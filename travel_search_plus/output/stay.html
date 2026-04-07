@@ -7,13 +7,13 @@
 <style>
 :root{--accent:#64b5ff;--accent2:#82e2c0;--bg:#09111f;--panel:#121d31;--line:#24324b;--text:#ecf3ff;--muted:#9db0cb;}
 *{box-sizing:border-box}
-body{margin:0;background:linear-gradient(180deg,#07101c,#0b1322 36%,#07101c);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Sans','Yu Gothic UI',Meiryo,sans-serif}
+body{margin:0;background:linear-gradient(180deg,#0b1020,#12182d);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Sans','Yu Gothic UI',Meiryo,sans-serif}
 a{color:inherit;text-decoration:none}
-.container{max-width:1480px;width:min(1480px,calc(100% - 40px));margin:0 auto;padding:18px 18px 34px}
+.wrap{max-width:1480px;width:min(1480px,calc(100% - 40px));margin:0 auto;padding:14px 20px}
 .topbar{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:12px}
-.title-wrap h1{margin:0;font-size:28px;line-height:1.18;display:flex;flex-wrap:wrap;align-items:baseline;gap:0}
-.title-suffix{color:var(--muted);font-size:15px;font-weight:500}
-.updated{margin-top:8px;color:var(--muted);font-size:13px}
+.title h1{margin:0;font-size:22px;font-weight:800;display:flex;flex-wrap:wrap;align-items:baseline;gap:0}
+.title-suffix{color:var(--muted);font-size:14px;font-weight:500}
+.sub{margin-top:4px;color:var(--muted);font-size:12px}
 .actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
 .toggle{border:1px solid var(--line);background:#101a2b;color:var(--text);padding:10px 14px;border-radius:999px;font-weight:700;cursor:pointer}
 .nav{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0 18px;margin-bottom:8px;border-bottom:1px solid var(--line)}
@@ -23,8 +23,9 @@ a{color:inherit;text-decoration:none}
 .card{background:rgba(18,29,49,.97);border:1px solid var(--line);border-radius:22px;box-shadow:0 10px 28px rgba(0,0,0,.18)}
 .panel{padding:20px 22px;margin:22px 6px 16px}
 .panel h2{margin:0 0 14px;font-size:22px}
-.search-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;align-items:end}
-label{display:flex;flex-direction:column;gap:7px;font-size:13px;color:var(--muted);transition:opacity .2s}
+.search-grid{display:flex;flex-wrap:wrap;gap:10px;align-items:end}
+label{display:flex;flex-direction:column;gap:7px;font-size:13px;color:var(--muted);transition:opacity .2s;flex:1 1 160px;min-width:110px}
+label:has(select){flex:0 1 155px;max-width:175px}
 label.field-dimmed{opacity:.3;pointer-events:none}
 label.field-dimmed input,label.field-dimmed select{color:#4a5568;cursor:not-allowed}
 input,select{width:100%;padding:11px 12px;border-radius:14px;border:1px solid var(--line);background:#0d1525;color:var(--text)}
@@ -48,22 +49,21 @@ input::placeholder{color:#718096}
 .chip-list{display:flex;gap:10px;flex-wrap:wrap}
 .footer{margin-top:18px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:0 6px}
 .en{display:none} body.en-mode .ja{display:none !important} body.en-mode .en{display:initial !important}
-@media (max-width:1100px){.search-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (max-width:760px){.search-grid{grid-template-columns:1fr 1fr} .topbar{flex-direction:column} .actions{justify-content:flex-start} .helper-line{text-align:left} .control-row{justify-content:flex-start} .title-wrap h1{font-size:23px} .title-suffix{font-size:13px}}
+@media (max-width:760px){.topbar{flex-direction:column} .actions{justify-content:flex-start} .helper-line{text-align:left} .control-row{justify-content:flex-start} .title h1{font-size:20px} .title-suffix{font-size:12px}}
 </style>
 </head>
 <body data-page="stay">
-<div class="container">
-  <header class="topbar">
-    <div class="title-wrap">
+<div class="wrap">
+  <div class="topbar">
+    <div class="title">
       <h1>Travel Search +<span class="title-suffix"> ｜ 旅行検索まとめてポン</span></h1>
-      <div class="updated">更新日時：2026-04-03 03:45</div>
+      <div class="sub">更新日時：2026-04-07 14:10</div>
     </div>
     <div class="actions">
       <button class="toggle" onclick="toggleLang()">JP / EN</button>
     </div>
-  </header>
-  <nav class="nav"><a class="nav-link" href="index.html"><span class="icon">🏠</span><span class="ja">メイン</span><span class="en">Home</span></a><a class="nav-link" href="transport.html"><span class="icon">✈️</span><span class="ja">移動</span><span class="en">Transport</span></a><a class="nav-link active" href="stay.html"><span class="icon">🏨</span><span class="ja">宿泊</span><span class="en">Stay</span></a><a class="nav-link" href="package.html"><span class="icon">🎫</span><span class="ja">セット</span><span class="en">Packages</span></a><a class="nav-link" href="compare.html"><span class="icon">⚖️</span><span class="ja">比較</span><span class="en">Compare</span></a><a class="nav-link" href="activity.html"><span class="icon">🎡</span><span class="ja">遊び場</span><span class="en">Activities</span></a><a class="nav-link" href="food.html"><span class="icon">🍽️</span><span class="ja">食事</span><span class="en">Food</span></a><a class="nav-link" href="support.html"><span class="icon">🧰</span><span class="ja">サポート</span><span class="en">Support</span></a><a class="nav-link" href="ideas.html"><span class="icon">✨</span><span class="ja">特集</span><span class="en">Ideas</span></a><a class="nav-link" href="domestic_travel.html"><span class="icon">🗾</span><span class="ja">国内旅行</span><span class="en">Domestic</span></a><a class="nav-link" href="global_travel.html"><span class="icon">🌍</span><span class="ja">海外旅行</span><span class="en">Global</span></a></nav>
+  </div>
+  <nav class="nav"><a class="nav-link" href="domestic_travel.html"><span class="icon">🗾</span><span class="ja">国内旅行</span><span class="en">Domestic</span></a><a class="nav-link" href="global_travel.html"><span class="icon">🌍</span><span class="ja">海外旅行</span><span class="en">Global</span></a><a class="nav-link" href="transport.html"><span class="icon">✈️</span><span class="ja">移動</span><span class="en">Transport</span></a><a class="nav-link active" href="stay.html"><span class="icon">🏨</span><span class="ja">宿泊</span><span class="en">Stay</span></a><a class="nav-link" href="package.html"><span class="icon">🎫</span><span class="ja">セット</span><span class="en">Packages</span></a><a class="nav-link" href="compare.html"><span class="icon">⚖️</span><span class="ja">比較</span><span class="en">Compare</span></a><a class="nav-link" href="activity.html"><span class="icon">🎡</span><span class="ja">遊び場</span><span class="en">Activities</span></a><a class="nav-link" href="food.html"><span class="icon">🍽️</span><span class="ja">食事</span><span class="en">Food</span></a><a class="nav-link" href="support.html"><span class="icon">🧰</span><span class="ja">サポート</span><span class="en">Support</span></a><a class="nav-link" href="ideas.html"><span class="icon">✨</span><span class="ja">特集</span><span class="en">Ideas</span></a></nav>
   
     <section class="panel card">
       <h2>🏨 <span class="ja">ホテル・旅館・民泊</span><span class="en">Hotels, Ryokan &amp; Homes</span></h2>
@@ -335,6 +335,28 @@ document.querySelectorAll('.kind-btn').forEach(btn => btn.addEventListener('clic
 }));
 if(localStorage.getItem('tsp-lang') === 'en') document.body.classList.add('en-mode');
 
+// 年4桁入力後に自動で月フィールドへ移動
+(function(){
+  ['departInput','returnInput'].forEach(function(id){
+    var el=qs(id);
+    if(!el) return;
+    var dc=0;
+    el.addEventListener('keydown',function(e){
+      if(/^[0-9]$/.test(e.key)){
+        dc++;
+        if(dc===4){
+          var self=this;
+          setTimeout(function(){
+            self.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',keyCode:39,bubbles:true}));
+          },30);
+          dc=0;
+        }
+      } else if(e.key!=='Backspace'&&e.key!=='Delete'){
+        dc=0;
+      }
+    });
+  });
+})();
 updateGeoLabels();
 updateRegionGroup(false);
 updateSubArea(false);

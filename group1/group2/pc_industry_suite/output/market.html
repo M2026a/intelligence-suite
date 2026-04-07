@@ -1,0 +1,1396 @@
+<!doctype html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>PC Industry Suite - market.html</title>
+<style>
+:root{
+  --bg:#0d1016;--panel:#151a23;--panel2:#1b2230;--line:#2a3446;
+  --text:#ebf0f8;--muted:#9ba9bc;--accent:#4ea1ff;--accent2:#1e2f49;
+  --ok:#1f6f53;--warn:#8a5a17;--bad:#7c3038;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Segoe UI',Meiryo,sans-serif}
+a{color:inherit;text-decoration:none}
+header{position:sticky;top:0;z-index:50;background:rgba(13,16,22,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.wrap{max-width:1480px;margin:0 auto;padding:14px 20px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.title h1{margin:0;font-size:22px;font-weight:800}
+.title .sub{margin-top:4px;color:var(--muted);font-size:12px}
+.right-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.page-lang-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:9px 14px;font-size:13px;cursor:pointer;transition:all .15s}
+.page-lang-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.nav a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;border:1px solid rgba(255,255,255,.10);color:var(--text);background:rgba(255,255,255,.03);padding:10px 18px;border-radius:999px;font-size:13px;font-weight:700;white-space:nowrap;transition:all .18s ease}
+.nav a:hover{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.06)}
+.nav a.active{background:linear-gradient(135deg,#4ea1ff,#5a86ff);border-color:transparent;color:#fff;box-shadow:0 4px 16px rgba(78,161,255,.3)}
+.main{max-width:1480px;margin:18px auto;padding:0 20px 40px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+.stat .num{font-size:26px;font-weight:800;margin-bottom:4px}
+.stat .label{color:var(--muted);font-size:12px}
+.stat .icon{font-size:22px;margin-bottom:8px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s}
+.flt-btn:hover{border-color:var(--accent)}
+.flt-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
+.search{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 12px;font-size:13px;min-width:220px}
+.search::placeholder{color:var(--muted)}
+.filter-label{color:var(--muted);font-size:12px;white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.grid.list{grid-template-columns:1fr}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;transition:border-color .18s,opacity .18s}
+.card:hover{border-color:var(--accent)}
+.card.is-read{opacity:.45}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;color:var(--muted);font-size:12px;align-items:center}
+.card-lang-toggle{display:flex;gap:5px;flex-shrink:0;align-items:center}
+.card-lang-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;white-space:nowrap;transition:all .15s}
+.card-lang-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
+.read-btn{background:var(--panel2);border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;transition:all .15s}
+.read-btn:hover{border-color:#666}
+.card h3{margin:0;font-size:15px;line-height:1.5;font-weight:700}
+.summary{color:#ced7e6;font-size:13px;line-height:1.6}
+.lang-pane.hidden{display:none!important}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.tag{display:inline-block;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:600;border:1px solid transparent}
+.tag-official{background:#173126;border-color:#2f7254;color:#c6f1dc}
+.tag-score5,.tag-score4{background:#1e1a3a;border-color:#a78bfa;color:#e0d9ff}
+.tag-score3{background:#1e2f49;border-color:#4ea1ff;color:#cae2ff}
+.tag-score2{background:#2d2014;border-color:#8a6a31;color:#ffe0a2}
+.tag-score1{background:#1e1e1e;border-color:#444;color:#aaa}
+.tag-theme{font-size:11px;padding:3px 8px;border-radius:999px;border:1px solid transparent;font-weight:600}
+.tag-new{background:#1a2e1a;border-color:#2ecc71;color:#2ecc71;font-weight:800;animation:pulse 1.5s infinite}
+.tag-bullish{background:#1a2e1a;border-color:#2ecc71;color:#2ecc71}
+.tag-bearish{background:#2e1a1a;border-color:#e74c3c;color:#e74c3c}
+.tag-neutral{background:#1e1e2e;border-color:#636e72;color:#9ba9bc}
+.tag-usd-strong{background:#1a2040;border-color:#4ea1ff;color:#a8d4ff}
+.tag-usd-weak{background:#2e1a1a;border-color:#e74c3c;color:#ffb3b3}
+.tag-jpy-strong{background:#1a2e1a;border-color:#2ecc71;color:#a8ffcc}
+.tag-jpy-weak{background:#2e2a1a;border-color:#f39c12;color:#ffe0a2}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.lang-badge{font-size:11px;padding:2px 6px;border-radius:4px;background:#2a3446;color:var(--muted)}
+.lang-badge.ja{background:#173126;color:#c6f1dc}
+.lang-badge.en{background:#1e2f49;color:#cae2ff}
+.open-btn{display:inline-flex;justify-content:center;align-items:center;background:var(--accent2);border:1px solid var(--accent);color:#eaf4ff;border-radius:10px;padding:9px 14px;font-size:13px;font-weight:700;margin-top:4px;transition:all .15s}
+.open-btn:hover{background:#2a4a80}
+.theme-section{margin-bottom:28px}
+.theme-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.theme-header h2{margin:0;font-size:17px;font-weight:800}
+.theme-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:999px;font-size:13px;font-weight:700;border:1px solid transparent}
+.cb-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.cb-grid > *{min-width:0}@media(max-width:1200px){.cb-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:700px){.cb-grid{grid-template-columns:1fr}}
+.cb-card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px}
+.cb-card .cb-name{font-weight:800;font-size:15px;margin-bottom:8px}
+.cb-card .cb-count{font-size:22px;font-weight:800;color:var(--accent)}
+.cb-card .cb-recent{font-size:12px;color:var(--muted);margin-top:6px}
+footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);font-size:12px}
+@media(max-width:700px){
+  .wrap,.main,footer{padding-left:12px;padding-right:12px}
+  .grid{grid-template-columns:1fr}
+  .search{min-width:160px;width:100%}
+  .card-top{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<header>
+<div class='wrap'>
+  <div class='top'>
+    <div class='title'>
+      <h1>💻 PC Industry Suite <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ PC・半導体・GPU・OS・市場動向を収集</span></h1>
+      <div class='sub'>更新日時：2026-04-07 14:07</div>
+    </div>
+    <div class='right-controls'>
+      <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
+      <button class='page-lang-btn' id='btnPageJA' onclick="setPageLang('ja')">🇯🇵 日本語表示</button>
+    </div>
+  </div>
+  <nav class='nav'><a href="index.html" class="">📋 メイン</a><a href="pickup.html" class="">⭐ 注目記事</a><a href="categories.html" class="">🧩 カテゴリ別</a><a href="brands.html" class="">🏷 ブランド別</a><a href="market.html" class="active">📈 市場動向</a><a href="analysis.html" class="">📊 分析</a></nav>
+</div>
+</header>
+<div class='main'>
+  <div class='panel' style='margin-bottom:16px'>
+    <h2 style='margin:0 0 14px;font-size:16px'>📈 市場動向モニター</h2>
+    <div class='cb-grid'><div class='cb-card'><div class='cb-name'>💹 価格・需給</div><div style='color:var(--muted);font-size:12px;margin-bottom:8px'>価格・需給関連</div><div class='cb-count'>25</div><div style='color:var(--muted);font-size:11px'>件の記事</div><div class='cb-recent'>最新: 2026-04-07 11:16</div></div><div class='cb-card'><div class='cb-name'>🧾 決算・業績</div><div style='color:var(--muted);font-size:12px;margin-bottom:8px'>決算・業績関連</div><div class='cb-count'>7</div><div style='color:var(--muted);font-size:11px'>件の記事</div><div class='cb-recent'>最新: 2026-04-06 21:17</div></div><div class='cb-card'><div class='cb-name'>🏭 投資・提携</div><div style='color:var(--muted);font-size:12px;margin-bottom:8px'>投資・提携関連</div><div class='cb-count'>6</div><div style='color:var(--muted);font-size:11px'>件の記事</div><div class='cb-recent'>最新: 2026-04-05 20:00</div></div><div class='cb-card'><div class='cb-name'>🚀 製品発表</div><div style='color:var(--muted);font-size:12px;margin-bottom:8px'>発表・発売関連</div><div class='cb-count'>7</div><div style='color:var(--muted);font-size:11px'>件の記事</div><div class='cb-recent'>最新: 2026-04-07 12:45</div></div><div class='cb-card'><div class='cb-name'>📈 市場一般</div><div style='color:var(--muted);font-size:12px;margin-bottom:8px'>市場一般</div><div class='cb-count'>12</div><div style='color:var(--muted);font-size:11px'>件の記事</div><div class='cb-recent'>最新: 2026-04-07 06:56</div></div></div>
+  </div>
+  
+<div class='panel'>
+  <div class='filters'>
+    <span class='filter-label'>市場分類:</span>
+    <button class='flt-btn flt-cb-bank active' data-bank='all'>全部</button>
+    <button class='flt-btn flt-cb-bank' data-bank='価格・需給'>💹 価格・需給</button><button class='flt-btn flt-cb-bank' data-bank='決算・業績'>🧾 決算・業績</button><button class='flt-btn flt-cb-bank' data-bank='投資・提携'>🏭 投資・提携</button><button class='flt-btn flt-cb-bank' data-bank='製品発表'>🚀 製品発表</button><button class='flt-btn flt-cb-bank' data-bank='市場一般'>📈 市場一般</button>
+  </div>
+  <div class='filters'>
+    <span class='filter-label'>言語:</span>
+    <button class='flt-btn flt-lang-cb active' data-lang='all'>🌍 全部</button>
+    <button class='flt-btn flt-lang-cb' data-lang='ja'>🇯🇵 日本語</button>
+    <button class='flt-btn flt-lang-cb' data-lang='en'>🌐 English</button>
+    <span class='filter-label'>論調:</span>
+    <button class='flt-btn flt-fx-cb active' data-fx='all'>全部</button>
+    <button class='flt-btn flt-fx-cb' data-fx='bullish'>✅ 好材料</button>
+    <button class='flt-btn flt-fx-cb' data-fx='bearish'>⚠ 懸念</button>
+    <button class='flt-btn flt-view-cb active' data-view='cards'>▦ カード</button>
+    <button class='flt-btn flt-view-cb' data-view='list'>≡ リスト</button>
+    <input id='searchBoxCB' class='search' placeholder='タイトル・本文を検索...'>
+  </div>
+</div>
+<script>
+(function(){
+  var fBank='all', fLang='all', fFx='all', fView='cards', search='';
+  function apply(){
+    var visible=0;
+    document.querySelectorAll('#cbGrid .item-card').forEach(function(card){
+      var show=true;
+      var grp = card.dataset.marketgroup || '市場一般';
+      if(fBank!=='all' && grp!==fBank) show=false;
+      if(fLang!=='all' && (card.dataset.lang||'')!==fLang) show=false;
+      if(fFx!=='all' && (card.dataset.sentiment||'')!==fFx) show=false;
+      if(search && !(card.textContent||'').toLowerCase().includes(search.toLowerCase())) show=false;
+      card.style.display=show?'':'none';
+      if(show) visible++;
+    });
+    document.getElementById('cbGrid').classList.toggle('list', fView==='list');
+    var cnt=document.getElementById('cbCount'); if(cnt) cnt.textContent=visible;
+  }
+  document.querySelectorAll('.flt-cb-bank').forEach(function(btn){btn.addEventListener('click',function(){document.querySelectorAll('.flt-cb-bank').forEach(function(b){b.classList.remove('active');});btn.classList.add('active'); fBank=btn.dataset.bank; apply();});});
+  document.querySelectorAll('.flt-lang-cb').forEach(function(btn){btn.addEventListener('click',function(){document.querySelectorAll('.flt-lang-cb').forEach(function(b){b.classList.remove('active');});btn.classList.add('active'); fLang=btn.dataset.lang; apply();});});
+  document.querySelectorAll('.flt-fx-cb').forEach(function(btn){btn.addEventListener('click',function(){document.querySelectorAll('.flt-fx-cb').forEach(function(b){b.classList.remove('active');});btn.classList.add('active'); fFx=btn.dataset.fx; apply();});});
+  document.querySelectorAll('.flt-view-cb').forEach(function(btn){btn.addEventListener('click',function(){document.querySelectorAll('.flt-view-cb').forEach(function(b){b.classList.remove('active');});btn.classList.add('active'); fView=btn.dataset.view; apply();});});
+  var sb=document.getElementById('searchBoxCB'); if(sb) sb.addEventListener('input',function(){search=this.value; apply();});
+})();
+</script>
+  <div style='margin-bottom:12px;font-weight:700;font-size:15px'>市場関連記事（<span id='cbCount'>57</span>件）</div>
+  <div class='grid' id='cbGrid'>
+<article class='card item-card'
+  data-cardid='item-cd9807eaebf2'
+  data-themes='GPU・AI PC|ノートPC・デスクトップ'
+  data-lang='ja'
+  data-score='3'
+  data-source='PC Watch'
+  data-sentiment='neutral'
+  data-importance='food_recall'
+  data-marketgroup='製品発表' data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span>PC Watch</span><span>2026-04-07 12:45</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-cd9807eaebf2')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「VAIOマイスター」誕生、ノジマ店舗でスペシャリストが商品案内。AI PC体験も</h3><div class='summary'>VAIOとノジマは4月7日、ノジマ全店舗でVAIOの製品知識とコンサルティング力を備えた販売員「VAIOマイスター」を認定する「VAIOマイスター制度」を、2026年4月より導入すると発表した。さらに、Microsoft 365 AI機能やVAIO独自機能を体験できる「VAIO Shop in Shop」を、4月7日よりノジマの4店舗で展開する。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🎮 GPU・AI PC</span><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-usd-weak'>🎮 GPU・AI PC</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://pc.watch.impress.co.jp/docs/news/2099661.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-7086b848e0c3'
+  data-themes='CPU・半導体|ノートPC・デスクトップ'
+  data-lang='ja'
+  data-score='3'
+  data-source='ITmedia PC USER'
+  data-sentiment='neutral'
+  data-importance='health_alert'
+  data-marketgroup='製品発表' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span>ITmedia PC USER</span><span>2026-04-06 17:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-7086b848e0c3')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>待望の「Core Ultra 7 270K Plus」は静かな船出――アキバでは激安ピラーレスケースなど“高コスパ”パーツに熱視線</h3><div class='summary'>Core Ultra 200Sの強化版といえる200S Plusシリーズの第一弾が投入されたが、週末を前にして購入者が殺到という雰囲気は見られなかった。また、高コスパなPCケースも複数登場している。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🧠 CPU・半導体</span><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-usd-strong'>🧠 CPU・半導体</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.itmedia.co.jp/pcuser/articles/2604/06/news096.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-5662c0e8495e'
+  data-themes='ノートPC・デスクトップ|OS・ソフトウェア'
+  data-lang='en'
+  data-score='3'
+  data-source='Notebookcheck News'
+  data-sentiment='bullish'
+  data-importance='training_behavior'
+  data-marketgroup='製品発表' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Notebookcheck News</span><span>2026-04-06 03:29</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-5662c0e8495e')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>PlayStation PC port studio bio suggests more PS5 exclusives could come to Steam</h3><div class='summary'>Nixxes Software could be dramatically impacted if Sony released fewer titles on Steam. The studio, which develops PlayStation PC ports, recently updated its company description. Despite the rumors, it emphasizes success in making PS5 exclusives multiplatform games.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>PlayStation PC移植スタジオのバイオは、より多くのPS5独占がSteamに登場する可能性があることを示唆しています</h3><div class='summary'>ソニーが Steam でリリースするタイトルが減れば、Nixxes Software は劇的な影響を受ける可能性があります。 PlayStation PC への移植を開発しているこのスタジオは、最近会社概要を更新しました。噂にもかかわらず、PS5専用ゲームのマルチプラットフォーム化の成功を強調している。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🪟 OS・ソフトウェア</span><span class='tag tag-jpy-strong'>💻 PC・OS</span><span class='tag tag-bullish'>✅ 好材料</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.notebookcheck.net/PlayStation-PC-port-studio-bio-suggests-more-PS5-exclusives-could-come-to-Steam.1266791.0.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-414f5211d22d'
+  data-themes='OS・ソフトウェア'
+  data-lang='en'
+  data-score='3'
+  data-source='Windows Blog'
+  data-sentiment='bullish'
+  data-importance='training_behavior'
+  data-marketgroup='製品発表' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Windows Blog</span><span>2026-04-03 02:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-414f5211d22d')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Part 3 – Babylon.js 9.0: OpenPBR and additional engine updates</h3><div class='summary'>Babylon.js 9.0 introduces several enhancements to help developers build beautiful, high-performance 3D experiences. OpenPBR Support - Alpha Babylon.js 9.0 begins implementation of The post Part 3 – Babylon.js 9.0: OpenPBR and additional engine updates appeared first on Windows Blog .</div></div>
+<div class='lang-pane lang-ja hidden'><h3>パート 3 – Babylon.js 9.0: OpenPBR と追加のエンジンのアップデート</h3><div class='summary'>Babylon.js 9.0 では、開発者が美しく高性能の 3D エクスペリエンスを構築できるように、いくつかの機能強化が導入されています。 OpenPBR サポート - アルファ Babylon.js 9.0 が「パート 3 – Babylon.js 9.0: OpenPBR と追加のエンジン更新プログラム」の実装を開始します。 最初に Windows ブログに掲載されました。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🪟 OS・ソフトウェア</span><span class='tag tag-jpy-strong'>💻 PC・OS</span><span class='tag tag-bullish'>✅ 好材料</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://blogs.windows.com/windowsdeveloper/2026/04/02/part-3-babylon-js-9-0-openpbr-and-additional-engine-updates/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-4ca064e38cb9'
+  data-themes='GPU・AI PC|ノートPC・デスクトップ'
+  data-lang='en'
+  data-score='3'
+  data-source='NVIDIA Blog'
+  data-sentiment='bullish'
+  data-importance='food_recall'
+  data-marketgroup='製品発表' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>NVIDIA Blog</span><span>2026-04-02 22:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-4ca064e38cb9')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Press Start on April: GeForce NOW Brings 10 Games to the Cloud</h3><div class='summary'>No joke — GFN Thursday is skipping the tricks and heading straight into the games. April kicks off with ten new titles, bringing fresh adventures to GeForce NOW, including the launch of Capcom’s highly anticipated PRAGMATA. A dozen new games are available to stream this week, including Arknights: En</div></div>
+<div class='lang-pane lang-ja hidden'><h3>4 月にスタートを押してください: GeForce NOW が 10 のゲームをクラウドにもたらします</h3><div class='summary'>冗談じゃない — GFN 木曜日はトリックをスキップして、そのままゲームに突入します。 4 月は 10 の新しいタイトルで始まり、カプコンの待望の PRAGMATA の発売など、GeForce NOW に新鮮な冒険がもたらされます。今週は、Arknights: En を含む 12 の新しいゲームがストリーミング可能になります。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🎮 GPU・AI PC</span><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-usd-weak'>🎮 GPU・AI PC</span><span class='tag tag-bullish'>✅ 好材料</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://blogs.nvidia.com/blog/geforce-now-thursday-april-2026-games-list/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-f6283ed92bf1'
+  data-themes='CPU・半導体|ノートPC・デスクトップ|OS・ソフトウェア'
+  data-lang='en'
+  data-score='3'
+  data-source='Intel Newsroom'
+  data-sentiment='neutral'
+  data-importance='health_alert'
+  data-marketgroup='製品発表' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Intel Newsroom</span><span>2026-03-17 16:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-f6283ed92bf1')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Intel Launches New Core Ultra 200HX Plus Series Mobile Processors</h3><div class='summary'>What’s New: Intel today announced the launch of its new Intel® Core™ Ultra 200HX Plus series mobile processors, giving gamers and professionals new high-performance options in the Core Ultra 200 series family.Optimized for advanced gaming, streaming, content creation, and workstation use, the Intel </div></div>
+<div class='lang-pane lang-ja hidden'><h3>インテル、新しい Core Ultra 200HX Plus シリーズ モバイル プロセッサを発表</h3><div class='summary'>最新情報: インテルは本日、新しいインテル® Core™ Ultra 200HX Plus シリーズ モバイル プロセッサーの発売を発表しました。これにより、ゲーマーや専門家に Core Ultra 200 シリーズ ファミリの新しい高性能オプションが提供されます。高度なゲーム、ストリーミング、コンテンツ作成、およびワークステーションの使用向けに最適化されたインテル</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🧠 CPU・半導体</span><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🪟 OS・ソフトウェア</span><span class='tag tag-usd-strong'>🧠 CPU・半導体</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://newsroom.intel.com/client-computing/intel-launches-core-ultra-200hx-plus-series-mobile-processors' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-bd4e6f1961c6'
+  data-themes='GPU・AI PC'
+  data-lang='en'
+  data-score='2'
+  data-source='Tom&#x27;s Hardware'
+  data-sentiment='neutral'
+  data-importance='food_recall'
+  data-marketgroup='製品発表' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Tom&#x27;s Hardware</span><span>2026-04-05 21:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-bd4e6f1961c6')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Nvidia Pascal GPUs debuted 10 years ago today, best known for the GTX 1060 and GTX 1080 Ti — architecture kicked off with the Tesla P100</h3><div class='summary'>Nvidia delivered &#x27;five architectural breakthroughs&#x27; with the launch of the Tesla P100 accelerator 10 years ago today.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Nvidia Pascal GPU は 10 年前の今日デビューし、GTX 1060 と GTX 1080 Ti で最もよく知られています。このアーキテクチャは Tesla P100 から始まりました。</h3><div class='summary'>Nvidia は、10 年前の今日、Tesla P100 アクセラレータの発売により「5 つのアーキテクチャ上のブレークスルー」を実現しました。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🎮 GPU・AI PC</span><span class='tag tag-usd-weak'>🎮 GPU・AI PC</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.tomshardware.com/pc-components/gpus/nvidia-pascal-gpus-debuted-10-years-ago-today-best-known-for-the-gtx-1060-and-gtx-1080-ti-architecture-kicked-off-with-the-tesla-p100' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-f94bb315d985'
+  data-themes='GPU・AI PC'
+  data-lang='en'
+  data-score='3'
+  data-source='Notebookcheck News'
+  data-sentiment='bearish'
+  data-importance='training_behavior'
+  data-marketgroup='決算・業績' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Notebookcheck News</span><span>2026-04-06 21:17</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-f94bb315d985')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Impressive results: Nvidia presents a possible solution to the VRAM crisis</h3><div class='summary'>At GTC 2026, Nvidia presented a possible answer to the VRAM crisis in modern games: with Neural Texture Compression, memory usage in a demo drops from 6.5 GB to 970 MB while maintaining nearly identical image quality. The technology is giving the community hope, but it is also fueling criticism of N</div></div>
+<div class='lang-pane lang-ja hidden'><h3>印象的な結果: Nvidia は VRAM 危機に対する可能な解決策を提示します</h3><div class='summary'>GTC 2026 で、Nvidia は現代のゲームにおける VRAM 危機に対する考えられる答えを提示しました。Neural Texture Compression を使用すると、ほぼ同等の画質を維持しながら、デモでのメモリ使用量が 6.5 GB から 970 MB に減少します。このテクノロジーはコミュニティに希望を与えていますが、同時に N に対する批判も煽っています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🎮 GPU・AI PC</span><span class='tag tag-jpy-strong'>💻 PC・OS</span><span class='tag tag-bearish'>⚠ 懸念</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.notebookcheck.net/Impressive-results-Nvidia-presents-a-possible-solution-to-the-VRAM-crisis.1267085.0.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-da2b53d3d6f3'
+  data-themes='GPU・AI PC'
+  data-lang='en'
+  data-score='3'
+  data-source='Tom&#x27;s Hardware'
+  data-sentiment='bearish'
+  data-importance='food_recall'
+  data-marketgroup='決算・業績' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Tom&#x27;s Hardware</span><span>2026-04-05 00:33</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-da2b53d3d6f3')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Nvidia AI tech claims to slash gaming GPU memory usage by 85% with zero quality loss — Neural Texture Compression demo reveals stunning visual parity between 6.5GB of VRAM and 970MB</h3><div class='summary'>Nvidia has just demoed its Neural Texture Compression technique again at a GTC talk, where it showed VRAM usage dropping from 6.5 GB to just 970 MB in a scene. NTC uses a neural network to decompress textures instead of standard block-based compression, reducing texture size and VRAM usage while als</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Nvidia AI テクノロジーは、品質損失ゼロでゲーム用 GPU メモリ使用量を 85% 削減すると主張しています — ニューラル テクスチャ圧縮のデモでは、6.5 GB の VRAM と 970 MB の視覚的な同等性が驚くほど高いことが明らかになりました</h3><div class='summary'>Nvidia は、GTC 講演でニューラル テクスチャ圧縮技術を再びデモしたところ、シーン内の VRAM 使用量が 6.5 GB からわずか 970 MB に低下することが示されました。 NTC は、標準のブロックベースの圧縮ではなくニューラル ネットワークを使用してテクスチャを解凍し、テクスチャ サイズと VRAM の使用量を削減します。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🎮 GPU・AI PC</span><span class='tag tag-usd-weak'>🎮 GPU・AI PC</span><span class='tag tag-bearish'>⚠ 懸念</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.tomshardware.com/pc-components/gpus/nvidia-ai-tech-claims-to-slash-vram-usage-by-85-percent-with-zero-quality-loss-neural-texture-compression-demo-reveals-stunning-visual-parity-between-6-5gb-of-memory-and-970mb' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-d6e394eaf8f3'
+  data-themes='CPU・半導体|GPU・AI PC|ノートPC・デスクトップ|OS・ソフトウェア'
+  data-lang='en'
+  data-score='3'
+  data-source='Intel Newsroom'
+  data-sentiment='neutral'
+  data-importance='food_recall'
+  data-marketgroup='決算・業績' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Intel Newsroom</span><span>2026-04-02 00:04</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-d6e394eaf8f3')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Intel Delivers Open, Scalable AI Performance in MLPerf Inference v6.0</h3><div class='summary'>What’s New: Today, MLCommons released its latest MLPerf Inference v6.0 benchmarks, showcasing results across four key benchmarks for Intel’s GPU Systems. Intel’s AI systems featured Intel® Xeon® 6 CPUs and Intel® Arc™ Pro B70 graphics, demonstrating accessible AI workload solutions across high-end w</div></div>
+<div class='lang-pane lang-ja hidden'><h3>インテル、MLPerf Inference v6.0 でオープンでスケーラブルな AI パフォーマンスを実現</h3><div class='summary'>最新情報: 本日、MLCommons は最新の MLPerf Inference v6.0 ベンチマークをリリースし、Intel の GPU システムの 4 つの主要なベンチマークの結果を紹介しました。インテルの AI システムは、インテル® Xeon® 6 CPU とインテル® Arc™ Pro B70 グラフィックスを搭載し、ハイエンドのシステム全体でアクセス可能な AI ワークロード ソリューションを実証しました。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🧠 CPU・半導体</span><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🎮 GPU・AI PC</span><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🪟 OS・ソフトウェア</span><span class='tag tag-usd-weak'>🎮 GPU・AI PC</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://newsroom.intel.com/artificial-intelligence/intel-delivers-ai-performance-mlperf-inference-v6-0' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-594d58ec1f95'
+  data-themes='CPU・半導体|OS・ソフトウェア|市場・企業動向'
+  data-lang='en'
+  data-score='3'
+  data-source='Intel Newsroom'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-marketgroup='決算・業績' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Intel Newsroom</span><span>2026-04-01 05:30</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-594d58ec1f95')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Intel to Report First-Quarter 2026 Financial Results</h3><div class='summary'>SANTA CLARA, Calif., March 31, 2026 — Intel Corporation today announced that it will report first-quarter financial results on Thursday, April 23, 2026, promptly after close of market. Intel will then hold an earnings conference call at 2 p.m. PT that day to discuss the results. A live public webcas</div></div>
+<div class='lang-pane lang-ja hidden'><h3>インテル、2026 年第 1 四半期の財務結果を報告へ</h3><div class='summary'>カリフォルニア州サンタクララ、2026 年 3 月 31 日 — インテル コーポレーションは本日、第 1 四半期の財務結果を 2026 年 4 月 23 日木曜日、市場終了直後に報告すると発表しました。その後、インテルは午後2時に決算電話会議を開催する予定だ。その日の PT で結果について話し合います。ライブ公開ウェブカス</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🧠 CPU・半導体</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🪟 OS・ソフトウェア</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://newsroom.intel.com/corporate/intel-to-report-first-quarter-2026-financial-results' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-01db3cf192cb'
+  data-themes='ノートPC・デスクトップ'
+  data-lang='ja'
+  data-score='2'
+  data-source='PC Watch'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-marketgroup='決算・業績' data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span>PC Watch</span><span>2026-04-07 12:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-01db3cf192cb')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ガチくんに! 第412回切り抜き公開「ついに行なわれる獣道ウメハラVSメナの勝敗を予想するガチくんとぷげら」</h3><div class='summary'>※毎週木曜日にプロ格闘ゲームプレイヤーであるガチくんをパーソナリティに迎え、ストリートファイター6攻略企画「ガチくんに!」をTwitchとYouTubeで配信しています。レギュラー出演者はカワノ、ぷげら、奥村茉実。ここでは当日放送したおおまかな内容を紹介するとともに、YouTubeにアップロードしたアーカイブの動画を掲載しています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-jpy-strong'>💻 PC・OS</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://pc.watch.impress.co.jp/docs/news/2099538.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-40b67d6270e8'
+  data-themes='OS・ソフトウェア'
+  data-lang='en'
+  data-score='2'
+  data-source='Notebookcheck News'
+  data-sentiment='bullish'
+  data-importance='food_recall'
+  data-marketgroup='決算・業績' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Notebookcheck News</span><span>2026-04-07 05:49</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-40b67d6270e8')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Indie game Slay the Spire 2 dominates Crimson Desert in March Steam sales charts</h3><div class='summary'>An indie deckbuilder unexpectedly topped the Steam sales charts for March. Slay the Spire 2 notched more than twice the total of any rival, including a popular Pearl Abyss open-world game. Following patches, Crimson Desert Steam reviews continue to improve, hinting at a successful April.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>インディーゲーム Slay the Spire 2 が 3 月の Steam 売上チャートで Crimson Desert を独占</h3><div class='summary'>インディーズデッキビルダーが、3月のSteamセールスチャートで予想外のトップを獲得した。 Slay the Spire 2 は、人気の Pearl Abyss オープンワールド ゲームを含む他のライバルゲームの合計の 2 倍以上の成績を収めました。パッチ後、Crimson Desert Steam のレビューは引き続き改善されており、4 月の成功を示唆しています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🪟 OS・ソフトウェア</span><span class='tag tag-usd-weak'>🎮 GPU・AI PC</span><span class='tag tag-bullish'>✅ 好材料</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.notebookcheck.net/Indie-game-Slay-the-Spire-2-dominates-Crimson-Desert-in-March-Steam-sales-charts.1267355.0.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-5de3e92eedd8'
+  data-themes='その他'
+  data-lang='ja'
+  data-score='1'
+  data-source='窓の杜'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-marketgroup='決算・業績' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span>窓の杜</span><span>2026-04-06 14:20</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-5de3e92eedd8')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「Microsoft 365」と「Claude」を接続、専用コネクターが無料を含む全プランに／「Outlook」や「Teams」、「OneDrive」などの業務データを「Claude」で活用できる</h3><div class='summary'>米Anthropicは4月4日（日本時間）、「Microsoft 365」コネクターがすべての「Claude」プランで利用できるようになったと発表した。「Claude」を「Outlook」や「Teams」、「OneDrive」、「SharePoint」などを接続して、メールやドキュメント、ファイルを会話に取り入れることができる。</div></div>
+  <div class='tags'><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://forest.watch.impress.co.jp/docs/news/2099279.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-a4de02bbd4cc'
+  data-themes='OS・ソフトウェア|市場・企業動向'
+  data-lang='en'
+  data-score='3'
+  data-source='Tom&#x27;s Hardware'
+  data-sentiment='bullish'
+  data-importance='breed_adoption'
+  data-marketgroup='投資・提携' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Tom&#x27;s Hardware</span><span>2026-04-05 20:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-a4de02bbd4cc')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Sequoia Capital shares founder’s 1977 memo for investing in Apple — initial $600,000 investment is worth $26.4 billion today, firm said it was ‘tough to do this deal’</h3><div class='summary'>The VC firm shared its founder&#x27;s notes on Apple recognizing the company&#x27;s potential while also doubting its management team.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>セコイア・キャピタル、アップルへの投資に関する創設者の1977年のメモを共有 - 当初の60万ドルの投資は現在264億ドルの価値がある、同社は「この取引を行うのは困難だった」と述べた</h3><div class='summary'>このVC会社は、Appleが同社の可能性を認識しながらも経営陣に疑問を抱いていたという創業者のメモを共有した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🪟 OS・ソフトウェア</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-bullish'>✅ 好材料</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.tomshardware.com/tech-industry/sequoia-capital-shares-founders-1977-memo-for-investing-in-apple-initial-usd600-000-investment-is-worth-usd26-4-billion-today-firm-said-it-was-tough-to-do-this-deal' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-a0bda0689cd4'
+  data-themes='CPU・半導体|OS・ソフトウェア|市場・企業動向'
+  data-lang='en'
+  data-score='3'
+  data-source='Intel Newsroom'
+  data-sentiment='bullish'
+  data-importance='health_alert'
+  data-marketgroup='投資・提携' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Intel Newsroom</span><span>2026-04-01 22:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-a0bda0689cd4')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Intel to Repurchase 49% Equity Interest in Ireland Fab Joint Venture</h3><div class='summary'>SANTA CLARA, Calif. and NEW YORK, April 1, 2026 – Intel Corporation (Nasdaq: INTC) and Apollo (NYSE: APO) today announced a definitive agreement for Intel to repurchase the 49% equity interest in the joint venture related to Intel’s Fab 34 in Ireland not held by Intel for $14.2 billion. The agreemen</div></div>
+<div class='lang-pane lang-ja hidden'><h3>インテル、アイルランド工場合弁会社の株式49%を買い戻す</h3><div class='summary'>カリフォルニア州サンタクララおよびニューヨーク、2026 年 4 月 1 日 – インテル コーポレーション (ナスダック: INTC) とアポロ (NYSE: APO) は本日、インテルが保有していないアイルランドのインテルのファブ 34 に関連する合弁事業の株式 49% をインテルが 142 億ドルで買い戻す最終合意を発表しました。同意者</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🧠 CPU・半導体</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🪟 OS・ソフトウェア</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-usd-strong'>🧠 CPU・半導体</span><span class='tag tag-bullish'>✅ 好材料</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://newsroom.intel.com/corporate/intel-repurchase-49-equity-interest-ireland-fab-joint-venture' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-f980eb0884e9'
+  data-themes='ノートPC・デスクトップ|市場・企業動向'
+  data-lang='en'
+  data-score='3'
+  data-source='Lenovo StoryHub'
+  data-sentiment='bullish'
+  data-importance='breed_adoption'
+  data-marketgroup='投資・提携' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Lenovo StoryHub</span><span>2026-03-31 14:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-f980eb0884e9')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Lenovo Announces Global Partnership with David Beckham</h3><div class='summary'>Lenovo today announced a global partnership with David Beckham, bringing together one of the world’s most recognized cultural figures and one of the world’s leading technology companies.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>レノボ、デビッド・ベッカムとのグローバルパートナーシップを発表</h3><div class='summary'>レノボは本日、デビッド・ベッカムとのグローバル・パートナーシップを発表し、世界で最も著名な文化人の一人と世界有数のテクノロジー企業を結び付けました。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-bullish'>✅ 好材料</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://news.lenovo.com/pressroom/press-releases/lenovo-x-david-beckham/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-9bc0a659a2a7'
+  data-themes='CPU・半導体|ノートPC・デスクトップ|OS・ソフトウェア'
+  data-lang='en'
+  data-score='3'
+  data-source='Intel Newsroom'
+  data-sentiment='bullish'
+  data-importance='health_alert'
+  data-marketgroup='投資・提携' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Intel Newsroom</span><span>2026-03-26 02:54</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-9bc0a659a2a7')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Intel, CrowdStrike Expand Collaboration to Help Businesses Safely Adopt AI</h3><div class='summary'>As AI workloads become more accessible across the enterprise, so does the threat of new security risks – both in the cloud, and on the device. This requires businesses to adopt stronger protection capabilities, built directly into their fleet of PCs, to help ensure that valuable information remains </div></div>
+<div class='lang-pane lang-ja hidden'><h3>インテルとクラウドストライク、企業が AI を安全に導入できるよう協力を拡大</h3><div class='summary'>AI ワークロードが企業全体でアクセスしやすくなるにつれて、クラウドとデバイスの両方で新たなセキュリティ リスクの脅威も増大します。このため、企業は貴重な情報を確実に保持できるよう、自社の PC 群に直接組み込まれた強力な保護機能を採用する必要があります。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🧠 CPU・半導体</span><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🪟 OS・ソフトウェア</span><span class='tag tag-usd-strong'>🧠 CPU・半導体</span><span class='tag tag-bullish'>✅ 好材料</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://newsroom.intel.com/client-computing/intel-crowdstrike-expand-collaboration-help-businesses-adopt-ai' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-994cdb5ff059'
+  data-themes='ノートPC・デスクトップ'
+  data-lang='en'
+  data-score='3'
+  data-source='Lenovo StoryHub'
+  data-sentiment='bullish'
+  data-importance='breed_adoption'
+  data-marketgroup='投資・提携' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Lenovo StoryHub</span><span>2026-03-24 01:11</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-994cdb5ff059')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>How Lenovo Is Transforming Enterprise Sustainability for ThinkPad Through its Partnership with Makersite</h3><div class='summary'>By integrating granular supplier data, automating Life Cycle Assessments (LCAs), and standardizing footprint modelling across teams, Lenovo is now delivering a new standard for transparency and precision in PC sustainability.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>レノボが Makersite とのパートナーシップを通じて ThinkPad の企業の持続可能性をどのように変革しているか</h3><div class='summary'>Lenovo は、詳細なサプライヤー データを統合し、ライフ サイクル アセスメント (LCA) を自動化し、チーム全体でのフットプリント モデリングを標準化することで、PC の持続可能性における透明性と精度の新しい標準を提供しています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-bullish'>✅ 好材料</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://news.lenovo.com/transforming-enterprise-sustainability-thinkpad-makersite/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-8041575c7d52'
+  data-themes='GPU・AI PC|ノートPC・デスクトップ|OS・ソフトウェア'
+  data-lang='en'
+  data-score='3'
+  data-source='NVIDIA Blog'
+  data-sentiment='neutral'
+  data-importance='food_recall'
+  data-marketgroup='投資・提携' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>NVIDIA Blog</span><span>2026-03-18 02:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-8041575c7d52')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>More Than Meets the Eye: NVIDIA RTX-Accelerated Computers Now Connect Directly to Apple Vision Pro</h3><div class='summary'>NVIDIA and Apple’s collaboration brings native integration of NVIDIA CloudXR 6.0 to visionOS, securely delivering NVIDIA RTX-powered simulators and professional 3D graphics applications — like Immersive for Autodesk VRED on Innoactive’s XR streaming solutions — to Apple Vision Pro.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>見た目以上のもの: NVIDIA RTX アクセラレーション コンピュータが Apple Vision Pro に直接接続できるようになりました</h3><div class='summary'>NVIDIA と Apple のコラボレーションにより、NVIDIA CloudXR 6.0 のvisionOS へのネイティブ統合が実現し、NVIDIA RTX 搭載のシミュレータとプロ仕様の 3D グラフィックス アプリケーション (Innoactive の XR ストリーミング ソリューション上の Autodesk VRED のイマーシブなど) が Apple Vision Pro に安全に提供されます。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🎮 GPU・AI PC</span><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🪟 OS・ソフトウェア</span><span class='tag tag-usd-weak'>🎮 GPU・AI PC</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://blogs.nvidia.com/blog/nvidia-cloudxr-apple-vision-pro/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-15a29cba4761'
+  data-themes='OS・ソフトウェア|市場・企業動向'
+  data-lang='en'
+  data-score='5'
+  data-source='Ars Technica'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-marketgroup='市場一般' data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge en'>🌐 English</span><span>Ars Technica</span><span>2026-04-07 06:56</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-15a29cba4761')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Sports bets on prediction markets ruled to be &quot;swaps,&quot; exempt from state laws</h3><div class='summary'>Court rules US preempts states from applying gambling laws to prediction markets.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>予測市場でのスポーツ賭博は「スワップ」と裁定され、州法の対象外となる</h3><div class='summary'>裁判所は、米国が各州の予測市場へのギャンブル法の適用を先取りする判決を下した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🪟 OS・ソフトウェア</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://arstechnica.com/tech-policy/2026/04/sports-bets-on-prediction-markets-ruled-to-be-swaps-exempt-from-state-laws/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-2f823cb11f9f'
+  data-themes='市場・企業動向'
+  data-lang='en'
+  data-score='4'
+  data-source='Tom&#x27;s Hardware'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-marketgroup='市場一般' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Tom&#x27;s Hardware</span><span>2026-04-06 19:50</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-2f823cb11f9f')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>WD Innovation Day 2026 press Q&amp;A transcript: roadmap plans to reach 60TB with ePMR and 100TB via HAMR by 2029 — &#x27;at some point, the laws of physics will require us to transition to HAMR&#x27;</h3><div class='summary'>WD&#x27;s leadership, now fully split from Sandisk, talks about its expectations for the future with industry analysts. We cover the full transcript of the press-only session right here.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>WD Innovation Day 2026 プレス Q&amp;A トランスクリプト: 2029 年までに ePMR で 60 TB、HAMR で 100 TB に達するロードマップ計画 — 「ある時点で、物理法則により HAMR への移行が必要になるでしょう」</h3><div class='summary'>サンディスクから完全に分離したWDの経営陣は、業界アナリストらと将来への期待について語った。報道関係者限定のセッションの全文をここで取り上げます。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.tomshardware.com/pc-components/hdds/wd-innovation-day-2026-press-q-and-a-transcript-roadmap-plans-to-reach-60tb-with-epmr-and-100tb-via-hamr-by-2029-at-some-point-the-laws-of-physics-will-require-us-to-transition-to-hamr' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-d0fbac684959'
+  data-themes='ノートPC・デスクトップ|市場・企業動向'
+  data-lang='en'
+  data-score='3'
+  data-source='Notebookcheck News'
+  data-sentiment='bullish'
+  data-importance='training_behavior'
+  data-marketgroup='市場一般' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Notebookcheck News</span><span>2026-04-07 03:31</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-d0fbac684959')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Modos Flow E Ink touchscreen combines 3.2K resolution with stylus and 60 Hz color display</h3><div class='summary'>With a high-resolution 3.2K E Ink panel, Modos Flow is one of the most interesting mobile monitors on the market. This is because E Ink guarantees first-class readability in the sun and low power consumption. With stylus support, color display and a frame rate of 60 Hz, the display is nevertheless e</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Modos Flow E Ink タッチスクリーンは、3.2K 解像度とスタイラスおよび 60 Hz カラー ディスプレイを組み合わせています</h3><div class='summary'>高解像度 3.2K E Ink パネルを備えた Modos Flow は、市場で最も興味深いモバイル モニターの 1 つです。これは、E Ink が太陽の下でも最高の可読性と低消費電力を保証しているためです。スタイラスのサポート、カラー ディスプレイ、60 Hz のフレーム レートを備えているにもかかわらず、ディスプレイは非常に高速です。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-strong'>💻 PC・OS</span><span class='tag tag-bullish'>✅ 好材料</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.notebookcheck.net/Modos-Flow-E-Ink-touchscreen-combines-3-2K-resolution-with-stylus-and-60-Hz-color-display.1267354.0.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-a8027c0d5a32'
+  data-themes='ノートPC・デスクトップ|市場・企業動向'
+  data-lang='en'
+  data-score='3'
+  data-source='Lenovo StoryHub'
+  data-sentiment='bullish'
+  data-importance='breed_adoption'
+  data-marketgroup='市場一般' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Lenovo StoryHub</span><span>2026-04-02 22:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-a8027c0d5a32')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Lenovo 360 Framework Evolves with Simplified Tiers, Services Growth Pathways, and New Technical Community</h3><div class='summary'>Lenovo today announced new enhancements to its global channel framework, Lenovo 360, building on the success of its channel-centric model to further simplify and accelerate partner growth.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Lenovo 360 フレームワークは、階層の簡素化、サービスの成長経路、新しい技術コミュニティによって進化します</h3><div class='summary'>Lenovo は本日、グローバル チャネル フレームワークである Lenovo 360 の新たな機能強化を発表しました。これは、パートナーの成長をさらに簡素化し、加速するためのチャネル中心モデルの成功を基盤としています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-bullish'>✅ 好材料</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://news.lenovo.com/pressroom/press-releases/lenovo-360-framework-evolves-simplified-tiers-services-growth/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-3b738afd8e99'
+  data-themes='ノートPC・デスクトップ|市場・企業動向'
+  data-lang='en'
+  data-score='3'
+  data-source='Lenovo StoryHub'
+  data-sentiment='bullish'
+  data-importance='breed_adoption'
+  data-marketgroup='市場一般' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Lenovo StoryHub</span><span>2026-04-02 22:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-3b738afd8e99')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Expanding Success in the Channel Through Technical Capability</h3><div class='summary'>Across the channel, the role of technical expertise is changing fast.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>技術力を通じてチャネルでの成功を拡大</h3><div class='summary'>チャネル全体で、技術的専門知識の役割は急速に変化しています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-bullish'>✅ 好材料</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://news.lenovo.com/expanding-success-in-the-channel-through-technical-capability/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-3e3443b75008'
+  data-themes='ノートPC・デスクトップ|市場・企業動向'
+  data-lang='en'
+  data-score='3'
+  data-source='Lenovo StoryHub'
+  data-sentiment='bullish'
+  data-importance='breed_adoption'
+  data-marketgroup='市場一般' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Lenovo StoryHub</span><span>2026-04-02 22:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-3e3443b75008')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>From Transactions to Transformation: Why the Next Era of Channel Growth Will Be Services-Led</h3><div class='summary'>The channel is entering a new phase of growth defined by the outcomes partners deliver.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>トランザクションから変革へ: 次のチャネル成長時代はサービス主導となる理由</h3><div class='summary'>このチャネルは、パートナーが提供する成果によって定義される、新たな成長段階に入りつつあります。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-bullish'>✅ 好材料</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://news.lenovo.com/from-transactions-to-transformation-why-the-next-era-of-channel-growth-will-be-services-led/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-1b63472d3495'
+  data-themes='ノートPC・デスクトップ|市場・企業動向'
+  data-lang='en'
+  data-score='3'
+  data-source='Lenovo StoryHub'
+  data-sentiment='bullish'
+  data-importance='training_behavior'
+  data-marketgroup='市場一般' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Lenovo StoryHub</span><span>2026-03-26 21:12</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-1b63472d3495')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>From Recovery to Innovation: How Lenovo Premier Support Is Earning Global Recognition</h3><div class='summary'>For customers, using Premier Support Plus leads to lower downtime risk, stronger service governance, and more predictable operational performance.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>回復からイノベーションへ: Lenovo プレミア サポートはどのようにして世界的な評価を獲得しているのか</h3><div class='summary'>お客様にとって、Premier Support Plus を使用すると、ダウンタイムのリスクが軽減され、サービス ガバナンスが強化され、運用パフォーマンスがより予測可能になります。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-strong'>💻 PC・OS</span><span class='tag tag-bullish'>✅ 好材料</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://news.lenovo.com/from-recovery-to-innovation-how-lenovo-premier-support-is-earning-global-recognition/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-862968b08694'
+  data-themes='ノートPC・デスクトップ|市場・企業動向'
+  data-lang='en'
+  data-score='3'
+  data-source='Lenovo StoryHub'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-marketgroup='市場一般' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Lenovo StoryHub</span><span>2026-03-25 04:52</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-862968b08694')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Building inclusive, ethical AI: lessons from Lenovo for technology leaders</h3><div class='summary'>As companies race to deploy AI, Lenovo’s experience shows that responsible, inclusive development requires motivated people, clear governance, practical processes, and a shared commitment to make smarter AI work for everyone.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>包括的で倫理的な AI の構築: テクノロジー リーダー向けの Lenovo からの教訓</h3><div class='summary'>企業が AI の導入を急ぐ中、レノボの経験は、責任ある包括的な開発には、意欲的な人材、明確なガバナンス、実践的なプロセス、そしてよりスマートな AI をすべての人にとって機能させるための共有の取り組みが必要であることを示しています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-strong'>💻 PC・OS</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://news.lenovo.com/building-inclusive-ethical-ai-lessons-for-technology-leaders/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-3397c1d7c8b7'
+  data-themes='市場・企業動向'
+  data-lang='en'
+  data-score='3'
+  data-source='Lenovo StoryHub'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-marketgroup='市場一般' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Lenovo StoryHub</span><span>2026-03-20 22:34</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-3397c1d7c8b7')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Lenovo Recognized for Energy Efficiency, Circularity and AI-driven Sustainability Solutions in ISG Provider Lens® 2025 Reports for Europe and the U.S.</h3><div class='summary'>In its 2025 Digital Sustainability reports, ISG has positioned Lenovo in the Market Challengers category.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Lenovo は、欧州および米国向けの ISG Provider Lens® 2025 レポートにおいて、エネルギー効率、循環性、AI 主導の持続可能性ソリューションで認められました。</h3><div class='summary'>ISG は、2025 年のデジタル サステナビリティ レポートで、レノボを市場の挑戦者カテゴリーに位置づけています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://news.lenovo.com/lenovo-recognize-in-isg-provider-lens-2025-reports-for-europe-and-u-s/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-843fcd2d1a3d'
+  data-themes='CPU・半導体|OS・ソフトウェア|市場・企業動向'
+  data-lang='en'
+  data-score='3'
+  data-source='Intel Newsroom'
+  data-sentiment='bullish'
+  data-importance='health_alert'
+  data-marketgroup='市場一般' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Intel Newsroom</span><span>2026-03-20 00:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-843fcd2d1a3d')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Intel Announces 2026 EPIC Supplier Award Recipients</h3><div class='summary'>Intel today announced the recipients of the 2026 Intel EPIC Supplier Award, honoring suppliers that demonstrate the highest levels of excellence across Intel’s global value chain. As the company delivers product leadership and world-class foundry services, its suppliers play an essential role in ena</div></div>
+<div class='lang-pane lang-ja hidden'><h3>インテル、2026 EPIC サプライヤー賞受賞者を発表</h3><div class='summary'>インテルは本日、インテルのグローバル バリュー チェーン全体で最高レベルの卓越性を実証したサプライヤーを表彰する、2026 年インテル EPIC サプライヤー賞の受賞者を発表しました。同社は製品のリーダーシップと世界クラスの鋳造サービスを提供するため、そのサプライヤーはenaにおいて重要な役割を果たしています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🧠 CPU・半導体</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🪟 OS・ソフトウェア</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-usd-strong'>🧠 CPU・半導体</span><span class='tag tag-bullish'>✅ 好材料</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://newsroom.intel.com/corporate/intel-announces-2026-epic-supplier-award-recipients' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-0f9bba7be5c2'
+  data-themes='ノートPC・デスクトップ|市場・企業動向'
+  data-lang='en'
+  data-score='3'
+  data-source='Lenovo StoryHub'
+  data-sentiment='neutral'
+  data-importance='food_recall'
+  data-marketgroup='市場一般' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Lenovo StoryHub</span><span>2026-03-17 22:24</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-0f9bba7be5c2')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Lenovo Partners with Eva Longoria to Launch Global Search for Business “Twins”</h3><div class='summary'>Backing Every Business initiative pairs founders with mentorship, grants and AI-powered technology – because no small business owner should build</div></div>
+<div class='lang-pane lang-ja hidden'><h3>レノボ、エヴァ・ロンゴリアと提携し、グローバルなビジネス検索「Twins」を開始</h3><div class='summary'>「Backing Every Business」イニシアチブでは、創業者にメンターシップ、助成金、AI を活用したテクノロジーを組み合わせています。中小企業のオーナーは構築すべきではないからです。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-usd-weak'>🎮 GPU・AI PC</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://news.lenovo.com/pressroom/press-releases/lenovo-partners-with-eva-longoria-to-launch-global-search-for-business-twins/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-6b050cb3bc21'
+  data-themes='ノートPC・デスクトップ|市場・企業動向'
+  data-lang='en'
+  data-score='3'
+  data-source='Lenovo StoryHub'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-marketgroup='市場一般' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Lenovo StoryHub</span><span>2026-03-17 16:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-6b050cb3bc21')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Scaling AI in Europe: with Control, Confidence and Sovereignty</h3><div class='summary'></div></div>
+<div class='lang-pane lang-ja hidden'><h3>ヨーロッパにおける AI の拡張: 制御、自信、主権を備えた</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-strong'>💻 PC・OS</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://news.lenovo.com/scaling-ai-in-europe/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-b1ab519d2df7'
+  data-themes='市場・企業動向'
+  data-lang='ja'
+  data-score='5'
+  data-source='PC Watch'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-marketgroup='価格・需給' data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span>PC Watch</span><span>2026-04-07 11:16</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-b1ab519d2df7')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【本日みつけたお買い得品】Ankerのマグネット式ワイヤレス充電対応モバイルバッテリが1,675円引き</h3><div class='summary'>Amazonにおいて、Ankerのマグネット接続によるワイヤレス充電に対応するモバイルバッテリ「Anker MagGo Power Bank(10,000mAh)」がタイムセールにより、昨晩の価格から1,675円引きとなる6,390円で販売している。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://pc.watch.impress.co.jp/docs/news/todays_sales/2099606.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-98586a813e87'
+  data-themes='ノートPC・デスクトップ'
+  data-lang='en'
+  data-score='5'
+  data-source='Notebookcheck News'
+  data-sentiment='bullish'
+  data-importance='breed_adoption'
+  data-marketgroup='価格・需給' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Notebookcheck News</span><span>2026-04-06 01:07</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-98586a813e87')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Baseus launches new slim magnetic power bank with up to 22.5W fast charging</h3><div class='summary'>The Baseus PicoGo Air is a new slim power bank that the company has launched in China. It measures 6.9mm thick and supports 15W magnetic wireless charging and 22.5W wired fast charging. The launch price is CNY 299, around $43.44</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Baseus、最大 22.5W の急速充電機能を備えた新しいスリム磁気パワーバンクを発売</h3><div class='summary'>Baseus PicoGo Air は、同社が中国で発売した新しいスリムパワーバンクです。厚さは6.9mmで、15Wの磁気ワイヤレス充電と22.5Wの有線高速充電をサポートします。発売価格は299元、約43.44ドル。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-bullish'>✅ 好材料</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.notebookcheck.net/Baseus-launches-new-slim-magnetic-power-bank-with-up-to-22-5W-fast-charging.1266735.0.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-0560a967bd48'
+  data-themes='ノートPC・デスクトップ|市場・企業動向'
+  data-lang='ja'
+  data-score='3'
+  data-source='PC Watch'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-marketgroup='価格・需給' data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span>PC Watch</span><span>2026-04-07 09:58</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-0560a967bd48')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【本日みつけたお買い得品】アイリスオーヤマのゲーミングモニターが6,200円引き</h3><div class='summary'>Amazonにおいて、アイリスオーヤマの23.8型ゲーミングモニター「LUCA DG-AF2320S-W」がタイムセールにて、直近価格より6,200円安い1万3,800円で販売している。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-strong'>💻 PC・OS</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://pc.watch.impress.co.jp/docs/news/todays_sales/2099570.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-ee7589f74ae0'
+  data-themes='ノートPC・デスクトップ|市場・企業動向'
+  data-lang='ja'
+  data-score='3'
+  data-source='PC Watch'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-marketgroup='価格・需給' data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span>PC Watch</span><span>2026-04-07 09:37</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-ee7589f74ae0')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>攻殻機動隊コラボのdynabook、300台限定で販売開始</h3><div class='summary'>Dynabookは4月6日より、14型ノートPC「dynabook XPZ 攻殻機動隊S.A.C.モデル」を数量限定で発売した。Dynabookのオンラインストアで購入でき、価格は27万2,800円。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-strong'>💻 PC・OS</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://pc.watch.impress.co.jp/docs/news/2099557.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-fa4bbb779133'
+  data-themes='ノートPC・デスクトップ|市場・企業動向'
+  data-lang='ja'
+  data-score='3'
+  data-source='PC Watch'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-marketgroup='価格・需給' data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span>PC Watch</span><span>2026-04-07 09:37</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-fa4bbb779133')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【本日みつけたお買い得品】Philipsの11型Androidタブレットが2,000円引きで販売中</h3><div class='summary'>Amazonにおいて、フィリップスのAndroidタブレット「T8015」が、タイムセールで直近価格から2,000円引きの2万6,980円で販売している。なお、先週まではクーポン適用により同じ価格で販売していた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://pc.watch.impress.co.jp/docs/news/todays_sales/2099562.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-5f29421ebe85'
+  data-themes='GPU・AI PC|ノートPC・デスクトップ'
+  data-lang='en'
+  data-score='3'
+  data-source='Tom&#x27;s Hardware'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-marketgroup='価格・需給' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Tom&#x27;s Hardware</span><span>2026-04-07 01:18</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-5f29421ebe85')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>HP’s flagship Omen Max 45L with an RTX 5090 is on sale for $1,000 off — get a top-shelf 4K gaming PC with 64GB DDR5 and 4TB SSD for $5,499</h3><div class='summary'>HP’s Omen Max 45L offers a powerful alternative to building your own PC amid rising component prices.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>RTX 5090 を搭載した HP のフラッグシップ Omen Max 45L が 1,000 ドル引きでセール中 - 64GB DDR5 と 4TB SSD を搭載した最高級 4K ゲーム PC が 5,499 ドルで手に入る</h3><div class='summary'>HP の Omen Max 45L は、コンポーネントの価格が高騰する中、独自の PC を構築するための強力な代替手段を提供します。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🎮 GPU・AI PC</span><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-jpy-strong'>💻 PC・OS</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.tomshardware.com/pc-components/hps-flagship-omen-max-45l-with-an-rtx-5090-is-on-sale-for-usd1-000-off-get-a-top-shelf-4k-gaming-pc-with-64gb-ddr5-and-4tb-ssd-for-usd5-499' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-15c2095b3a8d'
+  data-themes='CPU・半導体|市場・企業動向'
+  data-lang='en'
+  data-score='3'
+  data-source='Notebookcheck News'
+  data-sentiment='bullish'
+  data-importance='health_alert'
+  data-marketgroup='価格・需給' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Notebookcheck News</span><span>2026-04-07 00:45</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-15c2095b3a8d')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Ryzen 9 9950X3D2 pricing may have leaked ahead of launch</h3><div class='summary'>AMD Ryzen 9 9950X3D2 will be available in the market starting April 22, but it looks like pricing for the CPU has already leaked. The chip touts 13% performance uplift in some tasks compared to the Ryzen 9 9950X3D, but the leaked price tag seems a bit exorbitant.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Ryzen 9 9950X3D2の価格が発売前にリークされた可能性がある</h3><div class='summary'>AMD Ryzen 9 9950X3D2は4月22日から市場で入手可能になりますが、CPUの価格はすでにリークされているようです。このチップは、Ryzen 9 9950X3Dと比較して一部のタスクでパフォーマンスが13%向上すると宣伝していますが、リークされた価格は少し法外に思えます。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🧠 CPU・半導体</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-usd-strong'>🧠 CPU・半導体</span><span class='tag tag-bullish'>✅ 好材料</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.notebookcheck.net/Ryzen-9-9950X3D2-pricing-may-have-leaked-ahead-of-launch.1267267.0.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-30b1712a1b93'
+  data-themes='ノートPC・デスクトップ'
+  data-lang='en'
+  data-score='3'
+  data-source='Tom&#x27;s Hardware'
+  data-sentiment='bearish'
+  data-importance='breed_adoption'
+  data-marketgroup='価格・需給' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Tom&#x27;s Hardware</span><span>2026-04-07 00:28</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-30b1712a1b93')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>MSI MAG A1200PLS PCIE5 1200W power supply review: A competent 1200W unit, but pricey</h3><div class='summary'>The MSI MAG A1200PLS PCIE5 delivers strong cold efficiency numbers and excellent build presentation, but a thermal weakness at high load, a questionable 80Plus Platinum claim, and a steep asking price temper an otherwise capable unit.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>MSI MAG A1200PLS PCIE5 1200W 電源のレビュー: 有能な 1200W ユニットですが、高価です</h3><div class='summary'>MSI MAG A1200PLS PCIE5 は、強力な低温効率の数値と優れたビルド プレゼンテーションを提供しますが、高負荷時の熱の弱さ、80Plus Platinum の謳い文句に疑問があり、提示価格の高騰により、他の機能を備えたユニットの価値が低下します。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-bearish'>⚠ 懸念</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.tomshardware.com/pc-components/power-supplies/msi-mag-a1200pls-pcie5-1200w-power-supply-review' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-78ff74eda5d9'
+  data-themes='ノートPC・デスクトップ|市場・企業動向'
+  data-lang='ja'
+  data-score='3'
+  data-source='PC Watch'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-marketgroup='価格・需給' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span>PC Watch</span><span>2026-04-06 09:47</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-78ff74eda5d9')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【本日みつけたお買い得品】約7万1千円引き！MS Office付きノートが10万9,980円で販売中</h3><div class='summary'>Amazonは本日まで、新生活セールFinalを実施している。15.6型ノートPCのHP「15-fd」は、3月23日の価格から7万1,489円引きで、10万9,980円にて購入可能だ。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-strong'>💻 PC・OS</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://pc.watch.impress.co.jp/docs/news/todays_sales/2099229.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-36feb8ab5ca9'
+  data-themes='CPU・半導体|ノートPC・デスクトップ'
+  data-lang='en'
+  data-score='3'
+  data-source='Tom&#x27;s Hardware'
+  data-sentiment='bullish'
+  data-importance='health_alert'
+  data-marketgroup='価格・需給' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Tom&#x27;s Hardware</span><span>2026-04-06 02:15</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-36feb8ab5ca9')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>AMD&#x27;s upcoming Ryzen 9 9950X3D2 listed around $1,000 at several retailers across Canada and the UK — New flagship dual-cache CPU might demand a hefty premium</h3><div class='summary'>Listings for the 9950X3D2 have started to pop up at many different vendors, with some even listing preliminary prices. We found the CPU going for roughly $1,000 at two Canadian retailers, and just a smidge below that at a UK-based website. For context, the standard 9950X3D with 3D V-Cache on only on</div></div>
+<div class='lang-pane lang-ja hidden'><h3>AMDの次期Ryzen 9 9950X3D2は、カナダと英国の複数の小売店で約1,000ドルで販売されている — 新しい主力デュアルキャッシュCPUは高額のプレミアムを要求する可能性がある</h3><div class='summary'>9950X3D2 の出品はさまざまなベンダーで行われ始めており、暫定価格を掲載しているベンダーもあります。この CPU はカナダの 2 つの小売店で約 1,000 ドルで販売されており、英国に本拠を置く Web サイトではそれよりわずかに安いことがわかりました。コンテキストとして、3D V キャッシュを備えた標準 9950X3D のみがオンになっています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🧠 CPU・半導体</span><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-usd-strong'>🧠 CPU・半導体</span><span class='tag tag-bullish'>✅ 好材料</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.tomshardware.com/pc-components/cpus/amds-upcoming-ryzen-9-9950x3d2-listed-around-usd1-000-at-several-retailers-across-canada-and-the-uk-new-flagship-dual-cache-cpu-might-demand-a-hefty-premium' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-f8dc9dce3102'
+  data-themes='ノートPC・デスクトップ'
+  data-lang='en'
+  data-score='3'
+  data-source='Tom&#x27;s Hardware'
+  data-sentiment='bearish'
+  data-importance='training_behavior'
+  data-marketgroup='価格・需給' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Tom&#x27;s Hardware</span><span>2026-04-04 23:50</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-f8dc9dce3102')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Unprecedented $450 price slash brings 27-inch 1440p 280 Hz OLED gaming monitor down to $399 — LG UltraGear OLED 27GX700A-B now at an unbeatable Price</h3><div class='summary'>LG’s 27-inch 280 Hz OLED gaming monitor sees a massive price drop, with a promo code bringing it down to $399.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>前例のない 450 ドルの値下げにより、27 インチ 1440p 280 Hz OLED ゲーミング モニターが 399 ドルに値下げ — LG UltraGear OLED 27GX700A-B が破格の価格で登場</h3><div class='summary'>LG の 27 インチ 280 Hz OLED ゲーミング モニターは大幅に価格が下がり、プロモーション コードにより 399 ドルに下がります。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-jpy-strong'>💻 PC・OS</span><span class='tag tag-bearish'>⚠ 懸念</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.tomshardware.com/monitors/gaming-monitors/unprecedented-usd450-price-slash-brings-27-inch-1440p-280-hz-oled-gaming-monitor-down-to-usd399-lg-ultragear-oled-27gx700a-b-now-at-an-unbeatable-price' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-ef8eb1966d59'
+  data-themes='市場・企業動向'
+  data-lang='ja'
+  data-score='2'
+  data-source='PC Watch'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-marketgroup='価格・需給' data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span>PC Watch</span><span>2026-04-07 11:53</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-ef8eb1966d59')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>USBケーブルの「中身」が見える、安価なケーブルチェッカー</h3><div class='summary'>XYZA(エクシーザ)は、USBケーブルの通電状態やスペックを調べるデバイス「USB-C CABLE CHECKER 2」を発売した。Amazonでの価格は2,285円。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://pc.watch.impress.co.jp/docs/news/2099616.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-58350bd78c26'
+  data-themes='市場・企業動向'
+  data-lang='ja'
+  data-score='2'
+  data-source='PC Watch'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-marketgroup='価格・需給' data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span>PC Watch</span><span>2026-04-07 11:44</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-58350bd78c26')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【本日みつけたお買い得品】「松屋」のうまトマハンバーグセットが981円引き</h3><div class='summary'>Amazonにおいて、松屋の「うまトマハンバーグ」と「プレミアム仕様牛めしの具」が5食ずつ、10食セットとなった「【松屋人気コラボ商品】10食入り！うまトマハンバーグ 5食×プレミアム仕様牛めしの具 5食」が直近価格の981円引きとなる3,999円で販売している。1食あたりの価格は約399円。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://pc.watch.impress.co.jp/docs/news/todays_sales/2099624.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-6bdc7e0e80d1'
+  data-themes='ノートPC・デスクトップ'
+  data-lang='en'
+  data-score='2'
+  data-source='Notebookcheck News'
+  data-sentiment='bullish'
+  data-importance='health_alert'
+  data-marketgroup='価格・需給' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Notebookcheck News</span><span>2026-04-07 02:32</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-6bdc7e0e80d1')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Sentinel Core: New board turns Raspberry Pi into desktop computer</h3><div class='summary'>For the Raspberry Pi: A new motherboard is intended to significantly expand the capabilities of the single-board computer and give makers a very wide range of options for experimentation. It makes it possible to use a Raspberry Pi with standard components. PCIe can also be used. The Sentinel Core is</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Sentinel Core: 新しいボードが Raspberry Pi をデスクトップ コンピューターに変える</h3><div class='summary'>Raspberry Pi の場合: 新しいマザーボードは、シングルボード コンピューターの機能を大幅に拡張し、メーカーに非常に幅広い実験のオプションを提供することを目的としています。これにより、Raspberry Pi を標準コンポーネントで使用できるようになります。 PCIeも使用可能です。センチネルコアは、</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-usd-strong'>🧠 CPU・半導体</span><span class='tag tag-bullish'>✅ 好材料</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.notebookcheck.net/Sentinel-Core-New-board-turns-Raspberry-Pi-into-desktop-computer.1267341.0.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-9c1ce193031b'
+  data-themes='ノートPC・デスクトップ'
+  data-lang='en'
+  data-score='2'
+  data-source='Notebookcheck News'
+  data-sentiment='bullish'
+  data-importance='training_behavior'
+  data-marketgroup='価格・需給' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Notebookcheck News</span><span>2026-04-07 01:21</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-9c1ce193031b')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Arduino: $20 board brings Raspberry Pi compatibility and plenty of ports</h3><div class='summary'>The Arduino UNO Media Carrier is a new expansion board that is relatively affordable and is intended to significantly expand the capabilities of compatible developer boards and single-board computers. As the name suggests, the focus is primarily on media functions.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Arduino: 20 ドルのボードは Raspberry Pi との互換性と豊富なポートをもたらします</h3><div class='summary'>Arduino UNO メディア キャリアは、比較的手頃な価格の新しい拡張ボードで、互換性のある開発者ボードおよびシングルボード コンピュータの機能を大幅に拡張することを目的としています。名前が示すように、主にメディア機能に焦点を当てています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-jpy-strong'>💻 PC・OS</span><span class='tag tag-bullish'>✅ 好材料</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.notebookcheck.net/Arduino-20-board-brings-Raspberry-Pi-compatibility-and-plenty-of-ports.1267257.0.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-28689c1ba751'
+  data-themes='ノートPC・デスクトップ'
+  data-lang='en'
+  data-score='2'
+  data-source='Notebookcheck News'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-marketgroup='価格・需給' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Notebookcheck News</span><span>2026-04-07 01:19</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-28689c1ba751')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>1st Crimson Desert PS5 platinum trophy secured after 280+ hours in open-world game</h3><div class='summary'>The Crimson Desert platinum trophy demands an enormous time commitment. Even so, PS5 players are gradually becoming Pywel Legends after devoting hundreds of hours to the game. The size of the maps and the variety of side activities make the 35 achievements more intimidating.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>オープンワールド ゲームで 280 時間以上プレイした後、最初の Crimson Desert PS5 プラチナ トロフィーを獲得</h3><div class='summary'>Crimson Desert のプラチナ トロフィーを獲得するには、膨大な時間がかかります。それでも、PS5 プレイヤーは何百時間もゲームに費やした後、徐々に Pywel Legends になりつつあります。マップのサイズとサイド アクティビティの多様性により、35 の実績がより恐ろしいものになっています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.notebookcheck.net/1st-Crimson-Desert-PS5-platinum-trophy-secured-after-280-hours-in-open-world-game.1267256.0.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-625883eabcdb'
+  data-themes='市場・企業動向'
+  data-lang='en'
+  data-score='2'
+  data-source='Notebookcheck News'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-marketgroup='価格・需給' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Notebookcheck News</span><span>2026-04-06 21:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-625883eabcdb')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>McDonald’s offers a &quot;Pro Gamer Menu&quot; with a quirky controller gadget</h3><div class='summary'>In Turkey, McDonald’s is offering a quirky “Pro Gamer Menu” that includes a Big Mac, fries, Coke, onion rings and the anti-AFK tool “Archie.” While Reddit users see the promotion as a funny marketing gimmick, many think the price of around $12 is too high.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>マクドナルドが風変わりなコントローラーガジェットを備えた「プロゲーマーメニュー」を提供</h3><div class='summary'>トルコのマクドナルドは、ビッグマック、フライドポテト、コーラ、オニオンリング、AFK対策ツール「Archie」を含む風変わりな「プロゲーマーメニュー」を提供している。 Redditユーザーはこのプロモーションを面白いマーケティングの仕掛けだと考えているが、多くの人は約12ドルという価格は高すぎると考えている。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.notebookcheck.net/McDonald-s-offers-a-Pro-Gamer-Menu-with-a-quirky-controller-gadget.1267084.0.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-8627a275252f'
+  data-themes='市場・企業動向'
+  data-lang='ja'
+  data-score='2'
+  data-source='PC Watch'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-marketgroup='価格・需給' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span>PC Watch</span><span>2026-04-06 15:54</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-8627a275252f')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>オープンイヤーなのにノイキャンが使えるイヤフォン「OpenFit Pro」</h3><div class='summary'>Shokz Japanは、ノイズ低減機能の「フォーカスモード」を搭載する新型オープンイヤー型イヤフォン「OpenFit Pro」を4月22日に発売する。予約受付は4月7日に開始予定で、価格は3万9,880円。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://pc.watch.impress.co.jp/docs/news/2099410.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-a3bfc6aa727e'
+  data-themes='市場・企業動向'
+  data-lang='ja'
+  data-score='2'
+  data-source='PC Watch'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-marketgroup='価格・需給' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span>PC Watch</span><span>2026-04-06 15:15</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-a3bfc6aa727e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>143言語対応の2画面AI翻訳機、オフラインモードあり</h3><div class='summary'>iFLYTEK JAPAN AI SOLUTIONSは4月6日、2画面で構成される「iFLYTEK デュアルスクリーンAI翻訳機」を発売した。価格は9万9,800円。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://pc.watch.impress.co.jp/docs/news/2099395.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-2027bc6b01d8'
+  data-themes='市場・企業動向'
+  data-lang='ja'
+  data-score='2'
+  data-source='PC Watch'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-marketgroup='価格・需給' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span>PC Watch</span><span>2026-04-06 14:07</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-2027bc6b01d8')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>9万9,800円の“分割”ワイヤレスキーボード「Waffree US」</h3><div class='summary'>金沢エンジニアリングシステムズは4月6日、英語配列の分割式ワイヤレスキーボード「Waffree US」を発売した。Amazonでの価格は9万9,800円で、発売記念により5月31日までは5,000円オフで購入できる。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://pc.watch.impress.co.jp/docs/news/2099354.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-8af57362c470'
+  data-themes='市場・企業動向'
+  data-lang='ja'
+  data-score='2'
+  data-source='PC Watch'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-marketgroup='価格・需給' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span>PC Watch</span><span>2026-04-06 10:55</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-8af57362c470')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【本日みつけたお買い得品】47%オフ！ラピトリゲーミングキーボードがAmazonでセール</h3><div class='summary'>Amazonは本日まで、新生活セールFinalを実施中だ。SteelSeriesのゲーミングキーボード「Apex Pro Mini」は、3月24日の価格から1万6,737円引き(47%オフ)で、1万8,790円にて購入できる。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-weak'>📊 市場・企業動向</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://pc.watch.impress.co.jp/docs/news/todays_sales/2099256.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-d2cb6d7336e4'
+  data-themes='ノートPC・デスクトップ'
+  data-lang='en'
+  data-score='2'
+  data-source='Notebookcheck News'
+  data-sentiment='neutral'
+  data-importance='food_recall'
+  data-marketgroup='価格・需給' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Notebookcheck News</span><span>2026-04-06 05:24</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-d2cb6d7336e4')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Yakuza title for Switch 2 hits an all-time low price on Amazon</h3><div class='summary'>Deal | Whether you&#x27;re a fan of arcade brawlers or games with emotionally rich storylines, Yakuza 0: Director’s Cut has players covered. With fans considering it the perfect entry point for beginners, curious players can snag it at an all-time low price.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Switch 2用『龍が如く』タイトルがAmazonで史上最安値に</h3><div class='summary'>取引 |アーケードの喧嘩屋のファンでも、感情豊かなストーリー展開のあるゲームのファンでも、龍が如く 0: ディレクターズ カットはプレイヤーを魅了します。ファンの間では初心者にとって完璧なエントリーポイントであると考えられており、好奇心旺盛なプレイヤーはこれまでにない低価格で手に入れることができます。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-usd-weak'>🎮 GPU・AI PC</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.notebookcheck.net/Yakuza-title-for-Switch-2-hits-an-all-time-low-price-on-Amazon.1266803.0.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-d5cb91bb4dcb'
+  data-themes='ノートPC・デスクトップ'
+  data-lang='ja'
+  data-score='2'
+  data-source='ITmedia PC USER'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-marketgroup='価格・需給' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span>ITmedia PC USER</span><span>2026-04-05 06:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-d5cb91bb4dcb')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>メモリ高騰でRaspberry Piが再値上げ／Adobe CCがユーザーに無断でhostsファイルを書き換え？</h3><div class='summary'>うっかり見逃していたけれど、ちょっと気になる――そんなニュースを週末に“一気読み”する連載。今回は、3月29日週を中心に公開された主なニュースを一気にチェックしましょう！</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💻 ノートPC・デスクトップ</span><span class='tag tag-jpy-strong'>💻 PC・OS</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.itmedia.co.jp/pcuser/articles/2604/05/news012.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-34187dc5825e'
+  data-themes='OS・ソフトウェア'
+  data-lang='en'
+  data-score='2'
+  data-source='Tom&#x27;s Hardware'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-marketgroup='価格・需給' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Tom&#x27;s Hardware</span><span>2026-04-04 23:16</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-34187dc5825e')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Sharge Disk Pro 2TB review: Great sustained writes, active cooling, and a built-in hub</h3><div class='summary'>Sharge&#x27;s Disk Pro pairs a snappy 10 Gbps SSD with a handy port hub and active cooling, all in a compact, eye-catching shell with a magnetic back. It&#x27;s an impressive package for gamers and road warriors, but you&#x27;ll pay a high price for all these features.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Sharge Disk Pro 2TB レビュー: 優れた持続書き込み、アクティブ冷却、内蔵ハブ</h3><div class='summary'>Sharge の Disk Pro は、高速な 10 Gbps SSD と便利なポート ハブおよびアクティブ冷却機能を組み合わせ、背面に磁気を備えたコンパクトで目を引くシェルにすべて収められています。これはゲーマーや外出をする人にとっては印象的なパッケージですが、これらすべての機能を利用するには高い代償を払うことになります。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🪟 OS・ソフトウェア</span><span class='tag tag-jpy-strong'>💻 PC・OS</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.tomshardware.com/pc-components/external-ssds/sharge-disk-pro-2tb-review' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-2fce45b6d4bc'
+  data-themes='市場・企業動向'
+  data-lang='ja'
+  data-score='2'
+  data-source='ITmedia PC USER'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-marketgroup='価格・需給' data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span>ITmedia PC USER</span><span>2026-04-04 06:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-2fce45b6d4bc')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>アキバの一部ショップでHDD購入制限の動き――大容量モデルを中心に品薄感</h3><div class='summary'>メモリやSSD、HDDの高騰と供給不安が恒常化する中で、ユーザーに向かって局所的な追い風や向かい風が吹いている。今週はHDD回りでちょっとした向かい風を感じた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>📊 市場・企業動向</span><span class='tag tag-jpy-strong'>💻 PC・OS</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.itmedia.co.jp/pcuser/articles/2604/04/news024.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article></div>
+</div><footer>PC Industry Suite — Generated at 2026-04-07 14:07</footer></body></html>
+<script>
+var pageLang = 'en';
+function setPageLang(lang) {
+  pageLang = lang;
+  document.getElementById('btnPageEN').classList.toggle('active', lang === 'en');
+  document.getElementById('btnPageJA').classList.toggle('active', lang === 'ja');
+  document.querySelectorAll('.item-card').forEach(function(card) {
+    if ((card.dataset.lang || 'en') === 'ja') return;
+    var enPane = card.querySelector('.lang-en');
+    var jaPane = card.querySelector('.lang-ja');
+    var enBtn = card.querySelector('.card-lang-btn[data-l="en"]');
+    var jaBtn = card.querySelector('.card-lang-btn[data-l="ja"]');
+    if (!enPane || !jaPane) return;
+    if (lang === 'ja') {
+      enPane.classList.add('hidden'); jaPane.classList.remove('hidden');
+      if(enBtn) enBtn.classList.remove('active');
+      if(jaBtn) jaBtn.classList.add('active');
+    } else {
+      enPane.classList.remove('hidden'); jaPane.classList.add('hidden');
+      if(enBtn) enBtn.classList.add('active');
+      if(jaBtn) jaBtn.classList.remove('active');
+    }
+  });
+}
+function switchCardLang(btn, lang) {
+  var card = btn.closest('.item-card');
+  if (!card) return;
+  card.querySelectorAll('.card-lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var enPane = card.querySelector('.lang-en');
+  var jaPane = card.querySelector('.lang-ja');
+  if (!enPane || !jaPane) return;
+  if (lang === 'ja') { enPane.classList.add('hidden'); jaPane.classList.remove('hidden'); }
+  else { enPane.classList.remove('hidden'); jaPane.classList.add('hidden'); }
+}
+</script>
+
+<script>
+var READ_KEY = 'pc_industry_suite_read';
+function getReadSet() {
+  try { return new Set(JSON.parse(localStorage.getItem(READ_KEY) || '[]')); } catch(e) { return new Set(); }
+}
+function saveReadSet(s) { try { localStorage.setItem(READ_KEY, JSON.stringify([...s])); } catch(e) {} }
+function markRead(btn, cardId) {
+  var card = btn.closest('.item-card');
+  var rs = getReadSet();
+  if (rs.has(cardId)) { rs.delete(cardId); card.classList.remove('is-read'); btn.textContent = '既読'; }
+  else { rs.add(cardId); card.classList.add('is-read'); btn.textContent = '未読に戻す'; }
+  saveReadSet(rs);
+}
+(function applyRead() {
+  var rs = getReadSet();
+  document.querySelectorAll('.item-card[data-cardid]').forEach(function(card) {
+    if (rs.has(card.dataset.cardid)) {
+      card.classList.add('is-read');
+      var btn = card.querySelector('.read-btn');
+      if (btn) btn.textContent = '未読に戻す';
+    }
+  });
+})();
+</script>

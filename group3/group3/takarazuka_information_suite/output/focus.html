@@ -1,0 +1,1697 @@
+<!doctype html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Takarazuka Information Suite - focus.html</title>
+<style>
+:root{
+  --bg:#0d1016;--panel:#151a23;--panel2:#1b2230;--line:#2a3446;
+  --text:#ebf0f8;--muted:#9ba9bc;--accent:#4ea1ff;--accent2:#1e2f49;
+  --ok:#1f6f53;--warn:#8a5a17;--bad:#7c3038;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Segoe UI',Meiryo,sans-serif}
+a{color:inherit;text-decoration:none}
+header{position:sticky;top:0;z-index:50;background:rgba(13,16,22,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.wrap{max-width:1480px;margin:0 auto;padding:14px 20px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.title h1{margin:0;font-size:22px;font-weight:800}
+.title .sub{margin-top:4px;color:var(--muted);font-size:12px}
+.right-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.page-lang-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:9px 14px;font-size:13px;cursor:pointer;transition:all .15s}
+.page-lang-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.nav a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;border:1px solid rgba(255,255,255,.10);color:var(--text);background:rgba(255,255,255,.03);padding:10px 18px;border-radius:999px;font-size:13px;font-weight:700;white-space:nowrap;transition:all .18s ease}
+.nav a:hover{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.06)}
+.nav a.active{background:linear-gradient(135deg,#4ea1ff,#5a86ff);border-color:transparent;color:#fff;box-shadow:0 4px 16px rgba(78,161,255,.3)}
+.main{max-width:1480px;margin:18px auto;padding:0 20px 40px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+.stat .num{font-size:26px;font-weight:800;margin-bottom:4px}
+.stat .label{color:var(--muted);font-size:12px}
+.stat .icon{font-size:22px;margin-bottom:8px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s}
+.flt-btn:hover{border-color:var(--accent)}
+.flt-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
+.search{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 12px;font-size:13px;min-width:220px}
+.search::placeholder{color:var(--muted)}
+.filter-label{color:var(--muted);font-size:12px;white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.grid.list{grid-template-columns:1fr}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;transition:border-color .18s,opacity .18s}
+.card:hover{border-color:var(--accent)}
+.card.is-read{opacity:.45}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;color:var(--muted);font-size:12px;align-items:center}
+.card-lang-toggle{display:flex;gap:5px;flex-shrink:0;align-items:center}
+.card-lang-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;white-space:nowrap;transition:all .15s}
+.card-lang-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
+.read-btn{background:var(--panel2);border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;transition:all .15s}
+.read-btn:hover{border-color:#666}
+.card h3{margin:0;font-size:15px;line-height:1.5;font-weight:700}
+.summary{color:#ced7e6;font-size:13px;line-height:1.6}
+.lang-pane.hidden{display:none!important}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.tag{display:inline-block;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:600;border:1px solid transparent}
+.tag-official{background:#173126;border-color:#2f7254;color:#c6f1dc}
+.tag-score5,.tag-score4{background:#1e1a3a;border-color:#a78bfa;color:#e0d9ff}
+.tag-score3{background:#1e2f49;border-color:#4ea1ff;color:#cae2ff}
+.tag-score2{background:#2d2014;border-color:#8a6a31;color:#ffe0a2}
+.tag-score1{background:#1e1e1e;border-color:#444;color:#aaa}
+.tag-theme{font-size:11px;padding:3px 8px;border-radius:999px;border:1px solid transparent;font-weight:600}
+.tag-new{background:#1a2e1a;border-color:#2ecc71;color:#2ecc71;font-weight:800;animation:pulse 1.5s infinite}
+.tag-bullish{background:#1a2e1a;border-color:#2ecc71;color:#2ecc71}
+.tag-bearish{background:#2e1a1a;border-color:#e74c3c;color:#e74c3c}
+.tag-neutral{background:#1e1e2e;border-color:#636e72;color:#9ba9bc}
+.tag-usd-strong{background:#1a2040;border-color:#4ea1ff;color:#a8d4ff}
+.tag-usd-weak{background:#2e1a1a;border-color:#e74c3c;color:#ffb3b3}
+.tag-jpy-strong{background:#1a2e1a;border-color:#2ecc71;color:#a8ffcc}
+.tag-jpy-weak{background:#2e2a1a;border-color:#f39c12;color:#ffe0a2}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.lang-badge{font-size:11px;padding:2px 6px;border-radius:4px;background:#2a3446;color:var(--muted)}
+.lang-badge.ja{background:#173126;color:#c6f1dc}
+.lang-badge.en{background:#1e2f49;color:#cae2ff}
+.open-btn{display:inline-flex;justify-content:center;align-items:center;background:var(--accent2);border:1px solid var(--accent);color:#eaf4ff;border-radius:10px;padding:9px 14px;font-size:13px;font-weight:700;margin-top:4px;transition:all .15s}
+.open-btn:hover{background:#2a4a80}
+.theme-section{margin-bottom:28px}
+.theme-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.theme-header h2{margin:0;font-size:17px;font-weight:800}
+.theme-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:999px;font-size:13px;font-weight:700;border:1px solid transparent}
+.cb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.cb-card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px}
+.cb-card .cb-name{font-weight:800;font-size:15px;margin-bottom:8px}
+.cb-card .cb-count{font-size:22px;font-weight:800;color:var(--accent)}
+.cb-card .cb-recent{font-size:12px;color:var(--muted);margin-top:6px}
+footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);font-size:12px}
+@media(max-width:700px){
+  .wrap,.main,footer{padding-left:12px;padding-right:12px}
+  .grid{grid-template-columns:1fr}
+  .search{min-width:160px;width:100%}
+  .card-top{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<header>
+<div class='wrap'>
+  <div class='top'>
+    <div class='title'>
+      <h1>🎭 Takarazuka Information Suite <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 宝塚歌劇の公式情報を収集</span></h1>
+      <div class='sub'>更新日時：2026-04-07 14:36</div>
+    </div>
+    <div class='right-controls'>
+      <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
+      <button class='page-lang-btn' id='btnPageJA' onclick="setPageLang('ja')">🇯🇵 日本語表示</button>
+    </div>
+  </div>
+  <nav class='nav'><a href="index.html" class="">📋 メイン</a><a href="pickup.html" class="">⭐ 注目記事</a><a href="focus.html" class="active">🔖 重要タグ</a><a href="themes.html" class="">🏷 テーマ別</a><a href="group.html" class="">🎭 組別</a><a href="schedule.html" class="">🗓 公演スケジュール</a><a href="sources.html" class="">🧷 注目ソース</a><a href="analysis.html" class="">📊 分析</a></nav>
+</div>
+</header>
+
+<style>
+.fx-summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:24px}
+.fx-summary-card{border-radius:16px;padding:18px;text-align:center;border:1px solid transparent}
+.fx-summary-card .fx-num{font-size:36px;font-weight:900;margin-bottom:6px}
+.fx-summary-card .fx-label{font-size:14px;font-weight:700}
+.fx-summary-card .fx-desc{font-size:11px;color:var(--muted);margin-top:4px}
+.fx-usd-strong{background:#0d1e35;border-color:#4ea1ff}
+.fx-usd-weak{background:#2e0d0d;border-color:#e74c3c}
+.fx-jpy-strong{background:#0d2e1a;border-color:#2ecc71}
+.fx-jpy-weak{background:#2e2400;border-color:#f39c12}
+.fx-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.fx-tab{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:10px 18px;font-size:14px;font-weight:700;cursor:pointer;transition:all .18s}
+.fx-tab.active{border-color:transparent;color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.3)}
+.fx-panel{display:none}.fx-panel.active{display:block}
+</style>
+<div class='main'>
+  
+<div class='fx-summary-grid'>
+  <div class='fx-summary-card fx-usd-strong'>
+    <div class='fx-num' style='color:#4ea1ff'>32</div>
+    <div class='fx-label'>🩺 公演更新</div>
+    <div class='fx-desc'>Performance</div>
+  </div>
+  <div class='fx-summary-card fx-usd-weak'>
+    <div class='fx-num' style='color:#e74c3c'>20</div>
+    <div class='fx-label'>🍖 配信・商品</div>
+    <div class='fx-desc'>Media / Goods</div>
+  </div>
+  <div class='fx-summary-card fx-jpy-strong'>
+    <div class='fx-num' style='color:#2ecc71'>7</div>
+    <div class='fx-label'>🎓 スター動向</div>
+    <div class='fx-desc'>Star</div>
+  </div>
+  <div class='fx-summary-card fx-jpy-weak'>
+    <div class='fx-num' style='color:#f39c12'>16</div>
+    <div class='fx-label'>🎫 チケット・会員</div>
+    <div class='fx-desc'>Ticket / Member</div>
+  </div>
+  <div class='fx-summary-card' style='background:var(--panel2);border-color:var(--line)'>
+    <div class='fx-num' style='color:var(--muted)'>1</div>
+    <div class='fx-label'>➖ その他</div>
+    <div class='fx-desc'>General</div>
+  </div>
+</div>
+  <div class='panel'>
+    <div class='filters'>
+      <span class='filter-label'>言語:</span>
+      <button class='flt-btn flt-imp-lang active' data-lang='all'>🌍 全部</button>
+      <button class='flt-btn flt-imp-lang' data-lang='ja'>🇯🇵 日本語</button>
+      <button class='flt-btn flt-imp-lang' data-lang='en'>🌐 English</button>
+      <input id='searchBoxImportance' class='search' placeholder='タイトル・本文を検索...'>
+    </div>
+  </div>
+  <div class='fx-tabs'><button class='fx-tab active' data-key='performance_update' style='background:#0d1e35;border-color:#4ea1ff;color:#fff' onclick="switchFxTab('performance_update',this)">🎭 公演更新 (32)</button><button class='fx-tab ' data-key='media_goods' style='' onclick="switchFxTab('media_goods',this)">📺 配信・商品 (20)</button><button class='fx-tab ' data-key='star_update' style='' onclick="switchFxTab('star_update',this)">⭐ スター動向 (7)</button><button class='fx-tab ' data-key='ticket_member' style='' onclick="switchFxTab('ticket_member',this)">🎫 チケット・会員 (16)</button></div>
+  <div class='fx-panel active' id='fx-performance_update'><div class='grid'>
+<article class='card item-card'
+  data-cardid='item-e1a2b2cc2130'
+  data-themes='公演スケジュール'
+  data-troupes='花組'
+  data-kind='schedule'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公演案内（大劇場・東京）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公演案内（大劇場・東京）</span><span>2026-10-17</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-e1a2b2cc2130')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『エリザベート-愛と死の輪舞(ロンド)-』</h3><div class='summary'>ミュージカル / 『エリザベート-愛と死の輪舞(ロンド)-』 / 脚本・歌詞/ミヒャエル・クンツェ / 音楽・編曲/シルヴェスター・リーヴァイ / オリジナル・プロダクション/ウィーン劇場協会 / 潤色・演出/小池 修一郎 / Original production: Vereinigte Bühnen Wien GmbH / Worldwide Stage Rights: VBW International GmbH</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#54a0ff22;border-color:#54a0ff;color:#54a0ff'>🗓 公演スケジュール</span><span class='tag tag-theme' style='background:#1d2d47;border-color:#4ea1ff;color:#cae2ff'>🗓 公演スケジュール</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/revue/2026/elisabeth/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-ebf4fc4dfc9e'
+  data-themes='公演スケジュール'
+  data-troupes='全組共通'
+  data-kind='schedule'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公演案内（その他の劇場）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公演案内（その他の劇場）</span><span>2026-09-13</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-ebf4fc4dfc9e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『稲妻開化譚-イナズマカイカタン-』</h3><div class='summary'>ミュージカル / 『稲妻開化譚-イナズマカイカタン-』 / 作・演出/齋藤 吉正 / 兵庫県立芸術文化センター 阪急 中ホール / (兵庫県) / 2026年9月13日(日)〜9月22日(火) / 一般前売:2026年8月2日(日) / KAAT神奈川芸術劇場</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#54a0ff22;border-color:#54a0ff;color:#54a0ff'>🗓 公演スケジュール</span><span class='tag tag-theme' style='background:#1d2d47;border-color:#4ea1ff;color:#cae2ff'>🗓 公演スケジュール</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/revue/2026/inazumakaikatan/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-f312ee2ba7e4'
+  data-themes='公演スケジュール'
+  data-troupes='月組'
+  data-kind='schedule'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公演案内（その他の劇場）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公演案内（その他の劇場）</span><span>2026-09-10</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-f312ee2ba7e4')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『NINE』</h3><div class='summary'>『NINE』 / Book by ARTHUR KOPIT / Music and Lyrics by MAURY YESTON / Adaptation from the Italian by MARIO FRATTI / 潤色・演出/指田 珠子 / 東急シアターオーブ / (東京都) / 2026年9月10日(木)〜9月27日(日)</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#54a0ff22;border-color:#54a0ff;color:#54a0ff'>🗓 公演スケジュール</span><span class='tag tag-theme' style='background:#1d2d47;border-color:#4ea1ff;color:#cae2ff'>🗓 公演スケジュール</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/revue/2026/nine/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-c097377626c1'
+  data-themes='公演スケジュール'
+  data-troupes='星組'
+  data-kind='schedule'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公演案内（大劇場・東京）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公演案内（大劇場・東京）</span><span>2026-08-29</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-c097377626c1')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『RRR × TAKA”R”AZUKA ~√Rama~(アールアールアール バイ タカラヅカ ~ルートラーマ~)』</h3><div class='summary'>『RRR × TAKA”R”AZUKA ~√Rama~(アールアールアール バイ タカラヅカ ~ルートラーマ~)』 / Based on SS Rajamouli’s ‘RRR’. / 脚本・演出/谷 貴矢 / 宝塚大劇場 / (兵庫県) / 2026年8月29日(土)〜10月11日(日) / 一般前売:2026年8月8日(土) / 東京宝塚劇場</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#54a0ff22;border-color:#54a0ff;color:#54a0ff'>🗓 公演スケジュール</span><span class='tag tag-theme' style='background:#1d2d47;border-color:#4ea1ff;color:#cae2ff'>🗓 公演スケジュール</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/revue/2026/rrr/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-f4f39a1871f2'
+  data-themes='公演スケジュール'
+  data-troupes='全組共通'
+  data-kind='schedule'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公演案内（その他の劇場）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公演案内（その他の劇場）</span><span>2026-07-28</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-f4f39a1871f2')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『赤と黒』</h3><div class='summary'>ミュージカル・ロマン / 『赤と黒』 / -原作 スタンダール- / 脚本/柴田 侑宏 / 演出/田渕 大輔 / 宝塚バウホール / (兵庫県) / 2026年7月28日(火)〜8月13日(木)</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#54a0ff22;border-color:#54a0ff;color:#54a0ff'>🗓 公演スケジュール</span><span class='tag tag-theme' style='background:#1d2d47;border-color:#4ea1ff;color:#cae2ff'>🗓 公演スケジュール</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/revue/2026/theredandtheblack/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-631957ed9d2a'
+  data-themes='公演スケジュール'
+  data-troupes='花組'
+  data-kind='schedule'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公演案内（その他の劇場）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公演案内（その他の劇場）</span><span>2026-07-22</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-631957ed9d2a')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『マジシャンの憂鬱』 / 『EXCITER!!2026』</h3><div class='summary'>ミュージカル / 『マジシャンの憂鬱』 / 作・演出/正塚 晴彦 / スパークリング・ショー / 『EXCITER!!2026』 / 作・演出/藤井 大介 / 全国ツアー / 2026年7月22日(水)〜8月18日(火)</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#54a0ff22;border-color:#54a0ff;color:#54a0ff'>🗓 公演スケジュール</span><span class='tag tag-theme' style='background:#1d2d47;border-color:#4ea1ff;color:#cae2ff'>🗓 公演スケジュール</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/revue/2026/magiciannoyuuutsu/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-ab97ee69417e'
+  data-themes='公演スケジュール'
+  data-troupes='雪組'
+  data-kind='schedule'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公演案内（大劇場・東京）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公演案内（大劇場・東京）</span><span>2026-07-11</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-ab97ee69417e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『ポーの一族』</h3><div class='summary'>ミュージカル・ゴシック / 『ポーの一族』 / 原作/萩尾望都「ポーの一族」(小学館「フラワーコミックス」刊) / 脚本・演出/小池 修一郎 / 宝塚大劇場 / (兵庫県) / 2026年7月11日(土)〜8月23日(日) / 一般前売:2026年6月20日(土)</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#54a0ff22;border-color:#54a0ff;color:#54a0ff'>🗓 公演スケジュール</span><span class='tag tag-theme' style='background:#1d2d47;border-color:#4ea1ff;color:#cae2ff'>🗓 公演スケジュール</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/revue/2026/ponoichizoku/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-b555283cb8f9'
+  data-themes='公演スケジュール'
+  data-troupes='全組共通'
+  data-kind='schedule'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公演案内（その他の劇場）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公演案内（その他の劇場）</span><span>2026-06-12</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-b555283cb8f9')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『銀二貫』</h3><div class='summary'>浪華人情物語 / 『銀二貫』 / -梅が枝の花かんざし- / 原作/髙田郁(角川春樹事務所刊 ハルキ文庫) / 脚本/谷 正純 / 演出/鈴木 圭 / 宝塚バウホール / (兵庫県)</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#54a0ff22;border-color:#54a0ff;color:#54a0ff'>🗓 公演スケジュール</span><span class='tag tag-theme' style='background:#1d2d47;border-color:#4ea1ff;color:#cae2ff'>🗓 公演スケジュール</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/revue/2026/gin2kan/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-b5340db45f37'
+  data-themes='公演スケジュール'
+  data-troupes='星組'
+  data-kind='schedule'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公演案内（その他の劇場）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公演案内（その他の劇場）</span><span>2026-06-09</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-b5340db45f37')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『花より男子II』</h3><div class='summary'>TAKARAZUKA MUSICAL ROMANCE / 『花より男子II』 / -Shooting STAR- / ~原作/神尾葉子「花より男子」(集英社マーガレットコミックス刊)~ / 脚本・演出/野口 幸作 / 御園座 / (愛知県) / 2026年6月9日(火)〜6月30日(火)</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#54a0ff22;border-color:#54a0ff;color:#54a0ff'>🗓 公演スケジュール</span><span class='tag tag-theme' style='background:#1d2d47;border-color:#4ea1ff;color:#cae2ff'>🗓 公演スケジュール</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/revue/2026/hanayoridango2/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-c5deac028e58'
+  data-themes='公演スケジュール'
+  data-troupes='宙組'
+  data-kind='schedule'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公演案内（大劇場・東京）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公演案内（大劇場・東京）</span><span>2026-05-23</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-c5deac028e58')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『黒蜥蜴』 / 『Diamond IMPULSE(ダイヤモンド インパルス)』</h3><div class='summary'>ミュージカル・ロマン / 『黒蜥蜴』 / 原作/江戸川乱歩 戯曲/三島由紀夫 / 潤色・演出/生田 大和 / スパーキング・イルミネイト / 『Diamond IMPULSE(ダイヤモンド インパルス)』 / 作・演出/竹田 悠一郎 / 宝塚大劇場</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#54a0ff22;border-color:#54a0ff;color:#54a0ff'>🗓 公演スケジュール</span><span class='tag tag-theme' style='background:#1d2d47;border-color:#4ea1ff;color:#cae2ff'>🗓 公演スケジュール</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/revue/2026/kurotokage/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-3bfbcb7e865e'
+  data-themes='公演スケジュール'
+  data-troupes='全組共通'
+  data-kind='schedule'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公演案内（その他の劇場）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公演案内（その他の劇場）</span><span>2026-04-15</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-3bfbcb7e865e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『DayDream Dali』</h3><div class='summary'>超現実浪漫(シュルレアリスム・ロマン) / 『DayDream Dali』 / 作・演出/谷 貴矢 / 梅田芸術劇場シアター・ドラマシティ / (大阪府) / 2026年4月15日(水)〜4月23日(木) / 一般前売:2026年3月8日(日) / 東京建物 Brillia HALL(豊島区立芸術文化劇場)</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#54a0ff22;border-color:#54a0ff;color:#54a0ff'>🗓 公演スケジュール</span><span class='tag tag-theme' style='background:#1d2d47;border-color:#4ea1ff;color:#cae2ff'>🗓 公演スケジュール</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/revue/2026/daydreamdali/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-f795e2487354'
+  data-themes='公演スケジュール'
+  data-troupes='雪組'
+  data-kind='schedule'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公演案内（その他の劇場）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公演案内（その他の劇場）</span><span>2026-04-13</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-f795e2487354')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『波うららかに、めおと日和』</h3><div class='summary'>『波うららかに、めおと日和』 / 原作/西香はち「波うららかに、めおと日和」(講談社「コミックDAYS」連載) ©西香はち/講談社 / 脚本・演出/小柳 奈穂子 / 演出/雑賀 ヒカル / 梅田芸術劇場メインホール / (大阪府) / 2026年4月13日(月)〜4月30日(木) / 一般前売:2026年3月1日(日)</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#54a0ff22;border-color:#54a0ff;color:#54a0ff'>🗓 公演スケジュール</span><span class='tag tag-theme' style='background:#1d2d47;border-color:#4ea1ff;color:#cae2ff'>🗓 公演スケジュール</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/revue/2026/namiurarakanimeotobiyori/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-179e5a6fa385'
+  data-themes='公演スケジュール'
+  data-troupes='月組'
+  data-kind='schedule'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公演案内（大劇場・東京）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公演案内（大劇場・東京）</span><span>2026-04-04</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-179e5a6fa385')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『RYOFU』 / 『水晶宮殿(クリスタルパレス)』</h3><div class='summary'>三国志炎戯 / 『RYOFU』 / 脚本・演出/栗田 優香 / Amazing Fantasy / 『水晶宮殿(クリスタルパレス)』 / 作・演出/齋藤 吉正 / 宝塚大劇場 / (兵庫県)</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#54a0ff22;border-color:#54a0ff;color:#54a0ff'>🗓 公演スケジュール</span><span class='tag tag-theme' style='background:#1d2d47;border-color:#4ea1ff;color:#cae2ff'>🗓 公演スケジュール</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/revue/2026/ryofu/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-389d20fc63e9'
+  data-themes='劇場・施設'
+  data-troupes='専科|宙組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='bullish'
+  data-importance='performance_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-04-03</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-389d20fc63e9')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜ の配役決定＞ 宝塚大劇場／東京宝塚劇場 『黒蜥蜴』</h3><div class='summary'>劇場・施設 / 専科・宙組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🏛 劇場・施設</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/revue/2026/kurotokage/cast.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-d9428b5d7927'
+  data-themes='劇場・施設'
+  data-troupes='全組共通'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-04-03</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-d9428b5d7927')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>宝塚大劇場 カフェテリア「フルール」リニューアル1周年記念キャンペーンについて</h3><div class='summary'>劇場・施設 / 全組共通</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🏛 劇場・施設</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260403_008.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-b21fbe3bfea8'
+  data-themes='劇場・施設'
+  data-troupes='月組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-04-03</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-b21fbe3bfea8')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>宝塚大劇場レストラン 特別メニューについて</h3><div class='summary'>劇場・施設 / 月組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🏛 劇場・施設</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260403_005.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-091c0d7c5dcb'
+  data-themes='劇場・施設'
+  data-troupes='月組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-04-03</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-091c0d7c5dcb')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>宝塚大劇場内「レビューショップ」期間限定 の販売について</h3><div class='summary'>劇場・施設 / 月組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🏛 劇場・施設</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260403_006.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-deb48a556519'
+  data-themes='劇場・施設'
+  data-troupes='専科|星組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='bullish'
+  data-importance='performance_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-04-02</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-deb48a556519')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜出演者決定＞ 宝塚大劇場／東京宝塚劇場 『RRR × TAKA”R”AZUKA ～√Rama～』</h3><div class='summary'>劇場・施設 / 専科・星組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🏛 劇場・施設</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/revue/2026/rrr/cast.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-eced4ed350c8'
+  data-themes='劇場・施設'
+  data-troupes='雪組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='bullish'
+  data-importance='performance_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-04-02</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-eced4ed350c8')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜一部の配役決定＞ 宝塚大劇場／東京宝塚劇場 『ポーの一族』</h3><div class='summary'>劇場・施設 / 雪組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🏛 劇場・施設</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/revue/2026/ponoichizoku/cast.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-73c283e4743e'
+  data-themes='劇場・施設'
+  data-troupes='月組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-03-31</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-73c283e4743e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜ 時間＞ 宝塚大劇場</h3><div class='summary'>劇場・施設 / 月組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🏛 劇場・施設</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260331_005.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-aa42a04cb736'
+  data-themes='劇場・施設'
+  data-troupes='月組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-03-29</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-aa42a04cb736')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>宝塚大劇場各施設の営業体制（ 期間）について</h3><div class='summary'>劇場・施設 / 月組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🏛 劇場・施設</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260329_001.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-764f1682f61a'
+  data-themes='その他'
+  data-troupes='全組共通'
+  data-kind='news'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='bullish'
+  data-importance='performance_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-03-25</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-764f1682f61a')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>（追）宝塚歌劇公式アプリ「宝塚歌劇Pocket」における推奨動作環境の変更について</h3><div class='summary'>その他 / 全組共通</div></div>
+  <div class='tags'><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260301_004.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-e635ed2edc33'
+  data-themes='公演'
+  data-troupes='月組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-03-12</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-e635ed2edc33')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜人物相関図 公開＞ 『RYOFU』</h3><div class='summary'>公演 / 月組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🎭 公演</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/revue/2026/ryofu/correlation.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-90b818ffb662'
+  data-themes='劇場・施設'
+  data-troupes='全組共通'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-03-11</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-90b818ffb662')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>宝塚大劇場オリジナル 「STAMP BOOK」の販売について</h3><div class='summary'>劇場・施設 / 全組共通</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🏛 劇場・施設</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260311_001.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-e25810dd788d'
+  data-themes='公演'
+  data-troupes='宙組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-03-08</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-e25810dd788d')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜PR映像＞ 『黒蜥蜴』『Diamond IMPULSE』</h3><div class='summary'>公演 / 宙組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🎭 公演</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://youtu.be/RltzNP25iZU' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-38bb50b1db14'
+  data-themes='劇場・施設'
+  data-troupes='星組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='bearish'
+  data-importance='performance_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-02-27</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-38bb50b1db14')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>（追） 宝塚大劇場 ／東京宝塚劇場 休演者（部分休演）のお知らせ</h3><div class='summary'>劇場・施設 / 星組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🏛 劇場・施設</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20251230_008.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-6099d5bf110e'
+  data-themes='劇場・施設'
+  data-troupes='星組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-02-27</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-6099d5bf110e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>東京宝塚劇場 特別メニューについて</h3><div class='summary'>劇場・施設 / 星組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🏛 劇場・施設</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260227_001.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-b86fe975412d'
+  data-themes='劇場・施設'
+  data-troupes='専科|星組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-02-25</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-b86fe975412d')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜ 時間＞ 東京宝塚劇場</h3><div class='summary'>劇場・施設 / 専科・星組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🏛 劇場・施設</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260225_004.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-d8e5d966da8c'
+  data-themes='公演'
+  data-troupes='花組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-02-24</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-d8e5d966da8c')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜初日舞台映像（ロング）＞ 『蒼月抄』『EL DESEO』</h3><div class='summary'>公演 / 花組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🎭 公演</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://youtu.be/TWS3nvbDgCM' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-605c9b4f7127'
+  data-themes='会員・チケット'
+  data-troupes='全組共通'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-02-23</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-605c9b4f7127')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>（追）2026年ビジュアル 特別デザインチケットについて（宝塚大劇場・東京宝塚劇場）</h3><div class='summary'>会員・チケット / 全組共通</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>🎫 会員・チケット</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20251226_003.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-7c1121c274e3'
+  data-themes='公演スケジュール'
+  data-troupes='花組'
+  data-kind='schedule'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公演案内（大劇場・東京）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公演案内（大劇場・東京）</span><span>2026-02-14</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-7c1121c274e3')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『蒼月抄(そうげつしょう)』 / 『EL DESEO(エル・デセーオ)』</h3><div class='summary'>グランド・ラメント / 『蒼月抄(そうげつしょう)』 / -平家終焉の契り- / 作・演出/熊倉 飛鳥 / スパイシー・ショー / 『EL DESEO(エル・デセーオ)』 / 作・演出/指田 珠子 / 宝塚大劇場</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#54a0ff22;border-color:#54a0ff;color:#54a0ff'>🗓 公演スケジュール</span><span class='tag tag-theme' style='background:#1d2d47;border-color:#4ea1ff;color:#cae2ff'>🗓 公演スケジュール</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/revue/2026/sogetsusho/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-936182602871'
+  data-themes='公演スケジュール'
+  data-troupes='星組'
+  data-kind='schedule'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公演案内（大劇場・東京）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公演案内（大劇場・東京）</span><span>2026-01-01</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-936182602871')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『恋する天動説』 / 『DYNAMIC NOVA』</h3><div class='summary'>ビート・シアター / 『恋する天動説』 / -The Wand&#x27;rin&#x27; Stars- / 作・演出/大野 拓史 / ギャラクシーレヴュー / 『DYNAMIC NOVA』 / 作・演出/稲葉 太地 / 宝塚大劇場</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#54a0ff22;border-color:#54a0ff;color:#54a0ff'>🗓 公演スケジュール</span><span class='tag tag-theme' style='background:#1d2d47;border-color:#4ea1ff;color:#cae2ff'>🗓 公演スケジュール</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/revue/2026/koisurutendosetsu/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article></div></div><div class='fx-panel ' id='fx-media_goods'><div class='grid'>
+<article class='card item-card'
+  data-cardid='item-baa91cc03537'
+  data-themes='その他'
+  data-troupes='全組共通'
+  data-kind='news'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='bullish'
+  data-importance='media_goods'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-04-05</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-baa91cc03537')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>（再）出演者を含む宝塚歌劇関係者に対する無断撮影への対応について</h3><div class='summary'>その他 / 全組共通</div></div>
+  <div class='tags'><span class='tag tag-usd-weak'>📺 配信・商品</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260331_10.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-f1a601664068'
+  data-themes='商品'
+  data-troupes='月組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='bullish'
+  data-importance='media_goods'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-04-04</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-f1a601664068')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜カスタマイズCD＞ 新曲追加のお知らせ（キャトルレーヴ宝塚店）</h3><div class='summary'>商品 / 月組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a78bfa22;border-color:#a78bfa;color:#a78bfa'>🛍 商品</span><span class='tag tag-usd-weak'>📺 配信・商品</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260404_002.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-27f2a2508626'
+  data-themes='配信・放送'
+  data-troupes='全組共通'
+  data-kind='news'
+  data-lang='ja'
+  data-score='4'
+  data-source='宝塚歌劇 公式ニュース（配信・放送）'
+  data-sentiment='neutral'
+  data-importance='media_goods'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（配信・放送）</span><span>2026-04-03</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-27f2a2508626')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>メディア出演情報</h3><div class='summary'>配信・放送 / 全組共通</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>📺 配信・放送</span><span class='tag tag-usd-weak'>📺 配信・商品</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/tv_radio.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-ea4fc5177e35'
+  data-themes='配信・放送'
+  data-troupes='星組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='4'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='neutral'
+  data-importance='media_goods'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-04-03</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-ea4fc5177e35')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>（追）＜ライブ中継・ライブ配信＞ 『恋する天動説』『DYNAMIC NOVA』</h3><div class='summary'>配信・放送 / 星組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>📺 配信・放送</span><span class='tag tag-usd-weak'>📺 配信・商品</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20251206_002.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-95f289c14833'
+  data-themes='商品'
+  data-troupes='専科|花組|月組|雪組|星組|宙組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='bullish'
+  data-importance='media_goods'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-04-03</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-95f289c14833')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「歌劇4月号」発売【ebooksタカラヅカでも同時発売！】</h3><div class='summary'>商品 / 専科・花組・月組・雪組・星組・宙組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a78bfa22;border-color:#a78bfa;color:#a78bfa'>🛍 商品</span><span class='tag tag-usd-weak'>📺 配信・商品</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://shop.tca-pictures.net/shop/c/cbook/?utm_source=kageki.hankyu.co.jp&amp;utm_medium=news&amp;utm_campaign=20260403_2653' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-33c92aba602d'
+  data-themes='配信・放送'
+  data-troupes='花組|月組|雪組|星組|宙組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='4'
+  data-source='宝塚歌劇 公式ニュース（配信・放送）'
+  data-sentiment='bullish'
+  data-importance='media_goods'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（配信・放送）</span><span>2026-04-01</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-33c92aba602d')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜動画配信サービス タカラヅカ・オン・デマンド＞4月1日配信開始のラインアップ（『Eternal Voice 消え残る想い』『ベルサイユのばら』他）</h3><div class='summary'>配信・放送 / 花組・月組・雪組・星組・宙組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>📺 配信・放送</span><span class='tag tag-usd-weak'>📺 配信・商品</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260401_013.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-306f06afa388'
+  data-themes='配信・放送'
+  data-troupes='専科|花組|月組|雪組|星組|宙組|研究科一年'
+  data-kind='news'
+  data-lang='ja'
+  data-score='4'
+  data-source='宝塚歌劇 公式ニュース（配信・放送）'
+  data-sentiment='bullish'
+  data-importance='media_goods'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（配信・放送）</span><span>2026-04-01</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-306f06afa388')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜タカラヅカ・スカイ・ステージ＞5月ラインアップのお知らせ</h3><div class='summary'>配信・放送 / 専科・花組・月組・雪組・星組・宙組・研究科一年</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>📺 配信・放送</span><span class='tag tag-usd-weak'>📺 配信・商品</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260401_010.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-ef774799c2a8'
+  data-themes='配信・放送'
+  data-troupes='専科|花組|月組|雪組|星組|宙組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='4'
+  data-source='宝塚歌劇 公式ニュース（配信・放送）'
+  data-sentiment='bullish'
+  data-importance='media_goods'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（配信・放送）</span><span>2026-03-31</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-ef774799c2a8')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>動画配信サービス“TAKARAZUKA SQUARE【タカスク】”ラインアップ更新！</h3><div class='summary'>配信・放送 / 専科・花組・月組・雪組・星組・宙組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>📺 配信・放送</span><span class='tag tag-usd-weak'>📺 配信・商品</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260331_007.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-cd8e51fc3104'
+  data-themes='配信・放送'
+  data-troupes='花組|月組|雪組|星組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='4'
+  data-source='宝塚歌劇 公式ニュース（配信・放送）'
+  data-sentiment='bullish'
+  data-importance='media_goods'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（配信・放送）</span><span>2026-03-31</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-cd8e51fc3104')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>（追）＜TAKARAZUKA REVUE MUSIC＞3月配信のお知らせ</h3><div class='summary'>配信・放送 / 花組・月組・雪組・星組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>📺 配信・放送</span><span class='tag tag-usd-weak'>📺 配信・商品</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260317_002.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-681867cc9e27'
+  data-themes='その他'
+  data-troupes='花組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='bullish'
+  data-importance='media_goods'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-03-31</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-681867cc9e27')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>宝塚歌劇『エリザベート』上演記念 永久輝せあ・星空美咲トークイベント付 ウィーン6日間 ツアー開催のお知らせ</h3><div class='summary'>その他 / 花組</div></div>
+  <div class='tags'><span class='tag tag-usd-weak'>📺 配信・商品</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260331_003.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-67a9a59abb62'
+  data-themes='配信・放送'
+  data-troupes='月組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='4'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='neutral'
+  data-importance='media_goods'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-03-28</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-67a9a59abb62')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>（追）＜ライブ中継・ライブ配信＞ 『RYOFU』『水晶宮殿』</h3><div class='summary'>配信・放送 / 月組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>📺 配信・放送</span><span class='tag tag-usd-weak'>📺 配信・商品</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260307_002.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-ed077fcf0824'
+  data-themes='配信・放送'
+  data-troupes='花組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='4'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='neutral'
+  data-importance='media_goods'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-03-28</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-ed077fcf0824')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>（追）＜ライブ中継・ライブ配信＞ 『蒼月抄』『EL DESEO』</h3><div class='summary'>配信・放送 / 花組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>📺 配信・放送</span><span class='tag tag-usd-weak'>📺 配信・商品</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260117_003.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-fb3cc151e930'
+  data-themes='配信・放送'
+  data-troupes='雪組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='4'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='neutral'
+  data-importance='media_goods'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-03-14</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-fb3cc151e930')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜ライブ配信＞ 梅田芸術劇場シアター・ドラマシティ 『DayDream Dali』</h3><div class='summary'>配信・放送 / 雪組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>📺 配信・放送</span><span class='tag tag-usd-weak'>📺 配信・商品</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260314_003.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-c00c170778c7'
+  data-themes='劇場・施設'
+  data-troupes='花組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='4'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='bullish'
+  data-importance='media_goods'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-03-11</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-c00c170778c7')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜ブルーレイ・DVD・CD予約受付開始のお知らせ＞ 宝塚大劇場 『蒼月抄』『EL DESEO』</h3><div class='summary'>劇場・施設 / 花組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🏛 劇場・施設</span><span class='tag tag-usd-weak'>📺 配信・商品</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.tca-pictures.net/stage/2026/sogetsusho/?utm_source=kageki.hankyu.co.jp&amp;utm_medium=news&amp;utm_campaign=20260311_2644' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-3dbfc3463a88'
+  data-themes='配信・放送'
+  data-troupes='雪組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='4'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='neutral'
+  data-importance='media_goods'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-03-07</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-3dbfc3463a88')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜ライブ中継・ライブ配信＞ 梅田芸術劇場メインホール 『波うららかに、めおと日和』</h3><div class='summary'>配信・放送 / 雪組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>📺 配信・放送</span><span class='tag tag-usd-weak'>📺 配信・商品</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260307_003.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-2948317a9401'
+  data-themes='配信・放送'
+  data-troupes='月組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='4'
+  data-source='宝塚歌劇 公式ニュース（配信・放送）'
+  data-sentiment='bullish'
+  data-importance='media_goods'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（配信・放送）</span><span>2026-03-03</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-2948317a9401')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>（追）動画配信サービス“TAKARAZUKA SQUARE【タカスク】”『雨にじむ渤海』タカスク期間限定配信決定！プロモーション映像公開！</h3><div class='summary'>配信・放送 / 月組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>📺 配信・放送</span><span class='tag tag-usd-weak'>📺 配信・商品</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260227_003.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-8672a9edfddc'
+  data-themes='配信・放送'
+  data-troupes='星組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='4'
+  data-source='宝塚歌劇 公式ニュース（配信・放送）'
+  data-sentiment='bullish'
+  data-importance='media_goods'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（配信・放送）</span><span>2026-03-03</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-8672a9edfddc')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>（追）＜宝塚歌劇スケジューラ＞「Applause AKATSUKI Chisei」コラボカード追加のお知らせ</h3><div class='summary'>配信・放送 / 星組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>📺 配信・放送</span><span class='tag tag-usd-weak'>📺 配信・商品</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260115_001.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-c2fdebb7a9ef'
+  data-themes='配信・放送'
+  data-troupes='専科|花組|月組|雪組|星組|宙組|研究科一年'
+  data-kind='news'
+  data-lang='ja'
+  data-score='4'
+  data-source='宝塚歌劇 公式ニュース（配信・放送）'
+  data-sentiment='bullish'
+  data-importance='media_goods'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（配信・放送）</span><span>2026-03-01</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-c2fdebb7a9ef')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜タカラヅカ・スカイ・ステージ＞4月ラインアップのお知らせ</h3><div class='summary'>配信・放送 / 専科・花組・月組・雪組・星組・宙組・研究科一年</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>📺 配信・放送</span><span class='tag tag-usd-weak'>📺 配信・商品</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260301_002.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-619aa10224bf'
+  data-themes='商品'
+  data-troupes='全組共通'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='bullish'
+  data-importance='media_goods'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-02-25</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-619aa10224bf')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜ブルーレイ発売のご案内＞ 「THEME SONGS 2025 宝塚歌劇主題歌集」</h3><div class='summary'>商品 / 全組共通</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a78bfa22;border-color:#a78bfa;color:#a78bfa'>🛍 商品</span><span class='tag tag-usd-weak'>📺 配信・商品</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://shop.tca-pictures.net/shop/g/gTCAB-297?utm_source=kageki.hankyu.co.jp&amp;utm_medium=news&amp;utm_campaign=20260225_2630' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-299c547d909e'
+  data-themes='商品'
+  data-troupes='星組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='4'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='bullish'
+  data-importance='media_goods'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-02-24</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-299c547d909e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜カスタマイズCD＞ 主題歌・配信人気曲追加のお知らせ（キャトルレーヴ東京店）</h3><div class='summary'>商品 / 星組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a78bfa22;border-color:#a78bfa;color:#a78bfa'>🛍 商品</span><span class='tag tag-usd-weak'>📺 配信・商品</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260224_003.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article></div></div><div class='fx-panel ' id='fx-star_update'><div class='grid'>
+<article class='card item-card'
+  data-cardid='item-7b86ae597c5f'
+  data-themes='スター'
+  data-troupes='宙組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公式ニュース（スター）'
+  data-sentiment='bullish'
+  data-importance='star_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（スター）</span><span>2026-04-03</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-7b86ae597c5f')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>退団者のお知らせ</h3><div class='summary'>スター / 宙組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>⭐ スター</span><span class='tag tag-jpy-strong'>⭐ スター動向</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260403_002.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-b8c809066864'
+  data-themes='スター'
+  data-troupes='星組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（スター）'
+  data-sentiment='neutral'
+  data-importance='star_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（スター）</span><span>2026-03-25</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-b8c809066864')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>（追）宝塚ホテル開業100周年記念 瑠風輝 ディナーショー</h3><div class='summary'>スター / 星組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>⭐ スター</span><span class='tag tag-jpy-strong'>⭐ スター動向</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20251212_006.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-115af86e9389'
+  data-themes='スター'
+  data-troupes='花組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（スター）'
+  data-sentiment='neutral'
+  data-importance='star_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（スター）</span><span>2026-03-19</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-115af86e9389')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>（追）宝塚巴里祭2026</h3><div class='summary'>スター / 花組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>⭐ スター</span><span class='tag tag-jpy-strong'>⭐ スター動向</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260310_001.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-b378d21543de'
+  data-themes='商品'
+  data-troupes='専科|花組|月組|雪組|星組|宙組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='bullish'
+  data-importance='star_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-03-19</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-b378d21543de')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「波瀾爆笑!? 我が人生IV」好評発売中！</h3><div class='summary'>商品 / 専科・花組・月組・雪組・星組・宙組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a78bfa22;border-color:#a78bfa;color:#a78bfa'>🛍 商品</span><span class='tag tag-jpy-strong'>⭐ スター動向</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260131_002.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-e52f0ccbe74d'
+  data-themes='商品'
+  data-troupes='専科|花組|月組|雪組|星組|宙組|研究科一年'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='bullish'
+  data-importance='star_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-02-28</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-e52f0ccbe74d')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「宝塚おとめ 2026年度版」、「2025年 宝塚Stage Album（2026年発行）」発売のご案内</h3><div class='summary'>商品 / 専科・花組・月組・雪組・星組・宙組・研究科一年</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a78bfa22;border-color:#a78bfa;color:#a78bfa'>🛍 商品</span><span class='tag tag-jpy-strong'>⭐ スター動向</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260228_002.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-b9cec25d09ec'
+  data-themes='スター'
+  data-troupes='花組|月組|雪組|星組|宙組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（スター）'
+  data-sentiment='neutral'
+  data-importance='star_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（スター）</span><span>2026-02-25</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-b9cec25d09ec')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>副組長2名制の導入について</h3><div class='summary'>スター / 花組・月組・雪組・星組・宙組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>⭐ スター</span><span class='tag tag-jpy-strong'>⭐ スター動向</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260225_007.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-f5e5f33a817a'
+  data-themes='スター'
+  data-troupes='花組|月組|雪組|星組|宙組|研究科一年'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（スター）'
+  data-sentiment='neutral'
+  data-importance='star_update'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（スター）</span><span>2026-02-23</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-f5e5f33a817a')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>第111期生 組配属について</h3><div class='summary'>スター / 花組・月組・雪組・星組・宙組・研究科一年</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>⭐ スター</span><span class='tag tag-jpy-strong'>⭐ スター動向</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260223_003.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article></div></div><div class='fx-panel ' id='fx-ticket_member'><div class='grid'>
+<article class='card item-card'
+  data-cardid='item-7bea68be3716'
+  data-themes='会員・チケット'
+  data-troupes='宙組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='neutral'
+  data-importance='ticket_member'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-04-05</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-7bea68be3716')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>宝塚大劇場 「 プログラム付きチケット」の販売</h3><div class='summary'>会員・チケット / 宙組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>🎫 会員・チケット</span><span class='tag tag-jpy-weak'>🎫 チケット・会員</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260405_001.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-5da343c6f002'
+  data-themes='会員・チケット'
+  data-troupes='全組共通'
+  data-kind='news'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='bullish'
+  data-importance='ticket_member'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-04-01</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-5da343c6f002')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>宝塚友の会「チケット先行販売のお知らせ」について</h3><div class='summary'>会員・チケット / 全組共通</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>🎫 会員・チケット</span><span class='tag tag-jpy-weak'>🎫 チケット・会員</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260401_006.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-07b510803efb'
+  data-themes='会員・チケット'
+  data-troupes='専科|星組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='neutral'
+  data-importance='ticket_member'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-04-01</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-07b510803efb')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜宝塚友の会 チケット先行販売「抽選方式」＞ 宝塚バウホール 『銀二貫』</h3><div class='summary'>会員・チケット / 専科・星組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>🎫 会員・チケット</span><span class='tag tag-jpy-weak'>🎫 チケット・会員</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260401_012.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-0d0633effc23'
+  data-themes='会員・チケット'
+  data-troupes='月組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='neutral'
+  data-importance='ticket_member'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-04-01</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-0d0633effc23')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜宝塚友の会 チケット先行販売「抽選方式」＞宝塚友の会 会員様限定 特別イベント『トークスペシャルin宝塚』</h3><div class='summary'>会員・チケット / 月組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>🎫 会員・チケット</span><span class='tag tag-jpy-weak'>🎫 チケット・会員</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260401_011.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-5134f78e964f'
+  data-themes='会員・チケット'
+  data-troupes='月組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='neutral'
+  data-importance='ticket_member'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-03-31</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-5134f78e964f')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜宝塚友の会 チケット先行販売「第3抽選方式」＞ 東京宝塚劇場 『RYOFU』『水晶宮殿』</h3><div class='summary'>会員・チケット / 月組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>🎫 会員・チケット</span><span class='tag tag-jpy-weak'>🎫 チケット・会員</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260331_001.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-dd2dbcee12b4'
+  data-themes='会員・チケット'
+  data-troupes='全組共通'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='neutral'
+  data-importance='ticket_member'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-03-26</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-dd2dbcee12b4')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>チケット不正転売禁止法違反による検挙事案について（2026年3月26日）</h3><div class='summary'>会員・チケット / 全組共通</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>🎫 会員・チケット</span><span class='tag tag-jpy-weak'>🎫 チケット・会員</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260326_001.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-60b68445ff46'
+  data-themes='会員・チケット'
+  data-troupes='全組共通'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='neutral'
+  data-importance='ticket_member'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-03-25</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-60b68445ff46')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>宝塚友の会 会員証カードデザイン リニューアルについて</h3><div class='summary'>会員・チケット / 全組共通</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>🎫 会員・チケット</span><span class='tag tag-jpy-weak'>🎫 チケット・会員</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260325_003.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-b420987655fe'
+  data-themes='会員・チケット'
+  data-troupes='月組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='neutral'
+  data-importance='ticket_member'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-03-24</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-b420987655fe')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜宝塚歌劇共通ID＋ チケット先行販売＞ 東京宝塚劇場 『RYOFU』『水晶宮殿』</h3><div class='summary'>会員・チケット / 月組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>🎫 会員・チケット</span><span class='tag tag-jpy-weak'>🎫 チケット・会員</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260324_001.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-6ed5b1c46366'
+  data-themes='会員・チケット'
+  data-troupes='専科|花組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='neutral'
+  data-importance='ticket_member'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-03-22</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-6ed5b1c46366')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>（追）＜一般前売＞ 東京宝塚劇場 『蒼月抄』『EL DESEO』</h3><div class='summary'>会員・チケット / 専科・花組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>🎫 会員・チケット</span><span class='tag tag-jpy-weak'>🎫 チケット・会員</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260321_001.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-44c9d7baff16'
+  data-themes='会員・チケット'
+  data-troupes='宙組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='neutral'
+  data-importance='ticket_member'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-03-17</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-44c9d7baff16')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜宝塚歌劇共通ID＋ チケット先行販売＞ 宝塚大劇場 『黒蜥蜴』『Diamond IMPULSE』</h3><div class='summary'>会員・チケット / 宙組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>🎫 会員・チケット</span><span class='tag tag-jpy-weak'>🎫 チケット・会員</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260317_001.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-790dfd5ea6af'
+  data-themes='商品'
+  data-troupes='花組|月組|雪組|星組|宙組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='bullish'
+  data-importance='ticket_member'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-03-17</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-790dfd5ea6af')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「RISING STAR GUIDE 2026」好評発売中！</h3><div class='summary'>商品 / 花組・月組・雪組・星組・宙組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a78bfa22;border-color:#a78bfa;color:#a78bfa'>🛍 商品</span><span class='tag tag-jpy-weak'>🎫 チケット・会員</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260131_003.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-c860b9697154'
+  data-themes='会員・チケット'
+  data-troupes='専科|雪組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='neutral'
+  data-importance='ticket_member'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-03-15</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-c860b9697154')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>（追）＜一般前売＞ 東京建物 Brillia HALL 『DayDream Dali』</h3><div class='summary'>会員・チケット / 専科・雪組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>🎫 会員・チケット</span><span class='tag tag-jpy-weak'>🎫 チケット・会員</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260314_001.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-f48799035e88'
+  data-themes='会員・チケット'
+  data-troupes='花組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='4'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='neutral'
+  data-importance='ticket_member'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-03-15</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-f48799035e88')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>宝塚友の会「トークスペシャル in 宝塚」 無料配信の実施について</h3><div class='summary'>会員・チケット / 花組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>🎫 会員・チケット</span><span class='tag tag-jpy-weak'>🎫 チケット・会員</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260315_002.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-a8ff5c56b73a'
+  data-themes='会員・チケット'
+  data-troupes='月組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='5'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='neutral'
+  data-importance='ticket_member'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-03-13</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-a8ff5c56b73a')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>＜一般前売＞ 宝塚大劇場 『RYOFU』『水晶宮殿』</h3><div class='summary'>会員・チケット / 月組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>🎫 会員・チケット</span><span class='tag tag-jpy-weak'>🎫 チケット・会員</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260313_001.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-a7ec5a786486'
+  data-themes='会員・チケット'
+  data-troupes='月組'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（公演）'
+  data-sentiment='neutral'
+  data-importance='ticket_member'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（公演）</span><span>2026-03-06</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-a7ec5a786486')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>宝塚大劇場 「兵庫県民割引チケット」の販売</h3><div class='summary'>会員・チケット / 月組</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>🎫 会員・チケット</span><span class='tag tag-jpy-weak'>🎫 チケット・会員</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/hyogo_ticket_001.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-372a7a29caee'
+  data-themes='会員・チケット'
+  data-troupes='全組共通'
+  data-kind='news'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公式ニュース（全体）'
+  data-sentiment='neutral'
+  data-importance='ticket_member'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公式ニュース（全体）</span><span>2026-02-25</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-372a7a29caee')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>東京宝塚劇場チケットカウンターの営業について</h3><div class='summary'>会員・チケット / 全組共通</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>🎫 会員・チケット</span><span class='tag tag-jpy-weak'>🎫 チケット・会員</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/news/20260225_005.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article></div></div>
+</div>
+<script>
+const FX_TAB_META = {"performance_update": {"color": "#4ea1ff", "bg": "#0d1e35"}, "media_goods": {"color": "#e74c3c", "bg": "#2e0d0d"}, "star_update": {"color": "#2ecc71", "bg": "#0d2e1a"}, "ticket_member": {"color": "#f39c12", "bg": "#2e2400"}};
+(function(){
+  var impLang = 'all', impSearch = '';
+  function applyImportanceFilters(){
+    document.querySelectorAll('.fx-panel .item-card').forEach(function(card){
+      var show = true;
+      if (impLang !== 'all' && (card.dataset.lang || '') !== impLang) show = false;
+      if (impSearch && !(card.textContent || '').toLowerCase().includes(impSearch.toLowerCase())) show = false;
+      card.style.display = show ? '' : 'none';
+    });
+  }
+  document.querySelectorAll('.flt-imp-lang').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.flt-imp-lang').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      impLang = btn.dataset.lang;
+      applyImportanceFilters();
+    });
+  });
+  var sb = document.getElementById('searchBoxImportance');
+  if (sb) sb.addEventListener('input', function(){ impSearch = this.value; applyImportanceFilters(); });
+  applyImportanceFilters();
+})();
+function switchFxTab(key, btn) {
+  document.querySelectorAll('.fx-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.fx-tab').forEach(function(b){
+    b.classList.remove('active');
+    b.style.background='';
+    b.style.borderColor='var(--line)';
+    b.style.color='';
+  });
+  document.getElementById('fx-' + key).classList.add('active');
+  btn.classList.add('active');
+  var meta = FX_TAB_META[key] || null;
+  if (meta) {
+    btn.style.background = meta.bg;
+    btn.style.borderColor = meta.color;
+    btn.style.color = '#fff';
+  }
+}
+</script><footer>Takarazuka Information Suite — Generated at 2026-04-07 14:36</footer></body></html>
+<script>
+var pageLang = 'en';
+function setPageLang(lang) {
+  pageLang = lang;
+  document.getElementById('btnPageEN').classList.toggle('active', lang === 'en');
+  document.getElementById('btnPageJA').classList.toggle('active', lang === 'ja');
+  document.querySelectorAll('.item-card').forEach(function(card) {
+    if ((card.dataset.lang || 'en') === 'ja') return;
+    var enPane = card.querySelector('.lang-en');
+    var jaPane = card.querySelector('.lang-ja');
+    var enBtn = card.querySelector('.card-lang-btn[data-l="en"]');
+    var jaBtn = card.querySelector('.card-lang-btn[data-l="ja"]');
+    if (!enPane || !jaPane) return;
+    if (lang === 'ja') {
+      enPane.classList.add('hidden'); jaPane.classList.remove('hidden');
+      if(enBtn) enBtn.classList.remove('active');
+      if(jaBtn) jaBtn.classList.add('active');
+    } else {
+      enPane.classList.remove('hidden'); jaPane.classList.add('hidden');
+      if(enBtn) enBtn.classList.add('active');
+      if(jaBtn) jaBtn.classList.remove('active');
+    }
+  });
+}
+function switchCardLang(btn, lang) {
+  var card = btn.closest('.item-card');
+  if (!card) return;
+  card.querySelectorAll('.card-lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var enPane = card.querySelector('.lang-en');
+  var jaPane = card.querySelector('.lang-ja');
+  if (!enPane || !jaPane) return;
+  if (lang === 'ja') { enPane.classList.add('hidden'); jaPane.classList.remove('hidden'); }
+  else { enPane.classList.remove('hidden'); jaPane.classList.add('hidden'); }
+}
+</script>
+
+<script>
+var READ_KEY = 'takarazuka_information_suite_read';
+function getReadSet() {
+  try { return new Set(JSON.parse(localStorage.getItem(READ_KEY) || '[]')); } catch(e) { return new Set(); }
+}
+function saveReadSet(s) { try { localStorage.setItem(READ_KEY, JSON.stringify([...s])); } catch(e) {} }
+function markRead(btn, cardId) {
+  var card = btn.closest('.item-card');
+  var rs = getReadSet();
+  if (rs.has(cardId)) { rs.delete(cardId); card.classList.remove('is-read'); btn.textContent = '既読'; }
+  else { rs.add(cardId); card.classList.add('is-read'); btn.textContent = '未読に戻す'; }
+  saveReadSet(rs);
+}
+(function applyRead() {
+  var rs = getReadSet();
+  document.querySelectorAll('.item-card[data-cardid]').forEach(function(card) {
+    if (rs.has(card.dataset.cardid)) {
+      card.classList.add('is-read');
+      var btn = card.querySelector('.read-btn');
+      if (btn) btn.textContent = '未読に戻す';
+    }
+  });
+})();
+</script>

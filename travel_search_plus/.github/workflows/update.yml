@@ -1,0 +1,27 @@
+name: Update HTML
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+    - cron: '0 6 * * *'
+    - cron: '0 12 * * *'
+    - cron: '0 18 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run generator
+        run: python app/main.py
+      - name: Commit output
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add output/*.html || true
+          git commit -m "chore: HTMLを自動更新 $(TZ=Asia/Tokyo date +'%Y-%m-%d %H:%M JST')" || echo "No changes"
+          git push || true

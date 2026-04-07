@@ -23,113 +23,87 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'
 
       - name: pip を更新
         run: python -m pip install --upgrade pip
 
+      - name: 依存パッケージをまとめてインストール
+        run: pip install -r requirements_all.txt
+
       - name: ai_plus を実行
         working-directory: ./ai_plus
-        run: |
-          pip install -r requirements.txt
-          python app/main.py
+        run: python app/main.py
         continue-on-error: true
 
       - name: auto_industry_suite を実行
         working-directory: ./auto_industry_suite
-        run: |
-          pip install -r requirements.txt
-          python app/main.py
+        run: python app/main.py
         continue-on-error: true
 
       - name: camera_industry_suite を実行
         working-directory: ./camera_industry_suite
-        run: |
-          pip install -r requirements.txt
-          python app/main.py
+        run: python app/main.py
         continue-on-error: true
 
       - name: dog_information_suite を実行
         working-directory: ./dog_information_suite
-        run: |
-          pip install -r requirements.txt
-          python app/main.py
+        run: python app/main.py
         continue-on-error: true
 
       - name: IdeaTrendEngine を実行
         working-directory: ./IdeaTrendEngine
-        run: |
-          pip install -r requirements.txt
-          python app/main.py
+        run: python app/main.py
         continue-on-error: true
 
       - name: it_plus を実行
         working-directory: ./it_plus
-        run: |
-          pip install -r requirements.txt
-          python app/main.py
+        run: python app/main.py
         continue-on-error: true
 
       - name: market_plus を実行
         working-directory: ./market_plus
-        run: |
-          pip install -r requirements.txt
-          python app/main.py
+        run: python app/main.py
         continue-on-error: true
 
       - name: memory_market_plus を実行
         working-directory: ./memory_market_plus
-        run: |
-          pip install -r requirements.txt
-          python app/main.py
+        run: python app/main.py
         continue-on-error: true
 
       - name: pc_industry_suite を実行
         working-directory: ./pc_industry_suite
-        run: |
-          pip install -r requirements.txt
-          python app/main.py
+        run: python app/main.py
         continue-on-error: true
 
       - name: smart_news_viewer を実行
         working-directory: ./smart_news_viewer
-        run: |
-          pip install -r requirements.txt
-          python app/main.py
+        run: python app/main.py
         continue-on-error: true
 
       - name: Spot_Selection_Navigator を実行
         working-directory: ./Spot_Selection_Navigator
-        run: |
-          pip install -r requirements.txt
-          python app/main.py
+        run: python app/main.py
         continue-on-error: true
 
       - name: Strategic_IT_Suite を実行
         working-directory: ./Strategic_IT_Suite
-        run: |
-          pip install -r requirements.txt
-          python app/main.py
+        run: python app/main.py
         continue-on-error: true
 
       - name: travel_search_plus を実行
         working-directory: ./travel_search_plus
-        run: |
-          pip install -r requirements.txt
-          python app/main.py
+        run: python app/main.py
         continue-on-error: true
 
       - name: takarazuka_information_suite を実行
         working-directory: ./takarazuka_information_suite
-        run: |
-          pip install -r requirements.txt
-          python app/main.py
+        run: python app/main.py
         continue-on-error: true
 
       - name: takarazuka_info_B を実行
         working-directory: ./takarazuka_info_B
-        run: |
-          pip install -r requirements.txt
-          python app/main.py
+        run: python app/main.py
         continue-on-error: true
 
       - name: 変更をコミット＆プッシュ

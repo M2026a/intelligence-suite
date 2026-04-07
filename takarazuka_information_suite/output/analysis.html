@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Takarazuka Information Suite - analysis.html</title>
+<style>
+:root{
+  --bg:#0d1016;--panel:#151a23;--panel2:#1b2230;--line:#2a3446;
+  --text:#ebf0f8;--muted:#9ba9bc;--accent:#4ea1ff;--accent2:#1e2f49;
+  --ok:#1f6f53;--warn:#8a5a17;--bad:#7c3038;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Segoe UI',Meiryo,sans-serif}
+a{color:inherit;text-decoration:none}
+header{position:sticky;top:0;z-index:50;background:rgba(13,16,22,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.wrap{max-width:1480px;margin:0 auto;padding:14px 20px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.title h1{margin:0;font-size:22px;font-weight:800}
+.title .sub{margin-top:4px;color:var(--muted);font-size:12px}
+.right-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.page-lang-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:9px 14px;font-size:13px;cursor:pointer;transition:all .15s}
+.page-lang-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.nav a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;border:1px solid rgba(255,255,255,.10);color:var(--text);background:rgba(255,255,255,.03);padding:10px 18px;border-radius:999px;font-size:13px;font-weight:700;white-space:nowrap;transition:all .18s ease}
+.nav a:hover{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.06)}
+.nav a.active{background:linear-gradient(135deg,#4ea1ff,#5a86ff);border-color:transparent;color:#fff;box-shadow:0 4px 16px rgba(78,161,255,.3)}
+.main{max-width:1480px;margin:18px auto;padding:0 20px 40px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+.stat .num{font-size:26px;font-weight:800;margin-bottom:4px}
+.stat .label{color:var(--muted);font-size:12px}
+.stat .icon{font-size:22px;margin-bottom:8px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s}
+.flt-btn:hover{border-color:var(--accent)}
+.flt-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
+.search{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 12px;font-size:13px;min-width:220px}
+.search::placeholder{color:var(--muted)}
+.filter-label{color:var(--muted);font-size:12px;white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.grid.list{grid-template-columns:1fr}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;transition:border-color .18s,opacity .18s}
+.card:hover{border-color:var(--accent)}
+.card.is-read{opacity:.45}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;color:var(--muted);font-size:12px;align-items:center}
+.card-lang-toggle{display:flex;gap:5px;flex-shrink:0;align-items:center}
+.card-lang-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;white-space:nowrap;transition:all .15s}
+.card-lang-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
+.read-btn{background:var(--panel2);border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;transition:all .15s}
+.read-btn:hover{border-color:#666}
+.card h3{margin:0;font-size:15px;line-height:1.5;font-weight:700}
+.summary{color:#ced7e6;font-size:13px;line-height:1.6}
+.lang-pane.hidden{display:none!important}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.tag{display:inline-block;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:600;border:1px solid transparent}
+.tag-official{background:#173126;border-color:#2f7254;color:#c6f1dc}
+.tag-score5,.tag-score4{background:#1e1a3a;border-color:#a78bfa;color:#e0d9ff}
+.tag-score3{background:#1e2f49;border-color:#4ea1ff;color:#cae2ff}
+.tag-score2{background:#2d2014;border-color:#8a6a31;color:#ffe0a2}
+.tag-score1{background:#1e1e1e;border-color:#444;color:#aaa}
+.tag-theme{font-size:11px;padding:3px 8px;border-radius:999px;border:1px solid transparent;font-weight:600}
+.tag-new{background:#1a2e1a;border-color:#2ecc71;color:#2ecc71;font-weight:800;animation:pulse 1.5s infinite}
+.tag-bullish{background:#1a2e1a;border-color:#2ecc71;color:#2ecc71}
+.tag-bearish{background:#2e1a1a;border-color:#e74c3c;color:#e74c3c}
+.tag-neutral{background:#1e1e2e;border-color:#636e72;color:#9ba9bc}
+.tag-usd-strong{background:#1a2040;border-color:#4ea1ff;color:#a8d4ff}
+.tag-usd-weak{background:#2e1a1a;border-color:#e74c3c;color:#ffb3b3}
+.tag-jpy-strong{background:#1a2e1a;border-color:#2ecc71;color:#a8ffcc}
+.tag-jpy-weak{background:#2e2a1a;border-color:#f39c12;color:#ffe0a2}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.lang-badge{font-size:11px;padding:2px 6px;border-radius:4px;background:#2a3446;color:var(--muted)}
+.lang-badge.ja{background:#173126;color:#c6f1dc}
+.lang-badge.en{background:#1e2f49;color:#cae2ff}
+.open-btn{display:inline-flex;justify-content:center;align-items:center;background:var(--accent2);border:1px solid var(--accent);color:#eaf4ff;border-radius:10px;padding:9px 14px;font-size:13px;font-weight:700;margin-top:4px;transition:all .15s}
+.open-btn:hover{background:#2a4a80}
+.theme-section{margin-bottom:28px}
+.theme-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.theme-header h2{margin:0;font-size:17px;font-weight:800}
+.theme-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:999px;font-size:13px;font-weight:700;border:1px solid transparent}
+.cb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.cb-card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px}
+.cb-card .cb-name{font-weight:800;font-size:15px;margin-bottom:8px}
+.cb-card .cb-count{font-size:22px;font-weight:800;color:var(--accent)}
+.cb-card .cb-recent{font-size:12px;color:var(--muted);margin-top:6px}
+footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);font-size:12px}
+@media(max-width:700px){
+  .wrap,.main,footer{padding-left:12px;padding-right:12px}
+  .grid{grid-template-columns:1fr}
+  .search{min-width:160px;width:100%}
+  .card-top{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<header>
+<div class='wrap'>
+  <div class='top'>
+    <div class='title'>
+      <h1>🎭 Takarazuka Information Suite <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 宝塚歌劇の公式情報を収集</span></h1>
+      <div class='sub'>更新日時：2026-04-07 13:53</div>
+    </div>
+    <div class='right-controls'>
+      <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
+      <button class='page-lang-btn' id='btnPageJA' onclick="setPageLang('ja')">🇯🇵 日本語表示</button>
+    </div>
+  </div>
+  <nav class='nav'><a href="index.html" class="">📋 メイン</a><a href="pickup.html" class="">⭐ 注目記事</a><a href="focus.html" class="">🔖 重要タグ</a><a href="themes.html" class="">🏷 テーマ別</a><a href="group.html" class="">🎭 組別</a><a href="schedule.html" class="">🗓 公演スケジュール</a><a href="sources.html" class="">🧷 注目ソース</a><a href="analysis.html" class="active">📊 分析</a></nav>
+</div>
+</header>
+<style>.table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}.table th,.table td{padding:10px 14px;border-bottom:1px solid var(--line);text-align:left}.table th{background:var(--panel2);font-size:13px;color:var(--muted)}.table tr:last-child td{border-bottom:none}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}@media(max-width:900px){.two-col,.three-col{grid-template-columns:1fr}}</style>
+<div class='main'>
+  
+<div class='panel' style='margin-bottom:16px'>
+  <h2 style='margin:0 0 14px;font-size:16px'>📊 参考度・重要タグサマリー</h2>
+  <div class='two-col'>
+    <div>
+      <div style='font-size:13px;color:var(--muted);margin-bottom:10px'>参考度</div>
+      <div style='display:flex;gap:20px;flex-wrap:wrap'>
+        <div style='text-align:center'><div style='font-size:28px;font-weight:800;color:#2ecc71'>23</div><div style='color:var(--muted);font-size:12px'>✅ 参考 (30%)</div></div>
+        <div style='text-align:center'><div style='font-size:28px;font-weight:800;color:#e74c3c'>1</div><div style='color:var(--muted);font-size:12px'>⚠ 注意 (1%)</div></div>
+        <div style='text-align:center'><div style='font-size:28px;font-weight:800;color:#9ba9bc'>52</div><div style='color:var(--muted);font-size:12px'>➖ Neutral (68%)</div></div>
+      </div>
+    </div>
+    <div>
+      <div style='font-size:13px;color:var(--muted);margin-bottom:10px'>重要タグ</div>
+      <div style='display:flex;gap:14px;flex-wrap:wrap'>
+        <div style='text-align:center'><div style='font-size:24px;font-weight:800;color:#4ea1ff'>32</div><div style='color:var(--muted);font-size:11px'>🎭 公演</div></div>
+        <div style='text-align:center'><div style='font-size:24px;font-weight:800;color:#e74c3c'>20</div><div style='color:var(--muted);font-size:11px'>📺 配信・商品</div></div>
+        <div style='text-align:center'><div style='font-size:24px;font-weight:800;color:#2ecc71'>7</div><div style='color:var(--muted);font-size:11px'>⭐ スター</div></div>
+        <div style='text-align:center'><div style='font-size:24px;font-weight:800;color:#f39c12'>16</div><div style='color:var(--muted);font-size:11px'>🎫 チケット・会員</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class='two-col'>
+    <div class='panel'>
+      <h2 style='margin:0 0 14px;font-size:16px'>📡 ソース別記事数</h2>
+      <table class='table'><thead><tr><th>ソース</th><th>言語</th><th>種別</th><th>件数</th></tr></thead><tbody><tr><td>宝塚歌劇 公式ニュース（全体）</td><td>🇯🇵 日本語</td><td>🏛 公式</td><td style='font-weight:800'>26</td></tr><tr><td>宝塚歌劇 公式ニュース（公演）</td><td>🇯🇵 日本語</td><td>🏛 公式</td><td style='font-weight:800'>22</td></tr><tr><td>宝塚歌劇 公演案内（その他の劇場）</td><td>🇯🇵 日本語</td><td>🏛 公式</td><td style='font-weight:800'>8</td></tr><tr><td>宝塚歌劇 公式ニュース（配信・放送）</td><td>🇯🇵 日本語</td><td>🏛 公式</td><td style='font-weight:800'>8</td></tr><tr><td>宝塚歌劇 公演案内（大劇場・東京）</td><td>🇯🇵 日本語</td><td>🏛 公式</td><td style='font-weight:800'>7</td></tr><tr><td>宝塚歌劇 公式ニュース（スター）</td><td>🇯🇵 日本語</td><td>🏛 公式</td><td style='font-weight:800'>5</td></tr></tbody></table>
+    </div>
+    <div class='panel'>
+      <h2 style='margin:0 0 14px;font-size:16px'>🏷 テーマ別記事数</h2>
+      <table class='table'><thead><tr><th>テーマ</th><th>件数</th></tr></thead><tbody><tr><td><span style='color:#1dd1a1'>🎫 会員・チケット</span></td><td style='font-weight:800'>16</td></tr><tr><td><span style='color:#54a0ff'>🗓 公演スケジュール</span></td><td style='font-weight:800'>15</td></tr><tr><td><span style='color:#ff9f43'>🏛 劇場・施設</span></td><td style='font-weight:800'>13</td></tr><tr><td><span style='color:#4ea1ff'>📺 配信・放送</span></td><td style='font-weight:800'>13</td></tr><tr><td><span style='color:#a78bfa'>🛍 商品</span></td><td style='font-weight:800'>7</td></tr><tr><td><span style='color:#ffd166'>⭐ スター</span></td><td style='font-weight:800'>5</td></tr><tr><td><span style='color:#95a5a6'>📌 その他</span></td><td style='font-weight:800'>3</td></tr><tr><td><span style='color:#ff6b81'>🎭 公演</span></td><td style='font-weight:800'>3</td></tr><tr><td><span style='color:#e056fd'>🎓 学校・イベント</span></td><td style='font-weight:800'>1</td></tr></tbody></table>
+    </div>
+  </div>
+</div><footer>Takarazuka Information Suite — Generated at 2026-04-07 13:53</footer></body></html>

@@ -1,0 +1,1324 @@
+<!doctype html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Auto Industry Suite - focus.html</title>
+<style>
+:root{
+  --bg:#0d1016;--panel:#151a23;--panel2:#1b2230;--line:#2a3446;
+  --text:#ebf0f8;--muted:#9ba9bc;--accent:#4ea1ff;--accent2:#1e2f49;
+  --ok:#1f6f53;--warn:#8a5a17;--bad:#7c3038;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Segoe UI',Meiryo,sans-serif}
+a{color:inherit;text-decoration:none}
+header{position:sticky;top:0;z-index:50;background:rgba(13,16,22,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.wrap{max-width:1480px;margin:0 auto;padding:14px 20px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.title h1{margin:0;font-size:22px;font-weight:800}
+.title .sub{margin-top:4px;color:var(--muted);font-size:12px}
+.right-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.page-lang-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:9px 14px;font-size:13px;cursor:pointer;transition:all .15s}
+.page-lang-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.nav a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;border:1px solid rgba(255,255,255,.10);color:var(--text);background:rgba(255,255,255,.03);padding:10px 18px;border-radius:999px;font-size:13px;font-weight:700;white-space:nowrap;transition:all .18s ease}
+.nav a:hover{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.06)}
+.nav a.active{background:linear-gradient(135deg,#4ea1ff,#5a86ff);border-color:transparent;color:#fff;box-shadow:0 4px 16px rgba(78,161,255,.3)}
+.main{max-width:1480px;margin:18px auto;padding:0 20px 40px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+.stat .num{font-size:26px;font-weight:800;margin-bottom:4px}
+.stat .label{color:var(--muted);font-size:12px}
+.stat .icon{font-size:22px;margin-bottom:8px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s}
+.flt-btn:hover{border-color:var(--accent)}
+.flt-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
+.search{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 12px;font-size:13px;min-width:220px}
+.search::placeholder{color:var(--muted)}
+.filter-label{color:var(--muted);font-size:12px;white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.grid.list{grid-template-columns:1fr}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;transition:border-color .18s,opacity .18s}
+.card:hover{border-color:var(--accent)}
+.card.is-read{opacity:.45}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;color:var(--muted);font-size:12px;align-items:center}
+.card-lang-toggle{display:flex;gap:5px;flex-shrink:0;align-items:center}
+.card-lang-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;white-space:nowrap;transition:all .15s}
+.card-lang-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
+.read-btn{background:var(--panel2);border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;transition:all .15s}
+.read-btn:hover{border-color:#666}
+.card h3{margin:0;font-size:15px;line-height:1.5;font-weight:700}
+.summary{color:#ced7e6;font-size:13px;line-height:1.6}
+.lang-pane.hidden{display:none!important}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.tag{display:inline-block;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:600;border:1px solid transparent}
+.tag-official{background:#173126;border-color:#2f7254;color:#c6f1dc}
+.tag-score5,.tag-score4{background:#1e1a3a;border-color:#a78bfa;color:#e0d9ff}
+.tag-score3{background:#1e2f49;border-color:#4ea1ff;color:#cae2ff}
+.tag-score2{background:#2d2014;border-color:#8a6a31;color:#ffe0a2}
+.tag-score1{background:#1e1e1e;border-color:#444;color:#aaa}
+.tag-theme{font-size:11px;padding:3px 8px;border-radius:999px;border:1px solid transparent;font-weight:600}
+.tag-new{background:#1a2e1a;border-color:#2ecc71;color:#2ecc71;font-weight:800;animation:pulse 1.5s infinite}
+.tag-bullish{background:#1a2e1a;border-color:#2ecc71;color:#2ecc71}
+.tag-bearish{background:#2e1a1a;border-color:#e74c3c;color:#e74c3c}
+.tag-neutral{background:#1e1e2e;border-color:#636e72;color:#9ba9bc}
+.tag-usd-strong{background:#1a2040;border-color:#4ea1ff;color:#a8d4ff}
+.tag-usd-weak{background:#2e1a1a;border-color:#e74c3c;color:#ffb3b3}
+.tag-jpy-strong{background:#1a2e1a;border-color:#2ecc71;color:#a8ffcc}
+.tag-jpy-weak{background:#2e2a1a;border-color:#f39c12;color:#ffe0a2}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.lang-badge{font-size:11px;padding:2px 6px;border-radius:4px;background:#2a3446;color:var(--muted)}
+.lang-badge.ja{background:#173126;color:#c6f1dc}
+.lang-badge.en{background:#1e2f49;color:#cae2ff}
+.open-btn{display:inline-flex;justify-content:center;align-items:center;background:var(--accent2);border:1px solid var(--accent);color:#eaf4ff;border-radius:10px;padding:9px 14px;font-size:13px;font-weight:700;margin-top:4px;transition:all .15s}
+.open-btn:hover{background:#2a4a80}
+.theme-section{margin-bottom:28px}
+.theme-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.theme-header h2{margin:0;font-size:17px;font-weight:800}
+.theme-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:999px;font-size:13px;font-weight:700;border:1px solid transparent}
+.cb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.cb-card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px}
+.cb-card .cb-name{font-weight:800;font-size:15px;margin-bottom:8px}
+.cb-card .cb-count{font-size:22px;font-weight:800;color:var(--accent)}
+.cb-card .cb-recent{font-size:12px;color:var(--muted);margin-top:6px}
+footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);font-size:12px}
+@media(max-width:700px){
+  .wrap,.main,footer{padding-left:12px;padding-right:12px}
+  .grid{grid-template-columns:1fr}
+  .search{min-width:160px;width:100%}
+  .card-top{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<header>
+<div class='wrap'>
+  <div class='top'>
+    <div class='title'>
+      <h1>🚗 Auto Industry Suite <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 自動車業界ニュースを収集・分類し、市場動向を可視化</span></h1>
+      <div class='sub'>更新日時：2026-04-07 12:57</div>
+    </div>
+    <div class='right-controls'>
+      <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
+      <button class='page-lang-btn' id='btnPageJA' onclick="setPageLang('ja')">🇯🇵 日本語表示</button>
+    </div>
+  </div>
+  <nav class='nav'><a href="index.html" class="">📋 メイン</a><a href="pickup.html" class="">⭐ 注目記事</a><a href="focus.html" class="active">🔧 重要タグ</a><a href="themes.html" class="">🏷 テーマ別</a><a href="sources.html" class="">🌐 注目ソース</a><a href="analysis.html" class="">📊 分析</a></nav>
+</div>
+</header>
+
+<style>
+.fx-summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:24px}
+.fx-summary-card{border-radius:16px;padding:18px;text-align:center;border:1px solid transparent}
+.fx-summary-card .fx-num{font-size:36px;font-weight:900;margin-bottom:6px}
+.fx-summary-card .fx-label{font-size:14px;font-weight:700}
+.fx-summary-card .fx-desc{font-size:11px;color:var(--muted);margin-top:4px}
+.fx-usd-strong{background:#0d1e35;border-color:#4ea1ff}
+.fx-usd-weak{background:#2e0d0d;border-color:#e74c3c}
+.fx-jpy-strong{background:#0d2e1a;border-color:#2ecc71}
+.fx-jpy-weak{background:#2e2400;border-color:#f39c12}
+.fx-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.fx-tab{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:10px 18px;font-size:14px;font-weight:700;cursor:pointer;transition:all .18s}
+.fx-tab.active{border-color:transparent;color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.3)}
+.fx-panel{display:none}.fx-panel.active{display:block}
+</style>
+<div class='main'>
+  
+<div class='fx-summary-grid'>
+  <div class='fx-summary-card fx-usd-strong'>
+    <div class='fx-num' style='color:#4ea1ff'>18</div>
+    <div class='fx-label'>⚡ EV・電動化</div>
+    <div class='fx-desc'>EV / Electrification</div>
+  </div>
+  <div class='fx-summary-card fx-usd-weak'>
+    <div class='fx-num' style='color:#e74c3c'>16</div>
+    <div class='fx-label'>🏭 生産・供給網</div>
+    <div class='fx-desc'>Production / Supply Chain</div>
+  </div>
+  <div class='fx-summary-card fx-jpy-strong'>
+    <div class='fx-num' style='color:#2ecc71'>1</div>
+    <div class='fx-label'>⚖ 政策・規制</div>
+    <div class='fx-desc'>Policy / Regulation</div>
+  </div>
+  <div class='fx-summary-card fx-jpy-weak'>
+    <div class='fx-num' style='color:#f39c12'>13</div>
+    <div class='fx-label'>💹 業績・市場</div>
+    <div class='fx-desc'>Earnings / Market</div>
+  </div>
+  <div class='fx-summary-card' style='background:var(--panel2);border-color:var(--line)'>
+    <div class='fx-num' style='color:var(--muted)'>5</div>
+    <div class='fx-label'>➖ その他</div>
+    <div class='fx-desc'>General</div>
+  </div>
+</div>
+  <div class='panel'>
+    <div class='filters'>
+      <span class='filter-label'>言語:</span>
+      <button class='flt-btn flt-imp-lang active' data-lang='all'>🌍 全部</button>
+      <button class='flt-btn flt-imp-lang' data-lang='ja'>🇯🇵 日本語</button>
+      <button class='flt-btn flt-imp-lang' data-lang='en'>🌐 English</button>
+      <input id='searchBoxImportance' class='search' placeholder='タイトル・本文を検索...'>
+    </div>
+  </div>
+  <div class='fx-tabs'><button class='fx-tab active' data-key='ev_shift' style='background:#0d1e35;border-color:#4ea1ff;color:#fff' onclick="switchFxTab('ev_shift',this)">⚡ EV・電動化 (18)</button><button class='fx-tab ' data-key='supply_chain' style='' onclick="switchFxTab('supply_chain',this)">🏭 生産・供給網 (16)</button><button class='fx-tab ' data-key='regulation' style='' onclick="switchFxTab('regulation',this)">⚖ 政策・規制 (1)</button><button class='fx-tab ' data-key='earnings_market' style='' onclick="switchFxTab('earnings_market',this)">💹 業績・市場 (13)</button></div>
+  <div class='fx-panel active' id='fx-ev_shift'><div class='grid'>
+<article class='card item-card'
+  data-cardid='item-29caaef5b0ad'
+  data-themes='EV・電動化'
+  data-lang='en'
+  data-score='5'
+  data-source='Honda Global Newsroom'
+  data-sourcegroup='official_oem'
+  data-region='global'
+  data-sentiment='neutral'
+  data-importance='ev_shift'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Honda Global Newsroom</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-29caaef5b0ad')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Joint statement from Sony Group Corporation and Honda Motor Co., Ltd. regarding the review of Sony Honda Mobilityâs business direction</h3><div class='summary'>Joint statement from Sony Group Corporation and Honda Motor Co., Ltd. regarding the review of Sony Honda Mobilityâs business direction</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ソニーグループ株式会社と本田技研工業株式会社によるSony Honda Mobilityの事業方向見直しに関する共同声明</h3><div class='summary'>ソニーグループ株式会社と本田技研工業株式会社によるSony Honda Mobilityの事業方向見直しに関する共同声明</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚡ EV・電動化</span><span class='tag tag-usd-strong'>⚡ EV・電動化</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://global.honda/en/newsroom/news/2026/c260325eng.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-7c8cc60b3109'
+  data-themes='EV・電動化|業績・財務'
+  data-lang='en'
+  data-score='5'
+  data-source='Honda Global Newsroom'
+  data-sourcegroup='official_oem'
+  data-region='global'
+  data-sentiment='bullish'
+  data-importance='ev_shift'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Honda Global Newsroom</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-7c8cc60b3109')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Honda Announces Losses Associated with Reassessment of Automobile Electrification Strategy; Revision to Forecast for Consolidated Financial Results; and Future Direction</h3><div class='summary'>Honda Announces Losses Associated with Reassessment of Automobile Electrification Strategy; Revision to Forecast for Consolidated Financial Results; and Future Direction</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ホンダ、自動車電動化戦略の見直しに伴う損失を発表。連結業績予想の修正についてそして今後の方向性</h3><div class='summary'>ホンダ、自動車電動化戦略の見直しに伴う損失を発表。連結業績予想の修正についてそして今後の方向性</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚡ EV・電動化</span><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>💹 業績・財務</span><span class='tag tag-usd-strong'>⚡ EV・電動化</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://global.honda/en/newsroom/news/2026/c260312eng.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-990ced550340'
+  data-themes='EV・電動化|生産・供給網'
+  data-lang='en'
+  data-score='4'
+  data-source='Electrek'
+  data-sourcegroup='ev_media'
+  data-region='global'
+  data-sentiment='neutral'
+  data-importance='ev_shift'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge en'>🌐 English</span><span>Electrek</span><span>2026-04-07 09:59</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-990ced550340')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Orange EV electric terminal tractors clean up in Canada</h3><div class='summary'>GLS Canada has become one of the first major parcel and freight carriers in the country to deploy heavy-duty electric yard hostlers at its logistics terminals – and they’re helping the company clean up in a big way. more…</div></div>
+<div class='lang-pane lang-ja hidden'><h3>カナダで清掃活動を行うオレンジ色のEV電動ターミナルトラクター</h3><div class='summary'>GLS カナダは、物流ターミナルに大型電動ヤード ホスラーを導入した国内初の大手小包・貨物運送業者の 1 つとなり、同社のクリーンアップに大々的に貢献しています。もっと…</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚡ EV・電動化</span><span class='tag tag-theme' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏭 生産・供給網</span><span class='tag tag-usd-strong'>⚡ EV・電動化</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://electrek.co/2026/04/06/orange-ev-electric-terminal-tractors-clean-up-in-canada/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-812658f8fcff'
+  data-themes='EV・電動化|販売・市場'
+  data-lang='en'
+  data-score='4'
+  data-source='Electrek'
+  data-sourcegroup='ev_media'
+  data-region='global'
+  data-sentiment='bullish'
+  data-importance='ev_shift'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge en'>🌐 English</span><span>Electrek</span><span>2026-04-07 08:42</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-812658f8fcff')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>US war in Iran is pushing up gas prices and making a case for home solar</h3><div class='summary'>On today’s independent episode of Quick Charge , we take a look at refining and distributing our own fuel supply with home solar as America’s war in Iran rages on, shooting gas prices (and EV sales) into the stratosphere. more…</div></div>
+<div class='lang-pane lang-ja hidden'><h3>米国のイラン戦争でガソリン価格が高騰し、家庭用太陽光発電の需要が高まっている</h3><div class='summary'>今日の Quick Charge の独立したエピソードでは、アメリカのイラン戦争が激化し、ガソリン価格 (および EV の販売) が成層圏にまで高騰する中、家庭用太陽光発電を使った独自の燃料供給の精製と配布について考察します。もっと…</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚡ EV・電動化</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>📈 販売・市場</span><span class='tag tag-usd-strong'>⚡ EV・電動化</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://electrek.co/2026/04/06/us-war-in-iran-is-pushing-up-gas-prices-and-making-a-case-for-home-solar/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-eea7b55c79b4'
+  data-themes='EV・電動化'
+  data-lang='en'
+  data-score='4'
+  data-source='Electrek'
+  data-sourcegroup='ev_media'
+  data-region='global'
+  data-sentiment='neutral'
+  data-importance='ev_shift'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Electrek</span><span>2026-04-07 06:02</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-eea7b55c79b4')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Broken EV chargers? This program replaces them for free</h3><div class='summary'>Everged is rolling out a new program aimed at fixing one of the EV industry’s most persistent problems: broken and outdated chargers that never seem to get repaired. more…</div></div>
+<div class='lang-pane lang-ja hidden'><h3>EVの充電器が壊れた？このプログラムはそれらを無料で置き換えます</h3><div class='summary'>Everged は、EV 業界で最も根深い問題の 1 つである、壊れて古くなり、決して修理されそうにない問題の解決を目的とした新しいプログラムを展開しています。もっと…</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚡ EV・電動化</span><span class='tag tag-usd-strong'>⚡ EV・電動化</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://electrek.co/2026/04/06/broken-ev-chargers-this-program-replaces-them-for-free/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-fd82c1266a5a'
+  data-themes='EV・電動化|販売・市場|新車・製品'
+  data-lang='en'
+  data-score='4'
+  data-source='Electrek'
+  data-sourcegroup='ev_media'
+  data-region='global'
+  data-sentiment='neutral'
+  data-importance='ev_shift'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Electrek</span><span>2026-04-07 05:36</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-fd82c1266a5a')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Kia launches its most affordable EV at lower prices than expected</h3><div class='summary'>The EV2 is now available to order in Europe, with the first customer deliveries starting next month. Kia opened EV2 orders at lower prices than expected. more…</div></div>
+<div class='lang-pane lang-ja hidden'><h3>起亜自動車、予想よりも低価格で最も手頃なEVを発売</h3><div class='summary'>EV2 は現在ヨーロッパで注文可能であり、最初の顧客への納入は来月から始まります。起亜自動車は予想よりも低い価格でEV2の受注を開始した。もっと…</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚡ EV・電動化</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>📈 販売・市場</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🚗 新車・製品</span><span class='tag tag-usd-strong'>⚡ EV・電動化</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://electrek.co/2026/04/06/kia-launches-most-affordable-ev-lower-prices-than-expected/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-6a2ad5c50a24'
+  data-themes='EV・電動化|新車・製品'
+  data-lang='en'
+  data-score='4'
+  data-source='Electrek'
+  data-sourcegroup='ev_media'
+  data-region='global'
+  data-sentiment='neutral'
+  data-importance='ev_shift'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Electrek</span><span>2026-04-07 05:04</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-6a2ad5c50a24')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Michigan just unlocked $51M to fix EV charging gaps</h3><div class='summary'>Michigan just hit a key milestone in its National Electric Vehicle Infrastructure (NEVI) program, unlocking the remaining funds for the state’s EV charging buildout. more…</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ミシガン州はEVの充電ギャップを解消するために5,100万ドルを確保したばかり</h3><div class='summary'>ミシガン州は国家電気自動車インフラストラクチャー (NEVI) プログラムの重要なマイルストーンを達成し、州の EV 充電設備の整備に残りの資金を活用しました。もっと…</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚡ EV・電動化</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🚗 新車・製品</span><span class='tag tag-usd-strong'>⚡ EV・電動化</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://electrek.co/2026/04/06/michigan-just-unlocked-51m-to-fix-ev-charging-gaps/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-6d89f2b5b679'
+  data-themes='EV・電動化|販売・市場'
+  data-lang='en'
+  data-score='4'
+  data-source='Electrek'
+  data-sourcegroup='ev_media'
+  data-region='global'
+  data-sentiment='bullish'
+  data-importance='ev_shift'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Electrek</span><span>2026-04-07 04:15</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-6d89f2b5b679')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>BYD is winning the energy crisis as EV orders surge to ‘another level’ overseas</h3><div class='summary'>BYD expects soaring oil prices to drive overseas sales to “another level” as EV orders are already surging across several markets. more…</div></div>
+<div class='lang-pane lang-ja hidden'><h3>海外でEVの注文が「別のレベル」に急増、BYDはエネルギー危機に勝利</h3><div class='summary'>BYDは、EVの注文がすでに複数の市場で急増しているため、原油価格の高騰により海外売上高が「別のレベル」に達すると予想している。もっと…</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚡ EV・電動化</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>📈 販売・市場</span><span class='tag tag-usd-strong'>⚡ EV・電動化</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://electrek.co/2026/04/06/byd-ev-orders-surge-to-another-level-overseas-energy-crisis/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-c94f9aa3e0c8'
+  data-themes='EV・電動化'
+  data-lang='en'
+  data-score='4'
+  data-source='Electrek'
+  data-sourcegroup='ev_media'
+  data-region='global'
+  data-sentiment='neutral'
+  data-importance='ev_shift'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Electrek</span><span>2026-04-07 03:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-c94f9aa3e0c8')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>EVOLV TERRA e-scooter 50% off at new $614.50 low, Anker E10 backup system flash sale, Autel 80A level 2 EV Charger, Worx, more</h3><div class='summary'>Leading our Monday Green Deals this week is a surprise 50% discount on the EVOLV TERRA Full-Suspension Electric Scooter to a new $614.50 low . Right behind that, we have Anker’s SOLIX flash sale with up to $3,300 savings and a FREE 400W solar panel ($899 value) on the E10 Smart Hybrid Whole-Home Bac</div></div>
+<div class='lang-pane lang-ja hidden'><h3>EVOLV TERRA e-スクーターが 50% オフで新価格 $614.50 、Anker E10 バックアップ システム フラッシュ セール、Autel 80A レベル 2 EV 充電器、Worx など</h3><div class='summary'>今週の月曜日のグリーン セールの主役は、EVOLV TERRA フルサスペンション電動スクーターの驚きの 50% 割引で、$614.50 の新安値を付けています。その直後に、最大 3,300 ドルの割引と E10 スマート ハイブリッド全家庭用バックパックの 400W ソーラー パネル (899 ドル相当) を無料で提供する Anker の SOLIX フラッシュ セールが開催されます。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚡ EV・電動化</span><span class='tag tag-usd-strong'>⚡ EV・電動化</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://electrek.co/2026/04/06/evolv-terra-e-scooter-anker-e10-backup-system-flash-sale-autel-ev-charger-worx-more/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-d57f95f38c87'
+  data-themes='新車・製品'
+  data-lang='en'
+  data-score='2'
+  data-source='Electrek'
+  data-sourcegroup='ev_media'
+  data-region='global'
+  data-sentiment='neutral'
+  data-importance='ev_shift'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Electrek</span><span>2026-04-07 02:30</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-d57f95f38c87')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Rivian R2 EPA numbers out: 217 kW DC charge, up to 335mi range, heat pump</h3><div class='summary'>The EPA certification for Rivian’s upcoming R2 was found and posted on Rivian Forums this morning, and it includes some interesting insights about the vehicle – including one note that has fans worried about cold weather range, but we reached out to Rivian to get the facts. more…</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Rivian R2 EPA の数値: 217 kW DC 充電、最大 335 マイルの範囲、ヒートポンプ</h3><div class='summary'>今朝、Rivian の次期 R2 の EPA 認証が発見され、Rivian フォーラムに投稿されました。そこには、この車両に関する興味深い洞察がいくつか含まれています。その中には、ファンが寒い気候の範囲を心配しているという 1 つのメモも含まれていますが、私たちは事実を知るために Rivian に連絡を取りました。もっと…</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🚗 新車・製品</span><span class='tag tag-usd-strong'>⚡ EV・電動化</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://electrek.co/2026/04/06/rivian-r2-epa-numbers-out-217-kw-dc-charge-up-to-335mi-range-heat-pump/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-b2d1a70baf8c'
+  data-themes='EV・電動化|販売・市場|新車・製品'
+  data-lang='en'
+  data-score='4'
+  data-source='Electrek'
+  data-sourcegroup='ev_media'
+  data-region='global'
+  data-sentiment='neutral'
+  data-importance='ev_shift'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Electrek</span><span>2026-04-07 01:47</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-b2d1a70baf8c')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Toyota’s updated electric SUV is a surprise hit</h3><div class='summary'>Toyota’s updated electric SUV is now among the top-selling EVs in Japan, the US, and several European markets. more…</div></div>
+<div class='lang-pane lang-ja hidden'><h3>トヨタの改良型電気SUVが予想外のヒット</h3><div class='summary'>トヨタの最新の電気SUVは現在、日本、米国、いくつかの欧州市場で最も売れているEVの一つとなっている。もっと…</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚡ EV・電動化</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>📈 販売・市場</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🚗 新車・製品</span><span class='tag tag-usd-strong'>⚡ EV・電動化</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://electrek.co/2026/04/06/toyotas-updated-electric-suv-surprise-hit/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-422fbc9cb531'
+  data-themes='EV・電動化'
+  data-lang='en'
+  data-score='5'
+  data-source='Nissan Newsroom'
+  data-sourcegroup='official_oem'
+  data-region='global'
+  data-sentiment='neutral'
+  data-importance='ev_shift'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Nissan Newsroom</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-422fbc9cb531')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Financial News &amp; Events</h3><div class='summary'>Financial News &amp; Events</div></div>
+<div class='lang-pane lang-ja hidden'><h3>金融ニュースとイベント</h3><div class='summary'>金融ニュースとイベント</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚡ EV・電動化</span><span class='tag tag-usd-strong'>⚡ EV・電動化</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.nissan-global.com/EN/IR/NEWS_EVENT/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-ae754d081b55'
+  data-themes='EV・電動化'
+  data-lang='en'
+  data-score='5'
+  data-source='Nissan Newsroom'
+  data-sourcegroup='official_oem'
+  data-region='global'
+  data-sentiment='neutral'
+  data-importance='ev_shift'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Nissan Newsroom</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-ae754d081b55')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>FY2025 First Half and Full Year Outlook Revision Presentation Material</h3><div class='summary'>FY2025 First Half and Full Year Outlook Revision Presentation Material</div></div>
+<div class='lang-pane lang-ja hidden'><h3>2025年度上期・通期見通し修正プレゼンテーション資料</h3><div class='summary'>2025年度上期・通期見通し修正プレゼンテーション資料</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚡ EV・電動化</span><span class='tag tag-usd-strong'>⚡ EV・電動化</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.nissan-global.com/EN/IR/NEWS_EVENT/ASSETS/PDF/20251030_FY25Q1_OutlookRev_e.pdf' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-9b0c85a05ca5'
+  data-themes='EV・電動化|業績・財務'
+  data-lang='en'
+  data-score='5'
+  data-source='Nissan Newsroom'
+  data-sourcegroup='official_oem'
+  data-region='global'
+  data-sentiment='bullish'
+  data-importance='ev_shift'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Nissan Newsroom</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-9b0c85a05ca5')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>FY2024 Forecast Revision Presentation Material</h3><div class='summary'>FY2024 Forecast Revision Presentation Material</div></div>
+<div class='lang-pane lang-ja hidden'><h3>2024年度業績予想修正説明資料</h3><div class='summary'>2024年度業績予想修正説明資料</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚡ EV・電動化</span><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>💹 業績・財務</span><span class='tag tag-usd-strong'>⚡ EV・電動化</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.nissan-global.com/EN/IR/NEWS_EVENT/ASSETS/PDF/20250425_FY24Q4_ForecastRev_e.pdf' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-63e5f7cf34b8'
+  data-themes='EV・電動化'
+  data-lang='en'
+  data-score='5'
+  data-source='Toyota Global Newsroom'
+  data-sourcegroup='official_oem'
+  data-region='global'
+  data-sentiment='neutral'
+  data-importance='ev_shift'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Toyota Global Newsroom</span><span>2026-03-23 13:30</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-63e5f7cf34b8')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Toyota to Exhibit at Automobile Council 2026 Classic Car Event</h3><div class='summary'>Toyota Motor Corporation will exhibit at the Automobile Council 2026 classic car enthusiast event, to be held at Makuhari Messe in Chiba from April 10 through April 12.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>トヨタ、オートモビル・カウンシル2026クラシックカーイベントに出展</h3><div class='summary'>トヨタ自動車は、4月10日から12日まで千葉市の幕張メッセで開催されるクラシックカー愛好家向けイベント「オートモビル・カウンシル2026」に出展する。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚡ EV・電動化</span><span class='tag tag-usd-strong'>⚡ EV・電動化</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://global.toyota/en/newsroom/corporate/44105477.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-8b7000d122d8'
+  data-themes='EV・電動化'
+  data-lang='en'
+  data-score='5'
+  data-source='Toyota Global Newsroom'
+  data-sourcegroup='official_oem'
+  data-region='global'
+  data-sentiment='neutral'
+  data-importance='ev_shift'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Toyota Global Newsroom</span><span>2026-03-10 18:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-8b7000d122d8')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>LEXUS Announces Participation in Milan Design Week 2026</h3><div class='summary'>LEXUS will present a total of five works at Milan Design Week 2026, one of the world&#x27;s largest design events, held in Milan, Italy, from April 21, Tuesday to April 26, Sunday, 2026. At Superstudio Piu Daylight, located in the heart of the Tortona district where global creativity converges, LEXUS wil</div></div>
+<div class='lang-pane lang-ja hidden'><h3>LEXUS、ミラノデザインウィーク2026への参加を発表</h3><div class='summary'>LEXUSは、2026年4月21日（火）から4月26日（日）までイタリア・ミラノで開催される世界最大級のデザインイベント「ミラノデザインウィーク2026」に計5作品を出展します。 世界中のクリエイティビティが集まるトルトーナ地区の中心に位置するスーパースタジオ ピウ デイライトでは、LEXUSが展示します。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚡ EV・電動化</span><span class='tag tag-usd-strong'>⚡ EV・電動化</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://global.toyota/en/newsroom/lexus/44056310.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-bc06e69fae22'
+  data-themes='EV・電動化'
+  data-lang='ja'
+  data-score='4'
+  data-source='Response'
+  data-sourcegroup='jp_media'
+  data-region='japan'
+  data-sentiment='neutral'
+  data-importance='ev_shift'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span>Response</span><span>2026-04-07 12:20</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-bc06e69fae22')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>フォロフライのEVバン「F11VS」、九州第1号として2台導入…福岡倉庫</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚡ EV・電動化</span><span class='tag tag-usd-strong'>⚡ EV・電動化</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://response.jp/article/2026/04/07/409725.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-6951deccc60d'
+  data-themes='EV・電動化|生産・供給網|新車・製品'
+  data-lang='ja'
+  data-score='4'
+  data-source='Car Watch'
+  data-sourcegroup='jp_media'
+  data-region='japan'
+  data-sentiment='bullish'
+  data-importance='ev_shift'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span>Car Watch</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-6951deccc60d')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>三菱自動車、フィリピンで新型HEV車生産開始へ マルコス大統領と加藤CEOが面談し電動車普及プログラム「EVIS」へ参加意向表明</h3><div class='summary'>三菱自動車、フィリピンで新型HEV車生産開始へ マルコス大統領と加藤CEOが面談し電動車普及プログラム「EVIS」へ参加意向表明</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚡ EV・電動化</span><span class='tag tag-theme' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏭 生産・供給網</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🚗 新車・製品</span><span class='tag tag-usd-strong'>⚡ EV・電動化</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://car.watch.impress.co.jp/docs/news/2099525.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article></div></div><div class='fx-panel ' id='fx-supply_chain'><div class='grid'>
+<article class='card item-card'
+  data-cardid='item-919366f5b139'
+  data-themes='生産・供給網|販売・市場'
+  data-lang='en'
+  data-score='4'
+  data-source='Honda Global Newsroom'
+  data-sourcegroup='official_oem'
+  data-region='global'
+  data-sentiment='bullish'
+  data-importance='supply_chain'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Honda Global Newsroom</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-919366f5b139')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Production, Sales and Export Results for February, 2026</h3><div class='summary'>Production, Sales and Export Results for February, 2026</div></div>
+<div class='lang-pane lang-ja hidden'><h3>2026年2月の生産・販売・輸出実績</h3><div class='summary'>2026年2月の生産・販売・輸出実績</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏭 生産・供給網</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>📈 販売・市場</span><span class='tag tag-usd-weak'>🏭 生産・供給網</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://global.honda/en/newsroom/news/2026/c260330eng.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-2120c8d29f9b'
+  data-themes='生産・供給網'
+  data-lang='en'
+  data-score='4'
+  data-source='Honda Global Newsroom'
+  data-sourcegroup='official_oem'
+  data-region='global'
+  data-sentiment='bullish'
+  data-importance='supply_chain'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Honda Global Newsroom</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-2120c8d29f9b')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Honda to Expand Motorcycle Production Capacity in India by Adding New Motorcycle Production Line to its Second Plant</h3><div class='summary'>Honda to Expand Motorcycle Production Capacity in India by Adding New Motorcycle Production Line to its Second Plant</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ホンダ、インド第2工場に二輪車生産ラインを新設し二輪車生産能力を拡大</h3><div class='summary'>ホンダ、インド第2工場に二輪車生産ラインを新設し二輪車生産能力を拡大</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏭 生産・供給網</span><span class='tag tag-usd-weak'>🏭 生産・供給網</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://global.honda/en/newsroom/news/2026/2260319eng.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-2af7faf311a9'
+  data-themes='生産・供給網|販売・市場'
+  data-lang='en'
+  data-score='4'
+  data-source='Honda Global Newsroom'
+  data-sourcegroup='official_oem'
+  data-region='global'
+  data-sentiment='bullish'
+  data-importance='supply_chain'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Honda Global Newsroom</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-2af7faf311a9')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Production, Sales and Export Results for January, 2026</h3><div class='summary'>Production, Sales and Export Results for January, 2026</div></div>
+<div class='lang-pane lang-ja hidden'><h3>2026年1月の生産・販売・輸出実績</h3><div class='summary'>2026年1月の生産・販売・輸出実績</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏭 生産・供給網</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>📈 販売・市場</span><span class='tag tag-usd-weak'>🏭 生産・供給網</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://global.honda/en/newsroom/news/2026/c260226eng.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-b93a3cc9c277'
+  data-themes='生産・供給網|販売・市場|新車・製品'
+  data-lang='en'
+  data-score='4'
+  data-source='Toyota Global Newsroom'
+  data-sourcegroup='official_oem'
+  data-region='global'
+  data-sentiment='bullish'
+  data-importance='supply_chain'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Toyota Global Newsroom</span><span>2026-04-02 13:30</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-b93a3cc9c277')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Toyota to Sell U.S.-Made Tundra and Highlander in Japan</h3><div class='summary'>Toyota Motor Corporation (Toyota) will sell the Tundra pickup truck and the Highlander SUV, both manufactured at Toyota&#x27;s U.S. plants, in Japan using a new system that took effect on February 16, 2026. The vehicles will be sold through Toyota Mobility Tokyo Inc. starting on April 2. Nationwide sales</div></div>
+<div class='lang-pane lang-ja hidden'><h3>トヨタ、米国製「タンドラ」と「ハイランダー」を日本で販売</h3><div class='summary'>トヨタ自動車株式会社（以下、トヨタ）は、トヨタの米国工場で生産するピックアップトラック『タンドラ』とSUV『ハイランダー』を、2026年2月16日より日本国内で販売する新制度を導入し、4月2日よりトヨタモビリティ東京（株）を通じて販売する。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏭 生産・供給網</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>📈 販売・市場</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🚗 新車・製品</span><span class='tag tag-usd-weak'>🏭 生産・供給網</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://global.toyota/en/newsroom/toyota/44149919.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-e72802a6cea6'
+  data-themes='生産・供給網|販売・市場'
+  data-lang='en'
+  data-score='4'
+  data-source='Toyota Global Newsroom'
+  data-sourcegroup='official_oem'
+  data-region='global'
+  data-sentiment='bullish'
+  data-importance='supply_chain'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Toyota Global Newsroom</span><span>2026-03-30 13:30</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-e72802a6cea6')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Sales, Production, and Export Results for February 2026</h3><div class='summary'>Toyota Motor Corporation announces its sales, production, and export results for February 2026, including those for subsidiaries Daihatsu Motor Co., Ltd. and Hino Motors, Ltd.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>2026年2月の販売・生産・輸出実績</h3><div class='summary'>トヨタ自動車株式会社は、子会社のダイハツ工業株式会社および日野自動車株式会社を含む2026年2月の販売・生産・輸出実績を発表します。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏭 生産・供給網</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>📈 販売・市場</span><span class='tag tag-usd-weak'>🏭 生産・供給網</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://global.toyota/en/company/profile/production-sales-figures/202602.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-c01a1cd7fcb0'
+  data-themes='生産・供給網|提携・投資'
+  data-lang='en'
+  data-score='5'
+  data-source='Toyota Global Newsroom'
+  data-sourcegroup='official_oem'
+  data-region='global'
+  data-sentiment='bullish'
+  data-importance='supply_chain'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Toyota Global Newsroom</span><span>2026-03-24 01:15</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-c01a1cd7fcb0')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Toyota Announces $1 Billion Investment in Kentucky and Indiana Plants</h3><div class='summary'>Toyota Motor North America, Inc., Toyota&#x27;s North American headquarters, today announced a 1 billion USD investment in its Kentucky and Indiana plants to better meet diverse customer needs in the United States.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>トヨタ、ケンタッキー州とインディアナ州の工場への10億ドル投資を発表</h3><div class='summary'>トヨタの北米本社であるトヨタ・モーター・ノース・アメリカは本日、米国の多様な顧客ニーズによりよく応えるため、ケンタッキー州とインディアナ州の工場に10億ドルを投資すると発表した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏭 生産・供給網</span><span class='tag tag-theme' style='background:#fdcb6e22;border-color:#fdcb6e;color:#fdcb6e'>🤝 提携・投資</span><span class='tag tag-usd-weak'>🏭 生産・供給網</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://global.toyota/en/newsroom/corporate/44129928.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-4bccf2399fef'
+  data-themes='生産・供給網'
+  data-lang='en'
+  data-score='4'
+  data-source='Toyota Global Newsroom'
+  data-sourcegroup='official_oem'
+  data-region='global'
+  data-sentiment='bullish'
+  data-importance='supply_chain'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Toyota Global Newsroom</span><span>2026-03-23 13:30</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-4bccf2399fef')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>A80 Supra Interior Part Set for Reproduction</h3><div class='summary'>GAZOO Racing (GR) today announced that it plans to reproduce and reissue an interior part for the Toyota A80 Supra as part of its GR Heritage Parts Project.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>A80 スープラ 再現用内装パーツセット</h3><div class='summary'>GAZOO Racing（GR）は本日、GRヘリテージパーツプロジェクトの一環として、トヨタ『A80スープラ』の内装パーツを復刻・再販することを発表した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏭 生産・供給網</span><span class='tag tag-usd-weak'>🏭 生産・供給網</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://global.toyota/en/newsroom/toyota/44097740.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-bdb9008d99f7'
+  data-themes='生産・供給網'
+  data-lang='ja'
+  data-score='3'
+  data-source='Response'
+  data-sourcegroup='jp_media'
+  data-region='japan'
+  data-sentiment='bullish'
+  data-importance='supply_chain'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span>Response</span><span>2026-04-07 11:15</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-bdb9008d99f7')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>村田製作所、不正アクセスで顧客・取引先・従業員の個人情報が流出…生産活動への影響なし</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏭 生産・供給網</span><span class='tag tag-usd-weak'>🏭 生産・供給網</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://response.jp/article/2026/04/07/409719.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-55aee09c64aa'
+  data-themes='生産・供給網'
+  data-lang='ja'
+  data-score='2'
+  data-source='Car Watch'
+  data-sourcegroup='jp_media'
+  data-region='japan'
+  data-sentiment='neutral'
+  data-importance='supply_chain'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span>Car Watch</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-55aee09c64aa')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>スズキ、新色オレンジ追加など「GSX-8R」「GSX-8S」を一部仕様変更</h3><div class='summary'>スズキ、新色オレンジ追加など「GSX-8R」「GSX-8S」を一部仕様変更</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏭 生産・供給網</span><span class='tag tag-usd-weak'>🏭 生産・供給網</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://car.watch.impress.co.jp/docs/news/2099647.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-28197480d7e6'
+  data-themes='生産・供給網'
+  data-lang='ja'
+  data-score='2'
+  data-source='Car Watch'
+  data-sourcegroup='jp_media'
+  data-region='japan'
+  data-sentiment='neutral'
+  data-importance='supply_chain'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span>Car Watch</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-28197480d7e6')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>トヨタ自動車 士別試験場プレミアム体験会 寄附金額35万円のふるさと納税限定返礼品</h3><div class='summary'>トヨタ自動車 士別試験場プレミアム体験会 寄附金額35万円のふるさと納税限定返礼品</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏭 生産・供給網</span><span class='tag tag-usd-weak'>🏭 生産・供給網</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://car.watch.impress.co.jp/docs/news/2099596.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-6c47132e4636'
+  data-themes='新車・製品'
+  data-lang='ja'
+  data-score='2'
+  data-source='Car Watch'
+  data-sourcegroup='jp_media'
+  data-region='japan'
+  data-sentiment='neutral'
+  data-importance='supply_chain'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span>Car Watch</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-6c47132e4636')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ポルシェ、911の追加モデル公開予告 「走りを楽しむための新しいスポーツカー」</h3><div class='summary'>ポルシェ、911の追加モデル公開予告 「走りを楽しむための新しいスポーツカー」</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🚗 新車・製品</span><span class='tag tag-usd-weak'>🏭 生産・供給網</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://car.watch.impress.co.jp/docs/news/2099595.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-c96df783b280'
+  data-themes='生産・供給網'
+  data-lang='ja'
+  data-score='2'
+  data-source='Car Watch'
+  data-sourcegroup='jp_media'
+  data-region='japan'
+  data-sentiment='neutral'
+  data-importance='supply_chain'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span>Car Watch</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-c96df783b280')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>三菱自動車、コンセプトカー「パジェロI」をオートモビルカウンシル2026出展</h3><div class='summary'>三菱自動車、コンセプトカー「パジェロI」をオートモビルカウンシル2026出展</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏭 生産・供給網</span><span class='tag tag-usd-weak'>🏭 生産・供給網</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://car.watch.impress.co.jp/docs/news/2099475.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-c6f19b2b963e'
+  data-themes='生産・供給網'
+  data-lang='ja'
+  data-score='2'
+  data-source='Car Watch'
+  data-sourcegroup='jp_media'
+  data-region='japan'
+  data-sentiment='neutral'
+  data-importance='supply_chain'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span>Car Watch</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-c6f19b2b963e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ブリヂストン、新研修施設「ビー・ソリューション ラーニングセンター」公開 人財育成強化で2031年の創立100周年時に世界No.1奪還を目指す</h3><div class='summary'>ブリヂストン、新研修施設「ビー・ソリューション ラーニングセンター」公開 人財育成強化で2031年の創立100周年時に世界No.1奪還を目指す</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏭 生産・供給網</span><span class='tag tag-usd-weak'>🏭 生産・供給網</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://car.watch.impress.co.jp/docs/news/2099461.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-64646309e23f'
+  data-themes='生産・供給網'
+  data-lang='ja'
+  data-score='2'
+  data-source='Car Watch'
+  data-sourcegroup='jp_media'
+  data-region='japan'
+  data-sentiment='neutral'
+  data-importance='supply_chain'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span>Car Watch</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-64646309e23f')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>トヨタ、居眠り運転など「12シーン」をAIが検出する法人向け通信型ドラレコ「TransLog Pro」提供開始</h3><div class='summary'>トヨタ、居眠り運転など「12シーン」をAIが検出する法人向け通信型ドラレコ「TransLog Pro」提供開始</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏭 生産・供給網</span><span class='tag tag-usd-weak'>🏭 生産・供給網</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://car.watch.impress.co.jp/docs/news/2099439.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-d0b61a265744'
+  data-themes='販売・市場'
+  data-lang='ja'
+  data-score='2'
+  data-source='Car Watch'
+  data-sourcegroup='jp_media'
+  data-region='japan'
+  data-sentiment='neutral'
+  data-importance='supply_chain'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span>Car Watch</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-d0b61a265744')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>タミヤ、電動RCカー特別企画製品「1/10RCポルシェ934（1976）50周年記念」の価格は6万3800円</h3><div class='summary'>タミヤ、電動RCカー特別企画製品「1/10RCポルシェ934（1976）50周年記念」の価格は6万3800円</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>📈 販売・市場</span><span class='tag tag-usd-weak'>🏭 生産・供給網</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://car.watch.impress.co.jp/docs/news/2099381.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-792cecedd7da'
+  data-themes='生産・供給網'
+  data-lang='ja'
+  data-score='2'
+  data-source='Car Watch'
+  data-sourcegroup='jp_media'
+  data-region='japan'
+  data-sentiment='neutral'
+  data-importance='supply_chain'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span>Car Watch</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-792cecedd7da')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>2026年も瑶子女王杯が設定されたスーパーフォーミュラ、開幕ラウンドもてぎは第1戦・第2戦を太田格之進が連勝</h3><div class='summary'>2026年も瑶子女王杯が設定されたスーパーフォーミュラ、開幕ラウンドもてぎは第1戦・第2戦を太田格之進が連勝</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏭 生産・供給網</span><span class='tag tag-usd-weak'>🏭 生産・供給網</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://car.watch.impress.co.jp/docs/news/2099373.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article></div></div><div class='fx-panel ' id='fx-regulation'><div class='grid'>
+<article class='card item-card'
+  data-cardid='item-355dbfac8c69'
+  data-themes='生産・供給網'
+  data-lang='ja'
+  data-score='2'
+  data-source='Car Watch'
+  data-sourcegroup='jp_media'
+  data-region='japan'
+  data-sentiment='neutral'
+  data-importance='regulation'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 日本語</span><span>Car Watch</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-355dbfac8c69')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>内閣府や警察庁、令和8年「春の全国交通安全運動」は4月6日から15日 「ながらスマホ」の根絶など重点項目</h3><div class='summary'>内閣府や警察庁、令和8年「春の全国交通安全運動」は4月6日から15日 「ながらスマホ」の根絶など重点項目</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏭 生産・供給網</span><span class='tag tag-jpy-strong'>⚖ 政策・規制</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://car.watch.impress.co.jp/docs/news/2099451.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article></div></div><div class='fx-panel ' id='fx-earnings_market'><div class='grid'>
+<article class='card item-card'
+  data-cardid='item-c5ca6c34f10b'
+  data-themes='販売・市場|新車・製品'
+  data-lang='en'
+  data-score='4'
+  data-source='Honda Global Newsroom'
+  data-sourcegroup='official_oem'
+  data-region='global'
+  data-sentiment='bullish'
+  data-importance='earnings_market'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Honda Global Newsroom</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-c5ca6c34f10b')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Honda to Begin Sales of Two U.S.-built Vehicles in Japan</h3><div class='summary'>Honda to Begin Sales of Two U.S.-built Vehicles in Japan</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ホンダ、米国生産車2台を日本で販売開始</h3><div class='summary'>ホンダ、米国生産車2台を日本で販売開始</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>📈 販売・市場</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🚗 新車・製品</span><span class='tag tag-jpy-weak'>💹 業績・市場</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://global.honda/en/newsroom/news/2026/4260305beng.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-bb7456b79164'
+  data-themes='販売・市場'
+  data-lang='en'
+  data-score='3'
+  data-source='Electrek'
+  data-sourcegroup='ev_media'
+  data-region='global'
+  data-sentiment='bullish'
+  data-importance='earnings_market'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span>Electrek</span><span>2026-04-07 02:50</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-bb7456b79164')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>The Hyundai IONIQ 5 is heating up again, and now it has an $8,750 discount</h3><div class='summary'>The IONIQ 5 is making a comeback after sales jumped in the first quarter. Now, Hyundai is offering an $8,750 discount on all trims to sweeten the deal. more…</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ヒュンダイ IONIQ 5 が再びヒートアップし、現在は 8,750 ドルの割引が適用されています</h3><div class='summary'>IONIQ 5 は、第 1 四半期に売上が急増した後、復活を遂げています。現在、ヒュンダイは契約を有利にするために、すべてのトリムに8,750ドルの割引を提供している。もっと…</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>📈 販売・市場</span><span class='tag tag-jpy-weak'>💹 業績・市場</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://electrek.co/2026/04/06/hyundai-discounts-ioniq-5-ev-by-8750-sales-heat-up/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-198ae66fc35e'
+  data-themes='提携・投資'
+  data-lang='en'
+  data-score='5'
+  data-source='Toyota Global Newsroom'
+  data-sourcegroup='official_oem'
+  data-region='global'
+  data-sentiment='bullish'
+  data-importance='earnings_market'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Toyota Global Newsroom</span><span>2026-04-06 16:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-198ae66fc35e')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>SPARX Group Establishes the Japan Monozukuri Mirai Fund II</h3><div class='summary'>SPARX Group Co., Ltd. (SPARX; TSE Prime: 8739) announced the establishment of the Japan Monozukuri Mirai II Investment Limited Partnership (the &quot;Fund&quot;), together with Toyota Motor Corporation, Sumitomo Mitsui Banking Corporation (SMBC), MUFG Bank, Ltd., and Mizuho Bank, Ltd.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>スパークスグループ、「日本ものづくり未来基金Ⅱ」を設立</h3><div class='summary'>スパークスグループ株式会社（SPARX、東証プライム8739）は、トヨタ自動車株式会社、株式会社三井住友銀行（SMBC）、株式会社三菱UFJ銀行、株式会社みずほ銀行と共同で、日本ものづくり未来II投資事業有限責任組合（以下「本ファンド」）を設立したことを発表した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#fdcb6e22;border-color:#fdcb6e;color:#fdcb6e'>🤝 提携・投資</span><span class='tag tag-jpy-weak'>💹 業績・市場</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://global.toyota/en/newsroom/corporate/44194881.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-a9732f599a21'
+  data-themes='提携・投資|新車・製品'
+  data-lang='en'
+  data-score='3'
+  data-source='Toyota Global Newsroom'
+  data-sourcegroup='official_oem'
+  data-region='global'
+  data-sentiment='neutral'
+  data-importance='earnings_market'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Toyota Global Newsroom</span><span>2026-03-31 15:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-a9732f599a21')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Toyota Motor Corporation aims to join Daimler Truck and Volvo Group as equal shareholder in the fuel cell joint venture cellcentric</h3><div class='summary'>Daimler Truck AG (Daimler Truck), the Volvo Group (Volvo), cellcentric and Toyota Motor Corporation (Toyota) have signed a non-binding agreement to cooperate in the fuel cell system joint venture cellcentric. The three companies intend to collaborate based on an equal shareholding with Toyota as the</div></div>
+<div class='lang-pane lang-ja hidden'><h3>トヨタ自動車、燃料電池合弁会社セルセントリックの対等株主としてダイムラー・トラックとボルボ・グループに加わることを目指す</h3><div class='summary'>ダイムラー・トラックAG（ダイムラー・トラック）、ボルボ・グループ（ボルボ）、セルセントリック、トヨタ自動車株式会社（トヨタ）は、燃料電池システム合弁会社セルセントリックで協力するための拘束力のない契約を締結した。 3社は今後、トヨタとの折半出資のもとで協力していく考えだ。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#fdcb6e22;border-color:#fdcb6e;color:#fdcb6e'>🤝 提携・投資</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🚗 新車・製品</span><span class='tag tag-jpy-weak'>💹 業績・市場</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://global.toyota/en/newsroom/corporate/44152536.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-e968f88b970f'
+  data-themes='販売・市場|新車・製品'
+  data-lang='en'
+  data-score='4'
+  data-source='Toyota Global Newsroom'
+  data-sourcegroup='official_oem'
+  data-region='global'
+  data-sentiment='bullish'
+  data-importance='earnings_market'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 English</span><span class='tag tag-official'>🏛 公式</span><span>Toyota Global Newsroom</span><span>2026-03-13 13:30</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-e968f88b970f')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>GR Launches Motorsports-honed Type 26 GR Yaris</h3><div class='summary'>GAZOO Racing (GR) unveiled today a partially upgraded GR Yaris and announced that Toyota vehicle dealers across Japan are now accepting orders, with sales to commence on April 6.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>GR、モータースポーツに磨きをかけたタイプ26 GRヤリスを発売</h3><div class='summary'>GAZOO Racing（GR）は本日、一部改良新型「GRヤリス」を公開し、全国のトヨタ車販売店にて受注受付を開始し、4月6日より販売を開始すると発表した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>📈 販売・市場</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🚗 新車・製品</span><span class='tag tag-jpy-weak'>💹 業績・市場</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://global.toyota/en/newsroom/toyota/44085107.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-e28dc845b821'
+  data-themes='販売・市場'
+  data-lang='ja'
+  data-score='2'
+  data-source='Response'
+  data-sourcegroup='jp_media'
+  data-region='japan'
+  data-sentiment='neutral'
+  data-importance='earnings_market'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span>Response</span><span>2026-04-07 12:50</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-e28dc845b821')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>WHILLモビリティサービス、鹿児島・平川動物公園で開始…免許不要の近距離移動</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>📈 販売・市場</span><span class='tag tag-jpy-weak'>💹 業績・市場</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://response.jp/article/2026/04/07/409728.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-6dcadc0a25c7'
+  data-themes='販売・市場'
+  data-lang='ja'
+  data-score='2'
+  data-source='Response'
+  data-sourcegroup='jp_media'
+  data-region='japan'
+  data-sentiment='neutral'
+  data-importance='earnings_market'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span>Response</span><span>2026-04-07 12:40</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-6dcadc0a25c7')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ボッシュ、SUPER GTシリーズパートナー契約を2026年から2030年まで更新</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>📈 販売・市場</span><span class='tag tag-jpy-weak'>💹 業績・市場</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://response.jp/article/2026/04/07/409727.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-5dfad0ca879c'
+  data-themes='販売・市場'
+  data-lang='ja'
+  data-score='2'
+  data-source='Response'
+  data-sourcegroup='jp_media'
+  data-region='japan'
+  data-sentiment='neutral'
+  data-importance='earnings_market'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span>Response</span><span>2026-04-07 12:30</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-5dfad0ca879c')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>トヨタファイナンシャルサービス「my route」、時間帯限定チケット機能導入…宮崎交通・西肥自動車で先行展開</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>📈 販売・市場</span><span class='tag tag-jpy-weak'>💹 業績・市場</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://response.jp/article/2026/04/07/409726.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-c8b3cf5e33cf'
+  data-themes='販売・市場'
+  data-lang='ja'
+  data-score='2'
+  data-source='Response'
+  data-sourcegroup='jp_media'
+  data-region='japan'
+  data-sentiment='neutral'
+  data-importance='earnings_market'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span>Response</span><span>2026-04-07 12:14</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-c8b3cf5e33cf')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「最近のスズキは覚醒モード」高級スクーター『バーグマンストリート』の大胆刷新に「あまりにもかっこよすぎ」とSNS興奮！</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>📈 販売・市場</span><span class='tag tag-jpy-weak'>💹 業績・市場</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://response.jp/article/2026/04/07/409724.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-3a15241fe860'
+  data-themes='販売・市場'
+  data-lang='ja'
+  data-score='2'
+  data-source='Response'
+  data-sourcegroup='jp_media'
+  data-region='japan'
+  data-sentiment='neutral'
+  data-importance='earnings_market'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span>Response</span><span>2026-04-07 12:10</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-3a15241fe860')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>スマートバス停、岡山市に導入…YEデジタルが8社のバス情報を統合表示</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>📈 販売・市場</span><span class='tag tag-jpy-weak'>💹 業績・市場</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://response.jp/article/2026/04/07/409723.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-1b352b1c8a13'
+  data-themes='新車・製品'
+  data-lang='ja'
+  data-score='2'
+  data-source='Response'
+  data-sourcegroup='jp_media'
+  data-region='japan'
+  data-sentiment='neutral'
+  data-importance='earnings_market'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span>Response</span><span>2026-04-07 12:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-1b352b1c8a13')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>メルセデスAMG GT 4ドアクーペ 新型、スウェーデンで最終冬季テスト完了…「AMGレースエンジニア」搭載</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🚗 新車・製品</span><span class='tag tag-jpy-weak'>💹 業績・市場</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://response.jp/article/2026/04/07/409722.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-13e6aea17bd6'
+  data-themes='自動運転・SDV'
+  data-lang='ja'
+  data-score='2'
+  data-source='Response'
+  data-sourcegroup='jp_media'
+  data-region='japan'
+  data-sentiment='neutral'
+  data-importance='earnings_market'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span>Response</span><span>2026-04-07 11:45</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-13e6aea17bd6')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>自動運転システムの国際規格、日本主導でISO発行…車線変更も自動化へ</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#9b59b622;border-color:#9b59b6;color:#9b59b6'>🧠 自動運転・SDV</span><span class='tag tag-jpy-weak'>💹 業績・市場</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://response.jp/article/2026/04/07/409721.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-9a6664edf2db'
+  data-themes='販売・市場'
+  data-lang='ja'
+  data-score='2'
+  data-source='Response'
+  data-sourcegroup='jp_media'
+  data-region='japan'
+  data-sentiment='neutral'
+  data-importance='earnings_market'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 日本語</span><span>Response</span><span>2026-04-07 11:30</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-9a6664edf2db')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>純正オーディオのまま音が激変、BREEZEのアウディA1が示す賢いシステムアップ［car audio newcomer］by BREEZE 後編</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>📈 販売・市場</span><span class='tag tag-jpy-weak'>💹 業績・市場</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://response.jp/article/2026/04/07/409720.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article></div></div>
+</div>
+<script>
+const FX_TAB_META = {"ev_shift": {"color": "#4ea1ff", "bg": "#0d1e35"}, "supply_chain": {"color": "#e74c3c", "bg": "#2e0d0d"}, "regulation": {"color": "#2ecc71", "bg": "#0d2e1a"}, "earnings_market": {"color": "#f39c12", "bg": "#2e2400"}};
+(function(){
+  var impLang = 'all', impSearch = '';
+  function applyImportanceFilters(){
+    document.querySelectorAll('.fx-panel .item-card').forEach(function(card){
+      var show = true;
+      if (impLang !== 'all' && (card.dataset.lang || '') !== impLang) show = false;
+      if (impSearch && !(card.textContent || '').toLowerCase().includes(impSearch.toLowerCase())) show = false;
+      card.style.display = show ? '' : 'none';
+    });
+  }
+  document.querySelectorAll('.flt-imp-lang').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.flt-imp-lang').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      impLang = btn.dataset.lang;
+      applyImportanceFilters();
+    });
+  });
+  var sb = document.getElementById('searchBoxImportance');
+  if (sb) sb.addEventListener('input', function(){ impSearch = this.value; applyImportanceFilters(); });
+  applyImportanceFilters();
+})();
+function switchFxTab(key, btn) {
+  document.querySelectorAll('.fx-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.fx-tab').forEach(function(b){
+    b.classList.remove('active');
+    b.style.background='';
+    b.style.borderColor='var(--line)';
+    b.style.color='';
+  });
+  document.getElementById('fx-' + key).classList.add('active');
+  btn.classList.add('active');
+  var meta = FX_TAB_META[key] || null;
+  if (meta) {
+    btn.style.background = meta.bg;
+    btn.style.borderColor = meta.color;
+    btn.style.color = '#fff';
+  }
+}
+</script><footer>Auto Industry Suite — Generated at 2026-04-07 12:57</footer></body></html>
+<script>
+var pageLang = 'en';
+function setPageLang(lang) {
+  pageLang = lang;
+  document.getElementById('btnPageEN').classList.toggle('active', lang === 'en');
+  document.getElementById('btnPageJA').classList.toggle('active', lang === 'ja');
+  document.querySelectorAll('.item-card').forEach(function(card) {
+    if ((card.dataset.lang || 'en') === 'ja') return;
+    var enPane = card.querySelector('.lang-en');
+    var jaPane = card.querySelector('.lang-ja');
+    var enBtn = card.querySelector('.card-lang-btn[data-l="en"]');
+    var jaBtn = card.querySelector('.card-lang-btn[data-l="ja"]');
+    if (!enPane || !jaPane) return;
+    if (lang === 'ja') {
+      enPane.classList.add('hidden'); jaPane.classList.remove('hidden');
+      if(enBtn) enBtn.classList.remove('active');
+      if(jaBtn) jaBtn.classList.add('active');
+    } else {
+      enPane.classList.remove('hidden'); jaPane.classList.add('hidden');
+      if(enBtn) enBtn.classList.add('active');
+      if(jaBtn) jaBtn.classList.remove('active');
+    }
+  });
+}
+function switchCardLang(btn, lang) {
+  var card = btn.closest('.item-card');
+  if (!card) return;
+  card.querySelectorAll('.card-lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var enPane = card.querySelector('.lang-en');
+  var jaPane = card.querySelector('.lang-ja');
+  if (!enPane || !jaPane) return;
+  if (lang === 'ja') { enPane.classList.add('hidden'); jaPane.classList.remove('hidden'); }
+  else { enPane.classList.remove('hidden'); jaPane.classList.add('hidden'); }
+}
+</script>
+
+<script>
+var READ_KEY = 'auto_industry_suite_read';
+function getReadSet() {
+  try { return new Set(JSON.parse(localStorage.getItem(READ_KEY) || '[]')); } catch(e) { return new Set(); }
+}
+function saveReadSet(s) { try { localStorage.setItem(READ_KEY, JSON.stringify([...s])); } catch(e) {} }
+function markRead(btn, cardId) {
+  var card = btn.closest('.item-card');
+  var rs = getReadSet();
+  if (rs.has(cardId)) { rs.delete(cardId); card.classList.remove('is-read'); btn.textContent = '既読'; }
+  else { rs.add(cardId); card.classList.add('is-read'); btn.textContent = '未読に戻す'; }
+  saveReadSet(rs);
+}
+(function applyRead() {
+  var rs = getReadSet();
+  document.querySelectorAll('.item-card[data-cardid]').forEach(function(card) {
+    if (rs.has(card.dataset.cardid)) {
+      card.classList.add('is-read');
+      var btn = card.querySelector('.read-btn');
+      if (btn) btn.textContent = '未読に戻す';
+    }
+  });
+})();
+</script>

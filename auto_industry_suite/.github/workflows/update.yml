@@ -1,0 +1,36 @@
+name: HTMLを更新する
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'   # JST 09:00
+    - cron: '0 6 * * *'   # JST 15:00
+    - cron: '0 12 * * *'  # JST 21:00
+    - cron: '0 18 * * *'  # JST 03:00
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Python をセットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 依存パッケージをインストール
+        run: pip install -r requirements.txt
+
+      - name: Python スクリプトを実行（HTML生成）
+        run: python app/main.py
+
+      - name: 変更をコミット＆プッシュ
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add output/*.html
+          git diff --staged --quiet || git commit -m "chore: HTMLを自動更新 $(TZ=Asia/Tokyo date +'%Y-%m-%d %H:%M JST')"
+          git push

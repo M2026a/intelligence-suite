@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>スポット検索</title>
+<style>:root{--bg:#0b1020;--panel:#121934;--line:#273052;--text:#eef3ff;--muted:#aeb8d9;--accent:#6ea8ff;}*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Meiryo,sans-serif;font-size:14px;overflow-x:hidden}a{color:#cfe0ff;text-decoration:none}a:hover{text-decoration:underline}.topbar{background:#111827;border-bottom:1px solid var(--line);padding:10px 20px;position:sticky;top:0;z-index:50;width:1060px;margin:0 auto}.topbar-title{font-size:17px;font-weight:800;color:var(--text)}.topbar-title span{color:var(--muted);font-weight:400;margin-left:6px}.topbar-meta{font-size:12px;color:var(--muted);margin-top:3px}.tab-wrap{background:#0e1628;border-bottom:1px solid var(--line);padding:8px 16px;overflow-x:visible;white-space:normal;position:sticky;top:49px;z-index:40;width:1060px;margin:0 auto}.tab-wrap::-webkit-scrollbar{height:4px}.tab-wrap::-webkit-scrollbar-thumb{background:var(--line);border-radius:2px}.tabs{display:flex;gap:6px;flex-wrap:wrap}.tab-btn{background:transparent;border:1px solid var(--line);border-radius:999px;color:var(--muted);cursor:pointer;font-size:13px;padding:6px 14px;white-space:nowrap;transition:all .15s}.tab-btn:hover{border-color:var(--accent);color:var(--text)}.tab-btn.active{background:var(--accent);border-color:var(--accent);color:#07111f;font-weight:700}.wrap{width:1100px;margin:0 auto;padding:18px 20px;overflow-x:hidden}.card{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}.card-title{font-size:18px;font-weight:800;margin-bottom:14px}.controls{display:grid;grid-template-columns:140px 160px 260px 160px 160px 120px;gap:10px;align-items:end}label{display:block;font-weight:700;margin-bottom:5px;font-size:13px}input,select{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:#0a1024;color:var(--text);font-size:13px}.action-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px}.src-btns{display:flex;gap:10px;flex-wrap:wrap}.query-display{color:var(--muted);font-size:13px;margin-left:auto}.query-display strong{color:var(--text)}.shortcut-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:8px}.btnrow{display:flex;flex-wrap:wrap;gap:8px}.btn{display:inline-block;padding:9px 14px;border-radius:10px;background:var(--accent);color:#06111d;font-weight:700;border:none;cursor:pointer;text-decoration:none;font-size:13px}.btn.alt{background:rgba(255,255,255,.07);color:var(--text);border:1px solid var(--line)}.btn.alt:hover{background:rgba(255,255,255,.13);text-decoration:none}.btn:hover{text-decoration:none}.reset-btn{background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:10px;color:var(--text);cursor:pointer;font-size:13px;padding:10px 16px;white-space:nowrap}.shortcuts-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.shortcuts-grid>div{display:flex;flex-direction:column}.bottom-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:var(--muted);font-size:12px;padding:0 4px}.bottom-meta a{color:var(--muted)}.bottom-meta a:hover{color:var(--text)}.footer{margin:24px auto 0;padding:14px 20px;color:var(--muted);font-size:12px;width:1060px}@media(max-width:800px){.controls{grid-template-columns:1fr}.shortcuts-grid{grid-template-columns:1fr}.query-display{margin-left:0}}</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-title">🔍 スポット検索<span>| えらべにゃんとでお店やショップを検索</span></div>
+  <div class="topbar-meta">更新日時：2026-04-07 14:36</div>
+</div>
+
+<div class="tab-wrap"><div class="tabs"><button class="tab-btn active" data-cat="food" onclick="switchCat('food')">🍽️ 食事・グルメ</button><button class="tab-btn" data-cat="cafe" onclick="switchCat('cafe')">☕ カフェ・喫茶</button><button class="tab-btn" data-cat="bar" onclick="switchCat('bar')">🍺 飲み・バー</button><button class="tab-btn" data-cat="sweets" onclick="switchCat('sweets')">🍰 スイーツ・パン</button><button class="tab-btn" data-cat="travel" onclick="switchCat('travel')">🗺️ 観光・旅行</button><button class="tab-btn" data-cat="onsen" onclick="switchCat('onsen')">♨️ 温泉・サウナ</button><button class="tab-btn" data-cat="outdoor" onclick="switchCat('outdoor')">🏕️ アウトドア・自然</button><button class="tab-btn" data-cat="leisure" onclick="switchCat('leisure')">🎡 遊び・レジャー</button><button class="tab-btn" data-cat="entertainment" onclick="switchCat('entertainment')">🎬 映画・エンタメ</button><button class="tab-btn" data-cat="sports" onclick="switchCat('sports')">💪 スポーツ・フィットネス</button><button class="tab-btn" data-cat="spectator" onclick="switchCat('spectator')">🏟️ スポーツ観戦</button><button class="tab-btn" data-cat="shopping" onclick="switchCat('shopping')">🛍️ ショッピング</button><button class="tab-btn" data-cat="beauty_hair" onclick="switchCat('beauty_hair')">💇 美容・ヘア</button><button class="tab-btn" data-cat="nail_esthetic" onclick="switchCat('nail_esthetic')">💅 ネイル・エステ</button><button class="tab-btn" data-cat="medical" onclick="switchCat('medical')">🏥 医療・病院</button><button class="tab-btn" data-cat="dental" onclick="switchCat('dental')">🦷 歯医者</button><button class="tab-btn" data-cat="pet" onclick="switchCat('pet')">🐾 ペット</button><button class="tab-btn" data-cat="kids" onclick="switchCat('kids')">🧒 子ども・公園</button><button class="tab-btn" data-cat="learning" onclick="switchCat('learning')">📚 学び・教室</button><button class="tab-btn" data-cat="culture" onclick="switchCat('culture')">🎭 カルチャー・芸術</button><button class="tab-btn" data-cat="oshi" onclick="switchCat('oshi')">⭐ 推し活</button><button class="tab-btn" data-cat="car" onclick="switchCat('car')">🚗 車・ドライブ</button><button class="tab-btn" data-cat="daily" onclick="switchCat('daily')">🔧 生活・実用</button><button class="tab-btn" data-cat="seasonal" onclick="switchCat('seasonal')">🌸 季節・イベント</button><button class="tab-btn" data-cat="spiritual" onclick="switchCat('spiritual')">🔮 占い・スピリチュアル</button></div></div>
+
+<div class="wrap">
+
+  <div class="card">
+    <div class="card-title" id="catTitle">🍽️ 食事・グルメ</div>
+    <div class="controls">
+      <div><label for="region">地方</label><select id="region" onchange="updatePrefectures()"><option value=""></option><option value="北海道">北海道</option><option value="東北">東北</option><option value="関東">関東</option><option value="中部">中部</option><option value="関西">関西</option><option value="中国">中国</option><option value="四国">四国</option><option value="九州・沖縄">九州・沖縄</option></select></div>
+      <div><label for="pref">都道府県</label><select id="pref" onchange="updateAreaHints(true)"><option value=""></option></select></div>
+      <div><label for="area">エリア・駅・市</label><input id="area" list="area-list" placeholder="例: 栄 / 名古屋駅"><datalist id="area-list"></datalist></div>
+      <div><label for="subcat">種類</label><select id="subcat" onchange="applyLinks()"><option value=""></option><option value="ラーメン">ラーメン</option><option value="寿司">寿司</option><option value="焼肉">焼肉</option><option value="和食">和食</option><option value="中華">中華</option><option value="イタリアン">イタリアン</option><option value="焼鳥">焼鳥</option><option value="カレー">カレー</option><option value="定食">定食</option><option value="海鮮">海鮮</option><option value="丼">丼</option><option value="そば・うどん">そば・うどん</option></select></div>
+      <div><label for="scene">シーン</label><select id="scene" onchange="applyLinks()"><option value=""></option></select></div>
+      <div style="display:flex;align-items:flex-end"><button class="reset-btn" onclick="clearInputs()">リセット</button></div>
+    </div>
+    <div class="action-row">
+      <div class="src-btns" id="srcBtns"><a class="btn" href="https://www.google.com/maps/search/" target="_blank" rel="noopener" data-template="https://www.google.com/maps/search/{query}">Google Maps</a><a class="btn" href="https://tabelog.com/rstLst/?sk=" target="_blank" rel="noopener" data-template="https://tabelog.com/rstLst/?sk={query}">食べログ</a></div>
+      <div class="query-display">現在の検索語：<strong id="queryPreview">未入力</strong></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="shortcuts-grid">
+      <div>
+        <div class="shortcut-label">種類から選ぶ</div>
+        <div class="btnrow" id="subcatBtns"><button class="btn alt" onclick="setSubcat('ラーメン')">ラーメン</button><button class="btn alt" onclick="setSubcat('寿司')">寿司</button><button class="btn alt" onclick="setSubcat('焼肉')">焼肉</button><button class="btn alt" onclick="setSubcat('和食')">和食</button><button class="btn alt" onclick="setSubcat('中華')">中華</button><button class="btn alt" onclick="setSubcat('イタリアン')">イタリアン</button><button class="btn alt" onclick="setSubcat('焼鳥')">焼鳥</button><button class="btn alt" onclick="setSubcat('カレー')">カレー</button><button class="btn alt" onclick="setSubcat('定食')">定食</button><button class="btn alt" onclick="setSubcat('海鮮')">海鮮</button><button class="btn alt" onclick="setSubcat('丼')">丼</button><button class="btn alt" onclick="setSubcat('そば・うどん')">そば・うどん</button></div>
+      </div>
+      <div id="sceneArea" style="display:block">
+        <div class="shortcut-label">シーンから選ぶ</div>
+        <div class="btnrow" id="sceneBtns"><button class="btn alt" onclick="setScene('ひとり')">ひとり</button><button class="btn alt" onclick="setScene('デート')">デート</button><button class="btn alt" onclick="setScene('家族')">家族</button><button class="btn alt" onclick="setScene('友人')">友人</button><button class="btn alt" onclick="setScene('会食')">会食</button><button class="btn alt" onclick="setScene('ランチ')">ランチ</button><button class="btn alt" onclick="setScene('ディナー')">ディナー</button><button class="btn alt" onclick="setScene('コスパ重視')">コスパ重視</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-meta">
+    <div>営業情報は外部サイトで確認を</div>
+    <div>各トップページ：<span id="topLinks"></span></div>
+  </div>
+
+</div>
+
+<div class="footer">スポット検索 — Generated at 2026-04-07 14:36</div>
+
+<script>
+const CATEGORIES = [{"id": "food", "label": "食事・グルメ", "icon": "🍽️", "subcategories": ["ラーメン", "寿司", "焼肉", "和食", "中華", "イタリアン", "焼鳥", "カレー", "定食", "海鮮", "丼", "そば・うどん"], "scenes": ["ひとり", "デート", "家族", "友人", "会食", "ランチ", "ディナー", "コスパ重視"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "食べログ", "url_template": "https://tabelog.com/rstLst/?sk={query}"}]}, {"id": "cafe", "label": "カフェ・喫茶", "icon": "☕", "subcategories": ["カフェ", "純喫茶", "コーヒー専門", "猫カフェ", "犬カフェ", "ブックカフェ", "テラス席", "モーニング"], "scenes": ["ひとり", "デート", "友人", "作業・勉強", "モーニング"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "食べログ", "url_template": "https://tabelog.com/rstLst/?sk={query}"}]}, {"id": "bar", "label": "飲み・バー", "icon": "🍺", "subcategories": ["居酒屋", "バー", "クラフトビール", "ワインバー", "日本酒バー", "ダーツバー", "スポーツバー", "スナック"], "scenes": ["ひとり", "デート", "友人", "仕事後", "深夜"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "食べログ", "url_template": "https://tabelog.com/rstLst/?sk={query}"}]}, {"id": "sweets", "label": "スイーツ・パン", "icon": "🍰", "subcategories": ["ケーキ", "パン屋", "和菓子", "ソフトクリーム", "チョコレート", "モンブラン", "たい焼き", "どら焼き"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "食べログ", "url_template": "https://tabelog.com/rstLst/?sk={query}"}]}, {"id": "travel", "label": "観光・旅行", "icon": "🗺️", "subcategories": ["観光地", "名所", "絶景", "城", "展望台", "道の駅", "SA・PA", "灯台"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "じゃらん", "url_template": "https://www.jalan.net/uw/uwp2011/uww2011init.do?keyword={query}"}]}, {"id": "onsen", "label": "温泉・サウナ", "icon": "♨️", "subcategories": ["日帰り温泉", "銭湯", "サウナ", "露天風呂", "貸切風呂", "岩盤浴", "スパ"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "じゃらん温泉", "url_template": "https://www.jalan.net/onsen/?keyWord={query}"}]}, {"id": "outdoor", "label": "アウトドア・自然", "icon": "🏕️", "subcategories": ["キャンプ場", "ハイキング", "登山", "釣り", "バーベキュー", "サイクリング", "星空観察", "マリンスポーツ"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "なっぷ", "url_template": "https://www.nap-camp.com/list?freeword={query}"}]}, {"id": "leisure", "label": "遊び・レジャー", "icon": "🎡", "subcategories": ["テーマパーク", "脱出ゲーム", "ボウリング", "カラオケ", "ゲームセンター", "ビリヤード", "ダーツ", "VR体験", "アスレチック"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "じゃらん体験", "url_template": "https://www.jalan.net/activity/fw_search/?keyword={query}"}]}, {"id": "entertainment", "label": "映画・エンタメ", "icon": "🎬", "subcategories": ["映画館", "ライブハウス", "劇場", "コンサートホール", "お笑い", "落語", "ミュージカル", "漫画喫茶"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "映画.com", "url_template": "https://eiga.com/search/{query}/"}, {"name": "チケットぴあ", "url_template": "https://t.pia.jp/pia/search_all.do?kw={query}"}]}, {"id": "sports", "label": "スポーツ・フィットネス", "icon": "💪", "subcategories": ["ジム", "ヨガ", "水泳", "テニス", "ゴルフ", "武道", "ダンス", "クライミング", "ピラティス"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "EPARKスポーツ", "url_template": "https://epark.jp/sports/search/?q={query}"}]}, {"id": "spectator", "label": "スポーツ観戦", "icon": "🏟️", "subcategories": ["サッカー", "野球", "バスケ", "ラグビー", "格闘技", "競馬", "競輪", "競艇"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "チケットぴあ", "url_template": "https://t.pia.jp/pia/search_all.do?kw={query}"}]}, {"id": "shopping", "label": "ショッピング", "icon": "🛍️", "subcategories": ["ショッピングモール", "アウトレット", "家電量販店", "古着", "本屋", "100均", "ホームセンター", "スーパー"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "楽天市場", "url_template": "https://search.rakuten.co.jp/search/mall/{query}/"}, {"name": "Yahoo!ショッピング", "url_template": "https://shopping.yahoo.co.jp/search?p={query}"}]}, {"id": "beauty_hair", "label": "美容・ヘア", "icon": "💇", "subcategories": ["美容室", "理容室", "メンズカット", "カラー", "パーマ", "縮毛矯正", "ヘッドスパ"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "ホットペッパービューティー", "url_template": "https://beauty.hotpepper.jp/CSP/bt/salonSearch/search/?freeword={query}"}]}, {"id": "nail_esthetic", "label": "ネイル・エステ", "icon": "💅", "subcategories": ["ネイルサロン", "まつ毛エクステ", "エステ", "脱毛", "フェイシャル", "マッサージ", "リフレクソロジー", "整体"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "ホットペッパービューティー", "url_template": "https://beauty.hotpepper.jp/CSP/bt/salonSearch/search/?freeword={query}"}]}, {"id": "medical", "label": "医療・病院", "icon": "🏥", "subcategories": ["内科", "外科", "皮膚科", "眼科", "耳鼻科", "心療内科", "整形外科", "小児科", "産婦人科"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "EPARK", "url_template": "https://epark.jp/medical/list/?keyword={query}"}, {"name": "病院なび", "url_template": "https://byoinnavi.jp/search?word={query}"}]}, {"id": "dental", "label": "歯医者", "icon": "🦷", "subcategories": ["一般歯科", "矯正歯科", "インプラント", "ホワイトニング", "小児歯科", "口腔外科"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "EPARK", "url_template": "https://epark.jp/medical/list/?keyword={query}"}]}, {"id": "pet", "label": "ペット", "icon": "🐾", "subcategories": ["ペットショップ", "動物病院", "トリミング", "ドッグラン", "ペットホテル", "ペット可カフェ"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}]}, {"id": "kids", "label": "子ども・公園", "icon": "🧒", "subcategories": ["公園", "児童館", "キッズカフェ", "プール", "水族館", "動物園", "科学館", "遊園地"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "じゃらん体験", "url_template": "https://www.jalan.net/activity/fw_search/?keyword={query}"}]}, {"id": "learning", "label": "学び・教室", "icon": "📚", "subcategories": ["料理教室", "語学学校", "陶芸", "写真教室", "楽器教室", "ヨガ教室", "自習室", "コワーキング"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "ストアカ", "url_template": "https://www.street-academy.com/zenkoku/all?search={query}"}]}, {"id": "culture", "label": "カルチャー・芸術", "icon": "🎭", "subcategories": ["美術館", "博物館", "ギャラリー", "コンサート", "オペラ", "バレエ", "落語", "お笑い"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "チケットぴあ", "url_template": "https://t.pia.jp/pia/search_all.do?kw={query}"}, {"name": "ローチケ", "url_template": "https://l-tike.com/search/?keyword={query}"}]}, {"id": "oshi", "label": "推し活", "icon": "⭐", "subcategories": ["グッズショップ", "アニメ聖地", "アイドルイベント", "コスプレ撮影", "同人イベント", "声優イベント"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "Yahoo!ショッピング", "url_template": "https://shopping.yahoo.co.jp/search?p={query}"}]}, {"id": "car", "label": "車・ドライブ", "icon": "🚗", "subcategories": ["ガソリンスタンド", "洗車", "車検", "タイヤ交換", "カー用品店", "レンタカー", "道の駅"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "カーセンサー", "url_template": "https://www.carsensor.net/usedcar/search.php?KEYWORD={query}"}]}, {"id": "daily", "label": "生活・実用", "icon": "🔧", "subcategories": ["クリーニング", "コインランドリー", "郵便局", "銀行・ATM", "印刷・コピー", "薬局", "宅配"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}]}, {"id": "seasonal", "label": "季節・イベント", "icon": "🌸", "subcategories": ["花見", "紅葉", "花火大会", "イルミネーション", "初詣", "ひまわり畑", "紫陽花", "雪景色"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "じゃらん", "url_template": "https://www.jalan.net/uw/uwp2011/uww2011init.do?keyword={query}"}]}, {"id": "spiritual", "label": "占い・スピリチュアル", "icon": "🔮", "subcategories": ["占い", "パワースポット", "神社", "寺", "瞑想", "アロマ"], "scenes": ["ひとり", "デート", "友人", "家族", "会食", "接待", "観光・出張", "作業・勉強", "仕事後", "飲み会", "女子会", "記念日", "ランチ", "ディナー", "モーニング", "カフェタイム", "深夜", "コスパ重視", "落ち着いた店", "新店"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}]}];
+const REGION_PREFECTURES = {"北海道": ["北海道"], "東北": ["青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県"], "関東": ["茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県"], "中部": ["新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県", "三重県"], "関西": ["滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県"], "中国": ["鳥取県", "島根県", "岡山県", "広島県", "山口県"], "四国": ["徳島県", "香川県", "愛媛県", "高知県"], "九州・沖縄": ["福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"]};
+const PREFECTURE_AREAS = {"北海道": ["札幌", "すすきの", "函館", "旭川", "小樽"], "青森県": ["青森", "弘前", "八戸"], "岩手県": ["盛岡", "一関", "北上"], "宮城県": ["仙台", "国分町", "石巻"], "秋田県": ["秋田", "大館", "横手"], "山形県": ["山形", "米沢", "鶴岡"], "福島県": ["福島", "郡山", "いわき", "会津若松"], "茨城県": ["水戸", "つくば", "土浦"], "栃木県": ["宇都宮", "小山", "那須塩原"], "群馬県": ["高崎", "前橋", "伊勢崎"], "埼玉県": ["大宮", "浦和", "川越", "川口", "所沢"], "千葉県": ["千葉", "船橋", "柏", "成田", "木更津"], "東京都": ["新宿", "渋谷", "池袋", "上野", "銀座", "東京駅", "吉祥寺", "八王子"], "神奈川県": ["横浜", "みなとみらい", "川崎", "藤沢", "鎌倉"], "新潟県": ["新潟", "長岡", "上越"], "富山県": ["富山", "高岡"], "石川県": ["金沢", "小松"], "福井県": ["福井", "敦賀"], "山梨県": ["甲府", "河口湖"], "長野県": ["長野", "松本", "軽井沢"], "岐阜県": ["岐阜", "大垣", "高山"], "静岡県": ["静岡", "浜松", "熱海", "沼津"], "愛知県": ["名古屋", "栄", "名古屋駅", "金山", "豊橋", "岡崎", "豊田市"], "三重県": ["津", "四日市", "伊勢"], "滋賀県": ["大津", "草津", "彦根"], "京都府": ["京都", "河原町", "烏丸", "祇園", "京都駅"], "大阪府": ["梅田", "難波", "心斎橋", "天王寺", "新大阪", "京橋"], "兵庫県": ["神戸", "三宮", "姫路", "西宮"], "奈良県": ["奈良", "橿原"], "和歌山県": ["和歌山", "白浜"], "鳥取県": ["鳥取", "米子"], "島根県": ["松江", "出雲"], "岡山県": ["岡山", "倉敷"], "広島県": ["広島", "福山", "宮島口"], "山口県": ["山口", "下関", "宇部"], "徳島県": ["徳島", "鳴門"], "香川県": ["高松", "丸亀"], "愛媛県": ["松山", "今治"], "高知県": ["高知", "四万十"], "福岡県": ["博多", "天神", "中洲", "小倉"], "佐賀県": ["佐賀", "唐津"], "長崎県": ["長崎", "佐世保"], "熊本県": ["熊本", "阿蘇"], "大分県": ["大分", "別府", "湯布院"], "宮崎県": ["宮崎", "都城"], "鹿児島県": ["鹿児島", "天文館", "霧島"], "沖縄県": ["那覇", "国際通り", "北谷", "石垣"]};
+let currentCat = CATEGORIES[0];
+
+function switchCat(catId) {
+  currentCat = CATEGORIES.find(c => c.id === catId) || CATEGORIES[0];
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.cat === catId);
+  });
+  document.getElementById('catTitle').textContent = currentCat.icon + ' ' + currentCat.label;
+  const subcatSel = document.getElementById('subcat');
+  subcatSel.innerHTML = '<option value=""></option>' +
+    currentCat.subcategories.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join('');
+  const sceneSel = document.getElementById('scene');
+  if (sceneSel) {
+    sceneSel.innerHTML = '<option value=""></option>' +
+      ((currentCat.scenes || []).map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join(''));
+  }
+  document.getElementById('subcatBtns').innerHTML =
+    currentCat.subcategories.map(s =>
+      `<button class="btn alt" onclick="setSubcat('${esc(s)}')">${esc(s)}</button>`
+    ).join('');
+  const sceneArea = document.getElementById('sceneArea');
+  const sceneBtns = document.getElementById('sceneBtns');
+  if (currentCat.scenes && currentCat.scenes.length > 0) {
+    sceneArea.style.display = 'block';
+    sceneBtns.innerHTML = currentCat.scenes.map(s =>
+      `<button class="btn alt" onclick="setScene('${esc(s)}')">${esc(s)}</button>`
+    ).join('');
+  } else {
+    sceneArea.style.display = 'none';
+    sceneBtns.innerHTML = '';
+  }
+  applyLinks();
+  updateTopLinks();
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+function buildQuery() {
+  const region = document.getElementById('region').value.trim();
+  const pref = document.getElementById('pref').value.trim();
+  const area = document.getElementById('area').value.trim();
+  const subcat = document.getElementById('subcat').value.trim();
+  const scene = document.getElementById('scene').value.trim();
+  const place = [pref || region, area].filter(Boolean).join(' ');
+  return [place, subcat, scene].filter(Boolean).join(' ').trim();
+}
+
+function applyLinks() {
+  const query = buildQuery();
+  document.getElementById('queryPreview').textContent = query || '未入力';
+  document.getElementById('srcBtns').innerHTML = currentCat.sources.map(src => {
+    const href = src.url_template.replace('{query}', encodeURIComponent(query));
+    return `<a class="btn" href="${href}" target="_blank" rel="noopener">${esc(src.name)}</a>`;
+  }).join('');
+}
+
+function updatePrefectures() {
+  const region = document.getElementById('region').value;
+  const prefSel = document.getElementById('pref');
+  const prefs = REGION_PREFECTURES[region] || [];
+  prefSel.innerHTML = '<option value=""></option>' +
+    prefs.map(p => `<option value="${esc(p)}">${esc(p)}</option>`).join('');
+  updateAreaHints(true);
+}
+
+function updateAreaHints(resetArea) {
+  const pref = document.getElementById('pref').value;
+  const areaList = document.getElementById('area-list');
+  const areaInput = document.getElementById('area');
+  const areas = PREFECTURE_AREAS[pref] || [];
+  areaList.innerHTML = areas.map(a => `<option value="${esc(a)}">`).join('');
+  if (resetArea) areaInput.value = '';
+  applyLinks();
+}
+
+function setSubcat(val) {
+  document.getElementById('subcat').value = val;
+  applyLinks();
+}
+
+function setScene(val) {
+  const scene = document.getElementById('scene');
+  if (scene) {
+    scene.value = val;
+  }
+  applyLinks();
+}
+
+function updateTopLinks() {
+  document.getElementById('topLinks').innerHTML =
+    currentCat.sources.map((src, i) => {
+      const href = src.url_template.replace('{query}', '');
+      return (i > 0 ? ' / ' : '') +
+        `<a href="${href}" target="_blank" rel="noopener">${esc(src.name)}</a>`;
+    }).join('');
+}
+
+function clearInputs() {
+  document.getElementById('region').selectedIndex = 0;
+  updatePrefectures();
+  document.getElementById('pref').selectedIndex = 0;
+  document.getElementById('area').value = '';
+  document.getElementById('subcat').selectedIndex = 0;
+  const scene = document.getElementById('scene');
+  if (scene) scene.selectedIndex = 0;
+  applyLinks();
+}
+
+document.getElementById('region').addEventListener('change', applyLinks);
+document.getElementById('pref').addEventListener('change', applyLinks);
+document.getElementById('area').addEventListener('input', applyLinks);
+document.getElementById('area').addEventListener('change', applyLinks);
+document.getElementById('subcat').addEventListener('change', applyLinks);
+document.getElementById('scene').addEventListener('change', applyLinks);
+
+switchCat(CATEGORIES[0].id);
+</script>
+</body>
+</html>

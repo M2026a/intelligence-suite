@@ -12,89 +12,200 @@ permissions:
   contents: write
 
 jobs:
-
   group1:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
-      - run: pip install -r requirements_all.txt
 
-      - run: python ai_plus/app/main.py
-      - run: python it_plus/app/main.py
-      - run: python market_plus/app/main.py
-      - run: python memory_market_plus/app/main.py
-      - run: python pc_industry_suite/app/main.py
+      - name: pip を更新
+        run: python -m pip install --upgrade pip
 
-      - uses: actions/upload-artifact@v4
+      - name: 依存パッケージをインストール
+        run: pip install -r requirements_all.txt
+
+      - name: ai_plus を実行
+        working-directory: ./ai_plus
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: it_plus を実行
+        working-directory: ./it_plus
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: market_plus を実行
+        working-directory: ./market_plus
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: memory_market_plus を実行
+        working-directory: ./memory_market_plus
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: pc_industry_suite を実行
+        working-directory: ./pc_industry_suite
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: 成果物をアップロード
+        uses: actions/upload-artifact@v4
         with:
-          name: group1
-          path: "**/output/*.html"
+          name: group1-html
+          path: |
+            ai_plus/output/*.html
+            it_plus/output/*.html
+            market_plus/output/*.html
+            memory_market_plus/output/*.html
+            pc_industry_suite/output/*.html
+          if-no-files-found: warn
 
   group2:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
-      - run: pip install -r requirements_all.txt
 
-      - run: python auto_industry_suite/app/main.py
-      - run: python camera_industry_suite/app/main.py
-      - run: python dog_information_suite/app/main.py
-      - run: python smart_news_viewer/app/main.py
-      - run: python Strategic_IT_Suite/app/main.py
+      - name: pip を更新
+        run: python -m pip install --upgrade pip
 
-      - uses: actions/upload-artifact@v4
+      - name: 依存パッケージをインストール
+        run: pip install -r requirements_all.txt
+
+      - name: auto_industry_suite を実行
+        working-directory: ./auto_industry_suite
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: camera_industry_suite を実行
+        working-directory: ./camera_industry_suite
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: dog_information_suite を実行
+        working-directory: ./dog_information_suite
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: smart_news_viewer を実行
+        working-directory: ./smart_news_viewer
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: Strategic_IT_Suite を実行
+        working-directory: ./Strategic_IT_Suite
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: 成果物をアップロード
+        uses: actions/upload-artifact@v4
         with:
-          name: group2
-          path: "**/output/*.html"
+          name: group2-html
+          path: |
+            auto_industry_suite/output/*.html
+            camera_industry_suite/output/*.html
+            dog_information_suite/output/*.html
+            smart_news_viewer/output/*.html
+            Strategic_IT_Suite/output/*.html
+          if-no-files-found: warn
 
   group3:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
-      - run: pip install -r requirements_all.txt
 
-      - run: python travel_search_plus/app/main.py
-      - run: python Spot_Selection_Navigator/app/main.py
-      - run: python IdeaTrendEngine/app/main.py
-      - run: python takarazuka_information_suite/app/main.py
-      - run: python takarazuka_info_B/app/main.py
+      - name: pip を更新
+        run: python -m pip install --upgrade pip
 
-      - uses: actions/upload-artifact@v4
+      - name: 依存パッケージをインストール
+        run: pip install -r requirements_all.txt
+
+      - name: travel_search_plus を実行
+        working-directory: ./travel_search_plus
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: Spot_Selection_Navigator を実行
+        working-directory: ./Spot_Selection_Navigator
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: IdeaTrendEngine を実行
+        working-directory: ./IdeaTrendEngine
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: takarazuka_information_suite を実行
+        working-directory: ./takarazuka_information_suite
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: takarazuka_info_B を実行
+        working-directory: ./takarazuka_info_B
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: 成果物をアップロード
+        uses: actions/upload-artifact@v4
         with:
-          name: group3
-          path: "**/output/*.html"
+          name: group3-html
+          path: |
+            travel_search_plus/output/*.html
+            Spot_Selection_Navigator/output/*.html
+            IdeaTrendEngine/output/*.html
+            takarazuka_information_suite/output/*.html
+            takarazuka_info_B/output/*.html
+          if-no-files-found: warn
 
   commit:
     needs: [group1, group2, group3]
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/download-artifact@v4
+      - name: 成果物をダウンロード
+        uses: actions/download-artifact@v4
+        with:
+          pattern: "*-html"
+          merge-multiple: true
 
-      - name: ファイル統合
+      - name: 確認
         run: |
-          cp -r group1/* . || true
-          cp -r group2/* . || true
-          cp -r group3/* . || true
+          echo "===== downloaded files ====="
+          find . -type f | sort
 
       - name: commit & push
         run: |
-          git config user.name  "github-actions[bot]"
+          git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "parallel update" || echo no changes
+          git add ai_plus/output/*.html || true
+          git add it_plus/output/*.html || true
+          git add market_plus/output/*.html || true
+          git add memory_market_plus/output/*.html || true
+          git add pc_industry_suite/output/*.html || true
+          git add auto_industry_suite/output/*.html || true
+          git add camera_industry_suite/output/*.html || true
+          git add dog_information_suite/output/*.html || true
+          git add smart_news_viewer/output/*.html || true
+          git add Strategic_IT_Suite/output/*.html || true
+          git add travel_search_plus/output/*.html || true
+          git add Spot_Selection_Navigator/output/*.html || true
+          git add IdeaTrendEngine/output/*.html || true
+          git add takarazuka_information_suite/output/*.html || true
+          git add takarazuka_info_B/output/*.html || true
+          git diff --staged --quiet || git commit -m "parallel update $(TZ=Asia/Tokyo date +'%Y-%m-%d %H:%M JST')"
           git push

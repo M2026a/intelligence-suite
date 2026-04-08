@@ -3,24 +3,21 @@ name: HTMLを更新する
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'   # JST 09:00
-    - cron: '0 6 * * *'   # JST 15:00
-    - cron: '0 12 * * *'  # JST 21:00
-    - cron: '0 18 * * *'  # JST 03:00
+    - cron: '0 0 * * *'
+    - cron: '0 6 * * *'
+    - cron: '0 12 * * *'
+    - cron: '0 18 * * *'
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  group1:
     runs-on: ubuntu-latest
-
     steps:
-      - name: リポジトリをチェックアウト
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Python をセットアップ
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
@@ -28,31 +25,11 @@ jobs:
       - name: pip を更新
         run: python -m pip install --upgrade pip
 
-      - name: 依存パッケージをまとめてインストール
+      - name: 依存パッケージをインストール
         run: pip install -r requirements_all.txt
 
       - name: ai_plus を実行
         working-directory: ./ai_plus
-        run: python app/main.py
-        continue-on-error: true
-
-      - name: auto_industry_suite を実行
-        working-directory: ./auto_industry_suite
-        run: python app/main.py
-        continue-on-error: true
-
-      - name: camera_industry_suite を実行
-        working-directory: ./camera_industry_suite
-        run: python app/main.py
-        continue-on-error: true
-
-      - name: dog_information_suite を実行
-        working-directory: ./dog_information_suite
-        run: python app/main.py
-        continue-on-error: true
-
-      - name: IdeaTrendEngine を実行
-        working-directory: ./IdeaTrendEngine
         run: python app/main.py
         continue-on-error: true
 
@@ -76,13 +53,51 @@ jobs:
         run: python app/main.py
         continue-on-error: true
 
-      - name: smart_news_viewer を実行
-        working-directory: ./smart_news_viewer
+      - name: 成果物をアップロード
+        uses: actions/upload-artifact@v4
+        with:
+          name: group1-html
+          path: |
+            ai_plus/output/*.html
+            it_plus/output/*.html
+            market_plus/output/*.html
+            memory_market_plus/output/*.html
+            pc_industry_suite/output/*.html
+          if-no-files-found: warn
+
+  group2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: pip を更新
+        run: python -m pip install --upgrade pip
+
+      - name: 依存パッケージをインストール
+        run: pip install -r requirements_all.txt
+
+      - name: auto_industry_suite を実行
+        working-directory: ./auto_industry_suite
         run: python app/main.py
         continue-on-error: true
 
-      - name: Spot_Selection_Navigator を実行
-        working-directory: ./Spot_Selection_Navigator
+      - name: camera_industry_suite を実行
+        working-directory: ./camera_industry_suite
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: dog_information_suite を実行
+        working-directory: ./dog_information_suite
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: smart_news_viewer を実行
+        working-directory: ./smart_news_viewer
         run: python app/main.py
         continue-on-error: true
 
@@ -91,8 +106,46 @@ jobs:
         run: python app/main.py
         continue-on-error: true
 
+      - name: 成果物をアップロード
+        uses: actions/upload-artifact@v4
+        with:
+          name: group2-html
+          path: |
+            auto_industry_suite/output/*.html
+            camera_industry_suite/output/*.html
+            dog_information_suite/output/*.html
+            smart_news_viewer/output/*.html
+            Strategic_IT_Suite/output/*.html
+          if-no-files-found: warn
+
+  group3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: pip を更新
+        run: python -m pip install --upgrade pip
+
+      - name: 依存パッケージをインストール
+        run: pip install -r requirements_all.txt
+
       - name: travel_search_plus を実行
         working-directory: ./travel_search_plus
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: Spot_Selection_Navigator を実行
+        working-directory: ./Spot_Selection_Navigator
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: IdeaTrendEngine を実行
+        working-directory: ./IdeaTrendEngine
         run: python app/main.py
         continue-on-error: true
 
@@ -106,25 +159,58 @@ jobs:
         run: python app/main.py
         continue-on-error: true
 
-      - name: 変更をコミット＆プッシュ
+      - name: 成果物をアップロード
+        uses: actions/upload-artifact@v4
+        with:
+          name: group3-html
+          path: |
+            travel_search_plus/output/*.html
+            Spot_Selection_Navigator/output/*.html
+            IdeaTrendEngine/output/*.html
+            takarazuka_information_suite/output/*.html
+            takarazuka_info_B/output/*.html
+          if-no-files-found: warn
+
+  commit:
+    needs: [group1, group2, group3]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 成果物をダウンロード
+        uses: actions/download-artifact@v4
+        with:
+          pattern: "*-html"
+          merge-multiple: true
+
+      - name: 確認
         run: |
-          git config user.name  "github-actions[bot]"
+          echo "===== downloaded files ====="
+          find . -type f | sort
+
+      - name: commit & push
+        run: |
+          git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add index.html
           git add ai_plus/output/*.html || true
-          git add auto_industry_suite/output/*.html || true
-          git add camera_industry_suite/output/*.html || true
-          git add dog_information_suite/output/*.html || true
-          git add IdeaTrendEngine/output/*.html || true
           git add it_plus/output/*.html || true
           git add market_plus/output/*.html || true
           git add memory_market_plus/output/*.html || true
           git add pc_industry_suite/output/*.html || true
+          git add auto_industry_suite/output/*.html || true
+          git add camera_industry_suite/output/*.html || true
+          git add dog_information_suite/output/*.html || true
           git add smart_news_viewer/output/*.html || true
-          git add Spot_Selection_Navigator/output/*.html || true
           git add Strategic_IT_Suite/output/*.html || true
           git add travel_search_plus/output/*.html || true
+          git add Spot_Selection_Navigator/output/*.html || true
+          git add IdeaTrendEngine/output/*.html || true
           git add takarazuka_information_suite/output/*.html || true
           git add takarazuka_info_B/output/*.html || true
+<<<<<<< HEAD
           git diff --staged --quiet || git commit -m "chore: HTMLを自動更新 $(TZ=Asia/Tokyo date +'%Y-%m-%d %H:%M JST')"
           git push
+=======
+          git diff --staged --quiet || git commit -m "parallel update $(TZ=Asia/Tokyo date +'%Y-%m-%d %H:%M JST')"
+          git push
+>>>>>>> ec13610868543be2a1528b0b9044844b39c2be6f

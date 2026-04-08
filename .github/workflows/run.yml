@@ -207,10 +207,5 @@ jobs:
           git add IdeaTrendEngine/output/*.html || true
           git add takarazuka_information_suite/output/*.html || true
           git add takarazuka_info_B/output/*.html || true
-<<<<<<< HEAD
-          git diff --staged --quiet || git commit -m "chore: HTMLを自動更新 $(TZ=Asia/Tokyo date +'%Y-%m-%d %H:%M JST')"
-          git push
-=======
           git diff --staged --quiet || git commit -m "parallel update $(TZ=Asia/Tokyo date +'%Y-%m-%d %H:%M JST')"
           git push
->>>>>>> ec13610868543be2a1528b0b9044844b39c2be6f

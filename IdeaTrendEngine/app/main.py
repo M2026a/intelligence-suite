@@ -144,23 +144,31 @@ def make_nav_items() -> list[tuple]:
     ]
 
 def page_wrap(title: str, active_page: str, body: str) -> str:
-    active  = output_name(active_page)
-    im_nav  = []
-    it_nav  = []
+    active = output_name(active_page)
+    stem = Path(active_page).stem
+    current_is_it = CURRENT_SUFFIX == "it"
+
+    current_nav = []
     for href, label in core.NAV_ITEMS:
-        is_active = href == active
-        is_it     = href.endswith("_it.html")
-        classes   = ["suite-btn", "itnav" if is_it else "imnav"]
-        if is_active:
-            classes.append("active")
-        tag = f'<a href="{href}" class="{" ".join(classes)}">{label}</a>'
-        if is_it:
-            it_nav.append(tag)
-        else:
-            im_nav.append(tag)
+        if href.endswith(f"_{CURRENT_SUFFIX}.html"):
+            classes = ["suite-btn", "itnav" if current_is_it else "imnav"]
+            if href == active:
+                classes.append("active")
+            current_nav.append(f'<a href="{href}" class="{" ".join(classes)}">{label}</a>')
+
+    category_im_classes = ["category-btn", "imnav"]
+    category_it_classes = ["category-btn", "itnav"]
+    if current_is_it:
+        category_it_classes.append("active")
+    else:
+        category_im_classes.append("active")
+
+    category_im = f'<a href="{stem}_im.html" class="{" ".join(category_im_classes)}">事例 💡</a>'
+    category_it = f'<a href="{stem}_it.html" class="{" ".join(category_it_classes)}">TIPS 📘</a>'
+
     is_analysis = "analysis" in active
     lang_btn = "" if is_analysis else (
-        '<div style="display:flex;gap:6px;align-self:center;padding-left:8px;">'
+        '<div class="lang-switch">'
         '<button id="btn-lang-en" class="lang-btn lang-active" onclick="setPageLang(\'en\')">🌐 EN</button>'
         '<button id="btn-lang-ja" class="lang-btn" onclick="setPageLang(\'ja\')">🇯🇵 JA</button>'
         '</div>'
@@ -170,32 +178,48 @@ def page_wrap(title: str, active_page: str, body: str) -> str:
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{core.esc(title)} - {core.esc(CURRENT_APP_NAME)}</title>
 <style>{current_css()}
-.topbar{{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:14px 24px 12px 16px}}
-.header-left{{display:flex;flex-direction:column;justify-content:center;min-width:0;flex:0 1 auto;padding-top:0}}
-.header-title{{margin:0;font-size:24px;font-weight:800;line-height:1.18;white-space:nowrap;color:#f8fafc;letter-spacing:.01em}}
+.topbar{{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:14px 24px 12px 16px;flex-wrap:wrap}}
+.header-left{{display:flex;flex-direction:column;justify-content:center;min-width:0;flex:1 1 320px;padding-top:0}}
+.header-title{{margin:0;font-size:24px;font-weight:800;line-height:1.18;white-space:normal;color:#f8fafc;letter-spacing:.01em;overflow-wrap:anywhere}}
 .updated{{margin-top:3px;font-size:12px;font-weight:600;color:#9ba9bc;line-height:1.2}}
-.nav-shell{{display:flex;flex-direction:column;gap:8px;align-items:flex-start;padding:0;border:none;box-shadow:none;background:transparent}}
-.nav-row{{display:grid;grid-template-columns:112px auto;align-items:center;column-gap:6px}}
-.nav-head{{display:flex;align-items:center;gap:6px;white-space:nowrap}}
-.nav-label{{font-size:14px;font-weight:800;letter-spacing:.01em;white-space:nowrap}}
-.nav-label.it{{color:#22d3ee}}
-.nav-label.im{{color:#c4a1ff}}
-.nav-divider{{color:#cbd5e1;opacity:.9}}
-.nav-links{{display:flex;align-items:center;gap:10px;flex-wrap:wrap}}
-.suite-btn,.suite-btn:hover,.suite-btn:focus,.suite-btn:visited{{display:inline-flex;align-items:center;justify-content:center;min-height:30px;padding:7px 16px;border-radius:10px;text-decoration:none!important;font-size:13px;font-weight:700;line-height:1;color:#bfc7d5;background:transparent;border:1px solid transparent;box-shadow:none;transition:background .16s ease,color .16s ease,box-shadow .16s ease,transform .16s ease;vertical-align:middle;position:relative;top:0}}
-.suite-btn:hover{{text-decoration:none!important}}
-.suite-btn.imnav:hover{{color:#ffffff;background:rgba(196,161,255,.12);box-shadow:0 0 0 1px rgba(196,161,255,.24) inset}}
-.suite-btn.itnav:hover{{color:#ffffff;background:rgba(47,220,255,.12);box-shadow:0 0 0 1px rgba(47,220,255,.24) inset}}
-.suite-btn.imnav.active{{background:#8f63db;color:#ffffff;box-shadow:0 0 0 1px rgba(255,255,255,.12) inset, 0 0 16px rgba(143,99,219,.42)}}
-.suite-btn.itnav.active{{background:#0fb2d6;color:#ffffff;box-shadow:0 0 0 1px rgba(255,255,255,.12) inset, 0 0 16px rgba(15,178,214,.42)}}
-.suite-btn.imnav:not(.active), .suite-btn.itnav:not(.active){{color:#c2cad7}}
+.header-right{{display:flex;align-items:flex-start;gap:14px;flex:1 1 720px;min-width:0;justify-content:flex-end;flex-wrap:wrap}}
+.lang-switch{{display:flex;gap:6px;align-self:flex-start;flex:0 0 auto}}
+.nav-shell{{display:flex;flex-direction:column;gap:8px;align-items:flex-start;padding:0;border:none;box-shadow:none;background:transparent;min-width:0;max-width:100%;flex:1 1 640px}}
+.category-tabs,.nav-links{{display:flex;align-items:center;gap:6px;min-width:0;max-width:100%}}
+.category-tabs{{flex:0 0 auto;flex-wrap:nowrap}}
+.nav-links{{flex:1 1 100%;width:100%;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;padding-bottom:2px;-webkit-overflow-scrolling:touch;scrollbar-width:none}}
+.nav-links::-webkit-scrollbar{{display:none}}
+.category-btn,.category-btn:hover,.category-btn:focus,.category-btn:visited,.suite-btn,.suite-btn:hover,.suite-btn:focus,.suite-btn:visited{{display:inline-flex;align-items:center;justify-content:center;min-height:28px;padding:4px 8px;border-radius:7px;text-decoration:none!important;font-size:12px;font-weight:700;line-height:1;color:#bfc7d5;background:transparent;border:1px solid transparent;box-shadow:none;transition:background .16s ease,color .16s ease,box-shadow .16s ease,transform .16s ease;vertical-align:middle;position:relative;top:0;flex:0 0 auto;white-space:nowrap}}
+.category-btn{{padding:6px 10px;font-size:13px;border-radius:9px}}
+.category-btn.imnav:hover,.suite-btn.imnav:hover{{color:#ffffff;background:rgba(196,161,255,.12);box-shadow:0 0 0 1px rgba(196,161,255,.24) inset}}
+.category-btn.itnav:hover,.suite-btn.itnav:hover{{color:#ffffff;background:rgba(47,220,255,.12);box-shadow:0 0 0 1px rgba(47,220,255,.24) inset}}
+.category-btn.imnav.active,.suite-btn.imnav.active{{background:#8f63db;color:#ffffff;box-shadow:0 0 0 1px rgba(255,255,255,.12) inset, 0 0 16px rgba(143,99,219,.42)}}
+.category-btn.itnav.active,.suite-btn.itnav.active{{background:#0fb2d6;color:#ffffff;box-shadow:0 0 0 1px rgba(255,255,255,.12) inset, 0 0 16px rgba(15,178,214,.42)}}
+.category-btn.imnav:not(.active),.category-btn.itnav:not(.active),.suite-btn.imnav:not(.active),.suite-btn.itnav:not(.active){{color:#c2cad7}}
 .page{{min-height:calc(100vh - 86px);display:flex;flex-direction:column}}
 .page-footer{{margin-top:auto;padding:16px 20px 18px;color:#9ba9bc;font-size:12px;text-align:left;opacity:.8}}
+@media (max-width: 1320px){{
+  .header-right{{justify-content:flex-start;flex-basis:100%;align-items:flex-start}}
+  .nav-shell{{flex-basis:100%}}
+}}
 @media (max-width: 980px){{
-  .topbar{{flex-direction:column;align-items:flex-start}}
-  .header-title{{white-space:normal;font-size:22px}}
+  .topbar{{padding:14px 16px 12px}}
+  .header-left,.header-right{{flex-basis:100%}}
+  .header-title{{font-size:22px}}
   .nav-shell{{width:100%}}
-  .nav-row{{grid-template-columns:104px auto}}
+  .category-tabs{{width:100%;justify-content:space-between}}
+}}
+@media (max-width: 768px){{
+  .topbar{{gap:14px}}
+  .header-title{{font-size:20px}}
+  .header-right{{gap:10px;flex-direction:column;align-items:stretch}}
+  .nav-shell{{width:100%;gap:10px}}
+  .category-tabs{{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%}}
+  .nav-links{{gap:6px}}
+  .suite-btn{{padding:4px 8px;font-size:12px;border-radius:6px}}
+  .category-btn{{width:100%;justify-content:center}}
+  .nav-links{{width:100%}}
+  .lang-switch{{align-self:flex-start}}
 }}
 </style>
 <script>
@@ -213,10 +237,10 @@ function setPageLang(lang){{
     <div class="header-title">{core.esc(HEADER_TITLE)}</div>
     <div class="updated">更新日時：{core.esc(current_stamp())}</div>
   </div>
-  <div style="display:flex;align-items:center;gap:16px;">
+  <div class="header-right">
     <div class="nav-shell">
-      <div class="nav-row"><div class="nav-head"><span class="nav-divider">|</span><span class="nav-label im">💡改善事例</span></div><div class="nav-links">{''.join(im_nav)}</div></div>
-      <div class="nav-row"><div class="nav-head"><span class="nav-divider">|</span><span class="nav-label it">📊技術TIPS</span></div><div class="nav-links">{''.join(it_nav)}</div></div>
+      <div class="category-tabs">{category_im}{category_it}</div>
+      <div class="nav-links">{''.join(current_nav)}</div>
     </div>{lang_btn}
   </div>
 </div>

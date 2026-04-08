@@ -22,8 +22,8 @@ nav a:hover,nav a.active{background:var(--ac);color:#fff;text-decoration:none;}
 .card-title{font-size:15px;font-weight:bold;color:var(--warn);margin-bottom:6px;}
 .subitem{padding:7px 0;border-top:1px solid var(--brd);display:flex;justify-content:space-between;gap:12px;align-items:baseline;}
 .subitem:first-child{border-top:none;}
-.table-wrap{max-height:520px;overflow-y:auto;border-radius:10px;border:1px solid var(--brd);}
-table{width:100%;border-collapse:collapse;background:var(--sur);table-layout:auto;}
+.table-wrap{max-height:520px;overflow:auto;border-radius:10px;border:1px solid var(--brd);-webkit-overflow-scrolling:touch;}
+table{width:100%;border-collapse:collapse;background:var(--sur);table-layout:auto;min-width:860px;}
 table.idea-table{table-layout:fixed;}
 table.idea-table th:first-child,table.idea-table td:first-child{width:48%;}
 td{word-break:break-word;overflow-wrap:break-word;}
@@ -32,6 +32,17 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--brd);text-align:left;vertic
 th{background:var(--sur2);color:#e2e8f0;position:sticky;top:0;z-index:2;white-space:nowrap;}
 td{word-break:break-word;}
 tr:last-child td{border-bottom:none;}
+.desktop-table{display:block;}
+.mobile-cards{display:none;}
+.idea-mobile-card{background:var(--sur);border:1px solid var(--brd);border-radius:12px;padding:12px 12px 10px;margin-bottom:10px;}
+.idea-mobile-card:last-child{margin-bottom:0;}
+.idea-mobile-title{font-size:15px;font-weight:700;line-height:1.4;margin-bottom:8px;}
+.idea-mobile-meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;align-items:center;}
+.idea-mobile-impact{margin-bottom:8px;color:var(--tx);font-size:13px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.idea-mobile-foot{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;color:var(--mt);font-size:12px;}
+.idea-mobile-source,.idea-mobile-date{min-width:0;}
+.idea-mobile-source{flex:1 1 auto;}
+.idea-mobile-date{flex:0 0 auto;text-align:right;}
 .lang-btn{display:inline-flex;align-items:center;gap:4px;background:var(--sur2);border:1px solid var(--brd);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--mt);cursor:pointer;white-space:nowrap;}
 .lang-btn:hover{border-color:var(--ac);color:var(--ac);}
 .lang-btn.lang-active{border-color:var(--ac);color:var(--ac);background:var(--sur2);}
@@ -51,40 +62,60 @@ tr:last-child td{border-bottom:none;}
 .section{margin-top:22px;}
 .section h2{color:var(--tx);font-size:17px;margin-bottom:10px;}
 .empty{color:var(--mt);padding:16px;text-align:center;}
-.search-bar{background:var(--sur);border:1px solid var(--brd);border-radius:8px;padding:7px 12px;color:var(--tx);font-size:14px;width:180px;}
+.search-bar{background:var(--sur);border:1px solid var(--brd);border-radius:8px;padding:7px 12px;color:var(--tx);font-size:14px;width:180px;min-width:0;}
 .filter-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px;}
+.filter-row > *{min-width:0;}
 select{background:var(--sur);border:1px solid var(--brd);border-radius:8px;padding:7px 10px;color:var(--tx);font-size:13px;}
 .hidden{display:none!important;}
 .lang-btn{display:inline-flex;align-items:center;gap:4px;background:var(--sur2);border:1px solid var(--brd);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--mt);cursor:pointer;white-space:nowrap;}
 .lang-btn:hover{border-color:var(--ac);color:var(--ac);}
 .lang-btn.lang-active{border-color:var(--ac);color:var(--ac);}
+@media (max-width: 980px){.search-bar{flex:1 1 220px;width:auto;} .filter-row select{flex:1 1 140px;}}
+@media (max-width: 768px){.page{padding:14px;} .stats{grid-template-columns:repeat(2,minmax(0,1fr));} .desktop-table{display:none;} .mobile-cards{display:block;} .table-wrap{max-height:none;} table{min-width:760px;} .search-bar{flex:1 1 100%;width:100%;} .filter-row select{flex:1 1 calc(50% - 4px);} .idea-mobile-foot{flex-direction:column;} .idea-mobile-date{text-align:left;}}
+@media (max-width: 520px){.stats{grid-template-columns:1fr;} .filter-row select{flex:1 1 100%;}}
 
-.topbar{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:14px 24px 12px 16px}
-.header-left{display:flex;flex-direction:column;justify-content:center;min-width:0;flex:0 1 auto;padding-top:0}
-.header-title{margin:0;font-size:24px;font-weight:800;line-height:1.18;white-space:nowrap;color:#f8fafc;letter-spacing:.01em}
+.topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:14px 24px 12px 16px;flex-wrap:wrap}
+.header-left{display:flex;flex-direction:column;justify-content:center;min-width:0;flex:1 1 320px;padding-top:0}
+.header-title{margin:0;font-size:24px;font-weight:800;line-height:1.18;white-space:normal;color:#f8fafc;letter-spacing:.01em;overflow-wrap:anywhere}
 .updated{margin-top:3px;font-size:12px;font-weight:600;color:#9ba9bc;line-height:1.2}
-.nav-shell{display:flex;flex-direction:column;gap:8px;align-items:flex-start;padding:0;border:none;box-shadow:none;background:transparent}
-.nav-row{display:grid;grid-template-columns:112px auto;align-items:center;column-gap:6px}
-.nav-head{display:flex;align-items:center;gap:6px;white-space:nowrap}
-.nav-label{font-size:14px;font-weight:800;letter-spacing:.01em;white-space:nowrap}
-.nav-label.it{color:#22d3ee}
-.nav-label.im{color:#c4a1ff}
-.nav-divider{color:#cbd5e1;opacity:.9}
-.nav-links{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.suite-btn,.suite-btn:hover,.suite-btn:focus,.suite-btn:visited{display:inline-flex;align-items:center;justify-content:center;min-height:30px;padding:7px 16px;border-radius:10px;text-decoration:none!important;font-size:13px;font-weight:700;line-height:1;color:#bfc7d5;background:transparent;border:1px solid transparent;box-shadow:none;transition:background .16s ease,color .16s ease,box-shadow .16s ease,transform .16s ease;vertical-align:middle;position:relative;top:0}
-.suite-btn:hover{text-decoration:none!important}
-.suite-btn.imnav:hover{color:#ffffff;background:rgba(196,161,255,.12);box-shadow:0 0 0 1px rgba(196,161,255,.24) inset}
-.suite-btn.itnav:hover{color:#ffffff;background:rgba(47,220,255,.12);box-shadow:0 0 0 1px rgba(47,220,255,.24) inset}
-.suite-btn.imnav.active{background:#8f63db;color:#ffffff;box-shadow:0 0 0 1px rgba(255,255,255,.12) inset, 0 0 16px rgba(143,99,219,.42)}
-.suite-btn.itnav.active{background:#0fb2d6;color:#ffffff;box-shadow:0 0 0 1px rgba(255,255,255,.12) inset, 0 0 16px rgba(15,178,214,.42)}
-.suite-btn.imnav:not(.active), .suite-btn.itnav:not(.active){color:#c2cad7}
+.header-right{display:flex;align-items:flex-start;gap:14px;flex:1 1 720px;min-width:0;justify-content:flex-end;flex-wrap:wrap}
+.lang-switch{display:flex;gap:6px;align-self:flex-start;flex:0 0 auto}
+.nav-shell{display:flex;flex-direction:column;gap:8px;align-items:flex-start;padding:0;border:none;box-shadow:none;background:transparent;min-width:0;max-width:100%;flex:1 1 640px}
+.category-tabs,.nav-links{display:flex;align-items:center;gap:6px;min-width:0;max-width:100%}
+.category-tabs{flex:0 0 auto;flex-wrap:nowrap}
+.nav-links{flex:1 1 100%;width:100%;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;padding-bottom:2px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.category-btn,.category-btn:hover,.category-btn:focus,.category-btn:visited,.suite-btn,.suite-btn:hover,.suite-btn:focus,.suite-btn:visited{display:inline-flex;align-items:center;justify-content:center;min-height:28px;padding:4px 8px;border-radius:7px;text-decoration:none!important;font-size:12px;font-weight:700;line-height:1;color:#bfc7d5;background:transparent;border:1px solid transparent;box-shadow:none;transition:background .16s ease,color .16s ease,box-shadow .16s ease,transform .16s ease;vertical-align:middle;position:relative;top:0;flex:0 0 auto;white-space:nowrap}
+.category-btn{padding:6px 10px;font-size:13px;border-radius:9px}
+.category-btn.imnav:hover,.suite-btn.imnav:hover{color:#ffffff;background:rgba(196,161,255,.12);box-shadow:0 0 0 1px rgba(196,161,255,.24) inset}
+.category-btn.itnav:hover,.suite-btn.itnav:hover{color:#ffffff;background:rgba(47,220,255,.12);box-shadow:0 0 0 1px rgba(47,220,255,.24) inset}
+.category-btn.imnav.active,.suite-btn.imnav.active{background:#8f63db;color:#ffffff;box-shadow:0 0 0 1px rgba(255,255,255,.12) inset, 0 0 16px rgba(143,99,219,.42)}
+.category-btn.itnav.active,.suite-btn.itnav.active{background:#0fb2d6;color:#ffffff;box-shadow:0 0 0 1px rgba(255,255,255,.12) inset, 0 0 16px rgba(15,178,214,.42)}
+.category-btn.imnav:not(.active),.category-btn.itnav:not(.active),.suite-btn.imnav:not(.active),.suite-btn.itnav:not(.active){color:#c2cad7}
 .page{min-height:calc(100vh - 86px);display:flex;flex-direction:column}
 .page-footer{margin-top:auto;padding:16px 20px 18px;color:#9ba9bc;font-size:12px;text-align:left;opacity:.8}
+@media (max-width: 1320px){
+  .header-right{justify-content:flex-start;flex-basis:100%;align-items:flex-start}
+  .nav-shell{flex-basis:100%}
+}
 @media (max-width: 980px){
-  .topbar{flex-direction:column;align-items:flex-start}
-  .header-title{white-space:normal;font-size:22px}
+  .topbar{padding:14px 16px 12px}
+  .header-left,.header-right{flex-basis:100%}
+  .header-title{font-size:22px}
   .nav-shell{width:100%}
-  .nav-row{grid-template-columns:104px auto}
+  .category-tabs{width:100%;justify-content:space-between}
+}
+@media (max-width: 768px){
+  .topbar{gap:14px}
+  .header-title{font-size:20px}
+  .header-right{gap:10px;flex-direction:column;align-items:stretch}
+  .nav-shell{width:100%;gap:10px}
+  .category-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%}
+  .nav-links{gap:6px}
+  .suite-btn{padding:4px 8px;font-size:12px;border-radius:6px}
+  .category-btn{width:100%;justify-content:center}
+  .nav-links{width:100%}
+  .lang-switch{align-self:flex-start}
 }
 </style>
 <script>
@@ -99,21 +130,21 @@ function setPageLang(lang){
 </head><body>
 <div class="topbar">
   <div class="header-left">
-    <div class="header-title">IdeaTrendEngine｜改善ネタ × ITトレンドを収集・分類</div>
-    <div class="updated">更新日時：2026/04/08（水）12:01</div>
+    <div class="header-title">IdeaTrendEngine｜アイデア探索</div>
+    <div class="updated">更新日時：2026/04/08（水）15:00</div>
   </div>
-  <div style="display:flex;align-items:center;gap:16px;">
+  <div class="header-right">
     <div class="nav-shell">
-      <div class="nav-row"><div class="nav-head"><span class="nav-divider">|</span><span class="nav-label im">💡改善事例</span></div><div class="nav-links"><a href="index_im.html" class="suite-btn imnav">Latest</a><a href="pickup_im.html" class="suite-btn imnav">Pickup</a><a href="focus_im.html" class="suite-btn imnav">Focus</a><a href="themes_im.html" class="suite-btn imnav">Themes</a><a href="sources_im.html" class="suite-btn imnav">Sources</a><a href="analysis_im.html" class="suite-btn imnav active">Analysis</a></div></div>
-      <div class="nav-row"><div class="nav-head"><span class="nav-divider">|</span><span class="nav-label it">📊技術TIPS</span></div><div class="nav-links"><a href="index_it.html" class="suite-btn itnav">Latest</a><a href="pickup_it.html" class="suite-btn itnav">Pickup</a><a href="focus_it.html" class="suite-btn itnav">Focus</a><a href="themes_it.html" class="suite-btn itnav">Themes</a><a href="sources_it.html" class="suite-btn itnav">Sources</a><a href="analysis_it.html" class="suite-btn itnav">Analysis</a></div></div>
+      <div class="category-tabs"><a href="analysis_im.html" class="category-btn imnav active">事例 💡</a><a href="analysis_it.html" class="category-btn itnav">TIPS 📘</a></div>
+      <div class="nav-links"><a href="index_im.html" class="suite-btn imnav">Latest</a><a href="pickup_im.html" class="suite-btn imnav">Pickup</a><a href="focus_im.html" class="suite-btn imnav">Focus</a><a href="themes_im.html" class="suite-btn imnav">Themes</a><a href="sources_im.html" class="suite-btn imnav">Sources</a><a href="analysis_im.html" class="suite-btn imnav active">Analysis</a></div>
     </div>
   </div>
 </div>
 <div class="page">
 <div class="sub">難易度・インパクト・スコア分布</div>
 <div class="cards">
-  <div class="card"><div class="card-title">難易度分布</div><div class="subitem"><div class="diff-mid">中</div><div>98 件 <span class="muted">(85%)</span></div></div><div class="subitem"><div class="diff-hi">高</div><div>10 件 <span class="muted">(8%)</span></div></div><div class="subitem"><div class="diff-lo">低</div><div>7 件 <span class="muted">(6%)</span></div></div></div>
-  <div class="card"><div class="card-title">インパクトタグ分布</div><div class="subitem"><div><span class="pill pill-green">見える化</span></div><div>6 件<div class="bar-wrap"><div class="bar" style="width:10%;background:var(--ac2);"></div></div></div></div><div class="subitem"><div><span class="pill pill-green">標準化</span></div><div>5 件<div class="bar-wrap"><div class="bar" style="width:8%;background:var(--ac2);"></div></div></div></div><div class="subitem"><div><span class="pill pill-green">時間削減</span></div><div>1 件<div class="bar-wrap"><div class="bar" style="width:0%;background:var(--ac2);"></div></div></div></div><div class="subitem"><div><span class="pill pill-green">意思決定高速化</span></div><div>1 件<div class="bar-wrap"><div class="bar" style="width:0%;background:var(--ac2);"></div></div></div></div><div class="subitem"><div><span class="pill pill-green">ミス削減</span></div><div>1 件<div class="bar-wrap"><div class="bar" style="width:0%;background:var(--ac2);"></div></div></div></div></div>
-  <div class="card"><div class="card-title">スコア帯分布</div><div class="subitem"><div class="score-lo">0-29</div><div>7 件<div class="bar-wrap"><div class="bar" style="width:18%"></div></div></div></div><div class="subitem"><div class="score-lo">30-49</div><div>43 件<div class="bar-wrap"><div class="bar" style="width:100%"></div></div></div></div><div class="subitem"><div class="score-mid">50-69</div><div>55 件<div class="bar-wrap"><div class="bar" style="width:100%"></div></div></div></div><div class="subitem"><div class="score-hi">70-89</div><div>8 件<div class="bar-wrap"><div class="bar" style="width:18%"></div></div></div></div><div class="subitem"><div class="score-hi">90-100</div><div>2 件<div class="bar-wrap"><div class="bar" style="width:3%"></div></div></div></div></div>
-</div><div class="page-footer">IdeaTrendEngine — Generated at 2026/04/08（水）12:01</div></div>
+  <div class="card"><div class="card-title">難易度分布</div><div class="subitem"><div class="diff-hi">高</div><div>7 件 <span class="muted">(41%)</span></div></div><div class="subitem"><div class="diff-mid">中</div><div>7 件 <span class="muted">(41%)</span></div></div><div class="subitem"><div class="diff-lo">低</div><div>3 件 <span class="muted">(17%)</span></div></div></div>
+  <div class="card"><div class="card-title">インパクトタグ分布</div><div class="subitem"><div><span class="pill pill-green">標準化</span></div><div>3 件<div class="bar-wrap"><div class="bar" style="width:34%;background:var(--ac2);"></div></div></div></div><div class="subitem"><div><span class="pill pill-green">見える化</span></div><div>2 件<div class="bar-wrap"><div class="bar" style="width:22%;background:var(--ac2);"></div></div></div></div></div>
+  <div class="card"><div class="card-title">スコア帯分布</div><div class="subitem"><div class="score-lo">0-29</div><div>6 件<div class="bar-wrap"><div class="bar" style="width:100%"></div></div></div></div><div class="subitem"><div class="score-lo">30-49</div><div>5 件<div class="bar-wrap"><div class="bar" style="width:87%"></div></div></div></div><div class="subitem"><div class="score-mid">50-69</div><div>3 件<div class="bar-wrap"><div class="bar" style="width:51%"></div></div></div></div><div class="subitem"><div class="score-hi">70-89</div><div>3 件<div class="bar-wrap"><div class="bar" style="width:51%"></div></div></div></div><div class="subitem"><div class="score-hi">90-100</div><div>0 件<div class="bar-wrap"><div class="bar" style="width:0%"></div></div></div></div></div>
+</div><div class="page-footer">IdeaTrendEngine — Generated at 2026/04/08（水）15:00</div></div>
 </body></html>

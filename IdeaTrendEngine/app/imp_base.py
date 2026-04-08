@@ -12,12 +12,64 @@ from zoneinfo import ZoneInfo
 from pathlib import Path
 from typing import Iterable
 
-import feedparser
 import requests
 from bs4 import BeautifulSoup
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from deep_translator import GoogleTranslator
 import time
+
+try:
+    import feedparser  # type: ignore
+except Exception:
+    import xml.etree.ElementTree as ET
+
+    class _FeedParserFallback:
+        @staticmethod
+        def parse(url: str):
+            class _Result:
+                entries = []
+            try:
+                headers = {"User-Agent": USER_AGENT, "Accept-Language": "en-US,en;q=0.9,ja;q=0.8"}
+                r = requests.get(url, headers=headers, timeout=TIMEOUT)
+                r.raise_for_status()
+                root = ET.fromstring(r.content)
+                entries = []
+                for item in root.findall('.//item'):
+                    entries.append({
+                        "title": (item.findtext('title') or '').strip(),
+                        "link": (item.findtext('link') or '').strip(),
+                        "summary": (item.findtext('description') or '').strip(),
+                        "description": (item.findtext('description') or '').strip(),
+                    })
+                if not entries:
+                    ns_entries = root.findall('.//{*}entry')
+                    for entry in ns_entries:
+                        link = ''
+                        link_el = entry.find('{*}link')
+                        if link_el is not None:
+                            link = (link_el.attrib.get('href') or link_el.text or '').strip()
+                        entries.append({
+                            "title": (entry.findtext('{*}title') or '').strip(),
+                            "link": link,
+                            "summary": (entry.findtext('{*}summary') or entry.findtext('{*}content') or '').strip(),
+                            "description": (entry.findtext('{*}content') or entry.findtext('{*}summary') or '').strip(),
+                        })
+                res = _Result()
+                res.entries = entries
+                return res
+            except Exception:
+                return _Result()
+
+    feedparser = _FeedParserFallback()
+
+try:
+    from deep_translator import GoogleTranslator  # type: ignore
+except Exception:
+    class GoogleTranslator:
+        def __init__(self, source: str = "auto", target: str = "ja"):
+            self.source = source
+            self.target = target
+        def translate(self, text: str) -> str:
+            return text
 
 APP_NAME = ""
 ROOT = Path(__file__).resolve().parent.parent
@@ -542,8 +594,8 @@ nav a:hover,nav a.active{background:var(--ac);color:#fff;text-decoration:none;}
 .card-title{font-size:15px;font-weight:bold;color:var(--warn);margin-bottom:6px;}
 .subitem{padding:7px 0;border-top:1px solid var(--brd);display:flex;justify-content:space-between;gap:12px;align-items:baseline;}
 .subitem:first-child{border-top:none;}
-.table-wrap{max-height:520px;overflow-y:auto;border-radius:10px;border:1px solid var(--brd);}
-table{width:100%;border-collapse:collapse;background:var(--sur);table-layout:auto;}
+.table-wrap{max-height:520px;overflow:auto;border-radius:10px;border:1px solid var(--brd);-webkit-overflow-scrolling:touch;}
+table{width:100%;border-collapse:collapse;background:var(--sur);table-layout:auto;min-width:860px;}
 table.idea-table{table-layout:fixed;}
 table.idea-table th:first-child,table.idea-table td:first-child{width:48%;}
 td{word-break:break-word;overflow-wrap:break-word;}
@@ -552,6 +604,17 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--brd);text-align:left;vertic
 th{background:var(--sur2);color:#e2e8f0;position:sticky;top:0;z-index:2;white-space:nowrap;}
 td{word-break:break-word;}
 tr:last-child td{border-bottom:none;}
+.desktop-table{display:block;}
+.mobile-cards{display:none;}
+.idea-mobile-card{background:var(--sur);border:1px solid var(--brd);border-radius:12px;padding:12px 12px 10px;margin-bottom:10px;}
+.idea-mobile-card:last-child{margin-bottom:0;}
+.idea-mobile-title{font-size:15px;font-weight:700;line-height:1.4;margin-bottom:8px;}
+.idea-mobile-meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;align-items:center;}
+.idea-mobile-impact{margin-bottom:8px;color:var(--tx);font-size:13px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.idea-mobile-foot{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;color:var(--mt);font-size:12px;}
+.idea-mobile-source,.idea-mobile-date{min-width:0;}
+.idea-mobile-source{flex:1 1 auto;}
+.idea-mobile-date{flex:0 0 auto;text-align:right;}
 .lang-btn{display:inline-flex;align-items:center;gap:4px;background:var(--sur2);border:1px solid var(--brd);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--mt);cursor:pointer;white-space:nowrap;}
 .lang-btn:hover{border-color:var(--ac);color:var(--ac);}
 .lang-btn.lang-active{border-color:var(--ac);color:var(--ac);background:var(--sur2);}
@@ -571,13 +634,17 @@ tr:last-child td{border-bottom:none;}
 .section{margin-top:22px;}
 .section h2{color:var(--tx);font-size:17px;margin-bottom:10px;}
 .empty{color:var(--mt);padding:16px;text-align:center;}
-.search-bar{background:var(--sur);border:1px solid var(--brd);border-radius:8px;padding:7px 12px;color:var(--tx);font-size:14px;width:180px;}
+.search-bar{background:var(--sur);border:1px solid var(--brd);border-radius:8px;padding:7px 12px;color:var(--tx);font-size:14px;width:180px;min-width:0;}
 .filter-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px;}
+.filter-row > *{min-width:0;}
 select{background:var(--sur);border:1px solid var(--brd);border-radius:8px;padding:7px 10px;color:var(--tx);font-size:13px;}
 .hidden{display:none!important;}
 .lang-btn{display:inline-flex;align-items:center;gap:4px;background:var(--sur2);border:1px solid var(--brd);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--mt);cursor:pointer;white-space:nowrap;}
 .lang-btn:hover{border-color:var(--ac);color:var(--ac);}
 .lang-btn.lang-active{border-color:var(--ac);color:var(--ac);}
+@media (max-width: 980px){.search-bar{flex:1 1 220px;width:auto;} .filter-row select{flex:1 1 140px;}}
+@media (max-width: 768px){.page{padding:14px;} .stats{grid-template-columns:repeat(2,minmax(0,1fr));} .desktop-table{display:none;} .mobile-cards{display:block;} .table-wrap{max-height:none;} table{min-width:760px;} .search-bar{flex:1 1 100%;width:100%;} .filter-row select{flex:1 1 calc(50% - 4px);} .idea-mobile-foot{flex-direction:column;} .idea-mobile-date{text-align:left;}}
+@media (max-width: 520px){.stats{grid-template-columns:1fr;} .filter-row select{flex:1 1 100%;}}
 """
 
 NAV_ITEMS = [
@@ -655,6 +722,44 @@ def idea_row(idea: sqlite3.Row) -> str:
         f'</tr>'
     )
 
+def idea_mobile_card(idea: sqlite3.Row) -> str:
+    impacts = esc(idea["impact_tags"] or "－")
+    cat     = esc(idea["category"])
+    cols    = [c[0] for c in idea.description] if hasattr(idea, "description") else idea.keys()
+    region  = idea["region"] if "region" in cols else "不明"
+    title_ja   = (idea["title_ja"] if "title_ja" in cols else "") or ""
+    summary_ja = (idea["summary_ja"] if "summary_ja" in cols else "") or ""
+    if title_ja:
+        title_html = (
+            f'<span class="tl-en">{esc(idea["title"])}</span>'
+            f'<span class="tl-ja hidden">{esc(title_ja)}</span>'
+        )
+    else:
+        title_html = esc(idea["title"])
+    if summary_ja:
+        summary_html = (
+            f'<span class="tl-en">{esc(idea["summary"] or "")}</span>'
+            f'<span class="tl-ja hidden">{esc(summary_ja)}</span>'
+        )
+    else:
+        summary_html = esc(idea["summary"] or "")
+    return (
+        f'<article class="idea-mobile-card" data-cat="{cat}" data-diff="{esc(idea["difficulty"])}" '
+        f'data-src="{esc(idea["source_type"])}" data-region="{esc(region)}">'
+        f'<div class="idea-mobile-meta">'
+        f'<span class="pill pill-ac">{cat}</span>'
+        f'<span class="pill">難易度 {esc(idea["difficulty"])}</span>'
+        f'<span class="pill pill-warn">Score {idea["score"]}</span>'
+        f'</div>'
+        f'<div class="idea-mobile-title"><a href="{esc(idea["url"])}" target="_blank" rel="noopener noreferrer">{title_html}</a></div>'
+        f'<div class="idea-mobile-impact">{summary_html or impacts}</div>'
+        f'<div class="idea-mobile-foot">'
+        f'<div class="idea-mobile-source">{esc(idea["source_name"])} · {impacts}</div>'
+        f'<div class="idea-mobile-date">{format_dt(idea["collected_at"])}</div>'
+        f'</div>'
+        f'</article>'
+    )
+
 FILTER_SCRIPT = """<script>
 function filterTable(){
   var q=(document.getElementById('q')||{value:''}).value.toLowerCase();
@@ -663,13 +768,20 @@ function filterTable(){
   var src=(document.getElementById('src')||{value:''}).value;
   var region=(document.getElementById('region')||{value:''}).value;
   var vis=0;
+  function matchNode(r){
+    var txt=(r.textContent||'').toLowerCase();
+    return ((!q||txt.includes(q))&&(!cat||r.dataset.cat===cat)&&
+            (!diff||r.dataset.diff===diff)&&(!src||r.dataset.src===src)&&
+            (!region||r.dataset.region===region));
+  }
   document.querySelectorAll('#ideaBody tr').forEach(function(r){
-    var txt=r.textContent.toLowerCase();
-    var show=((!q||txt.includes(q))&&(!cat||r.dataset.cat===cat)&&
-              (!diff||r.dataset.diff===diff)&&(!src||r.dataset.src===src)&&
-              (!region||r.dataset.region===region));
+    var show=matchNode(r);
     r.classList.toggle('hidden',!show);
     if(show)vis++;
+  });
+  document.querySelectorAll('.idea-mobile-card').forEach(function(card){
+    var show=matchNode(card);
+    card.classList.toggle('hidden',!show);
   });
   var em=document.getElementById('emptyMsg');
   if(em) em.classList.toggle('hidden',vis>0);
@@ -701,20 +813,22 @@ def gen_index(conn: sqlite3.Connection) -> str:
     ideas = query_ideas(conn, "collected_at DESC")
     stats = get_stats(conn)
     rows  = "".join(idea_row(i) for i in ideas) or '<tr><td colspan="7" class="empty">データなし</td></tr>'
+    cards = "".join(idea_mobile_card(i) for i in ideas) or '<div class="empty">データなし</div>'
     src_types = [s["source_type"] for s in SOURCES]
     body = f"""
-<div class="sub">収集した改善事例・TIPSを新着順で確認できます</div>
+<div class="sub">アイデアを探しやすく整理しています</div>
 <div class="stats">
   <div class="stat"><div class="lbl">総件数</div><div class="val">{stats["total"]}</div></div>
   <div class="stat"><div class="lbl">平均スコア</div><div class="val">{stats["avg_score"]}</div></div>
   <div class="stat"><div class="lbl">お気に入り</div><div class="val">{stats["favorites"]}</div></div>
-  <div class="stat"><div class="lbl">カテゴリ数</div><div class="val">{len(stats["categories"])}</div></div>
+  <div class="stat"><div class="lbl">カテゴリ数</div><div class="val">{len(stats["categories"])} </div></div>
 </div>
 {build_filter_row(stats, src_types)}
-<div class="table-wrap"><table class="idea-table">
+<div class="desktop-table"><div class="table-wrap"><table class="idea-table">
 <thead><tr><th>タイトル</th><th>カテゴリ</th><th>難易度</th><th>スコア</th><th>インパクト</th><th>ソース</th><th>収集日</th></tr></thead>
 <tbody id="ideaBody">{rows}</tbody>
-</table></div>
+</table></div></div>
+<div class="mobile-cards">{cards}</div>
 <div id="emptyMsg" class="empty hidden">条件に一致するネタがありません。</div>
 {FILTER_SCRIPT}"""
     return page_wrap("Latest", "index.html", body)
@@ -723,6 +837,7 @@ def gen_pickup(conn: sqlite3.Connection) -> str:
     ideas = query_ideas(conn, "score DESC")[:25]
     stats = get_stats(conn)
     rows  = "".join(idea_row(i) for i in ideas) or '<tr><td colspan="7" class="empty">データなし</td></tr>'
+    cards = "".join(idea_mobile_card(i) for i in ideas) or '<div class="empty">データなし</div>'
     src_types = [s["source_type"] for s in SOURCES]
     body = f"""
 <div class="sub">スコア上位 25 件 &nbsp;|&nbsp; 実施優先度の高い改善ネタ</div>
@@ -730,13 +845,14 @@ def gen_pickup(conn: sqlite3.Connection) -> str:
   <div class="stat"><div class="lbl">総件数</div><div class="val">{stats["total"]}</div></div>
   <div class="stat"><div class="lbl">平均スコア</div><div class="val">{stats["avg_score"]}</div></div>
   <div class="stat"><div class="lbl">お気に入り</div><div class="val">{stats["favorites"]}</div></div>
-  <div class="stat"><div class="lbl">カテゴリ数</div><div class="val">{len(stats["categories"])}</div></div>
+  <div class="stat"><div class="lbl">カテゴリ数</div><div class="val">{len(stats["categories"])} </div></div>
 </div>
 {build_filter_row(stats, src_types)}
-<div class="table-wrap"><table class="idea-table">
+<div class="desktop-table"><div class="table-wrap"><table class="idea-table">
 <thead><tr><th>タイトル</th><th>カテゴリ</th><th>難易度</th><th>スコア</th><th>インパクト</th><th>ソース</th><th>収集日</th></tr></thead>
 <tbody id="ideaBody">{rows}</tbody>
-</table></div>
+</table></div></div>
+<div class="mobile-cards">{cards}</div>
 <div id="emptyMsg" class="empty hidden">条件に一致するネタがありません。</div>
 {FILTER_SCRIPT}"""
     return page_wrap("Pickup", "pickup.html", body)

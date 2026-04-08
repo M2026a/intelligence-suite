@@ -13,6 +13,6 @@ py app\main.py
 if errorlevel 1 pause & exit /b 1
 
 echo [3/3] Opening dashboard...
-start "" "%~dp0output\domestic_travel.html"
+start "" "%~dp0output\index.html"
 
 pause

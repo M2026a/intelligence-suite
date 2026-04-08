@@ -22,6 +22,6 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add output/*.html || true
+          git add output/index.html || true
           git commit -m "chore: HTMLを自動更新 $(TZ=Asia/Tokyo date +'%Y-%m-%d %H:%M JST')" || echo "No changes"
           git push || true

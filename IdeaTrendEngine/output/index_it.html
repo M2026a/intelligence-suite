@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Latest - ITトレンド構造ダッシュボード</title>
+<style>
+:root{--bg:#101214;--sur:#1b1f24;--sur2:#20262d;--brd:#2f3741;--tx:#f3f4f6;--mt:#94a3b8;--ac:#22d3ee;--ac2:#38bdf8;--warn:#facc15;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--tx);font-family:Arial,sans-serif;font-size:14px;}
+a{color:#7dd3fc;text-decoration:none;}a:hover{text-decoration:underline;}
+.topbar{background:var(--sur2);border-bottom:1px solid var(--brd);padding:10px 18px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:40;}
+.topbar .logo{color:var(--ac);font-weight:bold;font-size:16px;white-space:nowrap;}
+nav a{color:var(--mt);font-size:13px;padding:4px 10px;border-radius:6px;}
+nav a:hover,nav a.active{background:var(--ac);color:#fff;text-decoration:none;}
+.page{padding:18px;}
+.sub{color:var(--mt);font-size:12px;margin-bottom:14px;}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:18px;}
+.stat{background:var(--sur);border-radius:10px;padding:10px 12px;}
+.stat .lbl{color:var(--mt);font-size:11px;margin-bottom:3px;}
+.stat .val{font-size:18px;font-weight:bold;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;margin-bottom:18px;}
+.card{background:var(--sur);border-radius:10px;padding:12px;}
+.card-title{font-size:15px;font-weight:bold;color:var(--warn);margin-bottom:6px;}
+.subitem{padding:7px 0;border-top:1px solid var(--brd);display:flex;justify-content:space-between;gap:12px;align-items:baseline;}
+.subitem:first-child{border-top:none;}
+.table-wrap{max-height:520px;overflow:auto;border-radius:10px;border:1px solid var(--brd);-webkit-overflow-scrolling:touch;}
+table{width:100%;border-collapse:collapse;background:var(--sur);table-layout:auto;min-width:860px;}
+table.idea-table{table-layout:fixed;}
+table.idea-table th:first-child,table.idea-table td:first-child{width:48%;}
+td{word-break:break-word;overflow-wrap:break-word;}
+.tl-en,.tl-ja{font-size:inherit;font-weight:inherit;color:inherit;}
+th,td{padding:8px 10px;border-bottom:1px solid var(--brd);text-align:left;vertical-align:top;font-size:13px;}
+th{background:var(--sur2);color:#e2e8f0;position:sticky;top:0;z-index:2;white-space:nowrap;}
+td{word-break:break-word;}
+tr:last-child td{border-bottom:none;}
+.desktop-table{display:block;}
+.mobile-cards{display:none;}
+.idea-mobile-card{background:var(--sur);border:1px solid var(--brd);border-radius:12px;padding:12px 12px 10px;margin-bottom:10px;}
+.idea-mobile-card:last-child{margin-bottom:0;}
+.idea-mobile-title{font-size:15px;font-weight:700;line-height:1.4;margin-bottom:8px;}
+.idea-mobile-meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;align-items:center;}
+.idea-mobile-impact{margin-bottom:8px;color:var(--tx);font-size:13px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.idea-mobile-foot{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;color:var(--mt);font-size:12px;}
+.idea-mobile-source,.idea-mobile-date{min-width:0;}
+.idea-mobile-source{flex:1 1 auto;}
+.idea-mobile-date{flex:0 0 auto;text-align:right;}
+.lang-btn{display:inline-flex;align-items:center;gap:4px;background:var(--sur2);border:1px solid var(--brd);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--mt);cursor:pointer;white-space:nowrap;}
+.lang-btn:hover{border-color:var(--ac);color:var(--ac);}
+.lang-btn.lang-active{border-color:var(--ac);color:var(--ac);background:var(--sur2);}
+.pill{display:inline-block;background:#334155;color:#e2e8f0;border-radius:999px;padding:2px 8px;font-size:11px;margin-right:4px;white-space:nowrap;}
+.pill-ac{background:#4c1d95;color:#ddd6fe;}
+.pill-green{background:#14532d;color:#86efac;}
+.pill-warn{background:#713f12;color:#fde68a;}
+.muted{color:var(--mt);font-size:12px;}
+.score-hi{color:#a78bfa;font-weight:bold;}
+.score-mid{color:#67e8f9;}
+.score-lo{color:var(--mt);}
+.diff-hi{color:#f87171;}
+.diff-mid{color:#facc15;}
+.diff-lo{color:#4ade80;}
+.bar-wrap{background:var(--brd);border-radius:999px;height:8px;width:100%;margin-top:4px;}
+.bar{background:var(--ac);border-radius:999px;height:8px;}
+.section{margin-top:22px;}
+.section h2{color:var(--tx);font-size:17px;margin-bottom:10px;}
+.empty{color:var(--mt);padding:16px;text-align:center;}
+.search-bar{background:var(--sur);border:1px solid var(--brd);border-radius:8px;padding:7px 12px;color:var(--tx);font-size:14px;width:180px;min-width:0;}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px;}
+.filter-row > *{min-width:0;}
+select{background:var(--sur);border:1px solid var(--brd);border-radius:8px;padding:7px 10px;color:var(--tx);font-size:13px;}
+.hidden{display:none!important;}
+.lang-btn{display:inline-flex;align-items:center;gap:4px;background:var(--sur2);border:1px solid var(--brd);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--mt);cursor:pointer;white-space:nowrap;}
+.lang-btn:hover{border-color:var(--ac);color:var(--ac);}
+.lang-btn.lang-active{border-color:var(--ac);color:var(--ac);}
+@media (max-width: 980px){.search-bar{flex:1 1 220px;width:auto;} .filter-row select{flex:1 1 140px;}}
+@media (max-width: 768px){.page{padding:14px;} .stats{grid-template-columns:repeat(2,minmax(0,1fr));} .desktop-table{display:none;} .mobile-cards{display:block;} .table-wrap{max-height:none;} table{min-width:760px;} .search-bar{flex:1 1 100%;width:100%;} .filter-row select{flex:1 1 calc(50% - 4px);} .idea-mobile-foot{flex-direction:column;} .idea-mobile-date{text-align:left;}}
+@media (max-width: 520px){.stats{grid-template-columns:1fr;} .filter-row select{flex:1 1 100%;}}
+
+.topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:14px 24px 12px 16px;flex-wrap:wrap}
+.header-left{display:flex;flex-direction:column;justify-content:center;min-width:0;flex:1 1 320px;padding-top:0}
+.header-title{margin:0;font-size:24px;font-weight:800;line-height:1.18;white-space:normal;color:#f8fafc;letter-spacing:.01em;overflow-wrap:anywhere}
+.updated{margin-top:3px;font-size:12px;font-weight:600;color:#9ba9bc;line-height:1.2}
+.header-right{display:flex;align-items:flex-start;gap:14px;flex:1 1 720px;min-width:0;justify-content:flex-end;flex-wrap:wrap}
+.lang-switch{display:flex;gap:6px;align-self:flex-start;flex:0 0 auto}
+.nav-shell{display:flex;flex-direction:column;gap:8px;align-items:flex-start;padding:0;border:none;box-shadow:none;background:transparent;min-width:0;max-width:100%;flex:1 1 640px}
+.category-tabs,.nav-links{display:flex;align-items:center;gap:6px;min-width:0;max-width:100%}
+.category-tabs{flex:0 0 auto;flex-wrap:nowrap}
+.nav-links{flex:1 1 100%;width:100%;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;padding-bottom:2px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.category-btn,.category-btn:hover,.category-btn:focus,.category-btn:visited,.suite-btn,.suite-btn:hover,.suite-btn:focus,.suite-btn:visited{display:inline-flex;align-items:center;justify-content:center;min-height:28px;padding:4px 8px;border-radius:7px;text-decoration:none!important;font-size:12px;font-weight:700;line-height:1;color:#bfc7d5;background:transparent;border:1px solid transparent;box-shadow:none;transition:background .16s ease,color .16s ease,box-shadow .16s ease,transform .16s ease;vertical-align:middle;position:relative;top:0;flex:0 0 auto;white-space:nowrap}
+.category-btn{padding:6px 10px;font-size:13px;border-radius:9px}
+.category-btn.imnav:hover,.suite-btn.imnav:hover{color:#ffffff;background:rgba(196,161,255,.12);box-shadow:0 0 0 1px rgba(196,161,255,.24) inset}
+.category-btn.itnav:hover,.suite-btn.itnav:hover{color:#ffffff;background:rgba(47,220,255,.12);box-shadow:0 0 0 1px rgba(47,220,255,.24) inset}
+.category-btn.imnav.active,.suite-btn.imnav.active{background:#8f63db;color:#ffffff;box-shadow:0 0 0 1px rgba(255,255,255,.12) inset, 0 0 16px rgba(143,99,219,.42)}
+.category-btn.itnav.active,.suite-btn.itnav.active{background:#0fb2d6;color:#ffffff;box-shadow:0 0 0 1px rgba(255,255,255,.12) inset, 0 0 16px rgba(15,178,214,.42)}
+.category-btn.imnav:not(.active),.category-btn.itnav:not(.active),.suite-btn.imnav:not(.active),.suite-btn.itnav:not(.active){color:#c2cad7}
+.page{min-height:calc(100vh - 86px);display:flex;flex-direction:column}
+.page-footer{margin-top:auto;padding:16px 20px 18px;color:#9ba9bc;font-size:12px;text-align:left;opacity:.8}
+@media (max-width: 1320px){
+  .header-right{justify-content:flex-start;flex-basis:100%;align-items:flex-start}
+  .nav-shell{flex-basis:100%}
+}
+@media (max-width: 980px){
+  .topbar{padding:14px 16px 12px}
+  .header-left,.header-right{flex-basis:100%}
+  .header-title{font-size:22px}
+  .nav-shell{width:100%}
+  .category-tabs{width:100%;justify-content:space-between}
+}
+@media (max-width: 768px){
+  .topbar{gap:14px}
+  .header-title{font-size:20px}
+  .header-right{gap:10px;flex-direction:column;align-items:stretch}
+  .nav-shell{width:100%;gap:10px}
+  .category-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%}
+  .nav-links{gap:6px}
+  .suite-btn{padding:4px 8px;font-size:12px;border-radius:6px}
+  .category-btn{width:100%;justify-content:center}
+  .nav-links{width:100%}
+  .lang-switch{align-self:flex-start}
+}
+</style>
+<script>
+function setPageLang(lang){
+  document.querySelectorAll('.tl-en').forEach(function(e){e.classList.toggle('hidden',lang==='ja');});
+  document.querySelectorAll('.tl-ja').forEach(function(e){e.classList.toggle('hidden',lang==='en');});
+  document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('lang-active');});
+  var a=document.getElementById('btn-lang-'+lang);
+  if(a) a.classList.add('lang-active');
+}
+</script>
+</head><body>
+<div class="topbar">
+  <div class="header-left">
+    <div class="header-title">IdeaTrendEngine｜アイデア探索</div>
+    <div class="updated">更新日時：2026/04/08（水）15:00</div>
+  </div>
+  <div class="header-right">
+    <div class="nav-shell">
+      <div class="category-tabs"><a href="index_im.html" class="category-btn imnav">事例 💡</a><a href="index_it.html" class="category-btn itnav active">TIPS 📘</a></div>
+      <div class="nav-links"><a href="index_it.html" class="suite-btn itnav active">Latest</a><a href="pickup_it.html" class="suite-btn itnav">Pickup</a><a href="focus_it.html" class="suite-btn itnav">Focus</a><a href="themes_it.html" class="suite-btn itnav">Themes</a><a href="sources_it.html" class="suite-btn itnav">Sources</a><a href="analysis_it.html" class="suite-btn itnav">Analysis</a></div>
+    </div><div class="lang-switch"><button id="btn-lang-en" class="lang-btn lang-active" onclick="setPageLang('en')">🌐 EN</button><button id="btn-lang-ja" class="lang-btn" onclick="setPageLang('ja')">🇯🇵 JA</button></div>
+  </div>
+</div>
+<div class="page">
+<div class="sub">収集した技術情報を新着順で確認できます</div>
+<div class="stats">
+  <div class="stat"><div class="lbl">総件数</div><div class="val">0</div></div>
+  <div class="stat"><div class="lbl">平均スコア</div><div class="val">0</div></div>
+  <div class="stat"><div class="lbl">お気に入り</div><div class="val">0</div></div>
+  <div class="stat"><div class="lbl">カテゴリ数</div><div class="val">0</div></div>
+</div>
+<div class="filter-row">
+  <input id="q" class="search-bar" placeholder="キーワード検索..." oninput="filterTable()">
+  <select id="cat" onchange="filterTable()"><option value="">全カテゴリ</option></select>
+  <select id="diff" onchange="filterTable()"><option value="">全難易度</option><option value="低">低</option><option value="中">中</option><option value="高">高</option></select>
+  <select id="src" onchange="filterTable()"><option value="">全ソース</option><option value="techcrunch">techcrunch</option><option value="qiita">qiita</option><option value="zenn">zenn</option><option value="googlecloud">googlecloud</option></select>
+  <select id="region" onchange="filterTable()"><option value="">全地域</option><option value="日本">日本</option><option value="海外">海外</option><option value="不明">不明</option></select>
+</div>
+<div class="table-wrap"><table>
+<thead><tr><th>タイトル</th><th>カテゴリ</th><th>難易度</th><th>スコア</th><th>インパクト</th><th>ソース</th><th>収集日</th></tr></thead>
+<tbody id="ideaBody"><tr><td colspan="7" class="empty">データなし</td></tr></tbody>
+</table></div>
+<div id="emptyMsg" class="empty hidden">条件に一致するネタがありません。</div>
+<script>
+function filterTable(){
+  var q=(document.getElementById('q')||{value:''}).value.toLowerCase();
+  var cat=(document.getElementById('cat')||{value:''}).value;
+  var diff=(document.getElementById('diff')||{value:''}).value;
+  var src=(document.getElementById('src')||{value:''}).value;
+  var region=(document.getElementById('region')||{value:''}).value;
+  var vis=0;
+  function matchNode(r){
+    var txt=(r.textContent||'').toLowerCase();
+    return ((!q||txt.includes(q))&&(!cat||r.dataset.cat===cat)&&
+            (!diff||r.dataset.diff===diff)&&(!src||r.dataset.src===src)&&
+            (!region||r.dataset.region===region));
+  }
+  document.querySelectorAll('#ideaBody tr').forEach(function(r){
+    var show=matchNode(r);
+    r.classList.toggle('hidden',!show);
+    if(show)vis++;
+  });
+  document.querySelectorAll('.idea-mobile-card').forEach(function(card){
+    var show=matchNode(card);
+    card.classList.toggle('hidden',!show);
+  });
+  var em=document.getElementById('emptyMsg');
+  if(em) em.classList.toggle('hidden',vis>0);
+}
+</script><div class="page-footer">IdeaTrendEngine — Generated at 2026/04/08（水）15:00</div></div>
+</body></html>

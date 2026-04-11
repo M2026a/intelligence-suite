@@ -6,12 +6,13 @@
 <title>Intelligence Suite</title>
 
 <style>
+/* ===== 基本 ===== */
 body {
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   background: #111;
   color: #fff;
-  padding: 20px;
   margin: 0;
+  padding: 20px;
   font-size: 16px;
 }
 
@@ -27,6 +28,7 @@ body {
 .subtitle {
   color: #aaa;
   margin-top: 5px;
+  font-size: 14px;
 }
 
 .update {
@@ -35,74 +37,91 @@ body {
   margin-top: 5px;
 }
 
+/* ===== セクション ===== */
 .section {
-  margin-bottom: 30px;
+  margin-bottom: 32px;
 }
 
 .section h2 {
   border-left: 4px solid #4da3ff;
   padding-left: 10px;
   font-size: 18px;
-  margin-bottom: 15px;
+  margin-bottom: 14px;
 }
 
+/* ===== カード ===== */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 15px;
+  gap: 16px;
 }
 
 .card {
   background: #1a1a1a;
-  padding: 15px;
-  border-radius: 10px;
-  transition: 0.2s;
+  padding: 16px;
+  border-radius: 12px;
   text-decoration: none;
   color: #fff;
   border: 1px solid #222;
+  transition: 0.2s;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
   border-color: #4da3ff;
 }
 
 .card-title {
   font-size: 16px;
   font-weight: bold;
+  line-height: 1.4;
 }
 
 .card-sub {
-  font-size: 12px;
+  font-size: 13px;
   color: #aaa;
-  margin-top: 5px;
+  margin-top: 6px;
+  line-height: 1.4;
 }
 
 /* ===== スマホ最適化 ===== */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   body {
+    padding: 16px;
     font-size: 18px;
-    padding: 15px;
   }
 
   .title {
-    font-size: 40px;
+    font-size: 36px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .update {
+    font-size: 14px;
   }
 
   .section h2 {
-    font-size: 22px;
+    font-size: 24px;
   }
 
-  .card-title {
-    font-size: 20px;
-  }
-
-  .card-sub {
-    font-size: 15px;
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
   }
 
   .card {
     padding: 20px;
+  }
+
+  .card-title {
+    font-size: 22px;
+  }
+
+  .card-sub {
+    font-size: 16px;
   }
 }
 </style>
@@ -123,22 +142,18 @@ body {
       <div class="card-title">AI News Suite</div>
       <div class="card-sub">AI情報収集</div>
     </a>
-
     <a class="card" href="it_plus/output/index.html">
       <div class="card-title">IT News Suite</div>
       <div class="card-sub">IT業界ニュース</div>
     </a>
-
     <a class="card" href="IdeaTrendEngine/output/index_im.html">
       <div class="card-title">Idea Trend Engine</div>
       <div class="card-sub">改善アイデア</div>
     </a>
-
     <a class="card" href="Strategic_IT_Suite/output/index.html">
       <div class="card-title">Strategic IT Suite</div>
       <div class="card-sub">リスク / 戦略</div>
     </a>
-
     <a class="card" href="executive_signal/output/index.html">
       <div class="card-title">Executive Signal</div>
       <div class="card-sub">経営シグナル分析</div>
@@ -153,27 +168,22 @@ body {
       <div class="card-title">Smart News Viewer</div>
       <div class="card-sub">総合ニュース</div>
     </a>
-
     <a class="card" href="market_plus/output/index.html">
       <div class="card-title">Market Suite</div>
       <div class="card-sub">市場分析</div>
     </a>
-
     <a class="card" href="auto_industry_suite/output/index.html">
       <div class="card-title">Auto Industry</div>
       <div class="card-sub">自動車</div>
     </a>
-
     <a class="card" href="memory_market_plus/output/index.html">
       <div class="card-title">Memory Market</div>
       <div class="card-sub">半導体</div>
     </a>
-
     <a class="card" href="pc_industry_suite/output/index.html">
       <div class="card-title">PC Industry</div>
       <div class="card-sub">PC / GPU</div>
     </a>
-
     <a class="card" href="camera_industry_suite/output/index.html">
       <div class="card-title">Camera Industry</div>
       <div class="card-sub">カメラ</div>
@@ -188,27 +198,22 @@ body {
       <div class="card-title">Spot Navigator</div>
       <div class="card-sub">スポット検索</div>
     </a>
-
     <a class="card" href="travel_search_plus/output/index.html">
       <div class="card-title">Travel Search</div>
       <div class="card-sub">旅行</div>
     </a>
-
     <a class="card" href="dog_information_suite/output/index.html">
       <div class="card-title">Dog Info</div>
       <div class="card-sub">犬情報</div>
     </a>
-
     <a class="card" href="plot_engine/output/index.html">
       <div class="card-title">Plot Engine</div>
       <div class="card-sub">構想 / 文章プロット</div>
     </a>
-
     <a class="card" href="takarazuka_information_suite/output/index.html">
       <div class="card-title">Takarazuka</div>
       <div class="card-sub">宝塚</div>
     </a>
-
     <a class="card" href="takarazuka_info_B/output/index.html">
       <div class="card-title">Takarazuka B</div>
       <div class="card-sub">宝塚_旧版</div>

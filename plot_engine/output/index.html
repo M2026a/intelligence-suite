@@ -157,6 +157,12 @@
     align-items: end;
   }
 
+  /* ★ 追加：ボタン折り返し防止（リセット対策） */
+  .toolbar-main-actions button {
+    white-space: nowrap;
+    min-width: 0;
+  }
+
   .status-row {
     display: flex;
     justify-content: space-between;
@@ -432,7 +438,7 @@
       <span class="app-sep">|</span>
       <span class="app-subtitle">発想の種</span>
     </div>
-    <div class="app-updated">更新日時：2026-04-11 14:39</div>
+    <div class="app-updated">更新日時：2026-04-11 15:08</div>
 
   </div>
 </div>
@@ -474,7 +480,7 @@
           <label>&nbsp;</label>
           <div class="toolbar-main-actions">
             <button id="generateBtn" class="primary">生成</button>
-            <button id="resetAllBtn" class="secondary">リセット</button>
+            <button id="resetAllBtn" class="secondary">Reset</button>
             <button id="saveSettingsBtn" class="secondary">保存</button>
           </div>
         </div>

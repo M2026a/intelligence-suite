@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Photo Finder</title>
+<style>:root{--bg:#0b1020;--panel:#121934;--line:#273052;--text:#eef3ff;--muted:#aeb8d9;--accent:#6ea8ff;}*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Meiryo,sans-serif;font-size:14px;overflow-x:hidden}a{color:#cfe0ff;text-decoration:none}a:hover{text-decoration:underline}.topbar{background:#111827;border-bottom:1px solid var(--line);padding:10px 20px;position:sticky;top:0;z-index:50;max-width:1060px;width:100%;margin:0 auto;box-sizing:border-box}.topbar-title{font-size:17px;font-weight:800;color:var(--text)}.topbar-title span{color:var(--muted);font-weight:400;margin-left:6px}.topbar-meta{font-size:12px;color:var(--muted);margin-top:3px}.tab-wrap{background:#0e1628;border-bottom:1px solid var(--line);padding:8px 16px;overflow-x:auto;white-space:nowrap;position:static;max-width:1060px;width:100%;margin:0 auto;box-sizing:border-box}.tab-wrap::-webkit-scrollbar{height:4px}.tab-wrap::-webkit-scrollbar-thumb{background:var(--line);border-radius:2px}.tabs{display:flex;gap:6px;flex-wrap:wrap}.tab-btn{background:transparent;border:1px solid var(--line);border-radius:999px;color:var(--muted);cursor:pointer;font-size:13px;padding:6px 14px;white-space:nowrap;transition:all .15s}.tab-btn:hover{border-color:var(--accent);color:var(--text)}.tab-btn.active{background:var(--accent);border-color:var(--accent);color:#07111f;font-weight:700}.wrap{max-width:1100px;width:100%;margin:0 auto;padding:18px 20px;overflow-x:hidden;box-sizing:border-box}.card{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}.card-title{font-size:18px;font-weight:800;margin-bottom:14px}.controls{display:grid;grid-template-columns:140px 160px 260px 160px 160px 120px;gap:10px;align-items:end}label{display:block;font-weight:700;margin-bottom:5px;font-size:13px}input,select{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:#0a1024;color:var(--text);font-size:13px}.action-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px}.src-btns{display:flex;gap:10px;flex-wrap:wrap}.query-display{color:var(--muted);font-size:13px;margin-left:auto}.query-display strong{color:var(--text)}.shortcut-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:8px}.btnrow{display:flex;flex-wrap:wrap;gap:8px}.btn{display:inline-block;padding:9px 14px;border-radius:10px;background:var(--accent);color:#06111d;font-weight:700;border:none;cursor:pointer;text-decoration:none;font-size:13px}.btn.alt{background:rgba(255,255,255,.07);color:var(--text);border:1px solid var(--line)}.btn.alt:hover{background:rgba(255,255,255,.13);text-decoration:none}.btn:hover{text-decoration:none}.reset-btn{background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:10px;color:var(--text);cursor:pointer;font-size:13px;padding:10px 16px;white-space:nowrap}.shortcuts-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.shortcuts-grid>div{display:flex;flex-direction:column}.bottom-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:var(--muted);font-size:12px;padding:0 4px}.bottom-meta a{color:var(--muted)}.bottom-meta a:hover{color:var(--text)}.footer{margin:24px auto 0;padding:14px 20px;color:var(--muted);font-size:12px;max-width:1060px;width:100%;box-sizing:border-box}@media(max-width:800px){.controls{grid-template-columns:1fr}.shortcuts-grid{grid-template-columns:1fr}.query-display{margin-left:0}}</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-title">📷 Photo Finder<span>| 撮影スポット探索</span></div>
+  <div class="topbar-meta">更新日時：2026-04-11 23:42</div>
+</div>
+
+<div class="tab-wrap"><div class="tabs"><button class="tab-btn active" data-cat="general" onclick="switchCat('general')">📷 総合撮影</button><button class="tab-btn" data-cat="bird_special" onclick="switchCat('bird_special')">🦉 鳥・野鳥専用</button><button class="tab-btn" data-cat="urban_special" onclick="switchCat('urban_special')">🌃 夜景・都市専用</button><button class="tab-btn" data-cat="landscape_special" onclick="switchCat('landscape_special')">🏞️ 風景・絶景専用</button><button class="tab-btn" data-cat="season_special" onclick="switchCat('season_special')">🌸 季節・花専用</button><button class="tab-btn" data-cat="transport_special" onclick="switchCat('transport_special')">🚄 乗り物専用</button><button class="tab-btn" data-cat="town_special" onclick="switchCat('town_special')">⛩️ 神社・街並み</button></div></div>
+
+<div class="wrap">
+
+  <div class="card">
+    <div class="card-title" id="catTitle">📷 総合撮影</div>
+    <div class="controls">
+      <div><label for="region">地方</label><select id="region" onchange="updatePrefectures()"><option value=""></option><option value="北海道">北海道</option><option value="東北">東北</option><option value="関東">関東</option><option value="中部">中部</option><option value="関西">関西</option><option value="中国">中国</option><option value="四国">四国</option><option value="九州・沖縄">九州・沖縄</option></select></div>
+      <div><label for="pref">都道府県</label><select id="pref" onchange="updateAreaHints(true)"><option value=""></option></select></div>
+      <div><label for="area">エリア・駅・市</label><input id="area" list="area-list" placeholder="例: 名古屋港 / 白川郷 / 伊良湖"><datalist id="area-list"></datalist></div>
+      <div><label for="subcat">被写体</label><select id="subcat" onchange="applyLinks()"><option value=""></option><option value="風景">風景</option><option value="夜景">夜景</option><option value="海">海</option><option value="山">山</option><option value="滝">滝</option><option value="湖">湖</option><option value="神社">神社</option><option value="寺">寺</option><option value="街並み">街並み</option><option value="桜">桜</option><option value="紅葉">紅葉</option><option value="花火">花火</option><option value="野鳥">野鳥</option><option value="電車">電車</option><option value="飛行機">飛行機</option><option value="展望台">展望台</option></select></div>
+      <div><label for="scene">撮影条件</label><select id="scene" onchange="applyLinks()"><option value=""></option></select></div>
+      <div style="display:flex;align-items:flex-end"><button class="reset-btn" onclick="clearInputs()">リセット</button></div>
+    </div>
+    <div class="action-row">
+      <div class="src-btns" id="srcBtns"><a class="btn" href="https://www.google.com/maps/search/" target="_blank" rel="noopener" data-template="https://www.google.com/maps/search/{query}">Google Maps</a><a class="btn" href="https://www.google.com/search?tbm=isch&amp;q=" target="_blank" rel="noopener" data-template="https://www.google.com/search?tbm=isch&amp;q={query}">Google画像</a><a class="btn" href="https://www.instagram.com/explore/tags//" target="_blank" rel="noopener" data-template="https://www.instagram.com/explore/tags/{query}/">Instagram</a></div>
+      <div class="query-display">現在の検索条件：<strong id="queryPreview">未入力</strong></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="shortcuts-grid">
+      <div>
+        <div class="shortcut-label">被写体から選ぶ</div>
+        <div class="btnrow" id="subcatBtns"><button class="btn alt" onclick="setSubcat('風景')">風景</button><button class="btn alt" onclick="setSubcat('夜景')">夜景</button><button class="btn alt" onclick="setSubcat('海')">海</button><button class="btn alt" onclick="setSubcat('山')">山</button><button class="btn alt" onclick="setSubcat('滝')">滝</button><button class="btn alt" onclick="setSubcat('湖')">湖</button><button class="btn alt" onclick="setSubcat('神社')">神社</button><button class="btn alt" onclick="setSubcat('寺')">寺</button><button class="btn alt" onclick="setSubcat('街並み')">街並み</button><button class="btn alt" onclick="setSubcat('桜')">桜</button><button class="btn alt" onclick="setSubcat('紅葉')">紅葉</button><button class="btn alt" onclick="setSubcat('花火')">花火</button><button class="btn alt" onclick="setSubcat('野鳥')">野鳥</button><button class="btn alt" onclick="setSubcat('電車')">電車</button><button class="btn alt" onclick="setSubcat('飛行機')">飛行機</button><button class="btn alt" onclick="setSubcat('展望台')">展望台</button></div>
+      </div>
+      <div id="sceneArea" style="display:block">
+        <div class="shortcut-label">撮影条件から選ぶ</div>
+        <div class="btnrow" id="sceneBtns"><button class="btn alt" onclick="setScene('早朝')">早朝</button><button class="btn alt" onclick="setScene('朝焼け')">朝焼け</button><button class="btn alt" onclick="setScene('日中')">日中</button><button class="btn alt" onclick="setScene('夕景')">夕景</button><button class="btn alt" onclick="setScene('夜景')">夜景</button><button class="btn alt" onclick="setScene('星景')">星景</button><button class="btn alt" onclick="setScene('雨上がり')">雨上がり</button><button class="btn alt" onclick="setScene('初心者向け')">初心者向け</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-meta">
+    <div>撮影可否・立入可否・私有地情報は現地案内を確認</div>
+    <div>各参照先：<span id="topLinks"></span></div>
+  </div>
+
+</div>
+
+<div class="footer">Photo Finder — 更新日時 2026-04-11 23:42</div>
+
+<script>
+const CATEGORIES = [{"id": "general", "label": "総合撮影", "icon": "📷", "subcategories": ["風景", "夜景", "海", "山", "滝", "湖", "神社", "寺", "街並み", "桜", "紅葉", "花火", "野鳥", "電車", "飛行機", "展望台"], "scenes": ["早朝", "朝焼け", "日中", "夕景", "夜景", "星景", "雨上がり", "初心者向け"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "Google画像", "url_template": "https://www.google.com/search?tbm=isch&q={query}"}, {"name": "Instagram", "url_template": "https://www.instagram.com/explore/tags/{query}/"}]}, {"id": "bird_special", "label": "鳥・野鳥専用", "icon": "🦉", "subcategories": ["カワセミ", "水鳥", "小鳥", "猛禽", "サギ", "シギ・チドリ", "干潟", "池", "川", "森林公園", "河口", "雑木林", "渡り鳥", "冬鳥", "河口", "干潟", "葦原", "堤防", "防波堤", "山林", "湿原", "渓流"], "scenes": ["早朝", "午前", "夕方", "冬鳥", "渡り", "止まりもの", "飛びもの", "背景抜け良し", "近距離期待", "初心者向け", "駐車場あり", "歩き少なめ", "逆光注意", "背景抜け", "近距離", "群れ"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "Google画像", "url_template": "https://www.google.com/search?tbm=isch&q={query}"}, {"name": "Instagram", "url_template": "https://www.instagram.com/explore/tags/{query}/"}, {"name": "eBird", "url_template": "https://ebird.org/explore?q={query}"}]}, {"id": "urban_special", "label": "夜景・都市専用", "icon": "🌃", "subcategories": ["展望台", "工場夜景", "橋", "高架下", "駅", "ビル群", "路地", "港", "イルミネーション", "ネオン街", "観覧車", "埠頭", "湾岸エリア", "高台", "タワー", "工場地帯", "水辺リフレクション"], "scenes": ["夕景", "ブルーアワー", "夜景", "ネオン", "雨夜", "リフレクション", "長時間露光", "手持ち向き", "車で行きやすい", "雨上がり", "濡れ路面", "映り込み", "三脚推奨", "車で行きやすい"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "Google画像", "url_template": "https://www.google.com/search?tbm=isch&q={query}"}, {"name": "Instagram", "url_template": "https://www.instagram.com/explore/tags/{query}/"}]}, {"id": "landscape_special", "label": "風景・絶景専用", "icon": "🏞️", "subcategories": ["滝", "湖", "渓谷", "海", "棚田", "高原", "山", "森林", "湿原", "雲海", "朝霧", "リフレクション", "岬", "展望地", "岬", "断崖", "奇岩", "高原道路", "湿原木道"], "scenes": ["朝焼け", "日の出", "夕景", "マジックアワー", "星景", "雲海", "雨上がり", "広角向き", "徒歩少なめ", "朝霧", "雲海確率高", "風弱め", "広角向き", "登山必要"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "Google画像", "url_template": "https://www.google.com/search?tbm=isch&q={query}"}, {"name": "Instagram", "url_template": "https://www.instagram.com/explore/tags/{query}/"}]}, {"id": "season_special", "label": "季節・花専用", "icon": "🌸", "subcategories": ["桜", "梅", "菜の花", "藤", "紫陽花", "ひまわり", "彼岸花", "紅葉", "雪景色", "花火", "新緑", "ライトアップ"], "scenes": ["春", "初夏", "夏", "秋", "冬", "見頃", "ライトアップ", "早朝", "人少なめ"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "Google画像", "url_template": "https://www.google.com/search?tbm=isch&q={query}"}, {"name": "Instagram", "url_template": "https://www.instagram.com/explore/tags/{query}/"}]}, {"id": "transport_special", "label": "乗り物専用", "icon": "🚄", "subcategories": ["電車", "ローカル線", "新幹線", "飛行機", "空港", "鉄橋", "踏切", "船", "港", "駅ホーム", "展望デッキ"], "scenes": ["流し撮り", "夕景", "夜景", "順光", "逆光", "展望デッキ", "手持ち向き", "望遠向き", "車で行きやすい"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "Google画像", "url_template": "https://www.google.com/search?tbm=isch&q={query}"}, {"name": "Instagram", "url_template": "https://www.instagram.com/explore/tags/{query}/"}]}, {"id": "town_special", "label": "神社・街並み", "icon": "⛩️", "subcategories": ["神社", "寺", "鳥居", "石畳", "古民家", "宿場町", "城下町", "路地", "門前町", "和風庭園", "城跡"], "scenes": ["早朝", "人少なめ", "雨の日", "夕景", "夜間ライトアップ", "季節感", "散策向き", "スナップ"], "sources": [{"name": "Google Maps", "url_template": "https://www.google.com/maps/search/{query}"}, {"name": "Google画像", "url_template": "https://www.google.com/search?tbm=isch&q={query}"}, {"name": "Instagram", "url_template": "https://www.instagram.com/explore/tags/{query}/"}]}];
+const REGION_PREFECTURES = {"北海道": ["北海道"], "東北": ["青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県"], "関東": ["茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県"], "中部": ["新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県", "三重県"], "関西": ["滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県"], "中国": ["鳥取県", "島根県", "岡山県", "広島県", "山口県"], "四国": ["徳島県", "香川県", "愛媛県", "高知県"], "九州・沖縄": ["福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"]};
+const PREFECTURE_AREAS = {"北海道": ["札幌", "すすきの", "函館", "旭川", "小樽"], "青森県": ["青森", "弘前", "八戸"], "岩手県": ["盛岡", "一関", "北上"], "宮城県": ["仙台", "国分町", "石巻"], "秋田県": ["秋田", "大館", "横手"], "山形県": ["山形", "米沢", "鶴岡"], "福島県": ["福島", "郡山", "いわき", "会津若松"], "茨城県": ["水戸", "つくば", "土浦"], "栃木県": ["宇都宮", "小山", "那須塩原"], "群馬県": ["高崎", "前橋", "伊勢崎"], "埼玉県": ["大宮", "浦和", "川越", "川口", "所沢"], "千葉県": ["千葉", "船橋", "柏", "成田", "木更津"], "東京都": ["新宿", "渋谷", "池袋", "上野", "銀座", "東京駅", "吉祥寺", "八王子"], "神奈川県": ["横浜", "みなとみらい", "川崎", "藤沢", "鎌倉"], "新潟県": ["新潟", "長岡", "上越"], "富山県": ["富山", "高岡"], "石川県": ["金沢", "小松"], "福井県": ["福井", "敦賀"], "山梨県": ["甲府", "河口湖"], "長野県": ["長野", "松本", "軽井沢"], "岐阜県": ["岐阜", "大垣", "高山"], "静岡県": ["静岡", "浜松", "熱海", "沼津"], "愛知県": ["名古屋", "栄", "名古屋駅", "金山", "豊橋", "岡崎", "豊田市"], "三重県": ["津", "四日市", "伊勢"], "滋賀県": ["大津", "草津", "彦根"], "京都府": ["京都", "河原町", "烏丸", "祇園", "京都駅"], "大阪府": ["梅田", "難波", "心斎橋", "天王寺", "新大阪", "京橋"], "兵庫県": ["神戸", "三宮", "姫路", "西宮"], "奈良県": ["奈良", "橿原"], "和歌山県": ["和歌山", "白浜"], "鳥取県": ["鳥取", "米子"], "島根県": ["松江", "出雲"], "岡山県": ["岡山", "倉敷"], "広島県": ["広島", "福山", "宮島口"], "山口県": ["山口", "下関", "宇部"], "徳島県": ["徳島", "鳴門"], "香川県": ["高松", "丸亀"], "愛媛県": ["松山", "今治"], "高知県": ["高知", "四万十"], "福岡県": ["博多", "天神", "中洲", "小倉"], "佐賀県": ["佐賀", "唐津"], "長崎県": ["長崎", "佐世保"], "熊本県": ["熊本", "阿蘇"], "大分県": ["大分", "別府", "湯布院"], "宮崎県": ["宮崎", "都城"], "鹿児島県": ["鹿児島", "天文館", "霧島"], "沖縄県": ["那覇", "国際通り", "北谷", "石垣"]};
+let currentCat = CATEGORIES[0];
+
+function switchCat(catId) {
+  currentCat = CATEGORIES.find(c => c.id === catId) || CATEGORIES[0];
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.cat === catId);
+  });
+  document.getElementById('catTitle').textContent = currentCat.icon + ' ' + currentCat.label;
+  const subcatSel = document.getElementById('subcat');
+  subcatSel.innerHTML = '<option value=""></option>' +
+    currentCat.subcategories.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join('');
+  const sceneSel = document.getElementById('scene');
+  if (sceneSel) {
+    sceneSel.innerHTML = '<option value=""></option>' +
+      ((currentCat.scenes || []).map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join(''));
+  }
+  document.getElementById('subcatBtns').innerHTML =
+    currentCat.subcategories.map(s =>
+      `<button class="btn alt" onclick="setSubcat('${esc(s)}')">${esc(s)}</button>`
+    ).join('');
+  const sceneArea = document.getElementById('sceneArea');
+  const sceneBtns = document.getElementById('sceneBtns');
+  if (currentCat.scenes && currentCat.scenes.length > 0) {
+    sceneArea.style.display = 'block';
+    sceneBtns.innerHTML = currentCat.scenes.map(s =>
+      `<button class="btn alt" onclick="setScene('${esc(s)}')">${esc(s)}</button>`
+    ).join('');
+  } else {
+    sceneArea.style.display = 'none';
+    sceneBtns.innerHTML = '';
+  }
+  applyLinks();
+  updateTopLinks();
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+function buildQuery() {
+  const region = document.getElementById('region').value.trim();
+  const pref = document.getElementById('pref').value.trim();
+  const area = document.getElementById('area').value.trim();
+  const subcat = document.getElementById('subcat').value.trim();
+  const scene = document.getElementById('scene').value.trim();
+  const place = [pref || region, area].filter(Boolean).join(' ');
+  return [place, subcat, scene].filter(Boolean).join(' ').trim();
+}
+
+function applyLinks() {
+  const query = buildQuery();
+  document.getElementById('queryPreview').textContent = query || '未入力';
+  document.getElementById('srcBtns').innerHTML = currentCat.sources.map(src => {
+    const href = src.url_template.replace('{query}', encodeURIComponent(query));
+    return `<a class="btn" href="${href}" target="_blank" rel="noopener">${esc(src.name)}</a>`;
+  }).join('');
+}
+
+function updatePrefectures() {
+  const region = document.getElementById('region').value;
+  const prefSel = document.getElementById('pref');
+  const prefs = REGION_PREFECTURES[region] || [];
+  prefSel.innerHTML = '<option value=""></option>' +
+    prefs.map(p => `<option value="${esc(p)}">${esc(p)}</option>`).join('');
+  updateAreaHints(true);
+}
+
+function updateAreaHints(resetArea) {
+  const pref = document.getElementById('pref').value;
+  const areaList = document.getElementById('area-list');
+  const areaInput = document.getElementById('area');
+  const areas = PREFECTURE_AREAS[pref] || [];
+  areaList.innerHTML = areas.map(a => `<option value="${esc(a)}">`).join('');
+  if (resetArea) areaInput.value = '';
+  applyLinks();
+}
+
+function setSubcat(val) {
+  document.getElementById('subcat').value = val;
+  applyLinks();
+}
+
+function setScene(val) {
+  const scene = document.getElementById('scene');
+  if (scene) {
+    scene.value = val;
+  }
+  applyLinks();
+}
+
+function updateTopLinks() {
+  document.getElementById('topLinks').innerHTML =
+    currentCat.sources.map((src, i) => {
+      const href = src.url_template.replace('{query}', '');
+      return (i > 0 ? ' / ' : '') +
+        `<a href="${href}" target="_blank" rel="noopener">${esc(src.name)}</a>`;
+    }).join('');
+}
+
+function clearInputs() {
+  document.getElementById('region').selectedIndex = 0;
+  updatePrefectures();
+  document.getElementById('pref').selectedIndex = 0;
+  document.getElementById('area').value = '';
+  document.getElementById('subcat').selectedIndex = 0;
+  const scene = document.getElementById('scene');
+  if (scene) scene.selectedIndex = 0;
+  applyLinks();
+}
+
+document.getElementById('region').addEventListener('change', applyLinks);
+document.getElementById('pref').addEventListener('change', applyLinks);
+document.getElementById('area').addEventListener('input', applyLinks);
+document.getElementById('area').addEventListener('change', applyLinks);
+document.getElementById('subcat').addEventListener('change', applyLinks);
+document.getElementById('scene').addEventListener('change', applyLinks);
+
+switchCat(CATEGORIES[0].id);
+</script>
+</body>
+</html>

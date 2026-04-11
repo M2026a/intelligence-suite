@@ -138,6 +138,11 @@ jobs:
         run: python app/main.py
         continue-on-error: true
 
+      - name: Photo_Finder を実行
+        working-directory: ./Photo_Finder
+        run: python app/main.py
+        continue-on-error: true
+
       - name: IdeaTrendEngine を実行
         working-directory: ./IdeaTrendEngine
         run: python app/main.py
@@ -170,6 +175,7 @@ jobs:
           path: |
             travel_search_plus/output/*.html
             Spot_Selection_Navigator/output/*.html
+            Photo_Finder/output/*.html
             IdeaTrendEngine/output/*.html
             takarazuka_information_suite/output/*.html
             takarazuka_info_B/output/*.html
@@ -238,6 +244,7 @@ jobs:
           git add auto_industry_suite/output/*.html || true
           git add travel_search_plus/output/*.html || true
           git add Spot_Selection_Navigator/output/*.html || true
+          git add Photo_Finder/output/*.html || true
           git add IdeaTrendEngine/output/*.html || true
           git add takarazuka_information_suite/output/*.html || true
           git add takarazuka_info_B/output/*.html || true

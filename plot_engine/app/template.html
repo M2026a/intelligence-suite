@@ -399,29 +399,43 @@
   @media (max-width: 600px) {
     .topbar { padding: 10px 12px; }
     .content { padding: 10px 12px 20px; }
-    .toolbar-head, .toolbar {
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
+    .toolbar-grid {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 8px 10px;
     }
-    .toolbar-head div,
-    .toolbar input,
-    .toolbar select,
-    .toolbar button {
+    .field label {
+      font-size: 10px;
+      margin-bottom: 3px;
+    }
+    .field input,
+    .field select,
+    .field button {
       font-size: 12px;
+      height: 32px;
+      padding: 6px 8px;
+    }
+    .toolbar-main-actions {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+    }
+    .toolbar-main-actions button {
+      white-space: nowrap;
+      min-width: 0;
     }
     .status-row {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 8px;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
     }
-    .toolbar-actions,
+    .status-actions,
     .history-actions {
-      justify-content: stretch;
+      gap: 6px;
     }
-    .toolbar-actions .btn-inline,
-    .history-actions .btn-inline {
-      flex: 1 1 auto;
-      height: 30px;
+    .btn-inline {
+      height: 26px;
+      padding: 0 8px;
+      font-size: 11px;
     }
     .cards {
       grid-template-columns: 1fr;

@@ -168,6 +168,21 @@ jobs:
         run: python app/main.py
         continue-on-error: true
 
+      - name: entertainment_plus を実行
+        working-directory: ./entertainment_plus
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: gadget_plus を実行
+        working-directory: ./gadget_plus
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: sports_plus を実行
+        working-directory: ./sports_plus
+        run: python app/main.py
+        continue-on-error: true
+
       - name: 成果物をアップロード
         uses: actions/upload-artifact@v4
         with:
@@ -181,6 +196,9 @@ jobs:
             takarazuka_info_B/output/*.html
             plot_engine/output/*.html
             Strategic_IT_Suite/output/*.html
+            entertainment_plus/output/*.html
+            gadget_plus/output/*.html
+            sports_plus/output/*.html
           if-no-files-found: warn
 
   group4:
@@ -250,6 +268,9 @@ jobs:
           git add takarazuka_info_B/output/*.html || true
           git add plot_engine/output/*.html || true
           git add Strategic_IT_Suite/output/*.html || true
+          git add entertainment_plus/output/*.html || true
+          git add gadget_plus/output/*.html || true
+          git add sports_plus/output/*.html || true
           git add smart_news_viewer/output/*.html || true
           git diff --staged --quiet || git commit -m "parallel update $(TZ=Asia/Tokyo date +'%Y-%m-%d %H:%M JST')"
           git push

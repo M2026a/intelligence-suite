@@ -23,15 +23,40 @@ from app.score import score_article
 from app.signal import build_signals
 from config.sources import MODULE_SOURCES
 
+_CONFIG = json.loads((ROOT / "shared" / "config.json").read_text(encoding="utf-8"))
+TRANSLATE_WORKERS: int = int(_CONFIG.get("translate_workers", 4))
+TRANSLATE_RETRIES: int = int(_CONFIG.get("translate_retries", 2))
+
 OUTPUT_DIR = ROOT / "output"
+LOG_DIR = ROOT / "logs"
 DB_PATH = OUTPUT_DIR / "db.sqlite"
 OUTPUT_HTML = OUTPUT_DIR / "index.html"
 RUNTIME_JSON = OUTPUT_DIR / "last_run.json"
+CACHE_PATH = OUTPUT_DIR / "translate_cache.json"
 
 _TRANSLATOR: GoogleTranslator | None = None
-_TRANSLATION_CACHE: dict[tuple[str, str], str] = {}
-TRANSLATE_WORKERS = 4
-TRANSLATE_RETRIES = 2
+_TRANSLATION_CACHE: dict[str, str] = {}
+
+
+def _load_cache() -> None:
+    try:
+        if CACHE_PATH.exists():
+            data = json.loads(CACHE_PATH.read_text(encoding="utf-8"))
+            _TRANSLATION_CACHE.update(data)
+    except Exception:
+        pass
+
+
+def _save_cache() -> None:
+    try:
+        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+        CACHE_PATH.write_text(json.dumps(_TRANSLATION_CACHE, ensure_ascii=False, indent=2), encoding="utf-8")
+    except Exception:
+        pass
+
+
+def has_japanese(text: str) -> bool:
+    return bool(re.search(r"[\u3040-\u30ff\u4e00-\u9fff]", text))
 
 
 def get_translator(target_lang: str = "ja") -> GoogleTranslator:
@@ -41,24 +66,24 @@ def get_translator(target_lang: str = "ja") -> GoogleTranslator:
     return _TRANSLATOR
 
 
-def try_translate(text: str, target_lang: str = "ja") -> str:
+def try_translate(text: str) -> str:
     text = (text or "").strip()
-    if not text:
-        return ""
-    key = (text, target_lang)
-    if key in _TRANSLATION_CACHE:
-        return _TRANSLATION_CACHE[key]
+    if not text or has_japanese(text):
+        return text
+    if text in _TRANSLATION_CACHE:
+        cached = _TRANSLATION_CACHE[text]
+        return cached if has_japanese(cached) else ""
     translated = ""
     for _ in range(max(1, TRANSLATE_RETRIES + 1)):
         try:
-            translated = get_translator(target_lang).translate(text) or ""
-            if translated:
-                break
+            translated = get_translator().translate(text) or ""
+            if translated and has_japanese(translated):
+                _TRANSLATION_CACHE[text] = translated
+                return translated
         except Exception:
-            translated = ""
+            pass
         time.sleep(0.2)
-    _TRANSLATION_CACHE[key] = translated
-    return translated
+    return ""
 
 
 def title_fingerprint(article: dict[str, Any]) -> str:
@@ -95,9 +120,9 @@ def enrich_articles(raw_articles: list[dict[str, Any]]) -> list[dict[str, Any]]:
     en_items: list[dict[str, Any]] = []
 
     for article in raw_articles:
-        best_module = infer_best_module(article)
-        if best_module:
-            article["module"] = best_module
+#         best_module = infer_best_module(article)
+#         if best_module:
+#             article["module"] = best_module
         article = tag_article(article)
         article = score_article(article)
         article["translated_title_ja"] = article.get("title", "")
@@ -108,16 +133,36 @@ def enrich_articles(raw_articles: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
     total_en = len(en_items)
     if total_en:
+        _load_cache()
         print(f"🌐 翻訳中... ({total_en}件)")
         done = 0
 
         def do_translate(item: dict[str, Any]) -> dict[str, Any]:
             title = (item.get("title", "") or "").strip()
             summary = (item.get("summary", "") or "").strip()
+
+            can_combine = (
+                title and summary
+                and not has_japanese(title)
+                and not has_japanese(summary)
+            )
+
+            if can_combine:
+                sep = "\n\n---\n\n"
+                result = try_translate(title + sep + summary)
+                if result:
+                    parts = result.split(sep, 1)
+                    title_ja = parts[0].strip() if len(parts) > 0 else ""
+                    summary_ja = parts[1].strip() if len(parts) > 1 else ""
+                    if title_ja and summary_ja:
+                        item["translated_title_ja"] = title_ja
+                        item["translated_summary_ja"] = summary_ja
+                        return item
+
             title_ja = try_translate(title)
             summary_ja = try_translate(summary)
-            item["translated_title_ja"] = title_ja or title
-            item["translated_summary_ja"] = summary_ja or summary
+            item["translated_title_ja"] = title_ja if title_ja else title
+            item["translated_summary_ja"] = summary_ja if summary_ja else summary
             return item
 
         with ThreadPoolExecutor(max_workers=TRANSLATE_WORKERS) as ex:
@@ -130,6 +175,8 @@ def enrich_articles(raw_articles: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 done += 1
                 if done % 10 == 0 or done == total_en:
                     print(f"  翻訳進捗: {done}/{total_en}")
+
+        _save_cache()
 
     return enriched
 
@@ -147,6 +194,8 @@ def summarize_health(source_health: list[dict[str, Any]]) -> dict[str, Any]:
 
 def main() -> None:
     started = time.time()
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
     print("=" * 46)
     print("  Executive Signal")
     print("=" * 46)
@@ -193,7 +242,6 @@ def main() -> None:
     insert_signals(conn, signals)
     conn.close()
 
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     print("  - Building HTML...")
     html = build_html(all_articles, signals, warnings=warnings, source_health=source_health, health_summary=health_summary)
     print("  - Writing index.html...")

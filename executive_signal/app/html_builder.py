@@ -20,7 +20,7 @@ MODULE_LABELS = {
 
 
 def fmt_dt(value: str) -> str:
-    return (value or "").replace("T", " ")[:16] if value else "-"
+    return (value or "")[:16] if value else "-"
 
 
 def arrow(direction: str) -> str:
@@ -182,6 +182,44 @@ def build_analysis_summary(grouped_articles: dict[str, list[dict]], grouped_sign
         parts.append(f"記事母数最大は {top_volume['label']}（{top_volume['articles']}件）")
     return " ｜ ".join(parts) if parts else "集計結果はまだありません。"
 
+
+def build_module_summaries(grouped_articles: dict[str, list[dict]], grouped_signals: dict[str, list[dict]]) -> dict[str, str]:
+    summaries: dict[str, str] = {}
+    for module, label in MODULE_LABELS.items():
+        mod_articles = grouped_articles.get(module, [])
+        mod_signals = grouped_signals.get(module, [])
+        article_count = len(mod_articles)
+        if article_count == 0:
+            summaries[module] = f"{label}：記事なし"
+            continue
+        avg = sum(float(a.get('score', 0)) for a in mod_articles) / article_count
+        high = sum(1 for a in mod_articles if a.get('impact_label') == 'High')
+        high_rate = high / article_count * 100.0
+        top_signal = mod_signals[0] if mod_signals else None
+        parts = [f"記事 {article_count}件 / 平均スコア {avg:.1f}"]
+        if high_rate >= 5.0:
+            parts.append(f"高インパクト {high_rate:.0f}%")
+        if top_signal:
+            direction = top_signal.get('direction', '')
+            target = top_signal.get('target', '')
+            arrow = '↑' if 'up' in direction.lower() else '↓' if 'down' in direction.lower() else '→'
+            parts.append(f"主要シグナル：{target} {arrow}")
+        summaries[module] = " ｜ ".join(parts)
+    # allモジュール（Mainタブ）用
+    all_articles = [a for arts in grouped_articles.values() for a in arts]
+    all_count = len(all_articles)
+    if all_count:
+        all_avg = sum(float(a.get('score', 0)) for a in all_articles) / all_count
+        top_mods = sorted(MODULE_LABELS.keys(), key=lambda m: len(grouped_signals.get(m, [])), reverse=True)[:2]
+        top_labels = [MODULE_LABELS[m] for m in top_mods if grouped_signals.get(m)]
+        if top_labels:
+            summaries['all'] = f"全 {all_count}件 / 平均スコア {all_avg:.1f} ｜ シグナル上位：{' / '.join(top_labels)}"
+        else:
+            summaries['all'] = f"全 {all_count}件 / 平均スコア {all_avg:.1f}"
+    else:
+        summaries['all'] = "記事なし"
+    return summaries
+
 def build_html(articles: list[dict], signals: list[dict], *, warnings: list[str], source_health: list[dict], health_summary: dict) -> str:
     jst_now = datetime.now(ZoneInfo("Asia/Tokyo")).strftime("%Y-%m-%d %H:%M")
     articles_sorted = sorted(articles, key=lambda x: float(x.get('score', 0)), reverse=True)
@@ -205,6 +243,8 @@ def build_html(articles: list[dict], signals: list[dict], *, warnings: list[str]
     )
     analysis_rows = build_analysis_rows(grouped_articles, grouped_signals)
     analysis_summary = build_analysis_summary(grouped_articles, grouped_signals)
+    module_summaries = build_module_summaries(grouped_articles, grouped_signals)
+    module_summaries_js = json.dumps(module_summaries, ensure_ascii=False)
 
     template = Template("""<!doctype html>
 <html lang='ja'>
@@ -219,18 +259,14 @@ body { margin:0; font-family:Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-se
 a { color:var(--accent); text-decoration:none; }
 a:hover { text-decoration:underline; }
 .container { max-width:1200px; margin:0 auto; padding:0 16px 40px; }
-.hero { padding:0 0 8px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:flex-end; gap:16px; }
-.brand { display:flex; align-items:center; gap:12px; }
+.hero { padding:0 0 8px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
+.brand { display:flex; align-items:center; gap:12px; flex-wrap:wrap; flex:1 1 auto; }
 .hero-title { margin:0; font-size:22px; font-weight:800; line-height:1.2; }
 .hero-title .subline { font-weight:400; color:var(--sub); font-size:16px; }
 .updated { color:var(--text); font-size:12px; white-space:nowrap; }
-.toolbar { margin-top:14px; padding:12px 14px; border:1px solid var(--line); border-radius:18px; background:rgba(6,15,35,.42); display:grid; gap:10px; }
-.toolbar-row { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
-.toolbar-row.top { justify-content:space-between; }
-.toolbar-row.bottom { justify-content:flex-start; }
-.toolbar-left, .toolbar-right { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
-.toolbar-left { flex:1 1 auto; min-width:0; }
-.toolbar-right { margin-left:auto; }
+.hero-controls { display:flex; align-items:center; gap:12px; flex-wrap:wrap; flex-shrink:0; }
+.toolbar { margin-top:14px; padding:10px 14px; border:1px solid var(--line); border-radius:18px; background:rgba(6,15,35,.42); }
+.toolbar-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
 .nav-group, .module-group, .mini-group { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
 .nav-btn, .translate-btn { border:1px solid #334565; background:#0f1728; color:var(--text); padding:8px 14px; border-radius:999px; cursor:pointer; font-size:14px; transition:.18s ease; }
 .region-switch { gap:10px; }
@@ -375,20 +411,19 @@ tbody tr:last-child td { border-bottom:none; }
       <div class='hero-title'>Executive Signal <span class='subline'>｜ 経営判断</span></div>
       <div class='updated'>更新日時：$updated_at</div>
     </div>
+    <div class='hero-controls'>
+      <div class='mini-group region-switch'>
+        <label><input type='radio' name='regionSwitch' value='all' checked>全て</label>
+        <label><input type='radio' name='regionSwitch' value='domestic'>国内</label>
+        <label><input type='radio' name='regionSwitch' value='global'>海外</label>
+      </div>
+      <button type='button' id='pageTranslateBtn' class='translate-btn' data-mode='original'>🌐 翻訳 OFF</button>
+    </div>
   </header>
 
   <div class='toolbar'>
-    <div class='toolbar-row top'>
-      <div class='toolbar-left'>
-        <div class='mini-group region-switch'>
-          <label><input type='radio' name='regionSwitch' value='domestic' checked>国内</label>
-          <label><input type='radio' name='regionSwitch' value='global'>海外</label>
-        </div>
-        <div class='nav-group'>$nav</div>
-      </div>
-      <div class='toolbar-right'>
-        <button type='button' id='pageTranslateBtn' class='translate-btn' data-mode='original'>🌐 翻訳 OFF</button>
-      </div>
+    <div class='toolbar-row'>
+      <div class='nav-group'>$nav</div>
     </div>
   </div>
 
@@ -397,8 +432,8 @@ tbody tr:last-child td { border-bottom:none; }
     <div class='analysis-grid'>
       <div>
         <div class='section-header'><h2>Top Signals</h2></div>
-        <div class='top-summary'><span class='label'>現在：</span>Product / Talent が上昇主導、Geo Risk は中立、労働市場は弱含み</div>
-        <div class='signal-grid'>$top_signals</div>
+        <div class='top-summary'><span class='label'>現在：</span><span id='moduleSummaryText'></span></div>
+        <div class='signal-grid' id='signalGrid'>$top_signals</div>
       </div>
       <div>
         <div class='section-header'><h2>今日見る記事</h2><div class='section-note'>現在の条件で表示</div></div>
@@ -436,11 +471,18 @@ tbody tr:last-child td { border-bottom:none; }
 </div>
 <script>
 const navButtons = document.querySelectorAll('.nav-btn');
+const moduleSummaries = $module_summaries_js;
+
+function updateModuleSummary(module) {
+  const el = document.getElementById('moduleSummaryText');
+  if (el) el.textContent = moduleSummaries[module] || moduleSummaries['all'] || '';
+}
+
 const tabs = document.querySelectorAll('.tab-panel');
 const regionRadios = document.querySelectorAll("input[name='regionSwitch']");
 const pageTranslateBtn = document.getElementById('pageTranslateBtn');
 let currentModule = 'all';
-let currentRegion = 'domestic';
+let currentRegion = 'all';
 let currentTextMode = 'original';
 
 function visibleCount(nodes) {
@@ -450,11 +492,12 @@ function visibleCount(nodes) {
 function updateEmptyState() {
   const topCards = document.querySelectorAll('#topFocusGrid .article-card');
   const allCards = document.querySelectorAll('#allArticlesGrid .article-card');
-  const topSignals = document.querySelectorAll('.signal-grid .signal-card');
   const topNote = document.getElementById('filterEmptyNote');
   const allNote = document.getElementById('filterEmptyNoteAll');
+  const signalGrid = document.getElementById('signalGrid');
   if (topNote) topNote.style.display = visibleCount(topCards) ? 'none' : 'block';
   if (allNote) allNote.style.display = visibleCount(allCards) ? 'none' : 'block';
+  if (signalGrid) signalGrid.style.display = visibleCount(allCards) ? '' : 'none';
 }
 
 function applyFilters() {
@@ -462,7 +505,7 @@ function applyFilters() {
     const module = card.dataset.module || '';
     const region = card.dataset.region || 'global';
     const moduleOk = currentModule === 'all' || module === currentModule;
-    const regionOk = region === currentRegion;
+    const regionOk = currentRegion === 'all' || region === currentRegion;
     card.style.display = moduleOk && regionOk ? '' : 'none';
   });
   document.querySelectorAll('.signal-card').forEach((card) => {
@@ -478,6 +521,7 @@ function setMainTab(module) {
   tabs.forEach((x) => x.classList.remove('active'));
   const target = document.getElementById('tab-main');
   if (target) target.classList.add('active');
+  updateModuleSummary(currentModule);
   applyFilters();
 }
 
@@ -531,6 +575,7 @@ if (pageTranslateBtn) {
 }
 
 applyFilters();
+updateModuleSummary('all');
 applyTextMode('original');
 window.__ESS_DATA__ = $ess_data;
 </script>
@@ -547,11 +592,12 @@ window.__ESS_DATA__ = $ess_data;
         module_count=len(MODULE_LABELS),
         top_signals=build_signal_cards(top_signals) or "<div class='empty-card'>シグナルがまだありません。</div>",
         top_focus=build_cards(top_focus) or "<div class='empty-card'>記事がまだありません。</div>",
-        all_cards=build_cards(articles_sorted[:60]) or "<div class='empty-card'>記事がまだありません。</div>",
+        all_cards=build_cards(articles_sorted) or "<div class='empty-card'>記事がまだありません。</div>",
         health_html=build_health_summary(health_summary, warnings),
         tag_rows=build_tag_summary(grouped_articles),
         sources_html=build_source_list(grouped_articles, source_health),
         analysis_rows=analysis_rows,
         analysis_summary=analysis_summary,
+        module_summaries_js=module_summaries_js,
         ess_data=json.dumps({'articles': articles_sorted[:60], 'signals': signals[:30], 'warnings': warnings[:20]}, ensure_ascii=False),
     )

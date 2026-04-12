@@ -4,6 +4,9 @@ import html
 import re
 from dataclasses import dataclass, asdict
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
+
+_JST = ZoneInfo("Asia/Tokyo")
 from email.utils import parsedate_to_datetime
 from typing import Any
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -66,14 +69,14 @@ def normalize_for_match(text: str) -> str:
 
 def parse_date(value: str | None) -> str:
     if not value:
-        return datetime.now(timezone.utc).isoformat()
+        return datetime.now(_JST).strftime("%Y-%m-%d %H:%M")
     try:
         dt = parsedate_to_datetime(value)
         if dt.tzinfo is None:
             dt = dt.replace(tzinfo=timezone.utc)
-        return dt.astimezone(timezone.utc).isoformat()
+        return dt.astimezone(_JST).strftime("%Y-%m-%d %H:%M")
     except Exception:
-        return datetime.now(timezone.utc).isoformat()
+        return datetime.now(_JST).strftime("%Y-%m-%d %H:%M")
 
 
 def _request_text(url: str) -> str:
@@ -190,7 +193,7 @@ def fetch_html(source: dict[str, Any], module: str) -> list[Article]:
                         title=text,
                         url=url,
                         summary="",
-                        published=datetime.now(timezone.utc).isoformat(),
+                        published=datetime.now(_JST).strftime("%Y-%m-%d %H:%M"),
                         lang=source.get("lang", "en"),
                         source_weight=source.get("weight", 2),
                         source_type="html",

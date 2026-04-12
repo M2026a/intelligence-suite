@@ -23,25 +23,26 @@ header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-fi
 .search{min-width:240px;background:#0b1320;border:1px solid var(--line);color:var(--text);padding:9px 12px;border-radius:10px}
 .main-grid,.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
 .grid.list{grid-template-columns:1fr}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.card,.mini-item,.category-panel{min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
 .card.score-5{border-left:4px solid #ffd700}
 .card.score-4{border-left:4px solid #4ea1ff}
 .card.is-read{opacity:.62}
-.card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-.card-meta{display:flex;gap:6px;flex-wrap:wrap;font-size:11px;color:var(--muted)}
+.card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;min-width:0;flex-wrap:wrap}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;font-size:11px;color:var(--muted);min-width:0;overflow-wrap:anywhere;word-break:break-word}
 .lang-badge,.tag{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700}
 .lang-badge.ja{background:#14375d;border-color:#4ea1ff}
 .lang-badge.en{background:#24301f;border-color:#15c39a}
 .tag-new{background:#17391e;border-color:#15c39a;color:#93ffd8}.tag-hot{background:#14375d;border-color:#4ea1ff}.tag-caution{background:#3f1b1d;border-color:#ff7b7b}.tag-neutral{background:#1d2635;border-color:#4b5b78}
-.tags{display:flex;gap:6px;flex-wrap:wrap}.summary{font-size:13px;line-height:1.7;color:#d6e0f0}.hidden{display:none!important}
-.card h3{margin:0;font-size:17px;line-height:1.45}.open-btn{margin-top:auto;display:inline-flex;justify-content:center;background:var(--accent2);border-color:var(--accent)}
-.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 12px}.section-head h2{margin:0;font-size:20px}.count-badge{color:var(--muted);font-size:12px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;min-width:0;overflow-wrap:anywhere;word-break:break-word}.summary{font-size:13px;line-height:1.7;color:#d6e0f0;overflow-wrap:anywhere;word-break:break-word}.hidden{display:none!important}
+.card h3{margin:0;font-size:17px;line-height:1.45;overflow-wrap:anywhere;word-break:break-word}.open-btn{margin-top:auto;display:inline-flex;justify-content:center;background:var(--accent2);border-color:var(--accent);max-width:100%;white-space:normal;text-align:center}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 12px;min-width:0;flex-wrap:wrap}.section-head h2{margin:0;font-size:20px;overflow-wrap:anywhere;word-break:break-word}.count-badge{color:var(--muted);font-size:12px;overflow-wrap:anywhere;word-break:break-word}
 .category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:0}
 .category-grid.single{grid-template-columns:repeat(3,minmax(0,1fr))}
 .category-panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}.mini-list{display:grid;gap:8px}.mini-item{padding:10px;border-radius:12px;background:#0c1422;border:1px solid #1d2a40}.mini-item a{font-size:13px;line-height:1.5}.mini-meta{font-size:11px;color:var(--muted);margin-top:4px}
 footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size:12px}
 @media(max-width:980px){.category-grid.single{grid-template-columns:1fr}}
-@media(max-width:760px){body{padding-top:0}.top{flex-direction:column}.title h1{font-size:24px}.right-controls{justify-content:flex-start}.search{min-width:0;width:100%}.nav{padding-bottom:8px}.nav a{font-size:13px;padding:9px 12px}.grid,.main-grid,.category-grid{grid-template-columns:1fr}}
+@media(max-width:760px){body{padding-top:0}.top{flex-direction:column}.title h1{font-size:24px}.right-controls{justify-content:flex-start}.search{min-width:0;width:100%}.nav{padding-bottom:8px}.nav a{font-size:13px;padding:9px 12px}.grid,.main-grid,.category-grid{grid-template-columns:1fr}.card,.category-panel,.mini-item{width:100%;max-width:100%}.card-top,.card-meta,.tags,.section-head{width:100%}.card h3{font-size:16px;line-height:1.4}.summary{font-size:13px;line-height:1.65}.open-btn{width:100%}}
 </style>
 </head>
 <body>
@@ -50,7 +51,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='top'>
     <div class='title'>
       <h1>🎭 Watch Hub + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 映画・配信・アニメ・ゲーム・芸能</span></h1>
-      <div class='sub'>更新日時：2026-04-13 07:48</div>
+      <div class='sub'>更新日時：2026-04-13 08:14</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -228,15 +229,6 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
   <a class='open-btn' href='https://natalie.mu/owarai/news/668010' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card score-5' data-cardid='0b81429d4164144bc408681f4885a806' data-region='JP' data-score='5' data-platform='other'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-12 12:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'0b81429d4164144bc408681f4885a806')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>ある女性の3つの恋と人生を描く「ガールフレンズ」（女孩不平凡）特別上映</h3><div class='summary'>「アジアンクィア映画祭」のスピンオフ企画として、個別の作品や監督に焦点を当てる上映シリーズが始動。その第1回となる「アジアンクィア映画祭 スポットライト Vol.1」が、プライド月間に合わせて6月6日に東京・ユーロライブで開催され、マカオ・台湾・香港・タイによる国際共同制作映画「ガールフレンズ」（原題：女孩不平凡）が特別上映される。</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
-  <a class='open-btn' href='https://natalie.mu/eiga/news/667992' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
 <article class='card item-card score-5' data-cardid='d275d7661e9755321c8bf163df20c0fd' data-region='JP' data-score='5' data-platform='other'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-12 12:00</span></div>
@@ -255,14 +247,14 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
   <a class='open-btn' href='https://natalie.mu/owarai/news/667799' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card score-5' data-cardid='0ee16789ffcdcc960f416892d4ae73e2' data-region='JP' data-score='5' data-platform='other'>
+<article class='card item-card score-5' data-cardid='0b81429d4164144bc408681f4885a806' data-region='JP' data-score='5' data-platform='other'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-12 13:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'0ee16789ffcdcc960f416892d4ae73e2')">既読</button></div>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-12 12:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'0b81429d4164144bc408681f4885a806')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>松本若菜が「あさイチ」プレミアムトークに登場、“憧れの先輩”鈴木保奈美はVTR出演</h3><div class='summary'>松本若菜が、4月17日オンエアのNHK総合「あさイチ」プレミアムトークに出演。プレミアムドラマ「対決」で共演した“松本憧れの先輩”鈴木保奈美もVTRインタビューゲストとして登場する。</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
-  <a class='open-btn' href='https://natalie.mu/eiga/news/668015' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-ja'><h3>ある女性の3つの恋と人生を描く「ガールフレンズ」（女孩不平凡）特別上映</h3><div class='summary'>「アジアンクィア映画祭」のスピンオフ企画として、個別の作品や監督に焦点を当てる上映シリーズが始動。その第1回となる「アジアンクィア映画祭 スポットライト Vol.1」が、プライド月間に合わせて6月6日に東京・ユーロライブで開催され、マカオ・台湾・香港・タイによる国際共同制作映画「ガールフレンズ」（原題：女孩不平凡）が特別上映される。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/eiga/news/667992' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card score-5' data-cardid='8363f1725405e2540618e8815e38f756' data-region='JP' data-score='5' data-platform='other'>
   <div class='card-top'>
@@ -272,6 +264,15 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='lang-pane lang-ja'><h3>蛍原徹、ウド鈴木、ドランク鈴木、東幹久が参加「ガキ使」なんやったっけ部</h3><div class='summary'>本日4月12日（日）放送の「ダウンタウンのガキの使いやあらへんで！」（日本テレビ系）で「なんやったっけ部」と題した企画が展開され、蛍原徹、キャイ～ン・ウド鈴木、ドランクドラゴン鈴木、東幹久が出演する。</div></div>
   <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
   <a class='open-btn' href='https://natalie.mu/owarai/news/668012' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='0ee16789ffcdcc960f416892d4ae73e2' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-12 13:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'0ee16789ffcdcc960f416892d4ae73e2')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>松本若菜が「あさイチ」プレミアムトークに登場、“憧れの先輩”鈴木保奈美はVTR出演</h3><div class='summary'>松本若菜が、4月17日オンエアのNHK総合「あさイチ」プレミアムトークに出演。プレミアムドラマ「対決」で共演した“松本憧れの先輩”鈴木保奈美もVTRインタビューゲストとして登場する。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/eiga/news/668015' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card score-5' data-cardid='5a98cf51c2d9e9484594adcaa72fa4e8' data-region='JP' data-score='5' data-platform='other'>
   <div class='card-top'>
@@ -309,15 +310,6 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
   <a class='open-btn' href='https://natalie.mu/eiga/news/668028' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card score-5' data-cardid='d1660dd8cbcd410612630612fe3f78fe' data-region='JP' data-score='5' data-platform='other'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-13 05:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'d1660dd8cbcd410612630612fe3f78fe')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>横浜流星と広瀬すずが涙…「汝、星のごとく」予告映像公開、ティザービジュアルも到着</h3><div class='summary'>横浜流星と広瀬すずがダブル主演を務める映画「汝、星のごとく」の封切りが10月9日に決定。このたびティザービジュアルが到着し、YouTubeでは予告映像が公開された。</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
-  <a class='open-btn' href='https://natalie.mu/eiga/news/668042' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
 <article class='card item-card score-5' data-cardid='80bcf48bab8c3349e5fcd4ed5fc6de62' data-region='JP' data-score='5' data-platform='other'>
   <div class='card-top'>
     <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-13 05:00</span></div>
@@ -326,6 +318,15 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='lang-pane lang-ja'><h3>バッテリィズが「明石家さんま オールニッポンお願い！リクエスト」登場</h3><div class='summary'>明石家さんまがパーソナリティを務めるラジオ特番「明石家さんま オールニッポンお願い！リクエスト～アパート・マンション・一戸建て！『明石家おうち物語』～」（ニッポン放送）が4月20日（月）に放送され、バッテリィズがゲスト出演する。</div></div>
   <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
   <a class='open-btn' href='https://natalie.mu/owarai/news/668018' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='d1660dd8cbcd410612630612fe3f78fe' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-13 05:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'d1660dd8cbcd410612630612fe3f78fe')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>横浜流星と広瀬すずが涙…「汝、星のごとく」予告映像公開、ティザービジュアルも到着</h3><div class='summary'>横浜流星と広瀬すずがダブル主演を務める映画「汝、星のごとく」の封切りが10月9日に決定。このたびティザービジュアルが到着し、YouTubeでは予告映像が公開された。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/eiga/news/668042' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card score-5' data-cardid='e192e80c348642f89f157c87bceb8c30' data-region='JP' data-score='5' data-platform='other'>
   <div class='card-top'>
@@ -382,7 +383,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <a class='open-btn' href='https://natalie.mu/eiga/news/667979' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div>
 </section>
-</div><footer>Watch Hub + — Generated at 2026-04-13 07:48</footer>
+</div><footer>Watch Hub + — Generated at 2026-04-13 08:14</footer>
 <script>
 function setPageLang(lang) {
   localStorage.setItem('page_lang_pref', lang);

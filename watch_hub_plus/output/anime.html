@@ -23,25 +23,26 @@ header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-fi
 .search{min-width:240px;background:#0b1320;border:1px solid var(--line);color:var(--text);padding:9px 12px;border-radius:10px}
 .main-grid,.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
 .grid.list{grid-template-columns:1fr}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.card,.mini-item,.category-panel{min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
 .card.score-5{border-left:4px solid #ffd700}
 .card.score-4{border-left:4px solid #4ea1ff}
 .card.is-read{opacity:.62}
-.card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-.card-meta{display:flex;gap:6px;flex-wrap:wrap;font-size:11px;color:var(--muted)}
+.card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;min-width:0;flex-wrap:wrap}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;font-size:11px;color:var(--muted);min-width:0;overflow-wrap:anywhere;word-break:break-word}
 .lang-badge,.tag{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700}
 .lang-badge.ja{background:#14375d;border-color:#4ea1ff}
 .lang-badge.en{background:#24301f;border-color:#15c39a}
 .tag-new{background:#17391e;border-color:#15c39a;color:#93ffd8}.tag-hot{background:#14375d;border-color:#4ea1ff}.tag-caution{background:#3f1b1d;border-color:#ff7b7b}.tag-neutral{background:#1d2635;border-color:#4b5b78}
-.tags{display:flex;gap:6px;flex-wrap:wrap}.summary{font-size:13px;line-height:1.7;color:#d6e0f0}.hidden{display:none!important}
-.card h3{margin:0;font-size:17px;line-height:1.45}.open-btn{margin-top:auto;display:inline-flex;justify-content:center;background:var(--accent2);border-color:var(--accent)}
-.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 12px}.section-head h2{margin:0;font-size:20px}.count-badge{color:var(--muted);font-size:12px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;min-width:0;overflow-wrap:anywhere;word-break:break-word}.summary{font-size:13px;line-height:1.7;color:#d6e0f0;overflow-wrap:anywhere;word-break:break-word}.hidden{display:none!important}
+.card h3{margin:0;font-size:17px;line-height:1.45;overflow-wrap:anywhere;word-break:break-word}.open-btn{margin-top:auto;display:inline-flex;justify-content:center;background:var(--accent2);border-color:var(--accent);max-width:100%;white-space:normal;text-align:center}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 12px;min-width:0;flex-wrap:wrap}.section-head h2{margin:0;font-size:20px;overflow-wrap:anywhere;word-break:break-word}.count-badge{color:var(--muted);font-size:12px;overflow-wrap:anywhere;word-break:break-word}
 .category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:0}
 .category-grid.single{grid-template-columns:repeat(3,minmax(0,1fr))}
 .category-panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}.mini-list{display:grid;gap:8px}.mini-item{padding:10px;border-radius:12px;background:#0c1422;border:1px solid #1d2a40}.mini-item a{font-size:13px;line-height:1.5}.mini-meta{font-size:11px;color:var(--muted);margin-top:4px}
 footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size:12px}
 @media(max-width:980px){.category-grid.single{grid-template-columns:1fr}}
-@media(max-width:760px){body{padding-top:0}.top{flex-direction:column}.title h1{font-size:24px}.right-controls{justify-content:flex-start}.search{min-width:0;width:100%}.nav{padding-bottom:8px}.nav a{font-size:13px;padding:9px 12px}.grid,.main-grid,.category-grid{grid-template-columns:1fr}}
+@media(max-width:760px){body{padding-top:0}.top{flex-direction:column}.title h1{font-size:24px}.right-controls{justify-content:flex-start}.search{min-width:0;width:100%}.nav{padding-bottom:8px}.nav a{font-size:13px;padding:9px 12px}.grid,.main-grid,.category-grid{grid-template-columns:1fr}.card,.category-panel,.mini-item{width:100%;max-width:100%}.card-top,.card-meta,.tags,.section-head{width:100%}.card h3{font-size:16px;line-height:1.4}.summary{font-size:13px;line-height:1.65}.open-btn{width:100%}}
 </style>
 </head>
 <body>
@@ -50,7 +51,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='top'>
     <div class='title'>
       <h1>🎭 Watch Hub + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 映画・配信・アニメ・ゲーム・芸能</span></h1>
-      <div class='sub'>更新日時：2026-04-13 07:48</div>
+      <div class='sub'>更新日時：2026-04-13 08:14</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -82,7 +83,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='category-grid single'><div class='mini-item' data-region='JP' data-platform='other'><a href='https://www.4gamer.net/games/998/G099827/20260411001/' target='_blank' rel='noopener noreferrer'>集中せよ，走れ，撃て。サイケデリックな演出と，圧倒的な爽快感が特徴のアーケードライクな新作FPS「TAMASHIKA」が本日発売</a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-11 01:01</div></div><div class='mini-item' data-region='JP' data-platform='other'><a href='https://www.4gamer.net/games/570/G057056/20260410057/' target='_blank' rel='noopener noreferrer'>舞台「グノーシア ザ・ライブプレイングシアター」，2ndビジュアルを解禁。チケットの二次先行販売もスタート</a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-11 12:00</div></div><div class='mini-item' data-region='JP' data-platform='other'><a href='https://natalie.mu/eiga/news/667941' target='_blank' rel='noopener noreferrer'>「名探偵コナン ハイウェイの堕天使」初日11.3億円の好発進、横浜流星＆畑芽育が初声優を述懐</a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-11 14:15</div></div></div>
 </section>
 <section>
-  <div class='section-head'><h2>📰 最新記事</h2><span class='count-badge'>55件</span></div>
+  <div class='section-head'><h2>📰 最新記事</h2><span class='count-badge'>54件</span></div>
   <div class='grid'>
 <article class='card item-card score-5' data-cardid='8464ed9faab64b4dbf3021c27a203a93' data-region='JP' data-score='5' data-platform='other'>
   <div class='card-top'>
@@ -110,15 +111,6 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='lang-pane lang-ja'><h3>「名探偵コナン ハイウェイの堕天使」初日11.3億円の好発進、横浜流星＆畑芽育が初声優を述懐</h3><div class='summary'>「名探偵コナン ハイウェイの堕天使」の公開記念舞台挨拶が本日4月11日、東京・TOHOシネマズ 日比谷で行われ、江戸川コナン役の高山みなみ、毛利小五郎役の小山力也、萩原千速役の沢城みゆき、横溝重悟役の大塚明夫、萩原研二役の三木眞一郎、ゲスト声優の畑芽育、横浜流星、そして監督の蓮井隆弘が登壇した。</div></div>
   <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
   <a class='open-btn' href='https://natalie.mu/eiga/news/667941' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card score-5' data-cardid='a870200f29161ad5796f77cec54d519b' data-region='JP' data-score='5' data-platform='other'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 音楽/アニメ</span><span>2026-04-12 16:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'a870200f29161ad5796f77cec54d519b')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>南條愛乃、ミニアルバム2枚で構成する新作リリース 特典ディスクにライブ映像や「南條一間」</h3><div class='summary'>南條愛乃の6thオリジナルアルバム（タイトル未定）が8月12日にリリースされることが決定した。</div></div>
-  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
-  <a class='open-btn' href='https://natalie.mu/music/news/668019' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card score-5' data-cardid='d8f312e512f242dce5affcbe2bf9c282' data-region='JP' data-score='5' data-platform='other'>
   <div class='card-top'>
@@ -210,6 +202,24 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
   <a class='open-btn' href='https://natalie.mu/music/news/668044' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
+<article class='card item-card score-5' data-cardid='78c8564ff11026b2de8ebecd34f6c76c' data-region='JP' data-score='5' data-platform='netflix'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 音楽/アニメ</span><span>2026-04-13 08:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'78c8564ff11026b2de8ebecd34f6c76c')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「タッチ」で大会盛り上げた稲葉浩志、侍ジャパン映画の主題歌を書き下ろす</h3><div class='summary'>稲葉浩志（B&#x27;z）の新曲「果てなき夜を」が、4月20日より配信されるNetflixドキュメンタリー映画「戦いの向こう 侍たちの記録 2026 WORLD BASEBALL CLASSIC」の主題歌に決定した。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag'>Netflix</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/music/news/668062' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='2e813c4aed01ddd9f0cba92beb3e7bd0' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 音楽/アニメ</span><span>2026-04-13 08:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'2e813c4aed01ddd9f0cba92beb3e7bd0')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>すとぷり、新生活に寄り添う「ハルイロハ」ミュージックビデオ公開</h3><div class='summary'>すとぷりの新曲「ハルイロハ」のミュージックビデオがYouTubeで公開された。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/music/news/668043' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
 <article class='card item-card score-4' data-cardid='e3c5799ac3603e44465ac53367499669' data-region='JP' data-score='4' data-platform='prime'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Prime Video新作</span><span>2025-03-27 16:00</span></div>
@@ -281,15 +291,6 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='lang-pane lang-ja'><h3>［インタビュー］「日本コンテンツは石油のようなもの」――マンガプロダクションズCEOに聞く，中東市場の特色とAnimeJapan出展の狙い</h3><div class='summary'>サウジアラビアを拠点に，日本のアニメやマンガ，ゲームなどを中東に送り出している「マンガプロダクションズ」が，今年もAnimeJapanに出展していた。今回もブースにお邪魔してきたので，CEOであるブカーリイサム氏のインタビューとあわせて，その様子をお伝えしよう。</div></div>
   <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
   <a class='open-btn' href='https://www.4gamer.net/games/991/G999110/20260410047/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='29a789197f179b5e545d0a7f061841d0' data-region='JP' data-score='3' data-platform='other'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 音楽/アニメ</span><span>2026-04-12 15:30</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'29a789197f179b5e545d0a7f061841d0')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>東京メルヘン倶楽部がメジャーデビュー！最大規模のおゆうぎ会で見据えたさらなる景色</h3><div class='summary'>東京メルヘン倶楽部が4月8日に東京・Zepp DiverCity（TOKYO）で“おゆうぎ会”「漆黒のZepp」を開催した。</div></div>
-  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
-  <a class='open-btn' href='https://natalie.mu/music/news/668034' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card ' data-cardid='05846ea7ab9e51a8699e172961d3f2a0' data-region='JP' data-score='3' data-platform='other'>
   <div class='card-top'>
@@ -381,15 +382,6 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag'>Prime</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
   <a class='open-btn' href='https://news.google.com/rss/articles/CBMiV0FVX3lxTFB3WTVFTWdtSjRVRTRrWWQwLW00amQyWHJuaFVEeEVTME9NTDdCdC1DcjVmaGtocE5CSUZPeU9UUzdjYXJiaFlmRXlvdElFR1lBSTI3emUyYw?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card ' data-cardid='80f3c8b767a62a63ed68ced49337ae9c' data-region='JP' data-score='2' data-platform='netflix'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Netflix新作</span><span>2026-04-08 10:02</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'80f3c8b767a62a63ed68ced49337ae9c')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>Netflix 2026年4月の配信作品一覧 実写ドラマ『九条の大罪』、空知英秋『だんでらいおん』ほかオリジナル映画×14、ドラマ×25、春アニメ×26作品配信 - uzurea.net</h3><div class='summary'>Netflix 2026年4月の配信作品一覧 実写ドラマ『九条の大罪』、空知英秋『だんでらいおん』ほかオリジナル映画×14、ドラマ×25、春アニメ×26作品配信 uzurea.net</div></div>
-  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag'>Netflix</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
-  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiVEFVX3lxTE5NajhHTWhXRHJlcWNmVk9KSFFlM3VWVGJwQWlmZ0NEYzI2ZnNOdTJ0azByUmRvbFZrdVNqZF96QnRKZUJuejdEdTM0NHdESlRnM1FVeQ?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
 <article class='card item-card ' data-cardid='75a94f8e6a16c78c43528295b4b31d01' data-region='JP' data-score='2' data-platform='netflix'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Netflix新作</span><span>2026-04-08 12:19</span></div>
@@ -440,7 +432,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
     <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Anime News Network</span><span>2026-04-11 21:15</span></div>
     <div class='card-lang-toggle'><button class='card-lang-btn active' onclick="switchCardLang(this,'en')">EN</button><button class='card-lang-btn' onclick="switchCardLang(this,'ja')">JA</button><button class='read-btn' onclick="markRead(this,'0ae09ea573436e9d5266a5f0d0f8ffe4')">既読</button></div>
   </div>
-  <div class='lang-pane lang-en'><h3>Actors Mackenyu, Tetsuo Kurata, Author Eiko Kadono Attend Anime NYC 2026 as Guests</h3><div class='summary'>Convention takes place from August 20 through August 23 at Javits Convention Center</div></div><div class='lang-pane lang-ja hidden'><h3>俳優の真剣佑、倉田てつお、原作者の角野栄子がアニメNYC 2026にゲスト出席</h3><div class='summary'>大会は8月20日から8月23日までジャビッツ コンベンション センターで開催されます</div></div>
+  <div class='lang-pane lang-en'><h3>Actors Mackenyu, Tetsuo Kurata, Author Eiko Kadono Attend Anime NYC 2026 as Guests</h3><div class='summary'>Convention takes place from August 20 through August 23 at Javits Convention Center</div></div><div class='lang-pane lang-ja hidden'><h3>アニメNYC 2026に俳優の真剣佑、倉田てつお、作家・角野栄子がゲスト出席</h3><div class='summary'>大会は8月20日から8月23日までジャビッツ コンベンション センターで開催されます</div></div>
   <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
   <a class='open-btn' href='https://www.animenewsnetwork.com/news/2026-04-11/actors-mackenyu-tetsuo-kurata-author-eiko-kadono-attend-anime-nyc-2026-as-guests/.236292' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -485,7 +477,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
     <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Anime News Network</span><span>2026-04-12 13:47</span></div>
     <div class='card-lang-toggle'><button class='card-lang-btn active' onclick="switchCardLang(this,'en')">EN</button><button class='card-lang-btn' onclick="switchCardLang(this,'ja')">JA</button><button class='read-btn' onclick="markRead(this,'7debeb36b9868a5495bd0e0a3f5b736e')">既読</button></div>
   </div>
-  <div class='lang-pane lang-en'><h3>Level 5&#x27;s Holy Horror Mansion Game Unveils New Trailer</h3><div class='summary'>RPG features &quot;ghost crafting&quot;</div></div><div class='lang-pane lang-ja hidden'><h3>Level 5 のホーリー ホラー マンション ゲームが新しいトレーラーを公開</h3><div class='summary'>RPGの特徴「ゴーストクラフト」</div></div>
+  <div class='lang-pane lang-en'><h3>Level 5&#x27;s Holy Horror Mansion Game Unveils New Trailer</h3><div class='summary'>RPG features &quot;ghost crafting&quot;</div></div><div class='lang-pane lang-ja hidden'><h3>レベル 5 のホーリー ホラー マンション ゲームが新しいトレーラーを公開</h3><div class='summary'>RPGの特徴「ゴーストクラフト」</div></div>
   <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
   <a class='open-btn' href='https://www.animenewsnetwork.com/news/2026-04-12/level-5-holy-horror-mansion-game-unveils-new-trailer/.236307' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -512,7 +504,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
     <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Anime News Network</span><span>2026-04-12 12:56</span></div>
     <div class='card-lang-toggle'><button class='card-lang-btn active' onclick="switchCardLang(this,'en')">EN</button><button class='card-lang-btn' onclick="switchCardLang(this,'ja')">JA</button><button class='read-btn' onclick="markRead(this,'1b0e464d95c4b1d50ba3d2cdf617657d')">既読</button></div>
   </div>
-  <div class='lang-pane lang-en'><h3>Manga Up! Global Adds My Classmate James, Princess of Desert Rain in English</h3><div class='summary'>My Classmate James centers on girl who finds it hard to speak; Princess of Desert Rain centers on girl with hidden powers</div></div><div class='lang-pane lang-ja hidden'><h3>マンガUP!グローバルが私のクラスメート、砂漠の雨のプリンセス、ジェームズを英語で追加</h3><div class='summary'>私のクラスメイトのジェームスは、話すのが難しい女の子を中心にしています。 『Princess of Desert Rain』は、隠された力を持つ少女を主人公にしています</div></div>
+  <div class='lang-pane lang-en'><h3>Manga Up! Global Adds My Classmate James, Princess of Desert Rain in English</h3><div class='summary'>My Classmate James centers on girl who finds it hard to speak; Princess of Desert Rain centers on girl with hidden powers</div></div><div class='lang-pane lang-ja hidden'><h3>マンガUP！グローバルが私のクラスメート、砂漠の雨のプリンセス、ジェームズを英語で追加</h3><div class='summary'>私のクラスメイトのジェームスは、話すのが難しい女の子を中心にしています。 『Princess of Desert Rain』は、隠された力を持つ少女を主人公にしています</div></div>
   <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
   <a class='open-btn' href='https://www.animenewsnetwork.com/news/2026-04-11/manga-up-global-adds-my-classmate-james-princess-of-desert-rain-in-english/.236299' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -580,7 +572,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <a class='open-btn' href='https://www.animenewsnetwork.com/news/2026-04-12/rascal-does-not-dream-of-a-dear-friend-film-unveils-tomoe-koga-visual/.236320' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div>
 </section>
-</div><footer>Watch Hub + — Generated at 2026-04-13 07:48</footer>
+</div><footer>Watch Hub + — Generated at 2026-04-13 08:14</footer>
 <script>
 function setPageLang(lang) {
   localStorage.setItem('page_lang_pref', lang);

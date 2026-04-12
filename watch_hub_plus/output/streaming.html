@@ -23,25 +23,26 @@ header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-fi
 .search{min-width:240px;background:#0b1320;border:1px solid var(--line);color:var(--text);padding:9px 12px;border-radius:10px}
 .main-grid,.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
 .grid.list{grid-template-columns:1fr}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.card,.mini-item,.category-panel{min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
 .card.score-5{border-left:4px solid #ffd700}
 .card.score-4{border-left:4px solid #4ea1ff}
 .card.is-read{opacity:.62}
-.card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-.card-meta{display:flex;gap:6px;flex-wrap:wrap;font-size:11px;color:var(--muted)}
+.card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;min-width:0;flex-wrap:wrap}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;font-size:11px;color:var(--muted);min-width:0;overflow-wrap:anywhere;word-break:break-word}
 .lang-badge,.tag{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700}
 .lang-badge.ja{background:#14375d;border-color:#4ea1ff}
 .lang-badge.en{background:#24301f;border-color:#15c39a}
 .tag-new{background:#17391e;border-color:#15c39a;color:#93ffd8}.tag-hot{background:#14375d;border-color:#4ea1ff}.tag-caution{background:#3f1b1d;border-color:#ff7b7b}.tag-neutral{background:#1d2635;border-color:#4b5b78}
-.tags{display:flex;gap:6px;flex-wrap:wrap}.summary{font-size:13px;line-height:1.7;color:#d6e0f0}.hidden{display:none!important}
-.card h3{margin:0;font-size:17px;line-height:1.45}.open-btn{margin-top:auto;display:inline-flex;justify-content:center;background:var(--accent2);border-color:var(--accent)}
-.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 12px}.section-head h2{margin:0;font-size:20px}.count-badge{color:var(--muted);font-size:12px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;min-width:0;overflow-wrap:anywhere;word-break:break-word}.summary{font-size:13px;line-height:1.7;color:#d6e0f0;overflow-wrap:anywhere;word-break:break-word}.hidden{display:none!important}
+.card h3{margin:0;font-size:17px;line-height:1.45;overflow-wrap:anywhere;word-break:break-word}.open-btn{margin-top:auto;display:inline-flex;justify-content:center;background:var(--accent2);border-color:var(--accent);max-width:100%;white-space:normal;text-align:center}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 12px;min-width:0;flex-wrap:wrap}.section-head h2{margin:0;font-size:20px;overflow-wrap:anywhere;word-break:break-word}.count-badge{color:var(--muted);font-size:12px;overflow-wrap:anywhere;word-break:break-word}
 .category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:0}
 .category-grid.single{grid-template-columns:repeat(3,minmax(0,1fr))}
 .category-panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}.mini-list{display:grid;gap:8px}.mini-item{padding:10px;border-radius:12px;background:#0c1422;border:1px solid #1d2a40}.mini-item a{font-size:13px;line-height:1.5}.mini-meta{font-size:11px;color:var(--muted);margin-top:4px}
 footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size:12px}
 @media(max-width:980px){.category-grid.single{grid-template-columns:1fr}}
-@media(max-width:760px){body{padding-top:0}.top{flex-direction:column}.title h1{font-size:24px}.right-controls{justify-content:flex-start}.search{min-width:0;width:100%}.nav{padding-bottom:8px}.nav a{font-size:13px;padding:9px 12px}.grid,.main-grid,.category-grid{grid-template-columns:1fr}}
+@media(max-width:760px){body{padding-top:0}.top{flex-direction:column}.title h1{font-size:24px}.right-controls{justify-content:flex-start}.search{min-width:0;width:100%}.nav{padding-bottom:8px}.nav a{font-size:13px;padding:9px 12px}.grid,.main-grid,.category-grid{grid-template-columns:1fr}.card,.category-panel,.mini-item{width:100%;max-width:100%}.card-top,.card-meta,.tags,.section-head{width:100%}.card h3{font-size:16px;line-height:1.4}.summary{font-size:13px;line-height:1.65}.open-btn{width:100%}}
 </style>
 </head>
 <body>
@@ -50,7 +51,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='top'>
     <div class='title'>
       <h1>🎭 Watch Hub + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 映画・配信・アニメ・ゲーム・芸能</span></h1>
-      <div class='sub'>更新日時：2026-04-13 07:48</div>
+      <div class='sub'>更新日時：2026-04-13 08:14</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -85,10 +86,10 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
 
 <section class='panel'>
   <div class='section-head'><h2>📺 配信プラットフォーム別 注目3件</h2><span class='count-badge'>Netflix / Prime / Disney+</span></div>
-  <div class='category-grid'><section class='category-panel'><div class='section-head'><h2>📺 Netflix 注目3件</h2><span class='count-badge'>配信タブ内フィルタ対応</span></div><div class='mini-list'><div class='mini-item' data-region='JP' data-platform='netflix'><a href='https://news.google.com/rss/articles/CBMia0FVX3lxTE9TOVRyWDVSV2QzYWZDNlRIUTM2N3dUbkZMV3o4MEtRT0F2OTZDUHhCY0FTeklCcDBSSTM5ZV82REFfMXJWVGJLM2J1aktTV3N4ZzJSdEFDY1JjN1d2S2k4aXUyb3lzR0xMNnVF?oc=5' target='_blank' rel='noopener noreferrer'>2026年配信の新作4作品を一挙発表！「喧嘩独学」 、『余命一年、男をかう』、「ブラックオークション〜禁断の入札〜」 、「二十世紀電氣目録-ユーレカ・エヴリカ-」 - About Netflix</a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-01-26 17:00</div></div><div class='mini-item' data-region='JP' data-platform='netflix'><a href='https://news.google.com/rss/articles/CBMiaEFVX3lxTE5IRzZrTHNDSGwzMnR4cjFtTnhYeDkwdE1lczJxMEUzbkc3d3VXOGw0MkZhdHdZOS0tZDh4anJ6NVdNTDdUN0JkTEFtOGdLUkd0NGZMLTNiblRZSUlpbjlkaW9JemhmcnV1?oc=5' target='_blank' rel='noopener noreferrer'>Netflix2026年4月公開の最新作！占い師・細木数子を戸田恵梨香が演じる衝撃作『地獄に堕ちるわよ』が配信開始 - Vogue Japan</a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-03-31 16:00</div></div><div class='mini-item' data-region='JP' data-platform='netflix'><a href='https://news.google.com/rss/articles/CBMiSEFVX3lxTE4zelBTYm5vSUxUTGMxZFVrdGVnaGdncGRydEJXR0VUeWdDWHJoS09Xc3J0VXY2QnVjWm93Ry12MFdPcG00THYtSA?oc=5' target='_blank' rel='noopener noreferrer'>Netflixで配信予定の新作・人気韓国ドラマ ラインナップ【2026年最新】 - 海外ドラマNAVI</a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-04-06 11:34</div></div></div></section><section class='category-panel'><div class='section-head'><h2>📺 Prime 注目3件</h2><span class='count-badge'>配信タブ内フィルタ対応</span></div><div class='mini-list'><div class='mini-item' data-region='JP' data-platform='prime'><a href='https://news.google.com/rss/articles/CBMiggFBVV95cUxNZlZEVHhjdjliVTlNbHgtc2NEY0lCUXNMRGhqeGEzbFhlaEIyTG8tWk85Q1RGalhxZW5KY1ZxcE5ZS1Z4WkIzaHFNMEtrOE56bTg3YWxUVk5xR1NRcUJvRlg0UEFNZTRTSjdEal9ETWZ5Uk5oX2RmWlA2cUd4cmN0dVRR?oc=5' target='_blank' rel='noopener noreferrer'>【2026年4月】Amazonプライムビデオおすすめ映画45選！ - オリコン顧客満足度ランキング</a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-04-01 16:00</div></div><div class='mini-item' data-region='JP' data-platform='prime'><a href='https://news.google.com/rss/articles/CBMiSEFVX3lxTE1OUDB2Q3ZqRThoTzRReDl5bDAxZGdFanI4THltNVFrNk1xTmV4MV9EVi1sWkJyc1hBX0M1NHNKR2RWLVAtV2lnaw?oc=5' target='_blank' rel='noopener noreferrer'>Amazon Prime Videoで配信予定の新作韓国ドラマ【2026年最新】 - 海外ドラマNAVI</a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-04-07 12:03</div></div><div class='mini-item' data-region='JP' data-platform='prime'><a href='https://news.google.com/rss/articles/CBMiXkFVX3lxTFBqNTB1WHdENUd6Y2w3OGhBNVF4d1R3X083OFBzcXRSSm5WQ2RLLUtBcnM4TGZJeU9WZDRuWDVLTHVEeUVhMjh5VkM0WGNrOTBOUU1UeXRsc2FlLUxBbnc?oc=5' target='_blank' rel='noopener noreferrer'>『違う惑星の変な恋人』木村聡志監督が描く、 ユーモラスでほろ苦い10代の青春事情！ - intro.ne.jp</a><div class='mini-meta'>🇯🇵 国内 / ★3 / 2025-10-18 16:00</div></div></div></section><section class='category-panel'><div class='section-head'><h2>📺 Disney+ 注目3件</h2><span class='count-badge'>配信タブ内フィルタ対応</span></div><div class='mini-list'><div class='mini-item' data-region='JP' data-platform='disney'><a href='https://news.google.com/rss/articles/CBMiekFVX3lxTE9QQzRGb3Z6dm9jeDNTN3ROUE44WGlIWUw4Sk1aWHJyN2JDU0hOWE1lLXR0cXplenhDQkQzM1A0cEJ0bVoyREZ4NnBrZlRQRXQxWEg1NElwa3ZKY0x6alpLeWhsWDNHNGpGZDFnbEM0V2FnUkU4YVVCUkRn?oc=5' target='_blank' rel='noopener noreferrer'>ディズニープラス見て欲しいおすすめ55作品厳選！新作もチェック【2026年】 - 株式会社ショーケース</a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-04-01 16:00</div></div><div class='mini-item' data-region='JP' data-platform='disney'><a href='https://news.google.com/rss/articles/CBMihAFBVV95cUxNamZrbjBvcVdRWFRCWmtvLTAwbDVhVXpZajNNSVFPM1dnX29WSkdPYndYZGE5UU9kZkl2bzU4OFpUeUJjRHdnNEwwYTVrZnZKdm5USjBKN3A1aVFPUGlMM1BoaVBPSTY5Ui10T0hLcEFmYXo1X3FBM1Q5b0JkbDhmOHdIZ08?oc=5' target='_blank' rel='noopener noreferrer'>ディズニープラスで見れるおすすめ映画・ドラマ50選！ジャンル別紹介 - オリコン顧客満足度ランキング</a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-04-03 16:00</div></div><div class='mini-item' data-region='JP' data-platform='disney'><a href='https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBkSzNFYlhKOVRmb1lQc3JZTktiTDFBV0h5VHhHbDNickV1aWt3TzFOMnVMU3MyRWExUi1DeFhMRmQ5YjVsOXp3REpUUk5BUXM2aF9QMW1qSHpPR3M0WlZHMS1NdmsxWE0?oc=5' target='_blank' rel='noopener noreferrer'>映画『ズートピア２』が4月15日(水)よりディズニープラスで見放題独占配信開始！｜Disney+（ディズニープラス）公式 - ディズニープラス</a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-04-06 07:40</div></div></div></section></div>
+  <div class='category-grid'><section class='category-panel'><div class='section-head'><h2>📺 Netflix 注目3件</h2><span class='count-badge'>配信タブ内フィルタ対応</span></div><div class='mini-list'><div class='mini-item' data-region='JP' data-platform='netflix'><a href='https://news.google.com/rss/articles/CBMia0FVX3lxTE9TOVRyWDVSV2QzYWZDNlRIUTM2N3dUbkZMV3o4MEtRT0F2OTZDUHhCY0FTeklCcDBSSTM5ZV82REFfMXJWVGJLM2J1aktTV3N4ZzJSdEFDY1JjN1d2S2k4aXUyb3lzR0xMNnVF?oc=5' target='_blank' rel='noopener noreferrer'>2026年配信の新作4作品を一挙発表！「喧嘩独学」 、『余命一年、男をかう』、「ブラックオークション〜禁断の入札〜」 、「二十世紀電氣目録-ユーレカ・エヴリカ-」 - About Netflix</a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-01-26 17:00</div></div><div class='mini-item' data-region='JP' data-platform='netflix'><a href='https://news.google.com/rss/articles/CBMiaEFVX3lxTE5IRzZrTHNDSGwzMnR4cjFtTnhYeDkwdE1lczJxMEUzbkc3d3VXOGw0MkZhdHdZOS0tZDh4anJ6NVdNTDdUN0JkTEFtOGdLUkd0NGZMLTNiblRZSUlpbjlkaW9JemhmcnV1?oc=5' target='_blank' rel='noopener noreferrer'>Netflix2026年4月公開の最新作！占い師・細木数子を戸田恵梨香が演じる衝撃作『地獄に堕ちるわよ』が配信開始 - Vogue Japan</a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-03-31 16:00</div></div><div class='mini-item' data-region='JP' data-platform='netflix'><a href='https://news.google.com/rss/articles/CBMiSEFVX3lxTE4zelBTYm5vSUxUTGMxZFVrdGVnaGdncGRydEJXR0VUeWdDWHJoS09Xc3J0VXY2QnVjWm93Ry12MFdPcG00THYtSA?oc=5' target='_blank' rel='noopener noreferrer'>Netflixで配信予定の新作・人気韓国ドラマ ラインナップ【2026年最新】 - 海外ドラマNAVI</a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-04-06 11:34</div></div></div></section><section class='category-panel'><div class='section-head'><h2>📺 Prime 注目3件</h2><span class='count-badge'>配信タブ内フィルタ対応</span></div><div class='mini-list'><div class='mini-item' data-region='JP' data-platform='prime'><a href='https://news.google.com/rss/articles/CBMiggFBVV95cUxNZlZEVHhjdjliVTlNbHgtc2NEY0lCUXNMRGhqeGEzbFhlaEIyTG8tWk85Q1RGalhxZW5KY1ZxcE5ZS1Z4WkIzaHFNMEtrOE56bTg3YWxUVk5xR1NRcUJvRlg0UEFNZTRTSjdEal9ETWZ5Uk5oX2RmWlA2cUd4cmN0dVRR?oc=5' target='_blank' rel='noopener noreferrer'>【2026年4月】Amazonプライムビデオおすすめ映画45選！ - オリコン顧客満足度ランキング</a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-04-01 16:00</div></div><div class='mini-item' data-region='JP' data-platform='prime'><a href='https://news.google.com/rss/articles/CBMiSEFVX3lxTE1OUDB2Q3ZqRThoTzRReDl5bDAxZGdFanI4THltNVFrNk1xTmV4MV9EVi1sWkJyc1hBX0M1NHNKR2RWLVAtV2lnaw?oc=5' target='_blank' rel='noopener noreferrer'>Amazon Prime Videoで配信予定の新作韓国ドラマ【2026年最新】 - 海外ドラマNAVI</a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-04-07 12:03</div></div><div class='mini-item' data-region='JP' data-platform='prime'><a href='https://news.google.com/rss/articles/CBMif0FVX3lxTE8yYlhyRE9GZHJ4a1FZRUc1RXlJcl9tNnFDcVBxTVRxMUhDMnhpNTRjbk9hMk1RamFGRzJ2MFhQc0F3dlRMWkhvZlFLLVVuRzdEVndIbHRlUzhfLUxIaXV4U2w2SXBTblQwYzR5T1pUd1JmSjJmblVhcXZ1alEtZEk?oc=5' target='_blank' rel='noopener noreferrer'>パク・ソジュン、待望の新主演ドラマがPrimeVideoにて12／7～配信決定！｜STORY（magacol） - Yahoo!ニュース</a><div class='mini-meta'>🇯🇵 国内 / ★3 / 2025-12-02 17:00</div></div></div></section><section class='category-panel'><div class='section-head'><h2>📺 Disney+ 注目3件</h2><span class='count-badge'>配信タブ内フィルタ対応</span></div><div class='mini-list'><div class='mini-item' data-region='JP' data-platform='disney'><a href='https://news.google.com/rss/articles/CBMiekFVX3lxTE9QQzRGb3Z6dm9jeDNTN3ROUE44WGlIWUw4Sk1aWHJyN2JDU0hOWE1lLXR0cXplenhDQkQzM1A0cEJ0bVoyREZ4NnBrZlRQRXQxWEg1NElwa3ZKY0x6alpLeWhsWDNHNGpGZDFnbEM0V2FnUkU4YVVCUkRn?oc=5' target='_blank' rel='noopener noreferrer'>ディズニープラス見て欲しいおすすめ55作品厳選！新作もチェック【2026年】 - 株式会社ショーケース</a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-04-01 16:00</div></div><div class='mini-item' data-region='JP' data-platform='disney'><a href='https://news.google.com/rss/articles/CBMihAFBVV95cUxNamZrbjBvcVdRWFRCWmtvLTAwbDVhVXpZajNNSVFPM1dnX29WSkdPYndYZGE5UU9kZkl2bzU4OFpUeUJjRHdnNEwwYTVrZnZKdm5USjBKN3A1aVFPUGlMM1BoaVBPSTY5Ui10T0hLcEFmYXo1X3FBM1Q5b0JkbDhmOHdIZ08?oc=5' target='_blank' rel='noopener noreferrer'>ディズニープラスで見れるおすすめ映画・ドラマ50選！ジャンル別紹介 - オリコン顧客満足度ランキング</a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-04-03 16:00</div></div><div class='mini-item' data-region='JP' data-platform='disney'><a href='https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBkSzNFYlhKOVRmb1lQc3JZTktiTDFBV0h5VHhHbDNickV1aWt3TzFOMnVMU3MyRWExUi1DeFhMRmQ5YjVsOXp3REpUUk5BUXM2aF9QMW1qSHpPR3M0WlZHMS1NdmsxWE0?oc=5' target='_blank' rel='noopener noreferrer'>映画『ズートピア２』が4月15日(水)よりディズニープラスで見放題独占配信開始！｜Disney+（ディズニープラス）公式 - ディズニープラス</a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-04-06 07:40</div></div></div></section></div>
 </section>
 <section>
-  <div class='section-head'><h2>📰 最新記事</h2><span class='count-badge'>53件</span></div>
+  <div class='section-head'><h2>📰 最新記事</h2><span class='count-badge'>54件</span></div>
   <div class='grid'>
 <article class='card item-card score-5' data-cardid='e9346f85074b3353a2d19446a3976b23' data-region='JP' data-score='5' data-platform='other'>
   <div class='card-top'>
@@ -216,15 +217,6 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#00a8e122;border-color:#00a8e1;color:#00a8e1'>📦 Prime</span><span class='tag'>Prime</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
   <a class='open-btn' href='https://news.google.com/rss/articles/CBMiSEFVX3lxTE1OUDB2Q3ZqRThoTzRReDl5bDAxZGdFanI4THltNVFrNk1xTmV4MV9EVi1sWkJyc1hBX0M1NHNKR2RWLVAtV2lnaw?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card score-4' data-cardid='dbe5f94c2e8a5a78eb9803d183e712d6' data-region='JP' data-score='4' data-platform='disney'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Disney+新作</span><span>2026-04-09 16:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'dbe5f94c2e8a5a78eb9803d183e712d6')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>ディズニープラスの料金プランを徹底比較！お得な利用方法を解説 - オリコン顧客満足度ランキング</h3><div class='summary'>ディズニープラスの料金プランを徹底比較！お得な利用方法を解説 オリコン顧客満足度ランキング</div></div>
-  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#8cc7ff22;border-color:#8cc7ff;color:#8cc7ff'>✨ Disney+</span><span class='tag'>Disney+</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
-  <a class='open-btn' href='https://news.google.com/rss/articles/CBMieEFVX3lxTFB0d1h2TjVnRW5aTXBldloxeEYtN3FTWFkycHpWT0pIdWJXaTRPSzJxa3pwUE1zR043eGlRNnZ1MjhaOXJveHhhR0VBZi1TdGpRaVRtUnROVjNaU1YxQ2dYbk8yREktWjNZZzZyQ241UWVsVGlHNWh0Sw?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
 <article class='card item-card score-4' data-cardid='a1bddbd303266964b57d6ec28669da2e' data-region='JP' data-score='4' data-platform='netflix'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Netflix新作</span><span>2026-04-09 16:00</span></div>
@@ -251,15 +243,6 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='lang-pane lang-ja'><h3>Netflix週間視聴ランキング（映画）：『爆弾』初登場1位、劇場版『名探偵コナン』3作品がランクイン、『HUMINT/ヒューミント』は4位に【3/30/26 - 4/5/26】（オリコン） - Yahoo!ニュース</h3><div class='summary'>Netflix週間視聴ランキング（映画）：『爆弾』初登場1位、劇場版『名探偵コナン』3作品がランクイン、『HUMINT/ヒューミント』は4位に【3/30/26 - 4/5/26】（オリコン） Yahoo!ニュース</div></div>
   <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 Netflix</span><span class='tag'>Netflix</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
   <a class='open-btn' href='https://news.google.com/rss/articles/CBMif0FVX3lxTE5uWGk4Y2NpMDlxRF9KRVQ0YXJBZ3oyQjMzQlNRcjFSaTRlcjFhZ1l4My1tcG9UcmNkdFVseHFjQmQycmp4b1FLM0o5c3BrOVdVZjdDblFVYTJDSGdLaDlORTh1WWsxZ1A5SGFoSk9EcWdoTWpjejdoS1RoaTVXQkE?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='e15d0365d308100e4c78e253bc14aa33' data-region='JP' data-score='3' data-platform='prime'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Prime Video新作</span><span>2025-10-18 16:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'e15d0365d308100e4c78e253bc14aa33')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>『違う惑星の変な恋人』木村聡志監督が描く、 ユーモラスでほろ苦い10代の青春事情！ - intro.ne.jp</h3><div class='summary'>『違う惑星の変な恋人』木村聡志監督が描く、 ユーモラスでほろ苦い10代の青春事情！ intro.ne.jp</div></div>
-  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#00a8e122;border-color:#00a8e1;color:#00a8e1'>📦 Prime</span><span class='tag'>Prime</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
-  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiXkFVX3lxTFBqNTB1WHdENUd6Y2w3OGhBNVF4d1R3X083OFBzcXRSSm5WQ2RLLUtBcnM4TGZJeU9WZDRuWDVLTHVEeUVhMjh5VkM0WGNrOTBOUU1UeXRsc2FlLUxBbnc?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card ' data-cardid='39c7f30715fb12b6c7072c626a93cd91' data-region='JP' data-score='3' data-platform='disney'>
   <div class='card-top'>
@@ -305,6 +288,15 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='lang-pane lang-ja'><h3>【ネトフリ】「Netflix」2026年2月の配信ラインナップが公開！ - スクリーンオンライン</h3><div class='summary'>【ネトフリ】「Netflix」2026年2月の配信ラインナップが公開！ スクリーンオンライン</div></div>
   <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 Netflix</span><span class='tag'>Netflix</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★3</span></div>
   <a class='open-btn' href='https://news.google.com/rss/articles/CBMiTEFVX3lxTE10OVZyU04ta3lqMkRjNjl3b25GMnJhTHJHT0Z0Zks3LVg1YmV2TFBxOW9IMFBNQzIyQUdKSFkyaFdOcW1DTDVhM0xMUk0?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='04f34416868235dae4d702540d910873' data-region='JP' data-score='3' data-platform='disney'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Disney+新作</span><span>2026-01-26 17:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'04f34416868235dae4d702540d910873')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【ディズニープラス】「Disney+」2026年2月の注目の配信作が発表！ - スクリーンオンライン</h3><div class='summary'>【ディズニープラス】「Disney+」2026年2月の注目の配信作が発表！ スクリーンオンライン</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#8cc7ff22;border-color:#8cc7ff;color:#8cc7ff'>✨ Disney+</span><span class='tag'>Disney+</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiTEFVX3lxTFA0VFZPX0ZwSTI1OWpxRjJwS3pJeXI0ZlBPV1hJVnlIc0Y5RzRYOFU1dFVidUlFVHhORE9MMHd3WFMxN1ctQTNZSVVCcVM?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card ' data-cardid='fe4ee0ea7b09045bd3b7a96d53be3b30' data-region='JP' data-score='3' data-platform='prime'>
   <div class='card-top'>
@@ -378,6 +370,15 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 Netflix</span><span class='tag'>Netflix</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
   <a class='open-btn' href='https://news.google.com/rss/articles/CBMiSkFVX3lxTFBrdVdSU0dza2lwUXJ4UzIxWmdtcGVDNkJCSGtZazlfS2FuTHpWYTgyeHNlcmgwVFp1LWxYZ09pX05lQnlJVlMxSmln?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
+<article class='card item-card ' data-cardid='21f037ed74e8bab5344dd773bb4a4e5b' data-region='JP' data-score='3' data-platform='netflix'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Netflix新作</span><span>2026-04-13 08:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'21f037ed74e8bab5344dd773bb4a4e5b')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>稲葉浩志、WBCに挑んだ侍ジャパンのNetflixドキュメンタリー映画主題歌として新曲書き下ろし - 映画 - ニュース - クランクイン！</h3><div class='summary'>稲葉浩志、WBCに挑んだ侍ジャパンのNetflixドキュメンタリー映画主題歌として新曲書き下ろし - 映画 - ニュース クランクイン！</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 Netflix</span><span class='tag'>Netflix</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiTEFVX3lxTE1mZGsyQ21hTFgzUV9ZakFWbkpZeVd4dmUyQXIweWlKRU44YTJxTDVtNUlsUGJ5T0dmdVRlT3ZwTnp3WGszM2V6NlVtTXU?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
 <article class='card item-card ' data-cardid='a839177ff1046f331b2a6d15d6b2846c' data-region='JP' data-score='2' data-platform='prime'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Prime Video新作</span><span>2025-04-08 16:00</span></div>
@@ -404,6 +405,15 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='lang-pane lang-ja'><h3>【PrimeVideo】2025年9月の新着作品:『コンフィデンスマンKR』『セフレと恋人の境界線』など独占配信 - オリコンニュース</h3><div class='summary'>【PrimeVideo】2025年9月の新着作品:『コンフィデンスマンKR』『セフレと恋人の境界線』など独占配信 オリコンニュース</div></div>
   <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#00a8e122;border-color:#00a8e1;color:#00a8e1'>📦 Prime</span><span class='tag'>Prime</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
   <a class='open-btn' href='https://news.google.com/rss/articles/CBMiVkFVX3lxTE5jV016LTluTUVlREl1OEtxeDVtMlBNaWJYdXk1Q3N0T3YyS3R3aFZmcXB4NlhkamMxaktjTXhBb0N4c1JaVEZTM0NCa2xEUkFCU1BkRUZn?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='f75f30e061f7c100ae2ab9fed2e75066' data-region='JP' data-score='2' data-platform='prime'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Prime Video新作</span><span>2025-12-08 17:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'f75f30e061f7c100ae2ab9fed2e75066')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>パク・ソジュン＆ウォン・ジアン、緊急来日が決定！新ドラマ「明日はきっと」12月7日よりPrimeVideoで独占配信（Kstyle） - Yahoo!ニュース</h3><div class='summary'>パク・ソジュン＆ウォン・ジアン、緊急来日が決定！新ドラマ「明日はきっと」12月7日よりPrimeVideoで独占配信（Kstyle） Yahoo!ニュース</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#00a8e122;border-color:#00a8e1;color:#00a8e1'>📦 Prime</span><span class='tag'>Prime</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMif0FVX3lxTE9MbTVkNVpkYkFMcXBXbGZWTlJJeUpBLTU3OE9qSHI1WUdtRzNjcVU0bDQ5VWloRnlxQll5cHJYbTQyMlBwQjBOQm1qZGV0Mlh3NmZQTnAyUFltQjZmVGlDTWdoVTZHOEUzdm1meGFxM3N1M0loaDE0YkZBd1NSQjg?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card ' data-cardid='43c0c69c8e59a897e10fe422cb43ae9c' data-region='JP' data-score='2' data-platform='prime'>
   <div class='card-top'>
@@ -568,7 +578,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <a class='open-btn' href='https://news.google.com/rss/articles/CBMiaEFVX3lxTE1YckphWWJ6Z2wyV18wUm5FQjFqNXM3WVRRTVVTczZhVHBkTGRKVXVkMzkwcjA1OExWZmMyOENIZXI1cThSVmJYaGlieDBtSTBRMV9wckNXOC1YTldRZkR1dHNtVXM5UjJK?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div>
 </section>
-</div><footer>Watch Hub + — Generated at 2026-04-13 07:48</footer>
+</div><footer>Watch Hub + — Generated at 2026-04-13 08:14</footer>
 <script>
 function setPageLang(lang) {
   localStorage.setItem('page_lang_pref', lang);

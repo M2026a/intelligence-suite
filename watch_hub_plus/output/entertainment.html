@@ -23,25 +23,26 @@ header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-fi
 .search{min-width:240px;background:#0b1320;border:1px solid var(--line);color:var(--text);padding:9px 12px;border-radius:10px}
 .main-grid,.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
 .grid.list{grid-template-columns:1fr}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.card,.mini-item,.category-panel{min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
 .card.score-5{border-left:4px solid #ffd700}
 .card.score-4{border-left:4px solid #4ea1ff}
 .card.is-read{opacity:.62}
-.card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-.card-meta{display:flex;gap:6px;flex-wrap:wrap;font-size:11px;color:var(--muted)}
+.card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;min-width:0;flex-wrap:wrap}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;font-size:11px;color:var(--muted);min-width:0;overflow-wrap:anywhere;word-break:break-word}
 .lang-badge,.tag{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700}
 .lang-badge.ja{background:#14375d;border-color:#4ea1ff}
 .lang-badge.en{background:#24301f;border-color:#15c39a}
 .tag-new{background:#17391e;border-color:#15c39a;color:#93ffd8}.tag-hot{background:#14375d;border-color:#4ea1ff}.tag-caution{background:#3f1b1d;border-color:#ff7b7b}.tag-neutral{background:#1d2635;border-color:#4b5b78}
-.tags{display:flex;gap:6px;flex-wrap:wrap}.summary{font-size:13px;line-height:1.7;color:#d6e0f0}.hidden{display:none!important}
-.card h3{margin:0;font-size:17px;line-height:1.45}.open-btn{margin-top:auto;display:inline-flex;justify-content:center;background:var(--accent2);border-color:var(--accent)}
-.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 12px}.section-head h2{margin:0;font-size:20px}.count-badge{color:var(--muted);font-size:12px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;min-width:0;overflow-wrap:anywhere;word-break:break-word}.summary{font-size:13px;line-height:1.7;color:#d6e0f0;overflow-wrap:anywhere;word-break:break-word}.hidden{display:none!important}
+.card h3{margin:0;font-size:17px;line-height:1.45;overflow-wrap:anywhere;word-break:break-word}.open-btn{margin-top:auto;display:inline-flex;justify-content:center;background:var(--accent2);border-color:var(--accent);max-width:100%;white-space:normal;text-align:center}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 12px;min-width:0;flex-wrap:wrap}.section-head h2{margin:0;font-size:20px;overflow-wrap:anywhere;word-break:break-word}.count-badge{color:var(--muted);font-size:12px;overflow-wrap:anywhere;word-break:break-word}
 .category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:0}
 .category-grid.single{grid-template-columns:repeat(3,minmax(0,1fr))}
 .category-panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}.mini-list{display:grid;gap:8px}.mini-item{padding:10px;border-radius:12px;background:#0c1422;border:1px solid #1d2a40}.mini-item a{font-size:13px;line-height:1.5}.mini-meta{font-size:11px;color:var(--muted);margin-top:4px}
 footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size:12px}
 @media(max-width:980px){.category-grid.single{grid-template-columns:1fr}}
-@media(max-width:760px){body{padding-top:0}.top{flex-direction:column}.title h1{font-size:24px}.right-controls{justify-content:flex-start}.search{min-width:0;width:100%}.nav{padding-bottom:8px}.nav a{font-size:13px;padding:9px 12px}.grid,.main-grid,.category-grid{grid-template-columns:1fr}}
+@media(max-width:760px){body{padding-top:0}.top{flex-direction:column}.title h1{font-size:24px}.right-controls{justify-content:flex-start}.search{min-width:0;width:100%}.nav{padding-bottom:8px}.nav a{font-size:13px;padding:9px 12px}.grid,.main-grid,.category-grid{grid-template-columns:1fr}.card,.category-panel,.mini-item{width:100%;max-width:100%}.card-top,.card-meta,.tags,.section-head{width:100%}.card h3{font-size:16px;line-height:1.4}.summary{font-size:13px;line-height:1.65}.open-btn{width:100%}}
 </style>
 </head>
 <body>
@@ -50,7 +51,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='top'>
     <div class='title'>
       <h1>🎭 Watch Hub + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 映画・配信・アニメ・ゲーム・芸能</span></h1>
-      <div class='sub'>更新日時：2026-04-13 07:48</div>
+      <div class='sub'>更新日時：2026-04-13 08:14</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -327,15 +328,6 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
   <a class='open-btn' href='https://natalie.mu/owarai/news/667799' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card score-5' data-cardid='0ee16789ffcdcc960f416892d4ae73e2' data-region='JP' data-score='5' data-platform='other'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-12 13:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'0ee16789ffcdcc960f416892d4ae73e2')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>松本若菜が「あさイチ」プレミアムトークに登場、“憧れの先輩”鈴木保奈美はVTR出演</h3><div class='summary'>松本若菜が、4月17日オンエアのNHK総合「あさイチ」プレミアムトークに出演。プレミアムドラマ「対決」で共演した“松本憧れの先輩”鈴木保奈美もVTRインタビューゲストとして登場する。</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
-  <a class='open-btn' href='https://natalie.mu/eiga/news/668015' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
 <article class='card item-card score-5' data-cardid='8363f1725405e2540618e8815e38f756' data-region='JP' data-score='5' data-platform='other'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-12 13:00</span></div>
@@ -344,6 +336,15 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='lang-pane lang-ja'><h3>蛍原徹、ウド鈴木、ドランク鈴木、東幹久が参加「ガキ使」なんやったっけ部</h3><div class='summary'>本日4月12日（日）放送の「ダウンタウンのガキの使いやあらへんで！」（日本テレビ系）で「なんやったっけ部」と題した企画が展開され、蛍原徹、キャイ～ン・ウド鈴木、ドランクドラゴン鈴木、東幹久が出演する。</div></div>
   <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
   <a class='open-btn' href='https://natalie.mu/owarai/news/668012' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='0ee16789ffcdcc960f416892d4ae73e2' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-12 13:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'0ee16789ffcdcc960f416892d4ae73e2')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>松本若菜が「あさイチ」プレミアムトークに登場、“憧れの先輩”鈴木保奈美はVTR出演</h3><div class='summary'>松本若菜が、4月17日オンエアのNHK総合「あさイチ」プレミアムトークに出演。プレミアムドラマ「対決」で共演した“松本憧れの先輩”鈴木保奈美もVTRインタビューゲストとして登場する。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/eiga/news/668015' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card score-5' data-cardid='5a98cf51c2d9e9484594adcaa72fa4e8' data-region='JP' data-score='5' data-platform='other'>
   <div class='card-top'>
@@ -458,7 +459,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
     <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Anime News Network</span><span>2026-04-11 21:15</span></div>
     <div class='card-lang-toggle'><button class='card-lang-btn active' onclick="switchCardLang(this,'en')">EN</button><button class='card-lang-btn' onclick="switchCardLang(this,'ja')">JA</button><button class='read-btn' onclick="markRead(this,'0ae09ea573436e9d5266a5f0d0f8ffe4')">既読</button></div>
   </div>
-  <div class='lang-pane lang-en'><h3>Actors Mackenyu, Tetsuo Kurata, Author Eiko Kadono Attend Anime NYC 2026 as Guests</h3><div class='summary'>Convention takes place from August 20 through August 23 at Javits Convention Center</div></div><div class='lang-pane lang-ja hidden'><h3>俳優の真剣佑、倉田てつお、原作者の角野栄子がアニメNYC 2026にゲスト出席</h3><div class='summary'>大会は8月20日から8月23日までジャビッツ コンベンション センターで開催されます</div></div>
+  <div class='lang-pane lang-en'><h3>Actors Mackenyu, Tetsuo Kurata, Author Eiko Kadono Attend Anime NYC 2026 as Guests</h3><div class='summary'>Convention takes place from August 20 through August 23 at Javits Convention Center</div></div><div class='lang-pane lang-ja hidden'><h3>アニメNYC 2026に俳優の真剣佑、倉田てつお、作家・角野栄子がゲスト出席</h3><div class='summary'>大会は8月20日から8月23日までジャビッツ コンベンション センターで開催されます</div></div>
   <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
   <a class='open-btn' href='https://www.animenewsnetwork.com/news/2026-04-11/actors-mackenyu-tetsuo-kurata-author-eiko-kadono-attend-anime-nyc-2026-as-guests/.236292' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -472,7 +473,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <a class='open-btn' href='https://www.animenewsnetwork.com/news/2026-04-11/ichijoma-mankitsu-gurashi-anime-reveals-cast/.236306' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div>
 </section>
-</div><footer>Watch Hub + — Generated at 2026-04-13 07:48</footer>
+</div><footer>Watch Hub + — Generated at 2026-04-13 08:14</footer>
 <script>
 function setPageLang(lang) {
   localStorage.setItem('page_lang_pref', lang);

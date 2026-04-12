@@ -222,12 +222,18 @@ jobs:
         run: python app/main.py
         continue-on-error: true
 
+      - name: watch_hub_plus を実行
+        working-directory: ./watch_hub_plus
+        run: python app/main.py
+        continue-on-error: true
+
       - name: 成果物をアップロード
         uses: actions/upload-artifact@v4
         with:
           name: group4-html
           path: |
             smart_news_viewer/output/*.html
+            watch_hub_plus/output/*.html
           if-no-files-found: warn
 
   commit:
@@ -272,5 +278,6 @@ jobs:
           git add gadget_plus/output/*.html || true
           git add sports_plus/output/*.html || true
           git add smart_news_viewer/output/*.html || true
+          git add watch_hub_plus/output/*.html || true
           git diff --staged --quiet || git commit -m "parallel update $(TZ=Asia/Tokyo date +'%Y-%m-%d %H:%M JST')"
           git push

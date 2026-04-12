@@ -29,6 +29,7 @@ from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
 
 import feedparser
+import requests
 from deep_translator import GoogleTranslator
 
 ROOT = Path(__file__).resolve().parent.parent

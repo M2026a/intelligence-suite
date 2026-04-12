@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Watch Hub +</title>
+<style>
+:root{--bg:#08111e;--panel:#101a2a;--panel2:#0c1523;--line:#1f2b40;--text:#eef4ff;--muted:#93a4bf;--accent:#4ea1ff;--accent2:#15314f}
+*{box-sizing:border-box}html,body{margin:0;padding:0;background:linear-gradient(180deg,#08111e 0%,#0c1627 100%);color:var(--text);font-family:Inter,'Hiragino Sans','Yu Gothic UI',sans-serif}
+a{color:inherit;text-decoration:none}body{padding-top:0}
+.wrap,.main{width:min(1280px,94vw);margin:0 auto}
+header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:18px 0 12px}
+.title h1{margin:0;font-size:28px;line-height:1.2}.sub{margin-top:6px;color:var(--muted);font-size:13px}
+.nav{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0 12px}.nav a{padding:10px 14px;border-radius:10px;background:var(--panel2);border:1px solid var(--line);font-size:14px;font-weight:700}.nav a.active{background:var(--accent2);border-color:var(--accent);color:#eef6ff}.filters-panel{margin-bottom:18px}
+.page-lang-btn,.card-lang-btn,.read-btn,.flt-btn,.open-btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer}
+.page-lang-btn.active,.card-lang-btn.active,.flt-btn.active{background:var(--accent2);border-color:var(--accent)}
+.right-controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:18px}
+.main > .panel:first-child{position:static}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:0}
+.filter-label{font-size:12px;color:var(--muted);font-weight:700}
+.search{min-width:240px;background:#0b1320;border:1px solid var(--line);color:var(--text);padding:9px 12px;border-radius:10px}
+.main-grid,.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.grid.list{grid-template-columns:1fr}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.card.score-5{border-left:4px solid #ffd700}
+.card.score-4{border-left:4px solid #4ea1ff}
+.card.is-read{opacity:.62}
+.card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;font-size:11px;color:var(--muted)}
+.lang-badge,.tag{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700}
+.lang-badge.ja{background:#14375d;border-color:#4ea1ff}
+.lang-badge.en{background:#24301f;border-color:#15c39a}
+.tag-new{background:#17391e;border-color:#15c39a;color:#93ffd8}.tag-hot{background:#14375d;border-color:#4ea1ff}.tag-caution{background:#3f1b1d;border-color:#ff7b7b}.tag-neutral{background:#1d2635;border-color:#4b5b78}
+.tags{display:flex;gap:6px;flex-wrap:wrap}.summary{font-size:13px;line-height:1.7;color:#d6e0f0}.hidden{display:none!important}
+.card h3{margin:0;font-size:17px;line-height:1.45}.open-btn{margin-top:auto;display:inline-flex;justify-content:center;background:var(--accent2);border-color:var(--accent)}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 12px}.section-head h2{margin:0;font-size:20px}.count-badge{color:var(--muted);font-size:12px}
+.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:0}
+.category-grid.single{grid-template-columns:repeat(3,minmax(0,1fr))}
+.category-panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}.mini-list{display:grid;gap:8px}.mini-item{padding:10px;border-radius:12px;background:#0c1422;border:1px solid #1d2a40}.mini-item a{font-size:13px;line-height:1.5}.mini-meta{font-size:11px;color:var(--muted);margin-top:4px}
+footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size:12px}
+@media(max-width:980px){.category-grid.single{grid-template-columns:1fr}}
+@media(max-width:760px){body{padding-top:0}.top{flex-direction:column}.title h1{font-size:24px}.right-controls{justify-content:flex-start}.search{min-width:0;width:100%}.nav{padding-bottom:8px}.nav a{font-size:13px;padding:9px 12px}.grid,.main-grid,.category-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class='wrap'>
+  <div class='top'>
+    <div class='title'>
+      <h1>🎭 Watch Hub + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 映画・配信・アニメ・ゲーム・芸能</span></h1>
+      <div class='sub'>更新日時：2026-04-12 22:52</div>
+    </div>
+    <div class='right-controls'>
+      <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
+      <button class='page-lang-btn' id='btnPageJA' onclick="setPageLang('ja')">🇯🇵 日本語表示</button>
+    </div>
+  </div>
+  <nav class='nav'><a href="index.html" class="">📋 メイン</a><a href="movie.html" class="active">🎬 映画</a><a href="streaming.html" class="">📺 配信</a><a href="anime.html" class="">🎌 アニメ</a><a href="game.html" class="">🎮 ゲーム</a><a href="entertainment.html" class="">⭐ 芸能</a><a href="trend.html" class="">📈 トレンド</a><a href="analysis.html" class="">📊 分析</a></nav>
+</div>
+</header>
+<div class='main'>
+
+<div class='panel'>
+  <div class='filters'>
+    <span class='filter-label'>地域:</span>
+    <button class='flt-btn flt-region ' data-region='all'>🌍 全部</button>
+    <button class='flt-btn flt-region active' data-region='JP'>🇯🇵 国内</button>
+    <button class='flt-btn flt-region ' data-region='Global'>🌐 海外</button>
+    <span class='filter-label'>スコア:</span>
+    <button class='flt-btn flt-score active' data-score='all'>全部</button>
+    <button class='flt-btn flt-score' data-score='4'>★4以上</button>
+    <button class='flt-btn flt-score' data-score='3'>★3以上</button>
+    
+    <input id='searchBox' class='search' placeholder='タイトル・本文を検索...'>
+  </div>
+</div>
+
+<section class='panel'>
+  <div class='section-head'><h2>🎬 映画 今日の注目 3件</h2><span class='count-badge'>初期表示は国内</span></div>
+  <div class='category-grid single'><div class='mini-item' data-region='JP' data-platform='other'><a href='#' target='_blank' rel='noopener noreferrer'>国内向け映画トピックの取得結果がまだありません</a><div class='mini-meta'>🇯🇵 国内 / ★1 / 2026-04-12 22:52</div></div><div class='mini-item' data-region='JP' data-platform='other'><a href='#' target='_blank' rel='noopener noreferrer'>芸能向けプレースホルダー</a><div class='mini-meta'>🇯🇵 国内 / ★1 / 2026-04-12 22:52</div></div><div class='mini-item' data-region='JP' data-platform='other'><a href='#' target='_blank' rel='noopener noreferrer'>トレンド向けプレースホルダー</a><div class='mini-meta'>🇯🇵 国内 / ★1 / 2026-04-12 22:52</div></div></div>
+</section>
+<section>
+  <div class='section-head'><h2>📰 最新記事</h2><span class='count-badge'>3件</span></div>
+  <div class='grid'>
+<article class='card item-card ' data-cardid='d9f276361cf52544ebb981dc92138eb7' data-region='JP' data-score='1' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>Fallback</span><span>2026-04-12 22:52</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'d9f276361cf52544ebb981dc92138eb7')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>国内向け映画トピックの取得結果がまだありません</h3><div class='summary'>この版は起動確認を優先し、記事が0件でもHTMLを生成します。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='#' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='40bd268360fea491fe67ed8561957e03' data-region='JP' data-score='1' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>Fallback</span><span>2026-04-12 22:52</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'40bd268360fea491fe67ed8561957e03')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>芸能向けプレースホルダー</h3><div class='summary'>人物・出演・コメント系の記事が入る予定です。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='#' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='33d6db969af4fb9fd4244979734cbab7' data-region='JP' data-score='1' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>Fallback</span><span>2026-04-12 22:52</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'33d6db969af4fb9fd4244979734cbab7')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>トレンド向けプレースホルダー</h3><div class='summary'>ランキング・急上昇・話題キーワードをここに集約します。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='#' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article></div>
+</section>
+</div><footer>Watch Hub + — Generated at 2026-04-12 22:52</footer>
+<script>
+function setPageLang(lang) {
+  localStorage.setItem('page_lang_pref', lang);
+  document.querySelectorAll('.page-lang-btn').forEach(function(btn){ btn.classList.remove('active'); });
+  var enBtn = document.getElementById('btnPageEN');
+  var jaBtn = document.getElementById('btnPageJA');
+  document.querySelectorAll('.item-card').forEach(function(card){
+    var enPane = card.querySelector('.lang-en');
+    var jaPane = card.querySelector('.lang-ja');
+    if(!enPane || !jaPane) return;
+    if(lang === 'ja') {
+      enPane.classList.add('hidden');
+      jaPane.classList.remove('hidden');
+      if(jaBtn) jaBtn.classList.add('active');
+      if(enBtn) enBtn.classList.remove('active');
+    } else {
+      enPane.classList.remove('hidden');
+      jaPane.classList.add('hidden');
+      if(enBtn) enBtn.classList.add('active');
+      if(jaBtn) jaBtn.classList.remove('active');
+    }
+  });
+}
+function switchCardLang(btn, lang) {
+  var card = btn.closest('.item-card');
+  if (!card) return;
+  card.querySelectorAll('.card-lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var enPane = card.querySelector('.lang-en');
+  var jaPane = card.querySelector('.lang-ja');
+  if (lang === 'ja') { if(enPane) enPane.classList.add('hidden'); if(jaPane) jaPane.classList.remove('hidden'); }
+  else { if(enPane) enPane.classList.remove('hidden'); if(jaPane) jaPane.classList.add('hidden'); }
+}
+function markRead(btn, id) {
+  localStorage.setItem('watch_hub_plus_read_' + id, '1');
+  var card = btn.closest('.item-card');
+  if (card) card.classList.add('is-read');
+}
+(function(){
+  document.querySelectorAll('.item-card').forEach(function(card){
+    var id = card.dataset.cardid;
+    if(localStorage.getItem('watch_hub_plus_read_' + id) === '1') card.classList.add('is-read');
+  });
+  var current = localStorage.getItem('page_lang_pref') || 'en';
+  setPageLang(current);
+})();
+
+(function(){
+  var fRegion = 'JP';
+  var fScore = 'all';
+  var fPlatform = 'all';
+  var search = '';
+  function applyFilters(){
+    document.querySelectorAll('.item-card').forEach(function(card){
+      var show = true;
+      if(fRegion !== 'all' && (card.dataset.region || '') !== fRegion) show = false;
+      if(fScore !== 'all' && parseInt(card.dataset.score || '1', 10) < parseInt(fScore, 10)) show = false;
+      if(fPlatform !== 'all' && (card.dataset.platform || '') !== fPlatform) show = false;
+      if(search && !(card.textContent || '').toLowerCase().includes(search.toLowerCase())) show = false;
+      card.style.display = show ? '' : 'none';
+    });
+    document.querySelectorAll('.mini-item[data-region]').forEach(function(item){
+      var show = true;
+      if(fRegion !== 'all' && (item.dataset.region || '') !== fRegion) show = false;
+      if(fPlatform !== 'all' && (item.dataset.platform || '') !== fPlatform) show = false;
+      item.style.display = show ? '' : 'none';
+    });
+  }
+  document.querySelectorAll('.flt-region').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.flt-region').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      fRegion = btn.dataset.region;
+      applyFilters();
+    });
+  });
+  document.querySelectorAll('.flt-score').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.flt-score').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      fScore = btn.dataset.score;
+      applyFilters();
+    });
+  });
+  document.querySelectorAll('.flt-platform').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.flt-platform').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      fPlatform = btn.dataset.platform;
+      applyFilters();
+    });
+  });
+  var sb = document.getElementById('searchBox');
+  if(sb){ sb.addEventListener('input', function(){ search = this.value; applyFilters(); }); }
+  applyFilters();
+})();
+
+</script>
+</body></html>

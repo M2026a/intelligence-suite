@@ -70,7 +70,7 @@ html, body {
 }
 .nav {
     display:grid;
-    grid-template-columns:repeat(4,minmax(0,1fr));
+    grid-template-columns:repeat(5,minmax(0,1fr));
     gap:10px;
 }
 .nav-btn {
@@ -269,7 +269,16 @@ html, body {
     background:linear-gradient(180deg,#2f9958 0%,#1a6f3d 100%);
 }
 @media (max-width:980px) {
-    .nav, .metrics, .ai-top, .ai-grid { grid-template-columns:1fr; }
+    .metrics, .ai-top, .ai-grid { grid-template-columns:1fr; }
+    .nav {
+        grid-template-columns:repeat(3,minmax(0,1fr));
+        gap:6px;
+    }
+    .nav-btn {
+        padding:8px 6px;
+        font-size:11px;
+        border-radius:8px;
+    }
     .header-row {
         flex-wrap:wrap;
         align-items:flex-start;
@@ -281,6 +290,16 @@ html, body {
         padding-left:12px;
         padding-right:12px;
     }
+}
+@media (max-width:480px) {
+    .nav {
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+    .nav-btn {
+        padding:7px 4px;
+        font-size:10px;
+    }
+    .title { font-size:20px; }
 }
 </style>
 <script>
@@ -302,13 +321,14 @@ window.addEventListener('DOMContentLoaded', function() {
     <div class="header-row">
       <div class="title">🛡️ Strategic IT Suite</div>
       <div class="subtitle">｜ IT戦略・リスク・技術トレンドを収集・分類し、意思決定に活用する</div>
-      <div class="timestamp">最終更新: 2026-04-14 01:41</div>
+      <div class="timestamp">最終更新: 2026-04-14 02:22</div>
     </div>
     <div class="nav">
-      <button class="nav-btn" onclick="showPage('page-main', this)">🏠 MAIN</button>
-      <button class="nav-btn" onclick="showPage('page-gov', this)">🛡 AIガバナンス</button>
-      <button class="nav-btn" onclick="showPage('page-dev', this)">🚀 開発効率</button>
-      <button class="nav-btn" onclick="showPage('page-ai', this)">🤖 推奨AI構成</button>
+      <button class="nav-btn" data-page="page-main"  onclick="showPage('page-main', this)">🏠 MAIN</button>
+      <button class="nav-btn" data-page="page-legal" onclick="showPage('page-legal', this)">⚖️ 法規制情報</button>
+      <button class="nav-btn" data-page="page-gov"   onclick="showPage('page-gov', this)">🛡 AIガバナンス</button>
+      <button class="nav-btn" data-page="page-dev"   onclick="showPage('page-dev', this)">🚀 開発効率</button>
+      <button class="nav-btn" data-page="page-ai"    onclick="showPage('page-ai', this)">🤖 推奨AI構成</button>
     </div>
   </div>
 
@@ -316,10 +336,110 @@ window.addEventListener('DOMContentLoaded', function() {
     <div id="page-main" class="page active">
       <div class="section-title">📊 エグゼクティブ・サマリー</div>
 
+      <div class="panel" style="margin-bottom:18px;">
+        <div class="section-title" style="font-size:18px; margin-bottom:4px;">⚖️ 法規制情報　最新動向</div>
+        <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">自工会ガイドライン対応5法令　／　最新更新日時の新しい順</div>
+        
+      <div style="display:grid; grid-template-columns:140px 1fr; gap:0; border-bottom:1px solid #17202a; padding:12px 0; align-items:start;">
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <span class="badge" style="background:#0c4f90; color:#4db4ff; font-size:11px; padding:4px 8px; width:fit-content;">APPI</span>
+          <span style="font-size:12px; color:#b8c0cc; font-weight:700;">個人情報保護法</span>
+          <span style="font-size:11px; color:#5a6a7a;">最終更新: 2026-04-09 00:00</span>
+        </div>
+        <div style="padding-left:12px;">
+          <div style="margin-bottom:5px;"><span style="background:#c0392b;color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;margin-left:6px;">NEW</span></div>
+          <a href="https://public-comment.e-gov.go.jp/servlet/Public?CLASSNAME=PCM1040&amp;id=145207789&amp;Mode=1" target="_blank" rel="noopener noreferrer"
+             style="color:#8ad1ff; text-decoration:none; font-size:13px; font-weight:700; line-height:1.55;">
+            「第二種指定電気通信設備制度の運用に関するガイドライン」の改正
+          </a>
+          <div style="font-size:11px; color:#5a6a7a; margin-top:3px;">全7件
+            <a href="#" onclick="document.querySelector('.nav-btn[data-page=page-legal]').click(); return false;"
+               style="color:#4db4ff; margin-left:8px;">詳細を見る →</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:140px 1fr; gap:0; border-bottom:1px solid #17202a; padding:12px 0; align-items:start;">
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <span class="badge" style="background:#5a1010; color:#ff7a7a; font-size:11px; padding:4px 8px; width:fit-content;">UCPA-JP</span>
+          <span style="font-size:12px; color:#b8c0cc; font-weight:700;">不正競争防止法</span>
+          <span style="font-size:11px; color:#5a6a7a;">最終更新: 2026-04-13 00:00</span>
+        </div>
+        <div style="padding-left:12px;">
+          <div style="margin-bottom:5px;"><span style="background:#c0392b;color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;margin-left:6px;">NEW</span></div>
+          <a href="https://public-comment.e-gov.go.jp/servlet/Public?CLASSNAME=PCMMSTDETAIL&amp;id=550004329&amp;Mode=0" target="_blank" rel="noopener noreferrer"
+             style="color:#8ad1ff; text-decoration:none; font-size:13px; font-weight:700; line-height:1.55;">
+            種苗法施行規則及び品種登録規則の一部を改正する省令案についての意見・情報の募集について
+          </a>
+          <div style="font-size:11px; color:#5a6a7a; margin-top:3px;">全1件
+            <a href="#" onclick="document.querySelector('.nav-btn[data-page=page-legal]').click(); return false;"
+               style="color:#4db4ff; margin-left:8px;">詳細を見る →</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:140px 1fr; gap:0; border-bottom:1px solid #17202a; padding:12px 0; align-items:start;">
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <span class="badge" style="background:#1a4a1a; color:#6dcc7f; font-size:11px; padding:4px 8px; width:fit-content;">UCA</span>
+          <span style="font-size:12px; color:#b8c0cc; font-weight:700;">不正アクセス禁止法</span>
+          <span style="font-size:11px; color:#5a6a7a;">最終更新: </span>
+        </div>
+        <div style="padding-left:12px;">
+          <div style="margin-bottom:5px;"></div>
+          <a href="https://www.npa.go.jp/news/release/2026/20260310001.html" target="_blank" rel="noopener noreferrer"
+             style="color:#8ad1ff; text-decoration:none; font-size:13px; font-weight:700; line-height:1.55;">
+            令和７年におけるサイバー空間をめぐる脅威の情勢等について
+          </a>
+          <div style="font-size:11px; color:#5a6a7a; margin-top:3px;">全2件
+            <a href="#" onclick="document.querySelector('.nav-btn[data-page=page-legal]').click(); return false;"
+               style="color:#4db4ff; margin-left:8px;">詳細を見る →</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:140px 1fr; gap:0; border-bottom:1px solid #17202a; padding:12px 0; align-items:start;">
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <span class="badge" style="background:#3a0a55; color:#d07aff; font-size:11px; padding:4px 8px; width:fit-content;">ESA</span>
+          <span style="font-size:12px; color:#b8c0cc; font-weight:700;">電子署名認証法</span>
+          <span style="font-size:11px; color:#5a6a7a;">最終更新: ―</span>
+        </div>
+        <div style="padding-left:12px;">
+          <div style="margin-bottom:5px;"></div>
+          <a href="#" target="_blank" rel="noopener noreferrer"
+             style="color:#8ad1ff; text-decoration:none; font-size:13px; font-weight:700; line-height:1.55;">
+            情報なし
+          </a>
+          <div style="font-size:11px; color:#5a6a7a; margin-top:3px;">全0件
+            <a href="#" onclick="document.querySelector('.nav-btn[data-page=page-legal]').click(); return false;"
+               style="color:#4db4ff; margin-left:8px;">詳細を見る →</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:140px 1fr; gap:0; border-bottom:1px solid #17202a; padding:12px 0; align-items:start;">
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <span class="badge" style="background:#4a3000; color:#ffcc55; font-size:11px; padding:4px 8px; width:fit-content;">e-Doc</span>
+          <span style="font-size:12px; color:#b8c0cc; font-weight:700;">e-文書法</span>
+          <span style="font-size:11px; color:#5a6a7a;">最終更新: ―</span>
+        </div>
+        <div style="padding-left:12px;">
+          <div style="margin-bottom:5px;"></div>
+          <a href="#" target="_blank" rel="noopener noreferrer"
+             style="color:#8ad1ff; text-decoration:none; font-size:13px; font-weight:700; line-height:1.55;">
+            情報なし
+          </a>
+          <div style="font-size:11px; color:#5a6a7a; margin-top:3px;">全0件
+            <a href="#" onclick="document.querySelector('.nav-btn[data-page=page-legal]').click(); return false;"
+               style="color:#4db4ff; margin-left:8px;">詳細を見る →</a>
+          </div>
+        </div>
+      </div>
+      </div>
+
       <div class="metrics">
         <div class="metric">
           <div class="metric-label">AIリスク件数</div>
-          <div class="metric-value">56</div>
+          <div class="metric-value">51</div>
           <div class="metric-desc">AI関連の規制・脆弱性・漏洩ニュースの取得件数です。</div>
         </div>
         <div class="metric">
@@ -346,7 +466,7 @@ window.addEventListener('DOMContentLoaded', function() {
             </tr>
           </thead>
           <tbody>
-            <tr><td>2026-04-14 01:41</td><td>56</td><td>48</td><td>社内限定・管理重視型</td></tr>
+            <tr><td>2026-04-14 02:22</td><td>51</td><td>48</td><td>社内限定・管理重視型</td></tr>
           </tbody>
         </table>
       </div>
@@ -484,8 +604,8 @@ window.addEventListener('DOMContentLoaded', function() {
         <div class="item-card">
             <div class="item-index">15</div>
             <div class="item-body">
-                <a class="item-title" href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE5YVmozOVk1dk5qTmlhLXlfMkhxckRxVkdXQmJiZmNkUzF1Rml6dGlDMmllS3pkT2hsajZWbmNPWkRRSFR3VXhleElNNW1MbXJKaXc?oc=5" target="_blank" rel="noopener noreferrer">Moltbookで100万件超の認証情報流出、vibe codingがもたらすセキュリティリスク - innovaTopia</a>
-                <div class="item-meta">innovaTopia / 2026-02-04 17:00</div>
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMiqwFBVV95cUxOWkx6cTktd1dyamoyY2Rzd0NhUHJ2alZCVEIwdTBENVBqTmNyblVZd0lmQ3Nvb1lrWllXODRNSU1NaTZxa1puR0NVUlltb3JoZHJGUXBnQUZILVA0SklZRDdEV3ZoUlVWdGJrS3NlbnVEc3BGaWhLUzJncFdxaGlSVnVHanYwZkxkdXpFS0psV0M4amM2U2U1eDVnTDlCWHNVQnFfaXI3cTVZTXM?oc=5" target="_blank" rel="noopener noreferrer">AIアシスタント「Clawdbot」に脆弱性 APIキーや会話履歴漏えいの恐れ - 디지털투데이</a>
+                <div class="item-meta">디지털투데이 / 2026-01-27 17:00</div>
             </div>
         </div>
         
@@ -493,8 +613,8 @@ window.addEventListener('DOMContentLoaded', function() {
         <div class="item-card">
             <div class="item-index">16</div>
             <div class="item-body">
-                <a class="item-title" href="https://news.google.com/rss/articles/CBMiqwFBVV95cUxOWkx6cTktd1dyamoyY2Rzd0NhUHJ2alZCVEIwdTBENVBqTmNyblVZd0lmQ3Nvb1lrWllXODRNSU1NaTZxa1puR0NVUlltb3JoZHJGUXBnQUZILVA0SklZRDdEV3ZoUlVWdGJrS3NlbnVEc3BGaWhLUzJncFdxaGlSVnVHanYwZkxkdXpFS0psV0M4amM2U2U1eDVnTDlCWHNVQnFfaXI3cTVZTXM?oc=5" target="_blank" rel="noopener noreferrer">AIアシスタント「Clawdbot」に脆弱性 APIキーや会話履歴漏えいの恐れ - 디지털투데이</a>
-                <div class="item-meta">디지털투데이 / 2026-01-27 17:00</div>
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMirwFBVV95cUxQSnZrRDJ3Q19qNnlXN0FxczNtSnJEOVh2ME9jdGdRc0VYRVZWMXNQakpLRWZyT2Q2MzV5bHg2THFiTUxEaWpVT3JPTDhnVjllRHZvdkVUWnhNWnNnRU5ZY2lMZ2tWbExMdWhKQXdKMVJtS21wck5XdWFHbGR0eDY3N1dOTGxIR0VMbGhScGlnNmoyd0dsQkhBTWdJelpWQ3N1M3ZvU2JDX3M4dzItMFlV?oc=5" target="_blank" rel="noopener noreferrer">生成AIを悪用し女性芸能人のわいせつ画像を販売した容疑者を逮捕-ディープフェイクの国内外の規制動向 - 合同会社ロケットボーイズ</a>
+                <div class="item-meta">合同会社ロケットボーイズ / 2026-01-21 17:00</div>
             </div>
         </div>
         
@@ -511,7 +631,7 @@ window.addEventListener('DOMContentLoaded', function() {
         <div class="item-card">
             <div class="item-index">18</div>
             <div class="item-body">
-                <a class="item-title" href="https://news.google.com/rss/articles/CBMirwFBVV95cUxQSnZrRDJ3Q19qNnlXN0FxczNtSnJEOVh2ME9jdGdRc0VYRVZWMXNQakpLRWZyT2Q2MzV5bHg2THFiTUxEaWpVT3JPTDhnVjllRHZvdkVUWnhNWnNnRU5ZY2lMZ2tWbExMdWhKQXdKMVJtS21wck5XdWFHbGR0eDY3N1dOTGxIR0VMbGhScGlnNmoyd0dsQkhBTWdJelpWQ3N1M3ZvU2JDX3M4dzItMFlV?oc=5" target="_blank" rel="noopener noreferrer">生成AIを悪用し女性芸能人のわいせつ画像を販売した容疑者を逮捕-ディープフェイクの国内外の規制動向 - 合同会社ロケットボーイズ</a>
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMiuAFBVV95cUxPN2dLOFlMckFicHdxNmpmcmdzTWdUSmQyNy0zb0VUVU1WNFVELW5oeG9PRnJ3Qk84eW90QjFqZkJSMk1NUDYybThTMlBRTnRpV3NuUXdncC1fQkNRcEhVTi1wRGQ1QzgwTTZxSWE5cy16VXdHTE5sa2lmdTNJUEhlVWZYWDJiTWI1RXlKSXRONVFvRTl3NEdqTG4zcVlObkd1eU1JWjllb0xWZkVmTThQX1RJaGoxcEVE?oc=5" target="_blank" rel="noopener noreferrer">Google Geminiのプロンプトインジェクションとカレンダー招待を悪用したサイバー攻撃の手法 - 合同会社ロケットボーイズ</a>
                 <div class="item-meta">合同会社ロケットボーイズ / 2026-01-21 17:00</div>
             </div>
         </div>
@@ -520,15 +640,6 @@ window.addEventListener('DOMContentLoaded', function() {
         <div class="item-card">
             <div class="item-index">19</div>
             <div class="item-body">
-                <a class="item-title" href="https://news.google.com/rss/articles/CBMiuAFBVV95cUxPN2dLOFlMckFicHdxNmpmcmdzTWdUSmQyNy0zb0VUVU1WNFVELW5oeG9PRnJ3Qk84eW90QjFqZkJSMk1NUDYybThTMlBRTnRpV3NuUXdncC1fQkNRcEhVTi1wRGQ1QzgwTTZxSWE5cy16VXdHTE5sa2lmdTNJUEhlVWZYWDJiTWI1RXlKSXRONVFvRTl3NEdqTG4zcVlObkd1eU1JWjllb0xWZkVmTThQX1RJaGoxcEVE?oc=5" target="_blank" rel="noopener noreferrer">Google Geminiのプロンプトインジェクションとカレンダー招待を悪用したサイバー攻撃の手法 - 合同会社ロケットボーイズ</a>
-                <div class="item-meta">合同会社ロケットボーイズ / 2026-01-21 17:00</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">20</div>
-            <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMivgFBVV95cUxQZ185U29jbjJiTmhtdVY3ZFBOYUdHa3hpWUY1eWUxdHBSY0V4QVk5cG1VVDhlUXE2M2h3c1drUkFIbmRCYXljRTN0ZnJTWFM3Tk9qZkoyYkdJX2hrTnl1WE15cW1FTXdTbHVhdE4zb2xDZDNrbTh2SEU4NUJfQ2k5RnhMOFRSTXBNX3J3X0hHcnVFek92WE54SWo5dHh5bFNOLURQT0FKM2ZXSTNybnROTXhvSTg2SGdQWHVzOFpn?oc=5" target="_blank" rel="noopener noreferrer">X、AI Grokのビキニ化や水着化を規制すると発表|セキュリティやAI、ITのニュース-セキュリティ対策Lab - 合同会社ロケットボーイズ</a>
                 <div class="item-meta">合同会社ロケットボーイズ / 2026-01-20 17:00</div>
             </div>
@@ -536,7 +647,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">21</div>
+            <div class="item-index">20</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMidEFVX3lxTE5FTGpWbkxBX19FZTl2Z25WNmFFdlBGdUFCX2IxSFVkM2ZxUDVRVjBsT3BSanVsVFF2ZWFOdUV2aXNHXzE2VEdBeFNyMnNQb1dfYTRJRHF2TGNGWHpLdlBxU3I3SDFnYmtYZEZIS3JKTTZ5T3Bh?oc=5" target="_blank" rel="noopener noreferrer">生成AI利用でデータ漏えいリスクは2倍に 企業に求められる進退：セキュリティニュースアラート - ITmedia</a>
                 <div class="item-meta">ITmedia / 2026-01-17 17:00</div>
@@ -545,7 +656,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">22</div>
+            <div class="item-index">21</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMitgFBVV95cUxQcHpqaTdWcFdwd2VkdlBoM1NsNWp4X0hzWXprSXVWSkVCVWtWWE9wV0NQMVN0d3Y4UGd6Y05QNTlfWTJLeVF5aGNVcENpSzNQUzc1ZEtjbU9MeS1mTW40WWFwYVkwWXB4cGxjS1VRMTBsR3RWTG11am5qOWZkMEhiYU1rd19Ld0xSVTVna21wNThBN0F4a3F2a1BraEpKcEJqYUt1WnZ3ZEh2NXFLbEJwVENNZ2ZuQQ?oc=5" target="_blank" rel="noopener noreferrer">英、XのAI Grokで児童や他人を裸に加工するヌーディフィケーションを調査-日本でもビキニ化が問題に - 合同会社ロケットボーイズ</a>
                 <div class="item-meta">合同会社ロケットボーイズ / 2026-01-14 17:00</div>
@@ -554,7 +665,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">23</div>
+            <div class="item-index">22</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMiakFVX3lxTE1JdHVaamJoZ09SSy1NR1FYbU1WN05ucHhEbGRvQnZDUXhuY2xQVml1ajM5WGFvaGs5a3dZUjdTMEhmdGtkY2VFd2NXVkx0TW9LTi1zNzNVU1VPSWpJZEdXSFFRZl93bjNIRkE?oc=5" target="_blank" rel="noopener noreferrer">Thales AI Security Fabricを発表 | タレスDISジャパン株式会社のプレスリリース - PR TIMES</a>
                 <div class="item-meta">PR TIMES / 2025-12-23 17:00</div>
@@ -563,7 +674,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">24</div>
+            <div class="item-index">23</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMiWEFVX3lxTE1kYXhhUC1zdzBUWW9CT1oxUWVrQnhDcHBzd1ItTnZ4VEVUYXZESThBV3Y2ZVpFTldKSmpPajNFdEt1MGtRay01d0Via2dlM3dRUEVYdWIyZFY?oc=5" target="_blank" rel="noopener noreferrer">AIシステムの新たな脆弱性：プロンプトインジェクションがもたらすビジネスリスク - Forbes JAPAN</a>
                 <div class="item-meta">Forbes JAPAN / 2025-12-13 17:00</div>
@@ -572,7 +683,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">25</div>
+            <div class="item-index">24</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMia0FVX3lxTE1VT2ZJaVNfZUFEc084dG9SeGZYeXdQd2pHLUw5Zmpub0FxNFpYMEc4YlYtUXVxRk1HSURZbVVMSUpGT3ZTc21NSFJSdE41b0NqYWJMNUZfSEtMREZ1SjlRYU42Z3VfVnlWTExv?oc=5" target="_blank" rel="noopener noreferrer">AI時代の新たな脅威と守り方｜AIに潜むリスクとガイドライン・対策まとめ - ctc-g.co.jp</a>
                 <div class="item-meta">ctc-g.co.jp / 2025-11-20 17:00</div>
@@ -581,7 +692,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">26</div>
+            <div class="item-index">25</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMiakFVX3lxTE1mNGNBcS1jSmpmb3JPdGRUZzlJeXo3MTkydG5lZHhFbDhrNEdvZVh6YjBuVzJoaldrS1o3TW1rbjZEd3pLLUI3YUJiWTJzMWNTU3pqTUl2SHZYcVBIQk5QMXlNTm82dW1vZ2c?oc=5" target="_blank" rel="noopener noreferrer">英国発 サイバーセキュリティ企業「APRIO TECHNOLOGIES」がホワイトペーパーを公開 「シャドーAIの実態と新たなリスク」 - PR TIMES</a>
                 <div class="item-meta">PR TIMES / 2025-11-14 17:00</div>
@@ -590,7 +701,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">27</div>
+            <div class="item-index">26</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMiVEFVX3lxTE1FNWF2MWdtTXBaRW5UclBNN1g1NVFSWTVMQ2FRYXluR0xFQmhJNDZXVzVSZFdTTUxWUWlZVUhmVTFuWVNOVEJxR2pIYU9OZzNtdU1jYg?oc=5" target="_blank" rel="noopener noreferrer">バッファロー製Wi-Fiルーターに脆弱性 WPS機能経由でパスワード流出の恐れ - ASCII.jp</a>
                 <div class="item-meta">ASCII.jp / 2025-11-10 17:00</div>
@@ -599,7 +710,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">28</div>
+            <div class="item-index">27</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMigwFBVV95cUxNNS1rbnRjY0VBR1hvb1pCQ0tPXzl2RWNHZFAzODFadUVQNDhxQUZ5SzZ4NlBJOXRpc0lNSHFJS2xORkVROWtQYzV3aWRqUmxPYm5IdzJhanNMblY0Y29Sbk5oY3Y2NFJLMzRvSDZNX0VzN09nSWhVYTFneV9NZ2lIR0dqUQ?oc=5" target="_blank" rel="noopener noreferrer">OpenAIの新ブラウザ「Atlas」に深刻な脆弱性、マルウェアのダウンロードや機密情報漏洩の危険性など、複数の危険を専門家が警鐘 - XenoSpectrum</a>
                 <div class="item-meta">XenoSpectrum / 2025-10-25 16:00</div>
@@ -608,7 +719,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">29</div>
+            <div class="item-index">28</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMickFVX3lxTFB1c1BBUzhSVWZZZHFEZko5NGN4UmI3d1ZYeko3OFd0VmcxWE5wTXRneGNDLVh3VklaWHB4YzZEN3dsMmk5M0piV1UwRUVjTDNoV28yTU9hTkJ1Q0Q3TVgwSFhqVG81MGx1MTVOc0pCX2pIQQ?oc=5" target="_blank" rel="noopener noreferrer">AI議事録ツールに潜むサイバーリスク – Otter.ai訴訟が示す企業の脆弱性と対策 - innovaTopia</a>
                 <div class="item-meta">innovaTopia / 2025-10-11 16:00</div>
@@ -617,7 +728,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">30</div>
+            <div class="item-index">29</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMia0FVX3lxTE9aWTBoaEkyQkFjUktaVnFpUzNoMHA2YlpDdTBEaWdBRGUzaTdXRUJ4ZkE2MlhOVW5uZ3JqNnE4cWUxaXZYR2U4aHF5b0h0M1ZUUmVUeTJvM0g5ZUY4RlFKcFBlMnZDOFBQOGFz?oc=5" target="_blank" rel="noopener noreferrer">AIセキュリティ対策の始め方とは？担当者が知るべきリスクと具体的な対策を解説 | LAC WATCH - 株式会社ラック</a>
                 <div class="item-meta">株式会社ラック / 2025-10-03 16:00</div>
@@ -626,7 +737,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">31</div>
+            <div class="item-index">30</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMijAFBVV95cUxQa0RELXVqdE1WR2hQc3hySWt1bi0zSy1JZy1kY20xTTFxR0l2eDE0RldpZEtMM0w5UGRJZzFnamRRSVRmM1dzeDVaZUlhQkZuUGdCQUZpT05PeWMzdUVOZDFuYXdUMjIxY2k1ZXMxMlFjSlJFRUwxTDJDSXc0c1JqdnpEMjMwZjYtRlRiZw?oc=5" target="_blank" rel="noopener noreferrer">AI画像編集アプリがユーザデータを漏洩：サプライチェーン攻撃のリスクを誘発 | トレンドマイクロ (JP) - www.trendmicro.com</a>
                 <div class="item-meta">www.trendmicro.com / 2025-09-26 16:00</div>
@@ -635,7 +746,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">32</div>
+            <div class="item-index">31</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMipgFBVV95cUxOTXRtOEE5b083TEZNMmFOazlpNUZlMndWdFFMTmN0RE5aOEQtVWE3el9vSm5zNW9CMG5oYVdTWGdrd0NkQ09RbkhuZGVjNGFMUVd2cGpKeVBWdi1LdzVIWGNTbHVsalVDdmV1dXg4cV9JM1BoMlM0WldnNG9fSHVobzh6VmhaU1VjS0lmVXZQeFQzMU9DQndRUDZQSWw4TWRnOEdUWGRB?oc=5" target="_blank" rel="noopener noreferrer">クラウドに潜むリスクと責任：Snowflakeのデータ漏えい事件から考えるデータ保護の新常識 - OpenText Blogs</a>
                 <div class="item-meta">OpenText Blogs / 2025-09-19 11:47</div>
@@ -644,7 +755,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">33</div>
+            <div class="item-index">32</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMib0FVX3lxTE9Sb0tVdlJvRnRnU2xsV2RDMXZaRE56N2VlcE1yZ3Y4ZWFjUFg5ZDdIRzVDSk5ZeDlkWTFqQklMLWptQVozNE43dUwxUnl2ZjNvTmJYblpmZjVRRXhINDhTVF9IUEFobHJBZjJDcmUzWQ?oc=5" target="_blank" rel="noopener noreferrer">Brave、PerplexityのAIブラウザ「Comet」の深刻な脆弱性を指摘 「間接的プロンプトインジェクション」で情報漏えいの危険 - ITmedia</a>
                 <div class="item-meta">ITmedia / 2025-08-25 16:00</div>
@@ -653,7 +764,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">34</div>
+            <div class="item-index">33</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMiTkFVX3lxTE91SUdobzBTc3V5cy1CUFlOQ3pQZWZQZVJkcU5QTkJBT1p6QmVmakk1dkI4X296VkVMbGhpbHREYXhxSk1xbUxDWEhTU2JpUQ?oc=5" target="_blank" rel="noopener noreferrer">OpenAIデータ漏洩事件が示す警鐘：AI企業はハッカーにとっての宝庫 - AIBase</a>
                 <div class="item-meta">AIBase / 2025-07-28 07:54</div>
@@ -662,7 +773,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">35</div>
+            <div class="item-index">34</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxPdVM1clZXU0wtX3AwODZON3lfTEp3cVZ0N19kMWc2V1dhaVExTUxzOHlRbHU5d0M0b1NfczV1Um9hMUV0RlRlZ3BjaFRJckxuWUFFMzBBc0VEeWZYdlFRckFoQ0trLXhZWERacWZERlQ2OGM1cWRWUXluWUFpR01GZ1JxVDFnNGhzcjN2eUhxZElNWHZUeDBsdnVwb0d4SHlDTlNvMlJXbjZzUQ?oc=5" target="_blank" rel="noopener noreferrer">生成AIに「ログインURLを教えて」と聞くと、偽サイトへ誘導される|セキュリティとAIのニュース - 合同会社ロケットボーイズ</a>
                 <div class="item-meta">合同会社ロケットボーイズ / 2025-07-08 16:00</div>
@@ -671,7 +782,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">36</div>
+            <div class="item-index">35</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMikgFBVV95cUxQaFVHUEdfR09qam5QWGwxWG1Pd0lPeEFqdXJ4dzRjZXRqTXZQaWdrWHk4R0tCbm5qa2ZmeTEzVlFQYmMxV01IR19NLXFIcDBHYXVWQjZqR1QzRHVndWRHNHI0dlpVVEdZYy1sUGlBcENyYmU4MFdZcG5NUk9OekJmZXZZYnozelp6R2M1amY0YXBGdw?oc=5" target="_blank" rel="noopener noreferrer">Cloudflare、AIクローラーの規制機能を発表|セキュリティとIT、AIのニュース - 合同会社ロケットボーイズ</a>
                 <div class="item-meta">合同会社ロケットボーイズ / 2025-07-03 16:00</div>
@@ -680,7 +791,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">37</div>
+            <div class="item-index">36</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNMnF5NGRELThHZjRJb3JkdmJ6UnBwTzZ5czZUU21vZGpJRGRnWFUxTFFjczB6eVktRm9KbGotRGhGZk1ISmdwWHVnQnJwWE5qUWd2MW40b3M0OWxFSVpCRHJYSDRvX1RuZ3Fia0JWTkNzNTdFZGJBMFAwNXpFMlVqb2taZWtsc3Itemc5VEZoUGY?oc=5" target="_blank" rel="noopener noreferrer">北朝鮮 偽装 IT労働者によるAI技術の悪用 事例|セキュリティとAIのニュース - 合同会社ロケットボーイズ</a>
                 <div class="item-meta">合同会社ロケットボーイズ / 2025-07-03 16:00</div>
@@ -689,16 +800,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">38</div>
-            <div class="item-body">
-                <a class="item-title" href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNQ2Q3b1Ric0ZYa18xM09qak1RNkJWRjFXUWIxYkRSNEFkMXhOSWpBZnRXaFFaVjZEWDd5WEE2R3dqNlRJSkFkYVpmcjFzdHpFZ1BNSTdVc3NnVkRMTklwOGJEVUJLZWs2SDQtRmlZSkY2Q1g2dGxtUnlxbVhWOHRVWEZScTdYc1RLaHlPZVhRS1JMV180R2t3Z1Rjb1ZUUmVBcTZBb3BFS3RzT09TbWc?oc=5" target="_blank" rel="noopener noreferrer">Microsoft Copilotにおけるセキュリティ脆弱性：AIからのデータ漏洩リスクに関する新たな警告。 - Vietnam.vn</a>
-                <div class="item-meta">Vietnam.vn / 2025-06-20 16:00</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">39</div>
+            <div class="item-index">37</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMinAFBVV95cUxNd3ZfaUdLTlREbDBXTFJHUWU1dFdRSGo4S2EwaV9zeDZUWl9TR2xRQ0tpcTRlNmNGcHZNN2ZHUTJHT01WaHVzek54c1ZPeG1Jc2RnZW4zeVZsMEZVMFJySlZLQ2d4cm9oN0dtTGNJRWd4Zk84WkZrRURIejRRS2J1dWlTNjlmN20zY0FFd0k5WE9zSVVkampOZHo5VEw?oc=5" target="_blank" rel="noopener noreferrer">Asana、MCPサーバーの欠陥で顧客データが他社に漏洩か？問われるMCPの安全性 - XenoSpectrum</a>
                 <div class="item-meta">XenoSpectrum / 2025-06-19 16:00</div>
@@ -707,7 +809,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">40</div>
+            <div class="item-index">38</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMibEFVX3lxTE83bTZ0V0hCc2NXeG4temZBOGJZbEF3UEdxeHUyWldEMUw1NHU5bHlBODR1QXh4Mk5OOWRwRTBlRFdSNVB6LTU0NGpDdnBJM3g4bE84VERxRjNEQkl0aTJEcW9CeXpGVTRSVWJhZg?oc=5" target="_blank" rel="noopener noreferrer">AIセキュリティとは？メリットやリスクと活用事例を解説 | トレンドマイクロ (JP) - www.trendmicro.com</a>
                 <div class="item-meta">www.trendmicro.com / 2025-06-18 16:00</div>
@@ -716,7 +818,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">41</div>
+            <div class="item-index">39</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMid0FVX3lxTE03ckJWRk5hOXhWUjZVOVR2RmxRUm9LTkY2STItTHZkaWlUTVhRV1ZxejU4TWc3azBmWUQ4aGNWVG9ubnBPUnBkaHZ4WFNablgzdnNGZ0Y5d094TEFsLUtaTnVlUTRXaW5LMllaa2NueVpiR1kwc2pr?oc=5" target="_blank" rel="noopener noreferrer">AIのセキュリティと利便性を両立！なぜ今、「ローカルAI」に注目すべきなのか？[Sponsored] - INTERNET Watch</a>
                 <div class="item-meta">INTERNET Watch / 2025-06-17 16:00</div>
@@ -725,7 +827,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">42</div>
+            <div class="item-index">40</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMickFVX3lxTE9PRlA1UmxEMVNISXVjWlJ0THZjT2QxUHJBdHJQWmV3VC1pQjJ6WWNGcGg5c0lRb0tocnBSR1V3NktZOU1tYjNvMFY5Y2F1dXV5RHcwVXlCSVFLcklwTm9kTFpOc3hPMWtPcnI5dFBpVXNYUQ?oc=5" target="_blank" rel="noopener noreferrer">メール1通で企業秘密が筒抜け：世界初ゼロクリックAI攻撃「EchoLeak」の脅威 - innovaTopia</a>
                 <div class="item-meta">innovaTopia / 2025-06-13 16:00</div>
@@ -734,7 +836,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">43</div>
+            <div class="item-index">41</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMiVEFVX3lxTE5FNlJ5aUhUbmJ1YmxjVDZjM1poWFpEZGRXdC1kYzh5S2RUU01aUGhjeDRMV2F5SXhyM3VvMVVGc1Q3dVBUcmNjYVh3NnllaVJFeHdVOQ?oc=5" target="_blank" rel="noopener noreferrer">生成AIへのデータ送信量が急増、情報漏洩リスク高まる／中高年のキャリア支援が“後回し”になる理由、ほか - ASCII.jp</a>
                 <div class="item-meta">ASCII.jp / 2025-06-02 16:00</div>
@@ -743,7 +845,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">44</div>
+            <div class="item-index">42</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMioAFBVV95cUxNYjJaVlN1N09fdmNQNkNsREowX0pla1N3WEVJYlBKVzRWTmRoY0hmZ0RVSnZqTk9hVDZJR0xqcTQzbHRKbnYyN0drb2VkUV9qUW5oTDc1bmJadzFGNjlOcENsci1NT2JmODROOUFvZEhFTnYzeEdvcElqdzFUUEw0ZXowbmtUY3VScTg0eVhWR1RXNUlDMWpNVHpzcUNWM0Yz?oc=5" target="_blank" rel="noopener noreferrer">主要なLLMに有効なプロンプト インジェクション「Policy Puppetry」-サイバー攻撃への悪用が容易|セキュリティとAIのニュース - 合同会社ロケットボーイズ</a>
                 <div class="item-meta">合同会社ロケットボーイズ / 2025-05-02 16:00</div>
@@ -752,7 +854,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">45</div>
+            <div class="item-index">43</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE0yLXNJaFhPSU0xVmRodDFuT0VlQ1RHSjNsVnNmZzRHTHRESTR2bEJSWWwxaWlsVEMxSlAtVERyYTVhdG15SVItVnNTbGVjcjNVRVE?oc=5" target="_blank" rel="noopener noreferrer">Metaのllama.cpp設定ミスで露呈 – AIキャラクターチャットボットが性的な会話を大量漏洩 - innovaTopia</a>
                 <div class="item-meta">innovaTopia / 2025-04-14 16:00</div>
@@ -761,16 +863,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">46</div>
-            <div class="item-body">
-                <a class="item-title" href="https://news.google.com/rss/articles/CBMigwFBVV95cUxQRWpWZ2FpdG02aVN3MlNUUUwzajBaX3NuSHNPWG4ydGV1SC1KdEYwWkNkLXdWaGh4Rnl3ZkowelY2ekladnY0RWdybVF5SUFLU0p3SW5IcjF1NS1FZVUycnFqYmNtYlNqRGxQNkVxZXE3NWlBZUtoTVEtWW1oWTJaakpoRQ?oc=5" target="_blank" rel="noopener noreferrer">AIセキュリティとは何か？（前編）～AIのセキュリティリスクとその対策を考える～ | トレンドマイクロ (JP) - www.trendmicro.com</a>
-                <div class="item-meta">www.trendmicro.com / 2025-04-09 16:00</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">47</div>
+            <div class="item-index">44</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMilwFBVV95cUxPemFCeGFEVjRWTUtsT1Y2aDc0Wk5lcjQ4c0JBWU1FVm94d3pITU1NTURtOVBiWVlaZ1FucHRLVGJlMkIwRnVTd3NaWU92dk82ZElfU2s3T252Z3pRYWU4U254b093eVpJUE8zSnhkbkhfSTB0dWRVdmRqYmlkTFE3aEZWRExVMWJaYkpzLWpJU2VlbmJKXzdN?oc=5" target="_blank" rel="noopener noreferrer">AI チャットボットが自殺を助長？規制なき対話型AIの恐ろしい現実 - 合同会社ロケットボーイズ</a>
                 <div class="item-meta">合同会社ロケットボーイズ / 2025-03-06 17:00</div>
@@ -779,7 +872,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">48</div>
+            <div class="item-index">45</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMipgFBVV95cUxOelpGd1dEMjRCYmhqVnE4R3FVVnlKSWREWnVNeENUc0NQbHFTa3dhOUUzQXU2SlRUTFVEdlduSzQ4U1dmSlhRMW9pT2NlZGtNZFNEUl9NLWJpUnFOV1FrVjFjVWdVb0gtTGZsdTZmNEpUbVlIM0g0NmNzN3lSSTBXTWtReFZIZnhZX3RvUFlaOXpVQjBmUTFhbU9tZ0VwcHBRVDFCNF9n?oc=5" target="_blank" rel="noopener noreferrer">ユーロポール、AIを悪用した児童虐待コンテンツを摘発、19カ国の国際捜査で25人逮捕 - 合同会社ロケットボーイズ</a>
                 <div class="item-meta">合同会社ロケットボーイズ / 2025-03-03 17:00</div>
@@ -788,7 +881,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">49</div>
+            <div class="item-index">46</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMiV0FVX3lxTFA2RDluQl94RzEzam1wMlRramRYamlMc1M1Tmx3LWRJQWxuQVZlazhDR01sd0V5eTgyaXRjZEs4Nlh3Zk1PNTl4OWpjdnZQSXNqdWk5a09zbw?oc=5" target="_blank" rel="noopener noreferrer">「ネットのセキュリティもGMO」第1弾世界初！24時間無料で使える「GMOセキュリティ24」①「パスワード漏洩・Webサイトリスク診断」②「セキュリティ相談AIチャットボット」を2月6日より開始～3月6日には第2弾として国内最大級のセキュリティカンファレンス＆表彰式を開催～ | 脆 - GMO Cybersecurity by Ierae, Inc.</a>
                 <div class="item-meta">GMO Cybersecurity by Ierae, Inc. / 2025-02-07 17:00</div>
@@ -797,7 +890,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">50</div>
+            <div class="item-index">47</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxNR2FZV1VPMWpXRVNkZmFVNjhVOUY0ZzlBOHBJSXItdDZydkdMS1RLRWVwUWxBLTZya0ZZZmhyYTZXTXJaQzhBYy0zeXB5TjBoRWNZb3FmdTRSSXhmMkZFLXQ2SXhXRjVCSjYyRzlHc0N3US1KZ1AzSEZCMzd2V1hsZm9Ld2ZLN1pXS3pWdDFjSGtlN0d4SmpwRm83bE13YUdvN1haMHk0YkxENFNLTjFpZmM1RkxIVnZpOG5N?oc=5" target="_blank" rel="noopener noreferrer">AIセキュリティのSkyflow、エージェンティックAI向けセキュリティおよびプライバシーレイヤーを発表 - atpartners.co.jp</a>
                 <div class="item-meta">atpartners.co.jp / 2024-12-04 17:00</div>
@@ -806,7 +899,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">51</div>
+            <div class="item-index">48</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE1mLVRiQVA1bHlzdmM4ZGN4dUtDSEtTc2hKa2pLd0JtTzJxVTgySW9OY2lTZHk1T3pBdkZIcUh2VU9uMHhfWnRfTENHM1Y3NHlzdEdsRzZUdzhrR3AyUlFQWVpLcG8?oc=5" target="_blank" rel="noopener noreferrer">フィットネスアプリと情報漏洩:バイデン氏やトランプ氏、カマラ・ハリス氏などの行動追跡が可能に - 合同会社ロケットボーイズ</a>
                 <div class="item-meta">合同会社ロケットボーイズ / 2024-10-30 16:00</div>
@@ -815,7 +908,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">52</div>
+            <div class="item-index">49</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxPRFl5M3d5MXItcnNMSUlWM2hoSnZUYWZWdTllcTg2Z0V1ZnZNLUctVktzakszU0NmU2sybWZCdXB0NXpERFM3VUVsdFEzMDFxcDBONEtZQkoxaFVqTTNIcE90aUs2bEROekNGOXY2YXZyVm5ZbkJJWlBxN0JIcERFaUZRSmotM0VX?oc=5" target="_blank" rel="noopener noreferrer">Prisma Cloud AI-SPMの発表: AI利用アプリのセキュリティとコンプライアンス - Palo Alto Networks</a>
                 <div class="item-meta">Palo Alto Networks / 2024-10-25 16:00</div>
@@ -824,7 +917,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">53</div>
+            <div class="item-index">50</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMiSEFVX3lxTE5TZGFRUzIteFczMUpqZUptNTQ2X3N3QWJJWVRFQjlJMVp4OWlWaU5yQzNzU1ptSUtsbnpwMnh0eVZjUUxUUnRvMA?oc=5" target="_blank" rel="noopener noreferrer">AI事業者ガイドラインが求めるセキュリティ対策の概要を弁護士が解説 - unitis.jp</a>
                 <div class="item-meta">unitis.jp / 2024-06-18 16:00</div>
@@ -833,28 +926,10 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">54</div>
+            <div class="item-index">51</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMiYkFVX3lxTFBSVWRaSVJjSEhtMUVlSmVram92ZHN4TUxjelp1ejFaZ29tVHJzZXVFaHJXTWtiVDgzQzRDdTBSYXlLRExxcHV2QVhHSFAyWDhjclRTb0pyRUdzdFNSOVFNTEpR?oc=5" target="_blank" rel="noopener noreferrer">AIのリスクと安全性 | 社員のAI利用は禁止すべき？ - Cloudflare</a>
                 <div class="item-meta">Cloudflare / 2023-10-10 23:18</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">55</div>
-            <div class="item-body">
-                <a class="item-title" href="https://news.google.com/rss/articles/CBMiTkFVX3lxTE1ZUmlTMGhvcjlESzN6Z2ZOd3NDMFZNUWlxTFNzMGJjb3NOV3NuNjBDOWZNaXlzazBudXhLY0lVRkFZMm41bjh5SjJsb0s2Zw?oc=5" target="_blank" rel="noopener noreferrer">【盲点】リモート時代の「意外な脅威」を見過ごしてないか | Simplex Insight - シンプレクス株式会社</a>
-                <div class="item-meta">シンプレクス株式会社 / 2022-04-06 16:00</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">56</div>
-            <div class="item-body">
-                <a class="item-title" href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE9GZHhQLTdIbTlMUWdqR0xBVzhqV0VRS3IzT0NJT0lxUV9BMThZXzhnNHFxWXZUQWxOLWUxQ1cyRS1IU2QyQVhNT0RDeFl1bFdYN3dSSkVialNFUQ?oc=5" target="_blank" rel="noopener noreferrer">Zoomのセキュリティ脆弱性、ユーザー情報流出は本当か？日本法人マネージャーが答える。 - EnterpriseZine</a>
-                <div class="item-meta">EnterpriseZine / 2020-04-30 16:00</div>
             </div>
         </div>
         </div>
@@ -866,6 +941,24 @@ window.addEventListener('DOMContentLoaded', function() {
         <div class="item-card">
             <div class="item-index">01</div>
             <div class="item-body">
+                <a class="item-title" href="https://zenn.dev/yumeno/articles/5daff12fd4eeb0" target="_blank" rel="noopener noreferrer">国産LLMは公開されている。なぜ誰も知らないのか！</a>
+                <div class="item-meta">2026-04-14 01:59 / いいね 0</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">02</div>
+            <div class="item-body">
+                <a class="item-title" href="https://zenn.dev/sunyeul89/articles/bf48eb1a12ed81" target="_blank" rel="noopener noreferrer">`llm-wiki` の発想を、自分の Obsidian vault に持ち込んでみた</a>
+                <div class="item-meta">2026-04-14 01:44 / いいね 0</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">03</div>
+            <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/genda_jp/articles/kiro-cli-current-state" target="_blank" rel="noopener noreferrer">久しぶりにドキュメントを読んだのでKiro CLIの機能を整理してみた</a>
                 <div class="item-meta">2026-04-14 00:49 / いいね 1</div>
             </div>
@@ -873,7 +966,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">02</div>
+            <div class="item-index">04</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/ai_iinkai/articles/ai-wa-toi-kara-hajimaru-intro" target="_blank" rel="noopener noreferrer">「AIは問いから始まる」── 物語で学ぶClaude Code入門書を書きました</a>
                 <div class="item-meta">2026-04-14 00:45 / いいね 0</div>
@@ -882,7 +975,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">03</div>
+            <div class="item-index">05</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/koba_uk/articles/github-copilot-cli-remote-control" target="_blank" rel="noopener noreferrer">【GitHub】Copilot CLIがWebやモバイルから遠隔操作可能に（パブリックプレビュー）</a>
                 <div class="item-meta">2026-04-14 00:30 / いいね 0</div>
@@ -891,7 +984,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">04</div>
+            <div class="item-index">06</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/yy7613/articles/88278e57451e62" target="_blank" rel="noopener noreferrer">LLM の動き〜マルチモーダルモデルの確認〜</a>
                 <div class="item-meta">2026-04-14 00:26 / いいね 0</div>
@@ -900,7 +993,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">05</div>
+            <div class="item-index">07</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/como/articles/35e3476897b998" target="_blank" rel="noopener noreferrer">AIエディター「Kiro」活用術：実録・Windowsデスクトップアプリ開発（Vibe）</a>
                 <div class="item-meta">2026-04-14 00:24 / いいね 0</div>
@@ -909,7 +1002,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">06</div>
+            <div class="item-index">08</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/h_s_dev/articles/2c9a8803135e70" target="_blank" rel="noopener noreferrer">AI駆動開発6ヶ月、ようやく自分のワークフローができた話</a>
                 <div class="item-meta">2026-04-13 23:53 / いいね 0</div>
@@ -918,7 +1011,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">07</div>
+            <div class="item-index">09</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/satoh_y_0323/articles/3529d8c543726e" target="_blank" rel="noopener noreferrer">「これ欲しいです」──保育士向けワークフローを自動生成してみた【Clade v1.14】</a>
                 <div class="item-meta">2026-04-13 23:44 / いいね 0</div>
@@ -927,7 +1020,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">08</div>
+            <div class="item-index">10</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/ait/articles/claude-memory-sync-oss" target="_blank" rel="noopener noreferrer">Claude Code に永続記憶を持たせる OSS「claude-memory-sync」を作った — 設計と落とし穴</a>
                 <div class="item-meta">2026-04-13 23:28 / いいね 0</div>
@@ -936,7 +1029,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">09</div>
+            <div class="item-index">11</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/kanaria007/articles/40f56ff461ff1c" target="_blank" rel="noopener noreferrer">第10章 AI導入で組織が壊れるとき、何が起きているか</a>
                 <div class="item-meta">2026-04-13 23:03 / いいね 1</div>
@@ -945,7 +1038,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">10</div>
+            <div class="item-index">12</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/slate_infra/articles/8b539d0c58b967" target="_blank" rel="noopener noreferrer">開発のボトルネックはどこに移るのか──コード生成の先にある3つの制約</a>
                 <div class="item-meta">2026-04-13 22:51 / いいね 1</div>
@@ -954,7 +1047,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">11</div>
+            <div class="item-index">13</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/lumichy/articles/glm-5-1-review-1500000-tokens-reasoning" target="_blank" rel="noopener noreferrer">GLM-5.1徹底レビュー：150万トークンの衝撃と最強の推論性能</a>
                 <div class="item-meta">2026-04-13 22:46 / いいね 1</div>
@@ -963,7 +1056,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">12</div>
+            <div class="item-index">14</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/analysis/articles/thought-analyzer-self-evolution" target="_blank" rel="noopener noreferrer">自己進化するAIが「正しいものを書き換える」理由 ── AlphaEvolveとLLM wikiの分岐点</a>
                 <div class="item-meta">2026-04-13 22:34 / いいね 0</div>
@@ -972,7 +1065,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">13</div>
+            <div class="item-index">15</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/hokanco28/articles/5080cfab1f353e" target="_blank" rel="noopener noreferrer">BigQuery「AI関数」大量GAと運用が捗る3月のアップデートまとめ</a>
                 <div class="item-meta">2026-04-13 22:08 / いいね 0</div>
@@ -981,7 +1074,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">14</div>
+            <div class="item-index">16</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/hirasec/articles/20260413-ai-code-quality-best-practices" target="_blank" rel="noopener noreferrer">AIと一緒に作るコードの品質をどう担保するか、Best Practicesから学んだこと</a>
                 <div class="item-meta">2026-04-13 21:06 / いいね 0</div>
@@ -990,7 +1083,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">15</div>
+            <div class="item-index">17</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/fumofumo3/articles/05-frozen-pipe" target="_blank" rel="noopener noreferrer">#05 凍った水道管</a>
                 <div class="item-meta">2026-04-13 19:53 / いいね 1</div>
@@ -999,7 +1092,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">16</div>
+            <div class="item-index">18</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/susano/articles/26cd565798423c" target="_blank" rel="noopener noreferrer"># 「社内ドキュメント300ページをAIに食わせたら、新人教育が不要になった」— RAG実践ガイド</a>
                 <div class="item-meta">2026-04-13 19:30 / いいね 0</div>
@@ -1008,7 +1101,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">17</div>
+            <div class="item-index">19</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/toki_mwc/articles/claude-code-discord-mcp-multi-pc" target="_blank" rel="noopener noreferrer">Claude Code を複数PCで使うなら Discord MCP が最適解だった</a>
                 <div class="item-meta">2026-04-13 19:19 / いいね 0</div>
@@ -1017,7 +1110,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">18</div>
+            <div class="item-index">20</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/helloworld/articles/0d046871ee8ccc" target="_blank" rel="noopener noreferrer">サプライチェーン攻撃はAIが持ち込む——今日から入れられる7つの防御</a>
                 <div class="item-meta">2026-04-13 19:09 / いいね 1</div>
@@ -1026,7 +1119,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">19</div>
+            <div class="item-index">21</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/643866/articles/3cd3b80972f8da" target="_blank" rel="noopener noreferrer">CursorでSkills作成のコツ</a>
                 <div class="item-meta">2026-04-13 19:00 / いいね 0</div>
@@ -1035,7 +1128,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">20</div>
+            <div class="item-index">22</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/takna/articles/claude-code-server-log-check" target="_blank" rel="noopener noreferrer">Claude Code に「ログ見て」と言うだけでサーバーログを確認させる方法</a>
                 <div class="item-meta">2026-04-13 18:49 / いいね 1</div>
@@ -1044,7 +1137,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">21</div>
+            <div class="item-index">23</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/dely_jp/articles/73870e5536cf13" target="_blank" rel="noopener noreferrer">大AI時代に新卒エンジニアがもがく話</a>
                 <div class="item-meta">2026-04-13 18:12 / いいね 7</div>
@@ -1053,7 +1146,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">22</div>
+            <div class="item-index">24</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/nue_jp/articles/c9131ad1a1770f" target="_blank" rel="noopener noreferrer">IDD × SDD × AIDD で6W4Hを制す——AI時代に人間がすべきこと</a>
                 <div class="item-meta">2026-04-13 18:00 / いいね 0</div>
@@ -1062,7 +1155,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">23</div>
+            <div class="item-index">25</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/takuyanagai0213/articles/claude-code-for-x-blank-spot" target="_blank" rel="noopener noreferrer">「Claude Code for X」の空白地帯 ── なぜ日本では誰もやらないのか</a>
                 <div class="item-meta">2026-04-13 17:54 / いいね 0</div>
@@ -1071,7 +1164,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">24</div>
+            <div class="item-index">26</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/syunichisato51/articles/ai-news-20260413-0eee4b25" target="_blank" rel="noopener noreferrer">Claude Codeで86%がデプロイ成功、ソフトバンク1兆パラメーター参入——2026年4月第3週のAI業界を読む</a>
                 <div class="item-meta">2026-04-13 17:44 / いいね 0</div>
@@ -1080,7 +1173,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">25</div>
+            <div class="item-index">27</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/playpark/articles/ai-agent-labor-cost-comparison" target="_blank" rel="noopener noreferrer">AIエージェントを「月3万の新人」として見積もったら社内議論が一気に進んだ</a>
                 <div class="item-meta">2026-04-13 17:31 / いいね 1</div>
@@ -1089,7 +1182,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">26</div>
+            <div class="item-index">28</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/epicai_techblog/articles/0fb630fc14af7e" target="_blank" rel="noopener noreferrer">Coding AgentをRustで自作してみた</a>
                 <div class="item-meta">2026-04-13 17:30 / いいね 1</div>
@@ -1098,7 +1191,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">27</div>
+            <div class="item-index">29</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/joh_luck/articles/b2ab2304ba06ca" target="_blank" rel="noopener noreferrer">Argos CI でビジュアルリグレッションテストを導入してみた</a>
                 <div class="item-meta">2026-04-13 17:24 / いいね 0</div>
@@ -1107,7 +1200,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">28</div>
+            <div class="item-index">30</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/interpark/articles/ec0207f6aa2ecb" target="_blank" rel="noopener noreferrer">Gensparkによるショート動画生成マニュアル</a>
                 <div class="item-meta">2026-04-13 16:38 / いいね 0</div>
@@ -1116,7 +1209,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">29</div>
+            <div class="item-index">31</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/yunisuta/articles/ai-wukj6k000" target="_blank" rel="noopener noreferrer">2026年、現場エンジニアが押さえておくべきAI技術トレンド5選</a>
                 <div class="item-meta">2026-04-13 16:35 / いいね 0</div>
@@ -1125,7 +1218,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">30</div>
+            <div class="item-index">32</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/misadroid/articles/088a9cc0312a78" target="_blank" rel="noopener noreferrer">ClaudeCodeのセッションログでハーネスを育ててみる</a>
                 <div class="item-meta">2026-04-13 16:23 / いいね 0</div>
@@ -1134,7 +1227,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">31</div>
+            <div class="item-index">33</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/minamominamoto/articles/29cd175e4a2940" target="_blank" rel="noopener noreferrer">&quot;ハルシネーションの構造的解明：認識の失敗からフレームの誤作動へ&quot;</a>
                 <div class="item-meta">2026-04-13 16:22 / いいね 0</div>
@@ -1143,7 +1236,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">32</div>
+            <div class="item-index">34</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/ze1ny/articles/95books-typescript-structure" target="_blank" rel="noopener noreferrer">95冊の技術書をTypeScriptの構造化データにした方法</a>
                 <div class="item-meta">2026-04-13 16:13 / いいね 1</div>
@@ -1152,16 +1245,16 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">33</div>
+            <div class="item-index">35</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/genda_jp/articles/349257b6d83fd2" target="_blank" rel="noopener noreferrer">AWS Frontier Agentsで変わるSREの仕事、変わらないSREの仕事</a>
-                <div class="item-meta">2026-04-13 15:57 / いいね 4</div>
+                <div class="item-meta">2026-04-13 15:57 / いいね 5</div>
             </div>
         </div>
         
 
         <div class="item-card">
-            <div class="item-index">34</div>
+            <div class="item-index">36</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/nexus_lab_zen/articles/ai-cto-quality-audit" target="_blank" rel="noopener noreferrer">AIのCTOが自社プロダクトを品質監査したら、5つ中4つがビルドすら通らなかった話</a>
                 <div class="item-meta">2026-04-13 15:14 / いいね 0</div>
@@ -1170,7 +1263,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">35</div>
+            <div class="item-index">37</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/harada_ha/articles/3a50843a793634" target="_blank" rel="noopener noreferrer">Claude Code + n8n で企画書を知るAI企画者を作る</a>
                 <div class="item-meta">2026-04-13 14:28 / いいね 0</div>
@@ -1179,7 +1272,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">36</div>
+            <div class="item-index">38</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/tokium_dev/articles/a8e7af3930a473" target="_blank" rel="noopener noreferrer">AIにレガシーシステムのドキュメントを書かせる技術</a>
                 <div class="item-meta">2026-04-13 14:25 / いいね 1</div>
@@ -1188,7 +1281,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">37</div>
+            <div class="item-index">39</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/yumazd/articles/4324440fc3c7ec" target="_blank" rel="noopener noreferrer">🔍GitHub検索アプリにClaude AIを組み込んで分かった、&quot;使いどころ&quot;の設計判断</a>
                 <div class="item-meta">2026-04-13 14:21 / いいね 0</div>
@@ -1197,7 +1290,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">38</div>
+            <div class="item-index">40</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/syoshida07/articles/03c1915147408c" target="_blank" rel="noopener noreferrer">AI開発のため緩和か個人情報保護法改正案にみる企業とSIerに求められる企業統制モデル</a>
                 <div class="item-meta">2026-04-13 14:00 / いいね 0</div>
@@ -1206,7 +1299,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">39</div>
+            <div class="item-index">41</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/mbk_digital/articles/56a5e5fd831771" target="_blank" rel="noopener noreferrer">Claude Codeに「Zenn環境作って」と言ったら全部やってくれた話</a>
                 <div class="item-meta">2026-04-13 13:11 / いいね 1</div>
@@ -1215,7 +1308,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">40</div>
+            <div class="item-index">42</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/tre_conigli/articles/audrey-tang-ochiai-ai-era-mindset" target="_blank" rel="noopener noreferrer">オードリー・タンと落合陽一の対談で、AIに消耗する構造が見えた話</a>
                 <div class="item-meta">2026-04-13 13:05 / いいね 1</div>
@@ -1224,7 +1317,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">41</div>
+            <div class="item-index">43</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/miyan/articles/ai-driven-dev-stacked-pr-strategy-2026" target="_blank" rel="noopener noreferrer">AIが生成するPRをどう管理するか — スタックPRという現実解</a>
                 <div class="item-meta">2026-04-13 12:44 / いいね 0</div>
@@ -1233,7 +1326,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">42</div>
+            <div class="item-index">44</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/headwaters/articles/7b1fd9930cf859" target="_blank" rel="noopener noreferrer">生成AIの回答精度が上がる3つの鉄則！データ品質が企業DXを制する理由</a>
                 <div class="item-meta">2026-04-13 12:30 / いいね 1</div>
@@ -1242,7 +1335,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">43</div>
+            <div class="item-index">45</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/nexta_/articles/46b7b6e253e048" target="_blank" rel="noopener noreferrer">Claude Codeに「ふりかえり」を教えてみた：アジャイルな改善ループで自律進化するAIパートナーの構築</a>
                 <div class="item-meta">2026-04-13 12:17 / いいね 0</div>
@@ -1251,7 +1344,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">44</div>
+            <div class="item-index">46</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/nyuki/articles/ai-agent-trust-boundary" target="_blank" rel="noopener noreferrer">AI エージェントの時代、信頼の境界線が動いている</a>
                 <div class="item-meta">2026-04-13 12:07 / いいね 1</div>
@@ -1260,7 +1353,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">45</div>
+            <div class="item-index">47</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/dely_jp/articles/0f08d28107cf24" target="_blank" rel="noopener noreferrer">AIで作ったプロジェクトの&quot;置き場所&quot;をどうするか</a>
                 <div class="item-meta">2026-04-13 12:02 / いいね 2</div>
@@ -1269,28 +1362,10 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">46</div>
+            <div class="item-index">48</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/zaico/articles/d22da6aaa92a43" target="_blank" rel="noopener noreferrer">手作業VBAがつらくなったのでClaude CodeでExcel VBA開発できるようにした</a>
                 <div class="item-meta">2026-04-13 12:00 / いいね 6</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">47</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/newaitees/articles/a03641fe8b9c1c" target="_blank" rel="noopener noreferrer">AIにTRPGのシナリオを書かせてみる</a>
-                <div class="item-meta">2026-04-13 11:46 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">48</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/tre_conigli/articles/bash-mcp-server-internal-docs" target="_blank" rel="noopener noreferrer">なぜCLIではなくMCPなのか — Bashだけで社内ドキュメント検索MCPサーバーを作る</a>
-                <div class="item-meta">2026-04-13 11:33 / いいね 6</div>
             </div>
         </div>
         </div>
@@ -1328,7 +1403,7 @@ window.addEventListener('DOMContentLoaded', function() {
         </div>
         <div class="panel">
           <div class="section-title" style="font-size:18px; margin-bottom:10px;">判断理由</div>
-          <ul class="info-list"><li>AIリスク記事 56 件</li><li>開発記事 48 件</li><li>判定スコア 76</li><li>関連キーワード: セキュリティ(29) / 漏洩(11) / 脆弱性(10) / 情報漏洩(9) / 法(5)</li></ul>
+          <ul class="info-list"><li>AIリスク記事 51 件</li><li>開発記事 48 件</li><li>判定スコア 66</li><li>関連キーワード: セキュリティ(24) / 漏洩(10) / 情報漏洩(9) / 脆弱性(8) / 規制(4)</li></ul>
         </div>
       </div>
 
@@ -1337,6 +1412,175 @@ window.addEventListener('DOMContentLoaded', function() {
         <ul class="info-list"><li>対象データを機密区分で分類する</li><li>利用者、権限、操作ログの要件を決める</li><li>社内限定で試験運用し、統制ルールを固める</li></ul>
         <a class="action-btn" href="https://learn.microsoft.com/ja-jp/azure/search/retrieval-augmented-generation-overview" target="_blank" rel="noopener noreferrer">Microsoft RAGドキュメント</a>
       </div>
+    </div>
+
+    <div id="page-legal" class="page">
+      <div class="section-title">⚖️ 法規制動向</div>
+      <div class="notice-box" style="margin-bottom:18px; font-size:13px;">
+        自工会ガイドラインに基づく情報セキュリティ関連法令の最新動向を追跡します。改正・施行・通達などの情報が更新されます。
+      </div>
+      
+    <div class="panel" style="margin-bottom:18px;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px; flex-wrap:wrap;">
+        <span class="badge" style="background:#0c4f90; color:#4db4ff; font-size:13px; padding:6px 14px;">APPI</span>
+        <span style="font-size:20px; font-weight:800; color:#e8f4ff;">個人情報保護法</span>
+        
+        <a href="https://www.ppc.go.jp/" target="_blank" rel="noopener noreferrer"
+           style="margin-left:auto; font-size:12px; color:#4db4ff; text-decoration:none; white-space:nowrap;">
+          📎 公式サイト
+        </a>
+      </div>
+      <div class="notice-box" style="margin-bottom:14px; font-size:13px;">個人情報の適正な取扱いと保護を定めた法律。個人データ保護と委託・第三者提供管理の実務に直結します。</div>
+      <div style="font-size:13px; color:#b8c0cc; margin-bottom:8px; font-weight:700;">📰 最新情報（7件）</div>
+      
+        <div class="item-card">
+            <div class="item-index">01</div>
+            <div class="item-body">
+                <a class="item-title" href="https://public-comment.e-gov.go.jp/servlet/Public?CLASSNAME=PCM1040&amp;id=145207789&amp;Mode=1" target="_blank" rel="noopener noreferrer">「第二種指定電気通信設備制度の運用に関するガイドライン」の改正</a>
+                
+                <div class="item-meta">2026-04-09 00:00</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="item-index">02</div>
+            <div class="item-body">
+                <a class="item-title" href="https://www.ppc.go.jp/alart_for_medical_organizations" target="_blank" rel="noopener noreferrer">医療機関における個人情報の取扱いに関する注意喚起を掲載しました。</a>
+                
+                
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="item-index">03</div>
+            <div class="item-body">
+                <a class="item-title" href="https://www.ppc.go.jp/personalinfo/minaoshi/" target="_blank" rel="noopener noreferrer">令和３年 改正個人情報保護法</a>
+                
+                
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="item-index">04</div>
+            <div class="item-body">
+                <a class="item-title" href="https://www.ppc.go.jp/personalinfo/legal/kaiseihogohou/" target="_blank" rel="noopener noreferrer">令和２年 改正個人情報保護法</a>
+                
+                
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="item-index">05</div>
+            <div class="item-body">
+                <a class="item-title" href="https://www.ppc.go.jp/news/press/2019/20191129" target="_blank" rel="noopener noreferrer">「個人情報保護法 いわゆる3年ごと見直し 制度改正大綱（骨子）」 を公表しました。</a>
+                
+                
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="item-index">06</div>
+            <div class="item-body">
+                <a class="item-title" href="https://www.ppc.go.jp/news/careful_information/241211_alert_dataleakage" target="_blank" rel="noopener noreferrer">「不正アクセスによる個人データ漏えい防止のための注意喚起」を掲載しました。</a>
+                
+                
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="item-index">07</div>
+            <div class="item-body">
+                <a class="item-title" href="https://www.ppc.go.jp/news/press/2024/241225_houdou" target="_blank" rel="noopener noreferrer">「レセプトデータ等の保有個人情報の利活用に関する注意喚起（地方公共団体向け）」及び「レセプトデータ等の保有個人情報の利活用に関する注意喚起（個人情報取扱事業者向け）」を公表しました。</a>
+                
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="panel" style="margin-bottom:18px;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px; flex-wrap:wrap;">
+        <span class="badge" style="background:#5a1010; color:#ff7a7a; font-size:13px; padding:6px 14px;">UCPA-JP</span>
+        <span style="font-size:20px; font-weight:800; color:#e8f4ff;">不正競争防止法</span>
+        
+        <a href="https://www.meti.go.jp/" target="_blank" rel="noopener noreferrer"
+           style="margin-left:auto; font-size:12px; color:#4db4ff; text-decoration:none; white-space:nowrap;">
+          📎 公式サイト
+        </a>
+      </div>
+      <div class="notice-box" style="margin-bottom:14px; font-size:13px;">営業秘密と限定提供データの保護、不正競争行為の防止を定めた法律。情報漏えい対策や知財保護に関わります。</div>
+      <div style="font-size:13px; color:#b8c0cc; margin-bottom:8px; font-weight:700;">📰 最新情報（1件）</div>
+      
+        <div class="item-card">
+            <div class="item-index">01</div>
+            <div class="item-body">
+                <a class="item-title" href="https://public-comment.e-gov.go.jp/servlet/Public?CLASSNAME=PCMMSTDETAIL&amp;id=550004329&amp;Mode=0" target="_blank" rel="noopener noreferrer">種苗法施行規則及び品種登録規則の一部を改正する省令案についての意見・情報の募集について</a>
+                
+                <div class="item-meta">2026-04-13 00:00</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel" style="margin-bottom:18px;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px; flex-wrap:wrap;">
+        <span class="badge" style="background:#1a4a1a; color:#6dcc7f; font-size:13px; padding:6px 14px;">UCA</span>
+        <span style="font-size:20px; font-weight:800; color:#e8f4ff;">不正アクセス禁止法</span>
+        
+        <a href="https://www.npa.go.jp/cyber/" target="_blank" rel="noopener noreferrer"
+           style="margin-left:auto; font-size:12px; color:#4db4ff; text-decoration:none; white-space:nowrap;">
+          📎 公式サイト
+        </a>
+      </div>
+      <div class="notice-box" style="margin-bottom:14px; font-size:13px;">不正アクセス行為の禁止と関連対策を定めた法律。不正侵入、認証情報悪用、サイバー事案対応の基礎です。</div>
+      <div style="font-size:13px; color:#b8c0cc; margin-bottom:8px; font-weight:700;">📰 最新情報（2件）</div>
+      
+        <div class="item-card">
+            <div class="item-index">01</div>
+            <div class="item-body">
+                <a class="item-title" href="https://www.npa.go.jp/news/release/2026/20260310001.html" target="_blank" rel="noopener noreferrer">令和７年におけるサイバー空間をめぐる脅威の情勢等について</a>
+                
+                
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="item-index">02</div>
+            <div class="item-body">
+                <a class="item-title" href="https://www.npa.go.jp/news/release/2026/20260306001.html" target="_blank" rel="noopener noreferrer">不正アクセス行為の発生状況及びアクセス制御機能に関する技術の研究開発の状況</a>
+                
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="panel" style="margin-bottom:18px;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px; flex-wrap:wrap;">
+        <span class="badge" style="background:#3a0a55; color:#d07aff; font-size:13px; padding:6px 14px;">ESA</span>
+        <span style="font-size:20px; font-weight:800; color:#e8f4ff;">電子署名認証法</span>
+        
+        <a href="https://www.meti.go.jp/" target="_blank" rel="noopener noreferrer"
+           style="margin-left:auto; font-size:12px; color:#4db4ff; text-decoration:none; white-space:nowrap;">
+          📎 公式サイト
+        </a>
+      </div>
+      <div class="notice-box" style="margin-bottom:14px; font-size:13px;">電子署名の法的効力と認証業務を定めた法律。電子契約、電子証明書、認証基盤に関わります。</div>
+      <div style="font-size:13px; color:#b8c0cc; margin-bottom:8px; font-weight:700;">📰 最新情報（0件）</div>
+      <div class="empty-box">最新情報なし（公式サイトをご確認ください）</div>
+    </div>
+
+    <div class="panel" style="margin-bottom:18px;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px; flex-wrap:wrap;">
+        <span class="badge" style="background:#4a3000; color:#ffcc55; font-size:13px; padding:6px 14px;">e-Doc</span>
+        <span style="font-size:20px; font-weight:800; color:#e8f4ff;">e-文書法</span>
+        
+        <a href="https://www.meti.go.jp/" target="_blank" rel="noopener noreferrer"
+           style="margin-left:auto; font-size:12px; color:#4db4ff; text-decoration:none; white-space:nowrap;">
+          📎 公式サイト
+        </a>
+      </div>
+      <div class="notice-box" style="margin-bottom:14px; font-size:13px;">書類の電子保存を認める法律。電子保存、スキャナ保存、文書管理の見直しに関わります。</div>
+      <div style="font-size:13px; color:#b8c0cc; margin-bottom:8px; font-weight:700;">📰 最新情報（0件）</div>
+      <div class="empty-box">最新情報なし（公式サイトをご確認ください）</div>
+    </div>
     </div>
   </div>
 </div>

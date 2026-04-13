@@ -50,12 +50,12 @@ def safe_text(value):
 
 def get_ai_risk_entries():
     url = "https://news.google.com/rss/search?q=AI+脆弱性+規制+漏洩+セキュリティ&hl=ja&gl=JP&ceid=JP:ja"
-    return feedparser.parse(url, agent=USER_AGENT).entries[:100]
+    return feedparser.parse(url, agent=USER_AGENT, request_headers={"Connection": "close"}).entries[:100]
 
 
 def get_dev_articles():
     url = "https://zenn.dev/api/articles?topicname=ai&order=latest"
-    res = requests.get(url, timeout=20, headers={"User-Agent": USER_AGENT})
+    res = requests.get(url, timeout=5, headers={"User-Agent": USER_AGENT})
     res.raise_for_status()
     return res.json().get("articles", [])[:100]
 
@@ -166,7 +166,7 @@ def _extract_dates_from_text(text: str) -> dict:
 
 def _fetch_rss(src: dict) -> list[dict]:
     """RSSフィードを取得してキーワードフィルタリング"""
-    entries = feedparser.parse(src["fetch_url"], agent=USER_AGENT).entries
+    entries = feedparser.parse(src["fetch_url"], agent=USER_AGENT, request_headers={"Connection": "close"}).entries
     keywords = src.get("keywords", [])
     result = []
     for e in entries:
@@ -193,7 +193,7 @@ def _fetch_rss(src: dict) -> list[dict]:
 def _fetch_html_scrape(src: dict) -> list[dict]:
     """HTMLページをスクレイプして新着リストを取得"""
     try:
-        res = requests.get(src["fetch_url"], timeout=20, headers={"User-Agent": USER_AGENT})
+        res = requests.get(src["fetch_url"], timeout=5, headers={"User-Agent": USER_AGENT})
         res.raise_for_status()
         res.encoding = res.apparent_encoding or "utf-8"
         soup = BeautifulSoup(res.text, "html.parser")
@@ -261,12 +261,16 @@ def _fetch_legal_source(src: dict) -> list[dict]:
 
 
 def get_all_legal_news() -> list[dict]:
-    """全法令の情報を並列取得"""
+    """全法令の情報を並列取得・各法令最大8秒で打ち切り"""
     results = []
     with ThreadPoolExecutor(max_workers=5) as ex:
         futures = {ex.submit(_fetch_legal_source, src): src for src in LEGAL_SOURCES}
         for future in futures:
-            results.extend(future.result())
+            try:
+                results.extend(future.result(timeout=8))
+            except Exception as ex_:
+                src = futures[future]
+                print(f"[WARN] 法規制タイムアウト/失敗 ({src['law_name']}): {ex_}")
     # 公開日降順ソート（日付なしは末尾）
     results.sort(key=lambda x: x.get("published", ""), reverse=True)
     return results

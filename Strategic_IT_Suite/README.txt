@@ -1,4 +1,4 @@
-Strategic_IT_Suite
+Strategic_IT_Suite v0.0.10
 
 目的:
 既存の Strategic_IT_Suite を標準構成で実行するための再配置版です。

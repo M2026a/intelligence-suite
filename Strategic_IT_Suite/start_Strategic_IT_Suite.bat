@@ -1,7 +1,7 @@
 @echo off
 cd /d "%~dp0"
 echo ==============================================
-echo   Strategic_IT_Suite
+echo   Strategic_IT_Suite v0.0.10
 echo ==============================================
 
 echo [1/3] Installing requirements...

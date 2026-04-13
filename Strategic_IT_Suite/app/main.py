@@ -19,6 +19,10 @@ DB_FILE     = OUTPUT_DIR / "strategic_it_suite.db"
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 StrategicITSuite"
 JST = ZoneInfo("Asia/Tokyo")
 
+# GitHub Actions(CI=true)では短く、デスクトップでは長く
+import os
+FETCH_TIMEOUT = 5 if os.environ.get("CI") else 20
+
 CONFIG = json.loads((ROOT / "shared" / "config.json").read_text(encoding="utf-8"))
 
 def format_date(raw):
@@ -55,7 +59,7 @@ def get_ai_risk_entries():
 
 def get_dev_articles():
     url = "https://zenn.dev/api/articles?topicname=ai&order=latest"
-    res = requests.get(url, timeout=20, headers={"User-Agent": USER_AGENT})
+    res = requests.get(url, timeout=FETCH_TIMEOUT, headers={"User-Agent": USER_AGENT})
     res.raise_for_status()
     return res.json().get("articles", [])[:100]
 
@@ -193,7 +197,7 @@ def _fetch_rss(src: dict) -> list[dict]:
 def _fetch_html_scrape(src: dict) -> list[dict]:
     """HTMLページをスクレイプして新着リストを取得"""
     try:
-        res = requests.get(src["fetch_url"], timeout=20, headers={"User-Agent": USER_AGENT})
+        res = requests.get(src["fetch_url"], timeout=FETCH_TIMEOUT, headers={"User-Agent": USER_AGENT})
         res.raise_for_status()
         res.encoding = res.apparent_encoding or "utf-8"
         soup = BeautifulSoup(res.text, "html.parser")

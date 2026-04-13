@@ -1,0 +1,1097 @@
+<!doctype html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Watch Hub +</title>
+<style>
+:root{--bg:#08111e;--panel:#101a2a;--panel2:#0c1523;--line:#1f2b40;--text:#eef4ff;--muted:#93a4bf;--accent:#4ea1ff;--accent2:#15314f}
+*{box-sizing:border-box}html,body{margin:0;padding:0;background:linear-gradient(180deg,#08111e 0%,#0c1627 100%);color:var(--text);font-family:Inter,'Hiragino Sans','Yu Gothic UI',sans-serif}
+a{color:inherit;text-decoration:none}body{padding-top:0}
+.wrap,.main{width:min(1280px,94vw);margin:0 auto}
+header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:18px 0 12px}
+.title h1{margin:0;font-size:28px;line-height:1.2}.sub{margin-top:6px;color:var(--muted);font-size:13px}
+.nav{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0 12px}.nav a{padding:10px 14px;border-radius:10px;background:var(--panel2);border:1px solid var(--line);font-size:14px;font-weight:700}.nav a.active{background:var(--accent2);border-color:var(--accent);color:#eef6ff}.filters-panel{margin-bottom:18px}
+.page-lang-btn,.card-lang-btn,.read-btn,.flt-btn,.open-btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer}
+.page-lang-btn.active,.card-lang-btn.active,.flt-btn.active{background:var(--accent2);border-color:var(--accent)}
+.right-controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:18px}
+.main > .panel:first-child{position:static}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:0}
+.filter-label{font-size:12px;color:var(--muted);font-weight:700}
+.search{min-width:240px;background:#0b1320;border:1px solid var(--line);color:var(--text);padding:9px 12px;border-radius:10px}
+.main-grid,.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.grid.list{grid-template-columns:1fr}
+.card,.mini-item,.category-panel{min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
+.card.score-5{border-left:4px solid #ffd700}
+.card.score-4{border-left:4px solid #4ea1ff}
+.card.is-read{opacity:.62}
+.card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;min-width:0;flex-wrap:wrap}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;font-size:11px;color:var(--muted);min-width:0;overflow-wrap:anywhere;word-break:break-word}
+.lang-badge,.tag{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700}
+.lang-badge.ja{background:#14375d;border-color:#4ea1ff}
+.lang-badge.en{background:#24301f;border-color:#15c39a}
+.tag-new{background:#17391e;border-color:#15c39a;color:#93ffd8}.tag-hot{background:#14375d;border-color:#4ea1ff}.tag-caution{background:#3f1b1d;border-color:#ff7b7b}.tag-neutral{background:#1d2635;border-color:#4b5b78}
+.tags{display:flex;gap:6px;flex-wrap:wrap;min-width:0;overflow-wrap:anywhere;word-break:break-word}.summary{font-size:13px;line-height:1.7;color:#d6e0f0;overflow-wrap:anywhere;word-break:break-word}.hidden{display:none!important}
+.card h3{margin:0;font-size:17px;line-height:1.45;overflow-wrap:anywhere;word-break:break-word}.open-btn{margin-top:auto;display:inline-flex;justify-content:center;background:var(--accent2);border-color:var(--accent);max-width:100%;white-space:normal;text-align:center}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 12px;min-width:0;flex-wrap:wrap}.section-head h2{margin:0;font-size:20px;overflow-wrap:anywhere;word-break:break-word}.count-badge{color:var(--muted);font-size:12px;overflow-wrap:anywhere;word-break:break-word}
+.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:0}
+.category-grid.single{grid-template-columns:repeat(3,minmax(0,1fr))}
+.category-panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}.mini-list{display:grid;gap:8px}.mini-item{padding:10px;border-radius:12px;background:#0c1422;border:1px solid #1d2a40}.mini-item a{font-size:13px;line-height:1.5}.mini-meta{font-size:11px;color:var(--muted);margin-top:4px}
+footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size:12px}
+@media(max-width:980px){.category-grid.single{grid-template-columns:1fr}}
+@media(max-width:760px){body{padding-top:0}.top{flex-direction:column}.title h1{font-size:24px}.right-controls{justify-content:flex-start}.search{min-width:0;width:100%}.nav{padding-bottom:8px}.nav a{font-size:13px;padding:9px 12px}.grid,.main-grid,.category-grid{grid-template-columns:1fr}.card,.category-panel,.mini-item{width:100%;max-width:100%}.card-top,.card-meta,.tags,.section-head{width:100%}.card h3{font-size:16px;line-height:1.4}.summary{font-size:13px;line-height:1.65}.open-btn{width:100%}}
+</style>
+</head>
+<body>
+<header>
+<div class='wrap'>
+  <div class='top'>
+    <div class='title'>
+      <h1>🎭 Watch Hub + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 映画・配信・アニメ・ゲーム・芸能</span></h1>
+      <div class='sub'>更新日時：2026-04-13 16:28</div>
+    </div>
+    <div class='right-controls'>
+      <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
+      <button class='page-lang-btn' id='btnPageJA' onclick="setPageLang('ja')">🇯🇵 日本語表示</button>
+    </div>
+  </div>
+  <nav class='nav'><a href="index.html" class="">📋 メイン</a><a href="movie.html" class="">🎬 映画</a><a href="streaming.html" class="">📺 配信</a><a href="anime.html" class="">🎌 アニメ</a><a href="game.html" class="">🎮 ゲーム</a><a href="entertainment.html" class="">⭐ 芸能</a><a href="trend.html" class="active">📈 トレンド</a><a href="analysis.html" class="">📊 分析</a></nav>
+</div>
+</header>
+<div class='main'>
+
+<div class='panel'>
+  <div class='filters'>
+    <span class='filter-label'>地域:</span>
+    <button class='flt-btn flt-region ' data-region='all'>🌍 全部</button>
+    <button class='flt-btn flt-region active' data-region='JP'>🇯🇵 国内</button>
+    <button class='flt-btn flt-region ' data-region='Global'>🌐 海外</button>
+    <span class='filter-label'>スコア:</span>
+    <button class='flt-btn flt-score active' data-score='all'>全部</button>
+    <button class='flt-btn flt-score' data-score='4'>★4以上</button>
+    <button class='flt-btn flt-score' data-score='3'>★3以上</button>
+    
+    <input id='searchBox' class='search' placeholder='タイトル・本文を検索...'>
+  </div>
+</div>
+
+<section class='panel'>
+  <div class='section-head'><h2>📈 トレンド 今日の注目 3件</h2><span class='count-badge'>ランキング・急上昇・話題</span></div>
+  <div class='category-grid single'><div class='mini-item' data-region='JP' data-platform='other'><a href='https://jp.ign.com/shaberisugi-gamer/83110/podcast/484-gamer484-gamer' target='_blank' rel='noopener noreferrer'>「どうぶつの森」はどう変わる？『ぽこ あ ポケモン』旋風から考えるスローライフゲームの未来：#484 しゃべりすぎGAMER：#484 音声版 しゃべりすぎGAMER</a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-07 20:00</div></div><div class='mini-item' data-region='JP' data-platform='other'><a href='https://jp.ign.com/resident-evil-9/83115/news/20263ps5dl3' target='_blank' rel='noopener noreferrer'>カプコン強し 2026年3月のPS5国内DLランキングで「バイオハザード」と「モンハンストーリーズ3」がワンツーフィニッシュ</a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-08 17:26</div></div><div class='mini-item' data-region='JP' data-platform='other'><a href='https://jp.ign.com/shaberisugi-gamer/83113/podcast/04082026' target='_blank' rel='noopener noreferrer'>：今週遊んだゲーム 音声版 04/08/2026</a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-08 20:00</div></div></div>
+</section>
+<section>
+  <div class='section-head'><h2>📰 最新記事</h2><span class='count-badge'>101件</span></div>
+  <div class='grid'>
+<article class='card item-card score-5' data-cardid='e5248b70357f2e0c502e8fe32dd941e9' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-07 20:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'e5248b70357f2e0c502e8fe32dd941e9')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「どうぶつの森」はどう変わる？『ぽこ あ ポケモン』旋風から考えるスローライフゲームの未来：#484 しゃべりすぎGAMER：#484 音声版 しゃべりすぎGAMER</h3><div class='summary'>『ぽこ あ ポケモン』が大ヒットを飛ばし、ほかにも『トモダチコレクション わくわく生活』、『にほんの田舎暮らし』、『スターサンド・アイランド』、『プチプラネット』など、スローライフゲームが大きな注目を集めている。その中で、王者ともいえる「どうぶつの森」シリーズは今後どう変わっていくのか語り合った。また、牧場シムやストーリー性の強いスローライフゲームなどにも言及した。 ■ゲーム＆映画グッズ専門店「IGN JAPAN STORE」 https://ignstore.jp/ 00:00 オープニング 04:31 テーマ：どうぶつの森の今後 1:23:44 コメントコーナー ■出演 クラベ・エスラ お茶缶（フリーライター） 山田集佳（フリーライター） IGN JAPAN編集部のスタッフが、長々とゲーム雑談をする“ながら見”推奨番組「しゃべりすぎGAMER」。 コメントコーナーではみなさんからいただいたコメントを紹介したり、返答したりします。ぜひコメントを残してください！ ■「しゃべりすぎGAMER」再生リスト https://www.youtube.com/playlist?list=PL5dP0ylcT42dJXN_5KJECJ8cI9hK690_e ■ポッドキャスト版 iTunes https://podcasts.apple.com/jp/podcast/ign-japan-%E3%81%97%E3%82%83%E3%81%B9%E3%82%8A%E3%81%99%E3%81%8Egamer-%E3%83%9D%E3%83%83%E3%83%89%E3%82%AD%E3%83%A3%E3%82%B9%E3%83%88/id1258418439 Spotify https://open.spotify.com/show/4AKK4MIlRk3Zfj8my703D8?si=x1_N0RZnTWiagXspsoIUkA ■一部使用楽曲 MusMus：http://musmus.main.jp/</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/shaberisugi-gamer/83110/podcast/484-gamer484-gamer' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='9d42f62026ff893a687cd0f43ef55a6d' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-08 17:26</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'9d42f62026ff893a687cd0f43ef55a6d')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>カプコン強し 2026年3月のPS5国内DLランキングで「バイオハザード」と「モンハンストーリーズ3」がワンツーフィニッシュ</h3><div class='summary'>『バイオハザード RE:3』を含むとトップ10に3本がランクイン 2026年3月における日本のPS5ダウンロードランキングが発表 され、『バイオハザード レクイエム』が1位、『モンスターハンターストーリーズ3 ～運命の双竜～』が2位とカプコンがトップ2を独占したことが明らかになった。 2026年3月期の国内PS5ダウンロードランキングのトップ10は以下のとおり。 『バイオハザード レクイエム』（ レビュー ） 『モンスターハンターストーリーズ3 ～運命の双竜～』（ レビュー ） 『紅の砂漠』（ レビュー ） 『Marathon』 『首都高バトル』 『Minecraft』 『バイオハザード RE:3』（ レビュー ） 『零 ～紅い蝶～ REMAKE』（ レビュー ） 『Winning Post 10 2026』 『MLB The Show 26（英語版）』 『バイオハザード レクイエム』は2月27日という月末発売のタイトルながら 2月のダウンロードランキングで2位 となっており、3月はさらにその勢いを見せつける形となった。 『モンスターハンターストーリーズ3 ～運命の双竜～』も発売前時点のメディア評価も高く 、発売後も実際にたくさんプレイされているようだ。過去最安のセールが行われた影響もあってか、カプコンタイトルだと7位に『バイオハザード RE:3』がランクインしている。 PS …</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/resident-evil-9/83115/news/20263ps5dl3' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='7ce8acc97de03658acf69206760d05a2' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-08 20:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'7ce8acc97de03658acf69206760d05a2')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>：今週遊んだゲーム 音声版 04/08/2026</h3><div class='summary'>IGN JAPAN編集部のスタッフが、最近遊んだゲームについて話す番組 ■ゲーム＆映画グッズ専門店「IGN JAPAN STORE」 https://ignstore.jp/ 00:00 オープニング 00:12 『トモダチコレクション わくわく生活』 27:27 『カオスゼロナイトメア』 ■出演 クラベ・エスラ お茶缶（フリーライター） 山田集佳（フリーライター） ■「今週遊んだゲーム」の再生リストはこちら https://www.youtube.com/playlist?list=PL5dP0ylcT42fwUkuleiG6Qrz0NS0sL59- ■「しゃべりすぎGAMER」の再生リストはこちら https://www.youtube.com/playlist?list=PL5dP0ylcT42dJXN_5KJECJ8cI9hK690_e ■ポッドキャスト版 iTunes https://podcasts.apple.com/jp/podcast/ign-japan-%E3%81%97%E3%82%83%E3%81%B9%E3%82%8A%E3%81%99%E3%81%8Egamer-%E3%83%9D%E3%83%83%E3%83%89%E3%82%AD%E3%83%A3%E3%82%B9%E3%83%88/id1258418439 Spotify https://open.spotify.com/show/4AKK4MIlRk3Zfj8my703D8?si=x1_N0RZnTWiagXspsoIUkA ■一部使用楽曲 MusMus：http://musmus.main.jp/</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/shaberisugi-gamer/83113/podcast/04082026' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='5dc8c8d0e078436383123c11df16dd30' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-09 14:27</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'5dc8c8d0e078436383123c11df16dd30')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>FF14のレイドをシンプルに凝縮――とっつきやすくも奥深い注目作『Nullpoint Protocol』試遊感想</h3><div class='summary'>おいしいとこだけ詰め込みました 『ファイナルファンタジーXIV』から多大な影響を受けた、ボス戦が楽しめるインディーゲームのプレイ感想。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/nullpoint-protocol/83118/preview/ff14nullpoint-protocol' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='7963934a184904d8b3f972f69faff5cd' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-09 17:25</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'7963934a184904d8b3f972f69faff5cd')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『Forza Horizon 6』の舞台「Horizon Japan」の全体マップが公開</h3><div class='summary'>舞台が日本のオープンワールドゲームということもあって日本での注目度も高いタイトル 日本を舞台にしたオープンワールドレーシングゲーム 『Forza Horizon 6』の全体マップが公開 になった。舞台はHorizon Japanと銘打たれているようで、我々がなじみ深い日本の地図とは地形が異なる。本作では東京タワーや富士山に加え、福島県にある磐梯吾妻山などの広域にわたる名所をカバーしていることもあり、各所へのアクセスのしやすさなどを踏まえた形状になっているのだろう。 中心的な都市となる東京は南側中央部に配置され、各地の名所をギュッと収めたであろう南北に長い形状が特徴だ。南端に大黒PAと思しきエリア、北端には雪に覆われた日本アルプス、西端には大きな湖が配置されており、SNSでは地図上のどのあたりに名所が配置されているかという分析も早速始まっている。 こちらが Horizon Japanの全体マップです！ 東京シティの街並みから、雪山のアルプスまで、 #forzahorizon6 のマップはシリーズ史上最も作り込まれ、起伏に富んでいます。 皆さんはどの場所をフレンドと一緒に走ってみたいですか？🚗 pic.twitter.com/i45CiqTPyI — Forza Horizon Japan (@ForzaHorizonJP) April 8, 2026 IGN JAPANでは、 『Forza Horizon 6』の先行プレイを収めた動画をYouTubeで公開 しているので、本作の描く日本がどのようなものになっているか気になる人は以下の動画をチェックしてほしい。 また、以下のように本作にまつわる独自の特集記事も掲載中だ。 日本が舞台の『Forza Horizon 6』約9分の独占ゲームプレイ映像を公開！東京タワーから田園地帯まで、スーパーカーで駆け抜ける …</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/forza-horizon-6/83121/news/forza-horizon-6horizon-japan' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='b1bdd2fd4a543e26398b194891e270ed' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-10 13:22</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'b1bdd2fd4a543e26398b194891e270ed')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『ゼルダの伝説 時のオカリナ』のリメイクの噂が事実である可能性が高まった!?</h3><div class='summary'>『リズム天国 ミラクルスターズ』の発売日がきっかけ 先月、 『ゼルダの伝説 時のオカリナ』や「スターフォックス」シリーズの新作など、多数の未発表の任天堂によるゲームが2026年内に発売されるという噂が浮上した。 これらは Nate The Hate という、内部の情報に詳しいと主張するポッドキャストから流出した。 任天堂は本日、 Nintendo Switch向けタイトル『リズム天国 ミラクルスターズ』の発売日が7月2日になると発表した のだが、これは前述の噂が事実である可能性を高めていると一部では考えられている。Nate The Hateが「『リズム天国 ミラクルスターズ』は夏に発売する」と発言していたからだ。もちろん、Nate The Hateのこの発言が偶然当たっていた可能性もあるだろう。任天堂からは4月16日に『トモダチコレクション わくわく生活』、5月21日に『ヨッシーとフカシギの図鑑』が発売予定だ。そうなると、次の既報タイトルがおそらくは夏にやってくるだろう。これは内部情報に詳しくなくとも、多くのユーザーが予想できたことだろう。 しかし、忘れてはならないのは、Nate The Hateの流した噂が過去にも的中していることだ。例えば、Nintendo Switch 2の披露目の日付や、同機の特徴については事実と一致する噂を流していた。ほかにも『メトロイドプライム』のリマスターが発売されることを言い当てており、『F-ZERO 99』がリリースした2023年は「『F-ZERO」の新作が出る」と主張していた。 一方で、『メトロイドプライム トリロジー』がNintendo Switch向けにリリースされることや、Nintendo Switch Proがやってくることなど、同氏の発言が外れたことも少なくない。 噂が事実であれば、Nintendo Switch 2にとって2026年は素晴らしい年となるだろう。一方で、マリオファンはもう少しの辛抱が必要ということになる。なぜなら、同氏の発言によると3Dマリオの新作は今年ではなく、2027年になるとされているからだ。今後の任天堂からの正式発表に期待したい。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/nintendo-switch-2/83127/news/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='fa78149d75a10e8a62d644a14dd03443' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-10 16:31</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'fa78149d75a10e8a62d644a14dd03443')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『ライフ イズ ストレンジ リユニオン』レビュー 「青春ミステリ」の輝きを復活させた最終章としてふさわしい作品</h3><div class='summary'>見事にシリーズの軌道修正を果たした 2015年に発売された初代『ライフ イズ ストレンジ』は、マックスとクロエの等身大の青春劇を繊細に描いたことで、アドベンチャーゲームにおけるひとつの特異点となり、マスターピースとしての地位を確立している。 その後のシリーズは、クロエを描く前日譚『ライフ イズ ストレンジ ビフォア ザ ストーム』を除き、マックスとクロエの物語から距離を取り、世界観を同一として『The Awesome Adventures of Captain Spirit』、『ライフ イズ ストレンジ2』、『ライフ イズ ストレンジ トゥルーカラーズ』と展開してきた。 そして約10年近くの時を経て、2024年に発売された『ライフ イズ ストレンジ ダブルエクスポージャー』では、満を持してマックスの復帰が描かれることとなった。しかしこの作品は、コアのシチュエーションこそ初代をなぞったものの、「超能力の功罪」というテーマや、場当たり的なロマンスに注力するあまり、「マックス」というキャラクターの価値を見失っていたことは否めない。一般論として、傑作として評された作品の続編が、前作との比較を免れられないのはシリーズものの宿命であるが、偉大な初代を追い求めた結果、「『ライフ イズ ストレンジ』の直接的な続編」を根本から履き違えてしまっていたように思わざるを得ない。 そこから直接の続編として繋がる最新作『ライフ イズ ストレンジ リユニオン』は、一見すると前作の遺した重い資産を引き継ぐという極めて難しい舵取りを強いられているように思える。だが、いざゲームプレイを始めてみると、本作があの迷走した前作から見事な軌道修正を果たしていることにすぐに気づくだろう。 ファン待望となるクロエとの再会を描く本作は、しばしばシリーズが陥っていた過剰なシリアスさや陰惨な要素を抑制し、全体を包む軽快さによって余裕のある心地よいトーンを生み出している。 そして何より、マックスとクロエによる「W主人公制」がもたらすシステムの違いや、ふたりの明瞭な関係性に再びフォーカスしたことで、本作はシリーズ本来の魅力である「青春ミステリ」としての輝きを鮮やかに取り戻した。本稿では、前作で抱え込んだ問題を乗り越え、マックスの物語を締めくくる最終章としてふさわしい作品となった本作を紐解いていこう。 シリーズの魅力を履き違えた前作『ライフ イズ ストレンジ ダブルエクスポージャー』 本作『ライフ …</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/life-is-strange-reunion/83131/review/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='126232d6bcf35751e470fbb57fda665e' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-10 17:05</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'126232d6bcf35751e470fbb57fda665e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>eスポーツ選手に憧れる子どもたちのためのプロジェクトも始動 OMENブランド再編のHPゲーミング事業発表会</h3><div class='summary'>OMENブランドはHyperX内に統合 ゲーミングパソコンブランドのOMENを擁するHPが、2026年4月9日に都内でゲーミング事業発表会を行った。 HPはKingston Technologyのゲーミング部門「HyperX」を2021年に買収 しているが、このたびHPはキーボードやマウス、イヤフォンなどゲーミング関係の周辺機器を包括したHyperXをHP内のゲーミング事業のマスターブランドとすることを発表した。 これまで掲げてきた「We are All Gamers.」をあらためてスローガンに、次世代のあらゆるゲーマーのライフスタイルに合った質の高いゲーム体験を提供することで、PCのみならずモバイルやコンソールも含めたマルチプラットフォーム展開を目指す。マイクやマウスなど多彩な商品を取り扱うHyperXブランド内にOMENを含めることで、個別の製品だけではなく一貫したソリューションを提供していくという。 OMENというゲーマー内ではかなり知名度の高いブランドを、買収した別ブランドに包括するというのはなかなか大胆な決断だが、昨今のメモリ・GPU価格の上昇や、スマートフォンアプリも含めたゲーマーのプレイスタイルの多様化を考慮すると、PCの販売だけでなく周辺機器も含めたライフスタイルの提案をしていくという判断は、これからのゲーマーのあり方を考える上でも非常に示唆に富む。 そのための施策として、今回のゲーミング事業発表会では新製品の紹介のほか、AI機能も含めた OMEN Gaming Hub の機能拡張、そして eスポーツチームであるFENNEL とのパートナー契約などが発表された。 発表会の冒頭には、日本HPの執行役員であるパーソナルシステムズ事業本部の事業本部長である松浦氏が登壇。日本国内だけでもゲームをプレイする人口は5400万人にも及ぶと語り（ 『ファミ通ゲーム白書 2025』などにあるゲーム人口推計が念頭にあると思われる ）、潜在的なユーザーも含めて、HPはPC事業で培った究極の没入感をモバイルやコンソールでも提供していくというビジョンを語った。 もともとハイエンドなゲーム環境をユーザーに提供してきたOMENは、 GeForce RTX 5090も搭載可能なHyperX OMEN MAX …</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/gaming-device/83133/feature/e-omenhp' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='47811e01233205a59ec77deb994cefed' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-10 20:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'47811e01233205a59ec77deb994cefed')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>次、なに観る？「スキルツリー」の概念で広がる映画の楽しみ方：第431回 音声版 銀幕にポップコーン</h3><div class='summary'>洋画ファン倍増計画・第2弾！ 前回の「映画スターターパック」回では、視聴者のみなさんからもおすすめのスターターパックを多数寄せていただいた。今回はそうしたコメントを紹介しつつ、スターターパックの次のステップとして、「スキルツリー」の概念を映画鑑賞に当てはめてみる。 ■トークに出てきた主な映画たち 『バック・トゥ・ザ・フューチャー』 『僕らのミライへ逆回転』 『ドライヴ』 『アンダー・ザ・シルバーレイク』 『スーパーバッド 童貞ウォーズ』 『ギャラクシー・クエスト』 『ラースと、その彼女』 『ショーシャンクの空に』 『3時10分、決断のとき』 『沈黙 -サイレンス-』 『パッション』 『ラ・ラ・ランド』 『バットマン フォーエヴァー』 『タクシードライバー』 『仁義なき戦い』 ■ゲーム＆映画グッズ専門店「IGN JAPAN STORE」 https://ignstore.jp ■出演者 山田集佳（フリーライター） 千葉芳樹 野津圭一郎 IGN JAPANのスタッフが、最新の映画やドラマについて雑談をする番組 #映画 #感想 #解説 #考察 #レビュー ■「銀幕にポップコーン」の再生リスト https://www.youtube.com/playlist?list=PL5dP0ylcT42fuRRKW8Iho4XAPx3wEiaOJ ■ポッドキャスト版 iTunes https://itun.es/i6dS29S Spotify https://open.spotify.com/show/0oqAeYZxX61w87WTNxksNc?si=29pxqxZQSFStdrHIFbefyg</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/shaberisugi-gamer/83125/podcast/431' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='979ab895c09c726ce868e8193b65749c' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-11 18:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'979ab895c09c726ce868e8193b65749c')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>うおおおおおお！！！！「今井らいぱちのオールナイトニッポン0」放送決定</h3><div class='summary'>「R-1グランプリ2026」王者の今井らいぱちがパーソナリティを務める「今井らいぱちのオールナイトニッポン0（ZERO）」が4月18日（土）深夜に生放送されることが決定した。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/news/667921' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='33b03bb54c14c6c4b596dbdab0c16544' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-12 09:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'33b03bb54c14c6c4b596dbdab0c16544')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「運搬千鳥」ロバート山本、阿武隈急行の新型車両を運搬するプロジェクトに密着</h3><div class='summary'>毎年恒例の特番「運搬千鳥 それ、どうやって運ぶんじゃ？」（東海テレビ・フジテレビ系）が本日4月12日（日）に放送され、MCの千鳥をはじめ、若槻千夏、生田衣梨奈がゲスト出演。たんぽぽ川村、ロバート山本、まちゃまちゃが“運搬芸人”としてVTRに登場する。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/news/667789' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='bee8fe6d7b6bd5ed8f5398e489eb9ea0' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-12 10:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'bee8fe6d7b6bd5ed8f5398e489eb9ea0')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ヤバい番組の制作秘話～誰がどうやって企画した!?～ 真空ジェシカ・ガクが「年忘れにっぽんの歌」裏配信で寒空の下6時間ボイトレ!? 裏側を城谷Pに聞いた</h3><div class='summary'>ユニークなテレビ番組を企画・演出している裏方を取材する「ヤバい番組の制作秘話～誰がどうやって企画した!?～」。第2回には、大晦日、走るロンドンバスの中で真空ジェシカ・ガクが6時間ボイトレし、最後に北島三郎「まつり」を上手に歌うという珍妙な企画でお笑いファンの興味をそそった「年忘れにっぽんの歌」（テレビ東京）の裏配信を担当した城谷美里プロデューサーに話を聞いた。</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/column/664276' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='2acf88e8d2489c020845b2a14f5ba507' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-12 11:14</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'2acf88e8d2489c020845b2a14f5ba507')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>東京ホテイソン、リンガーハットをアップグレードさせる長時間ロケ「ぜひ見てほしい」</h3><div class='summary'>明日4月13日（月）に放送される特番「究極ジャッジ！ドリームメニュー」（カンテレ・フジテレビ系）に東京ホテイソンが出演するのは既報の通り。このたび、2人のコメントが到着した。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/news/668010' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='d275d7661e9755321c8bf163df20c0fd' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-12 12:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'d275d7661e9755321c8bf163df20c0fd')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>なすなかにし、那須の復帰後初の単独公演「いとこの漫才祭」開催 第2部はゲストと歌謡ショー</h3><div class='summary'>なすなかにしが5月4日（月・祝）に「いとこの漫才祭」「いとこの歌謡祭」の2部公演を東京・座・高円寺2で開催する。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/news/668001' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='38568cb4f539b69efde5956bdf721efe' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-12 12:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'38568cb4f539b69efde5956bdf721efe')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>マユリカ中谷がアパートの隣人役でドラマ「エラー」初回ゲスト 阪本はポッドキャストの声</h3><div class='summary'>畑芽育と志田未来がW主演を務めるドラマ「エラー」（ABCテレビ・テレビ朝日系）が本日4月12日（日）にスタート。第1話にマユリカ中谷がゲスト出演するほか、マユリカ阪本も声の出演をする。「エラー」は、とある女性を死なせてしまったユメ（畑）と、その死により生きる意欲を失ってしまった女性の1人娘・未央（志田）が、真実を知らないまま友情を育んでいく物語。中谷は、未央が住んでいたアパートの隣人を演じる。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/news/667799' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='8363f1725405e2540618e8815e38f756' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-12 13:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'8363f1725405e2540618e8815e38f756')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>蛍原徹、ウド鈴木、ドランク鈴木、東幹久が参加「ガキ使」なんやったっけ部</h3><div class='summary'>本日4月12日（日）放送の「ダウンタウンのガキの使いやあらへんで！」（日本テレビ系）で「なんやったっけ部」と題した企画が展開され、蛍原徹、キャイ～ン・ウド鈴木、ドランクドラゴン鈴木、東幹久が出演する。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/news/668012' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='211318c561b547b9549df18341731d4b' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-12 17:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'211318c561b547b9549df18341731d4b')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「シンプル・アクシデント」監督ジャファル・パナヒ、2度の収監経験が及ぼした影響明かす</h3><div class='summary'>イランの映画監督ジャファル・パナヒの最新作「シンプル・アクシデント／偶然」より本編映像の一部が解禁され、あわせてパナヒのインタビューコメントが公開された。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/eiga/news/667982' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='b99cda54f82d514dea19749c0f58944c' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-12 18:45</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'b99cda54f82d514dea19749c0f58944c')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ドンデコルテ渡辺銀次のチャーハン、千鳥が引退か続行かジャッジ</h3><div class='summary'>本日4月12日（日）深夜配信の「チャンスの時間」（ABEMA）で特別企画「ドンデコルテ渡辺銀次 チャーハン引退式」が実施される。「M-1グランプリ2025」で準優勝後、チャーハンを作る動画がバズり一躍注目の人となったドンデコルテの渡辺銀次。この企画では、面白い芸人ではなく“チャーハンの人”として消費されてしまうのではないかという危機から救うため、渡辺に芸人としての本来の姿を取り戻してもらう。</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/news/668017' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='ed243417fad30a875a274d6339fbe17e' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-12 20:45</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'ed243417fad30a875a274d6339fbe17e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>菅田将暉、大河ドラマ「豊臣兄弟！」で青春を謳歌 仲野太賀・池松壮亮から刺激受ける</h3><div class='summary'>仲野太賀が主演を務める大河ドラマ「豊臣兄弟！」より、竹中半兵衛役の菅田将暉からコメントが到着。仲野らとの撮影を「まるで1つのチームのような関係で、青春を一緒に謳歌しているような感覚があります」と振り返った。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/eiga/news/667973' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='d1a31fe5ec5b7516198f93e06ce75bb4' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-13 00:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'d1a31fe5ec5b7516198f93e06ce75bb4')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>目黒蓮がanan表紙にソロで登場、「SAKAMOTO DAYS」主人公の二面性イメージしたカットも</h3><div class='summary'>目黒蓮（Snow Man）が4月22日発売のanan2493号表紙にソロで登場。誌面には主演作「SAKAMOTO DAYS」の主人公・坂本太郎の二面性をイメージしたカットが収録される。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/eiga/news/668028' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='b72406b844678748bc5560b27d93dfc5' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 音楽/アニメ</span><span>2026-04-13 00:15</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'b72406b844678748bc5560b27d93dfc5')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>来週もHi-STANDARD特集！「EIGHT-JAM」ハイスタ特集の完結編オンエア決定</h3><div class='summary'>4月19日にテレビ朝日系「EIGHT-JAM」で、Hi-STANDARD特集の後編がオンエアされることが告知された。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/music/news/668057' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='bce97082fd0a8189d7ce7e7d644c9a80' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 音楽/アニメ</span><span>2026-04-13 04:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'bce97082fd0a8189d7ce7e7d644c9a80')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>NiziU・RIMAが「LOVEマシーン」熱唱 畑芽育、久間田琳加、横田真悠と「Essential」CMで</h3><div class='summary'>RIMA（NiziU）が出演する花王のヘアケアブランド「Essential」（エッセンシャル）のテレビCM「さらツヤすぎる！Essential！（LOVEマシーン）」編が本日4月13日より全国で放映される。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/music/news/668058' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='af77f73d38d999b54fada1349997b51d' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 音楽/アニメ</span><span>2026-04-13 04:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'af77f73d38d999b54fada1349997b51d')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>timelesz菊池風磨が眉を褒めてシュート決める、CMワンカット撮影で「器用さ出ちゃった」</h3><div class='summary'>菊池風磨（timelesz）がプロに任せる自眉ケア「HBL」（エイチビーエル）のブランドアンバサダーに就任。彼を起用したWeb CM「HBLしている人はみんないい顔してる」編がYouTubeで公開された。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/music/news/668054' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='d1660dd8cbcd410612630612fe3f78fe' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-13 05:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'d1660dd8cbcd410612630612fe3f78fe')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>横浜流星と広瀬すずが涙…「汝、星のごとく」予告映像公開、ティザービジュアルも到着</h3><div class='summary'>横浜流星と広瀬すずがダブル主演を務める映画「汝、星のごとく」の封切りが10月9日に決定。このたびティザービジュアルが到着し、YouTubeでは予告映像が公開された。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/eiga/news/668042' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='80bcf48bab8c3349e5fcd4ed5fc6de62' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-13 05:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'80bcf48bab8c3349e5fcd4ed5fc6de62')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>バッテリィズが「明石家さんま オールニッポンお願い！リクエスト」登場</h3><div class='summary'>明石家さんまがパーソナリティを務めるラジオ特番「明石家さんま オールニッポンお願い！リクエスト～アパート・マンション・一戸建て！『明石家おうち物語』～」（ニッポン放送）が4月20日（月）に放送され、バッテリィズがゲスト出演する。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/news/668018' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='e192e80c348642f89f157c87bceb8c30' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-13 06:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'e192e80c348642f89f157c87bceb8c30')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>NON STYLE石田と令和ロマン・ケムリ「THE SECOND」16→8でMC</h3><div class='summary'>結成16年以上のコンビが漫才で頂点を狙う賞レース「THE SECOND～漫才トーナメント～2026」の「ノックアウトステージ16→8」が4月18日（土）に東京・フジテレビ本社で実施されるのは既報の通り。このたび各試合の先攻・後攻が決定。またMCをNON STYLE石田、令和ロマン・ケムリが務めることが発表された。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/news/667875' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='221e14271e141806788d9b6f404e9fbc' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 音楽/アニメ</span><span>2026-04-13 06:30</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'221e14271e141806788d9b6f404e9fbc')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>櫻井翔が本気の表情、フジテレビ新番組「真剣遊戯！THEバトルSHOW」ポスター公開</h3><div class='summary'>4月20日20:00にフジテレビ系でスタートする櫻井翔（嵐）がMCの新番組「真剣遊戯！THEバトルSHOW」のポスタービジュアルが公開された。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/music/news/668044' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='310a6f469d8f2d6c45e3a0c9027f6114' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-13 07:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'310a6f469d8f2d6c45e3a0c9027f6114')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>北村匠海、出口夏希ら新月9ドラマ軍団が「ネプリーグ」出演 神木隆之介は中島裕翔にツッコまれる</h3><div class='summary'>北村匠海、出口夏希、黒崎煌代、ソニン、神木隆之介といったフジテレビ系月9ドラマ「サバ缶、宇宙へ行く」のキャストが本日4月13日19時より放送されるバラエティ番組「ネプリーグSP」に出演。対する「野口聡一軍団」には、元宇宙飛行士の野口聡一や中島裕翔が名を連ねた。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/eiga/news/668002' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='ebf0831ee06f30df10ceefc897faa7f8' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-13 07:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'ebf0831ee06f30df10ceefc897faa7f8')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「天狗の台所 Season3」今秋放送、駒木根葵汰・塩野瑛久・越山敬達が再び里に集う</h3><div class='summary'>ドラマ「天狗の台所 Season3」が、2026年秋よりBS-TBSで放送決定。メインキャストとして「25時、赤坂で」の駒木根葵汰、「光る君へ」の塩野瑛久、映画「国宝」の越山敬達が続投する。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/eiga/news/667975' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='5b70b571e05e49d56fa8bf89d62d31ed' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-13 07:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'5b70b571e05e49d56fa8bf89d62d31ed')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>本日4月13日（月）放送開始の2026春ドラマ</h3><div class='summary'>本日4月13日（月）に放送がスタートする新作ドラマの情報をまとめました。映画ナタリーでは「2026春ドラマまとめ」を公開中。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/eiga/news/667963' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='78c8564ff11026b2de8ebecd34f6c76c' data-region='JP' data-score='5' data-platform='netflix'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 音楽/アニメ</span><span>2026-04-13 08:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'78c8564ff11026b2de8ebecd34f6c76c')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「タッチ」で大会盛り上げた稲葉浩志、侍ジャパン映画の主題歌を書き下ろす</h3><div class='summary'>稲葉浩志（B&#x27;z）の新曲「果てなき夜を」が、4月20日より配信されるNetflixドキュメンタリー映画「戦いの向こう 侍たちの記録 2026 WORLD BASEBALL CLASSIC」の主題歌に決定した。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag'>Netflix</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/music/news/668062' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='2e813c4aed01ddd9f0cba92beb3e7bd0' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 音楽/アニメ</span><span>2026-04-13 08:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'2e813c4aed01ddd9f0cba92beb3e7bd0')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>すとぷり、新生活に寄り添う「ハルイロハ」ミュージックビデオ公開</h3><div class='summary'>すとぷりの新曲「ハルイロハ」のミュージックビデオがYouTubeで公開された。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/music/news/668043' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='d3394859b52425948827434c66835465' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-13 10:48</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'d3394859b52425948827434c66835465')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「ゴジラ-0.0」最新映像がもうすぐ公開、山崎貴が監督・脚本・VFXを担当</h3><div class='summary'>山崎貴が監督・脚本・VFXを担当した「ゴジラ」シリーズ最新作「ゴジラ-0.0（マイナスゼロ）」のファーストティザー映像が、YouTubeの東宝MOVIEチャンネルにて公開決定。日本時間4月15日朝7時55分にプレミア公開のカウントダウンがスタートする。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/eiga/news/668066' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='af6bad195ec193ae04174bb046e354b1' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-13 10:51</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'af6bad195ec193ae04174bb046e354b1')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Xiaomiの8.7インチタブレット「Redmi Pad SE 8.7 4G」がAmazonにて最大25%オフでタイムセール中</h3><div class='summary'>SIM対応で場所を選ばずネットが繋がるセルラーモデル Xiaomiの8.7インチタブレット「Redmi Pad SE 8.7 4G」がAmazonにて最大25%オフでタイムセール中だ。セール対象になっているのは、セルラーモデルの2機種。 64GBモデル 20%オフ 128GBモデル 25%オフ 本製品は、片手で軽快に操作できる8.7インチのコンパクトなサイズ感が特徴のタブレット。Wi-Fiのある環境での使用に適したWi-Fiモデルも存在するが、今回セール対象となっているのは4G LTE通信に対応したセルラーモデル。タブレット本体に別途用意したSIMカードを挿入することでWi-Fi環境のない場所でもインターネットを利用可能だ。 &lt;a data-amazon=&quot;amz&quot; href=&quot;https://www.amazon.co.jp/dp/B0DXFD7SGS?tag=zdintlignjp-22&amp;ascsubtag=c%7C83135&quot; …</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/gaming-device/83135/news/xiaomi87redmi-pad-se-87-4gamazon25' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='3636444adda263d169ee81099c8f9d1e' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-13 11:01</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'3636444adda263d169ee81099c8f9d1e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>世紀末×青春サバイバルの人生シム「The Last Blue ―世界の終りで青春を―」，2026年秋にSteamで発売。アイドル活動やメイド喫茶の経営も可能</h3><div class='summary'>afterglowgamesは2026年4月10日，PC向けシミュレーションゲーム「TheLastBlue―世界の終りで青春を―」を2026年秋にリリースすると発表し，Steamストアページを公開した。世紀末の荒野を舞台に，拠点防衛とNPC育成，そして恋愛や経営といった青春要素を組み合わせたタイトルだ。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/998/G099831/20260413001/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='cac1ce977de37c941a6c119549ac6013' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 音楽/アニメ</span><span>2026-04-13 11:10</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'cac1ce977de37c941a6c119549ac6013')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>藤井風、昨日出演した海外フェス「コーチェラ」より「Okay, Goodbye」ライブ映像公開</h3><div class='summary'>藤井風が現地時間4月11日に出演したアメリカ・カリフォルニア州インディオの音楽フェスティバル「Coachella Valley Music and Arts Festival」（コーチェラ）より、「Okay, Goodbye」のライブ映像がフェスのYouTubeチャンネルにて公開された。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/music/news/668071' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='0f95591e4b0488994e35be815b178a8e' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-13 11:22</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'0f95591e4b0488994e35be815b178a8e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>EXITの新番組「NEXiT!!」スタート、りんたろー。「拾う神現れた」</h3><div class='summary'>EXITがMCを務める新番組「NEXiT!!」（フジテレビ）が4月30日（木）深夜にスタートする。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/news/668072' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='6f3b264b98be24f00f3eab65f0f35f52' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 音楽/アニメ</span><span>2026-04-13 11:30</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'6f3b264b98be24f00f3eab65f0f35f52')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>IMP.「INVADER」のMV公開、ロングネイル＆傷メイクで世界観表現</h3><div class='summary'>本日4月13日リリースのIMP.の新曲「INVADER」のミュージックビデオが、YouTubeにて公開された。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/music/news/668074' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='3895495bb2d304649f658a4a001ec58b' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-13 11:39</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'3895495bb2d304649f658a4a001ec58b')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ジャファー・ジャクソンら「Michael／マイケル」ベルリンプレミアに、米倉涼子も感動</h3><div class='summary'>映画「Michael／マイケル」のワールドプレミアが現地時間4月10日にドイツ・ベルリンで行われ、マイケル・ジャクソンを演じたジャファー・ジャクソンらキャスト・スタッフが登壇。レッドカーペットゲストとして、日本から俳優・米倉涼子も参加した。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/eiga/news/668080' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='4f62a55d8b0bccf38cb93daf02d97775' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-13 11:50</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'4f62a55d8b0bccf38cb93daf02d97775')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>サービス終了を控える「うたわれるもの ロストフラグ」，物語を振り返るストーリー版「うたわれるもの ロストフラグ 物語記録保存領域」制作決定</h3><div class='summary'>アクアプラスは本日（2026年4月13日），スマートフォン向けRPG「うたわれるものロストフラグ」のサービス終了にあわせて，本作の物語を振り返るストーリー版「うたわれるものロストフラグ物語記録保存領域」の制作を決定したと発表した。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/466/G046693/20260413004/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='0679b70cac70ecc7d100a83d939848ed' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-13 12:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'0679b70cac70ecc7d100a83d939848ed')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Switch2を傷から守るスタイリッシュな極薄カバー，LEPIC GAMINGの「PITA」シリーズは必見の製品だ【PR】</h3><div class='summary'>NintendoSwitch2を持ち運ぶ人は多いだろうが，そんなときに気になるのが，本体やJoy-Con2に傷がついてしまうこと。「できるだけきれいに使いたい」という人に紹介したいのが，ゲーマー向けアクセサリーブランド「LEPICGAMING」によるSwitch2用ハードカバー「PITA」（ピタ）シリーズだ。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/999/G999902/20260406026/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='8702fc4296990d05f72b5cfb3a7a888a' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-13 12:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'8702fc4296990d05f72b5cfb3a7a888a')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「スーパーバッド 童貞ウォーズ」アパレルアイテム発売、四千頭身がビジュアルモデルに</h3><div class='summary'>映画「スーパーバッド 童貞ウォーズ（原題：Superbad）」のソフトが日本でリリースされてから18周年となることを記念して、アパレルコレクション「SUPERBAD 18-years-old collection」が4月27日18時よりFilmarks Storeで発売。4月24日から26日には、東京・東急プラザ原宿「ハラカド」3Fに設置されるポップアップストアで先行販売が行われる。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/eiga/news/668049' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='1451423a28e1180766922ff0be8012e5' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-13 12:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'1451423a28e1180766922ff0be8012e5')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>四千頭身、2007年の青春映画「SUPERBAD」発アパレルのモデルに</h3><div class='summary'>映画「SUPERBAD」の“日本上陸”18周年を記念したアパレルコレクション「SUPERBAD 18-years-old collection」のモデルに四千頭身が起用された。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/news/668085' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='ec9774e0696d68328c73eda78df4a289' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-13 12:01</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'ec9774e0696d68328c73eda78df4a289')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>タップバトルを楽しめる無料ブラウザゲーム「連打戦士バンドリちゃん！」，新キャラクターを追加。マシロ・クラタやレイヤら5名が参戦</h3><div class='summary'>ブシロードは2026年4月10日，ブラウザゲーム「連打戦士バンドリちゃん！」に新キャラクターを追加したと発表した。本作は，ミニアニメ「元祖！バンドリちゃん」の第1話の世界観をベースにしたブラウザゲームだ。新たにマシロ・クラタやレイヤ，高松トモリら計5名が登場している。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/998/G099834/20260413003/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='ed872700e33fe2b14b795445a38c1313' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-13 12:08</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'ed872700e33fe2b14b795445a38c1313')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>本格的な海洋航海を追求する大規模海事シム「Professional Ship Simulator」，制作をアナウンス</h3><div class='summary'>AerosoftとSWESystemsは，PC向け大規模海事シム「ProfessionalShipSimulator」を発表し，最新ゲームプレイトレイラーを公開した。本作でプレイヤーは，広大な外洋から混雑した港湾まで，環境に合わせて慎重な操船を強いられることになる。タグボートや救助船，漁船，コンテナ船，タンカー，豪華客船などの運航を行う。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/998/G099836/20260413005/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='a114931bc2f693d3aa6e0d9e775681bb' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 音楽/アニメ</span><span>2026-04-13 12:12</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'a114931bc2f693d3aa6e0d9e775681bb')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>LE SSERAFIMが2ndアルバム「&#x27;PUREFLOW&#x27; pt.1」発表、リード曲を先行配信</h3><div class='summary'>LE SSERAFIMの2ndアルバム「&#x27;PUREFLOW&#x27; pt.1」が5月22日にリリースされる。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/music/news/668091' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='e485dcd69dc4f6a367bdf41a037d38dd' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-13 12:13</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'e485dcd69dc4f6a367bdf41a037d38dd')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>動物モノのミステリーアドベンチャー「Moses &amp; Plato - Last Train to Clawville」，4月14日にSteamとGOGで発売</h3><div class='summary'>TogeProductionsは，PC向け新作タイトル「Moses&amp;Plato-LastTraintoClawville」を2026年4月14日にSteam，GOG.comで発売する。本作は，使節の殺害事件に巻き込まれたチベットスナギツネの「Moses」と，その相棒であるマヌルネコ「Plato」の刑事コンビが，無実を証明すべく行動する「動物ミステリーアドベンチャー」だ。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/998/G099835/20260413008/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='1736376663d37f19e903bfabdc7cae4b' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-13 12:14</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'1736376663d37f19e903bfabdc7cae4b')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「REDMAGIC 11 Pro/Pro＋」が3DMarkでのベンチマーク不正で公式ランキングから除外される</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/143/G014363/20260413007/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='8bbd9f978e333246e7d287fdaa8d657e' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-13 12:20</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'8bbd9f978e333246e7d287fdaa8d657e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>“スター・ウォーズの日”に向けてライトセーバーなど新商品発売、マンダロリアンやグローグーも</h3><div class='summary'>“スター・ウォーズの日”である5月4日に向けた施策として、関連コレクショングッズ「STAR WARS」が4月17日、「THE MANDALORIAN AND GROGU」が4月28日よりディズニーストア一部店舗およびディズニー公式オンラインストアで販売される。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/eiga/news/667305' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='3a3e5b97b90de1dc0710decf7dc7cba4' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-13 12:21</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'3a3e5b97b90de1dc0710decf7dc7cba4')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ツートライブが上戸彩と異色ドライブロケ カベポスター浜田がカメラマン担当</h3><div class='summary'>「やすとものいたって真剣です」（ABCテレビ）の今週4月16日（木）放送回で「ツートライブのおもてなしドライブ」が行われ、上戸彩がスペシャルゲストとして出演。上戸の登場に、案内役のツートライブは「えっ、本物!?」「なんでこの番組に!?」と動揺を隠さない。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/news/668090' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='1dc5375f6d75c6b7aa38585a4cbbd2a3' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-13 12:35</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'1dc5375f6d75c6b7aa38585a4cbbd2a3')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>エルフがベイスターズセレモニアルピッチ登場、“ブチアゲ隊長”荒川がギャル魂全開で投球</h3><div class='summary'>横浜DeNAベイスターズが5月12日（火）から14日（木）の対中日ドラゴンズで「YOKOHAMA GIRLS☆FESTIVAL 2026 Supported by 横濱ハーバー」を開催。この初日にスペシャルゲストとしてエルフが出演することが決定した。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/news/668097' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='3b4353056801c5965a2d831f291292fd' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-13 12:56</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'3b4353056801c5965a2d831f291292fd')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ネットマーブルの新作RPG「モンギル：STAR DIVE」，リリースPV（short ver.）を公開。東洋テイストのエリア「スラ」の紹介映像も配信中</h3><div class='summary'>ネットマーブルは2026年4月12日，同社が4月15日にリリースを予定している新作タイトル「モンギル：STARDIVE」のリリースPV（shortver.）を公開した。映像では，主人公「ベルナ」たちが登場し，ニャンコをめぐるちょっとした騒動のワンシーンが収録されている。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/857/G085718/20260413010/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='2f1d3491b2333894fd6c67c7208a5e44' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 音楽/アニメ</span><span>2026-04-13 12:59</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'2f1d3491b2333894fd6c67c7208a5e44')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>BALLISTIK BOYZ砂田将宏が「アイ捨て」出演、超特急ユーキ演じるアイドルの好敵手に</h3><div class='summary'>砂田将宏（BALLISTIK BOYZ）が5月より縦型ショートドラマプラットフォーム「ReelShort」で配信されるショートドラマ「アイドル夫を捨てたら、人生逆転した件」に出演する。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/music/news/668094' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='df4d66ac1226f773ff422d00b40cf435' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-13 13:07</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'df4d66ac1226f773ff422d00b40cf435')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>昭和を代表する名作玩具「チクタクバンバン」が「令和進化版」で復刻。協力モードと，2つの回転パネルを追加し，戦略性と難度が向上</h3><div class='summary'>メガハウスは本日，1981年に発売され，昭和を代表する名作玩具として親しまれた，対戦型パズルゲーム「チクタクバンバン」に新要素を加えた「令和進化版」を，2026年4月下旬に発売すると発表した。令和進化版では，従来の対戦モードに加え，最大4人でゴールを目指す「協力モード」と，2つの回転パネルが追加される。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/999/G999905/20260413011/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='c8be0254a9eae8842d6007193e5a1a17' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-13 13:27</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'c8be0254a9eae8842d6007193e5a1a17')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「ザ・スーパーマリオギャラクシー・ムービーUT」，映画公開初日の4月24日に発売決定。MENとKIDSで4種のデザインをラインナップ</h3><div class='summary'>ユニクロは本日（2026年4月13日），同社のグラフィックTシャツブランド「UT」より，「ザ・スーパーマリオギャラクシー・ムービーUT」を，4月24日にユニクロ全店ならびにオンラインストアで発売すると発表した。今回は，MENとKIDSでそれぞれ4種類の柄が展開される。価格はMENが1990円，KIDSが990円（いずれも税込）だ。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/991/G999103/20260413013/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='50d84f3f9b7dcb66a8730d09e6c2ef79' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-13 13:28</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'50d84f3f9b7dcb66a8730d09e6c2ef79')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「ザ・スーパーマリオブラザーズ・ムービー」土曜プレミアムで放送、新作公開を前に</h3><div class='summary'>任天堂とイルミネーションが贈るアニメーション映画「ザ・スーパーマリオブラザーズ・ムービー」が、4月18日にフジテレビ系の土曜プレミアム枠でオンエアされる。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/eiga/news/668098' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='160a3e3f1a81f48093d3474e5a879da4' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-13 13:50</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'160a3e3f1a81f48093d3474e5a879da4')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「タルコフ」の開発者，Nikita氏が関わる新作タイトル「Fragmentary Order」が正式発表。2251年の未来を舞台としたハードコアFPS</h3><div class='summary'>RantGamesStudiosは本日（2026年4月13日），開発中の新作タイトル「FragmentaryOrder」を発表し，アナウンストレイラーを公開した。本作は，「EscapefromTarkov」の開発者であるNikitaBuyanov氏が，以前から存在を明かしていた新プロジェクトで，「Cor3」として知られていたタイトルだ。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/998/G099842/20260413015/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='b62c3a6853793155ab243c47bce56d4f' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-13 14:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'b62c3a6853793155ab243c47bce56d4f')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>俺はロマンスよりホラーが好きなんだ…サメ映画「デンジャラス・アニマルズ」本予告公開</h3><div class='summary'>サメ映画「デンジャラス・アニマルズ 絶望海域」の本ポスターが到着し、YouTubeでは本予告が公開された。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/eiga/news/668070' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='89c0fa09c579c17c24c0a7042f4ad376' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 音楽/アニメ</span><span>2026-04-13 14:03</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'89c0fa09c579c17c24c0a7042f4ad376')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>JJJがこの世を去って1年、昨年の「POP YOURS」映像を1日限定で公開</h3><div class='summary'>2025年5月に千葉・幕張メッセで開催されたヒップホップフェス「POP YOURS 2025」から、2日目のヘッドライナーを務めたJJJの楽曲「Beautiful Mind」の映像が、本日4月13日限定でYouTubeで公開されている。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/music/news/668106' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='25fb3c6b8419b57d5b1e944a1b9fae71' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-13 14:10</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'25fb3c6b8419b57d5b1e944a1b9fae71')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>一番くじ「ザ・スーパーマリオギャラクシー・ムービー」を4月24日より発売。マリオやヨッシーのビッグサイズクッションが当たる</h3><div class='summary'>BANDAISPIRITSロト・イノベーション事業部は本日，ハズレなしのキャラクターくじの最新作「一番くじ『ザ・スーパーマリオギャラクシー・ムービー』」を，4月24日より発売すると発表した。映画にちなんだ賞品ラインナップで，マリオやヨッシーがデザインされたビッグサイズクッションなどが用意されている。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/991/G999103/20260413019/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='a8da1915da58f845a49873d819501654' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-13 14:12</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'a8da1915da58f845a49873d819501654')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「名探偵コナン」動員230万超で初登場1位、シリーズ歴代No.1スタート</h3><div class='summary'>4月10日から12日の全国映画動員ランキングトップ10が興行通信社より発表され、「名探偵コナン ハイウェイの堕天使」が初登場で1位を獲得。公開3日間で観客動員数231万8009人、興行収入35億213万7800円を記録し、シリーズ歴代1位スタートとなった。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/eiga/news/668096' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='73819bcc6201deb86d7138e1ffbe6447' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-13 14:18</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'73819bcc6201deb86d7138e1ffbe6447')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>新作カードRPG「三国志・極彩」，正式サービスを4月16日に開始。鬼頭明里さんら出演声優陣を発表，「うさぎ100％武士語」コラボも開催</h3><div class='summary'>SupernovaOverseasLimitedは本日，スマートフォン向けカードRPG「三国志・極彩」の正式サービスを，4月16日に開始すると発表した。あわせて，鬼頭明里さんら出演声優陣の情報を公開したほか，「うさぎ100％武士語」とのコラボ開催も明らかにしている。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/990/G099017/20260413016/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='d09179150dcb5903a334c6260eb1dfe8' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-13 14:21</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'d09179150dcb5903a334c6260eb1dfe8')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>千鳥大悟＆綾瀬はるか主演「箱の中の羊」が第79回カンヌ国際映画祭コンペティション部門に正式出品</h3><div class='summary'>千鳥・大悟が綾瀬はるかと共に主演を務める映画「箱の中の羊」が、「第79回カンヌ国際映画祭」のコンペティション部門に正式出品されることが決定した。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/news/668111' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='c5a3d4972b8370c9ab5b1fa8da7a721d' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-13 15:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'c5a3d4972b8370c9ab5b1fa8da7a721d')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ソン・ソックが少女を癒やす、韓国映画「大丈夫、大丈夫、大丈夫！」新映像</h3><div class='summary'>韓国映画「大丈夫、大丈夫、大丈夫！」の本編映像の一部がYouTubeで公開。ソン・ソック演じる薬剤師ドンウクが、イ・レ扮するイニョンに寄り添う姿が収められている。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/eiga/news/668077' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='3f2afa2edd92907742b413d80b350919' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-13 15:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'3f2afa2edd92907742b413d80b350919')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>エルサレムの人々を映した「子どもたちはもう遊ばない」再上映、イラン情勢を受けて</h3><div class='summary'>「パンと植木鉢」「独裁者と小さな孫」で知られるイランのモフセン・マフマルバフが監督を務めた「子どもたちはもう遊ばない」が、4月25日より東京のシアター・イメージフォーラムで再上映される。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/eiga/news/668075' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='4c4b9226bfe91b02795fb784c392157b' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-13 15:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'4c4b9226bfe91b02795fb784c392157b')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ニューヨークとカナメストーン、同期のツーマンライブが5年ぶりに本日開催</h3><div class='summary'>ニューヨークとカナメストーンのツーマンライブ「ニューヨーク×カナメストーン」が本日4月13日（月）に東京・小劇場B1で開催される。会場チケットは完売したが配信チケットが4月27日（月）21時まで販売中。見逃し配信は同日23時59分まで。</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/news/668102' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='3547ee26d745f70196d117e6d22b7115' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie 映画</span><span>2026-04-13 15:12</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'3547ee26d745f70196d117e6d22b7115')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>神奈川県横浜市で「やかまし村の子どもたち」上映、北欧に夏休みがやって来た</h3><div class='summary'>横浜キネマ倶楽部の第88回上映会が、5月4日に神奈川・横浜市南公会堂で行われる。「長くつ下のピッピ」「ロッタちゃん」シリーズで知られるスウェーデンの児童文学作家アストリッド・リンドグレーンの作品が、本人の脚本によって映画化された「やかまし村の子どもたち」が上映作品に選ばれた。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/eiga/news/668109' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='64b37e1b63579dd6177ebdee9c9841b8' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-13 15:25</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'64b37e1b63579dd6177ebdee9c9841b8')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>マユリカ中谷と阪本、お互いにドッキリの仕掛け人だと思って衝撃の告白 エースと高岸も</h3><div class='summary'>本日4月13日（月）の「くりぃむナンタラ」（テレビ朝日系）で新企画「仕掛け人マウントバトル」が展開され、マユリカ、バッテリィズ・エース、ティモンディ高岸が登場する。この企画では、芸人が番組側から「ドッキリの仕掛け人をやってほしい」と依頼されるのだが、そのドッキリのターゲットも実は仕掛け人。そうとは知らずにお互いがドッキリを仕掛け合う。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/news/668117' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='989e968a855a1babeec898394a71a1df' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-13 15:30</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'989e968a855a1babeec898394a71a1df')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>崩壊した世界を旅する2.5DアクションRPG「Alabaster Dawn」，早期アクセス版のリリースが5月7日に決定</h3><div class='summary'>RadicalFishGamesは2026年4月10日，開発中の新作タイトル「AlabasterDawn」の早期アクセス版を，5月7日にSteamでリリースすると発表した。本作は，崩壊した世界を旅する主人公「ジュノ」が，人類を目覚めさせ，世界を再建する，見下ろし視点の2.5DアクションRPGだ。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/930/G093074/20260413024/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='e3cc9b7134e18df23d07f80875c61568' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-13 15:35</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'e3cc9b7134e18df23d07f80875c61568')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>住民惨殺事件の真相に迫り，邪教の存在を追う。新任異端審問官として捜査に挑むADV「Inkblood」，2026年4月23日にプレイテスト開始予定</h3><div class='summary'>CRITICALREFLEXは本日（2026年4月13日），異端審問官をテーマとした新作タイトル「Inkblood」のプレイテストを，2026年4月23日に開始すると発表した。プレイヤーは新任の異端審問官となり，馬車に搭載された捜査機器を駆使して，住民たちが惨殺された事件の真相に迫り，邪教の関与を追っていく。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/966/G096666/20260413026/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='910d9f629bdbfb609813511b5049287c' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-13 15:41</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'910d9f629bdbfb609813511b5049287c')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>エルフ荒川、ギャルメイク封印して「ザ！世界仰天ニュース」再現ドラマ出演</h3><div class='summary'>明日4月14日（火）放送の「ザ！世界仰天ニュース 身近でまさかの爆発＆危険な食べ物 愛が起こした奇跡3時間スペシャル！」（日本テレビ系）に南海キャンディーズ山里、かが屋・賀屋、エルフ荒川がゲスト出演する。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/news/668118' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='f0d669b11964b6e151d41765a5a29af3' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-13 15:43</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'f0d669b11964b6e151d41765a5a29af3')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「Sky 星を紡ぐ子どもたち」ファン200人が集結。海岸のゴミ拾いイベント「光を紡ぐビーチクリーン in 江の島」に参加してきた</h3><div class='summary'>2026年4月11日，thatgamecompanyの「Sky星を紡ぐ子どもたち」とNPO法人・海さくらが協力し，神奈川・江の島海岸の清掃イベントが実施された。イベントには200人の参加者が集い，海岸に落ちているゴミを拾うアクティビティを楽しんだ。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/707/G070745/20260413022/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='c215c940c0db7ee076c9f73b9ed05bfc' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-13 16:16</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'c215c940c0db7ee076c9f73b9ed05bfc')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ダイアン津田＆津田健次郎が共演、AOKIのWeb動画 健次郎もごいごいすー</h3><div class='summary'>株式会社AOKIによる商品「パジャマスーツ」の新キャンペーンキャラクターにダイアン津田と津田健次郎が就任した。2人が出演するWeb動画「ビジ↔カジ、どちらも。」が本日4月13日よりAOKIのYouTubeチャンネルと公式SNSで公開されている。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/news/668128' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='ca9802fa5881956e00ec24a153672569' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-13 16:27</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'ca9802fa5881956e00ec24a153672569')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「王様のブランチ」今夜ゴールデンSP ミキ、ニッチェ、森三中黒沢らディズニーロケ</h3><div class='summary'>TBSの情報バラエティ「王様のブランチ」の2時間特番「王様のブランチゴールデン 祝30周年！テレビ初！世界のディズニー全部見せますSP！」が本日4月13日（月）に同局系で放送される。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/news/668126' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='3550577575055bed65baeaad7780ec38' data-region='JP' data-score='4' data-platform='netflix'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Netflix新作</span><span>2026-01-27 17:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'3550577575055bed65baeaad7780ec38')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>2026年配信の新作4作品を一挙発表！「喧嘩独学」 、『余命一年、男をかう』、「ブラックオークション〜禁断の入札〜」 、「二十世紀電氣目録-ユーレカ・エヴリカ-」 - About Netflix</h3><div class='summary'>2026年配信の新作4作品を一挙発表！「喧嘩独学」 、『余命一年、男をかう』、「ブラックオークション〜禁断の入札〜」 、「二十世紀電氣目録-ユーレカ・エヴリカ-」 About Netflix</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 Netflix</span><span class='tag'>Netflix</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMia0FVX3lxTE9TOVRyWDVSV2QzYWZDNlRIUTM2N3dUbkZMV3o4MEtRT0F2OTZDUHhCY0FTeklCcDBSSTM5ZV82REFfMXJWVGJLM2J1aktTV3N4ZzJSdEFDY1JjN1d2S2k4aXUyb3lzR0xMNnVF?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='79785ea5d6fa9c13b662af8db75621f9' data-region='JP' data-score='4' data-platform='prime'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Prime Video新作</span><span>2026-03-31 16:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'79785ea5d6fa9c13b662af8db75621f9')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【PrimeVideo】2026年4月の新着作品：『ザ・ボーイズ』完結や新作アニメなど充実ラインアップ - 山形新聞</h3><div class='summary'>【PrimeVideo】2026年4月の新着作品：『ザ・ボーイズ』完結や新作アニメなど充実ラインアップ 山形新聞</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag'>Prime</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiZkFVX3lxTE1qelhqMlkxMmpkZ3NZeTh2ZlJFYnlOWGNvYjJ2V1lVbHQtRVZoT1BKeWEwbnFUaEJzd0ZsVE1zZ1NXTVZDNXRHeVBjYkpuN2xqNE82Rl93cm4teV9na0loZUVUaVJYQQ?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='20ba1789751d3aacd236dc2dc6cd16ea' data-region='JP' data-score='4' data-platform='prime'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Prime Video新作</span><span>2026-04-01 16:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'20ba1789751d3aacd236dc2dc6cd16ea')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【2026年4月】Amazonプライムビデオおすすめ映画45選！ - オリコン顧客満足度ランキング</h3><div class='summary'>【2026年4月】Amazonプライムビデオおすすめ映画45選！ オリコン顧客満足度ランキング</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#00a8e122;border-color:#00a8e1;color:#00a8e1'>📦 Prime</span><span class='tag'>Prime</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiggFBVV95cUxNZlZEVHhjdjliVTlNbHgtc2NEY0lCUXNMRGhqeGEzbFhlaEIyTG8tWk85Q1RGalhxZW5KY1ZxcE5ZS1Z4WkIzaHFNMEtrOE56bTg3YWxUVk5xR1NRcUJvRlg0UEFNZTRTSjdEal9ETWZ5Uk5oX2RmWlA2cUd4cmN0dVRR?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='867c5549139531571e304e8ec542f0fc' data-region='JP' data-score='4' data-platform='disney'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Disney+新作</span><span>2026-04-01 16:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'867c5549139531571e304e8ec542f0fc')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ディズニープラス見て欲しいおすすめ55作品厳選！新作もチェック【2026年】 - 株式会社ショーケース</h3><div class='summary'>ディズニープラス見て欲しいおすすめ55作品厳選！新作もチェック【2026年】 株式会社ショーケース</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#8cc7ff22;border-color:#8cc7ff;color:#8cc7ff'>✨ Disney+</span><span class='tag'>Disney+</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiekFVX3lxTE9QQzRGb3Z6dm9jeDNTN3ROUE44WGlIWUw4Sk1aWHJyN2JDU0hOWE1lLXR0cXplenhDQkQzM1A0cEJ0bVoyREZ4NnBrZlRQRXQxWEg1NElwa3ZKY0x6alpLeWhsWDNHNGpGZDFnbEM0V2FnUkU4YVVCUkRn?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='afec1d4eebd62c15bb9fd41e3df7a85f' data-region='JP' data-score='4' data-platform='disney'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Disney+新作</span><span>2026-04-03 16:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'afec1d4eebd62c15bb9fd41e3df7a85f')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ディズニープラスで見れるおすすめ映画・ドラマ50選！ジャンル別紹介 - オリコン顧客満足度ランキング</h3><div class='summary'>ディズニープラスで見れるおすすめ映画・ドラマ50選！ジャンル別紹介 オリコン顧客満足度ランキング</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#8cc7ff22;border-color:#8cc7ff;color:#8cc7ff'>✨ Disney+</span><span class='tag'>Disney+</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMihAFBVV95cUxNamZrbjBvcVdRWFRCWmtvLTAwbDVhVXpZajNNSVFPM1dnX29WSkdPYndYZGE5UU9kZkl2bzU4OFpUeUJjRHdnNEwwYTVrZnZKdm5USjBKN3A1aVFPUGlMM1BoaVBPSTY5Ui10T0hLcEFmYXo1X3FBM1Q5b0JkbDhmOHdIZ08?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='c1df92e4df89c7199ba07900deed7454' data-region='JP' data-score='4' data-platform='disney'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Disney+新作</span><span>2026-04-06 07:40</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'c1df92e4df89c7199ba07900deed7454')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>映画『ズートピア２』が4月15日(水)よりディズニープラスで見放題独占配信開始！｜Disney+（ディズニープラス）公式 - ディズニープラス</h3><div class='summary'>映画『ズートピア２』が4月15日(水)よりディズニープラスで見放題独占配信開始！｜Disney+（ディズニープラス）公式 ディズニープラス</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#8cc7ff22;border-color:#8cc7ff;color:#8cc7ff'>✨ Disney+</span><span class='tag'>Disney+</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBkSzNFYlhKOVRmb1lQc3JZTktiTDFBV0h5VHhHbDNickV1aWt3TzFOMnVMU3MyRWExUi1DeFhMRmQ5YjVsOXp3REpUUk5BUXM2aF9QMW1qSHpPR3M0WlZHMS1NdmsxWE0?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='149b506a0c3f8ba9115c23d618707587' data-region='JP' data-score='4' data-platform='netflix'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Netflix新作</span><span>2026-04-06 11:34</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'149b506a0c3f8ba9115c23d618707587')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Netflixで配信予定の新作・人気韓国ドラマ ラインナップ【2026年最新】 - 海外ドラマNAVI</h3><div class='summary'>Netflixで配信予定の新作・人気韓国ドラマ ラインナップ【2026年最新】 海外ドラマNAVI</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 Netflix</span><span class='tag'>Netflix</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiSEFVX3lxTE4zelBTYm5vSUxUTGMxZFVrdGVnaGdncGRydEJXR0VUeWdDWHJoS09Xc3J0VXY2QnVjWm93Ry12MFdPcG00THYtSA?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='471434a01fd16e36ee0800d8223b9116' data-region='JP' data-score='4' data-platform='prime'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Prime Video新作</span><span>2026-04-07 12:03</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'471434a01fd16e36ee0800d8223b9116')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Amazon Prime Videoで配信予定の新作韓国ドラマ【2026年最新】 - 海外ドラマNAVI</h3><div class='summary'>Amazon Prime Videoで配信予定の新作韓国ドラマ【2026年最新】 海外ドラマNAVI</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#00a8e122;border-color:#00a8e1;color:#00a8e1'>📦 Prime</span><span class='tag'>Prime</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiSEFVX3lxTE1OUDB2Q3ZqRThoTzRReDl5bDAxZGdFanI4THltNVFrNk1xTmV4MV9EVi1sWkJyc1hBX0M1NHNKR2RWLVAtV2lnaw?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='a1bddbd303266964b57d6ec28669da2e' data-region='JP' data-score='4' data-platform='netflix'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Netflix新作</span><span>2026-04-09 16:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'a1bddbd303266964b57d6ec28669da2e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【随時更新】Netflix 配信 韓国ドラマ 新作＆ 終了作、おすすめ作品まとめ - Danmee ダンミ</h3><div class='summary'>【随時更新】Netflix 配信 韓国ドラマ 新作＆ 終了作、おすすめ作品まとめ Danmee ダンミ</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 Netflix</span><span class='tag'>Netflix</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiTkFVX3lxTE8tOUdUaHFXUlY1ZnNxVGoyVlZ2YXhQeWVaa0RWUThteE05Mzh4YlZiR1lHaGdtQXNoN0NSQlJlSkVJbndyeHVaTW51eGJSdw?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='91ef073661cb81a66df52235764cc4dd' data-region='JP' data-score='4' data-platform='netflix'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Netflix新作</span><span>2026-04-10 08:44</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'91ef073661cb81a66df52235764cc4dd')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>鈴鹿央士、Netflixシリーズ『喧嘩独学』主要キャストの場面写真解禁 6月11日配信開始に変更 - オリコンニュース</h3><div class='summary'>鈴鹿央士、Netflixシリーズ『喧嘩独学』主要キャストの場面写真解禁 6月11日配信開始に変更 オリコンニュース</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 Netflix</span><span class='tag'>Netflix</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiVkFVX3lxTFB1eDZPMUdVZ0phR3Z2N082YlpPaWJWS0FWZjVkN2JPNDhsVTBPbXpxVzFhdHB1V2pCMGdQU296dDV0VVlybUxYQ3ZRQzdXNDNwc1ZDcndn?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='34d6dac8f331b212019c6af21dd8b4c5' data-region='JP' data-score='4' data-platform='netflix'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Netflix新作</span><span>2026-04-11 09:47</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'34d6dac8f331b212019c6af21dd8b4c5')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Netflix週間視聴ランキング（映画）：『爆弾』初登場1位、劇場版『名探偵コナン』3作品がランクイン、『HUMINT/ヒューミント』は4位に【3/30/26 - 4/5/26】（オリコン） - Yahoo!ニュース</h3><div class='summary'>Netflix週間視聴ランキング（映画）：『爆弾』初登場1位、劇場版『名探偵コナン』3作品がランクイン、『HUMINT/ヒューミント』は4位に【3/30/26 - 4/5/26】（オリコン） Yahoo!ニュース</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 Netflix</span><span class='tag'>Netflix</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMif0FVX3lxTE5uWGk4Y2NpMDlxRF9KRVQ0YXJBZ3oyQjMzQlNRcjFSaTRlcjFhZ1l4My1tcG9UcmNkdFVseHFjQmQycmp4b1FLM0o5c3BrOVdVZjdDblFVYTJDSGdLaDlORTh1WWsxZ1A5SGFoSk9EcWdoTWpjejdoS1RoaTVXQkE?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='9b20be09e67c5171999d754f9367d01d' data-region='JP' data-score='3' data-platform='prime'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Prime Video新作</span><span>2025-12-25 17:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'9b20be09e67c5171999d754f9367d01d')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【PrimeVideo】2026年1月の新着作品:冬アニメが勢ぞろい、『グランメゾン・パリ』『雪風 YUKIKAZE』などの話題作も - オリコンニュース</h3><div class='summary'>【PrimeVideo】2026年1月の新着作品:冬アニメが勢ぞろい、『グランメゾン・パリ』『雪風 YUKIKAZE』などの話題作も オリコンニュース</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag'>Prime</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiVkFVX3lxTE1SbndXdGxUcmJLUWtLbkt5UkJYdzRfMnJlMk0xc3kxQ2pZbHJJVHh5YllSbXFGNDlmdHM0a0w4WEYxNnQyNjFVb2JoX19MUFNDYjlfNWtR?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='8b8c36f99730c1cccba45ba881c52150' data-region='JP' data-score='3' data-platform='prime'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Prime Video新作</span><span>2025-12-25 17:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'8b8c36f99730c1cccba45ba881c52150')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Amazonプライムビデオ 2026年1月配信の見放題作品一覧 冬アニメは57作品以上。『グランメゾン・パリ』、『ベートーヴェン捏造』など注目作品続々！ - uzurea.net</h3><div class='summary'>Amazonプライムビデオ 2026年1月配信の見放題作品一覧 冬アニメは57作品以上。『グランメゾン・パリ』、『ベートーヴェン捏造』など注目作品続々！ uzurea.net</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag'>Prime</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiV0FVX3lxTE4yaU50cmFZZ1A3aEJlWTM0V3hnSEpkR2I0ZjNTNktlM3pQMGR3UFJiSV96bjRVRmhHYnY0VlZFcmtEcTVtTXJnTUo4alI0QnNhS1hrX3pXWQ?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='5eb2c5c5db0d6b436d2fd716a20d21f6' data-region='JP' data-score='3' data-platform='prime'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Prime Video新作</span><span>2026-01-04 17:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'5eb2c5c5db0d6b436d2fd716a20d21f6')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Amazonプライムビデオ 2025年9月配信の見放題作品一覧 『ジェン・ブイ S2』『ヘルヴァ･ボス』『ヴェノム：ザ・ラストダンス』『野生の島のロズ』など話題作が続々 - uzurea.net</h3><div class='summary'>Amazonプライムビデオ 2025年9月配信の見放題作品一覧 『ジェン・ブイ S2』『ヘルヴァ･ボス』『ヴェノム：ザ・ラストダンス』『野生の島のロズ』など話題作が続々 uzurea.net</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#00a8e122;border-color:#00a8e1;color:#00a8e1'>📦 Prime</span><span class='tag'>Prime</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiV0FVX3lxTE1mbHU4aC0yaGdVT0RJWjBfXzNlVzZCNHA2Q1lJVDFrZUpZY1h3Q0V3T2E1SGJtalkzR1NXVEl5Mmt3NlVpT2NidW9hWnRLN1E3ZFZmTTA5VQ?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='04f34416868235dae4d702540d910873' data-region='JP' data-score='3' data-platform='disney'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Disney+新作</span><span>2026-01-26 17:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'04f34416868235dae4d702540d910873')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【ディズニープラス】「Disney+」2026年2月の注目の配信作が発表！ - スクリーンオンライン</h3><div class='summary'>【ディズニープラス】「Disney+」2026年2月の注目の配信作が発表！ スクリーンオンライン</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#8cc7ff22;border-color:#8cc7ff;color:#8cc7ff'>✨ Disney+</span><span class='tag'>Disney+</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiTEFVX3lxTFA0VFZPX0ZwSTI1OWpxRjJwS3pJeXI0ZlBPV1hJVnlIc0Y5RzRYOFU1dFVidUlFVHhORE9MMHd3WFMxN1ctQTNZSVVCcVM?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='fe4ee0ea7b09045bd3b7a96d53be3b30' data-region='JP' data-score='3' data-platform='prime'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Prime Video新作</span><span>2026-01-31 17:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'fe4ee0ea7b09045bd3b7a96d53be3b30')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Amazonプライムビデオ 2025年12月配信の見放題作品一覧 『フォールアウト S2』『人間標本』『トワイライト・ウォリアーズ 決戦！九龍城砦』など話題作続々！ - uzurea.net</h3><div class='summary'>Amazonプライムビデオ 2025年12月配信の見放題作品一覧 『フォールアウト S2』『人間標本』『トワイライト・ウォリアーズ 決戦！九龍城砦』など話題作続々！ uzurea.net</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#00a8e122;border-color:#00a8e1;color:#00a8e1'>📦 Prime</span><span class='tag'>Prime</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiWEFVX3lxTE5MRGJzTWI5RWc0MFpkSDRMVDdPeXhIdWgxY0dxOWVXV1NFb2UzWGtYRndZSnl1QzliSzlYVXJ0MmE3c3pLQVNwVnNfXzBqMklSdHEwTktLUHk?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='459feb392eb1dada2ffb2c5a42873052' data-region='JP' data-score='3' data-platform='disney'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Disney+新作</span><span>2026-03-25 16:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'459feb392eb1dada2ffb2c5a42873052')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【ディズニープラス】「Disney+」2026年4月の注目の配信作が発表！ (1/2) - スクリーンオンライン</h3><div class='summary'>【ディズニープラス】「Disney+」2026年4月の注目の配信作が発表！ (1/2) スクリーンオンライン</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#8cc7ff22;border-color:#8cc7ff;color:#8cc7ff'>✨ Disney+</span><span class='tag'>Disney+</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiTEFVX3lxTE5PekRTRTR4dW0zSVRvQ3A1LXhaNDlEWGFYeWhHLUtaNm9Ddl8yY1JVdGJ0LUhKdElaTy0xNjYtVGNtXzdYUGcyYnAzV2M?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='993d34fa9dbca87262a2f780905f6b22' data-region='JP' data-score='3' data-platform='netflix'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Netflix新作</span><span>2026-04-12 23:37</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'993d34fa9dbca87262a2f780905f6b22')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Netflix“グローバル”でもTOP10入り「やっぱり」「最強すぎ」初週から“国内外”で記録更新！“大注目”【ネトフリドラマ】 - TRILL</h3><div class='summary'>Netflix“グローバル”でもTOP10入り「やっぱり」「最強すぎ」初週から“国内外”で記録更新！“大注目”【ネトフリドラマ】 TRILL</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 Netflix</span><span class='tag'>Netflix</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiT0FVX3lxTE5odU9XbWJzLUtXMlNxbWFOVG84OWk5X1Q2dEZWLVRIaHlHcHFnSHpXbnV0UkF3eFg4VmFDblRVRWpxcVQ5aGw1Mi1WcW11VHc?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='7debeb36b9868a5495bd0e0a3f5b736e' data-region='Global' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Anime News Network</span><span>2026-04-12 13:47</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' onclick="switchCardLang(this,'en')">EN</button><button class='card-lang-btn' onclick="switchCardLang(this,'ja')">JA</button><button class='read-btn' onclick="markRead(this,'7debeb36b9868a5495bd0e0a3f5b736e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Level 5&#x27;s Holy Horror Mansion Game Unveils New Trailer</h3><div class='summary'>RPG features &quot;ghost crafting&quot;</div></div><div class='lang-pane lang-ja hidden'><h3>Level 5 のホーリー ホラー マンション ゲームが新しいトレーラーを公開</h3><div class='summary'>RPGの特徴「ゴーストクラフト」</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.animenewsnetwork.com/news/2026-04-12/level-5-holy-horror-mansion-game-unveils-new-trailer/.236307' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='b0ddcc636893a3f3ca195c33042364b7' data-region='Global' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Anime News Network</span><span>2026-04-13 10:15</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' onclick="switchCardLang(this,'en')">EN</button><button class='card-lang-btn' onclick="switchCardLang(this,'ja')">JA</button><button class='read-btn' onclick="markRead(this,'b0ddcc636893a3f3ca195c33042364b7')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Wit Studio Animates Music Video for Vocaloid Producer Orangestar</h3><div class='summary'>Musician performs Agents of the Four Seasons: Dance of Spring&#x27;s opening song with Kase</div></div><div class='lang-pane lang-ja hidden'><h3>Wit Studio がボーカロイド プロデューサー Orangestar のミュージック ビデオをアニメーション化</h3><div class='summary'>ミュージシャンが加瀬さんと『エージェント・オブ・ザ・フォー・シーズンズ: ダンス・オブ・スプリング』のオープニング曲を演奏</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.animenewsnetwork.com/interest/2026-04-12/wit-studio-animates-music-video-for-vocaloid-producer-orangestar/.236321' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='46eb5d7b96a23870f67f178b5676b959' data-region='Global' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge en'>🌐 海外</span><span>Anime News Network</span><span>2026-04-13 11:26</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' onclick="switchCardLang(this,'en')">EN</button><button class='card-lang-btn' onclick="switchCardLang(this,'ja')">JA</button><button class='read-btn' onclick="markRead(this,'46eb5d7b96a23870f67f178b5676b959')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Yuu Nagira&#x27;s &#x27;Nanji, Hoshi no Gotoku&#x27; Novel Gets Live-Action Film on October 9</h3><div class='summary'>Ryūsei Yokohama, Suzu Hirose star in film of award-winning story set on island in Seto Inland Sea</div></div><div class='lang-pane lang-ja hidden'><h3>なぎらゆうの小説「なんじ、星の如く」が10月9日に実写映画化</h3><div class='summary'>横浜流星、広瀬すず主演、瀬戸内海の島を舞台にした受賞歴のある物語を映画化</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.animenewsnetwork.com/news/2026-04-12/yuu-nagira-nanji-hoshi-no-gotoku-novel-gets-live-action-film-on-october-9/.236327' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='a9434c752a09b73ee77dd445d4c85300' data-region='Global' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge en'>🌐 海外</span><span>Anime News Network</span><span>2026-04-13 11:39</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' onclick="switchCardLang(this,'en')">EN</button><button class='card-lang-btn' onclick="switchCardLang(this,'ja')">JA</button><button class='read-btn' onclick="markRead(this,'a9434c752a09b73ee77dd445d4c85300')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Live-Action Tengu no Daidokoro Gets 3rd Season This Fall</h3><div class='summary'>New season features original story supervised by manga&#x27;s creator Ai Tanaka</div></div><div class='lang-pane lang-ja hidden'><h3>実写版「天狗の台所」今秋第3シーズン決定</h3><div class='summary'>新シーズンは漫画原作者・田中あい監修のオリジナルストーリーが登場</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.animenewsnetwork.com/news/2026-04-12/live-action-tengu-no-daidokoro-gets-3rd-season-this-fall/.236325' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='a54aacab576d9af80b0ad3126e3cd119' data-region='Global' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge en'>🌐 海外</span><span>Anime News Network</span><span>2026-04-13 12:09</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' onclick="switchCardLang(this,'en')">EN</button><button class='card-lang-btn' onclick="switchCardLang(this,'ja')">JA</button><button class='read-btn' onclick="markRead(this,'a54aacab576d9af80b0ad3126e3cd119')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>&#x27;Go for It, Nakamura!&#x27; Anime Casts Shunsuke Takeuchi</h3><div class='summary'>Takeuchi voices P.E. teacher Kaoru Niō in episode 3 on Wednesday</div></div><div class='lang-pane lang-ja hidden'><h3>「頑張れ、中村！」アニメキャスト 武内駿輔</h3><div class='summary'>竹内は体育の声を担当しています。水曜日のエピソード3の仁王かおる先生</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.animenewsnetwork.com/news/2026-04-12/go-for-it-nakamura-anime-casts-shunsuke-takeuchi/.236319' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='91db64e674fa3e33e67baa56b907baf1' data-region='Global' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge en'>🌐 海外</span><span>Anime News Network</span><span>2026-04-13 14:32</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' onclick="switchCardLang(this,'en')">EN</button><button class='card-lang-btn' onclick="switchCardLang(this,'ja')">JA</button><button class='read-btn' onclick="markRead(this,'91db64e674fa3e33e67baa56b907baf1')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>TV Anime &#x27;The Villager of LV999&#x27; 2-Month-Consecutive Streaming Special Confirmed; Yuichiro Umehara Cast as New Character Menou; Character Introduction &amp; Cast Comments Also Revealed</h3><div class='summary'>TV anime &quot;The Villager of LV999&quot;, based on the popular novel series with a cumulative circulation of over 3.8 million copies, has confirmed a 2-month-consecutive...</div></div><div class='lang-pane lang-ja hidden'><h3>TVアニメ『LV999の村人』2か月連続スペシャル配信決定;新キャラクター・メノウ役に梅原裕一郎が出演。キャラクター紹介＆キャストコメントも公開</h3><div class='summary'>シリーズ累計発行部数380万部を超える人気ノベルが原作のTVアニメ『LV999の村人』が2か月連続アニメ化決定！</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.animenewsnetwork.com/press-release/2026-04-13/tv-anime-the-villager-of-lv999-2-month-consecutive-streaming-special-confirmed-yuichiro-umehara-/.236330' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='736bda529046610adf0ea9aa19efae78' data-region='Global' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge en'>🌐 海外</span><span>Anime News Network</span><span>2026-04-13 14:33</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' onclick="switchCardLang(this,'en')">EN</button><button class='card-lang-btn' onclick="switchCardLang(this,'ja')">JA</button><button class='read-btn' onclick="markRead(this,'736bda529046610adf0ea9aa19efae78')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Global Breakout Japanese Hip-Hop Duo Creepy Nuts Close Out Coachella on Debut Night, Marking a Breakthrough Moment for Japanese Hip-Hop on the Global Stage</h3><div class='summary'>NEW SINGLE “FRIGHT” OUT NOWTOKYO, Japan (April 13, 2026) – CREEPY NUTS are not a viral anomaly. The Japanese hip-hop duo — comprised of R-Shitei,...</div></div><div class='lang-pane lang-ja hidden'><h3>世界的にブレイクした日本のヒップホップデュオ、Creepy Nutsがデビューナイトでコーチェラを締めくくり、日本のヒップホップが世界舞台で画期的な瞬間を迎える</h3><div class='summary'>新しいシングル「FRIGHT」がリリースされました東京、日本 (2026 年 4 月 13 日) – CREEPY NUTS はウイルス性の異常ではありません。 R-指定と...</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.animenewsnetwork.com/press-release/2026-04-13/global-breakout-japanese-hip-hop-duo-creepy-nuts-close-out-coachella-on-debut-night-marking-a-/.236333' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='007ee0673681e099fe0d902b3ef2624e' data-region='Global' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge en'>🌐 海外</span><span>Anime News Network</span><span>2026-04-13 14:33</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' onclick="switchCardLang(this,'en')">EN</button><button class='card-lang-btn' onclick="switchCardLang(this,'ja')">JA</button><button class='read-btn' onclick="markRead(this,'007ee0673681e099fe0d902b3ef2624e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Enter the Labyrinth of Lust: Ingoku Danchi: Deviant&#x27;s Apartment Complex Premieres with Simultaneous Streaming Exclusively on OceanVeil</h3><div class='summary'>OceanVeil and AnimeFesta to Premiere Spring Anime &quot;Ingoku Danchi&quot; in Sync with Japanese BroadcastOceanVeil, the premier anime streaming service dedicated...</div></div><div class='lang-pane lang-ja hidden'><h3>欲望の迷宮に突入：淫獄団地：Deviant&#x27;s Apartment ComplexがOceanVeilで独占同時ストリーミング初公開</h3><div class='summary'>OceanVeilとAnimeFesta、日本の放送と同期して春アニメ「淫獄団地」を初公開 大手アニメストリーミングサービスOceanVeil...</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.animenewsnetwork.com/press-release/2026-04-13/enter-the-labyrinth-of-lust-ingoku-danchi-deviant-apartment-complex-premieres-with-simultaneous-/.236329' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='d5f9dda308beba790d97d503ffcc470a' data-region='Global' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge en'>🌐 海外</span><span>Anime News Network</span><span>2026-04-13 15:14</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' onclick="switchCardLang(this,'en')">EN</button><button class='card-lang-btn' onclick="switchCardLang(this,'ja')">JA</button><button class='read-btn' onclick="markRead(this,'d5f9dda308beba790d97d503ffcc470a')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Mujina Into the Deep Manga Ends 1st Season, Returns with Season 2 in 2027</h3><div class='summary'>Manga launched in 2023, 1st season entered &quot;final battle&quot; on January 9</div></div><div class='lang-pane lang-ja hidden'><h3>Mujina Into the Deep マンガは第 1 シーズンを終了、2027 年にシーズン 2 で復活</h3><div class='summary'>漫画は2023年にスタート、第1シーズンは1月9日に「最終決戦」に突入</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.animenewsnetwork.com/news/2026-04-13/mujina-into-the-deep-manga-ends-1st-season-returns-with-season-2-in-2027/.236313' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article></div>
+</section>
+</div><footer>Watch Hub + — Generated at 2026-04-13 16:28</footer>
+<script>
+function setPageLang(lang) {
+  localStorage.setItem('page_lang_pref', lang);
+  document.querySelectorAll('.page-lang-btn').forEach(function(btn){ btn.classList.remove('active'); });
+  var enBtn = document.getElementById('btnPageEN');
+  var jaBtn = document.getElementById('btnPageJA');
+  document.querySelectorAll('.item-card').forEach(function(card){
+    var enPane = card.querySelector('.lang-en');
+    var jaPane = card.querySelector('.lang-ja');
+    if(!enPane || !jaPane) return;
+    if(lang === 'ja') {
+      enPane.classList.add('hidden');
+      jaPane.classList.remove('hidden');
+      if(jaBtn) jaBtn.classList.add('active');
+      if(enBtn) enBtn.classList.remove('active');
+    } else {
+      enPane.classList.remove('hidden');
+      jaPane.classList.add('hidden');
+      if(enBtn) enBtn.classList.add('active');
+      if(jaBtn) jaBtn.classList.remove('active');
+    }
+  });
+}
+function switchCardLang(btn, lang) {
+  var card = btn.closest('.item-card');
+  if (!card) return;
+  card.querySelectorAll('.card-lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var enPane = card.querySelector('.lang-en');
+  var jaPane = card.querySelector('.lang-ja');
+  if (lang === 'ja') { if(enPane) enPane.classList.add('hidden'); if(jaPane) jaPane.classList.remove('hidden'); }
+  else { if(enPane) enPane.classList.remove('hidden'); if(jaPane) jaPane.classList.add('hidden'); }
+}
+function markRead(btn, id) {
+  localStorage.setItem('watch_hub_plus_read_' + id, '1');
+  var card = btn.closest('.item-card');
+  if (card) card.classList.add('is-read');
+}
+(function(){
+  document.querySelectorAll('.item-card').forEach(function(card){
+    var id = card.dataset.cardid;
+    if(localStorage.getItem('watch_hub_plus_read_' + id) === '1') card.classList.add('is-read');
+  });
+  var current = localStorage.getItem('page_lang_pref') || 'en';
+  setPageLang(current);
+})();
+
+(function(){
+  var fRegion = 'JP';
+  var fScore = 'all';
+  var fPlatform = 'all';
+  var search = '';
+  function applyFilters(){
+    document.querySelectorAll('.item-card').forEach(function(card){
+      var show = true;
+      if(fRegion !== 'all' && (card.dataset.region || '') !== fRegion) show = false;
+      if(fScore !== 'all' && parseInt(card.dataset.score || '1', 10) < parseInt(fScore, 10)) show = false;
+      if(fPlatform !== 'all' && (card.dataset.platform || '') !== fPlatform) show = false;
+      if(search && !(card.textContent || '').toLowerCase().includes(search.toLowerCase())) show = false;
+      card.style.display = show ? '' : 'none';
+    });
+    document.querySelectorAll('.mini-item[data-region]').forEach(function(item){
+      var show = true;
+      if(fRegion !== 'all' && (item.dataset.region || '') !== fRegion) show = false;
+      if(fPlatform !== 'all' && (item.dataset.platform || '') !== fPlatform) show = false;
+      item.style.display = show ? '' : 'none';
+    });
+  }
+  document.querySelectorAll('.flt-region').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.flt-region').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      fRegion = btn.dataset.region;
+      applyFilters();
+    });
+  });
+  document.querySelectorAll('.flt-score').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.flt-score').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      fScore = btn.dataset.score;
+      applyFilters();
+    });
+  });
+  document.querySelectorAll('.flt-platform').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.flt-platform').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      fPlatform = btn.dataset.platform;
+      applyFilters();
+    });
+  });
+  var sb = document.getElementById('searchBox');
+  if(sb){ sb.addEventListener('input', function(){ search = this.value; applyFilters(); }); }
+  applyFilters();
+})();
+
+</script>
+</body></html>

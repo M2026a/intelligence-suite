@@ -2,65 +2,241 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Intelligence Suite</title>
 
 <style>
 body {
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   background: #111;
   color: #fff;
+  margin: 0;
   padding: 20px;
+  font-size: 16px;
 }
 
-h1 {
-  border-bottom: 1px solid #444;
-  padding-bottom: 10px;
+.header {
+  margin-bottom: 30px;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
+.title {
+  font-size: 32px;
+  font-weight: bold;
 }
 
-li {
-  margin: 10px 0;
+.subtitle {
+  color: #aaa;
+  margin-top: 5px;
+  font-size: 14px;
 }
 
-a {
-  color: #4da3ff;
-  text-decoration: none;
+.update {
+  color: #777;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.section {
+  margin-bottom: 32px;
+}
+
+.section h2 {
+  border-left: 4px solid #4da3ff;
+  padding-left: 10px;
   font-size: 18px;
+  margin-bottom: 14px;
 }
 
-a:hover {
-  text-decoration: underline;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: #1a1a1a;
+  padding: 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #fff;
+  border: 1px solid #222;
+  transition: 0.2s;
+  display: block;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: #4da3ff;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.card-sub {
+  font-size: 13px;
+  color: #aaa;
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  body { padding: 16px; font-size: 18px; }
+  .title { font-size: 36px; }
+  .subtitle { font-size: 16px; }
+  .update { font-size: 14px; }
+  .section h2 { font-size: 24px; }
+  .grid { grid-template-columns: 1fr; gap: 14px; }
+  .card { padding: 20px; }
+  .card-title { font-size: 22px; }
+  .card-icon { font-size: 24px; }
+  .card-sub { font-size: 16px; }
 }
 </style>
-
 </head>
 
 <body>
 
-<h1>Intelligence Suite</h1>
+<div class="header">
+  <div class="title">Intelligence Suite</div>
+  <div class="subtitle">意思決定支援・情報収集ダッシュボード</div>
+  <div class="update">更新日時：2026-04-11</div>
+</div>
 
-<ul>
-  <li><a href="ai_plus/output/index.html">AI News Suite～AI情報～</a></li>
-  <li><a href="it_plus/output/index.html">IT News Suite～IT情報～</a></li><br>
-  <li><a href="IdeaTrendEngine/output/index_im.html">Idea Trend Engine～改善TIPS～</a></li><br>
-  <li><a href="Strategic_IT_Suite/output/index.html">Strategic IT Suite～リスク・TIPS～</a></li><br>
+<div class="section">
+  <h2>■ 業務 / IT / 戦略</h2>
+  <div class="grid">
+    <a class="card" href="ai_plus/output/index.html">
+      <div class="card-title"><span class="card-icon">🤖</span>AI News +</div>
+      <div class="card-sub">AI情報収集</div>
+    </a>
 
-  <li><a href="smart_news_viewer/output/index.html">Smart News Viewer～ニュース全般～</a></li>
-  <li><a href="market_plus/output/index.html">Market Suite～市場状況～</a></li><br>
-  <li><a href="auto_industry_suite/output/index.html">Auto Industry Suite～自動車情報～</a></li>
-  <li><a href="memory_market_plus/output/index.html">Memory Market Suite～メモリー～</a></li>
-  <li><a href="pc_industry_suite/output/index.html">PC Industry Suite～パソコン～</a></li>
-  <li><a href="camera_industry_suite/output/index.html">Camera Industry Suite～カメラ～</a></li>
-  <li><a href="dog_information_suite/output/index.html">Dog Information Suite～犬～</a></li><br>
-  <li><a href="Spot_Selection_Navigator/output/index.html">【娯楽】Spot Selection Navigator～スポット検索～</a></li>
-  <li><a href="travel_search_plus/output/index.html">【娯楽】Travel Search～旅行検索～</a></li><br>
-  <li><a href="takarazuka_information_suite/output/index.html">【娯楽】Takarazuka Information Suite～宝塚情報～</a></li>
-  <li><a href="takarazuka_info_B/output/index.html">【娯楽】Takarazuka Info B～宝塚情報B～</a></li>
-</ul>
+    <a class="card" href="it_plus/output/index.html">
+      <div class="card-title"><span class="card-icon">🖥️</span>IT News +</div>
+      <div class="card-sub">IT業界ニュース</div>
+    </a>
+
+    <a class="card" href="IdeaTrendEngine/output/index_im.html">
+      <div class="card-title"><span class="card-icon">💡</span>Idea Trend Engine</div>
+      <div class="card-sub">改善アイデア</div>
+    </a>
+
+    <a class="card" href="Strategic_IT_Suite/output/index.html">
+      <div class="card-title"><span class="card-icon">🧭</span>Strategic IT Suite</div>
+      <div class="card-sub">リスク / 戦略</div>
+    </a>
+
+    <a class="card" href="executive_signal/output/index.html">
+      <div class="card-title"><span class="card-icon">📊</span>Executive Signal</div>
+      <div class="card-sub">経営シグナル分析</div>
+    </a>
+  </div>
+</div>
+
+<div class="section">
+  <h2>■ 市場 / 業界</h2>
+  <div class="grid">
+    <a class="card" href="smart_news_viewer/output/index.html">
+      <div class="card-title"><span class="card-icon">📰</span>Smart News Viewer</div>
+      <div class="card-sub">総合ニュース</div>
+    </a>
+
+    <a class="card" href="market_plus/output/index.html">
+      <div class="card-title"><span class="card-icon">📈</span>Market +</div>
+      <div class="card-sub">市場分析</div>
+    </a>
+
+    <a class="card" href="auto_industry_suite/output/index.html">
+      <div class="card-title"><span class="card-icon">🚗</span>Auto Industry</div>
+      <div class="card-sub">自動車</div>
+    </a>
+
+    <a class="card" href="memory_market_plus/output/index.html">
+      <div class="card-title"><span class="card-icon">🧠</span>Memory Market +</div>
+      <div class="card-sub">半導体</div>
+    </a>
+
+    <a class="card" href="pc_industry_suite/output/index.html">
+      <div class="card-title"><span class="card-icon">💻</span>PC Industry</div>
+      <div class="card-sub">PC / GPU</div>
+    </a>
+
+    <a class="card" href="camera_industry_suite/output/index.html">
+      <div class="card-title"><span class="card-icon">📷</span>Camera Industry</div>
+      <div class="card-sub">カメラ</div>
+    </a>
+  </div>
+</div>
+
+<div class="section">
+  <h2>■ 娯楽 / 生活</h2>
+  <div class="grid">
+    <a class="card" href="Spot_Selection_Navigator/output/index.html">
+      <div class="card-title"><span class="card-icon">📍</span>Spot Navigator</div>
+      <div class="card-sub">スポット検索</div>
+    </a>
+
+    <a class="card" href="travel_search_plus/output/index.html">
+      <div class="card-title"><span class="card-icon">✈️</span>Travel Search +</div>
+      <div class="card-sub">旅行</div>
+    </a>
+
+    <a class="card" href="dog_information_suite/output/index.html">
+      <div class="card-title"><span class="card-icon">🐶</span>Dog Info</div>
+      <div class="card-sub">犬情報</div>
+    </a>
+
+    <a class="card" href="plot_engine/output/index.html">
+      <div class="card-title"><span class="card-icon">✍️</span>Plot Engine</div>
+      <div class="card-sub">構想 / 文章プロット</div>
+    </a>
+
+    <a class="card" href="Photo_Finder/output/index.html">
+      <div class="card-title"><span class="card-icon">📸</span>Photo Finder</div>
+      <div class="card-sub">撮影スポット探索</div>
+    </a>
+
+    <a class="card" href="watch_hub_plus/output/index.html">
+      <div class="card-title"><span class="card-icon">🎥</span>Watch Hub +</div>
+      <div class="card-sub">映画・配信・アニメ・ゲーム・芸能</div>
+    </a>
+
+    <a class="card" href="entertainment_plus/output/index.html">
+      <div class="card-title"><span class="card-icon">🎬</span>Entertainment +</div>
+      <div class="card-sub">エンタメ情報</div>
+    </a>
+
+    <a class="card" href="gadget_plus/output/index.html">
+      <div class="card-title"><span class="card-icon">📱</span>Gadget +</div>
+      <div class="card-sub">ガジェット</div>
+    </a>
+
+    <a class="card" href="sports_plus/output/index.html">
+      <div class="card-title"><span class="card-icon">⚽</span>Sports +</div>
+      <div class="card-sub">スポーツ</div>
+    </a>
+
+    <a class="card" href="takarazuka_information_suite/output/index.html">
+      <div class="card-title"><span class="card-icon">🎭</span>Takarazuka</div>
+      <div class="card-sub">宝塚</div>
+    </a>
+
+    <a class="card" href="takarazuka_info_B/output/index.html">
+      <div class="card-title"><span class="card-icon">🎟️</span>Takarazuka B</div>
+      <div class="card-sub">宝塚_旧版</div>
+    </a>
+  </div>
+</div>
 
 </body>
 </html>

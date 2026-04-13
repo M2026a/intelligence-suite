@@ -1,0 +1,1145 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plot Engine | 発想の種</title>
+<style>
+  :root {
+    --bg:      #0f1117;
+    --panel:   #181c24;
+    --panel2:  #1e2330;
+    --line:    #2a2f3d;
+    --text:    #e8eaf0;
+    --muted:   #8892a4;
+    --accent:  #5b9cf6;
+    --c-sf:      #4e9eff;
+    --c-fantasy: #a970e8;
+    --c-mystery: #e89c40;
+    --c-horror:  #e85555;
+    --c-game:    #44c98a;
+    --c-default: #8892a4;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Hiragino Kaku Gothic ProN", Meiryo, "Yu Gothic", Arial, sans-serif;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  /* ─── topbar ─── */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    flex: 0 0 auto;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    padding: 10px 16px;
+  }
+  .topbar-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .app-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+    margin-bottom: 2px;
+    flex-wrap: wrap;
+  }
+  .app-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .app-sep {
+    font-size: 16px;
+    color: var(--line);
+    margin: 0 10px;
+  }
+  .app-subtitle {
+    font-size: 14px;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .app-updated {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 0;
+  }
+
+  
+  .control-panel {
+    margin-bottom: 12px;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--panel);
+  }
+
+  .toolbar-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    align-items: end;
+  }
+  .field {
+    min-width: 0;
+  }
+  .field label {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    margin: 0 0 4px;
+    line-height: 1.2;
+  }
+  .field input,
+  .field select,
+  .field button {
+    width: 100%;
+    min-width: 0;
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    font-size: 12px;
+    padding: 6px 8px;
+    height: 30px;
+    font-family: inherit;
+  }
+  .field input::placeholder { color: var(--muted); }
+  .field button { cursor: pointer; }
+  .field button.primary {
+    background: #1d3a6e;
+    border-color: #2d5aa8;
+    color: #fff;
+    font-weight: 600;
+    transition: background 0.15s;
+  }
+  .field button.primary:hover { background: #2548a0; }
+  .field button.secondary {
+    background: var(--panel2);
+    border-color: var(--line);
+    color: var(--muted);
+  }
+  #resetAllBtn {
+    background: #4a2026;
+    border-color: #8f3d4a;
+    color: #ffd8dd;
+    font-weight: 600;
+  }
+  #resetAllBtn:hover {
+    background: #5b2730;
+  }
+  #saveSettingsBtn {
+    background: #173a2d;
+    border-color: #2d7a5d;
+    color: #d9ffef;
+    font-weight: 600;
+  }
+  #saveSettingsBtn:hover {
+    background: #1d4b39;
+  }
+
+  .toolbar-main-actions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    align-items: end;
+  }
+
+  /* ★ 追加：ボタン折り返し防止（リセット対策） */
+  .toolbar-main-actions button {
+    white-space: nowrap;
+    min-width: 0;
+  }
+
+  .status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .btn-inline {
+    width: auto;
+    height: 28px;
+    padding: 0 10px;
+    font-size: 11px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    border: 1px solid var(--line);
+    background: var(--panel2);
+    color: var(--muted);
+    white-space: nowrap;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  #toggleStatsBtn {
+    background: #2a2354;
+    border-color: #5b4ab8;
+    color: #e4ddff;
+    font-weight: 600;
+  }
+  #toggleStatsBtn:hover {
+    background: #342c69;
+  }
+  .history-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .status-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .btn-danger {
+    background: #4a2026;
+    border-color: #8f3d4a;
+    color: #ffd8dd;
+    font-weight: 600;
+  }
+
+  /* ─── content ─── */
+  .content {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 12px 16px 24px;
+  }
+  .content-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 900px) {
+    .toolbar-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .control-panel {
+      padding: 10px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .topbar { padding: 10px 12px; }
+    .content { padding: 10px 12px 20px; }
+    .toolbar-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 10px;
+    }
+    .field label {
+      font-size: 10px;
+      margin-bottom: 3px;
+    }
+    .field input,
+    .field select,
+    .field button {
+      font-size: 12px;
+      height: 32px;
+      padding: 6px 8px;
+    }
+    .toolbar-main-actions {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+    }
+    .status-row {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .status-actions,
+    .history-actions {
+      gap: 6px;
+    }
+    .btn-inline {
+      height: 26px;
+      padding: 0 8px;
+      font-size: 11px;
+    }
+    .cards {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .content {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 12px 16px 24px;
+  }
+  .content-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  /* ─── stats panel ─── */
+  .collapse {
+    margin-bottom: 12px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--panel);
+  }
+  .collapse summary {
+    cursor: pointer; list-style: none;
+    padding: 8px 12px; font-size: 12px; color: var(--muted);
+  }
+  .collapse summary::-webkit-details-marker { display: none; }
+  .collapse-body { padding: 0 12px 10px; font-size: 12px; color: var(--muted); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .chip {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 3px 10px;
+    background: var(--panel2);
+    font-size: 11px;
+  }
+
+  /* ─── cards ─── */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+  }
+  .card {
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--gc, var(--line));
+    border-radius: 10px;
+    background: var(--panel);
+    padding: 14px;
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    gap: 8px;
+  }
+  .card h3 {
+    margin: 0;
+    font-size: 15px;
+    color: #fff;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .genre-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.06);
+    color: var(--gc, var(--muted));
+    border: 1px solid rgba(255,255,255,0.12);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .label { color: var(--muted); font-size: 11px; margin-bottom: 5px; }
+  .story {
+    line-height: 1.75;
+    font-size: 13px;
+    margin-bottom: 12px;
+    color: #cdd0d8;
+  }
+  .structure {
+    border-top: 1px solid var(--line);
+    padding-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px 12px;
+    font-size: 12px;
+  }
+  .s-item { display: flex; gap: 4px; }
+  .s-key { color: var(--muted); flex-shrink: 0; }
+  .s-val { color: #c8ccd8; }
+  .s-full { grid-column: 1 / -1; }
+  .card-footer {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .btn-save {
+    font-size: 11px; padding: 4px 12px; height: auto;
+    background: transparent; border: 1px solid var(--line);
+    color: var(--muted); border-radius: 4px; cursor: pointer;
+    transition: all 0.15s; font-family: inherit;
+  }
+  .btn-save:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-save:disabled { opacity: 0.4; cursor: default; }
+
+  .empty {
+    border: 1px dashed var(--line); border-radius: 10px;
+    padding: 40px; text-align: center;
+    color: var(--muted); font-size: 14px;
+  }
+
+  @media (max-width: 900px) {
+    .toolbar-head, .toolbar {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .toolbar-head { gap: 6px; }
+  }
+
+  @media (max-width: 600px) {
+    .topbar { padding: 10px 12px; }
+    .content { padding: 10px 12px 20px; }
+    .toolbar-grid {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 8px 10px;
+    }
+    .field label {
+      font-size: 10px;
+      margin-bottom: 3px;
+    }
+    .field input,
+    .field select,
+    .field button {
+      font-size: 12px;
+      height: 32px;
+      padding: 6px 8px;
+    }
+    .toolbar-main-actions {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+    }
+    .toolbar-main-actions button {
+      white-space: nowrap;
+      min-width: 0;
+    }
+    .status-row {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .status-actions,
+    .history-actions {
+      gap: 6px;
+    }
+    .btn-inline {
+      height: 26px;
+      padding: 0 8px;
+      font-size: 11px;
+    }
+    .cards {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-inner">
+
+    <div class="app-header">
+      <span class="app-name">✏️ Plot Engine</span>
+      <span class="app-sep">|</span>
+      <span class="app-subtitle">発想の種</span>
+    </div>
+    <div class="app-updated">更新日時：2026-04-13 16:27</div>
+
+  </div>
+</div>
+
+<div class="content">
+  <div class="content-inner">
+    
+    <div class="control-panel">
+      <div class="toolbar-grid">
+        <div class="field">
+          <label for="keyword">キーワード</label>
+          <input id="keyword" type="text" placeholder="指定なし">
+        </div>
+        <div class="field">
+          <label for="genre">ジャンル</label>
+          <select id="genre"></select>
+        </div>
+        <div class="field">
+          <label for="tone">雰囲気</label>
+          <select id="tone"></select>
+        </div>
+        <div class="field">
+          <label for="mainView">主視点</label>
+          <select id="mainView"></select>
+        </div>
+        <div class="field">
+          <label for="subView">副視点</label>
+          <select id="subView"></select>
+        </div>
+        <div class="field">
+          <label for="count">生成数</label>
+          <select id="count"></select>
+        </div>
+        <div class="field">
+          <label for="diff">差別化</label>
+          <select id="diff"></select>
+        </div>
+        <div class="field">
+          <label>&nbsp;</label>
+          <div class="toolbar-main-actions">
+            <button id="generateBtn" class="primary">生成</button>
+            <button id="resetAllBtn" class="secondary">リセット</button>
+            <button id="saveSettingsBtn" class="secondary">保存</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="status-row">
+        <div id="status">待機中</div>
+        <div class="status-actions">
+          <button id="toggleStatsBtn" class="btn-inline">履歴</button>
+        </div>
+      </div>
+    </div>
+
+    <details id="statsPanel" class="collapse">
+      <summary>履歴</summary>
+      <div class="collapse-body">
+        <div id="statsText">履歴 0件 / お気に入り 0件</div>
+        <div class="history-actions">
+          <button id="clearHistoryBtn" class="btn-inline btn-danger">履歴クリア</button>
+        </div>
+        <div class="chips" id="statsChips"></div>
+      </div>
+    </details>
+    <div id="cards" class="cards"></div>
+    <div id="empty" class="empty">「生成」を押すと、ここにプロットのヒントが表示されます。</div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const READ_KEY = 'plot_engine_history';
+  const FAV_KEY  = 'plot_engine_favorites';
+  const BAL_KEY  = 'plot_engine_balance';
+  const FORM_KEY = 'plot_engine_form';
+
+  const GENRE_COLOR = {
+    'sf':'#4e9eff','fantasy':'#a970e8','mystery':'#e89c40',
+    'horror':'#e85555','game':'#44c98a','指定なし':'#8892a4'
+  };
+  const GENRE_LABEL = {
+    'sf':'SF','fantasy':'ファンタジー','mystery':'ミステリー',
+    'horror':'ホラー','game':'ゲーム','指定なし':'汎用'
+  };
+
+  /* ─────────────────────────────────────────
+     語彙データ  各ジャンル 12 項目
+  ───────────────────────────────────────── */
+  const G = {
+    conflicts: {
+      default: [
+        '復讐 vs 贖罪','正義 vs 生存','希望 vs 代償','本心 vs 与えられた役割',
+        '愛情 vs 義務','自由 vs 秩序','記憶 vs 真実','救済 vs 支配',
+        '成長 vs 安定','孤独 vs 共存','継承 vs 破壊','信仰 vs 現実',
+        '覚悟 vs 後悔','誇り vs 生存','優しさ vs 強さ','正直 vs 優しい嘘'
+      ],
+      sf: [
+        '自由 vs 秩序','記憶 vs 真実','人間性 vs 効率','進化 vs 倫理',
+        '管理 vs 自由','希望 vs 代償','感情 vs 論理','個 vs 集合体',
+        '存在 vs データ','過去 vs 上書き','本物 vs 複製','意志 vs プログラム'
+      ],
+      fantasy: [
+        '継承 vs 破壊','信仰 vs 現実','使命 vs 願い','王道 vs 反逆',
+        '救済 vs 支配','宿命 vs 自由','血筋 vs 覚悟','神 vs 人',
+        '光 vs 影','伝説 vs 真実','守護 vs 孤独','誓い vs 裏切り'
+      ],
+      mystery: [
+        '真実 vs 保護','正義 vs 生存','記憶 vs 真実','本心 vs 役割',
+        '責任 vs 沈黙','合理 vs 執念','証拠 vs 感情','暴露 vs 隠蔽',
+        '法 vs 善意','復讐 vs 理性','過去 vs 現在','動機 vs 結果'
+      ],
+      horror: [
+        '生存 vs 禁忌','理性 vs 恐怖','救済 vs 侵食','日常 vs 崩壊',
+        '信頼 vs 疑念','希望 vs 代償','逃走 vs 直視','記憶 vs 忘却',
+        '仲間 vs 疑惑','正気 vs 狂気','外 vs 閉域','犠牲 vs 逃避'
+      ],
+      game: [
+        '攻略 vs 犠牲','成長 vs 消耗','勝利 vs 喪失','自由 vs ルール',
+        '協力 vs 裏切り','挑戦 vs 安全','最強 vs 仲間','効率 vs 楽しさ',
+        '本物 vs ゲーム','記録 vs 忘却','継続 vs リセット','勝者 vs 敗者'
+      ]
+    },
+    relations: {
+      default: [
+        '師弟','親子','敵対','共犯','相棒','宿敵','主従','偽りの家族',
+        '元恋人','観察者と被験者','先輩後輩','救済者と依存者',
+        '友人の成れの果て','見知らぬ同士','守る者と守られる者','鏡のような他人'
+      ],
+      sf: [
+        '観察者と被験者','相棒','敵対','先輩後輩','主従','偽りの家族',
+        '製作者とその創造物','プログラムと人間','記憶を共有する他人','複製と本物',
+        '監視者と被監視者','かつて同じ存在だった者'
+      ],
+      fantasy: [
+        '師弟','主従','親子','宿敵','相棒','救済者と依存者',
+        '血を分けた敵','預言者と選ばれし者','守護者と封印されし者',
+        '剣と盾','裏切り者と信者','神の使いと普通の人間'
+      ],
+      mystery: [
+        '相棒','敵対','元恋人','観察者と被験者','先輩後輩','共犯',
+        '探偵と容疑者','証人と調査者','弁護者と告発者','秘密を共有する二人',
+        '過去を知る者と知らない者','真実を隠す者と暴く者'
+      ],
+      horror: [
+        '偽りの家族','相棒','敵対','救済者と依存者','共犯','親子',
+        '生き残った者たち','過去を知る者','疑いを持つ二人','最後の理解者',
+        '犠牲者と加害者の境界','恐怖を知る者と知らない者'
+      ],
+      game: [
+        '相棒','宿敵','共犯','先輩後輩','主従','敵対',
+        '最強プレイヤーとその模倣者','ライバル','チームメンバーと離脱者',
+        'バグを知る者','正攻法と裏道を行く者','最終面の番人と挑戦者'
+      ]
+    },
+    goals: {
+      default: [
+        '取り戻したい','守りたい','逃げ切りたい','真実を知りたい',
+        '認められたい','壊したい','救いたい','継ぎたい',
+        '証明したい','支配から外れたい','忘れたい','生き延びたい',
+        '許されたい','終わらせたい','生まれ直したい','ひとりになりたくない'
+      ],
+      sf: [
+        '真実を知りたい','自由を取り戻したい','生き延びたい','支配から外れたい',
+        '証明したい','守りたい','人間であり続けたい','記憶を守りたい',
+        '設計された運命を変えたい','存在を証明したい','誰かに気づいてほしい','外に出たい'
+      ],
+      fantasy: [
+        '救いたい','継ぎたい','認められたい','守りたい',
+        '取り戻したい','証明したい','宿命を断ち切りたい','選ばれなかった側に立ちたい',
+        '神に問いたい','誓いを果たしたい','普通に生きたい','世界を変えたい'
+      ],
+      mystery: [
+        '真実を知りたい','証明したい','逃げ切りたい','守りたい',
+        '忘れたい','認められたい','罪を償いたい','誰も傷つけずに終わらせたい',
+        '隠し続けたい','記憶を取り戻したい','疑惑を晴らしたい','正しい答えを出したい'
+      ],
+      horror: [
+        '生き延びたい','逃げ切りたい','守りたい','真実を知りたい',
+        '忘れたい','救いたい','元の日常に戻りたい','誰かに信じてほしい',
+        '一人になりたくない','理解したい','終わらせたい','声を届けたい'
+      ],
+      game: [
+        '攻略したい','生き延びたい','成長したい','勝ち抜きたい',
+        '救いたい','真実を知りたい','最強になりたい','仲間を守りたい',
+        'ルールを変えたい','クリアして終わらせたい','誰よりも先に到達したい','答え合わせをしたい'
+      ]
+    },
+    costs: {
+      default: [
+        '信頼を失う','孤独を抱える','記憶を失う','居場所を失う',
+        '勝利の意味を失う','大切な人を遠ざける','身体を壊す','役割を背負う',
+        '日常を失う','名前を失う','時間を失う','未来を縛られる',
+        '自分の正しさを疑う','やり直せない選択をする','誰かを傷つける','嘘をつき続ける'
+      ],
+      sf: [
+        '記憶を失う','自由を失う','名前を失う','身体を壊す',
+        '未来を縛られる','信頼を失う','人間性の一部を手放す','感情を切り離す',
+        '存在の証拠を消される','次世代に呪いを残す','感覚を改ざんされる','別の誰かになる'
+      ],
+      fantasy: [
+        '継承を背負う','大切な人を遠ざける','居場所を失う','名前を失う',
+        '日常を失う','信頼を失う','力の代償に何かを失う','使命に自分を飲み込まれる',
+        '守った世界に居場所がない','誰も知らない犠牲を払う','記憶を封じられる','力と引き換えに孤独になる'
+      ],
+      mystery: [
+        '信頼を失う','孤独を抱える','日常を失う','居場所を失う',
+        '勝利の意味を失う','時間を失う','真実と引き換えに何かを壊す','誰かを犠牲にする',
+        '汚れた手で正義を実現する','嘘をつき続ける','疑惑を持たれ続ける','過去を背負う'
+      ],
+      horror: [
+        '正気を削る','日常を失う','孤独を抱える','身体を壊す',
+        '信頼を失う','未来を縛られる','見てしまったものを忘れられない','誰にも信じてもらえない',
+        'トラウマを抱える','正常に戻れない','仲間を失う','自分の一部が死ぬ'
+      ],
+      game: [
+        '時間を失う','仲間を遠ざける','勝利の意味を失う','身体を壊す',
+        '自由を失う','信頼を失う','現実との境界が薄れる','積み上げたものを捨てる',
+        '次の挑戦者を育てられない','勝ちの定義を変えてしまう','本当の目的を見失う','誰かの敗北の上に立つ'
+      ]
+    },
+    endings: {
+      default: [
+        '勝ったが空白が残る','守れたが関係は戻らない','真実に届いたが失ったものが大きい',
+        '逃げ切ったが次の火種が残る','救えたが自分は残れない','壊したが継ぐ責任が生まれる',
+        '終えたが誰にも言えない','手放したことで初めて前に進める',
+        '正しかったが孤独になる','諦めた先に本当のものがあった',
+        '全てを失って自分だけが残る','変わったが昔には戻れない'
+      ],
+      sf: [
+        '真実に届いたが未来を失う','自由を得たが名前を捨てる','守れたが世界から切り離される',
+        '勝ったが人間性を削る','逃げ切ったが監視は続く','救えたが記憶が残らない',
+        '存在を証明したが誰にも届かない','システムを壊したが世界が揺らぐ',
+        '設計通りに終わったがそれが違和感の正体だった','記録には残るが本人は消える',
+        '自由になったが戻る場所がない','人間に戻れたが何かが足りない'
+      ],
+      fantasy: [
+        '救えたが王座を捨てる','継いだが日常は戻らない','勝ったが誰にも祝われない',
+        '守れたが絆は形を変える','壊したが責任が残る','真実に届いたが願いは失う',
+        '宿命を断ったが次の宿命が生まれる','英雄になったが孤独が深まる',
+        '誓いを果たしたが誓いの相手はもういない','世界は救われたが自分の居場所はない',
+        '伝説になったが名前は消える','力を手放した先に平和がある'
+      ],
+      mystery: [
+        '真実に届いたが孤独になる','証明したが信頼を失う','守れたが自分は汚れる',
+        '逃げ切ったが次の疑念が残る','勝ったが空白が残る','終わらせたが関係は戻らない',
+        '全てを暴いたが救われる人がいない','正義を貫いたが代償が大きすぎた',
+        '真犯人を知ったが言えない','謎は解けたが傷は残る',
+        '守った秘密が次の事件を生む','最後に疑うべきは自分だった'
+      ],
+      horror: [
+        '生き延びたが日常は戻らない','逃げ切ったが傷は残る','救えたが自分は壊れる',
+        '勝ったが次の火種が残る','終わらせたが名前を失う','守れたが誰も覚えていない',
+        '現実に戻ったが何かが違う','恐怖の正体を知ったがそれが最悪だった',
+        '全員助かったが誰も信じてもらえない','終わったはずが終わっていない',
+        '生存したが仲間の記憶が重すぎる','逃げた先が始まりの場所だった'
+      ],
+      game: [
+        '勝ち抜いたが仲間が離れる','攻略したが現実を失う','救えたが次の周回が始まる',
+        '逃げ切ったが敗者を背負う','成長したが元には戻れない','終えたが未練が残る',
+        'クリアしたが何も変わっていない','最強になったが挑戦者がいなくなる',
+        '全てを手に入れたが空っぽになる','記録に名前を刻んだが達成感がない',
+        '仲間と勝ったが自分だけ違う終わりを迎える','ゲームが終わっても現実が続く'
+      ]
+    },
+    titleFront: {
+      default: [
+        '最後の','錆びた','透明な','夜明け前の','失われた','未完成の',
+        '静かな','閉ざされた','遠い','壊れた','灰色の','逆光の',
+        '折れた','忘れられた','傷ついた','濡れた'
+      ],
+      sf: [
+        '量子の','観測者の','冷たい','忘却の','人工の','遠隔の',
+        '最適化された','複製された','消去された','設計された','再起動の','隔離された'
+      ],
+      fantasy: [
+        '王都の','星詠みの','封印された','古き','青き','黒曜の',
+        '祝福されぬ','忘れられた神の','血脈の','断たれた','選ばれぬ者の','滅びの'
+      ],
+      mystery: [
+        '無名の','密室の','消えた','沈黙の','白い','偽りの',
+        '証拠のない','消された','隠された','夜の','証言台の','回収された'
+      ],
+      horror: [
+        '濡れた','赤い','歪んだ','見てはいけない','夜の','戻らない',
+        '腐りかけた','人の形をした','開いてはいけない','閉じた','染みついた','忘れてはいけない'
+      ],
+      game: [
+        '最終','周回の','攻略者の','敗者の','裏面の','覚醒した',
+        '封印された','未発見の','ハードモードの','制限時間の','最適解の','バグった'
+      ]
+    },
+    titleBack: {
+      default: [
+        '王座','記録','約束','境界線','観測記','回廊',
+        '残響','分岐点','灯火','契約','設計図','庭',
+        '手紙','痕跡','遺言','扉'
+      ],
+      sf: [
+        '監獄','軌道','保存則','プロトコル','観測点','アーカイブ',
+        'ターミナル','記憶域','接続ログ','管理室','出口','周波数'
+      ],
+      fantasy: [
+        '聖杯','継承書','剣','祭壇','王冠','迷宮',
+        '加護','血統書','呪紋','詠唱','聖域','幻視'
+      ],
+      mystery: [
+        '遺書','目撃者','証明','密約','観察録','遺留品',
+        'アリバイ','告白','封筒','第三者','矛盾','不在証明'
+      ],
+      horror: [
+        '地下室','囁き','忌み名','鏡','廊下','祈り',
+        '染み','体温','夢','入口','記憶','儀式'
+      ],
+      game: [
+        '周回路','セーブデータ','クエスト','最終面','裏ルート','勝敗表',
+        'フラグ','ステータス','隠し部屋','残機','エンドロール','バッドエンド'
+      ]
+    },
+    openings: {
+      default: [
+        'ある選択が、取り返しのつかない裂け目を生んだ。',
+        '本当の望みは、役割の奥でずっと黙っていた。',
+        '守るための判断が、最初の裏切りになった。',
+        '勝つほど遠ざかるものがあった。',
+        '真実に近づくほど、帰る場所が薄くなっていった。',
+        '始まりは小さな違和感だった。',
+        '全てが終わった後でやっと、それが始まりだったと気づいた。',
+        '正しいことをしたはずなのに、誰も喜ばなかった。',
+        '手放した瞬間に、本当に必要なものだったと知った。',
+        '誰かを守るために、自分の一部を殺した。',
+        '嘘をつくのが得意になった頃、本当のことが言えなくなっていた。',
+        '奪われた後でしか、持っていたものの重さがわからなかった。'
+      ],
+      sf: [
+        '監視網の向こうで、消えたはずの記録が点灯した。',
+        '規則どおりの世界で、たった一つだけ整合しない痕跡が残っていた。',
+        '効率のために切り捨てたものが、人間らしさの中心だった。',
+        '最適化された社会で、最も無駄なものだけが真実を持っていた。',
+        '記憶の削除が完了した瞬間、何かが残った。',
+        '人工知能が答えを出した後、問いだけが宙に浮いた。'
+      ],
+      fantasy: [
+        '継承の儀の夜、誰も継いではならない名が呼ばれた。',
+        '祈りで守られていたはずの街は、最初から見捨てられていた。',
+        '古い約束は、守る者ではなく壊す者を選んだ。',
+        '選ばれなかった者が、選ばれた者より深く世界を知っていた。',
+        '伝説は英雄を作るが、英雄は伝説に縛られる。',
+        '禁じられた魔法の名を、誰も教えなかった。なぜなら全員が知っていたから。'
+      ],
+      mystery: [
+        '証拠は揃っているのに、真実だけが逃げ続けていた。',
+        '見落とされた一言が、全員の立場を反転させる。',
+        '守りたい相手ほど、疑わなければならなかった。',
+        '最初に嘘をついたのは誰か、ではなく、最後まで嘘をつかなかった誰かが問題だった。',
+        '密室には扉より多くの出口があった。',
+        '目撃者が一番多かった夜に、誰も何も見ていなかった。'
+      ],
+      horror: [
+        'いつもの帰り道に、二度と戻れない順番が混じっていた。',
+        '助けを求める声は、知っている人間の声に似すぎていた。',
+        '見てはいけないものは、見つけた瞬間よりも忘れた後に近づいてくる。',
+        '扉は内側から施錠されていた。逃げた方向は外ではなかった。',
+        '怖いのは化け物ではなく、化け物でないものが化け物に見えることだった。',
+        '一番安全な場所が、最初に終わった場所だった。'
+      ],
+      game: [
+        '最適解のはずの行動が、誰かの脱落条件になっていた。',
+        'セーブできる世界ほど、取り返しのつかない損失が際立つ。',
+        '勝利条件の達成が、本当の敗北の始まりだった。',
+        '全てのルートを踏んだ後で、攻略できないものが一つ残っていた。',
+        '一番強い敵は、システムではなく仲間だった。',
+        'バッドエンドにしか記録されていないものがあった。'
+      ]
+    }
+  };
+
+  /* ─────────────────────────────────────────
+     ストーリー文テンプレート 6 種
+  ───────────────────────────────────────── */
+  const STORY_TMPLS = [
+    // 1: 葛藤中心（元の形）
+    (p,kw,v1,v2,tw) =>
+      `${p.opening}${kw}${v1}は、${p.conflict}のはざまで${p.goal}と願う。${p.relation}の関係が${tw}に揺れるほど選択は先鋭化し、やがて${p.cost}。最後は、${p.ending}${v2}。`,
+    // 2: 関係から始まる
+    (p,kw,v1,v2,tw) =>
+      `${p.opening}${kw}${p.relation}という関係から、物語は動き出す。${v1}が${p.goal}を求めるとき、${p.conflict}という壁が${tw}に立ちふさがる。${p.cost}を払い、${p.ending}${v2}。`,
+    // 3: 代償からの逆算
+    (p,kw,v1,v2,tw) =>
+      `${p.opening}${kw}${p.conflict}を前に、${v1}は${p.goal}ことを選ぶ。だが選択には必ず代償があった。${p.relation}の間で${tw}に${p.cost}。そして迎えた結末は、${p.ending}${v2}。`,
+    // 4: 結末の予感
+    (p,kw,v1,v2,tw) =>
+      `${p.opening}${kw}${p.ending}という終わりだけが、最初から見えていた。${v1}は${p.relation}の中で${p.conflict}に引き裂かれながら、それでも${p.goal}と前に進む。${tw}な代償、${p.cost}${v2}。`,
+    // 5: 問いかけ形式
+    (p,kw,v1,v2,tw) =>
+      `${p.opening}${kw}${p.conflict}という問いが、この物語を貫く。${v1}の${p.goal}という願いと、${p.relation}の関係が交差するとき、何もかもが${tw}に歪み始める。${p.cost}、そして${p.ending}${v2}。`,
+    // 6: 気づきから
+    (p,kw,v1,v2,tw) =>
+      `${p.opening}${kw}${v1}が最初に気づいたのは、${p.conflict}の輪郭だった。${p.relation}を通じて${tw}に描かれていく${p.goal}という渇望。だが${p.cost}。物語の終わりには、${p.ending}${v2}。`
+  ];
+
+  const TONE_FLAVOR = {
+    '指定なし': ['静かに','鋭く','にじむように','じわりと','淡く'],
+    'ダーク':   ['暗く','容赦なく','冷たく','深く沈むように','底なしに'],
+    '静か':     ['静かに','淡く','抑えて','息を潜めて','音もなく'],
+    '切ない':   ['切実に','痛みを含んで','にじむように','胸を締め付けるように','やるせなく'],
+    '熱い':     ['まっすぐ','熱を帯びて','強く','燃えるように','迷いなく'],
+    '知的':     ['理詰めで','観察的に','乾いた温度で','冷静に','精密に'],
+    '不穏':     ['不穏に','じわじわと','薄く歪ませて','ずれた角度で','奇妙な静けさで'],
+    '軽快':     ['軽やかに','テンポよく','皮肉を混ぜて','飄々と','あっけらかんと']
+  };
+
+  const GENRE_OPTS   = ['指定なし','sf','fantasy','mystery','horror','game'];
+  const TONE_OPTS    = ['指定なし','ダーク','静か','切ない','熱い','知的','不穏','軽快'];
+  const MAIN_OPTS    = ['指定なし','一人称','三人称','多視点'];
+  const SUB_OPTS     = ['指定なし','補助なし','敵視点','相棒視点','第三者視点'];
+  const COUNT_OPTS   = ['3','5','7'];
+  const DIFF_OPTS    = ['標準','強','最強'];
+
+  const state = {
+    lastBatchCore: new Set(),
+    favorites: load(FAV_KEY, []),
+    history:   load(READ_KEY, []),
+    balance:   load(BAL_KEY, {})
+  };
+
+  /* ─── util ─── */
+  function load(key, fb) {
+    try { const r = localStorage.getItem(key); return r ? JSON.parse(r) : fb; }
+    catch(_) { return fb; }
+  }
+  function save(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+  function rnd(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  function fillSel(sel, opts) {
+    sel.innerHTML = '';
+    const L = {'sf':'SF','fantasy':'ファンタジー','mystery':'ミステリー','horror':'ホラー','game':'ゲーム'};
+    opts.forEach(v => {
+      const o = document.createElement('option');
+      o.value = v; o.textContent = L[v] || v;
+      sel.appendChild(o);
+    });
+  }
+
+  const $ = id => document.getElementById(id);
+  const el = {
+    keyword:$('keyword'), genre:$('genre'), tone:$('tone'),
+    mainView:$('mainView'), subView:$('subView'), count:$('count'), diff:$('diff'),
+    btn:$('generateBtn'), cards:$('cards'), empty:$('empty'),
+    status:$('status'), toggleStats:$('toggleStatsBtn'),
+    statsPanel:$('statsPanel'), statsText:$('statsText'), statsChips:$('statsChips'),
+    resetAll:$('resetAllBtn'), saveSettings:$('saveSettingsBtn'), clearHistory:$('clearHistoryBtn')
+  };
+
+  fillSel(el.genre, GENRE_OPTS); fillSel(el.tone, TONE_OPTS);
+  fillSel(el.mainView, MAIN_OPTS); fillSel(el.subView, SUB_OPTS);
+  fillSel(el.count, COUNT_OPTS); fillSel(el.diff, DIFF_OPTS);
+  el.count.value = '5'; el.diff.value = '強';
+
+  function getFormState() {
+    return {
+      keyword: el.keyword.value,
+      genre: el.genre.value,
+      tone: el.tone.value,
+      mainView: el.mainView.value,
+      subView: el.subView.value,
+      count: el.count.value,
+      diff: el.diff.value
+    };
+  }
+
+  function applyFormState(form) {
+    if (!form || typeof form !== 'object') return;
+    if (typeof form.keyword === 'string') el.keyword.value = form.keyword;
+    if (GENRE_OPTS.includes(form.genre)) el.genre.value = form.genre;
+    if (TONE_OPTS.includes(form.tone)) el.tone.value = form.tone;
+    if (MAIN_OPTS.includes(form.mainView)) el.mainView.value = form.mainView;
+    if (SUB_OPTS.includes(form.subView)) el.subView.value = form.subView;
+    if (COUNT_OPTS.includes(form.count)) el.count.value = form.count;
+    if (DIFF_OPTS.includes(form.diff)) el.diff.value = form.diff;
+  }
+
+  applyFormState(load(FORM_KEY, null));
+
+  /* ─── balanced pick ─── */
+  function ensureBucket(bk, key, items) {
+    if (!state.balance[bk]) state.balance[bk] = {};
+    if (!state.balance[bk][key]) state.balance[bk][key] = {};
+    const c = state.balance[bk][key];
+    items.forEach(i => { if (c[i] == null) c[i] = 0; });
+    return c;
+  }
+  function getList(bk, genre) {
+    const t = G[bk];
+    return (!genre || genre === '指定なし' ? t.default : (t[genre] || t.default)).slice();
+  }
+  function pickBalanced(bk, genre, forbidden) {
+    const list = getList(bk, genre);
+    const c = ensureBucket(bk, genre || 'default', list);
+    const min = Math.min(...list.map(i => c[i]));
+    let cands = list.filter(i => c[i] === min && !forbidden.has(i));
+    if (!cands.length) {
+      const next = Math.min(...list.filter(i => !forbidden.has(i)).map(i => c[i]));
+      cands = list.filter(i => c[i] === next && !forbidden.has(i));
+    }
+    if (!cands.length) cands = list.filter(i => c[i] === min);
+    const picked = rnd(cands);
+    c[picked]++;
+    return picked;
+  }
+
+  function coreKey(p) {
+    return [p.conflict,p.relation,p.goal,p.cost,p.ending].join('｜');
+  }
+  function titleFor(genre, forbidden) {
+    return pickBalanced('titleFront',genre,forbidden) + pickBalanced('titleBack',genre,forbidden);
+  }
+  function buildStory(p, tone, keyword, mainView, subView) {
+    const tw = rnd(TONE_FLAVOR[tone] || TONE_FLAVOR['指定なし']);
+    const kw = keyword ? `「${keyword}」を手がかりに、` : '';
+    const v1 = mainView === '指定なし' ? '人物たち' : `${mainView}で描かれる人物たち`;
+    const v2 = (subView && subView !== '指定なし' && subView !== '補助なし')
+      ? `。さらに${subView}が、見えていない歪みを浮かび上がらせる` : '';
+    return rnd(STORY_TMPLS)(p, kw, v1, v2, tw);
+  }
+
+  /* ─── render ─── */
+  function render(cards, genre) {
+    el.cards.innerHTML = '';
+    el.empty.style.display = cards.length ? 'none' : 'block';
+    const color = GENRE_COLOR[genre] || GENRE_COLOR['指定なし'];
+    const label = GENRE_LABEL[genre] || '汎用';
+
+    cards.forEach(card => {
+      const div = document.createElement('div');
+      div.className = 'card';
+      div.style.setProperty('--gc', color);
+      div.innerHTML = `
+        <div class="card-header">
+          <h3>${card.title}</h3>
+          <span class="genre-badge">${label}</span>
+        </div>
+        <div class="label">生成ストーリー</div>
+        <div class="story">${card.story}</div>
+        <div class="structure">
+          <div class="s-item"><span class="s-key">対立軸：</span><span class="s-val">${card.conflict}</span></div>
+          <div class="s-item"><span class="s-key">関係：</span><span class="s-val">${card.relation}</span></div>
+          <div class="s-item"><span class="s-key">目的：</span><span class="s-val">${card.goal}</span></div>
+          <div class="s-item"><span class="s-key">代償：</span><span class="s-val">${card.cost}</span></div>
+          <div class="s-item s-full"><span class="s-key">結末：</span><span class="s-val">${card.ending}</span></div>
+        </div>
+        <div class="card-footer"></div>
+      `;
+      const btn = document.createElement('button');
+      btn.textContent = '⭐ お気に入り保存';
+      btn.className = 'btn-save';
+      btn.addEventListener('click', () => {
+        state.favorites.push(card);
+        save(FAV_KEY, state.favorites);
+        updateStats();
+        btn.textContent = '✓ 保存済み';
+        btn.disabled = true;
+      });
+      div.querySelector('.card-footer').appendChild(btn);
+      el.cards.appendChild(div);
+    });
+  }
+
+  function updateStats() {
+    el.statsText.textContent = `履歴 ${state.history.length}件 / お気に入り ${state.favorites.length}件`;
+    const freq = {};
+    state.history.forEach(item => { freq[item.conflict] = (freq[item.conflict]||0)+1; });
+    const top = Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,6);
+    el.statsChips.innerHTML = '';
+    top.forEach(([name,count]) => {
+      const c = document.createElement('div');
+      c.className = 'chip';
+      c.textContent = `${name} × ${count}`;
+      el.statsChips.appendChild(c);
+    });
+  }
+
+  function clearRenderedResults() {
+    el.cards.innerHTML = '';
+    el.empty.style.display = 'block';
+  }
+
+  function resetInputs() {
+    el.keyword.value = '';
+    el.genre.value = '指定なし';
+    el.tone.value = '指定なし';
+    el.mainView.value = '指定なし';
+    el.subView.value = '指定なし';
+    el.count.value = '5';
+    el.diff.value = '強';
+  }
+
+  function resetAll() {
+    resetInputs();
+    state.lastBatchCore = new Set();
+    localStorage.removeItem(FORM_KEY);
+    clearRenderedResults();
+    el.status.textContent = '入力内容をリセットしました';
+  }
+
+  function saveCurrentSettings() {
+    save(FORM_KEY, getFormState());
+    el.status.textContent = '入力内容を保存しました';
+  }
+
+  function clearHistoryAndSaved() {
+    state.favorites = [];
+    state.history = [];
+    localStorage.removeItem(FAV_KEY);
+    localStorage.removeItem(READ_KEY);
+    clearRenderedResults();
+    updateStats();
+    el.status.textContent = '履歴・保存をクリアしました';
+  }
+
+  /* ─── generate ─── */
+  function generate() {
+    el.btn.disabled = true;
+    el.status.textContent = '生成中...';
+
+    const genre    = el.genre.value;
+    const tone     = el.tone.value;
+    const keyword  = el.keyword.value.trim();
+    const mainView = el.mainView.value;
+    const subView  = el.subView.value;
+    const count    = Number(el.count.value || 5);
+    const diff     = el.diff.value;
+
+    const batch = [], batchCore = new Set(), forbidden = new Set();
+    let attempts = 0;
+
+    while (batch.length < count && attempts < 300) {
+      attempts++;
+      const conflict = pickBalanced('conflicts', genre, forbidden);
+      const relation = pickBalanced('relations', genre, forbidden);
+      const goal     = pickBalanced('goals',     genre, forbidden);
+      const cost     = pickBalanced('costs',     genre, forbidden);
+      const ending   = pickBalanced('endings',   genre, forbidden);
+      const opening  = pickBalanced('openings',  genre, forbidden);
+      const p = {conflict,relation,goal,cost,ending,opening};
+      const key = coreKey(p);
+
+      if (state.lastBatchCore.has(key) || batchCore.has(key)) continue;
+      if (diff !== '標準') {
+        const tooClose = state.history.slice(-24).some(h => {
+          let s = 0;
+          if (h.conflict===conflict) s+=3;
+          if (h.relation===relation) s+=2;
+          if (h.goal===goal)         s+=2;
+          if (h.cost===cost)         s+=2;
+          if (h.ending===ending)     s+=2;
+          return s >= (diff==='最強' ? 4 : 6);
+        });
+        if (tooClose) continue;
+      }
+
+      batchCore.add(key);
+      [conflict,relation,goal,cost,ending,opening].forEach(x => forbidden.add(x));
+      batch.push({
+        title: titleFor(genre, forbidden),
+        story: buildStory(p, tone, keyword, mainView, subView),
+        ...p
+      });
+    }
+
+    state.lastBatchCore = batchCore;
+    state.history.push(...batch);
+    state.history = state.history.slice(-120);
+    save(READ_KEY, state.history);
+    save(BAL_KEY,  state.balance);
+    render(batch, genre);
+    updateStats();
+    el.status.textContent = `生成完了：${batch.length}件 / 試行 ${attempts}回`;
+    el.btn.disabled = false;
+  }
+
+  el.btn.addEventListener('click', generate);
+  el.toggleStats.addEventListener('click', () => { el.statsPanel.open = !el.statsPanel.open; });
+  el.resetAll.addEventListener('click', resetAll);
+  el.clearHistory.addEventListener('click', clearHistoryAndSaved);
+  updateStats();
+})();
+</script>
+</body>
+</html>

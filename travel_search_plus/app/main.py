@@ -329,7 +329,7 @@ def build_page(
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:linear-gradient(180deg,#0b1020,#12182d);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Sans','Yu Gothic UI',Meiryo,sans-serif;overflow-x:hidden}
 a{color:#9cc1ff;text-decoration:none} a:hover{text-decoration:underline}
-.wrap{max-width:1480px;width:min(1480px,calc(100% - 40px));margin:0 auto;padding:14px 20px}
+.wrap{max-width:1480px;margin:0 auto;padding:14px 20px;}
 /* ─ Topbar ─ */
 .topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:16px}
 .title h1{font-size:22px;font-weight:800;display:flex;flex-wrap:wrap;align-items:baseline;gap:0}

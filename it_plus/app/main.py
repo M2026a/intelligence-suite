@@ -1033,7 +1033,7 @@ def card_html(item: dict, themes_cfg: dict) -> str:
     score_cls = f"tag-score{min(score,5)}"
     new_tag      = "<span class='tag tag-new'>🆕 NEW</span>" if new_flag else ""
     official_tag = "<span class='tag tag-official'>🏛 公式</span>" if is_official else ""
-    lang_badge   = f"<span class='lang-badge {'ja' if lang=='ja' else 'en'}'>{'🇯🇵 日本語' if lang=='ja' else '🌐 English'}</span>"
+    lang_badge   = f"<span class='lang-badge {'ja' if lang=='ja' else 'en'}'>{'🇯🇵 国内' if lang=='ja' else '🌐 海外'}</span>"
 
     if lang == "ja":
         panes       = f"<div class='lang-pane lang-ja'><h3>{title_orig}</h3><div class='summary'>{summary_orig}</div></div>"
@@ -1149,10 +1149,10 @@ def render_focus(items: list[dict], themes_cfg: dict) -> str:
   {summary_cards}
   <div class='panel'>
     <div class='filters'>
-      <span class='filter-label'>言語:</span>
+      <span class='filter-label'>地域:</span>
       <button class='flt-btn flt-imp-lang active' data-lang='all'>🌍 全部</button>
-      <button class='flt-btn flt-imp-lang' data-lang='ja'>🇯🇵 日本語</button>
-      <button class='flt-btn flt-imp-lang' data-lang='en'>🌐 English</button>
+      <button class='flt-btn flt-imp-lang' data-lang='ja'>🇯🇵 国内</button>
+      <button class='flt-btn flt-imp-lang' data-lang='en'>🌐 海外</button>
       <input id='searchBoxImportance' class='search' placeholder='タイトル・本文を検索...'>
     </div>
   </div>
@@ -1307,10 +1307,10 @@ def render_index(items: list[dict], themes_cfg: dict) -> str:
 <div class='panel'>
   <div class='filters'>{theme_btns}</div>
   <div class='filters'>
-    <span class='filter-label'>言語:</span>
+    <span class='filter-label'>地域:</span>
     <button class='flt-btn flt-lang active' data-lang='all'>🌍 全部</button>
-    <button class='flt-btn flt-lang' data-lang='ja'>🇯🇵 日本語</button>
-    <button class='flt-btn flt-lang' data-lang='en'>🌐 English</button>
+    <button class='flt-btn flt-lang' data-lang='ja'>🇯🇵 国内</button>
+    <button class='flt-btn flt-lang' data-lang='en'>🌐 海外</button>
     <span class='filter-label'>重要タグ:</span>
     <button class='flt-btn flt-fx active' data-fx='all'>全部</button>
     <button class='flt-btn flt-fx' data-fx='ai_data'>🤖 AI・データ</button>
@@ -1376,10 +1376,10 @@ def render_themes(items: list[dict], themes_cfg: dict) -> str:
         + theme_jump_btns +
         "</div>"
         "<div class='filters'>"
-        "<span class='filter-label'>言語:</span>"
+        "<span class='filter-label'>地域:</span>"
         "<button class='flt-btn flt-lang active' data-lang='all'>🌍 全部</button>"
-        "<button class='flt-btn flt-lang' data-lang='ja'>🇯🇵 日本語</button>"
-        "<button class='flt-btn flt-lang' data-lang='en'>🌐 English</button>"
+        "<button class='flt-btn flt-lang' data-lang='ja'>🇯🇵 国内</button>"
+        "<button class='flt-btn flt-lang' data-lang='en'>🌐 海外</button>"
         "<span class='filter-label'>重要タグ:</span>"
         "<button class='flt-btn flt-fx-t active' data-fx='all'>全部</button>"
         "<button class='flt-btn flt-fx-t' data-fx='ai_data'>🤖 AI・データ</button>"
@@ -1501,10 +1501,10 @@ def render_sources(items: list[dict], themes_cfg: dict) -> str:
     {bank_buttons}
   </div>
   <div class='filters'>
-    <span class='filter-label'>言語:</span>
+    <span class='filter-label'>地域:</span>
     <button class='flt-btn flt-lang-cb active' data-lang='all'>🌍 全部</button>
-    <button class='flt-btn flt-lang-cb' data-lang='ja'>🇯🇵 日本語</button>
-    <button class='flt-btn flt-lang-cb' data-lang='en'>🌐 English</button>
+    <button class='flt-btn flt-lang-cb' data-lang='ja'>🇯🇵 国内</button>
+    <button class='flt-btn flt-lang-cb' data-lang='en'>🌐 海外</button>
     <span class='filter-label'>重要タグ:</span>
     <button class='flt-btn flt-fx-cb active' data-fx='all'>全部</button>
     <button class='flt-btn flt-fx-cb' data-fx='ai_data'>🤖 AI・データ</button>
@@ -1572,7 +1572,7 @@ def render_analysis(items: list[dict], themes_cfg: dict) -> str:
         src_items = [x for x in items if x.get("source") == src]
         official  = "🏛 公式" if any(x.get("official") for x in src_items) else ""
         lang      = src_items[0].get("lang", "") if src_items else ""
-        lang_str  = "🇯🇵 日本語" if lang == "ja" else "🌐 English"
+        lang_str  = "🇯🇵 国内" if lang == "ja" else "🌐 海外"
         src_rows += f"<tr><td>{html.escape(src)}</td><td>{lang_str}</td><td>{official}</td><td style='font-weight:800'>{cnt}</td></tr>"
 
     theme_rows = ""
@@ -1624,7 +1624,7 @@ def render_analysis(items: list[dict], themes_cfg: dict) -> str:
   <div class='two-col'>
     <div class='panel'>
       <h2 style='margin:0 0 14px;font-size:16px'>📡 ソース別記事数</h2>
-      <table class='table'><thead><tr><th>ソース</th><th>言語</th><th>種別</th><th>件数</th></tr></thead><tbody>{src_rows}</tbody></table>
+      <table class='table'><thead><tr><th>ソース</th><th>地域</th><th>種別</th><th>件数</th></tr></thead><tbody>{src_rows}</tbody></table>
     </div>
     <div class='panel'>
       <h2 style='margin:0 0 14px;font-size:16px'>🏷 テーマ別記事数</h2>
@@ -1787,19 +1787,19 @@ def render_pickup(items: list[dict], themes_cfg: dict) -> str:
 <div class='main'>
   <div class='reading-switch'>
     <button class='reading-tab active' onclick="switchPickupTab('mix',this)">🌐 全部</button>
-    <button class='reading-tab' onclick="switchPickupTab('ja',this)">🇯🇵 日本語</button>
-    <button class='reading-tab' onclick="switchPickupTab('en',this)">🌐 English</button>
+    <button class='reading-tab' onclick="switchPickupTab('ja',this)">🇯🇵 国内</button>
+    <button class='reading-tab' onclick="switchPickupTab('en',this)">🌐 海外</button>
   </div>
   <div class='reading-panel active' id='pickup-tab-mix'>
     <div class='sec-hdr'><h2>🌐 全部 注目記事</h2><span class='count-badge'>{len(mix_sorted)}件</span></div>
     {mix_tab}
   </div>
   <div class='reading-panel' id='pickup-tab-ja'>
-    <div class='sec-hdr'><h2>🇯🇵 日本語 注目記事</h2><span class='count-badge'>{len(ja_sorted)}件</span></div>
+    <div class='sec-hdr'><h2>🇯🇵 国内 注目記事</h2><span class='count-badge'>{len(ja_sorted)}件</span></div>
     {ja_tab}
   </div>
   <div class='reading-panel' id='pickup-tab-en'>
-    <div class='sec-hdr'><h2>🌐 English 注目記事</h2><span class='count-badge'>{len(en_sorted)}件</span></div>
+    <div class='sec-hdr'><h2>🌐 海外 注目記事</h2><span class='count-badge'>{len(en_sorted)}件</span></div>
     {en_tab}
   </div>
 </div>

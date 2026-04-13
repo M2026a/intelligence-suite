@@ -50,7 +50,7 @@ def safe_text(value):
 
 def get_ai_risk_entries():
     url = "https://news.google.com/rss/search?q=AI+脆弱性+規制+漏洩+セキュリティ&hl=ja&gl=JP&ceid=JP:ja"
-    return feedparser.parse(url, agent=USER_AGENT).entries[:100]
+    return feedparser.parse(url, agent=USER_AGENT, request_headers={"Connection": "close"}).entries[:100]
 
 
 def get_dev_articles():
@@ -58,6 +58,222 @@ def get_dev_articles():
     res = requests.get(url, timeout=20, headers={"User-Agent": USER_AGENT})
     res.raise_for_status()
     return res.json().get("articles", [])[:100]
+
+
+
+# ── 法規制情報取得 ────────────────────────────────────────────────────────────
+import re
+from bs4 import BeautifulSoup
+
+LEGAL_SOURCES = [
+    {
+        "law_key":    "personal_info",
+        "law_name":   "個人情報保護法",
+        "law_abbr":   "APPI",
+        "description": "個人情報の適正な取扱いと保護を定めた法律。情報セキュリティ対策の根幹。",
+        "official_url": "https://www.ppc.go.jp/",
+        "fetch_type": "html_scrape",
+        # 個人情報保護委員会 新着情報ページ
+        "fetch_url":  "https://www.ppc.go.jp/information/",
+        # 関心キーワード（これが含まれる項目を優先表示）
+        "keywords":   ["改正", "施行", "ガイドライン", "規則", "告示", "閣議", "法律"],
+    },
+    {
+        "law_key":    "unauthorized_access",
+        "law_name":   "不正アクセス禁止法",
+        "law_abbr":   "UCPA",
+        "description": "不正アクセス行為の禁止とその対策・処罰を定めた法律。",
+        "official_url": "https://www.npa.go.jp/cyber/",
+        "fetch_type": "html_scrape",
+        # 警察庁サイバー警察局 新着
+        "fetch_url":  "https://www.npa.go.jp/cyber/",
+        "keywords":   ["不正アクセス", "改正", "施行", "禁止法", "サイバー犯罪", "法律"],
+    },
+    {
+        "law_key":    "e_document",
+        "law_name":   "e-文書法",
+        "law_abbr":   "e-Doc",
+        "description": "書類の電子保存を認める法律。電子帳簿保存法と合わせてDX推進の根拠法。",
+        "official_url": "https://www.meti.go.jp/policy/it_policy/e-document/",
+        "fetch_type": "rss",
+        # 経済産業省 RSS（IT政策カテゴリ）
+        "fetch_url":  "https://www.meti.go.jp/rss/whatsnew.rdf",
+        "keywords":   ["e-文書", "電子帳簿", "電子保存", "文書電子化", "スキャナ保存"],
+    },
+    {
+        "law_key":    "electronic_signature",
+        "law_name":   "電子署名認証法",
+        "law_abbr":   "ESA",
+        "description": "電子署名の法的効力と認証業務を定めた法律。電子契約・文書管理の基盤。",
+        "official_url": "https://www.digital.go.jp/policies/digitalsign",
+        "fetch_type": "rss",
+        # デジタル庁 RSS
+        "fetch_url":  "https://www.digital.go.jp/rss/news.xml",
+        "keywords":   ["電子署名", "認証", "電子契約", "特定認証", "認定"],
+    },
+    {
+        "law_key":    "unfair_competition",
+        "law_name":   "不正競争防止法",
+        "law_abbr":   "UCPA-JP",
+        "description": "営業秘密・技術情報の保護と不正競争行為の防止を定めた法律。情報漏洩対策の根拠。",
+        "official_url": "https://www.meti.go.jp/policy/economy/chizai/chiteki/trade-secret.html",
+        "fetch_type": "rss",
+        # 経済産業省 RSS（同上）
+        "fetch_url":  "https://www.meti.go.jp/rss/whatsnew.rdf",
+        "keywords":   ["不正競争", "営業秘密", "限定提供データ", "産業スパイ", "知財"],
+    },
+]
+
+# 施行日・期限を抽出する正規表現パターン
+_DATE_PATTERN = re.compile(
+    r"(?:令和|平成)(\d{1,2})年\s*(\d{1,2})月(?:\s*(\d{1,2})日)?|"
+    r"(\d{4})年\s*(\d{1,2})月(?:\s*(\d{1,2})日)?"
+)
+_ENFORCE_KEYWORDS = ["施行", "施行日", "適用開始", "発効"]
+_DEADLINE_KEYWORDS = ["期限", "猶予期間", "移行期限", "対応期限", "までに"]
+
+
+def _extract_dates_from_text(text: str) -> dict:
+    """テキストから施行日・対応期限を抽出して返す"""
+    result = {"enforce_date": "", "deadline": ""}
+    sentences = re.split(r"[。\n]", text)
+    for sent in sentences:
+        has_enforce  = any(k in sent for k in _ENFORCE_KEYWORDS)
+        has_deadline = any(k in sent for k in _DEADLINE_KEYWORDS)
+        if not (has_enforce or has_deadline):
+            continue
+        m = _DATE_PATTERN.search(sent)
+        if not m:
+            continue
+        # 和暦→西暦変換
+        if m.group(1):  # 令和/平成
+            era_year = int(m.group(1))
+            month    = int(m.group(2))
+            day      = int(m.group(3)) if m.group(3) else 1
+            era_text = sent[:m.start()]
+            year = (2018 + era_year) if "令和" in era_text else (1988 + era_year)
+        else:
+            year  = int(m.group(4))
+            month = int(m.group(5))
+            day   = int(m.group(6)) if m.group(6) else 1
+        date_str = f"{year}-{month:02d}-{day:02d}"
+        if has_enforce and not result["enforce_date"]:
+            result["enforce_date"] = date_str
+        if has_deadline and not result["deadline"]:
+            result["deadline"] = date_str
+    return result
+
+
+def _fetch_rss(src: dict) -> list[dict]:
+    """RSSフィードを取得してキーワードフィルタリング"""
+    entries = feedparser.parse(src["fetch_url"], agent=USER_AGENT, request_headers={"Connection": "close"}).entries
+    keywords = src.get("keywords", [])
+    result = []
+    for e in entries:
+        title   = getattr(e, "title", "")
+        summary = getattr(e, "summary", "")
+        combined = title + summary
+        # キーワードが1つでも含まれるものだけ対象
+        if keywords and not any(kw in combined for kw in keywords):
+            continue
+        link      = getattr(e, "link", "#")
+        published = format_date(getattr(e, "published", ""))
+        dates     = _extract_dates_from_text(combined)
+        result.append({
+            "title":        title,
+            "link":         link,
+            "published":    published,
+            "source":       src["law_name"],
+            "enforce_date": dates["enforce_date"],
+            "deadline":     dates["deadline"],
+        })
+    return result[:10]
+
+
+def _fetch_html_scrape(src: dict) -> list[dict]:
+    """HTMLページをスクレイプして新着リストを取得"""
+    try:
+        res = requests.get(src["fetch_url"], timeout=20, headers={"User-Agent": USER_AGENT})
+        res.raise_for_status()
+        res.encoding = res.apparent_encoding or "utf-8"
+        soup = BeautifulSoup(res.text, "html.parser")
+    except Exception as ex:
+        print(f"[WARN] HTML取得失敗 ({src['law_name']}): {ex}")
+        return []
+
+    keywords = src.get("keywords", [])
+    result   = []
+
+    # <a> タグから新着リンクを抽出（汎用）
+    base_url = "/".join(src["fetch_url"].split("/")[:3])
+    for a in soup.find_all("a", href=True):
+        text = a.get_text(strip=True)
+        if not text or len(text) < 10:
+            continue
+        # キーワードフィルタ
+        if keywords and not any(kw in text for kw in keywords):
+            continue
+        href = a["href"]
+        if href.startswith("/"):
+            href = base_url + href
+        elif not href.startswith("http"):
+            continue
+        # 日付を近傍テキストから取得試行
+        parent_text = ""
+        for parent in a.parents:
+            parent_text = parent.get_text(" ", strip=True)
+            if len(parent_text) < 500:
+                break
+        # 近傍から和暦日付を探す
+        date_m = re.search(r"令和\s*(\d{1,2})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日", parent_text)
+        published = ""
+        if date_m:
+            y = 2018 + int(date_m.group(1))
+            published = f"{y}-{int(date_m.group(2)):02d}-{int(date_m.group(3)):02d}"
+        dates = _extract_dates_from_text(parent_text)
+        result.append({
+            "title":        text,
+            "link":         href,
+            "published":    published,
+            "source":       src["law_name"],
+            "enforce_date": dates["enforce_date"],
+            "deadline":     dates["deadline"],
+        })
+        if len(result) >= 10:
+            break
+    return result
+
+
+def _fetch_legal_source(src: dict) -> list[dict]:
+    """取得タイプに応じてディスパッチ"""
+    try:
+        if src["fetch_type"] == "rss":
+            items = _fetch_rss(src)
+        else:
+            items = _fetch_html_scrape(src)
+        for item in items:
+            item["law_key"]  = src["law_key"]
+            item["law_name"] = src["law_name"]
+        return items
+    except Exception as ex:
+        print(f"[WARN] 法規制取得失敗 ({src['law_name']}): {ex}")
+        return []
+
+
+def get_all_legal_news() -> list[dict]:
+    """全法令の情報を並列取得・各法令最大8秒で打ち切り"""
+    results = []
+    with ThreadPoolExecutor(max_workers=5) as ex:
+        futures = {ex.submit(_fetch_legal_source, src): src for src in LEGAL_SOURCES}
+        for future in futures:
+            try:
+                results.extend(future.result())
+            except Exception as ex_:
+                src = futures[future]
+                print(f"[WARN] 法規制タイムアウト/失敗 ({src['law_name']}): {ex_}")
+    # 公開日降順ソート（日付なしは末尾）
+    results.sort(key=lambda x: x.get("published", ""), reverse=True)
+    return results
 
 
 def init_db():
@@ -105,11 +321,29 @@ def init_db():
         """
     )
 
+    cur.execute(
+        """
+        CREATE TABLE IF NOT EXISTS legal_items (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            run_id INTEGER NOT NULL,
+            law_key TEXT,
+            law_name TEXT,
+            title TEXT,
+            link TEXT,
+            source TEXT,
+            published TEXT,
+            enforce_date TEXT,
+            deadline TEXT,
+            FOREIGN KEY(run_id) REFERENCES run_history(id)
+        )
+        """
+    )
+
     con.commit()
     return con
 
 
-def save_run_history(con, run_at, risk_entries, dev_articles, config_result):
+def save_run_history(con, run_at, risk_entries, dev_articles, config_result, legal_news=None):
     cur = con.cursor()
     cur.execute(
         "INSERT INTO run_history (run_at, risk_count, dev_count, config_name, config_key) VALUES (?, ?, ?, ?, ?)",
@@ -139,6 +373,14 @@ def save_run_history(con, run_at, risk_entries, dev_articles, config_result):
         cur.execute(
             "INSERT INTO dev_items (run_id, title, link, published, liked_count) VALUES (?, ?, ?, ?, ?)",
             (run_id, title, link, published, liked_count),
+        )
+
+    for item in (legal_news or []):
+        cur.execute(
+            "INSERT INTO legal_items (run_id, law_key, law_name, title, link, source, published, enforce_date, deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            (run_id, item.get("law_key",""), item.get("law_name",""), item.get("title",""),
+             item.get("link","#"), item.get("source",""), item.get("published",""),
+             item.get("enforce_date",""), item.get("deadline","")),
         )
 
     con.commit()
@@ -558,7 +800,169 @@ def build_list_html(items):
     return "".join([f"<li>{safe_text(x)}</li>" for x in items])
 
 
-def build_html(risk_entries, dev_articles, generated_at, history, config_result):
+def _law_latest(legal_news: list[dict], law_key: str) -> dict | None:
+    """指定法令の最新アイテムを返す"""
+    for item in legal_news:
+        if item.get("law_key") == law_key:
+            return item
+    return None
+
+
+def _law_items(legal_news: list[dict], law_key: str) -> list[dict]:
+    """指定法令のアイテム一覧を返す（日付降順）"""
+    return [i for i in legal_news if i.get("law_key") == law_key]
+
+
+def _date_badge(date_str: str, label: str, color: str) -> str:
+    """施行日・対応期限バッジHTML"""
+    if not date_str:
+        return ""
+    return (
+        f'<span style="display:inline-block; padding:3px 10px; border-radius:6px;'
+        f' background:{color}; color:#fff; font-size:11px; font-weight:700;'
+        f' margin-right:6px;">{label}　{safe_text(date_str)}</span>'
+    )
+
+
+def build_legal_summary_panel(legal_news: list[dict]) -> str:
+    """MAINページ用 法規制サマリーパネル"""
+    # 法令を最新ニュース日付の新しい順に並べる
+    src_map = {s["law_key"]: s for s in LEGAL_SOURCES}
+    law_keys_sorted = sorted(
+        [s["law_key"] for s in LEGAL_SOURCES],
+        key=lambda k: (_law_latest(legal_news, k) or {}).get("published", ""),
+        reverse=True,
+    )
+
+    tag_colors = {
+        "personal_info":       ("#0c4f90", "#4db4ff"),
+        "unauthorized_access": ("#1a4a1a", "#6dcc7f"),
+        "e_document":          ("#4a3000", "#ffcc55"),
+        "electronic_signature":("#3a0a55", "#d07aff"),
+        "unfair_competition":  ("#5a1010", "#ff7a7a"),
+    }
+
+    rows = []
+    for key in law_keys_sorted:
+        src     = src_map[key]
+        latest  = _law_latest(legal_news, key)
+        items   = _law_items(legal_news, key)
+        bg, fg  = tag_colors.get(key, ("#123c66", "#dff3ff"))
+
+        latest_date  = safe_text(latest["published"]) if latest else "―"
+        latest_title = latest["title"] if latest else "情報なし"
+        latest_link  = latest["link"]  if latest else "#"
+
+        enforce_badge = _date_badge(latest.get("enforce_date","") if latest else "", "施行", "#1f7a43")
+        deadline_badge= _date_badge(latest.get("deadline","")     if latest else "", "期限", "#8a3a00")
+
+        # 新着バッジ（7日以内）
+        new_badge = ""
+        if latest and latest.get("published","") >= (
+            datetime.now(JST).strftime("%Y-%m-%d")[:8] + "01"
+        ):
+            new_badge = '<span style="background:#c0392b;color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;margin-left:6px;">NEW</span>'
+
+        rows.append(f"""
+      <div style="display:grid; grid-template-columns:140px 1fr; gap:0; border-bottom:1px solid #17202a; padding:12px 0; align-items:start;">
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <span class="badge" style="background:{bg}; color:{fg}; font-size:11px; padding:4px 8px; width:fit-content;">{safe_text(src["law_abbr"])}</span>
+          <span style="font-size:12px; color:#b8c0cc; font-weight:700;">{safe_text(src["law_name"])}</span>
+          <span style="font-size:11px; color:#5a6a7a;">最終更新: {latest_date}</span>
+        </div>
+        <div style="padding-left:12px;">
+          <div style="margin-bottom:5px;">{enforce_badge}{deadline_badge}{new_badge}</div>
+          <a href="{safe_text(latest_link)}" target="_blank" rel="noopener noreferrer"
+             style="color:#8ad1ff; text-decoration:none; font-size:13px; font-weight:700; line-height:1.55;">
+            {safe_text(latest_title)}
+          </a>
+          <div style="font-size:11px; color:#5a6a7a; margin-top:3px;">全{len(items)}件
+            <a href="#" onclick="document.querySelector('.nav-btn[data-page=page-legal]').click(); return false;"
+               style="color:#4db4ff; margin-left:8px;">詳細を見る →</a>
+          </div>
+        </div>
+      </div>""")
+
+    return "\n".join(rows)
+
+
+def build_legal_page_html(legal_news: list[dict]) -> str:
+    """法規制情報ページのHTMLを構築"""
+    src_map = {s["law_key"]: s for s in LEGAL_SOURCES}
+
+    # 法令を最新ニュース日付の新しい順
+    law_keys_sorted = sorted(
+        [s["law_key"] for s in LEGAL_SOURCES],
+        key=lambda k: (_law_latest(legal_news, k) or {}).get("published", ""),
+        reverse=True,
+    )
+
+    tag_colors = {
+        "personal_info":       ("#0c4f90", "#4db4ff"),
+        "unauthorized_access": ("#1a4a1a", "#6dcc7f"),
+        "e_document":          ("#4a3000", "#ffcc55"),
+        "electronic_signature":("#3a0a55", "#d07aff"),
+        "unfair_competition":  ("#5a1010", "#ff7a7a"),
+    }
+
+    sections = []
+    for key in law_keys_sorted:
+        src   = src_map[key]
+        items = _law_items(legal_news, key)
+        bg, fg = tag_colors.get(key, ("#123c66", "#dff3ff"))
+        latest = items[0] if items else None
+
+        # 施行日・期限バッジ（最新アイテムから）
+        enforce_badge = _date_badge(latest.get("enforce_date","") if latest else "", "施行開始", "#1f7a43")
+        deadline_badge= _date_badge(latest.get("deadline","")     if latest else "", "対応期限", "#8a3a00")
+        date_badges   = enforce_badge + deadline_badge
+
+        # ニュース行
+        if items:
+            news_rows = []
+            for idx, item in enumerate(items, 1):
+                title    = safe_text(item.get("title", "無題"))
+                link     = safe_text(item.get("link", "#"))
+                published= safe_text(item.get("published", ""))
+                e_badge  = _date_badge(item.get("enforce_date",""), "施行", "#1f7a43")
+                d_badge  = _date_badge(item.get("deadline",""),     "期限", "#8a3a00")
+                meta_parts = [published]
+                meta = " / ".join([x for x in meta_parts if x])
+                meta_html = f'<div class="item-meta">{meta}</div>' if meta else ""
+                badge_html = (e_badge + d_badge) if (e_badge or d_badge) else ""
+                news_rows.append(f"""
+        <div class="item-card">
+            <div class="item-index">{idx:02d}</div>
+            <div class="item-body">
+                <a class="item-title" href="{link}" target="_blank" rel="noopener noreferrer">{title}</a>
+                {f'<div style="margin-top:4px;">{badge_html}</div>' if badge_html else ""}
+                {meta_html}
+            </div>
+        </div>""")
+            news_html = "\n".join(news_rows)
+        else:
+            news_html = '<div class="empty-box">最新情報なし（公式サイトをご確認ください）</div>'
+
+        sections.append(f"""
+    <div class="panel" style="margin-bottom:18px;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px; flex-wrap:wrap;">
+        <span class="badge" style="background:{bg}; color:{fg}; font-size:13px; padding:6px 14px;">{safe_text(src["law_abbr"])}</span>
+        <span style="font-size:20px; font-weight:800; color:#e8f4ff;">{safe_text(src["law_name"])}</span>
+        {date_badges}
+        <a href="{safe_text(src["official_url"])}" target="_blank" rel="noopener noreferrer"
+           style="margin-left:auto; font-size:12px; color:#4db4ff; text-decoration:none; white-space:nowrap;">
+          📎 公式サイト
+        </a>
+      </div>
+      <div class="notice-box" style="margin-bottom:14px; font-size:13px;">{safe_text(src["description"])}</div>
+      <div style="font-size:13px; color:#b8c0cc; margin-bottom:8px; font-weight:700;">📰 最新情報（{len(items)}件）</div>
+      {news_html}
+    </div>""")
+
+    return "\n".join(sections)
+
+
+def build_html(risk_entries, dev_articles, generated_at, history, config_result, legal_news=None):
     risk_count = len(risk_entries)
     dev_count = len(dev_articles)
     risk_html = build_list_items_news(risk_entries)
@@ -569,6 +973,8 @@ def build_html(risk_entries, dev_articles, generated_at, history, config_result)
     features_html = build_list_html(config_result["features"])
     cautions_html = build_list_html(config_result["cautions"])
     next_actions_html = build_list_html(config_result["next_actions"])
+    legal_page_html    = build_legal_page_html(legal_news or [])
+    legal_summary_html = build_legal_summary_panel(legal_news or [])
 
     html_doc = f"""<!DOCTYPE html>
 <html lang="ja">
@@ -642,7 +1048,7 @@ html, body {{
 }}
 .nav {{
     display:grid;
-    grid-template-columns:repeat(4,minmax(0,1fr));
+    grid-template-columns:repeat(5,minmax(0,1fr));
     gap:10px;
 }}
 .nav-btn {{
@@ -841,7 +1247,16 @@ html, body {{
     background:linear-gradient(180deg,#2f9958 0%,#1a6f3d 100%);
 }}
 @media (max-width:980px) {{
-    .nav, .metrics, .ai-top, .ai-grid {{ grid-template-columns:1fr; }}
+    .metrics, .ai-top, .ai-grid {{ grid-template-columns:1fr; }}
+    .nav {{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+        gap:6px;
+    }}
+    .nav-btn {{
+        padding:8px 6px;
+        font-size:11px;
+        border-radius:8px;
+    }}
     .header-row {{
         flex-wrap:wrap;
         align-items:flex-start;
@@ -853,6 +1268,16 @@ html, body {{
         padding-left:12px;
         padding-right:12px;
     }}
+}}
+@media (max-width:480px) {{
+    .nav {{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }}
+    .nav-btn {{
+        padding:7px 4px;
+        font-size:10px;
+    }}
+    .title {{ font-size:20px; }}
 }}
 </style>
 <script>
@@ -877,16 +1302,23 @@ window.addEventListener('DOMContentLoaded', function() {{
       <div class="timestamp">最終更新: {safe_text(generated_at)}</div>
     </div>
     <div class="nav">
-      <button class="nav-btn" onclick="showPage('page-main', this)">🏠 MAIN</button>
-      <button class="nav-btn" onclick="showPage('page-gov', this)">🛡 AIガバナンス</button>
-      <button class="nav-btn" onclick="showPage('page-dev', this)">🚀 開発効率</button>
-      <button class="nav-btn" onclick="showPage('page-ai', this)">🤖 推奨AI構成</button>
+      <button class="nav-btn" data-page="page-main"  onclick="showPage('page-main', this)">🏠 MAIN</button>
+      <button class="nav-btn" data-page="page-legal" onclick="showPage('page-legal', this)">⚖️ 法規制情報</button>
+      <button class="nav-btn" data-page="page-gov"   onclick="showPage('page-gov', this)">🛡 AIガバナンス</button>
+      <button class="nav-btn" data-page="page-dev"   onclick="showPage('page-dev', this)">🚀 開発効率</button>
+      <button class="nav-btn" data-page="page-ai"    onclick="showPage('page-ai', this)">🤖 推奨AI構成</button>
     </div>
   </div>
 
   <div class="content">
     <div id="page-main" class="page active">
       <div class="section-title">📊 エグゼクティブ・サマリー</div>
+
+      <div class="panel" style="margin-bottom:18px;">
+        <div class="section-title" style="font-size:18px; margin-bottom:4px;">⚖️ 法規制情報　最新動向</div>
+        <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">自工会ガイドライン対応5法令　／　最新更新日時の新しい順</div>
+        {legal_summary_html}
+      </div>
 
       <div class="metrics">
         <div class="metric">
@@ -976,6 +1408,14 @@ window.addEventListener('DOMContentLoaded', function() {{
         <a class="action-btn" href="https://learn.microsoft.com/ja-jp/azure/search/retrieval-augmented-generation-overview" target="_blank" rel="noopener noreferrer">Microsoft RAGドキュメント</a>
       </div>
     </div>
+
+    <div id="page-legal" class="page">
+      <div class="section-title">⚖️ 法規制動向</div>
+      <div class="notice-box" style="margin-bottom:18px; font-size:13px;">
+        自工会ガイドラインに基づく情報セキュリティ関連法令の最新動向を追跡します。改正・施行・通達などの情報が更新されます。
+      </div>
+      {legal_page_html}
+    </div>
   </div>
 </div>
 </body>
@@ -987,10 +1427,11 @@ def main():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
     start = time.time()
-    print("  🚀 並列取得: AI Risk / Dev Articles 同時実行")
-    with ThreadPoolExecutor(max_workers=2) as ex:
-        f_risk = ex.submit(get_ai_risk_entries)
-        f_dev  = ex.submit(get_dev_articles)
+    print("  🚀 並列取得: AI Risk / Dev Articles / 法規制ニュース 同時実行")
+    with ThreadPoolExecutor(max_workers=3) as ex:
+        f_risk  = ex.submit(get_ai_risk_entries)
+        f_dev   = ex.submit(get_dev_articles)
+        f_legal = ex.submit(get_all_legal_news)
         try:
             risk_entries = f_risk.result()
             risk_entries.sort(key=lambda e: e.get("published_parsed") or (0,)*9, reverse=True)
@@ -1003,17 +1444,22 @@ def main():
         except Exception as e:
             print(f"[WARN] Dev Articles取得失敗: {e}")
             dev_articles = []
+        try:
+            legal_news = f_legal.result()
+        except Exception as e:
+            print(f"[WARN] 法規制ニュース取得失敗: {e}")
+            legal_news = []
 
     generated_at = datetime.now(JST).strftime("%Y-%m-%d %H:%M")
     config_result = analyze_config(risk_entries, dev_articles)
-    print(f"リスク記事: {len(risk_entries)}件 / 開発記事: {len(dev_articles)}件")
+    print(f"リスク記事: {len(risk_entries)}件 / 開発記事: {len(dev_articles)}件 / 法規制: {len(legal_news)}件")
 
     con = init_db()
-    save_run_history(con, generated_at, risk_entries, dev_articles, config_result)
+    save_run_history(con, generated_at, risk_entries, dev_articles, config_result, legal_news)
     history = get_recent_history(con, limit=8)
     con.close()
 
-    html_text = build_html(risk_entries, dev_articles, generated_at, history, config_result)
+    html_text = build_html(risk_entries, dev_articles, generated_at, history, config_result, legal_news)
 
     with open(OUTPUT_FILE, "w", encoding="utf-8-sig") as f:
         f.write(html_text)

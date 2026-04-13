@@ -253,6 +253,9 @@ jobs:
           echo "===== downloaded files ====="
           find . -type f | sort
 
+      - name: トップ index.html を生成
+        run: python generate_index.py
+
       - name: commit & push
         run: |
           git config user.name "github-actions[bot]"

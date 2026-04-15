@@ -975,7 +975,7 @@ def split_dev_articles_by_date(dev_articles, days=2):
     return recent_articles, older_articles, border
 
 
-def get_older_dev_history(con, border_dt, limit=300):
+def get_older_dev_history(con, border_dt, limit):
     border_iso = border_dt.astimezone(timezone.utc).isoformat()
     cur = con.cursor()
     cur.execute(
@@ -1696,7 +1696,7 @@ def main():
     con = init_db()
     save_run_history(con, generated_at, risk_entries, dev_articles, config_result, legal_news)
     history = get_recent_history(con, limit=8)
-    older_dev_history = get_older_dev_history(con, border_dt, limit=300)
+    older_dev_history = get_older_dev_history(con, border_dt, 200)
     older_dev_articles = fetched_older_dev_articles + older_dev_history
     deduped_older_dev_articles = []
     seen_older = set()
@@ -1710,6 +1710,7 @@ def main():
             continue
         seen_older.add(key)
         deduped_older_dev_articles.append(article)
+    deduped_older_dev_articles = deduped_older_dev_articles[:200]
     con.close()
 
     html_text = build_html(

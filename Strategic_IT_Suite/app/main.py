@@ -950,9 +950,13 @@ def build_list_items_articles(articles):
     return "\n".join(parts)
 
 
-def split_dev_articles_by_date(dev_articles, days=2):
-    border = datetime.now(timezone.utc) - timedelta(days=days)
-    recent_articles = []
+def split_dev_articles_by_day(dev_articles):
+    now_jst = datetime.now(JST)
+    today = now_jst.date()
+    yesterday = today - timedelta(days=1)
+
+    today_articles = []
+    yesterday_articles = []
     older_articles = []
 
     for article in dev_articles:
@@ -961,18 +965,22 @@ def split_dev_articles_by_date(dev_articles, days=2):
             published_dt = datetime.fromisoformat(raw_published.replace("Z", "+00:00"))
             if published_dt.tzinfo is None:
                 published_dt = published_dt.replace(tzinfo=timezone.utc)
+            published_date_jst = published_dt.astimezone(JST).date()
         except Exception:
             older_articles.append(article)
             continue
 
-        if published_dt >= border:
-            recent_articles.append(article)
+        if published_date_jst == today:
+            today_articles.append(article)
+        elif published_date_jst == yesterday:
+            yesterday_articles.append(article)
         else:
             older_articles.append(article)
 
-    recent_articles.sort(key=lambda a: a.get("published_at") or a.get("published") or "", reverse=True)
+    today_articles.sort(key=lambda a: a.get("published_at") or a.get("published") or "", reverse=True)
+    yesterday_articles.sort(key=lambda a: a.get("published_at") or a.get("published") or "", reverse=True)
     older_articles.sort(key=lambda a: a.get("published_at") or a.get("published") or "", reverse=True)
-    return recent_articles, older_articles, border
+    return today_articles, yesterday_articles, older_articles
 
 
 def get_older_dev_history(con, border_dt, limit):
@@ -1009,18 +1017,23 @@ def get_older_dev_history(con, border_dt, limit):
     return rows
 
 
-def build_dev_page_html(recent_dev_articles, older_dev_articles):
-    recent_count = len(recent_dev_articles)
+def build_dev_page_html(today_dev_articles, yesterday_dev_articles, older_dev_articles):
+    today_count = len(today_dev_articles)
+    yesterday_count = len(yesterday_dev_articles)
     older_count = len(older_dev_articles)
-    recent_html = build_list_items_articles(recent_dev_articles)
+    today_html = build_list_items_articles(today_dev_articles)
+    yesterday_html = build_list_items_articles(yesterday_dev_articles)
     older_html = build_list_items_articles(older_dev_articles)
 
     return f"""
-    <div class="section-title" style="font-size:18px; margin-bottom:6px;">🔥 直近2日間</div>
-    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">Zenn AIトピックの最新記事 / {recent_count}件</div>
-    {recent_html}
-    <div class="section-title" style="font-size:18px; margin-top:22px; margin-bottom:6px;">📚 3日以前</div>
-    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">SQLiteに蓄積された過去履歴 / {older_count}件</div>
+    <div class="section-title" style="font-size:18px; margin-bottom:6px;">🔥 今日</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">Zenn AIトピックの最新記事 / {today_count}件</div>
+    {today_html}
+    <div class="section-title" style="font-size:18px; margin-top:22px; margin-bottom:6px;">🟡 昨日</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">前日の取得記事 / {yesterday_count}件</div>
+    {yesterday_html}
+    <div class="section-title" style="font-size:18px; margin-top:22px; margin-bottom:6px;">📚 過去</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">SQLiteに蓄積された過去履歴 / {older_count}件（最大200件表示）</div>
     {older_html}
     """
 
@@ -1191,11 +1204,11 @@ def build_legal_page_html(legal_news: list[dict]) -> str:
     return "\n".join(sections)
 
 
-def build_html(risk_entries, recent_dev_articles, older_dev_articles, generated_at, history, config_result, legal_news=None, fetched_dev_count=None):
+def build_html(risk_entries, today_dev_articles, yesterday_dev_articles, older_dev_articles, generated_at, history, config_result, legal_news=None, fetched_dev_count=None):
     risk_count = len(risk_entries)
-    dev_count = fetched_dev_count if fetched_dev_count is not None else len(recent_dev_articles)
+    dev_count = fetched_dev_count if fetched_dev_count is not None else (len(today_dev_articles) + len(yesterday_dev_articles))
     risk_html = build_list_items_news(risk_entries)
-    dev_html = build_dev_page_html(recent_dev_articles, older_dev_articles)
+    dev_html = build_dev_page_html(today_dev_articles, yesterday_dev_articles, older_dev_articles)
     history_rows = build_history_rows(history)
     reasons_html = build_list_html(config_result["reasons"])
     fit_for_html = build_list_html(config_result["fit_for"])
@@ -1690,7 +1703,8 @@ def main():
 
     generated_at = datetime.now(JST).strftime("%Y-%m-%d %H:%M")
     config_result = analyze_config(risk_entries, dev_articles)
-    recent_dev_articles, fetched_older_dev_articles, border_dt = split_dev_articles_by_date(dev_articles, days=2)
+    today_dev_articles, yesterday_dev_articles, fetched_older_dev_articles = split_dev_articles_by_day(dev_articles)
+    border_dt = datetime.now(JST).replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=1)
     print(f"リスク記事: {len(risk_entries)}件 / 開発記事: {len(dev_articles)}件 / 法規制: {len(legal_news)}件")
 
     con = init_db()
@@ -1715,7 +1729,8 @@ def main():
 
     html_text = build_html(
         risk_entries,
-        recent_dev_articles,
+        today_dev_articles,
+        yesterday_dev_articles,
         deduped_older_dev_articles,
         generated_at,
         history,

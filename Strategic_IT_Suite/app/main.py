@@ -1,7 +1,7 @@
 import html
 import os
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -927,10 +927,14 @@ def build_list_items_articles(articles):
     parts = []
     for idx, a in enumerate(articles, 1):
         title = safe_text(a.get("title", "無題"))
-        link = safe_text("https://zenn.dev" + a.get("path", ""))
-        published = format_date(a.get("published_at", ""))
+        raw_link = a.get("link") or ""
+        if not raw_link and a.get("path"):
+            raw_link = "https://zenn.dev" + a.get("path", "")
+        link = safe_text(raw_link or "#")
+        published = format_date(a.get("published_at") or a.get("published") or "")
         liked = safe_text(a.get("liked_count", 0))
         meta = " / ".join([x for x in [published, f"いいね {liked}"] if x])
+        meta_html = f'<div class="item-meta">{meta}</div>' if meta else ""
 
         parts.append(
             f"""
@@ -938,12 +942,87 @@ def build_list_items_articles(articles):
             <div class="item-index">{idx:02d}</div>
             <div class="item-body">
                 <a class="item-title" href="{link}" target="_blank" rel="noopener noreferrer">{title}</a>
-                <div class="item-meta">{meta}</div>
+                {meta_html}
             </div>
         </div>
         """
         )
     return "\n".join(parts)
+
+
+def split_dev_articles_by_date(dev_articles, days=2):
+    border = datetime.now(timezone.utc) - timedelta(days=days)
+    recent_articles = []
+    older_articles = []
+
+    for article in dev_articles:
+        raw_published = article.get("published_at") or article.get("published") or ""
+        try:
+            published_dt = datetime.fromisoformat(raw_published.replace("Z", "+00:00"))
+            if published_dt.tzinfo is None:
+                published_dt = published_dt.replace(tzinfo=timezone.utc)
+        except Exception:
+            older_articles.append(article)
+            continue
+
+        if published_dt >= border:
+            recent_articles.append(article)
+        else:
+            older_articles.append(article)
+
+    recent_articles.sort(key=lambda a: a.get("published_at") or a.get("published") or "", reverse=True)
+    older_articles.sort(key=lambda a: a.get("published_at") or a.get("published") or "", reverse=True)
+    return recent_articles, older_articles, border
+
+
+def get_older_dev_history(con, border_dt, limit=300):
+    border_iso = border_dt.astimezone(timezone.utc).isoformat()
+    cur = con.cursor()
+    cur.execute(
+        """
+        SELECT title, link, published, liked_count
+        FROM dev_items
+        WHERE published IS NOT NULL
+          AND published <> ''
+          AND published < ?
+        ORDER BY published DESC, id DESC
+        LIMIT ?
+        """,
+        (border_iso, limit),
+    )
+
+    rows = []
+    seen = set()
+    for title, link, published, liked_count in cur.fetchall():
+        key = (title or "", link or "", published or "")
+        if key in seen:
+            continue
+        seen.add(key)
+        rows.append(
+            {
+                "title": title or "",
+                "link": link or "#",
+                "published": published or "",
+                "liked_count": int(liked_count or 0),
+            }
+        )
+    return rows
+
+
+def build_dev_page_html(recent_dev_articles, older_dev_articles):
+    recent_count = len(recent_dev_articles)
+    older_count = len(older_dev_articles)
+    recent_html = build_list_items_articles(recent_dev_articles)
+    older_html = build_list_items_articles(older_dev_articles)
+
+    return f"""
+    <div class="section-title" style="font-size:18px; margin-bottom:6px;">🔥 直近2日間</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">Zenn AIトピックの最新記事 / {recent_count}件</div>
+    {recent_html}
+    <div class="section-title" style="font-size:18px; margin-top:22px; margin-bottom:6px;">📚 3日以前</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">SQLiteに蓄積された過去履歴 / {older_count}件</div>
+    {older_html}
+    """
 
 
 def build_list_html(items):
@@ -1112,11 +1191,11 @@ def build_legal_page_html(legal_news: list[dict]) -> str:
     return "\n".join(sections)
 
 
-def build_html(risk_entries, dev_articles, generated_at, history, config_result, legal_news=None):
+def build_html(risk_entries, recent_dev_articles, older_dev_articles, generated_at, history, config_result, legal_news=None, fetched_dev_count=None):
     risk_count = len(risk_entries)
-    dev_count = len(dev_articles)
+    dev_count = fetched_dev_count if fetched_dev_count is not None else len(recent_dev_articles)
     risk_html = build_list_items_news(risk_entries)
-    dev_html = build_list_items_articles(dev_articles)
+    dev_html = build_dev_page_html(recent_dev_articles, older_dev_articles)
     history_rows = build_history_rows(history)
     reasons_html = build_list_html(config_result["reasons"])
     fit_for_html = build_list_html(config_result["fit_for"])
@@ -1611,14 +1690,38 @@ def main():
 
     generated_at = datetime.now(JST).strftime("%Y-%m-%d %H:%M")
     config_result = analyze_config(risk_entries, dev_articles)
+    recent_dev_articles, fetched_older_dev_articles, border_dt = split_dev_articles_by_date(dev_articles, days=2)
     print(f"リスク記事: {len(risk_entries)}件 / 開発記事: {len(dev_articles)}件 / 法規制: {len(legal_news)}件")
 
     con = init_db()
     save_run_history(con, generated_at, risk_entries, dev_articles, config_result, legal_news)
     history = get_recent_history(con, limit=8)
+    older_dev_history = get_older_dev_history(con, border_dt, limit=300)
+    older_dev_articles = fetched_older_dev_articles + older_dev_history
+    deduped_older_dev_articles = []
+    seen_older = set()
+    for article in older_dev_articles:
+        key = (
+            article.get("title", ""),
+            article.get("link") or article.get("path") or "",
+            article.get("published") or article.get("published_at") or "",
+        )
+        if key in seen_older:
+            continue
+        seen_older.add(key)
+        deduped_older_dev_articles.append(article)
     con.close()
 
-    html_text = build_html(risk_entries, dev_articles, generated_at, history, config_result, legal_news)
+    html_text = build_html(
+        risk_entries,
+        recent_dev_articles,
+        deduped_older_dev_articles,
+        generated_at,
+        history,
+        config_result,
+        legal_news,
+        fetched_dev_count=len(dev_articles),
+    )
 
     with open(OUTPUT_FILE, "w", encoding="utf-8-sig") as f:
         f.write(html_text)

@@ -26,13 +26,13 @@ header{position:sticky;top:0;z-index:50;background:rgba(13,16,22,.96);backdrop-f
 .nav a:hover{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.06)}
 .nav a.active{background:linear-gradient(135deg,#4ea1ff,#5a86ff);border-color:transparent;color:#fff;box-shadow:0 4px 16px rgba(78,161,255,.3)}
 .main{max-width:1480px;margin:18px auto;padding:0 20px 40px}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px;overflow:hidden}
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
 .stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
 .stat .num{font-size:26px;font-weight:800;margin-bottom:4px}
 .stat .label{color:var(--muted);font-size:12px}
 .stat .icon{font-size:22px;margin-bottom:8px}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center;width:100%;max-width:100%;box-sizing:border-box}
 .flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;box-sizing:border-box}
 .flt-btn:hover{border-color:var(--accent)}
 .flt-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
@@ -100,7 +100,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='top'>
     <div class='title'>
       <h1>📱 Gadget + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ ガジェット・家電・便利グッズ情報</span></h1>
-      <div class='sub'>更新日時：2026-04-16 11:00</div>
+      <div class='sub'>更新日時：2026-04-16 11:27</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -135,7 +135,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='fx-desc'>Phones / Tablets</div>
   </div>
   <div class='fx-summary-card fx-usd-weak'>
-    <div class='fx-num' style='color:#ff5c5c'>26</div>
+    <div class='fx-num' style='color:#ff5c5c'>27</div>
     <div class='fx-label'>💻 PC・周辺機器</div>
     <div class='fx-desc'>PC / Peripherals</div>
   </div>
@@ -150,7 +150,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='fx-desc'>Smart Appliances</div>
   </div>
   <div class='fx-summary-card' style='background:var(--panel2);border-color:var(--line)'>
-    <div class='fx-num' style='color:var(--muted)'>104</div>
+    <div class='fx-num' style='color:var(--muted)'>103</div>
     <div class='fx-label'>➖ その他</div>
     <div class='fx-desc'>General</div>
   </div>
@@ -164,7 +164,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
       <input id='searchBoxImportance' class='search' placeholder='タイトル・本文を検索...'>
     </div>
   </div>
-  <div class='fx-tabs'><button class='fx-tab active' data-key='ai_data' style='background:#1a1233;border-color:#7c4dff;color:#fff' onclick="switchFxTab('ai_data',this)">📱 スマホ・タブレット (28)</button><button class='fx-tab ' data-key='security_alert' style='' onclick="switchFxTab('security_alert',this)">💻 PC・周辺機器 (26)</button><button class='fx-tab ' data-key='cloud_platform' style='' onclick="switchFxTab('cloud_platform',this)">📷 カメラ・オーディオ (21)</button><button class='fx-tab ' data-key='developer_tools' style='' onclick="switchFxTab('developer_tools',this)">🏠 スマート家電 (4)</button></div>
+  <div class='fx-tabs'><button class='fx-tab active' data-key='ai_data' style='background:#1a1233;border-color:#7c4dff;color:#fff' onclick="switchFxTab('ai_data',this)">📱 スマホ・タブレット (28)</button><button class='fx-tab ' data-key='security_alert' style='' onclick="switchFxTab('security_alert',this)">💻 PC・周辺機器 (27)</button><button class='fx-tab ' data-key='cloud_platform' style='' onclick="switchFxTab('cloud_platform',this)">📷 カメラ・オーディオ (21)</button><button class='fx-tab ' data-key='developer_tools' style='' onclick="switchFxTab('developer_tools',this)">🏠 スマート家電 (4)</button></div>
   <div class='fx-panel active' id='fx-ai_data'><div class='grid'>
 <article class='card item-card'
   data-cardid='item-f08bad9fe258'
@@ -687,6 +687,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>📱 スマホ・タブレット</span><span class='tag tag-usd-strong'>📱 スマホ・タブレット</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://www.engadget.com/social-media/the-us-government-wants-reddit-to-snitch-on-one-of-its-users-through-a-grand-jury-190532844.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div></div><div class='fx-panel ' id='fx-security_alert'><div class='grid'>
+<article class='card item-card'
+  data-cardid='item-6fa44101d6d7'
+  data-themes='PC・周辺機器'
+  data-lang='ja'
+  data-score='4'
+  data-source='ITmedia PC USER'
+  data-sentiment='neutral'
+  data-importance='security_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia PC USER</span><span>2026-04-16 02:20</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-6fa44101d6d7')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>バケツ水攻めに極寒、粉塵 ──タフブック30周年の新モデルが示す「現場を止めない」実力を新人記者が目撃した</h3><div class='summary'>バケツの水を浴びても動き続ける「タフブック」。新人記者が、過酷な現場を支える頑丈なPCを目撃した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-usd-weak'>💻 PC・周辺機器</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.itmedia.co.jp/pcuser/articles/2604/16/news066.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
 <article class='card item-card'
   data-cardid='item-225a45324815'
   data-themes='スマホ・タブレット|PC・周辺機器'
@@ -1259,23 +1276,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://dc.watch.impress.co.jp/docs/review/newproduct/2097854.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-e6c819ffcd9a'
-  data-themes='カメラ・オーディオ'
-  data-lang='ja'
-  data-score='4'
-  data-source='AV Watch'
-  data-sentiment='neutral'
-  data-importance='cloud_platform'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-15 22:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-e6c819ffcd9a')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>ロスレス対応で高音質化、JBLのBluetoothスピーカー「JBL GO 5」は4月23日発売</h3><div class='summary'>ハーマンインターナショナルは、JBLの小型ポータブルBluetoothスピーカー「JBL GO 5」の発売日を4月23日に決定した。価格はオープンで、直販サイトの価格は7,700円。新たにUSB-C経由でのロスレスオーディオ再生に対応したほか、スピーカーユニットやアンプも強化。音質を進化させた。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2101968.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-24a08e78202d'
   data-themes='カメラ・オーディオ'
   data-lang='ja'
@@ -1291,6 +1291,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>岡嶋和幸の「あとで買う」 1,791点目：大きく開くスタイリッシュなカメラポーチ - デジカメ Watch</h3><div class='summary'>ネットショップのカートの中にある「あとで買う」には、様子見をしているなど気になるアイテムがたくさん入っています。この連載では、フォトライフに関連する製品を中心にその中身をお届けします。どのような物に興味を持ち、どのような視点で選んでいるのかなど、日々の物欲をお楽しみください。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://dc.watch.impress.co.jp/docs/column/okajima/2101986.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-e6c819ffcd9a'
+  data-themes='カメラ・オーディオ'
+  data-lang='ja'
+  data-score='4'
+  data-source='AV Watch'
+  data-sentiment='neutral'
+  data-importance='cloud_platform'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-15 22:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-e6c819ffcd9a')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ロスレス対応で高音質化、JBLのBluetoothスピーカー「JBL GO 5」は4月23日発売</h3><div class='summary'>ハーマンインターナショナルは、JBLの小型ポータブルBluetoothスピーカー「JBL GO 5」の発売日を4月23日に決定した。価格はオープンで、直販サイトの価格は7,700円。新たにUSB-C経由でのロスレスオーディオ再生に対応したほか、スピーカーユニットやアンプも強化。音質を進化させた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2101968.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-78d07421d526'
@@ -1712,7 +1729,7 @@ function switchFxTab(key, btn){
   var panel = document.getElementById('fx-' + key);
   if (panel) panel.classList.add('active');
 }
-</script><footer>Gadget + — Generated at 2026-04-16 11:00</footer></body></html>
+</script><footer>Gadget + — Generated at 2026-04-16 11:27</footer></body></html>
 <script>
 var pageLang = 'en';
 function setPageLang(lang) {

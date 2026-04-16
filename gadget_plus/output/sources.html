@@ -26,13 +26,13 @@ header{position:sticky;top:0;z-index:50;background:rgba(13,16,22,.96);backdrop-f
 .nav a:hover{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.06)}
 .nav a.active{background:linear-gradient(135deg,#4ea1ff,#5a86ff);border-color:transparent;color:#fff;box-shadow:0 4px 16px rgba(78,161,255,.3)}
 .main{max-width:1480px;margin:18px auto;padding:0 20px 40px}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px;overflow:hidden}
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
 .stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
 .stat .num{font-size:26px;font-weight:800;margin-bottom:4px}
 .stat .label{color:var(--muted);font-size:12px}
 .stat .icon{font-size:22px;margin-bottom:8px}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center;width:100%;max-width:100%;box-sizing:border-box}
 .flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;box-sizing:border-box}
 .flt-btn:hover{border-color:var(--accent)}
 .flt-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
@@ -100,7 +100,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='top'>
     <div class='title'>
       <h1>📱 Gadget + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ ガジェット・家電・便利グッズ情報</span></h1>
-      <div class='sub'>更新日時：2026-04-16 11:00</div>
+      <div class='sub'>更新日時：2026-04-16 11:27</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -140,14 +140,14 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div style='color:var(--muted);font-size:12px;margin-bottom:8px'>国内ガジェットニュース</div>
   <div class='cb-count'>15</div>
   <div style='color:var(--muted);font-size:11px'>件の記事</div>
-  <div class='cb-recent'>最新: 2026-04-16 01:04</div>
+  <div class='cb-recent'>最新: 2026-04-16 02:04</div>
 </div>
 <div class='cb-card'>
   <div class='cb-name'>🇯🇵 ITmedia PC USER</div>
   <div style='color:var(--muted);font-size:12px;margin-bottom:8px'>国内ガジェットニュース</div>
   <div class='cb-count'>20</div>
   <div style='color:var(--muted);font-size:11px'>件の記事</div>
-  <div class='cb-recent'>最新: 2026-04-15 13:00</div>
+  <div class='cb-recent'>最新: 2026-04-16 02:20</div>
 </div>
 <div class='cb-card'>
   <div class='cb-name'>🇯🇵 デジカメ Watch</div>
@@ -222,6 +222,40 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </script>
   <div style='margin-bottom:12px;font-weight:700;font-size:15px'>注目ソース関連記事（<span id='cbCount'>183</span>件）</div>
   <div class='grid' id='cbGrid'>
+<article class='card item-card'
+  data-cardid='item-6fa44101d6d7'
+  data-themes='PC・周辺機器'
+  data-lang='ja'
+  data-score='4'
+  data-source='ITmedia PC USER'
+  data-sentiment='neutral'
+  data-importance='security_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia PC USER</span><span>2026-04-16 02:20</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-6fa44101d6d7')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>バケツ水攻めに極寒、粉塵 ──タフブック30周年の新モデルが示す「現場を止めない」実力を新人記者が目撃した</h3><div class='summary'>バケツの水を浴びても動き続ける「タフブック」。新人記者が、過酷な現場を支える頑丈なPCを目撃した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-usd-weak'>💻 PC・周辺機器</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.itmedia.co.jp/pcuser/articles/2604/16/news066.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-18b246d7ea91'
+  data-themes='その他'
+  data-lang='ja'
+  data-score='1'
+  data-source='家電 Watch'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>家電 Watch</span><span>2026-04-16 02:04</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-18b246d7ea91')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>配線工事不要なロールスクリーン、バッテリーで動く 立川ブラインド</h3><div class='summary'>立川ブラインド工業は、採光と眺望をスマートにコントロールできる調光ロールスクリーン「ルミエ」の、意匠性や機能性を向上させたリニューアルモデルを、5月1日に発売する。税別の参考本体価格は、手動モデルの調光ロールスクリーン「ルミエ」が118,800円。電動モデルの「ホームタコス ルミエ」バッテリー仕様が185,000円。なお、生地や仕様により価格が異なる、また参考本体価格には取付け費や工事費などは含まれない。</div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://kaden.watch.impress.co.jp/docs/news/2101863.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
 <article class='card item-card'
   data-cardid='item-bc1d5f429ffa'
   data-themes='その他'
@@ -442,23 +476,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://dc.watch.impress.co.jp/docs/review/newproduct/2097854.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-e6c819ffcd9a'
-  data-themes='カメラ・オーディオ'
-  data-lang='ja'
-  data-score='4'
-  data-source='AV Watch'
-  data-sentiment='neutral'
-  data-importance='cloud_platform'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-15 22:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-e6c819ffcd9a')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>ロスレス対応で高音質化、JBLのBluetoothスピーカー「JBL GO 5」は4月23日発売</h3><div class='summary'>ハーマンインターナショナルは、JBLの小型ポータブルBluetoothスピーカー「JBL GO 5」の発売日を4月23日に決定した。価格はオープンで、直販サイトの価格は7,700円。新たにUSB-C経由でのロスレスオーディオ再生に対応したほか、スピーカーユニットやアンプも強化。音質を進化させた。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2101968.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-24a08e78202d'
   data-themes='カメラ・オーディオ'
   data-lang='ja'
@@ -474,6 +491,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>岡嶋和幸の「あとで買う」 1,791点目：大きく開くスタイリッシュなカメラポーチ - デジカメ Watch</h3><div class='summary'>ネットショップのカートの中にある「あとで買う」には、様子見をしているなど気になるアイテムがたくさん入っています。この連載では、フォトライフに関連する製品を中心にその中身をお届けします。どのような物に興味を持ち、どのような視点で選んでいるのかなど、日々の物欲をお楽しみください。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://dc.watch.impress.co.jp/docs/column/okajima/2101986.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-e6c819ffcd9a'
+  data-themes='カメラ・オーディオ'
+  data-lang='ja'
+  data-score='4'
+  data-source='AV Watch'
+  data-sentiment='neutral'
+  data-importance='cloud_platform'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-15 22:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-e6c819ffcd9a')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ロスレス対応で高音質化、JBLのBluetoothスピーカー「JBL GO 5」は4月23日発売</h3><div class='summary'>ハーマンインターナショナルは、JBLの小型ポータブルBluetoothスピーカー「JBL GO 5」の発売日を4月23日に決定した。価格はオープンで、直販サイトの価格は7,700円。新たにUSB-C経由でのロスレスオーディオ再生に対応したほか、スピーカーユニットやアンプも強化。音質を進化させた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2101968.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-225a45324815'
@@ -1297,23 +1331,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.theverge.com/tech/912097/vivo-x300-ultra-camera-kit-hands-on' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-7bce00448728'
-  data-themes='PC・周辺機器'
-  data-lang='ja'
-  data-score='4'
-  data-source='ITmedia PC USER'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia PC USER</span><span>2026-04-15 13:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-7bce00448728')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>新型「Amazon Fire TV Stick HD」登場 本体をスリム化＋USB Type-C端子搭載で6980円</h3><div class='summary'>Amazonが、約2年ぶりに「Fire TV Stick HD」の新モデルをリリースする。ハードウェアをデザインごと一新し、よりスリムになって持ち運びやすくなったのが特徴だ。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://www.itmedia.co.jp/pcuser/articles/2604/15/news146.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-d96fe379befd'
   data-themes='レビュー・比較'
   data-lang='en'
@@ -1334,6 +1351,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>Amazonの新しいFire TV Stick HDはこれまでよりもスリムで、電源アダプターがありません</h3><div class='summary'>昨年9月のハードウェアイベントでFire TV Stick Selectの4Kバージョンを発表した後、Amazonは本日、HDドングルの最新バージョンを発売した。 Fire TV Stick HDの価格は35ドルで、Alexa+が組み込まれており、同社が1月のCESでプレビューした再設計されたエクスペリエンスを提供する</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>📝 レビュー・比較</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.engadget.com/home/home-theater/amazons-new-fire-tv-stick-hd-is-slimmer-than-ever-and-has-no-power-adapter-130000885.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-7bce00448728'
+  data-themes='PC・周辺機器'
+  data-lang='ja'
+  data-score='4'
+  data-source='ITmedia PC USER'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia PC USER</span><span>2026-04-15 13:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-7bce00448728')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>新型「Amazon Fire TV Stick HD」登場 本体をスリム化＋USB Type-C端子搭載で6980円</h3><div class='summary'>Amazonが、約2年ぶりに「Fire TV Stick HD」の新モデルをリリースする。ハードウェアをデザインごと一新し、よりスリムになって持ち運びやすくなったのが特徴だ。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.itmedia.co.jp/pcuser/articles/2604/15/news146.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-f292c08c3e6b'
@@ -1431,40 +1465,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.theverge.com/tech/912346/amazon-fire-tv-stick-hd-slimmest-ever' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-9eee05a7ca6e'
-  data-themes='その他'
-  data-lang='ja'
-  data-score='1'
-  data-source='AV Watch'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-15 13:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-9eee05a7ca6e')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>Amazon、隣のHDMIに干渉しない「Fire TV Stick HD」6980円。高速化、給電はUSB-Cに</h3><div class='summary'>Amazonは、HDMIケーブルと同等の太さを実現し、テレビからの直接給電に対応した新しいストリーミングメディアプレーヤー「Fire TV Stick HD」を発表した。価格は6,980円で、4月30日から出荷する。すでに予約受付を開始している。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2101925.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-20e11376e1b8'
-  data-themes='その他'
-  data-lang='ja'
-  data-score='1'
-  data-source='AV Watch'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-15 13:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-20e11376e1b8')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>Amazon、Fire TVに新UI導入。日本向けに開発した「アニメタブ」</h3><div class='summary'>Amazonは、Fire TVシリーズ向けにホーム画面のデザインやコンテンツ・アプリの表示方法、操作性を刷新した新しいUI(ユーザーインターフェース)の提供を日本でも開始する。新しいUIでは日本向けに開発した「アニメ タブ」も用意する。まずは4月30日に出荷開始する新しい「Fire TV Stick HD」から提供し、その後は現行のFire TVモデルにも順次展開する。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2101924.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-1b0b3191596a'
   data-themes='その他'
   data-lang='ja'
@@ -1497,6 +1497,40 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>Amazon「Fire TV」デバイスのUIが刷新、日本独自の「アニメタブ」で“春アニメ”検索も容易に</h3><div class='summary'>アマゾンジャパンは15日、同社製のストリーミングメディアプレイヤー「Fire TV」シリーズで、新しいユーザーインターフェイス（UI）を導入すると発表した。</div></div>
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://k-tai.watch.impress.co.jp/docs/news/2101993.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-9eee05a7ca6e'
+  data-themes='その他'
+  data-lang='ja'
+  data-score='1'
+  data-source='AV Watch'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-15 13:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-9eee05a7ca6e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Amazon、隣のHDMIに干渉しない「Fire TV Stick HD」6980円。高速化、給電はUSB-Cに</h3><div class='summary'>Amazonは、HDMIケーブルと同等の太さを実現し、テレビからの直接給電に対応した新しいストリーミングメディアプレーヤー「Fire TV Stick HD」を発表した。価格は6,980円で、4月30日から出荷する。すでに予約受付を開始している。</div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2101925.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-20e11376e1b8'
+  data-themes='その他'
+  data-lang='ja'
+  data-score='1'
+  data-source='AV Watch'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-15 13:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-20e11376e1b8')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Amazon、Fire TVに新UI導入。日本向けに開発した「アニメタブ」</h3><div class='summary'>Amazonは、Fire TVシリーズ向けにホーム画面のデザインやコンテンツ・アプリの表示方法、操作性を刷新した新しいUI(ユーザーインターフェース)の提供を日本でも開始する。新しいUIでは日本向けに開発した「アニメ タブ」も用意する。まずは4月30日に出荷開始する新しい「Fire TV Stick HD」から提供し、その後は現行のFire TVモデルにも順次展開する。</div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2101924.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-71e5c0ebee9b'
@@ -3360,23 +3394,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.engadget.com/ai/two-suspects-have-been-arrested-for-allegedly-shooting-at-sam-altmans-house-142655308.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-4a889b13cd7b'
-  data-themes='PC・周辺機器'
-  data-lang='ja'
-  data-score='2'
-  data-source='ITmedia PC USER'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia PC USER</span><span>2026-04-14 06:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-4a889b13cd7b')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>「テトリス」が対戦型ボードゲームに メガハウスが4月下旬に発売</h3><div class='summary'>メガハウスは、人気パズルゲームをアナログ化した「テトリスボードゲーム」を発売する。実際にブロックを手に持って落とし、列を揃えてポイントを競う対戦型で、最大4人までの同時プレイに対応する。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.itmedia.co.jp/pcuser/articles/2604/14/news104.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-f2674c5d1b75'
   data-themes='カメラ・オーディオ|レビュー・比較'
   data-lang='en'
@@ -3397,23 +3414,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>Blackmagic の DaVinci Resolve 21 は、新しい写真ページで Adobe Lightroom に対応します</h3><div class='summary'>多くのクリエイターがすでに Adobe Premiere から DaVinci Resolve に切り替えており、開発元の Blackmagic Design は現在、Lightroom と Photoshop を追いかけています。オーストラリアの会社は、NAB 2026 放送大会で、Photo design という新しいページを備えた DaVinci Resolve 21 のベータ版を発表しました。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>📝 レビュー・比較</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.engadget.com/apps/blackmagics-davinci-resolve-21-takes-on-adobe-lightroom-with-a-new-photo-page-053034084.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-8109478995b7'
-  data-themes='その他'
-  data-lang='ja'
-  data-score='1'
-  data-source='家電 Watch'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>家電 Watch</span><span>2026-04-14 03:04</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-8109478995b7')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>サンコー「冷蔵服」大型ファンとペルチェで涼しい</h3><div class='summary'>サンコーは、「圧倒的に冷える 冷蔵服 2026年モデル(ベスト/半袖)」を4月10日に発売した。価格はベストが22,800円、半袖が24,800円。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://kaden.watch.impress.co.jp/docs/news/2101137.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-7dc28ee5c464'
@@ -3723,7 +3723,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.engadget.com/big-tech/ibm-settles-its-dei-lawsuit-with-the-doj-for-17-million-153749285.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div>
-</div><footer>Gadget + — Generated at 2026-04-16 11:00</footer></body></html>
+</div><footer>Gadget + — Generated at 2026-04-16 11:27</footer></body></html>
 <script>
 var pageLang = 'en';
 function setPageLang(lang) {

@@ -33,7 +33,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(13,16,22,.96);backdrop-f
 .stat .label{color:var(--muted);font-size:12px}
 .stat .icon{font-size:22px;margin-bottom:8px}
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
-.flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s}
+.flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;box-sizing:border-box}
 .flt-btn:hover{border-color:var(--accent)}
 .flt-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
 .search{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 12px;font-size:13px;min-width:220px}
@@ -100,7 +100,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='top'>
     <div class='title'>
       <h1>📱 Gadget + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ ガジェット・家電・便利グッズ情報</span></h1>
-      <div class='sub'>更新日時：2026-04-16 05:32</div>
+      <div class='sub'>更新日時：2026-04-16 11:00</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -115,14 +115,14 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='stat-grid'>
   <div class='stat'><div class='icon'>📰</div><div class='num'>183</div><div class='label'>総記事数</div></div>
   <div class='stat'><div class='icon'>🆕</div><div class='num' style='color:#20bf6b'>0</div><div class='label'>直近6h 新着</div></div>
-  <div class='stat'><div class='icon'>🤖</div><div class='num' style='color:#7c4dff'>29</div><div class='label'>スマホ・タブレット</div></div>
-  <div class='stat'><div class='icon'>🔐</div><div class='num' style='color:#ff5c5c'>25</div><div class='label'>PC・周辺機器</div></div>
-  <div class='stat'><div class='icon'>☁️</div><div class='num' style='color:#00a8ff'>25</div><div class='label'>カメラ・オーディオ</div></div>
-  <div class='stat'><div class='icon'>🛠️</div><div class='num' style='color:#20bf6b'>2</div><div class='label'>スマート家電</div></div>
+  <div class='stat'><div class='icon'>🤖</div><div class='num' style='color:#7c4dff'>28</div><div class='label'>スマホ・タブレット</div></div>
+  <div class='stat'><div class='icon'>🔐</div><div class='num' style='color:#ff5c5c'>26</div><div class='label'>PC・周辺機器</div></div>
+  <div class='stat'><div class='icon'>☁️</div><div class='num' style='color:#00a8ff'>21</div><div class='label'>カメラ・オーディオ</div></div>
+  <div class='stat'><div class='icon'>🛠️</div><div class='num' style='color:#20bf6b'>4</div><div class='label'>スマート家電</div></div>
   <div class='stat'><div class='icon'>🏛</div><div class='num'>0</div><div class='label'>公式ソース</div></div>
 </div>
 <div class='panel'>
-  <div class='filters'><button class='flt-btn flt-theme active' data-theme='all'>📋 すべて</button><button class='flt-btn flt-theme' data-theme='スマホ・タブレット'>📱 スマホ・タブレット (33)</button><button class='flt-btn flt-theme' data-theme='PC・周辺機器'>💻 PC・周辺機器 (41)</button><button class='flt-btn flt-theme' data-theme='カメラ・オーディオ'>📷 カメラ・オーディオ (34)</button><button class='flt-btn flt-theme' data-theme='スマート家電'>🏠 スマート家電 (4)</button><button class='flt-btn flt-theme' data-theme='便利グッズ'>🧰 便利グッズ (4)</button><button class='flt-btn flt-theme' data-theme='レビュー・比較'>📝 レビュー・比較 (18)</button><button class='flt-btn flt-theme' data-theme='その他'>➖ その他 (85)</button></div>
+  <div class='filters'><button class='flt-btn flt-theme active' data-theme='all'>📋 すべて</button><button class='flt-btn flt-theme' data-theme='スマホ・タブレット'>📱 スマホ・タブレット (32)</button><button class='flt-btn flt-theme' data-theme='PC・周辺機器'>💻 PC・周辺機器 (42)</button><button class='flt-btn flt-theme' data-theme='カメラ・オーディオ'>📷 カメラ・オーディオ (30)</button><button class='flt-btn flt-theme' data-theme='スマート家電'>🏠 スマート家電 (5)</button><button class='flt-btn flt-theme' data-theme='便利グッズ'>🧰 便利グッズ (3)</button><button class='flt-btn flt-theme' data-theme='レビュー・比較'>📝 レビュー・比較 (19)</button><button class='flt-btn flt-theme' data-theme='その他'>➖ その他 (85)</button></div>
   <div class='filters'>
     <span class='filter-label'>地域:</span>
     <button class='flt-btn flt-lang active' data-lang='all'>🌍 全部</button>
@@ -207,6 +207,413 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </script>
 </div>
 <div class='grid' id='itemGrid'>
+<article class='card item-card'
+  data-cardid='item-bc1d5f429ffa'
+  data-themes='その他'
+  data-lang='en'
+  data-score='1'
+  data-source='Gizmodo'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Gizmodo</span><span>2026-04-16 01:33</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-bc1d5f429ffa')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>‘You Can’t Miss What Our Values Are’: Before Its Pivot to AI, Allbirds Sounded Very Different</h3><div class='summary'>An interview from 2019 is a depressing reminder of what the big corporate trend was back then.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>「私たちの価値観を見逃すわけにはいきません」: AI に軸足を移す前、Allbirds はまったく異なって聞こえました</h3><div class='summary'>2019年のインタビューは、当時の大企業のトレンドが何であったかを思い起こさせる憂鬱な内容です。</div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://gizmodo.com/you-cant-miss-what-our-values-are-before-its-pivot-to-ai-allbirds-sounded-very-different-2000747152' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-5afab6c411e0'
+  data-themes='カメラ・オーディオ'
+  data-lang='ja'
+  data-score='4'
+  data-source='AV Watch'
+  data-sentiment='neutral'
+  data-importance='cloud_platform'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-16 01:26</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-5afab6c411e0')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>キヤノン、1台でリモートカメラの初期設定から制御までできるコントローラー「RC-IP300」</h3><div class='summary'>キヤノンは、業務用のリモートカメラコントローラー「RC-IP300」を6月下旬に発売する。価格はオープンで、直販価格は32万円(税別)。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2102036.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-6deb4d409dd0'
+  data-themes='その他'
+  data-lang='ja'
+  data-score='1'
+  data-source='AV Watch'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-16 01:21</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-6deb4d409dd0')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「ふしぎの国のアリス」が4Kブルーレイに。「総力を挙げて貴重な映像を修復」</h3><div class='summary'>ウォルト・ディズニー・ジャパンは、ディズニー不朽の名作アニメーション「ふしぎの国のアリス」を7月22日に4K Ultra Blu-ray盤で発売する。BDとの2枚組で、価格は7,590円。</div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2102003.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-7c40ba1d5cfc'
+  data-themes='スマート家電'
+  data-lang='ja'
+  data-score='4'
+  data-source='家電 Watch'
+  data-sentiment='neutral'
+  data-importance='developer_tools'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>家電 Watch</span><span>2026-04-16 01:04</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-7c40ba1d5cfc')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>エコバックス、小回りのきくミニロボット掃除機</h3><div class='summary'>エコバックスジャパンは、コンパクト設計と高機能を両立したオールインワンロボット掃除機「DEEBOT mini 2」を、4月15日に発売した。価格は69,800円</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🏠 スマート家電</span><span class='tag tag-jpy-weak'>🏠 スマート家電</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://kaden.watch.impress.co.jp/docs/news/2101780.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-8f4ce2280366'
+  data-themes='その他'
+  data-lang='ja'
+  data-score='1'
+  data-source='家電 Watch'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>家電 Watch</span><span>2026-04-16 00:04</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-8f4ce2280366')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>準固体電池で動くハンディファン</h3><div class='summary'>ユアサプライムスは、発火しにくい準固体電池を採用したハンディファン「5WAY ハンディファン YM-702HS」を、4月中旬に発売した。価格は3,980円。</div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://kaden.watch.impress.co.jp/docs/news/2101746.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-d7720b702582'
+  data-themes='スマート家電|レビュー・比較'
+  data-lang='ja'
+  data-score='5'
+  data-source='家電 Watch'
+  data-sentiment='neutral'
+  data-importance='developer_tools'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>家電 Watch</span><span>2026-04-15 23:04</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-d7720b702582')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【家電ラボの徹底「本音」レビュー】ルンバ ミニは小さくても優秀! 使い捨てシートの水拭きもラク</h3><div class='summary'>ここ数年、ロボット掃除機の高機能化が急速に進んでいます。海外ではアームが飛び出てモノを拾ったり、階段を昇り降りしたりするモデルまで登場し、その進化のスピードには目を見張るものがあります。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🏠 スマート家電</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>📝 レビュー・比較</span><span class='tag tag-jpy-weak'>🏠 スマート家電</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://kaden.watch.impress.co.jp/docs/column/lab-review/2098260.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-c8b095de830f'
+  data-themes='その他'
+  data-lang='ja'
+  data-score='1'
+  data-source='デジカメ Watch'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>デジカメ Watch</span><span>2026-04-15 23:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-c8b095de830f')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>立山黒部アルペンルートが全線で開通 「みくりが池ブルー」など残雪風景の撮影シーズン到来</h3><div class='summary'>立山黒部貫光株式会社は4月15日（水）、富山県と長野県を結ぶ山岳観光ルート「立山黒部アルペンルート」の全線開通を発表。同日より標高2,450mの室堂平をはじめとする各地点へのアクセスが可能となった。</div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://dc.watch.impress.co.jp/docs/news/2101922.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-203c27f26b56'
+  data-themes='その他'
+  data-lang='ja'
+  data-score='3'
+  data-source='デジカメ Watch'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>デジカメ Watch</span><span>2026-04-15 22:30</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-203c27f26b56')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Leofotoビデオ雲台のロングリリースプレートが単体購入可能に</h3><div class='summary'>株式会社ワイドトレードは、ロングタイプのクイックリリースプレート「PL-140」を4月24日（金）に発売する。</div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://dc.watch.impress.co.jp/docs/news/2101246.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-a0b71429ee28'
+  data-themes='その他'
+  data-lang='ja'
+  data-score='1'
+  data-source='デジカメ Watch'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>デジカメ Watch</span><span>2026-04-15 22:30</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-a0b71429ee28')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>3面リフレクター「Flip Bansa2」にホワイト/ゴールドの反射布</h3><div class='summary'>株式会社レイクプラッツ（H&amp;Y Filters JAPAN）は、SMDVブランドの「Flip Bansa2 リフレクター」に装着できるリバーシブル仕様の反射布を4月10日（金）に発売した。価格は5,900円。</div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://dc.watch.impress.co.jp/docs/news/2101376.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-f08bad9fe258'
+  data-themes='スマホ・タブレット'
+  data-lang='en'
+  data-score='5'
+  data-source='The Verge Tech'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Verge Tech</span><span>2026-04-15 22:18</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-f08bad9fe258')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>YouTube now lets you turn off Shorts</h3><div class='summary'>YouTube&#x27;s time management settings now have an option to put a zero-minute time limit on Shorts, effectively removing them from your app in Android and iOS. The option is an update to the Shorts timer YouTube originally announced in October; the lowest previous option was 15 minutes. The feature was</div></div>
+<div class='lang-pane lang-ja hidden'><h3>YouTube でショート動画をオフにできるようになりました</h3><div class='summary'>YouTube の時間管理設定に、ショート動画に 0 分の時間制限を設定するオプションが追加され、Android と iOS のアプリからショート動画を効果的に削除できます。このオプションは、YouTube が 10 月に発表したショート タイマーのアップデートです。以前の最低オプションは 15 分でした。特徴は</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>📱 スマホ・タブレット</span><span class='tag tag-usd-strong'>📱 スマホ・タブレット</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.theverge.com/streaming/912898/youtube-shorts-feed-limit-zero-minutes' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-896e1ffc11f9'
+  data-themes='その他'
+  data-lang='en'
+  data-score='1'
+  data-source='Gizmodo'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Gizmodo</span><span>2026-04-15 22:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-896e1ffc11f9')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>The First ‘Clayface’ Footage Was Wonderfully Disgusting</h3><div class='summary'>Tom Rhys Harries stars as the Batman villain in the new film arriving October 23.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>最初の「クレイフェイス」映像は素晴らしく不快だった</h3><div class='summary'>トム・リース・ハリーズは、10月23日に公開される新作でバットマンの悪役として主演します。</div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://gizmodo.com/the-first-clayface-footage-was-wonderfully-disgusting-2000747042' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-e47edfb8a971'
+  data-themes='カメラ・オーディオ|レビュー・比較'
+  data-lang='ja'
+  data-score='5'
+  data-source='デジカメ Watch'
+  data-sentiment='neutral'
+  data-importance='cloud_platform'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>デジカメ Watch</span><span>2026-04-15 22:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-e47edfb8a971')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>新製品レビュー：撮影後にアングルが変えられる…360°カメラ搭載ドローン「ANTIGRAVITY A1」の表現力を検証 “まるで鳥になる”圧倒的な没入感の飛行体験</h3><div class='summary'>ANTIGRAVITY A1（以下、A1）は、世界初の8K 360°カメラを搭載したドローンで、Insta360が関わる新ブランド「Antigravity」から登場したモデルだ。今回、A1を試す機会をいただいたので、使用感についてお伝えする。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>📝 レビュー・比較</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://dc.watch.impress.co.jp/docs/review/newproduct/2097854.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-e6c819ffcd9a'
+  data-themes='カメラ・オーディオ'
+  data-lang='ja'
+  data-score='4'
+  data-source='AV Watch'
+  data-sentiment='neutral'
+  data-importance='cloud_platform'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-15 22:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-e6c819ffcd9a')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ロスレス対応で高音質化、JBLのBluetoothスピーカー「JBL GO 5」は4月23日発売</h3><div class='summary'>ハーマンインターナショナルは、JBLの小型ポータブルBluetoothスピーカー「JBL GO 5」の発売日を4月23日に決定した。価格はオープンで、直販サイトの価格は7,700円。新たにUSB-C経由でのロスレスオーディオ再生に対応したほか、スピーカーユニットやアンプも強化。音質を進化させた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2101968.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-24a08e78202d'
+  data-themes='カメラ・オーディオ'
+  data-lang='ja'
+  data-score='4'
+  data-source='デジカメ Watch'
+  data-sentiment='neutral'
+  data-importance='cloud_platform'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>デジカメ Watch</span><span>2026-04-15 22:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-24a08e78202d')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>岡嶋和幸の「あとで買う」 1,791点目：大きく開くスタイリッシュなカメラポーチ - デジカメ Watch</h3><div class='summary'>ネットショップのカートの中にある「あとで買う」には、様子見をしているなど気になるアイテムがたくさん入っています。この連載では、フォトライフに関連する製品を中心にその中身をお届けします。どのような物に興味を持ち、どのような視点で選んでいるのかなど、日々の物欲をお楽しみください。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://dc.watch.impress.co.jp/docs/column/okajima/2101986.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-225a45324815'
+  data-themes='スマホ・タブレット|PC・周辺機器'
+  data-lang='en'
+  data-score='5'
+  data-source='Engadget'
+  data-sentiment='neutral'
+  data-importance='security_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Engadget</span><span>2026-04-15 21:53</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-225a45324815')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Microsoft&#x27;s new college deal is a half-hearted answer to the $500 MacBook Neo</h3><div class='summary'>Apple&#x27;s MacBook Neo is a $600 (or $500 for students) shot across the bow at affordable Windows laptops, and it seems like Microsoft has ready its first response. The newly announced &quot;Microsoft College Offer&quot; is a bundle of Microsoft 365 Premium, Xbox Game Pass Ultimate, custom Xbox controller and di</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Microsoftの新たな大学向け契約は、500ドルのMacBook Neoに対する中途半端な答えだ</h3><div class='summary'>Apple の MacBook Neo は、手頃な価格の Windows ラップトップとしては 600 ドル (学生の場合は 500 ドル) の値段ですが、Microsoft は最初の対応を準備しているようです。新たに発表された「Microsoft College Offer」は、Microsoft 365 Premium、Xbox Game Pass Ultimate、カスタム Xbox コントローラー、およびディ</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>📱 スマホ・タブレット</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-usd-weak'>💻 PC・周辺機器</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.engadget.com/computing/laptops/microsofts-new-college-deal-is-a-half-hearted-answer-to-the-500-macbook-neo-215336362.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-21ed11f6b62d'
+  data-themes='その他'
+  data-lang='en'
+  data-score='1'
+  data-source='Gizmodo'
+  data-sentiment='bullish'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Gizmodo</span><span>2026-04-15 21:10</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-21ed11f6b62d')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Scientists Found Literal Ink From Ballpoint Pens in Martian Meteorites</h3><div class='summary'>This doesn&#x27;t devalue scientific research thus far, but we might need a more unified approach for cleaning important samples, the study says.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>科学者たちは火星の隕石からボールペンの文字通りのインクを発見</h3><div class='summary'>これはこれまでのところ科学研究の価値を下げるものではないが、重要なサンプルを洗浄するためにはより統一されたアプローチが必要になる可能性がある、と研究は述べている。</div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://gizmodo.com/scientists-found-literal-ink-from-ballpoint-pens-in-martian-meteorites-2000746996' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-c2ff99c65b48'
+  data-themes='その他'
+  data-lang='en'
+  data-score='1'
+  data-source='Gizmodo'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Gizmodo</span><span>2026-04-15 21:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-c2ff99c65b48')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>The ‘Galaxy’s Edge’ Han Solo Proves You Really Can’t Replace Harrison Ford</h3><div class='summary'>&#x27;It may not look like much, but it&#x27;s got it where it counts&#x27; is probably not something you want to say to someone&#x27;s face wandering &#x27;Galaxy&#x27;s Edge.&#x27;</div></div>
+<div class='lang-pane lang-ja hidden'><h3>『ギャラクシーズ・エッジ』ハン・ソロはハリソン・フォードの代わりにはなれないことを証明する</h3><div class='summary'>「大したことはないように見えるかもしれないが、重要なところにはそれが備わっている」という言葉は、おそらく「ギャラクシーズ・エッジ」をさまよう人に面と向かって言いたくない言葉だろう。</div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://gizmodo.com/galaxys-edge-han-solo-character-reveal-star-wars-disneyland-2000746980' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-1a173ab85bf5'
+  data-themes='レビュー・比較'
+  data-lang='en'
+  data-score='2'
+  data-source='Gizmodo'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Gizmodo</span><span>2026-04-15 21:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-1a173ab85bf5')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>BYD Is Rolling Out 5-Minute Charging on Several Popular EVs</h3><div class='summary'>The new Blade Battery 2.0 Flash Charging system can recharge EV batteries from 10% to 70% in five minutes.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>BYD、いくつかの人気EVに5分間充電を展開</h3><div class='summary'>新しい Blade Battery 2.0 フラッシュ充電システムは、EV バッテリーを 5 分で 10% から 70% まで充電できます。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>📝 レビュー・比較</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://gizmodo.com/byd-is-rolling-out-5-minute-charging-on-several-popular-evs-2000747052' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-6ba2262f0586'
+  data-themes='その他'
+  data-lang='en'
+  data-score='1'
+  data-source='Gizmodo'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Gizmodo</span><span>2026-04-15 21:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-6ba2262f0586')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Jury Does What Trump’s DOJ Wouldn’t, Deems Ticketmaster a Monopoly</h3><div class='summary'>Imagine actually holding a corporation accountable.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>陪審はトランプ大統領の司法省がやらなかったことを行い、チケットマスターを独占とみなす</h3><div class='summary'>実際に企業に責任を負わせることを想像してみてください。</div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://gizmodo.com/jury-does-what-trumps-doj-wouldnt-deems-ticketmaster-a-monopoly-2000747040' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-fa9f097ace0b'
+  data-themes='その他'
+  data-lang='en'
+  data-score='1'
+  data-source='Gizmodo'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Gizmodo</span><span>2026-04-15 20:40</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-fa9f097ace0b')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>EU Is Rolling Out an Online Age Verification App That Could Become the Global Blueprint</h3><div class='summary'>The momentum is building for a social media ban for minors in one of the largest economies in the world.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>EU、世界的な青写真となる可能性のあるオンライン年齢確認アプリを展開中</h3><div class='summary'>世界最大の経済大国の一つで、未成年者に対するソーシャルメディア禁止の機運が高まっている。</div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://gizmodo.com/eu-is-rolling-out-an-online-age-verification-app-that-could-become-the-global-blueprint-2000746948' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-6296c4112659'
+  data-themes='その他'
+  data-lang='en'
+  data-score='1'
+  data-source='Engadget'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Engadget</span><span>2026-04-15 20:39</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-6296c4112659')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Federal jury finds concert business Live Nation is a monopoly</h3><div class='summary'>Live Nation, which operates the Ticketmaster platform, has been determined to be a monopoly . A federal jury handed down its decision today that the company violated federal and state antitrust rules. This finding won&#x27;t surprise anyone who has used Ticketmaster and been sticker-shocked by their fina</div></div>
+<div class='lang-pane lang-ja hidden'><h3>連邦陪審、ライブ・ネイションは独占企業であるとコンサート事業を認定</h3><div class='summary'>Ticketmaster プラットフォームを運営する Live Nation は、独占企業であると判断されました。連邦陪審は本日、同社が連邦および州の独占禁止法に違反したとの判決を下した。 Ticketmaster を使用し、その FINA に衝撃を受けた人なら、この発見は驚くべきことではないでしょう。</div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://www.engadget.com/entertainment/music/federal-jury-finds-concert-business-live-nation-is-a-monopoly-203924011.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
 <article class='card item-card'
   data-cardid='item-332131281746'
   data-themes='その他'
@@ -357,7 +764,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>There&#x27;s yet another study about how bad AI is for our brains</h3><div class='summary'>A group of researchers from across the US and the UK have conducted a study on what AI does to our brains and the results are, in a word, grim. These results were published in a paper called &quot;AI assistance reduces persistence and hurts independent performance&quot; which kind of tells you everything you </div></div>
-<div class='lang-pane lang-ja hidden'><h3>AIが私たちの脳にどれほど悪影響を与えるかについて、さらに別の研究がある</h3><div class='summary'>米国と英国の研究者グループが、AI が私たちの脳に与える影響に関する研究を実施しましたが、その結果は一言で言えば悲惨なものでした。これらの結果は、「AI 支援により持続性が低下し、独立したパフォーマンスが損なわれる」という論文で発表されました。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>AIが私たちの脳にどれほど悪影響を与えるかについて、さらに別の研究がある</h3><div class='summary'>米国と英国の研究者グループが、AI が私たちの脳に与える影響について研究を実施しましたが、その結果は一言で言えば厳しいものでした。これらの結果は、「AI 支援により持続性が低下し、独立したパフォーマンスが損なわれる」という論文で発表されました。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>📝 レビュー・比較</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.engadget.com/ai/theres-yet-another-study-about-how-bad-ai-is-for-our-brains-183418494.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -511,7 +918,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Google unleashes a native Gemini app for the Mac</h3><div class='summary'>Not content with stuffing Gemini into all of its own apps and services, Google wants you to adopt its AI assistant on desktops and laptops too. The company released a Gemini Windows app on Tuesday and it&#x27;s following that up a day later with one for Macs. Google says the macOS Gemini app is a &quot;native</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Google が Mac 用のネイティブ Gemini アプリをリリース</h3><div class='summary'>Google は、自社のアプリやサービスのすべてに Gemini を詰め込むことに満足せず、デスクトップやラップトップにも AI アシスタントを採用してほしいと考えています。同社は火曜日に Gemini Windows アプリをリリースし、その翌日に Mac 用アプリをリリースした。 Googleは、macOS Geminiアプリは「ネイティブ」であると述べています</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Google、Mac 用のネイティブ Gemini アプリをリリース</h3><div class='summary'>Google は、自社のアプリやサービスのすべてに Gemini を詰め込むことに満足せず、デスクトップやラップトップにも AI アシスタントを採用してほしいと考えています。同社は火曜日に Gemini Windows アプリをリリースし、その翌日に Mac 用アプリをリリースした。 Googleは、macOS Geminiアプリは「ネイティブ」であると述べています</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-usd-weak'>💻 PC・周辺機器</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.engadget.com/ai/google-unleashes-a-native-gemini-app-for-the-mac-170500185.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -621,7 +1028,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Shoe company Allbirds pivots to AI compute in sign of a totally normal and healthy economy</h3><div class='summary'>The shoe company Allbirds, famous for its wool trainers, is pivoting to AI . You read that right. The San Francisco company has plans &quot;to pivot its business to AI compute infrastructure, with a long-term vision to become a fully integrated GPU-as-a-Service and AI-native cloud solutions provider.&quot; It</div></div>
-<div class='lang-pane lang-ja hidden'><h3>靴会社オールバーズ、完全に正常で健全な経済の兆しとして AI コンピューティングに軸足を移す</h3><div class='summary'>ウールのスニーカーで有名な靴会社オールバーズは、AI に軸足を移しています。あなたはそれを正しく読んでいます。サンフランシスコの同社は、「完全に統合された GPU-as-a-Service および AI ネイティブのクラウド ソリューション プロバイダーになるという長期的なビジョンを掲げ、ビジネスを AI コンピューティング インフラストラクチャに軸足する」計画を立てています。それ</div></div>
+<div class='lang-pane lang-ja hidden'><h3>靴会社オールバーズ、完全に正常で健全な経済の兆しとして AI コンピューティングに軸足を移す</h3><div class='summary'>ウールのトレーナーで有名な靴会社オールバーズは、AI に軸足を移しています。あなたはそれを正しく読んでいます。サンフランシスコの同社は、「完全に統合された GPU-as-a-Service および AI ネイティブのクラウド ソリューション プロバイダーになるという長期的なビジョンを掲げ、ビジネスを AI コンピューティング インフラストラクチャに軸足する」計画を立てています。それ</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-usd-weak'>💻 PC・周辺機器</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.engadget.com/ai/shoe-company-pivots-to-ai-compute-in-sign-of-a-totally-normal-and-healthy-economy-161449196.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -714,94 +1121,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://gizmodo.com/allbirds-is-getting-out-of-the-shoe-business-and-pivoting-to-ai-infrastructure-2000746830' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-746963ee80bb'
-  data-themes='その他'
-  data-lang='en'
-  data-score='1'
-  data-source='Gizmodo'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Gizmodo</span><span>2026-04-15 15:40</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-746963ee80bb')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>There’s No Saving Windows 11. It’s Time for Windows 12</h3><div class='summary'>Windows 11 can&#x27;t overcome a slew of bugs, security holes, and AI slop. It&#x27;s time for something new.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Windows 11 には保存機能はありません。Windows 12 の時代です</h3><div class='summary'>Windows 11 は、多数のバグ、セキュリティ ホール、AI の遅れを克服できません。何か新しいことを始める時が来ました。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://gizmodo.com/theres-no-saving-windows-11-its-time-for-windows-12-2000746855' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-73a28772638c'
-  data-themes='その他'
-  data-lang='en'
-  data-score='1'
-  data-source='Gizmodo'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Gizmodo</span><span>2026-04-15 15:30</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-73a28772638c')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Axiom Space Is Ready to Test Its Next-Generation Spacesuit in 2027</h3><div class='summary'>The company announced that it was nearly finished developing the spacesuit to be worn by astronauts during the Artemis missions.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>アクシオム・スペースは2027年に次世代宇宙服をテストする準備ができている</h3><div class='summary'>同社は、アルテミスミッション中に宇宙飛行士が着用する宇宙服の開発がほぼ完了したと発表した。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://gizmodo.com/axiom-space-is-ready-to-test-its-next-generation-spacesuit-in-2027-2000746723' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-4ffca338d4f7'
-  data-themes='その他'
-  data-lang='en'
-  data-score='1'
-  data-source='Gizmodo'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Gizmodo</span><span>2026-04-15 15:06</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-4ffca338d4f7')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Astronomers Just Dropped the Largest High-Res 3D Map of the Universe</h3><div class='summary'>It&#x27;s a good time for cosmology.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>天文学者が宇宙最大の高解像度 3D 地図を投下</h3><div class='summary'>宇宙論にとって良い時期です。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://gizmodo.com/astronomers-just-dropped-the-largest-high-res-3d-map-of-the-universe-2000746853' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-d6bdf9193257'
-  data-themes='その他'
-  data-lang='en'
-  data-score='1'
-  data-source='Gizmodo'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Gizmodo</span><span>2026-04-15 15:00</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-d6bdf9193257')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>The ‘Good Omens’ Finale Trailer Wants You to Think About the End and Nothing Else</h3><div class='summary'>After years of waiting sparked by sexual harassment allegations against co-creator Neil Gaiman, Amazon is ready to send &#x27;Good Omens&#x27; out for one last time.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>「グッド・オーメンズ」のフィナーレ予告編は、終わりについてだけ考えてもらいたい</h3><div class='summary'>共同制作者のニール・ゲイマンに対するセクハラ疑惑をきっかけに何年も待ち続けた後、アマゾンは最後にもう一度「グッド・オーメンズ」を世に出す準備ができている。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://gizmodo.com/good-omens-season-3-trailer-prime-video-neil-gaiman-2000746844' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-c0a39909a0b7'
   data-themes='スマホ・タブレット'
   data-lang='ja'
@@ -875,50 +1194,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.engadget.com/entertainment/spotify-is-selling-books-now-144340074.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-9328ca3a9984'
-  data-themes='その他'
-  data-lang='en'
-  data-score='1'
-  data-source='Gizmodo'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Gizmodo</span><span>2026-04-15 14:10</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-9328ca3a9984')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Some Locals Are Using AI to Protest Against Data Centers</h3><div class='summary'>Advocacy against data centers isn&#x27;t necessarily all about being anti-AI.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>地元住民の一部が AI を利用してデータセンターに抗議している</h3><div class='summary'>データセンターに対する反対運動は、必ずしも反 AI であることがすべてではありません。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://gizmodo.com/some-locals-are-using-ai-to-protest-against-data-centers-2000744027' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-14f70ab09a15'
-  data-themes='その他'
-  data-lang='en'
-  data-score='1'
-  data-source='Gizmodo'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Gizmodo</span><span>2026-04-15 14:00</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-14f70ab09a15')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>‘A Knight of the Seven Kingdoms’ Season 2 Filming Has Been Canceled By a Storm</h3><div class='summary'>Plus, Nic Cage is returning to the &#x27;Longlegs&#x27; universe for a new film.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>「七王国の騎士」シーズン2撮影が嵐のため中止</h3><div class='summary'>さらに、ニック・ケイジが新しい映画のために「ロングレッグス」の世界に戻ってきます。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://gizmodo.com/knight-of-the-seven-kingdoms-season-2-filming-canceled-2000746534' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-aa9eae11bb05'
   data-themes='PC・周辺機器'
   data-lang='en'
@@ -963,28 +1238,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.theverge.com/tech/912334/walmart-onn-4k-pro-streamer-google-tv-gemini-matter-thread-smart-home' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-6e1cc1fae40e'
-  data-themes='その他'
-  data-lang='en'
-  data-score='1'
-  data-source='Gizmodo'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Gizmodo</span><span>2026-04-15 13:35</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-6e1cc1fae40e')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>A Crew of Worms on the ISS Aims to Help Scientists Unlock the Secrets of Space Travel</h3><div class='summary'>Move over, Artemis crew. Space worms are taking over.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ISS のワームの乗組員は、科学者が宇宙旅行の秘密を明らかにするのを支援することを目指しています</h3><div class='summary'>アルテミスの乗組員、そこに移動してください。スペースワームが乗っ取っています。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://gizmodo.com/a-crew-of-worms-on-the-iss-aims-to-help-scientists-unlock-the-secrets-of-space-travel-2000746301' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-78d07421d526'
   data-themes='カメラ・オーディオ'
   data-lang='en'
@@ -1024,7 +1277,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>More phone cameras should come with telephoto lenses</h3><div class='summary'>Upgrading your phone with a camera grip attachment is one thing. But doll-sized telephoto lenses that you mount on top of the rear camera? C&#x27;mon. I wrote the Vivo X300 off as a gimmick, a funny concept designed to generate attention rather than actual sales. But then I spent a weekend carrying the p</div></div>
-<div class='lang-pane lang-ja hidden'><h3>もっと多くの携帯電話カメラには望遠レンズが搭載されるべきです</h3><div class='summary'>カメラ グリップ アタッチメントを使用して携帯電話をアップグレードすることは 1 つのことです。しかし、背面カメラの上に取り付ける人形サイズの望遠レンズはどうでしょうか？さあ。私は Vivo X300 をギミック、つまり実際の販売ではなく注目を集めるように設計された面白いコンセプトだと書きました。でもその後、私は週末をかけてそのバッグを持ち歩いた</div></div>
+<div class='lang-pane lang-ja hidden'><h3>もっと多くの携帯電話カメラには望遠レンズが搭載されるべきです</h3><div class='summary'>カメラ グリップ アタッチメントを使用して携帯電話をアップグレードすることは 1 つのことです。しかし、背面カメラの上に取り付ける人形サイズの望遠レンズはどうでしょうか？さあ。私は Vivo X300 をギミック、つまり実際の販売ではなく注目を集めるように設計された面白いコンセプトだと書きました。でもその後、私は週末をこのバッグを持ち歩いて過ごした</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>📱 スマホ・タブレット</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.theverge.com/tech/912097/vivo-x300-ultra-camera-kit-hands-on' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -1063,7 +1316,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Amazon&#x27;s new Fire TV Stick HD is slimmer than ever and has no power adapter</h3><div class='summary'>After unveiling a 4K version of its Fire TV Stick Select at its hardware event last September , Amazon is launching the latest version of its HD dongle today. The Fire TV Stick HD costs $35, comes with Alexa+ built in and offers the redesigned experience that the company previewed at CES in January </div></div>
-<div class='lang-pane lang-ja hidden'><h3>Amazonの新しいFire TV Stick HDはこれまでよりスリムで、電源アダプターがありません</h3><div class='summary'>昨年9月のハードウェアイベントでFire TV Stick Selectの4Kバージョンを発表した後、Amazonは本日、HDドングルの最新バージョンを発売した。 Fire TV Stick HDの価格は35ドルで、Alexa+が組み込まれており、同社が1月のCESでプレビューした再設計されたエクスペリエンスを提供する</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Amazonの新しいFire TV Stick HDはこれまでよりもスリムで、電源アダプターがありません</h3><div class='summary'>昨年9月のハードウェアイベントでFire TV Stick Selectの4Kバージョンを発表した後、Amazonは本日、HDドングルの最新バージョンを発売した。 Fire TV Stick HDの価格は35ドルで、Alexa+が組み込まれており、同社が1月のCESでプレビューした再設計されたエクスペリエンスを提供する</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>📝 レビュー・比較</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.engadget.com/home/home-theater/amazons-new-fire-tv-stick-hd-is-slimmer-than-ever-and-has-no-power-adapter-130000885.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -1136,7 +1389,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Adobe embraces conversational AI editing, marking a ‘fundamental shift’ in creative work</h3><div class='summary'>Adobe is fully embracing AI tools that enable creators to edit their work using descriptive prompts, instead of manually using specific Creative Cloud apps. The software giant&#x27;s new Firefly AI Assistant allows users to describe what they want to change by typing their own words into a conversational</div></div>
-<div class='lang-pane lang-ja hidden'><h3>アドビ、会話型 AI 編集を採用、クリエイティブな仕事に「根本的な変化」をもたらす</h3><div class='summary'>アドビは、クリエイターが特定の Creative Cloud アプリを手動で使用する代わりに、説明的なプロンプトを使用して作品を編集できるようにする AI ツールを全面的に採用しています。ソフトウェア大手の新しい Firefly AI アシスタントを使用すると、ユーザーは会話形式に自分の言葉を入力して、変更したい内容を説明できます。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>アドビ、会話型 AI 編集を採用、クリエイティブな仕事に「根本的な変化」をもたらす</h3><div class='summary'>アドビは、クリエイターが特定の Creative Cloud アプリを手動で使用する代わりに、説明的なプロンプトを使用して作品を編集できるようにする AI ツールを全面的に採用しています。ソフトウェア大手の新しい Firefly AI アシスタントを使用すると、ユーザーは会話文に自分の言葉を入力して、変更したい内容を説明できます。</div></div>
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://www.theverge.com/tech/912287/adobe-firefly-ai-assistant-announcement-editing' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -1273,28 +1526,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>MicrosoftはWindows Recallの新たなセキュリティ上の懸念に直面している</h3><div class='summary'>Microsoft が、PC 上での操作のほとんどをスクリーンショットする AI を活用した Windows 機能である Recall を立ち上げようとしたとき、サイバーセキュリティにとっては「災害」であり、「プライバシーの悪夢」であるとのレッテルを貼られました。反発を受け、再設計とリコールの確保が 1 年も遅れた後、再びセキュリティとセキュリティの問題に直面しています。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-usd-weak'>💻 PC・周辺機器</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.theverge.com/report/912101/microsoft-windows-recall-new-security-concerns-response' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-7ac1596994da'
-  data-themes='その他'
-  data-lang='en'
-  data-score='1'
-  data-source='The Verge Tech'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Verge Tech</span><span>2026-04-15 11:26</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-7ac1596994da')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Snap is laying off 16 percent of its staff as it leans into AI</h3><div class='summary'>Snap is laying off roughly 16 percent of its global workforce in a cost-cutting effort to chase improved profitability with the help of AI. The cuts will impact around 1,000 full-time employees, according to a memo sent to staffers from Snap CEO Evan Spiegel. An additional 300 open roles are also be</div></div>
-<div class='lang-pane lang-ja hidden'><h3>スナップ、AIへの傾斜で従業員の16パーセントを解雇</h3><div class='summary'>スナップは、AIの助けを借りて収益性の向上を追求するコスト削減の取り組みとして、世界中の従業員の約16パーセントを一時解雇している。スナップの最高経営責任者（CEO）エヴァン・シュピーゲル氏が従業員に宛てたメモによると、人員削減は約1000人のフルタイム従業員に影響を与えるという。追加の 300 の募集職種も用意されています。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://www.theverge.com/tech/912314/snap-layoffs-1000-staffers-ai-profitability' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-056bfae112f3'
@@ -2254,6 +2485,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://kaden.watch.impress.co.jp/docs/column/umai/2095463.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-e336f2c44a5c'
+  data-themes='PC・周辺機器'
+  data-lang='ja'
+  data-score='3'
+  data-source='ITmedia PC USER'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia PC USER</span><span>2026-04-15 00:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-e336f2c44a5c')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>アドビが「Creative Cloud」の映像処理製品をアップデート Premiereには「カラーモード」を実装 Frame.io向けデスクトップアプリの提供も開始</h3><div class='summary'>アドビは、「Adobe Creative Cloud」の映像系製品のアップデートを発表した。Premiereには、色調整を簡単に行える「カラーモード」をβ実装するなど、より使いやすさを向上している。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.itmedia.co.jp/pcuser/articles/2604/15/news120.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-d3211523213d'
   data-themes='その他'
   data-lang='ja'
@@ -2552,23 +2800,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>“新世代GoPro”として1型・5000万画素センサー搭載のプロ向けシネマカメラ「MISSION 1」シリーズ登場 マイクロフォーサーズレンズ交換式モデルも</h3><div class='summary'>米GoProが1型センサー搭載のプロ向け「MISSION 1」シリーズを発表した。新型GP3チップにより、8K60fps撮影や長時間駆動を実現。MFTレンズ交換式を含む3モデルを展開する。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.itmedia.co.jp/pcuser/articles/2604/15/news066.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-ff8d6b3fbe76'
-  data-themes='カメラ・オーディオ'
-  data-lang='ja'
-  data-score='4'
-  data-source='AV Watch'
-  data-sentiment='neutral'
-  data-importance='cloud_platform'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-14 15:36</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-ff8d6b3fbe76')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>米GoPro、1インチセンサーの“シネマカメラ”「MISSION 1」。マイクロフォーサーズマウント採用モデルも</h3><div class='summary'>米GoProは現地時間4月14日、コンパクトなシネマティックカメラシステムを謳うカメラ「MISSION 1」シリーズを発表した。ラインナップは「MISSION 1」と「MISSION 1 PRO」、さらにマイクロフォーサーズレンズ用マウントを備えた「MISSION 1 PRO ILS」。MISSION 1 PROには付属品が異なるバリエーションモデルも用意する。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2101686.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-642782f5fabc'
@@ -3007,74 +3238,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://dc.watch.impress.co.jp/docs/news/2101654.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-5a9215dfd945'
-  data-themes='カメラ・オーディオ'
-  data-lang='ja'
-  data-score='4'
-  data-source='AV Watch'
-  data-sentiment='neutral'
-  data-importance='cloud_platform'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-14 09:39</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-5a9215dfd945')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>Creativeの球体スピーカー「Pebble V3」やサウンドバーがAmazonでタイムセール【今日みつけたお買い得品】</h3><div class='summary'>AmazonにてCreativeのUSB/Bluetoothスピーカーの「Pebble V3」や、サウンドバー「Stage Pro」、完全ワイヤレスイヤフォン「Aurvana Ace 2」などがタイムセールになっている。4月14日18時時点での主な対象製品と価格は以下の通り。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/todayssales/2101633.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-73c5b537acdc'
-  data-themes='その他'
-  data-lang='ja'
-  data-score='1'
-  data-source='AV Watch'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-14 09:16</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-73c5b537acdc')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>LG、“大画面が身近になる”4K液晶TVエントリー「NU850」6機種。55型で約8.8万円</h3><div class='summary'>LGエレクトロニクス・ジャパンは、「大画面が身近になる」という4K液晶テレビエントリーモデル「NU850」シリーズとして、43型～85型の6モデルを、販路限定で4月中旬より順次発売する。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2101625.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-76ec84151e90'
-  data-themes='カメラ・オーディオ'
-  data-lang='ja'
-  data-score='4'
-  data-source='デジカメ Watch'
-  data-sentiment='neutral'
-  data-importance='cloud_platform'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>デジカメ Watch</span><span>2026-04-14 09:09</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-76ec84151e90')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>水上を飛ぶ防水ドローン「HOVERAir AQUA」 AI制御でハンズフリー撮影 リストバンド式のリモコンも</h3><div class='summary'>ZERO ZERO ROBOTICSは、防水仕様のカメラ付きドローン「HOVERAir AQUA」を5月28日（木）に発売する。基本セットの価格は19万9,980円。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://dc.watch.impress.co.jp/docs/news/2101623.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-fc435c7a83b3'
-  data-themes='カメラ・オーディオ'
-  data-lang='ja'
-  data-score='4'
-  data-source='デジカメ Watch'
-  data-sentiment='neutral'
-  data-importance='cloud_platform'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>デジカメ Watch</span><span>2026-04-14 08:27</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-fc435c7a83b3')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>本日のお買い得商品 MF魚眼レンズ「Brightin Star 10mm F5.6」がセール中</h3><div class='summary'>Amazonで、MF魚眼レンズ「Brightin Star 10mm F5.6 PRO Fish-eye」が1万9,600円から15%OFFの1万6,405円でセール中だ。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://dc.watch.impress.co.jp/docs/news/saleitem/2101592.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-6d99059ee90f'
   data-themes='その他'
   data-lang='ja'
@@ -3177,7 +3340,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Two suspects have been arrested for allegedly shooting at Sam Altman&#x27;s house</h3><div class='summary'>OpenAI CEO Sam Altman&#x27;s house may have been the target of a second attack after San Francisco Police Department arrested two suspects for a reported shooting in the Russian Hill neighborhood. The SFPD said in a press release that police officers responded to a &quot;suspicious occurrence of possible shot</div></div>
-<div class='lang-pane lang-ja hidden'><h3>サム・アルトマンさん宅で銃撃の疑いで容疑者２人逮捕</h3><div class='summary'>サンフランシスコ市警察がロシアン・ヒル地区での銃撃事件で容疑者２人を逮捕したことを受け、OpenAIの最高経営責任者（CEO）サム・アルトマン氏の自宅が二度目の襲撃の標的となった可能性がある。 SFPDはプレスリリースで、警察官が「発砲の可能性がある不審な出来事が発生した」と対応したと述べた。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>サム・アルトマンさん宅で銃撃の疑いで容疑者２人逮捕</h3><div class='summary'>サンフランシスコ警察がロシアン・ヒル地区での銃撃事件で容疑者２人を逮捕したことを受け、OpenAIの最高経営責任者（CEO）サム・アルトマン氏の自宅が二度目の襲撃の標的となった可能性がある。 SFPDはプレスリリースで、警察官が「発砲の可能性がある不審な出来事が発生した」と対応したと述べた。</div></div>
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.engadget.com/ai/two-suspects-have-been-arrested-for-allegedly-shooting-at-sam-altmans-house-142655308.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -3221,40 +3384,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.engadget.com/apps/blackmagics-davinci-resolve-21-takes-on-adobe-lightroom-with-a-new-photo-page-053034084.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-cd42d75ec505'
-  data-themes='スマホ・タブレット'
-  data-lang='ja'
-  data-score='4'
-  data-source='ITmedia PC USER'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia PC USER</span><span>2026-04-14 05:24</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-cd42d75ec505')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>レノボ、学習利用にも適したSnapdragon 8s Gen4搭載13型Androidタブレット</h3><div class='summary'>レノボ・ジャパンは、Snapdragon 8s Gen4を採用する13型Androidタブレット「Lenovo Idea Tab Pro Gen 2」を発表した。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>📱 スマホ・タブレット</span><span class='tag tag-usd-strong'>📱 スマホ・タブレット</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://www.itmedia.co.jp/pcuser/articles/2604/14/news096.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-de81041c0775'
-  data-themes='カメラ・オーディオ'
-  data-lang='ja'
-  data-score='4'
-  data-source='デジカメ Watch'
-  data-sentiment='neutral'
-  data-importance='cloud_platform'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>デジカメ Watch</span><span>2026-04-14 04:58</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-de81041c0775')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>キャンペーン：最大3万3,000円還元の「SAMYANGレンズキャッシュバックキャンペーン」 AF 14-24mm F2.8 FEなど7本が対象</h3><div class='summary'>株式会社ケンコー・トキナーは、「SAMYANGレンズキャッシュバックキャンペーン」を4月20日（月）から開始する。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://dc.watch.impress.co.jp/docs/news/campaign/2101525.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-8109478995b7'
   data-themes='その他'
   data-lang='ja'
@@ -3270,91 +3399,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>サンコー「冷蔵服」大型ファンとペルチェで涼しい</h3><div class='summary'>サンコーは、「圧倒的に冷える 冷蔵服 2026年モデル(ベスト/半袖)」を4月10日に発売した。価格はベストが22,800円、半袖が24,800円。</div></div>
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://kaden.watch.impress.co.jp/docs/news/2101137.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-134f1060d306'
-  data-themes='その他'
-  data-lang='ja'
-  data-score='1'
-  data-source='デジカメ Watch'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>デジカメ Watch</span><span>2026-04-14 02:52</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-134f1060d306')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>「見た目がクレヨン」のUSB Type-Cフラッシュメモリー サンディスクが米クレヨラとコラボ</h3><div class='summary'>サンディスクは、クレヨラ公認のUSBフラッシュメモリーを発売した。価格はオープン。直販サイトでの限定販売となる。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://dc.watch.impress.co.jp/docs/news/2101458.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-1beb5368779b'
-  data-themes='その他'
-  data-lang='ja'
-  data-score='1'
-  data-source='家電 Watch'
-  data-sentiment='bullish'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>家電 Watch</span><span>2026-04-14 02:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-1beb5368779b')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>Anker初の走行充電器 車で走ってポタ電を急速チャージ</h3><div class='summary'>アンカー・ジャパンは、ポータブル電源シリーズ「Anker Solix」から走行充電器「Anker Solix オルタネーターチャージャー」を4月14日に発売する。価格は89,990円。4月20日までの期間限定で、AmazonおよびAnker Japan 公式オンラインストアでは44%OFFクーポンが提供される。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://kaden.watch.impress.co.jp/docs/news/2099973.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-6a099679fa5d'
-  data-themes='その他'
-  data-lang='ja'
-  data-score='1'
-  data-source='家電 Watch'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>家電 Watch</span><span>2026-04-14 01:04</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-6a099679fa5d')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>シロカの壁掛け扇風機、置き場所とらず真下も涼しい</h3><div class='summary'>シロカは、独自の送風技術「ふわビューン技術」を搭載した壁掛け扇風機「壁掛けふわビューン SF-W251」を4月25日に発売する。価格は12,980円。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://kaden.watch.impress.co.jp/docs/news/2101104.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-4de46d0fefa7'
-  data-themes='カメラ・オーディオ|スマート家電|レビュー・比較'
-  data-lang='ja'
-  data-score='5'
-  data-source='家電 Watch'
-  data-sentiment='neutral'
-  data-importance='cloud_platform'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>家電 Watch</span><span>2026-04-14 00:04</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-4de46d0fefa7')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>【家電ミニレビュー】防災スピーカーが便利 ラジオや充電器になって“もしもの備え”に</h3><div class='summary'>今回ご紹介するのはリズムの手回し充電ワイヤレススピーカー「CRANKSPEAKER(クランクスピーカー)」です。いわゆる防災グッズのカテゴリに入る製品ですが、防災グッズとしてしまい込んでおくのはもったいない! 毎日使いたくなる一台でした。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🏠 スマート家電</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>📝 レビュー・比較</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://kaden.watch.impress.co.jp/docs/column_review/kdnreview/2096195.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-cc76584d9978'
-  data-themes='カメラ・オーディオ'
-  data-lang='ja'
-  data-score='4'
-  data-source='デジカメ Watch'
-  data-sentiment='neutral'
-  data-importance='cloud_platform'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>デジカメ Watch</span><span>2026-04-13 22:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-cc76584d9978')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>レザー製「WOTANCRAFT」ショルダーバッグにブラウンカラー</h3><div class='summary'>株式会社オリエンタルホビーは、WOTANCRAFTのカメラバッグ「PILOT LEATHER」に新色のブラウンを追加し、4月11日（土）に発売した。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://dc.watch.impress.co.jp/docs/news/2101008.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-7dc28ee5c464'
@@ -3418,7 +3462,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Meta warned by dozens of organizations that facial recognition on its smart glasses would empower predators</h3><div class='summary'>Dozens of civil rights organizations have written a letter to Meta CEO Mark Zuckerberg to warn of the dangers in bringing facial recognition technology to the company&#x27;s smart glasses. More than 70 groups have banded together to form a coalition to urge Zuckerberg to abandon plans to incorporate the </div></div>
-<div class='lang-pane lang-ja hidden'><h3>メタはスマートグラスの顔認識が捕食者に力を与えると数十の組織から警告</h3><div class='summary'>数十の公民権団体がメタのCEO、マーク・ザッカーバーグに書簡を送り、同社のスマートグラスに顔認識技術を導入することの危険性を警告した。 70以上の団体が団結して連合を結成し、ザッカーバーグ氏に企業を組み込む計画を放棄するよう促した。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>メタはスマートグラスの顔認識が捕食者に力を与えると数十の組織から警告</h3><div class='summary'>数十の公民権団体がメタのCEO、マーク・ザッカーバーグに書簡を送り、同社のスマートグラスに顔認識技術を導入することの危険性を警告した。 70以上の団体が団結して連合を結成し、ザッカーバーグ氏に企業組み入れ計画を放棄するよう促した。</div></div>
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://www.engadget.com/big-tech/meta-warned-by-dozens-of-organizations-that-facial-recognition-on-its-smart-glasses-would-empower-predators-185000998.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -3638,7 +3682,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>The first European country to get Tesla’s Full Self-Driving Supervised will be the Netherlands</h3><div class='summary'>Tesla&#x27;s Full Self-Driving (Supervised) is ready to make its European debut, and it&#x27;s starting with the Netherlands. According to Tesla Europe , the automaker&#x27;s driver assistance system was approved in the Netherlands and will start rolling out shortly. RDW , the country&#x27;s regulatory authority on veh</div></div>
-<div class='lang-pane lang-ja hidden'><h3>テスラの完全自動運転監視を取得した最初のヨーロッパの国はオランダになる</h3><div class='summary'>テスラの完全自動運転（監視付き）はヨーロッパでデビューする準備が整い、オランダから始まります。 Tesla Europe によると、この自動車メーカーの運転支援システムはオランダで承認され、まもなく展開が開始される予定です。 RDW 、自動車に関する国の規制当局</div></div>
+<div class='lang-pane lang-ja hidden'><h3>テスラの完全自動運転監視を取得した最初のヨーロッパの国はオランダになる</h3><div class='summary'>テスラの完全自動運転（監視付き）はヨーロッパでデビューする準備が整い、オランダから始まります。 Tesla Europe によると、この自動車メーカーの運転支援システムはオランダで承認され、間もなく展開が開始される予定です。 RDW 、自動車に関する国の規制当局</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>📝 レビュー・比較</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.engadget.com/transportation/the-first-european-country-to-get-teslas-full-self-driving-supervised-will-be-the-netherlands-170157644.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -3663,52 +3707,8 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>IBM、DEI訴訟を司法省と1,700万ドルで和解</h3><div class='summary'>IBM は、同社が DEI の実践により公民権法に違反したという米国司法省の告発を解決することに同意しました。司法省のプレスリリースによると、IBMは「人種、肌の色、出身国、性別」を考慮した疑惑の解決に1700万ドル以上を支払う予定だという。</div></div>
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.engadget.com/big-tech/ibm-settles-its-dei-lawsuit-with-the-doj-for-17-million-153749285.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-88d64898f09d'
-  data-themes='スマホ・タブレット|PC・周辺機器|カメラ・オーディオ|便利グッズ|レビュー・比較'
-  data-lang='en'
-  data-score='4'
-  data-source='Engadget'
-  data-sentiment='neutral'
-  data-importance='cloud_platform'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Engadget</span><span>2026-04-11 13:30</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-88d64898f09d')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Engadget review recap: ASUS ZenBook A16, AirPods Max 2, Sonos Play and LG Sound Suite</h3><div class='summary'>Spring has certainly sprung here at Engadget. Well, it has in terms of reviews , at least. We’ve put over a dozen devices through their paces since my last roundup, which gives you a lot to catch up on over the weekend. Read on for the rundown of all the reviews you might’ve missed. ASUS ZenBook A16</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Engadget レビューの要約: ASUS ZenBook A16、AirPods Max 2、Sonos Play、LG Sound Suite</h3><div class='summary'>ここEngadgetにも確実に春がやってきました。まあ、少なくともレビューに関してはそうです。前回のまとめ以来、私たちは十数台のデバイスのペースを試してきました。これにより、週末に多くのことを知ることができます。見逃した可能性のあるすべてのレビューの概要を読んでください。 ASUS ZenBook A16</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>📱 スマホ・タブレット</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🧰 便利グッズ</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>📝 レビュー・比較</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://www.engadget.com/engadget-review-recap-asus-zenbook-a16-airpods-max-2-sonos-play-and-lg-sound-suite-133000521.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-a9f124f58baa'
-  data-themes='スマホ・タブレット'
-  data-lang='en'
-  data-score='1'
-  data-source='Engadget'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Engadget</span><span>2026-04-11 11:47</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-a9f124f58baa')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>X&#x27;s messaging app, XChat, may be available soon</h3><div class='summary'>XChat is now on the App Store , where its listing says that it’s expected to be available for download on April 17. This isn’t the same IRC app from the early aughts, which you may remember if you’re of a certain age. This is a messaging app specifically for X users. X chief Elon Musk first talked a</div></div>
-<div class='lang-pane lang-ja hidden'><h3>XのメッセージングアプリXChatが間もなく利用可能になる可能性がある</h3><div class='summary'>XChat は現在 App Store にあり、そのリストには 4 月 17 日にダウンロード可能になる予定であると記載されています。これは、ある程度の年齢の方なら覚えているかもしれない、初期の IRC アプリとは異なります。これは、X ユーザー専用のメッセージング アプリです。 X の責任者イーロン・マスク氏が最初に語った</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>📱 スマホ・タブレット</span><span class='tag tag-usd-strong'>📱 スマホ・タブレット</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://www.engadget.com/apps/xs-messaging-app-xchat-may-be-available-soon-114722904.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div>
-</div><footer>Gadget + — Generated at 2026-04-16 05:32</footer></body></html>
+</div><footer>Gadget + — Generated at 2026-04-16 11:00</footer></body></html>
 <script>
 var pageLang = 'en';
 function setPageLang(lang) {

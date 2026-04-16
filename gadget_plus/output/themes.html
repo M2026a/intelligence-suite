@@ -26,35 +26,41 @@ header{position:sticky;top:0;z-index:50;background:rgba(13,16,22,.96);backdrop-f
 .nav a:hover{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.06)}
 .nav a.active{background:linear-gradient(135deg,#4ea1ff,#5a86ff);border-color:transparent;color:#fff;box-shadow:0 4px 16px rgba(78,161,255,.3)}
 .main{max-width:1480px;margin:18px auto;padding:0 20px 40px}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px;overflow:hidden}
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
 .stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
 .stat .num{font-size:26px;font-weight:800;margin-bottom:4px}
 .stat .label{color:var(--muted);font-size:12px}
 .stat .icon{font-size:22px;margin-bottom:8px}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
-.flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center;width:100%;max-width:100%;box-sizing:border-box}
+.filters > *{min-width:0;max-width:100%;box-sizing:border-box}
+.flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s;max-width:100%;box-sizing:border-box}
 .flt-btn:hover{border-color:var(--accent)}
 .flt-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
-.search{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 12px;font-size:13px;min-width:220px}
+.search{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 12px;font-size:13px;min-width:220px;max-width:100%;box-sizing:border-box}
 .search::placeholder{color:var(--muted)}
 .filter-label{color:var(--muted);font-size:12px;white-space:nowrap}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.grid > *{min-width:0;max-width:100%}
 .grid.list{grid-template-columns:1fr}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;transition:border-color .18s,opacity .18s}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;transition:border-color .18s,opacity .18s;min-width:0;max-width:100%;box-sizing:border-box}
 .card:hover{border-color:var(--accent)}
 .card.is-read{opacity:.45}
 .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
-.card-meta{display:flex;gap:6px;flex-wrap:wrap;color:var(--muted);font-size:12px;align-items:center}
-.card-lang-toggle{display:flex;gap:5px;flex-shrink:0;align-items:center}
+.card-top > *{min-width:0;max-width:100%}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;color:var(--muted);font-size:12px;align-items:center;min-width:0;max-width:100%;overflow-wrap:anywhere;word-break:break-word}
+.card-meta span{min-width:0;max-width:100%;overflow-wrap:anywhere;word-break:break-word}
+.card-lang-toggle{display:flex;gap:5px;flex-shrink:0;align-items:center;flex-wrap:wrap;min-width:0;max-width:100%}
 .card-lang-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;white-space:nowrap;transition:all .15s}
 .card-lang-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
-.read-btn{background:var(--panel2);border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;transition:all .15s}
+.read-btn{background:var(--panel2);border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;transition:all .15s;max-width:100%}
 .read-btn:hover{border-color:#666}
-.card h3{margin:0;font-size:15px;line-height:1.5;font-weight:700}
-.summary{color:#ced7e6;font-size:13px;line-height:1.6}
+.card h3{margin:0;font-size:15px;line-height:1.5;font-weight:700;overflow-wrap:anywhere;word-break:break-word}
+.summary{color:#ced7e6;font-size:13px;line-height:1.6;overflow-wrap:anywhere;word-break:break-word}
 .lang-pane.hidden{display:none!important}
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;min-width:0;max-width:100%}
+.tag{overflow-wrap:anywhere;word-break:break-word;max-width:100%}
+.open-btn{max-width:100%;white-space:normal;text-align:center;overflow-wrap:anywhere;word-break:break-word;box-sizing:border-box}
 .tag{display:inline-block;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:600;border:1px solid transparent}
 .tag-official{background:#173126;border-color:#2f7254;color:#c6f1dc}
 .tag-score5,.tag-score4{background:#1e1a3a;border-color:#a78bfa;color:#e0d9ff}
@@ -89,8 +95,13 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 @media(max-width:700px){
   .wrap,.main,footer{padding-left:12px;padding-right:12px}
   .grid{grid-template-columns:1fr}
-  .search{min-width:160px;width:100%}
+  .filters{align-items:stretch}
+  .filters > *{min-width:0;max-width:100%}
+  .search{min-width:0;width:100%}
+  .flt-btn{white-space:normal;overflow-wrap:anywhere;word-break:break-word}
+  #sourceFilterRow .flt-source{white-space:normal;overflow-wrap:anywhere;word-break:break-word}
   .card-top{flex-direction:column}
+  .card-lang-toggle{width:100%}
 }
 </style>
 </head>
@@ -100,7 +111,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='top'>
     <div class='title'>
       <h1>📱 Gadget + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ ガジェット・家電・便利グッズ情報</span></h1>
-      <div class='sub'>更新日時：2026-04-16 11:52</div>
+      <div class='sub'>更新日時：2026-04-16 12:19</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -168,9 +179,60 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='theme-section' data-section='スマホ・タブレット'>
   <div class='theme-header'>
     <span class='theme-badge' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>📱 スマホ・タブレット</span>
-    <span style='color:var(--muted);font-size:13px'>Phones / Tablets · <span class='section-count'>33</span>件</span>
+    <span style='color:var(--muted);font-size:13px'>Phones / Tablets · <span class='section-count'>36</span>件</span>
   </div>
   <div class='grid theme-grid'>
+<article class='card item-card'
+  data-cardid='item-c02a2888e861'
+  data-themes='スマホ・タブレット'
+  data-lang='ja'
+  data-score='4'
+  data-source='ケータイ Watch'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ケータイ Watch</span><span>2026-04-16 03:03</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-c02a2888e861')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>サムスン、「Galaxy A57 5G」4月23日発売 6.9mmの薄型大画面で約8万円</h3><div class='summary'>サムスン電子ジャパンは、最新Androidスマートフォン「Samsung Galaxy A57 5G」を発表した。発売日は4月23日で、現在予約を受け付けている。価格は7万9800円。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>📱 スマホ・タブレット</span><span class='tag tag-usd-strong'>📱 スマホ・タブレット</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://k-tai.watch.impress.co.jp/docs/news/2102140.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-a36039d20cb4'
+  data-themes='スマホ・タブレット|カメラ・オーディオ'
+  data-lang='ja'
+  data-score='4'
+  data-source='デジカメ Watch'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>デジカメ Watch</span><span>2026-04-16 03:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-a36039d20cb4')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>週刊アンケート：【結果発表】スマホカメラは何眼？</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>📱 スマホ・タブレット</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-usd-strong'>📱 スマホ・タブレット</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://dc.watch.impress.co.jp/docs/enquete/2101967.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-fb1afd784626'
+  data-themes='スマホ・タブレット'
+  data-lang='ja'
+  data-score='3'
+  data-source='ケータイ Watch'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ケータイ Watch</span><span>2026-04-16 02:55</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-fb1afd784626')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>JCOM、「らくらくスマートフォン Lite」販売開始</h3><div class='summary'>JCOMは、モバイルサービス「J:COM MOBILE」の新端末として、FCNTのシニア向けスマートフォン「らくらくスマートフォン Lite」を発売した。価格は5万2800円。24回または48回での支払いもできる。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>📱 スマホ・タブレット</span><span class='tag tag-usd-strong'>📱 スマホ・タブレット</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://k-tai.watch.impress.co.jp/docs/news/2102126.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
 <article class='card item-card'
   data-cardid='item-227d7f3b9310'
   data-themes='スマホ・タブレット'
@@ -715,7 +777,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>The Morning After: Meta is reportedly working on an AI model of Mark Zuckerberg</h3><div class='summary'>If you were looking for the worst AI project announced so far this week, try Meta. According to a Financial Times report, the company is developing its own Mark Zuckerberg AI , training it on Zuckerberg’s mannerisms, tone and publicly available statements. AKA, the good stuff. ( Will it smoke meats </div></div>
-<div class='lang-pane lang-ja hidden'><h3>ザ・モーニング・アフター：メタがマーク・ザッカーバーグのAIモデルに取り組んでいると報じられている</h3><div class='summary'>今週これまでに発表された最悪の AI プロジェクトを探しているなら、Meta を試してみてください。フィナンシャル・タイムズの報道によると、同社は独自のマーク・ザッカーバーグAIを開発しており、ザッカーバーグのマナー、口調、公開されている発言に基づいてトレーニングしているという。別名、良いものです。 （肉を燻製にするのですか</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ザ・モーニング・アフター：メタがマーク・ザッカーバーグのAIモデルに取り組んでいると報じられている</h3><div class='summary'>今週これまでに発表された最悪の AI プロジェクトを探しているなら、Meta を試してみてください。フィナンシャル・タイムズの報道によると、同社は独自のマーク・ザッカーバーグAIを開発しており、ザッカーバーグのマナー、口調、公開されている発言に基づいてトレーニングしているという。別名、良いものです。 (肉を燻製するのですか</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>📱 スマホ・タブレット</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-usd-strong'>📱 スマホ・タブレット</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.engadget.com/general/the-morning-after-engadget-newsletter-111528055.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -910,7 +972,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Google unleashes a native Gemini app for the Mac</h3><div class='summary'>Not content with stuffing Gemini into all of its own apps and services, Google wants you to adopt its AI assistant on desktops and laptops too. The company released a Gemini Windows app on Tuesday and it&#x27;s following that up a day later with one for Macs. Google says the macOS Gemini app is a &quot;native</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Google、Mac 向けネイティブ Gemini アプリをリリース</h3><div class='summary'>Google は、自社のアプリやサービスのすべてに Gemini を詰め込むことに満足せず、デスクトップやラップトップにも AI アシスタントを採用してほしいと考えています。同社は火曜日に Gemini Windows アプリをリリースし、その翌日に Mac 用アプリをリリースした。 Googleは、macOS Geminiアプリは「ネイティブ」であると述べています</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Google、Mac 用のネイティブ Gemini アプリをリリース</h3><div class='summary'>Google は、自社のアプリやサービスのすべてに Gemini を詰め込むことに満足せず、デスクトップやラップトップにも AI アシスタントを採用してほしいと考えています。同社は火曜日に Gemini Windows アプリをリリースし、その翌日に Mac 用アプリをリリースした。 Googleは、macOS Geminiアプリは「ネイティブ」であると述べています</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-usd-weak'>💻 PC・周辺機器</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.engadget.com/ai/google-unleashes-a-native-gemini-app-for-the-mac-170500185.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -976,7 +1038,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Shoe company Allbirds pivots to AI compute in sign of a totally normal and healthy economy</h3><div class='summary'>The shoe company Allbirds, famous for its wool trainers, is pivoting to AI . You read that right. The San Francisco company has plans &quot;to pivot its business to AI compute infrastructure, with a long-term vision to become a fully integrated GPU-as-a-Service and AI-native cloud solutions provider.&quot; It</div></div>
-<div class='lang-pane lang-ja hidden'><h3>靴会社オールバーズ、完全に正常で健全な経済の兆しとして AI コンピューティングに軸足を移す</h3><div class='summary'>ウールのスニーカーで有名な靴会社オールバーズは、AI に軸足を移しています。あなたはそれを正しく読んでいます。サンフランシスコの同社は、「完全に統合された GPU-as-a-Service および AI ネイティブのクラウド ソリューション プロバイダーになるという長期的なビジョンを掲げ、ビジネスを AI コンピューティング インフラストラクチャに軸足する」計画を立てています。それ</div></div>
+<div class='lang-pane lang-ja hidden'><h3>靴会社オールバーズ、完全に正常で健全な経済の兆しとして AI コンピューティングに軸足を移す</h3><div class='summary'>ウールのトレーナーで有名な靴会社オールバーズは、AI に軸足を移しています。あなたはそれを正しく読んでいます。サンフランシスコの同社は、「完全に統合された GPU-as-a-Service および AI ネイティブのクラウド ソリューション プロバイダーになるという長期的なビジョンを掲げ、ビジネスを AI コンピューティング インフラストラクチャに軸足する」計画を立てています。それ</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-usd-weak'>💻 PC・周辺機器</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.engadget.com/ai/shoe-company-pivots-to-ai-compute-in-sign-of-a-totally-normal-and-healthy-economy-161449196.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -1020,7 +1082,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Most US teens say TikTok, Instagram and Snapchat aren&#x27;t hurting (or helping) their mental health</h3><div class='summary'>Most teens in the United States say that Instagram, TikTok and Snapchat aren&#x27;t harming their mental health, though a slightly higher proportion report negative effects on their sleep and productivity, according to a new report from Pew Research. The report offers fresh insights into how teens percei</div></div>
-<div class='lang-pane lang-ja hidden'><h3>米国の十代の若者のほとんどは、TikTok、Instagram、Snapchatが自分たちの精神的健康に悪影響を与えていない（または助けになっていない）と述べている</h3><div class='summary'>ピュー・リサーチの新たな報告書によると、米国の十代の若者のほとんどは、インスタグラム、ティックトック、スナップチャットが自分たちの精神的健康に悪影響を及ぼしていないとしているが、睡眠や生産性に悪影響を及ぼしていると報告している割合がわずかに高い。このレポートは、十代の若者たちがどのように認識しているかについての新たな洞察を提供します。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>米国の十代の若者のほとんどは、TikTok、Instagram、Snapchatが精神的健康に悪影響を与えていない（または助けになっていない）と述べている</h3><div class='summary'>ピュー・リサーチの新たな報告書によると、米国の十代の若者のほとんどは、インスタグラム、ティックトック、スナップチャットが自分たちの精神的健康に悪影響を及ぼしていないとしているが、睡眠や生産性に悪影響を及ぼしていると報告している割合がわずかに高い。このレポートは、十代の若者たちがどのように認識しているかについての新たな洞察を提供します。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-usd-weak'>💻 PC・周辺機器</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.engadget.com/social-media/most-us-teens-say-tiktok-instagram-and-snapchat-arent-hurting-or-helping-their-mental-health-140000912.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -1200,7 +1262,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Godzilla goes to New York in &#x27;Minus Zero&#x27; teaser trailer</h3><div class='summary'>Japanese entertainment company Toho has released a teaser video for Godzilla Minus Zero , the upcoming sequel to the award-winning film Godzilla Minus One . The teaser shows the famous monster next to the Statue of Liberty as it rampages across New York. Godzilla Minus Zero is set in 1949, two years</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ゴジラ、「マイナスゼロ」ティーザートレーラーでニューヨークへ</h3><div class='summary'>日本のエンターテインメント会社である東宝は、受賞歴のある映画『ゴジラ マイナス ワン』の続編である『ゴジラ マイナス ゼロ』のティーザービデオを公開しました。ティーザーでは、自由の女神の隣で有名な怪物がニューヨーク中を暴れ回る様子が描かれています。 『ゴジラ マイナスゼロ』の舞台は1949年から2年後</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ゴジラ、「マイナスゼロ」ティーザートレーラーでニューヨークへ</h3><div class='summary'>日本のエンターテインメント会社である東宝は、受賞歴のある映画『ゴジラ マイナス ワン』の続編である『ゴジラ マイナス ゼロ』のティーザービデオを公開しました。ティーザーでは、自由の女神の隣で有名な怪物がニューヨーク中を暴れ回る様子が描かれています。 『ゴジラ マイナスゼロ』の舞台は1949年、2年後</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-usd-weak'>💻 PC・周辺機器</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.engadget.com/entertainment/godzilla-goes-to-new-york-in-minus-zero-teaser-trailer-015029346.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -1388,7 +1450,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>The Morning After: Meta is reportedly working on an AI model of Mark Zuckerberg</h3><div class='summary'>If you were looking for the worst AI project announced so far this week, try Meta. According to a Financial Times report, the company is developing its own Mark Zuckerberg AI , training it on Zuckerberg’s mannerisms, tone and publicly available statements. AKA, the good stuff. ( Will it smoke meats </div></div>
-<div class='lang-pane lang-ja hidden'><h3>ザ・モーニング・アフター：メタがマーク・ザッカーバーグのAIモデルに取り組んでいると報じられている</h3><div class='summary'>今週これまでに発表された最悪の AI プロジェクトを探しているなら、Meta を試してみてください。フィナンシャル・タイムズの報道によると、同社は独自のマーク・ザッカーバーグAIを開発しており、ザッカーバーグのマナー、口調、公開されている発言に基づいてトレーニングしているという。別名、良いものです。 （肉を燻製にするのですか</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ザ・モーニング・アフター：メタがマーク・ザッカーバーグのAIモデルに取り組んでいると報じられている</h3><div class='summary'>今週これまでに発表された最悪の AI プロジェクトを探しているなら、Meta を試してみてください。フィナンシャル・タイムズの報道によると、同社は独自のマーク・ザッカーバーグAIを開発しており、ザッカーバーグのマナー、口調、公開されている発言に基づいてトレーニングしているという。別名、良いものです。 (肉を燻製するのですか</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>📱 スマホ・タブレット</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-usd-strong'>📱 スマホ・タブレット</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.engadget.com/general/the-morning-after-engadget-newsletter-111528055.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -1595,7 +1657,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Roblox introduces mandatory age-gated account tiers</h3><div class='summary'>Roblox is preparing to roll out its biggest change since starting age verification late last year. While that program was initially focused on chat access, today’s news is about age-segregating the games on the massive platform. Starting in mid-May, users will be pushed into one of three worlds: Rob</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Roblox、必須の年齢制限付きアカウント階層を導入</h3><div class='summary'>Robloxは、昨年末に年齢認証を開始して以来最大の変更を展開する準備をしている。このプログラムは当初、チャット アクセスに焦点を当てていましたが、今日のニュースは、巨大なプラットフォーム上のゲームの年齢別化に関するものです。 5 月中旬から、ユーザーは 3 つの世界のいずれかに押し込まれます: ロブ</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Roblox が必須の年齢制限付きアカウント階層を導入</h3><div class='summary'>Robloxは、昨年末に年齢確認を開始して以来最大の変更を展開する準備をしている。このプログラムは当初、チャット アクセスに焦点を当てていましたが、今日のニュースは、巨大なプラットフォーム上のゲームの年齢区分に関するものです。 5 月中旬から、ユーザーは 3 つの世界のいずれかに押し込まれます: ロブ</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>📝 レビュー・比較</span><span class='tag tag-usd-weak'>💻 PC・周辺機器</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.engadget.com/gaming/roblox-introduces-mandatory-age-gated-account-tiers-121535702.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -1625,9 +1687,26 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='theme-section' data-section='カメラ・オーディオ'>
   <div class='theme-header'>
     <span class='theme-badge' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span>
-    <span style='color:var(--muted);font-size:13px'>Camera / Audio · <span class='section-count'>31</span>件</span>
+    <span style='color:var(--muted);font-size:13px'>Camera / Audio · <span class='section-count'>32</span>件</span>
   </div>
   <div class='grid theme-grid'>
+<article class='card item-card'
+  data-cardid='item-a36039d20cb4'
+  data-themes='スマホ・タブレット|カメラ・オーディオ'
+  data-lang='ja'
+  data-score='4'
+  data-source='デジカメ Watch'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>デジカメ Watch</span><span>2026-04-16 03:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-a36039d20cb4')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>週刊アンケート：【結果発表】スマホカメラは何眼？</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>📱 スマホ・タブレット</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-usd-strong'>📱 スマホ・タブレット</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://dc.watch.impress.co.jp/docs/enquete/2101967.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
 <article class='card item-card'
   data-cardid='item-f1151cd13fac'
   data-themes='カメラ・オーディオ'
@@ -1933,7 +2012,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Godzilla goes to New York in &#x27;Minus Zero&#x27; teaser trailer</h3><div class='summary'>Japanese entertainment company Toho has released a teaser video for Godzilla Minus Zero , the upcoming sequel to the award-winning film Godzilla Minus One . The teaser shows the famous monster next to the Statue of Liberty as it rampages across New York. Godzilla Minus Zero is set in 1949, two years</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ゴジラ、「マイナスゼロ」ティーザートレーラーでニューヨークへ</h3><div class='summary'>日本のエンターテインメント会社である東宝は、受賞歴のある映画『ゴジラ マイナス ワン』の続編である『ゴジラ マイナス ゼロ』のティーザービデオを公開しました。ティーザーでは、自由の女神の隣で有名な怪物がニューヨーク中を暴れ回る様子が描かれています。 『ゴジラ マイナスゼロ』の舞台は1949年から2年後</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ゴジラ、「マイナスゼロ」ティーザートレーラーでニューヨークへ</h3><div class='summary'>日本のエンターテインメント会社である東宝は、受賞歴のある映画『ゴジラ マイナス ワン』の続編である『ゴジラ マイナス ゼロ』のティーザービデオを公開しました。ティーザーでは、自由の女神の隣で有名な怪物がニューヨーク中を暴れ回る様子が描かれています。 『ゴジラ マイナスゼロ』の舞台は1949年、2年後</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-usd-weak'>💻 PC・周辺機器</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.engadget.com/entertainment/godzilla-goes-to-new-york-in-minus-zero-teaser-trailer-015029346.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -2111,7 +2190,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>The Morning After: Meta is reportedly working on an AI model of Mark Zuckerberg</h3><div class='summary'>If you were looking for the worst AI project announced so far this week, try Meta. According to a Financial Times report, the company is developing its own Mark Zuckerberg AI , training it on Zuckerberg’s mannerisms, tone and publicly available statements. AKA, the good stuff. ( Will it smoke meats </div></div>
-<div class='lang-pane lang-ja hidden'><h3>ザ・モーニング・アフター：メタがマーク・ザッカーバーグのAIモデルに取り組んでいると報じられている</h3><div class='summary'>今週これまでに発表された最悪の AI プロジェクトを探しているなら、Meta を試してみてください。フィナンシャル・タイムズの報道によると、同社は独自のマーク・ザッカーバーグAIを開発しており、ザッカーバーグのマナー、口調、公開されている発言に基づいてトレーニングしているという。別名、良いものです。 （肉を燻製にするのですか</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ザ・モーニング・アフター：メタがマーク・ザッカーバーグのAIモデルに取り組んでいると報じられている</h3><div class='summary'>今週これまでに発表された最悪の AI プロジェクトを探しているなら、Meta を試してみてください。フィナンシャル・タイムズの報道によると、同社は独自のマーク・ザッカーバーグAIを開発しており、ザッカーバーグのマナー、口調、公開されている発言に基づいてトレーニングしているという。別名、良いものです。 (肉を燻製するのですか</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>📱 スマホ・タブレット</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-usd-strong'>📱 スマホ・タブレット</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.engadget.com/general/the-morning-after-engadget-newsletter-111528055.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -2456,7 +2535,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>There&#x27;s yet another study about how bad AI is for our brains</h3><div class='summary'>A group of researchers from across the US and the UK have conducted a study on what AI does to our brains and the results are, in a word, grim. These results were published in a paper called &quot;AI assistance reduces persistence and hurts independent performance&quot; which kind of tells you everything you </div></div>
-<div class='lang-pane lang-ja hidden'><h3>AIが私たちの脳にどれほど悪影響を与えるかについて、さらに別の研究がある</h3><div class='summary'>米国と英国の研究者グループが、AI が私たちの脳に与える影響に関する研究を実施しましたが、その結果は一言で言えば悲惨なものでした。これらの結果は、「AI 支援により持続性が低下し、独立したパフォーマンスが損なわれる」という論文で発表されました。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>AIが私たちの脳にどれほど悪影響を与えるかについて、さらに別の研究がある</h3><div class='summary'>米国と英国の研究者グループが、AI が私たちの脳に与える影響について研究を実施しましたが、その結果は一言で言えば厳しいものでした。これらの結果は、「AI 支援により持続性が低下し、独立したパフォーマンスが損なわれる」という論文で発表されました。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>📝 レビュー・比較</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.engadget.com/ai/theres-yet-another-study-about-how-bad-ai-is-for-our-brains-183418494.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -2749,7 +2828,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Roblox introduces mandatory age-gated account tiers</h3><div class='summary'>Roblox is preparing to roll out its biggest change since starting age verification late last year. While that program was initially focused on chat access, today’s news is about age-segregating the games on the massive platform. Starting in mid-May, users will be pushed into one of three worlds: Rob</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Roblox、必須の年齢制限付きアカウント階層を導入</h3><div class='summary'>Robloxは、昨年末に年齢認証を開始して以来最大の変更を展開する準備をしている。このプログラムは当初、チャット アクセスに焦点を当てていましたが、今日のニュースは、巨大なプラットフォーム上のゲームの年齢別化に関するものです。 5 月中旬から、ユーザーは 3 つの世界のいずれかに押し込まれます: ロブ</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Roblox が必須の年齢制限付きアカウント階層を導入</h3><div class='summary'>Robloxは、昨年末に年齢確認を開始して以来最大の変更を展開する準備をしている。このプログラムは当初、チャット アクセスに焦点を当てていましたが、今日のニュースは、巨大なプラットフォーム上のゲームの年齢区分に関するものです。 5 月中旬から、ユーザーは 3 つの世界のいずれかに押し込まれます: ロブ</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>📝 レビュー・比較</span><span class='tag tag-usd-weak'>💻 PC・周辺機器</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.engadget.com/gaming/roblox-introduces-mandatory-age-gated-account-tiers-121535702.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -2779,9 +2858,43 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='theme-section' data-section='その他'>
   <div class='theme-header'>
     <span class='theme-badge' style='background:#636e7222;border-color:#636e72;color:#636e72'>➖ その他</span>
-    <span style='color:var(--muted);font-size:13px'>Others · <span class='section-count'>84</span>件</span>
+    <span style='color:var(--muted);font-size:13px'>Others · <span class='section-count'>81</span>件</span>
   </div>
   <div class='grid theme-grid'>
+<article class='card item-card'
+  data-cardid='item-a1d33ce93302'
+  data-themes='その他'
+  data-lang='ja'
+  data-score='1'
+  data-source='家電 Watch'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>家電 Watch</span><span>2026-04-16 03:04</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-a1d33ce93302')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>時間設定なしで冷凍食品あたため簡単なオーブンレンジ、東芝</h3><div class='summary'>東芝ライフスタイルは、過熱水蒸気オーブンレンジ「石窯ドーム」から、市販冷凍食品の自動あたため機能を搭載した「ER-D7000C」を、6月に発売する。価格はオープン。市場想定価格は187,000円前後。</div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://kaden.watch.impress.co.jp/docs/news/2101598.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-34add18ae2f6'
+  data-themes='その他'
+  data-lang='ja'
+  data-score='1'
+  data-source='AV Watch'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-16 03:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-34add18ae2f6')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Audeze「勝敗を分ける一瞬を確実に捉える」平面磁界型ゲーミングヘッドセット</h3><div class='summary'>完実電気は、Audezeの平面磁界型ワイヤレスゲーミングヘッドセット「Maxwell2」を、4月16日に発売した。PlayStation用とXbox用の2タイプを用意し、いずれも価格はオープン。直販価格はPlayStation用「Maxwell2 for PlayStation」が72,600円、Xbox用「Maxwell2 for X-Box」が82,280円。</div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2102124.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
 <article class='card item-card'
   data-cardid='item-9c527241f63f'
   data-themes='その他'
@@ -2990,7 +3103,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>The ‘Galaxy’s Edge’ Han Solo Proves You Really Can’t Replace Harrison Ford</h3><div class='summary'>&#x27;It may not look like much, but it&#x27;s got it where it counts&#x27; is probably not something you want to say to someone&#x27;s face wandering &#x27;Galaxy&#x27;s Edge.&#x27;</div></div>
-<div class='lang-pane lang-ja hidden'><h3>『ギャラクシーズ・エッジ』ハン・ソロはハリソン・フォードの代わりにはなれないことを証明する</h3><div class='summary'>「大したことはないように見えるかもしれないが、重要なところにはそれが備わっている」というのは、おそらく「ギャラクシーズ・エッジ」をさまよっている人に面と向かって言いたくない言葉だろう。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>『ギャラクシーズ・エッジ』ハン・ソロはハリソン・フォードの代わりにはなれないことを証明する</h3><div class='summary'>「大したことはないように見えるかもしれないが、重要なところにはそれが備わっている」という言葉は、おそらく「ギャラクシーズ・エッジ」をさまよう人に面と向かって言いたくない言葉だろう。</div></div>
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://gizmodo.com/galaxys-edge-han-solo-character-reveal-star-wars-disneyland-2000746980' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -3056,7 +3169,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Federal jury finds concert business Live Nation is a monopoly</h3><div class='summary'>Live Nation, which operates the Ticketmaster platform, has been determined to be a monopoly . A federal jury handed down its decision today that the company violated federal and state antitrust rules. This finding won&#x27;t surprise anyone who has used Ticketmaster and been sticker-shocked by their fina</div></div>
-<div class='lang-pane lang-ja hidden'><h3>連邦陪審、ライブ・ネイションは独占企業であるとコンサート事業を認定</h3><div class='summary'>Ticketmaster プラットフォームを運営する Live Nation は、独占企業であると判断されました。連邦陪審は本日、同社が連邦および州の独占禁止法に違反したとの判決を下した。この発見は、Ticketmaster を使用し、その FINA に衝撃を受けた人なら誰でも驚くことではないでしょう。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>連邦陪審、ライブ・ネイションは独占企業であるとコンサート事業を認定</h3><div class='summary'>Ticketmaster プラットフォームを運営する Live Nation は、独占企業であると判断されました。連邦陪審は本日、同社が連邦および州の独占禁止法に違反したとの判決を下した。 Ticketmaster を使用し、その FINA に衝撃を受けた人なら、この発見は驚くべきことではないでしょう。</div></div>
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://www.engadget.com/entertainment/music/federal-jury-finds-concert-business-live-nation-is-a-monopoly-203924011.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -3437,7 +3550,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Adobe embraces conversational AI editing, marking a ‘fundamental shift’ in creative work</h3><div class='summary'>Adobe is fully embracing AI tools that enable creators to edit their work using descriptive prompts, instead of manually using specific Creative Cloud apps. The software giant&#x27;s new Firefly AI Assistant allows users to describe what they want to change by typing their own words into a conversational</div></div>
-<div class='lang-pane lang-ja hidden'><h3>アドビ、会話型 AI 編集を採用、クリエイティブな仕事に「根本的な変化」をもたらす</h3><div class='summary'>アドビは、クリエイターが特定の Creative Cloud アプリを手動で使用する代わりに、説明的なプロンプトを使用して作品を編集できるようにする AI ツールを全面的に採用しています。ソフトウェア大手の新しい Firefly AI アシスタントを使用すると、ユーザーは会話形式に自分の言葉を入力して、変更したい内容を説明できます。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>アドビ、会話型 AI 編集を採用、クリエイティブな仕事に「根本的な変化」をもたらす</h3><div class='summary'>アドビは、クリエイターが特定の Creative Cloud アプリを手動で使用する代わりに、説明的なプロンプトを使用して作品を編集できるようにする AI ツールを全面的に採用しています。ソフトウェア大手の新しい Firefly AI アシスタントを使用すると、ユーザーは会話文に自分の言葉を入力して、変更したい内容を説明できます。</div></div>
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://www.theverge.com/tech/912287/adobe-firefly-ai-assistant-announcement-editing' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -3906,23 +4019,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2101618.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-6faec1b74efa'
-  data-themes='その他'
-  data-lang='ja'
-  data-score='1'
-  data-source='AV Watch'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-15 01:03</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-6faec1b74efa')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>ソニーINZONE、MDR-MV1ベースの初背面開放型ヘッドセット「H6 Air」</h3><div class='summary'>ソニーは、INZONE初の背面開放型を採用したゲーミングヘッドセット「INZONE H6 Air」を4月24日に発売する。市場想定価格は28,000円前後。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2101609.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-f138e8106dfb'
   data-themes='その他'
   data-lang='ja'
@@ -4081,7 +4177,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>NAACP sues xAI over data center pollution</h3><div class='summary'>The NAACP is suing xAI and a subsidiary called MZX Tech for allegedly operating unpermitted methane gas turbines to power its Colossus 2 data center in South Memphis. The association is asking the federal district court of the Northern District of Mississippi to declare that the company has violated</div></div>
-<div class='lang-pane lang-ja hidden'><h3>NAACP、データセンター汚染をめぐりxAIを提訴</h3><div class='summary'>NAACPは、南メンフィスにあるColossus 2データセンターに電力を供給するために無許可でメタンガスタービンを稼働させたとして、xAIとMZX Techという子会社を訴えている。同協会はミシシッピ州北部地区連邦地方裁判所に対し、同社が違反行為を行ったと宣言するよう求めている。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>NAACP、データセンター汚染をめぐりxAIを提訴</h3><div class='summary'>NAACPは、南メンフィスにあるColossus 2データセンターに電力を供給するために無許可のメタンガスタービンを稼働させたとして、xAIとMZX Techという子会社を訴えている。同協会はミシシッピ州北部地区連邦地方裁判所に対し、同社が違反行為を行ったと宣言するよう求めている。</div></div>
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://www.engadget.com/ai/naacp-sues-xai-over-data-center-pollution-213511352.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -4125,7 +4221,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>OpenAI buys its second startup in a month</h3><div class='summary'>OpenAI has acquired Hiro Finance, a startup that offers AI-powered financial planning tools. As first reported by TechCrunch , fiscal terms of the deal, which was announced on Monday, were not disclosed by OpenAI. However, all signs point this to being an acquhire, with Hiro founder Ethan Bloch writ</div></div>
-<div class='lang-pane lang-ja hidden'><h3>OpenAI、1か月で2社目のスタートアップを買収</h3><div class='summary'>OpenAI は、AI を活用したファイナンシャル プランニング ツールを提供するスタートアップの Hero Finance を買収しました。 TechCrunch が最初に報じたように、月曜日に発表されたこの取引の会計条件は OpenAI によって開示されていない。しかし、すべての兆候はこれが買収であることを示しており、ヒロの創設者イーサン・ブロックの令状もある。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>OpenAI、1か月で2社目のスタートアップを買収</h3><div class='summary'>OpenAI は、AI を活用したファイナンシャル プランニング ツールを提供するスタートアップ企業 Hero Finance を買収しました。 TechCrunch が最初に報じたように、月曜日に発表されたこの取引の会計条件は OpenAI によって開示されていない。しかし、すべての兆候はこれが買収であることを示しており、ヒロの創設者イーサン・ブロックの令状もある。</div></div>
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://www.engadget.com/ai/openai-buys-its-second-startup-in-a-month-140550769.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -4147,77 +4243,9 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Sony is developing a Bloodborne animated film adaptation</h3><div class='summary'>An R-rated animated film adaptation of Bloodborne is currently being developed by Sony, according to Variety . Sony Pictures Entertainment Motion Picture Group held a presentation at CinemaCon, where the division’s president said that the adaptation will be “very true” to the violent and graphic nat</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ソニーが『Bloodborne』のアニメ映画化を開発中</h3><div class='summary'>Variety によると、『Bloodborne』の R 指定アニメ映画化が現在ソニーによって開発されているとのこと。ソニー・ピクチャーズ エンタテインメント映画グループはシネマコンでプレゼンテーションを開催し、同部門の社長は、この映画化は暴力的で生々しい映画に「非常に忠実」であると述べた。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ソニーが『Bloodborne』のアニメ映画化を開発中</h3><div class='summary'>Variety によると、『Bloodborne』の R 指定アニメ映画化が現在ソニーによって開発されているとのこと。ソニー・ピクチャーズ エンタテインメント映画グループはシネマコンでプレゼンテーションを開催し、同部門の社長は、この映画化は暴力的で生々しい国家映画に「非常に忠実」であると述べた。</div></div>
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://www.engadget.com/gaming/sony-is-developing-a-bloodborne-animated-film-adaptation-110421866.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-1a730e39b394'
-  data-themes='その他'
-  data-lang='ja'
-  data-score='1'
-  data-source='ケータイ Watch'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ケータイ Watch</span><span>2026-04-14 10:16</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-1a730e39b394')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>ブラウザの「戻るボタン」“乗っ取り”はスパム、グーグルが新方針</h3><div class='summary'>グーグルは、検索のスパムポリシーの中で「戻るボタンの乗っ取り」（back button hijacking）と呼ばれる行為を「悪意のある行為」の明示的な違反として追加したと発表した。6月15日から適用される。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://k-tai.watch.impress.co.jp/docs/news/2101639.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-588a0854dfc8'
-  data-themes='その他'
-  data-lang='ja'
-  data-score='3'
-  data-source='デジカメ Watch'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>デジカメ Watch</span><span>2026-04-14 10:15</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-588a0854dfc8')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>動画編集ソフトDaVinci Resolveが「写真編集」に対応 動画素材と色調を統一 テザリング撮影も可能に</h3><div class='summary'>Blackmagic Designは4月13日、動画編集ソフトの最新版「DaVinci Resolve 21」を発表した。新たに写真を扱うための「フォトページ」が利用可能になった。無料版でも利用できる。現在、パブリックベータ版が公開中。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://dc.watch.impress.co.jp/docs/news/2101654.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-6d99059ee90f'
-  data-themes='その他'
-  data-lang='ja'
-  data-score='1'
-  data-source='ケータイ Watch'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ケータイ Watch</span><span>2026-04-14 07:23</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-6d99059ee90f')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>KDDI、基地局の電源をスマート化 九州の300局で再エネ利用と災害対応力強化</h3><div class='summary'>KDDIは、基地局の電力利用をコントロールする電源設備「Open Power Station」を、九州エリアの300の基地局で導入し、稼働を開始した。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://k-tai.watch.impress.co.jp/docs/news/2101568.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-ad09dfef5368'
-  data-themes='その他'
-  data-lang='ja'
-  data-score='1'
-  data-source='家電 Watch'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>家電 Watch</span><span>2026-04-14 07:04</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-ad09dfef5368')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>工事不要の後付けスマートロック AI指紋認証で0.5秒解錠</h3><div class='summary'>Dreame Technology Japanは、スマートロック「Dreame Sakura Lock Vision Pro」を、4月10日に発売した。価格は34,980円で、4月30日までは期間限定特別価格の26,982円で販売する。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://kaden.watch.impress.co.jp/docs/news/2101457.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-b92345bf6576'
@@ -4237,7 +4265,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Two suspects have been arrested for allegedly shooting at Sam Altman&#x27;s house</h3><div class='summary'>OpenAI CEO Sam Altman&#x27;s house may have been the target of a second attack after San Francisco Police Department arrested two suspects for a reported shooting in the Russian Hill neighborhood. The SFPD said in a press release that police officers responded to a &quot;suspicious occurrence of possible shot</div></div>
-<div class='lang-pane lang-ja hidden'><h3>サム・アルトマンさん宅で銃撃の疑いで容疑者２人逮捕</h3><div class='summary'>サンフランシスコ市警察がロシアン・ヒル地区での銃撃事件で容疑者２人を逮捕したことを受け、OpenAIの最高経営責任者（CEO）サム・アルトマン氏の自宅が二度目の襲撃の標的となった可能性がある。 SFPDはプレスリリースで、警察官が「発砲の可能性がある不審な出来事が発生した」と対応したと述べた。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>サム・アルトマンさん宅で銃撃の疑いで容疑者２人逮捕</h3><div class='summary'>サンフランシスコ警察がロシアン・ヒル地区での銃撃事件で容疑者２人を逮捕したことを受け、OpenAIの最高経営責任者（CEO）サム・アルトマン氏の自宅が二度目の襲撃の標的となった可能性がある。 SFPDはプレスリリースで、警察官が「発砲の可能性がある不審な出来事が発生した」と対応したと述べた。</div></div>
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.engadget.com/ai/two-suspects-have-been-arrested-for-allegedly-shooting-at-sam-altmans-house-142655308.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -4281,7 +4309,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Meta warned by dozens of organizations that facial recognition on its smart glasses would empower predators</h3><div class='summary'>Dozens of civil rights organizations have written a letter to Meta CEO Mark Zuckerberg to warn of the dangers in bringing facial recognition technology to the company&#x27;s smart glasses. More than 70 groups have banded together to form a coalition to urge Zuckerberg to abandon plans to incorporate the </div></div>
-<div class='lang-pane lang-ja hidden'><h3>メタはスマートグラスの顔認識が捕食者に力を与えると数十の組織から警告</h3><div class='summary'>数十の公民権団体がメタのCEO、マーク・ザッカーバーグに書簡を送り、同社のスマートグラスに顔認識技術を導入することの危険性を警告した。 70以上の団体が団結して連合を結成し、ザッカーバーグ氏に企業を組み込む計画を放棄するよう促した。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>メタはスマートグラスの顔認識が捕食者に力を与えると数十の組織から警告</h3><div class='summary'>数十の公民権団体がメタのCEO、マーク・ザッカーバーグに書簡を送り、同社のスマートグラスに顔認識技術を導入することの危険性を警告した。 70以上の団体が団結して連合を結成し、ザッカーバーグ氏に企業組み入れ計画を放棄するよう促した。</div></div>
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://www.engadget.com/big-tech/meta-warned-by-dozens-of-organizations-that-facial-recognition-on-its-smart-glasses-would-empower-predators-185000998.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -4395,7 +4423,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.engadget.com/big-tech/ibm-settles-its-dei-lawsuit-with-the-doj-for-17-million-153749285.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div>
-</div></div><footer>Gadget + — Generated at 2026-04-16 11:52</footer></body></html>
+</div></div><footer>Gadget + — Generated at 2026-04-16 12:19</footer></body></html>
 <script>
 var pageLang = 'en';
 function setPageLang(lang) {

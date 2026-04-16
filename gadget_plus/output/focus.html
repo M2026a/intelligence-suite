@@ -26,35 +26,41 @@ header{position:sticky;top:0;z-index:50;background:rgba(13,16,22,.96);backdrop-f
 .nav a:hover{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.06)}
 .nav a.active{background:linear-gradient(135deg,#4ea1ff,#5a86ff);border-color:transparent;color:#fff;box-shadow:0 4px 16px rgba(78,161,255,.3)}
 .main{max-width:1480px;margin:18px auto;padding:0 20px 40px}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px;overflow:hidden}
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
 .stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
 .stat .num{font-size:26px;font-weight:800;margin-bottom:4px}
 .stat .label{color:var(--muted);font-size:12px}
 .stat .icon{font-size:22px;margin-bottom:8px}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
-.flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center;width:100%;max-width:100%;box-sizing:border-box}
+.filters > *{min-width:0;max-width:100%;box-sizing:border-box}
+.flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s;max-width:100%;box-sizing:border-box}
 .flt-btn:hover{border-color:var(--accent)}
 .flt-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
-.search{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 12px;font-size:13px;min-width:220px}
+.search{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 12px;font-size:13px;min-width:220px;max-width:100%;box-sizing:border-box}
 .search::placeholder{color:var(--muted)}
 .filter-label{color:var(--muted);font-size:12px;white-space:nowrap}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.grid > *{min-width:0;max-width:100%}
 .grid.list{grid-template-columns:1fr}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;transition:border-color .18s,opacity .18s}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;transition:border-color .18s,opacity .18s;min-width:0;max-width:100%;box-sizing:border-box}
 .card:hover{border-color:var(--accent)}
 .card.is-read{opacity:.45}
 .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
-.card-meta{display:flex;gap:6px;flex-wrap:wrap;color:var(--muted);font-size:12px;align-items:center}
-.card-lang-toggle{display:flex;gap:5px;flex-shrink:0;align-items:center}
+.card-top > *{min-width:0;max-width:100%}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;color:var(--muted);font-size:12px;align-items:center;min-width:0;max-width:100%;overflow-wrap:anywhere;word-break:break-word}
+.card-meta span{min-width:0;max-width:100%;overflow-wrap:anywhere;word-break:break-word}
+.card-lang-toggle{display:flex;gap:5px;flex-shrink:0;align-items:center;flex-wrap:wrap;min-width:0;max-width:100%}
 .card-lang-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;white-space:nowrap;transition:all .15s}
 .card-lang-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
-.read-btn{background:var(--panel2);border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;transition:all .15s}
+.read-btn{background:var(--panel2);border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;transition:all .15s;max-width:100%}
 .read-btn:hover{border-color:#666}
-.card h3{margin:0;font-size:15px;line-height:1.5;font-weight:700}
-.summary{color:#ced7e6;font-size:13px;line-height:1.6}
+.card h3{margin:0;font-size:15px;line-height:1.5;font-weight:700;overflow-wrap:anywhere;word-break:break-word}
+.summary{color:#ced7e6;font-size:13px;line-height:1.6;overflow-wrap:anywhere;word-break:break-word}
 .lang-pane.hidden{display:none!important}
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;min-width:0;max-width:100%}
+.tag{overflow-wrap:anywhere;word-break:break-word;max-width:100%}
+.open-btn{max-width:100%;white-space:normal;text-align:center;overflow-wrap:anywhere;word-break:break-word;box-sizing:border-box}
 .tag{display:inline-block;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:600;border:1px solid transparent}
 .tag-official{background:#173126;border-color:#2f7254;color:#c6f1dc}
 .tag-score5,.tag-score4{background:#1e1a3a;border-color:#a78bfa;color:#e0d9ff}
@@ -89,8 +95,13 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 @media(max-width:700px){
   .wrap,.main,footer{padding-left:12px;padding-right:12px}
   .grid{grid-template-columns:1fr}
-  .search{min-width:160px;width:100%}
+  .filters{align-items:stretch}
+  .filters > *{min-width:0;max-width:100%}
+  .search{min-width:0;width:100%}
+  .flt-btn{white-space:normal;overflow-wrap:anywhere;word-break:break-word}
+  #sourceFilterRow .flt-source{white-space:normal;overflow-wrap:anywhere;word-break:break-word}
   .card-top{flex-direction:column}
+  .card-lang-toggle{width:100%}
 }
 </style>
 </head>
@@ -100,7 +111,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='top'>
     <div class='title'>
       <h1>📱 Gadget + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ ガジェット・家電・便利グッズ情報</span></h1>
-      <div class='sub'>更新日時：2026-04-16 11:52</div>
+      <div class='sub'>更新日時：2026-04-16 12:19</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -130,7 +141,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   
 <div class='fx-summary-grid'>
   <div class='fx-summary-card fx-usd-strong'>
-    <div class='fx-num' style='color:#7c4dff'>29</div>
+    <div class='fx-num' style='color:#7c4dff'>32</div>
     <div class='fx-label'>📱 スマホ・タブレット</div>
     <div class='fx-desc'>Phones / Tablets</div>
   </div>
@@ -150,7 +161,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='fx-desc'>Smart Appliances</div>
   </div>
   <div class='fx-summary-card' style='background:var(--panel2);border-color:var(--line)'>
-    <div class='fx-num' style='color:var(--muted)'>102</div>
+    <div class='fx-num' style='color:var(--muted)'>99</div>
     <div class='fx-label'>➖ その他</div>
     <div class='fx-desc'>General</div>
   </div>
@@ -164,8 +175,59 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
       <input id='searchBoxImportance' class='search' placeholder='タイトル・本文を検索...'>
     </div>
   </div>
-  <div class='fx-tabs'><button class='fx-tab active' data-key='ai_data' style='background:#1a1233;border-color:#7c4dff;color:#fff' onclick="switchFxTab('ai_data',this)">📱 スマホ・タブレット (29)</button><button class='fx-tab ' data-key='security_alert' style='' onclick="switchFxTab('security_alert',this)">💻 PC・周辺機器 (26)</button><button class='fx-tab ' data-key='cloud_platform' style='' onclick="switchFxTab('cloud_platform',this)">📷 カメラ・オーディオ (22)</button><button class='fx-tab ' data-key='developer_tools' style='' onclick="switchFxTab('developer_tools',this)">🏠 スマート家電 (4)</button></div>
+  <div class='fx-tabs'><button class='fx-tab active' data-key='ai_data' style='background:#1a1233;border-color:#7c4dff;color:#fff' onclick="switchFxTab('ai_data',this)">📱 スマホ・タブレット (32)</button><button class='fx-tab ' data-key='security_alert' style='' onclick="switchFxTab('security_alert',this)">💻 PC・周辺機器 (26)</button><button class='fx-tab ' data-key='cloud_platform' style='' onclick="switchFxTab('cloud_platform',this)">📷 カメラ・オーディオ (22)</button><button class='fx-tab ' data-key='developer_tools' style='' onclick="switchFxTab('developer_tools',this)">🏠 スマート家電 (4)</button></div>
   <div class='fx-panel active' id='fx-ai_data'><div class='grid'>
+<article class='card item-card'
+  data-cardid='item-c02a2888e861'
+  data-themes='スマホ・タブレット'
+  data-lang='ja'
+  data-score='4'
+  data-source='ケータイ Watch'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ケータイ Watch</span><span>2026-04-16 03:03</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-c02a2888e861')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>サムスン、「Galaxy A57 5G」4月23日発売 6.9mmの薄型大画面で約8万円</h3><div class='summary'>サムスン電子ジャパンは、最新Androidスマートフォン「Samsung Galaxy A57 5G」を発表した。発売日は4月23日で、現在予約を受け付けている。価格は7万9800円。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>📱 スマホ・タブレット</span><span class='tag tag-usd-strong'>📱 スマホ・タブレット</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://k-tai.watch.impress.co.jp/docs/news/2102140.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-a36039d20cb4'
+  data-themes='スマホ・タブレット|カメラ・オーディオ'
+  data-lang='ja'
+  data-score='4'
+  data-source='デジカメ Watch'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>デジカメ Watch</span><span>2026-04-16 03:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-a36039d20cb4')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>週刊アンケート：【結果発表】スマホカメラは何眼？</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>📱 スマホ・タブレット</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-usd-strong'>📱 スマホ・タブレット</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://dc.watch.impress.co.jp/docs/enquete/2101967.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-fb1afd784626'
+  data-themes='スマホ・タブレット'
+  data-lang='ja'
+  data-score='3'
+  data-source='ケータイ Watch'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ケータイ Watch</span><span>2026-04-16 02:55</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-fb1afd784626')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>JCOM、「らくらくスマートフォン Lite」販売開始</h3><div class='summary'>JCOMは、モバイルサービス「J:COM MOBILE」の新端末として、FCNTのシニア向けスマートフォン「らくらくスマートフォン Lite」を発売した。価格は5万2800円。24回または48回での支払いもできる。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>📱 スマホ・タブレット</span><span class='tag tag-usd-strong'>📱 スマホ・タブレット</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://k-tai.watch.impress.co.jp/docs/news/2102126.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
 <article class='card item-card'
   data-cardid='item-227d7f3b9310'
   data-themes='スマホ・タブレット'
@@ -617,7 +679,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>The Morning After: Meta is reportedly working on an AI model of Mark Zuckerberg</h3><div class='summary'>If you were looking for the worst AI project announced so far this week, try Meta. According to a Financial Times report, the company is developing its own Mark Zuckerberg AI , training it on Zuckerberg’s mannerisms, tone and publicly available statements. AKA, the good stuff. ( Will it smoke meats </div></div>
-<div class='lang-pane lang-ja hidden'><h3>ザ・モーニング・アフター：メタがマーク・ザッカーバーグのAIモデルに取り組んでいると報じられている</h3><div class='summary'>今週これまでに発表された最悪の AI プロジェクトを探しているなら、Meta を試してみてください。フィナンシャル・タイムズの報道によると、同社は独自のマーク・ザッカーバーグAIを開発しており、ザッカーバーグのマナー、口調、公開されている発言に基づいてトレーニングしているという。別名、良いものです。 （肉を燻製にするのですか</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ザ・モーニング・アフター：メタがマーク・ザッカーバーグのAIモデルに取り組んでいると報じられている</h3><div class='summary'>今週これまでに発表された最悪の AI プロジェクトを探しているなら、Meta を試してみてください。フィナンシャル・タイムズの報道によると、同社は独自のマーク・ザッカーバーグAIを開発しており、ザッカーバーグのマナー、口調、公開されている発言に基づいてトレーニングしているという。別名、良いものです。 (肉を燻製するのですか</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>📱 スマホ・タブレット</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-usd-strong'>📱 スマホ・タブレット</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.engadget.com/general/the-morning-after-engadget-newsletter-111528055.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -805,7 +867,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Google unleashes a native Gemini app for the Mac</h3><div class='summary'>Not content with stuffing Gemini into all of its own apps and services, Google wants you to adopt its AI assistant on desktops and laptops too. The company released a Gemini Windows app on Tuesday and it&#x27;s following that up a day later with one for Macs. Google says the macOS Gemini app is a &quot;native</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Google、Mac 向けネイティブ Gemini アプリをリリース</h3><div class='summary'>Google は、自社のアプリやサービスのすべてに Gemini を詰め込むことに満足せず、デスクトップやラップトップにも AI アシスタントを採用してほしいと考えています。同社は火曜日に Gemini Windows アプリをリリースし、その翌日に Mac 用アプリをリリースした。 Googleは、macOS Geminiアプリは「ネイティブ」であると述べています</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Google、Mac 用のネイティブ Gemini アプリをリリース</h3><div class='summary'>Google は、自社のアプリやサービスのすべてに Gemini を詰め込むことに満足せず、デスクトップやラップトップにも AI アシスタントを採用してほしいと考えています。同社は火曜日に Gemini Windows アプリをリリースし、その翌日に Mac 用アプリをリリースした。 Googleは、macOS Geminiアプリは「ネイティブ」であると述べています</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-usd-weak'>💻 PC・周辺機器</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.engadget.com/ai/google-unleashes-a-native-gemini-app-for-the-mac-170500185.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -871,7 +933,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Shoe company Allbirds pivots to AI compute in sign of a totally normal and healthy economy</h3><div class='summary'>The shoe company Allbirds, famous for its wool trainers, is pivoting to AI . You read that right. The San Francisco company has plans &quot;to pivot its business to AI compute infrastructure, with a long-term vision to become a fully integrated GPU-as-a-Service and AI-native cloud solutions provider.&quot; It</div></div>
-<div class='lang-pane lang-ja hidden'><h3>靴会社オールバーズ、完全に正常で健全な経済の兆しとして AI コンピューティングに軸足を移す</h3><div class='summary'>ウールのスニーカーで有名な靴会社オールバーズは、AI に軸足を移しています。あなたはそれを正しく読んでいます。サンフランシスコの同社は、「完全に統合された GPU-as-a-Service および AI ネイティブのクラウド ソリューション プロバイダーになるという長期的なビジョンを掲げ、ビジネスを AI コンピューティング インフラストラクチャに軸足する」計画を立てています。それ</div></div>
+<div class='lang-pane lang-ja hidden'><h3>靴会社オールバーズ、完全に正常で健全な経済の兆しとして AI コンピューティングに軸足を移す</h3><div class='summary'>ウールのトレーナーで有名な靴会社オールバーズは、AI に軸足を移しています。あなたはそれを正しく読んでいます。サンフランシスコの同社は、「完全に統合された GPU-as-a-Service および AI ネイティブのクラウド ソリューション プロバイダーになるという長期的なビジョンを掲げ、ビジネスを AI コンピューティング インフラストラクチャに軸足する」計画を立てています。それ</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-usd-weak'>💻 PC・周辺機器</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.engadget.com/ai/shoe-company-pivots-to-ai-compute-in-sign-of-a-totally-normal-and-healthy-economy-161449196.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -915,7 +977,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Most US teens say TikTok, Instagram and Snapchat aren&#x27;t hurting (or helping) their mental health</h3><div class='summary'>Most teens in the United States say that Instagram, TikTok and Snapchat aren&#x27;t harming their mental health, though a slightly higher proportion report negative effects on their sleep and productivity, according to a new report from Pew Research. The report offers fresh insights into how teens percei</div></div>
-<div class='lang-pane lang-ja hidden'><h3>米国の十代の若者のほとんどは、TikTok、Instagram、Snapchatが自分たちの精神的健康に悪影響を与えていない（または助けになっていない）と述べている</h3><div class='summary'>ピュー・リサーチの新たな報告書によると、米国の十代の若者のほとんどは、インスタグラム、ティックトック、スナップチャットが自分たちの精神的健康に悪影響を及ぼしていないとしているが、睡眠や生産性に悪影響を及ぼしていると報告している割合がわずかに高い。このレポートは、十代の若者たちがどのように認識しているかについての新たな洞察を提供します。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>米国の十代の若者のほとんどは、TikTok、Instagram、Snapchatが精神的健康に悪影響を与えていない（または助けになっていない）と述べている</h3><div class='summary'>ピュー・リサーチの新たな報告書によると、米国の十代の若者のほとんどは、インスタグラム、ティックトック、スナップチャットが自分たちの精神的健康に悪影響を及ぼしていないとしているが、睡眠や生産性に悪影響を及ぼしていると報告している割合がわずかに高い。このレポートは、十代の若者たちがどのように認識しているかについての新たな洞察を提供します。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-usd-weak'>💻 PC・周辺機器</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.engadget.com/social-media/most-us-teens-say-tiktok-instagram-and-snapchat-arent-hurting-or-helping-their-mental-health-140000912.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -993,7 +1055,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Godzilla goes to New York in &#x27;Minus Zero&#x27; teaser trailer</h3><div class='summary'>Japanese entertainment company Toho has released a teaser video for Godzilla Minus Zero , the upcoming sequel to the award-winning film Godzilla Minus One . The teaser shows the famous monster next to the Statue of Liberty as it rampages across New York. Godzilla Minus Zero is set in 1949, two years</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ゴジラ、「マイナスゼロ」ティーザートレーラーでニューヨークへ</h3><div class='summary'>日本のエンターテインメント会社である東宝は、受賞歴のある映画『ゴジラ マイナス ワン』の続編である『ゴジラ マイナス ゼロ』のティーザービデオを公開しました。ティーザーでは、自由の女神の隣で有名な怪物がニューヨーク中を暴れ回る様子が描かれています。 『ゴジラ マイナスゼロ』の舞台は1949年から2年後</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ゴジラ、「マイナスゼロ」ティーザートレーラーでニューヨークへ</h3><div class='summary'>日本のエンターテインメント会社である東宝は、受賞歴のある映画『ゴジラ マイナス ワン』の続編である『ゴジラ マイナス ゼロ』のティーザービデオを公開しました。ティーザーでは、自由の女神の隣で有名な怪物がニューヨーク中を暴れ回る様子が描かれています。 『ゴジラ マイナスゼロ』の舞台は1949年、2年後</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-usd-weak'>💻 PC・周辺機器</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.engadget.com/entertainment/godzilla-goes-to-new-york-in-minus-zero-teaser-trailer-015029346.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -1237,7 +1299,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Roblox introduces mandatory age-gated account tiers</h3><div class='summary'>Roblox is preparing to roll out its biggest change since starting age verification late last year. While that program was initially focused on chat access, today’s news is about age-segregating the games on the massive platform. Starting in mid-May, users will be pushed into one of three worlds: Rob</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Roblox、必須の年齢制限付きアカウント階層を導入</h3><div class='summary'>Robloxは、昨年末に年齢認証を開始して以来最大の変更を展開する準備をしている。このプログラムは当初、チャット アクセスに焦点を当てていましたが、今日のニュースは、巨大なプラットフォーム上のゲームの年齢別化に関するものです。 5 月中旬から、ユーザーは 3 つの世界のいずれかに押し込まれます: ロブ</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Roblox が必須の年齢制限付きアカウント階層を導入</h3><div class='summary'>Robloxは、昨年末に年齢確認を開始して以来最大の変更を展開する準備をしている。このプログラムは当初、チャット アクセスに焦点を当てていましたが、今日のニュースは、巨大なプラットフォーム上のゲームの年齢区分に関するものです。 5 月中旬から、ユーザーは 3 つの世界のいずれかに押し込まれます: ロブ</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💻 PC・周辺機器</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>📝 レビュー・比較</span><span class='tag tag-usd-weak'>💻 PC・周辺機器</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.engadget.com/gaming/roblox-introduces-mandatory-age-gated-account-tiers-121535702.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div></div><div class='fx-panel ' id='fx-cloud_platform'><div class='grid'>
@@ -1746,7 +1808,7 @@ function switchFxTab(key, btn){
   var panel = document.getElementById('fx-' + key);
   if (panel) panel.classList.add('active');
 }
-</script><footer>Gadget + — Generated at 2026-04-16 11:52</footer></body></html>
+</script><footer>Gadget + — Generated at 2026-04-16 12:19</footer></body></html>
 <script>
 var pageLang = 'en';
 function setPageLang(lang) {

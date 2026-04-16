@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Sports +</title>
+<style>
+:root{--bg:#08111e;--panel:#101a2a;--panel2:#0c1523;--line:#1f2b40;--text:#eef4ff;--muted:#93a4bf;--accent:#4ea1ff;--accent2:#15314f}
+*{box-sizing:border-box}html,body{margin:0;padding:0;background:linear-gradient(180deg,#08111e 0%,#0c1627 100%);color:var(--text);font-family:Inter,'Hiragino Sans','Yu Gothic UI',sans-serif}
+a{color:inherit;text-decoration:none}body{padding-top:0}
+.wrap,.main{width:min(1280px,94vw);margin:0 auto}
+header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:18px 0 12px}
+.title h1{margin:0;font-size:28px;line-height:1.2}.sub{margin-top:6px;color:var(--muted);font-size:13px}
+.nav{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0 12px}.nav a{padding:10px 14px;border-radius:10px;background:var(--panel2);border:1px solid var(--line);font-size:14px;font-weight:700}.nav a.active{background:var(--accent2);border-color:var(--accent);color:#eef6ff}.filters-panel{margin-bottom:18px}
+.page-lang-btn,.card-lang-btn,.read-btn,.flt-btn,.open-btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer}
+.page-lang-btn.active,.card-lang-btn.active,.flt-btn.active{background:var(--accent2);border-color:var(--accent)}
+.right-controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:18px}
+.main > .panel:first-child{position:static}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:0}
+.filter-label{font-size:12px;color:var(--muted);font-weight:700}
+.search{min-width:240px;background:#0b1320;border:1px solid var(--line);color:var(--text);padding:9px 12px;border-radius:10px}
+.main-grid,.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.grid.list{grid-template-columns:1fr}
+.card,.mini-item,.category-panel{min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
+.card.score-5{border-left:4px solid #ffd700}
+.card.score-4{border-left:4px solid #4ea1ff}
+.card.is-read{opacity:.62}
+.card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;min-width:0;flex-wrap:wrap}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;font-size:11px;color:var(--muted);min-width:0;overflow-wrap:anywhere;word-break:break-word}
+.lang-badge,.tag{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700}
+.lang-badge.ja{background:#14375d;border-color:#4ea1ff}
+.lang-badge.en{background:#24301f;border-color:#15c39a}
+.tag-new{background:#17391e;border-color:#15c39a;color:#93ffd8}.tag-hot{background:#14375d;border-color:#4ea1ff}.tag-caution{background:#3f1b1d;border-color:#ff7b7b}.tag-neutral{background:#1d2635;border-color:#4b5b78}
+.tags{display:flex;gap:6px;flex-wrap:wrap;min-width:0;overflow-wrap:anywhere;word-break:break-word}.summary{font-size:13px;line-height:1.7;color:#d6e0f0;overflow-wrap:anywhere;word-break:break-word}.hidden{display:none!important}
+.card h3{margin:0;font-size:17px;line-height:1.45;overflow-wrap:anywhere;word-break:break-word}.open-btn{margin-top:auto;display:inline-flex;justify-content:center;background:var(--accent2);border-color:var(--accent);max-width:100%;white-space:normal;text-align:center}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 12px;min-width:0;flex-wrap:wrap}.section-head h2{margin:0;font-size:20px;overflow-wrap:anywhere;word-break:break-word}.count-badge{color:var(--muted);font-size:12px;overflow-wrap:anywhere;word-break:break-word}
+.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:0}
+.category-grid.single{grid-template-columns:repeat(3,minmax(0,1fr))}
+.category-panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}.mini-list{display:grid;gap:8px}.mini-item{padding:10px;border-radius:12px;background:#0c1422;border:1px solid #1d2a40}.mini-item a{font-size:13px;line-height:1.5}.mini-meta{font-size:11px;color:var(--muted);margin-top:4px}
+footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size:12px}
+@media(max-width:980px){.category-grid.single{grid-template-columns:1fr}}
+@media(max-width:760px){body{padding-top:0}.top{flex-direction:column}.title h1{font-size:24px}.right-controls{justify-content:flex-start}.search{min-width:0;width:100%}.nav{padding-bottom:8px}.nav a{font-size:13px;padding:9px 12px}.grid,.main-grid,.category-grid{grid-template-columns:1fr}.card,.category-panel,.mini-item{width:100%;max-width:100%}.card-top,.card-meta,.tags,.section-head{width:100%}.card h3{font-size:16px;line-height:1.4}.summary{font-size:13px;line-height:1.65}.open-btn{width:100%}}
+</style>
+</head>
+<body>
+<header>
+<div class='wrap'>
+  <div class='top'>
+    <div class='title'>
+      <h1>🎭 Sports + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ スポーツ情報</span></h1>
+      <div class='sub'>更新日時：2026-04-16 23:19</div>
+    </div>
+    <div class='right-controls'>
+      <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
+      <button class='page-lang-btn' id='btnPageJA' onclick="setPageLang('ja')">🇯🇵 日本語表示</button>
+    </div>
+  </div>
+  <nav class='nav'><a href="index.html" class="">📋 メイン</a><a href="baseball.html" class="active">⚾ 野球</a><a href="soccer.html" class="">⚽ サッカー</a><a href="basketball.html" class="">🏀 バスケット</a><a href="tennis.html" class="">🎾 テニス</a><a href="motorsports.html" class="">🏁 モータースポーツ</a><a href="combat.html" class="">🥊 格闘技</a><a href="analysis.html" class="">📊 分析</a></nav>
+</div>
+</header>
+<div class='main'>
+
+<div class='panel'>
+  <div class='filters'>
+    <span class='filter-label'>地域:</span>
+    <button type='button' class='flt-btn flt-region active' data-region='all' onclick="setRegionFilter('all', this)">🌍 全部</button>
+    <button type='button' class='flt-btn flt-region ' data-region='JP' onclick="setRegionFilter('JP', this)">🇯🇵 国内</button>
+    <button type='button' class='flt-btn flt-region ' data-region='Global' onclick="setRegionFilter('Global', this)">🌐 海外</button>
+    <span class='filter-label'>スコア:</span>
+    <button type='button' class='flt-btn flt-score active' data-score='all' onclick="setScoreFilter('all', this)">全部</button>
+    <button type='button' class='flt-btn flt-score' data-score='4' onclick="setScoreFilter('4', this)">★4以上</button>
+    <button type='button' class='flt-btn flt-score' data-score='3' onclick="setScoreFilter('3', this)">★3以上</button>
+    <input id='searchBox' class='search' placeholder='タイトル・本文を検索...' oninput="setSearchFilter(this.value)">
+  </div>
+</div>
+
+<section class='panel'>
+  <div class='section-head'><h2>⚾ 野球 今日の注目 3件</h2><span class='count-badge js-visible-count' data-target='.js-mini-scope .mini-item'>0件</span></div>
+  <div class='category-grid single js-mini-scope'><div class='mini-item' data-region='JP'><a href='http://www3.nhk.or.jp/news/html/20260416/k10015100581000.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>ドジャース 大谷翔平 投手専念で今季2勝目 毎回の10奪三振</span></a><div class='mini-meta'>🇯🇵 国内 / ★2 / 2026-04-16 18:11</div></div><div class='mini-item' data-region='JP'><a href='http://www3.nhk.or.jp/news/html/20260416/k10015101171000.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>【プロ野球結果】ヤクルトが4連勝 ソフトバンクは連敗止める</span></a><div class='mini-meta'>🇯🇵 国内 / ★2 / 2026-04-16 21:53</div></div><div class='mini-item' data-region='JP'><a href='https://www.nikkansports.com/baseball/news/202604160001481.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>【とっておきメモ】２勝目巨人田中将大の強み「体をバランス良く使えている」ブルペン捕手が証言</span></a><div class='mini-meta'>🇯🇵 国内 / ★2 / 2026-04-16 22:21</div></div></div>
+</section>
+<section>
+  <div class='section-head'><h2>📰 最新記事</h2><span class='count-badge js-visible-count' data-target='.item-card'>0件</span></div>
+  <div class='grid'>
+<article class='card item-card ' data-cardid='fc917ade2b4b0aaa60307ef7bccebdb2' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK スポーツ</span><span>2026-04-16 18:11</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'fc917ade2b4b0aaa60307ef7bccebdb2')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ドジャース 大谷翔平 投手専念で今季2勝目 毎回の10奪三振</h3><div class='summary'>大リーグ、ドジャースの大谷翔平選手が、メッツ戦に先発ピッチャーに専念して出場し、毎回となる10の三振を奪うなど6回1失点の力投で今シーズン2勝目をあげました。一問一答も掲載しています。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260416/k10015100581000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='8becbd57b9a383efe9b2370870b6ebda' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK スポーツ</span><span>2026-04-16 21:53</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '8becbd57b9a383efe9b2370870b6ebda')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【プロ野球結果】ヤクルトが4連勝 ソフトバンクは連敗止める</h3><div class='summary'>プロ野球は16日、5試合が行われました。セ・リーグの首位、ヤクルトが連勝を4に伸ばし、パ・リーグの首位、ソフトバンクが連敗を止めました。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260416/k10015101171000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='f206484937d12b1a719d6fddb2b8fc81' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-16 22:21</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'f206484937d12b1a719d6fddb2b8fc81')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【とっておきメモ】２勝目巨人田中将大の強み「体をバランス良く使えている」ブルペン捕手が証言</h3><div class='summary'>巨人が接戦をもぎ取って敵地・甲子園で阪神に連勝した。先発の田中将大投手（37）は6回7安打3失点、4奪三振で2勝目。 田中将は野茂英雄氏を超える日米通算202勝目をマークした。甲子園での阪神戦白星は楽天時代の10年5月16日以来、581…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604160001481.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='3f50353c305f5fa745e21ba2852cc9a9' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-16 22:22</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '3f50353c305f5fa745e21ba2852cc9a9')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【阪神】初の連敗でも佐藤輝明がさすがの見せ場 マー君から新人年以来の本塁打でチームに勇気</h3><div class='summary'>阪神佐藤輝明内野手（27）が敗戦の中で輝きを放った。 先発ルーカスが乱調で初回いきなり3失点したが、直後に4号2ランで逆襲ムードを作り上げた。1点及ばず敗れ、雨天中止をはさんでこのカードは巨人に2連敗。連敗は初めてでカード負け越しも初。…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-caution'>⚠ 注意</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604160001635.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='aac413a73a93dd79d2700025ba0dc5fc' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-16 22:25</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'aac413a73a93dd79d2700025ba0dc5fc')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【ヤクルト】松本健が先発２年ぶり勝利「マツケンサンバ」で登場２安打に驚き 少年時代ほぼ８番</h3><div class='summary'>「マツケン」が勝利を呼び込んだ。ヤクルト先発松本健の登場曲が球場を盛り上げた。打席に向かう際に響いたのは松平健の「マツケンサンバ2」。今季初めて流れたのは2回2死一塁での第1打席だ。DeNAデュプランティエの内角速球を左足を引いてはじき…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604160001480.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='08f6cdb13f6424f14f81f117f3225a11' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-16 22:28</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '08f6cdb13f6424f14f81f117f3225a11')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【DeNA】相川監督「プロ野球なので…」失点につながったヒュンメルの落球に苦言</h3><div class='summary'>DeNAが今季初の完封負けを喫した。ヤクルトに21年以来、5年ぶりの開幕から5連敗。借金は今季最多タイの5に戻った。 0－1の3回2死二塁、ヤクルト岩田の前方への飛球を左翼ヒュンメルが落球。強風にあおられた打球は、グラブをかすめ左頬付近…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604160001615.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='b2668b875a8f1c6b8af73d69c8a75136' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-16 22:29</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'b2668b875a8f1c6b8af73d69c8a75136')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【日本ハム】新庄監督、細野の投球に「フォアボールよくないね。ヒット打たれた方が」／一問一答</h3><div class='summary'>日本ハムはロッテに競り負け、13日ぶりの借金生活となった。新庄剛志監督（54）は清宮幸太郎内野手（26）を初めて1番に起用。3回には、その清宮幸がチャンスメークして2点リードも、先発の細野晴希投手（24）が5回5死四球で3失点と安定しな…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604160001550.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='6a41ea6b33dfd8c7bc812c04c3c557b3' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-16 22:30</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '6a41ea6b33dfd8c7bc812c04c3c557b3')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【ソフトバンク】”北九州男”山川穂高がポール際へ５号特大アーチ「切れなくてよかった」</h3><div class='summary'>ソフトバンク山川穂高内野手（34）が“北九州男”ぶりを発揮し、特大アーチをかっ飛ばした。3回ど真ん中のカーブを高々とかち上げ、左翼ポール際へ運ぶチームトップタイの今季5号ソロ。「めちゃくちゃいい反応で打つことができた。狙っていない。切れ…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604160001683.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='a82eb312bc5ac3282cebcffdb29988db' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-16 22:32</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'a82eb312bc5ac3282cebcffdb29988db')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【西武】３戦連続１得点で３連敗…打力に課題、先発投手の責務大も「耐えるしかない」西口監督</h3><div class='summary'>西武がオリックスに3連戦3連敗を喫した。同一カード3連敗は今季初。ロッテと入れ替わりで最下位に転落した。“単独最下位転落”も4月半ばにして今季3度目のこと。なかなかチーム状況が上がらない苦境を象徴する事象だ。 3戦連続1得点。オリックス…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604160001467.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='cc130493e81352932d18e1f52bae58fd' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-16 22:36</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'cc130493e81352932d18e1f52bae58fd')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【巨人】初「伝統の一戦」で日米通算202勝の田中将大「なんとか連勝したいなという気持ちで」</h3><div class='summary'>巨人田中将大投手（37）が初の「伝統の一戦」で6回3失点の粘投をみせ、日米通算202勝目を挙げた。 野茂英雄氏を抜いて歴代単独3位とする一夜に。「チームは初戦に勝っていたので、なんとか連勝したいなという気持ちでマウンドに上がりました」と…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604160001616.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='79f0bef540b581748569480a63526afa' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-16 22:37</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '79f0bef540b581748569480a63526afa')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【ソフトバンク】不振の野村勇今季初打点「必死に打ちに」小久保監督「合いそうだった」起用的中</h3><div class='summary'>不振のソフトバンク野村勇内野手（29）が13打席ぶりの安打を放った。2回1死二塁、楽天藤原の低めスライダーをとらえ、左翼フェンス直撃の適時二塁打で今季初打点。「ここ数試合、なかなかヒットが出ていない中で、何とかチャンスで1本と必死に打ち…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604160001617.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='ef2e84ac11393c5af6309ad30a2e2e69' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-16 22:37</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'ef2e84ac11393c5af6309ad30a2e2e69')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【ヤクルト】池山監督の采配ズバリ「８番投手」松本健吾６回無失点で２勝目＆プロ初安打も</h3><div class='summary'>池山ヤクルトがノリノリだ！ 4連勝で12勝4敗とした。2位阪神とのゲーム差は1・5に。対DeNAのシーズン初戦から5連勝は日本一の21年以来だ。 松本健吾投手（27）が先発した。今季最長6回を投げ76球と効率のいい投球で、3安打2四球2…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604160001551.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='e53e866180d76669c9c9f9472d840e41' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-16 22:39</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'e53e866180d76669c9c9f9472d840e41')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【日本ハム】４試合ぶりスタメン矢沢宏太、今季２号ソロ「甘いボール１発で」他３打席三振は反省</h3><div class='summary'>日本ハム矢沢宏太投手（25）が4試合ぶりのスタメン起用に応えた。 1点を追う4回2死、ロッテ先発の木村から右中間への今季2号ソロ。「完璧だった。甘いボールを1発で仕留められた」と振り返った。だが、その他の3打席はいずれも三振で4打数1安…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604160001685.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='d76dafd66bc1cc99d008d5b41412faa3' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-16 22:44</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'd76dafd66bc1cc99d008d5b41412faa3')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【桧山進次郎】阪神ルーカスに丁寧さ感じられず ローテを守れるかも微妙な立ち位置に</h3><div class='summary'>阪神が15日の雨天中止を挟み、聖地での伝統の一戦で連敗を喫した。カード負け越し、連敗はともに今季初めて。首位ヤクルトとのゲーム差は1・5に広がった。阪神先発のイーストン・ルーカス投手（29）は5回7安打4失点で、来日3度目の先発でも白星…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/column/analyst/news/202604160001556.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='62a6d2ee06e6ac5dbb02af170a1a1722' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-16 22:45</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '62a6d2ee06e6ac5dbb02af170a1a1722')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【オリックス】スタメン復帰の紅林弘太郎が2安打3打点 リタイア中の宮城に「あいつの分まで」</h3><div class='summary'>2試合ぶりにスタメン復帰したオリックス紅林弘太郎内野手（24）が意地の2安打3打点を挙げた。1点を先制された直後の4回2死一、二塁では中堅への逆転二塁打。8回にはダメ押し適時二塁打で気をはいた。エース宮城が左肘故障でリタイア中。「あいつ…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🚑 故障・欠場</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604160001642.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='2c7917a586deab3668ab0c08b2780450' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-16 22:47</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '2c7917a586deab3668ab0c08b2780450')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【日本ハム】細野晴希が猛省 先制点直後に四球与え３失点に「信用してもらえない」５回101球</h3><div class='summary'>日本ハム細野晴希投手（24）が自滅からの失点を悔やんだ。2点を先制してもらった直後の3回。先頭のロッテ小川に四球を与えるなど、3四死球が絡んで3点を失い「ああいう点の取られ方をしていたら、これからなかなか勝てないし、信用してもらえない」…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604160001686.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='2cdcbabd7fb437479449212d65131ac3' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-16 22:52</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '2cdcbabd7fb437479449212d65131ac3')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【阪神】「伝統の一戦」で今季初の連敗も「特にコメントすることないですね」と藤川監督は前向き</h3><div class='summary'>阪神が甲子園での「伝統の一戦」で、今季初の連敗を喫した。カード負け越しも今季初めてで、首位ヤクルトとのゲーム差は1・5に広がった。 先発のイーストン・ルーカス投手（29）は5回7安打4失点で2敗目。来日3度目の先発でも白星はつかめず「初…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604160001474.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='cd3b4a8e830fbc76ffe00a9f021f7acc' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-16 22:53</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'cd3b4a8e830fbc76ffe00a9f021f7acc')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【こんな人】2日連続白星「自分らしいっちゃ自分らしい」ロッテ八木彬 ストライク先行で勝負</h3><div class='summary'>ロッテの5年目右腕、八木彬投手（28）がロッテ史上初の「初勝利から2日連続勝利」という快挙を成し遂げた。 同点で迎えた5回、2番手で登板すると、2回を1安打無失点と危なげなく抑えた。味方打線が6回裏にポランコの左前適時打で勝ち越しに成功…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604160001657.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='8b707bd16ed1e40e50551d6976cac71b' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-16 22:54</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '8b707bd16ed1e40e50551d6976cac71b')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【阪神】嶋村麟士朗、プロ初打席に「燃えるものはあった…一野球人として、ちょっと成長は…」</h3><div class='summary'>阪神嶋村麟士朗捕手（22）が伝統の一戦でプロ初打席に立った。1点を追う9回、先頭坂本誠志郎捕手（32）の代打で登場。「燃えるものはあった。相手ピッチャーが誰であろうと自分のバッティングをするだけだった」と、巨人の守護神ライデル・マルティ…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604160001561.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='c1937a35edacbe7ac6fc1283a0aa67f4' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-16 22:55</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'c1937a35edacbe7ac6fc1283a0aa67f4')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【楽天】ドラ１藤原聡大「力不足でゲームを壊してしまった」４回５安打５失点で初勝利逃す</h3><div class='summary'>楽天ドラフト1位の藤原聡大投手（22）が2敗目を喫した。0・5ゲーム差で追うソフトバンクとの直接対決に先発。4回5安打3四球5失点でプロ初勝利を逃した。「結果のとおりなので、自分の力不足でゲームを壊してしまって、チームに申し訳ない気持ち…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604160001468.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='0ec453e521ca8541301dbe0234792fd4' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-16 22:57</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '0ec453e521ca8541301dbe0234792fd4')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【日本ハム】斎藤友貴哉「相手が１つ上」代打ポランコに勝ち越し打許す 昇格即登板も敗戦投手に</h3><div class='summary'>1軍昇格した日本ハム斎藤友貴哉投手（31）が、同点の6回に2番手で登板した。2死一、三塁で、代打ポランコに155キロのツーシームを捉えられ、勝ち越し左前打を許した。 最速157キロと剛腕ぶりを発揮したが、敗戦投手となり「1点取られたので…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604160001695.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='62e851e54a3b07333706c81534bade90' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-16 23:02</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '62e851e54a3b07333706c81534bade90')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【阪神】NPBではメディアも表現機会がほぼない「月への大飛球」佐藤輝明の代名詞になるか？</h3><div class='summary'>阪神佐藤輝明内野手（27）の4号2ランはレアな一打と言えた。田中将の高め直球。見逃せばボールという球にバットを出した。強振したようには見えなかったが球が高かった分、強烈なバックスピンがかかったのだろう。37度という高角度で飛び出した。本…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604160001637.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='8191a12a721c73fdac0a9e3b1b491b5f' data-region='JP' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK スポーツ</span><span>2026-04-15 15:03</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '8191a12a721c73fdac0a9e3b1b491b5f')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>プロ野球 阪神対巨人 天候不良のため中止</h3><div class='summary'>15日夜、甲子園球場で予定されていた、プロ野球、阪神対巨人の試合は、天候不良のため中止となりました。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag tag-caution'>⚠ 注意</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260415/k10015100021000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='3cf8179e4cd5e7c4ad637a2315af5dd6' data-region='JP' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK スポーツ</span><span>2026-04-15 17:49</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '3cf8179e4cd5e7c4ad637a2315af5dd6')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ドジャース山本由伸 8回途中1失点の好投 大谷は48試合連続出塁</h3><div class='summary'>大リーグ、ドジャースの山本由伸投手が、メッツ戦に先発登板し、7つの三振を奪うなど8回途中1失点の力投を見せましたが、勝ち負けはつきませんでした。この試合、大谷翔平選手はノーヒットながら、申告敬遠で、連続出塁の記録が48試合に伸びました。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260415/k10015100001000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='7d2c3849f3b27fc2ab4533171ee8e5cd' data-region='JP' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK スポーツ</span><span>2026-04-15 23:26</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '7d2c3849f3b27fc2ab4533171ee8e5cd')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【プロ野球結果】パ・リーグ2位 楽天 首位ソフトバンクに連勝</h3><div class='summary'>プロ野球は、雨のため1試合が中止になり、4試合が行われました。パ・リーグ2位の楽天は、首位のソフトバンクとの直接対決に連勝し、0.5ゲーム差に迫りました。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260415/k10015100341000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='2f4e606f021e6c4b6ea04a47fdfad003' data-region='Global' data-score='5'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge en'>🌐 海外</span><span>ESPN Top</span><span>2026-04-16 23:54</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '2f4e606f021e6c4b6ea04a47fdfad003')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Dodgers spent an MLB record $515M in 2025</h3><div class='summary'>The Dodgers shattered Major League Baseball&#x27;s spending record in 2025 with a combined $515 million in payroll and luxury tax last season.</div></div><div class='lang-pane lang-ja hidden'><h3>ドジャースは2025年にMLB記録となる5億1500万ドルを費やした</h3><div class='summary'>ドジャースは昨シーズン、給与と贅沢税の合計で5億1500万ドルを計上し、2025年のメジャーリーグ野球の支出記録を打ち破った。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.espn.com/mlb/story/_/id/48502875/dodgers-smashed-mlb-spending-record-515m-2025' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='b116dd63ed1f4c503487edeedb6e6a93' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge en'>🌐 海外</span><span>ESPN Top</span><span>2026-04-16 22:32</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'b116dd63ed1f4c503487edeedb6e6a93')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>The legacy of Jackie Robinson, baseball&#x27;s greatest agent of change</h3><div class='summary'>On Jackie Robinson Day, we remember one of the game&#x27;s most legendary players and his lasting impact.</div></div><div class='lang-pane lang-ja hidden'><h3>野球界の偉大な変革者、ジャッキー・ロビンソンの遺産</h3><div class='summary'>ジャッキー ロビンソン デーに、私たちはこのゲームで最も伝説的なプレーヤーの 1 人と、彼の永続的な影響を思い出します。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.espn.com/mlb/story/_/id/48475790/mlb-2026-jackie-robinson-day-legacy-negro-leagues-dodgers' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='8043cb9fd538323d5a6ea97a0a598c5e' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge en'>🌐 海外</span><span>ESPN Top</span><span>2026-04-17 00:09</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '8043cb9fd538323d5a6ea97a0a598c5e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Are the Dodgers this good? Are the Mets this bad? What we learned from MLB&#x27;s $1 billion series</h3><div class='summary'>It&#x27;s early. Still, the richest showdown in baseball history said a lot about both teams.</div></div><div class='lang-pane lang-ja hidden'><h3>ドジャースってそんなに強いのか？メッツってそんなに悪いの？ MLBの10億ドルシリーズから学んだこと</h3><div class='summary'>早いですね。それでも、野球史上最も豊かな対決は両チームについて多くを語った。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🚑 故障・欠場</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.espn.com/mlb/story/_/id/48477110/mlb-2026-los-angeles-dodgers-new-york-mets-billion-dollar-series-3-things-learned' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article></div>
+  <div class='summary no-results hidden'>条件に一致する記事がありません。</div>
+</section>
+</div><footer>Sports + — Generated at 2026-04-16 23:19</footer>
+<script>
+function safeStorageGet(key) {
+  try { return window.localStorage ? localStorage.getItem(key) : null; } catch (e) { return null; }
+}
+function safeStorageSet(key, value) {
+  try { if (window.localStorage) localStorage.setItem(key, value); } catch (e) {}
+}
+function setPageLang(lang) {
+  document.querySelectorAll('.page-lang-btn').forEach(function(btn){ btn.classList.remove('active'); });
+  var enBtn = document.getElementById('btnPageEN');
+  var jaBtn = document.getElementById('btnPageJA');
+  if(lang === 'ja') {
+    if(jaBtn) jaBtn.classList.add('active');
+    if(enBtn) enBtn.classList.remove('active');
+  } else {
+    if(enBtn) enBtn.classList.add('active');
+    if(jaBtn) jaBtn.classList.remove('active');
+  }
+  document.querySelectorAll('.item-card, .mini-item').forEach(function(block){
+    var enPane = block.querySelector('.lang-en');
+    var jaPane = block.querySelector('.lang-ja');
+    if(!enPane || !jaPane) return;
+    var cardEnBtn = block.querySelector('.card-lang-btn[data-lang="en"]');
+    var cardJaBtn = block.querySelector('.card-lang-btn[data-lang="ja"]');
+    if(lang === 'ja') {
+      enPane.classList.add('hidden');
+      jaPane.classList.remove('hidden');
+      if(cardJaBtn) cardJaBtn.classList.add('active');
+      if(cardEnBtn) cardEnBtn.classList.remove('active');
+    } else {
+      enPane.classList.remove('hidden');
+      jaPane.classList.add('hidden');
+      if(cardEnBtn) cardEnBtn.classList.add('active');
+      if(cardJaBtn) cardJaBtn.classList.remove('active');
+    }
+  });
+}
+function switchCardLang(btn, lang) {
+  var card = btn.closest('.item-card');
+  if (!card) return;
+  card.querySelectorAll('.card-lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var enPane = card.querySelector('.lang-en');
+  var jaPane = card.querySelector('.lang-ja');
+  if (lang === 'ja') { if(enPane) enPane.classList.add('hidden'); if(jaPane) jaPane.classList.remove('hidden'); }
+  else { if(enPane) enPane.classList.remove('hidden'); if(jaPane) jaPane.classList.add('hidden'); }
+  if(btn.blur) btn.blur();
+}
+function markRead(btn, id) {
+  safeStorageSet('watch_hub_plus_read_' + id, '1');
+  var card = btn.closest('.item-card');
+  if (card) card.classList.add('is-read');
+}
+function getVisibleCount(scope, selector) {
+  var root = scope || document;
+  return Array.prototype.filter.call(root.querySelectorAll(selector), function(el) {
+    return el.style.display !== 'none';
+  }).length;
+}
+function refreshVisibleCounts() {
+  document.querySelectorAll('.js-visible-count').forEach(function(el){
+    var selector = el.dataset.target || '.item-card';
+    var section = el.closest('section') || document;
+    el.textContent = getVisibleCount(section, selector) + '件';
+  });
+  document.querySelectorAll('section').forEach(function(sec){
+    var empty = sec.querySelector('.no-results');
+    if(!empty) return;
+    var visibleCards = getVisibleCount(sec, '.item-card');
+    empty.classList.toggle('hidden', visibleCards > 0);
+  });
+}
+function syncFilterButtons() {
+  document.querySelectorAll('.flt-region').forEach(function(btn){
+    btn.classList.toggle('active', (btn.dataset.region || 'all') === window.__sportsRegion);
+  });
+  document.querySelectorAll('.flt-score').forEach(function(btn){
+    btn.classList.toggle('active', (btn.dataset.score || 'all') === window.__sportsScore);
+  });
+}
+function applySportsFilters() {
+  var region = window.__sportsRegion || 'all';
+  var score = window.__sportsScore || 'all';
+  var search = (window.__sportsSearch || '').toLowerCase();
+  document.querySelectorAll('.item-card').forEach(function(card){
+    var show = true;
+    if(region !== 'all' && (card.dataset.region || '') !== region) show = false;
+    if(score !== 'all' && parseInt(card.dataset.score || '1', 10) < parseInt(score, 10)) show = false;
+    if(search && (card.textContent || '').toLowerCase().indexOf(search) === -1) show = false;
+    card.style.display = show ? '' : 'none';
+  });
+  document.querySelectorAll('.mini-item[data-region]').forEach(function(item){
+    var show = true;
+    if(region !== 'all' && (item.dataset.region || '') !== region) show = false;
+    if(search && (item.textContent || '').toLowerCase().indexOf(search) === -1) show = false;
+    item.style.display = show ? '' : 'none';
+  });
+  syncFilterButtons();
+  refreshVisibleCounts();
+}
+function setRegionFilter(region, btn) {
+  window.__sportsRegion = region || 'all';
+  applySportsFilters();
+  if(btn && btn.blur) btn.blur();
+}
+function setScoreFilter(score, btn) {
+  window.__sportsScore = score || 'all';
+  applySportsFilters();
+  if(btn && btn.blur) btn.blur();
+}
+function setSearchFilter(value) {
+  window.__sportsSearch = value || '';
+  applySportsFilters();
+}
+(function(){
+  document.querySelectorAll('.item-card').forEach(function(card){
+    var id = card.dataset.cardid;
+    if(safeStorageGet('watch_hub_plus_read_' + id) === '1') card.classList.add('is-read');
+  });
+  setPageLang('en');
+  var activeRegion = document.querySelector('.flt-region.active');
+  var activeScore = document.querySelector('.flt-score.active');
+  var sb = document.getElementById('searchBox');
+  window.__sportsRegion = activeRegion ? (activeRegion.dataset.region || 'all') : 'all';
+  window.__sportsScore = activeScore ? (activeScore.dataset.score || 'all') : 'all';
+  window.__sportsSearch = sb ? (sb.value || '') : '';
+  refreshVisibleCounts();
+  applySportsFilters();
+})();
+</script>

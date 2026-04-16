@@ -1,2 +1,3 @@
 Sports +
-スポーツニュース
+
+start_sports_plus.bat を実行してください。

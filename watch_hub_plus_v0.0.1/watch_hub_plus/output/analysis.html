@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Watch Hub +</title>
+<style>
+:root{--bg:#08111e;--panel:#101a2a;--panel2:#0c1523;--line:#1f2b40;--text:#eef4ff;--muted:#93a4bf;--accent:#4ea1ff;--accent2:#15314f}
+*{box-sizing:border-box}html,body{margin:0;padding:0;background:linear-gradient(180deg,#08111e 0%,#0c1627 100%);color:var(--text);font-family:Inter,'Hiragino Sans','Yu Gothic UI',sans-serif}
+a{color:inherit;text-decoration:none}body{padding-top:0}
+.wrap,.main{width:min(1280px,94vw);margin:0 auto}
+header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:18px 0 12px}
+.title h1{margin:0;font-size:28px;line-height:1.2}.sub{margin-top:6px;color:var(--muted);font-size:13px}
+.nav{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0 12px}.nav a{padding:10px 14px;border-radius:10px;background:var(--panel2);border:1px solid var(--line);font-size:14px;font-weight:700}.nav a.active{background:var(--accent2);border-color:var(--accent);color:#eef6ff}.filters-panel{margin-bottom:18px}
+.page-lang-btn,.card-lang-btn,.read-btn,.flt-btn,.open-btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer}
+.page-lang-btn.active,.card-lang-btn.active,.flt-btn.active{background:var(--accent2);border-color:var(--accent)}
+.right-controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:18px}
+.main > .panel:first-child{position:static}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:0}
+.filter-label{font-size:12px;color:var(--muted);font-weight:700}
+.search{min-width:240px;background:#0b1320;border:1px solid var(--line);color:var(--text);padding:9px 12px;border-radius:10px}
+.main-grid,.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.grid.list{grid-template-columns:1fr}
+.card,.mini-item,.category-panel{min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
+.card.score-5{border-left:4px solid #ffd700}
+.card.score-4{border-left:4px solid #4ea1ff}
+.card.is-read{opacity:.62}
+.card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;min-width:0;flex-wrap:wrap}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;font-size:11px;color:var(--muted);min-width:0;overflow-wrap:anywhere;word-break:break-word}
+.lang-badge,.tag{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700}
+.lang-badge.ja{background:#14375d;border-color:#4ea1ff}
+.lang-badge.en{background:#24301f;border-color:#15c39a}
+.tag-new{background:#17391e;border-color:#15c39a;color:#93ffd8}.tag-hot{background:#14375d;border-color:#4ea1ff}.tag-caution{background:#3f1b1d;border-color:#ff7b7b}.tag-neutral{background:#1d2635;border-color:#4b5b78}
+.tags{display:flex;gap:6px;flex-wrap:wrap;min-width:0;overflow-wrap:anywhere;word-break:break-word}.summary{font-size:13px;line-height:1.7;color:#d6e0f0;overflow-wrap:anywhere;word-break:break-word}.hidden{display:none!important}
+.card h3{margin:0;font-size:17px;line-height:1.45;overflow-wrap:anywhere;word-break:break-word}.open-btn{margin-top:auto;display:inline-flex;justify-content:center;background:var(--accent2);border-color:var(--accent);max-width:100%;white-space:normal;text-align:center}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 12px;min-width:0;flex-wrap:wrap}.section-head h2{margin:0;font-size:20px;overflow-wrap:anywhere;word-break:break-word}.count-badge{color:var(--muted);font-size:12px;overflow-wrap:anywhere;word-break:break-word}
+.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:0}
+.category-grid.single{grid-template-columns:repeat(3,minmax(0,1fr))}
+.category-panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}.mini-list{display:grid;gap:8px}.mini-item{padding:10px;border-radius:12px;background:#0c1422;border:1px solid #1d2a40}.mini-item a{font-size:13px;line-height:1.5}.mini-meta{font-size:11px;color:var(--muted);margin-top:4px}
+footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size:12px}
+@media(max-width:980px){.category-grid.single{grid-template-columns:1fr}}
+@media(max-width:760px){body{padding-top:0}.top{flex-direction:column}.title h1{font-size:24px}.right-controls{justify-content:flex-start}.search{min-width:0;width:100%}.nav{padding-bottom:8px}.nav a{font-size:13px;padding:9px 12px}.grid,.main-grid,.category-grid{grid-template-columns:1fr}.card,.category-panel,.mini-item{width:100%;max-width:100%}.card-top,.card-meta,.tags,.section-head{width:100%}.card h3{font-size:16px;line-height:1.4}.summary{font-size:13px;line-height:1.65}.open-btn{width:100%}}
+</style>
+</head>
+<body>
+<header>
+<div class='wrap'>
+  <div class='top'>
+    <div class='title'>
+      <h1>🎭 Watch Hub + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 映画・配信・アニメ・ゲーム・芸能</span></h1>
+      <div class='sub'>更新日時：2026-04-16 23:27</div>
+    </div>
+    <div class='right-controls'>
+      <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
+      <button class='page-lang-btn' id='btnPageJA' onclick="setPageLang('ja')">🇯🇵 日本語表示</button>
+    </div>
+  </div>
+  <nav class='nav'><a href="index.html" class="">📋 メイン</a><a href="movie.html" class="">🎬 映画</a><a href="streaming.html" class="">📺 配信</a><a href="anime.html" class="">🎌 アニメ</a><a href="game.html" class="">🎮 ゲーム</a><a href="entertainment.html" class="">⭐ 芸能</a><a href="trend.html" class="">📈 トレンド</a><a href="analysis.html" class="active">📊 分析</a></nav>
+</div>
+</header>
+<div class='main'>
+
+<div class='panel'>
+  <div class='filters'>
+    <span class='filter-label'>地域:</span>
+    <button class='flt-btn flt-region ' data-region='all'>🌍 全部</button>
+    <button class='flt-btn flt-region active' data-region='JP'>🇯🇵 国内</button>
+    <button class='flt-btn flt-region ' data-region='Global'>🌐 海外</button>
+    <span class='filter-label'>スコア:</span>
+    <button class='flt-btn flt-score active' data-score='all'>全部</button>
+    <button class='flt-btn flt-score' data-score='4'>★4以上</button>
+    <button class='flt-btn flt-score' data-score='3'>★3以上</button>
+    
+    <input id='searchBox' class='search' placeholder='タイトル・本文を検索...'>
+  </div>
+</div>
+
+
+<section class='panel' style='margin-bottom:18px'>
+  <div class='section-head'>
+    <h2>🏆 話題の作品・人物ランキング</h2>
+    <span class='count-badge'>複数記事に登場したワード TOP10</span>
+  </div>
+  <div class='mini-list'><div class='mini-item' style='display:flex;justify-content:space-between;align-items:center'><div style='font-weight:700'>🥇 九条の大罪</div><div class='mini-meta' style='white-space:nowrap'>4件</div></div><div class='mini-item' style='display:flex;justify-content:space-between;align-items:center'><div style='font-weight:700'>🥈 2026年最新</div><div class='mini-meta' style='white-space:nowrap'>4件</div></div><div class='mini-item' style='display:flex;justify-content:space-between;align-items:center'><div style='font-weight:700'>🥉 AmazonのPrime Video（プライム</div><div class='mini-meta' style='white-space:nowrap'>4件</div></div><div class='mini-item' style='display:flex;justify-content:space-between;align-items:center'><div style='font-weight:700'>　 Japanese Funk</div><div class='mini-meta' style='white-space:nowrap'>3件</div></div><div class='mini-item' style='display:flex;justify-content:space-between;align-items:center'><div style='font-weight:700'>　 PrimeVideo</div><div class='mini-meta' style='white-space:nowrap'>3件</div></div><div class='mini-item' style='display:flex;justify-content:space-between;align-items:center'><div style='font-weight:700'>　 ズートピア２</div><div class='mini-meta' style='white-space:nowrap'>3件</div></div><div class='mini-item' style='display:flex;justify-content:space-between;align-items:center'><div style='font-weight:700'>　 Netflix</div><div class='mini-meta' style='white-space:nowrap'>3件</div></div><div class='mini-item' style='display:flex;justify-content:space-between;align-items:center'><div style='font-weight:700'>　 ディズニープラス</div><div class='mini-meta' style='white-space:nowrap'>3件</div></div><div class='mini-item' style='display:flex;justify-content:space-between;align-items:center'><div style='font-weight:700'>　 カービィ</div><div class='mini-meta' style='white-space:nowrap'>2件</div></div><div class='mini-item' style='display:flex;justify-content:space-between;align-items:center'><div style='font-weight:700'>　 ホグワーツ・レガシー</div><div class='mini-meta' style='white-space:nowrap'>2件</div></div></div>
+</section>
+<section class='panel'>
+  <div class='section-head'><h2>📊 分析サマリー</h2><span class='count-badge'>180件 / 更新:2026-04-16 23:27</span></div>
+  <div class='category-grid'><section class='category-panel'><div class='section-head'><h2>カテゴリ別件数</h2></div><div class='mini-list'><div class='mini-item'><div style='font-weight:700'>🎬 映画</div><div class='mini-meta'>35件</div></div><div class='mini-item'><div style='font-weight:700'>📺 配信</div><div class='mini-meta'>50件</div></div><div class='mini-item'><div style='font-weight:700'>🎌 アニメ</div><div class='mini-meta'>58件</div></div><div class='mini-item'><div style='font-weight:700'>🎮 ゲーム</div><div class='mini-meta'>37件</div></div><div class='mini-item'><div style='font-weight:700'>⭐ 芸能</div><div class='mini-meta'>41件</div></div><div class='mini-item'><div style='font-weight:700'>📈 トレンド</div><div class='mini-meta'>104件</div></div></div></section><section class='category-panel'><div class='section-head'><h2>地域 / 配信元</h2></div><div class='mini-list'><div class='mini-item'><div style='font-weight:700'>国内</div><div class='mini-meta'>160件</div></div><div class='mini-item'><div style='font-weight:700'>海外</div><div class='mini-meta'>20件</div></div><div class='mini-item'><div style='font-weight:700'>Netflix</div><div class='mini-meta'>15件</div></div><div class='mini-item'><div style='font-weight:700'>Prime</div><div class='mini-meta'>13件</div></div><div class='mini-item'><div style='font-weight:700'>Disney+</div><div class='mini-meta'>19件</div></div></div></section><section class='category-panel'><div class='section-head'><h2>直近7日 活発なカテゴリ</h2></div><div class='mini-list'><div class='mini-item'><div style='font-weight:700'>📈 トレンド</div><div class='mini-meta'>直近7日 89件</div></div><div class='mini-item'><div style='font-weight:700'>🎌 アニメ</div><div class='mini-meta'>直近7日 50件</div></div><div class='mini-item'><div style='font-weight:700'>⭐ 芸能</div><div class='mini-meta'>直近7日 39件</div></div><div class='mini-item'><div style='font-weight:700'>🎮 ゲーム</div><div class='mini-meta'>直近7日 35件</div></div><div class='mini-item'><div style='font-weight:700'>🎬 映画</div><div class='mini-meta'>直近7日 35件</div></div><div class='mini-item'><div style='font-weight:700'>📺 配信</div><div class='mini-meta'>直近7日 16件</div></div></div></section></div>
+</section>
+<section>
+  <div class='section-head'><h2>⭐ スコア上位記事</h2><span class='count-badge'>★4以上が金・青ボーダー</span></div>
+  <div class='grid'>
+<article class='card item-card score-5' data-cardid='4e2dbd31125c2215f67692edb2a1fe3f' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-14 14:08</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'4e2dbd31125c2215f67692edb2a1fe3f')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Xboxの重役、「Game Passの価格がプレイヤーにとって高くなりすぎた」との認識を社内向けに示したと報道</h3><div class='summary'>幅広い層にアピールできる柔軟なシステムの構築を模索か Microsoftのゲーミング部門CEOであるアシャ・シャルマが、Game Passの価格について「プレイヤーにとって高すぎる状態になっている」という認識を社内向けに示していたことが報じられた。 このことを報道したThe Verge によれば、シャルマは「Game PassがXboxのゲーム体験の中核をなすものである」としつつも、「現在のモデルが最終形ではないことも明らかだ」と指摘したという。また、「短期的にはGame Passはプレイヤーにとって高価になりすぎたため、よりよい価値を提供する必要があり、長いスパンでの試行錯誤が必要ながら長期的にはGame Passをもっと柔軟なサービスへと進化させる予定である」との方針を示したとのこと。 参考として現在のGame Passの月額料金を示すと以下のとおり。「初月は安価に提供」といった例外は省いて記述している。詳細は 公式サイトの比較ページ を参照してほしい。 Essential 850円（税込） Premium 1300円（税込） Ultimate 2750円（税込） PC Game Pass 1550円（税込） Game Passは、2025年10月にプランの大規模改訂と価格の再設定が行われた。このとき、米国ではUltimateプランが50%の増額となり、一部で反発を招いていた。なお、日本ではこのときに為替の影響もあってかUltimateプランは倍額に近い変更となっている（参考： GAME Watchの当時の記事 ）。 シャルマは、2026年3月のGDCでも 「ゲーム機やGame Passといった製品を幅広い層に向け、さらに魅力的なものにしたい」ということを関係者に対して語っていたと報じられている 。今回の報道と合わせて見れば「Game Passの価格をどう設定するか」や「さらに安価なプランを生み出せないか」といった点がXboxの戦略上の争点となっていると考えるのは自然だろう。 Xboxは、2026年6月8日にXbox Games Showcase 2026とGears of …</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/xbox-series-x/83146/xboxgame-pass' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='587be995a4fe4bfc2581ad6f6c40e6d0' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-14 15:51</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'587be995a4fe4bfc2581ad6f6c40e6d0')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『Bloodborne』の映画化が発表 2026年劇場公開の『SEKIRO: NO DEFEAT』に続いて、フロムタイトルのさらなるアニメ化</h3><div class='summary'>監督や公開日は不明で情報は少ない 『Bloodborne』の映画化が、ラスベガスで開催中のCinemaCon 2026で発表になった。長編のアニメ映画になることと、過激な描写のあるR指定であること以外に情報は少なく、もっとも気になる部分である監督や脚本、公開日といったものも不明だ。 『Bloodborne』を手がけたフロム・ソフトウェア関連の2026年の主だった動きとしては、以下のようなものがある。 Nintendo Switch 2『ELDEN RING Tarnished Edition』 2026年発売予定 Nintendo Switch 2『The Duskbloods』 2026年発売予定 アニメ映画『SEKIRO: NO DEFEAT』 2026年劇場公開予定 情報量からすると映画版『Bloodborne』の公開はまだまだ先になると思われ、『SEKIRO: NO DEFEAT』に続くアニメ映画となるのだろう。 IGN USの記事 によれば、映画版『Bloodborne』にはPlayStation Productions、Lyrical Animation、そして&lt;a href=&quot;https://www.youtube.com/@jacksepticeye&quot; …</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/bloodborne/83150/bloodborne-2026sekiro-no-defeat' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='29997c60e64b3407868197f76eb709ce' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-14 17:27</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'29997c60e64b3407868197f76eb709ce')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『スパイダーマン：ブランド・ニュー・デイ』米CinemaCon限定公開の新映像から判明したこと</h3><div class='summary'>新たに2種類のポスターも公開 米ラスベガスで開催中のCinemaConにて、 『スパイダーマン：ブランド・ニュー・デイ』 の新映像と2種類のポスターが 公開された 。この記事では、会場限定で披露された映像の内容をできるだけ詳細に紹介する。 映像はコーヒーショップから始まった。ピーター・パーカーは、ネッドが注文するのを聞いている。電話の相手に「すぐにかけ直す」と伝えたネッドが店を出ると、ピーターはその後を追う。ネッドはパーティーに向かうところで飲み物を持参しており、ピーターもそのまま会場に入って、場に溶け込もうとしている。 カップを手にしたまま居心地悪そうに歩き回るピーターは、ある部屋でスパイダーマンの小さなフィギュアを見つける。壁にはスパイダーマンに関する記事などが貼られており、そこがネッドの部屋であることが明らかになる。 『スパイダーマン：ブランド・ニュー・デイ』新ポスタービジュアル① ここで、ネッドは高校時代にスパイダーマンが自分や友人たちを何度も救ってくれたことを覚えており、それ以来ずっとその正体を突き止めようとしていることが判明する。彼はスパイダーマンの正体を世間に明かしたいわけではなく、ただ感謝を伝えたいと考えているようで、そのために「Spider-Tracker」と呼ばれるアプリを開発していた。 ネッドはスパイダーマンがクイーンズ出身であることも把握しており、有力な候補として、クラスメイトだったフラッシュ・トンプソンと、マーティン・スター演じる教師のロジャー・ハリントンの2人を挙げている。 そこへMJが現れ、パーティーの混雑ぶりに不満を漏らしながら、花を持って立っているピーターに気づく。彼女が「いい花だね」と声をかけると、ピーターは礼を言い、自分の名前を「メイナード」だと名乗る。 ネッドは、このメイナードがなぜここにいるのかと戸惑うが、ピーターは近所の住人（neighbor）だと説明。それに対してMJは「親愛なる隣人ってわけね！」と返す。 その後、ネッドはMJの後を追い、彼女が一度は得た仕事を断ったことについて会話する。MJは「魂のない企業では働きたくない」と語り、「何か素晴らしいことを待つべきだと感じている」とも話す。 するとそこへ、エマン・エスファンディ演じるMJのボーイフレンドが現れ、「もう待たなくていいよ！」と言う（エスファンディは『スター・ウォーズ：アソーカ』で実写版のエズラ・ブリッジャーを演じた俳優だ）。彼が「全員を救うことはできない」と続けると、MJは「やってみることはできる」と応じ、2人はキスを交わす。ピーターはうれしくなさそうだ。 『スパイダーマン：ブランド・ニュー・デイ』新ポスタービジュアル② 続いて、スパイダーマンがビルから飛び降りるシーンなど、これまでの予告編で公開されていたものを含む短い特別映像も上映された。また、ダメージ・コントロール局の隊員たちがスパイダーマンに銃を向ける場面も映し出される。スパイダーマンは「ちょっと待って、もう高校生じゃないんだ！」と言い、アクロバティックに動きながら彼らを次々と倒していく。 ソニーは会場にて、 『スパイダーマン：ノー・ウェイ・ホーム』 が同社史上最大のヒット作であることをあらためて強調。『スパイダーマン：ブランド・ニュー・デイ』の 最初の予告編 が、公開から1週間未満で10億回以上再生され、史上最も視聴された予告編となったことも振り返った。映画は2026年7月31日に日米同時公開となる。 …</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/spider-man-4-tom-holland-sequel/83151/cinemacon' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='17c8b5f714358e0871ba7c748f1ff28c' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-14 17:35</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'17c8b5f714358e0871ba7c748f1ff28c')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Metacriticで2026年のベストゲームの約半分がカプコン!? 同社が現代の最も安定感のある大手メーカーである理由を考える</h3><div class='summary'>『プラグマタ』の静かだが確実に魅力的な着地が意味するもの 『バイオハザード7 レジデント イービル』を2016年に発売してから、カプコンの好調が続いている。「バイオハザード」シリーズはもちろん、「モンスターハンター」も国内に留まらず世界的なヒットとなり、「ストリートファイター」シリーズも対戦ゲームとして再燃している。 そんなカプコンでも、2026年ほど好調なスタートはちょっと見たことがない。カプコン以外のパブリッシャーでもここまでの大作ラッシュは珍しいし、どれも高評価となると前例すら思いつかないほどだ。 2月には『バイオハザード レクイエム』がリリースとなり、レビュー集積サイトMetacriticでは PS５版が89点のメタスコア を獲得し、 現時点では『ぽこ あ ポケモン』に続いて2026年の最も評価されたゲーム となっている（表示こそされないが、Metacriticは小数点による優劣があるようだ）。サバイバルホラーの恐怖体験とド派手なTPSアクションを融合したゲームプレイが絶賛されたことはもちろん、圧倒的なディテールのグラフィックスも話題となった。他機種と同時にリリースした Nintendo Switch 2版もクオリティの高さも注目を集めて 、同機で同時にリリースした「バイオハザード7」の移植「ゴールドエディション」も 87点のメタスコア を記録した。 3月は『モンスターハンターストーリーズ3 ～運命の双竜～』がリリースされた。あくまでスピンオフのRPG作品であるが、海外メディアの多くは「シリーズ本編に匹敵する面白さ」と評し、これも PS5版が86点のメタスコア を獲得している。 いよいよ4月17日（Switch 2版は24日）に発売を迎える新規IP『プラグマタ』のレビューもついに解禁された。 IGN JAPANのレビュー では8点を付けており、「コンパクトかつ緻密に作り込まれた完全新作TPS」と評した。ほかのメディアでも高評価となっており、 PS5版のメタスコアは記事執筆時点で88件のレビューが掲載済みで86点 という高得点に落ち着いている。よりレビュー数の少ない他機種版も、以下のようにいずれも高いメタスコアを記録している。 Switch 2版 （89点） PC版 （88点） &lt;a href=&quot;https://www.metacritic.com/game/pragmata/critic-reviews/?platform=xbox-series-x&quot; …</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/pragmata/83148/metacritic2026' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='2efc5dab4cfbb8436a9515fd999b9698' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-14 18:56</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'2efc5dab4cfbb8436a9515fd999b9698')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ソニー、『ゼルダの伝説』の映画について撮影完了を報告</h3><div class='summary'>撮影はほぼ予定どおり進んだ模様 ソニーが、ラスベガスで開催中のCinemaConで実写映画版『ゼルダの伝説』の撮影が終了したことを告知した。それ以外に新しい情報はなく、公開日も変わらず2027年5月7日予定だという。 撮影はニュージーランドで行われている ことが過去に明らかになっており、もともと2026年4月まで撮影が行われることになっていた。したがってほぼ予定どおりの進行と言える。 任天堂のゲームの映画にソニーの名前が出るとちょっと不思議な感覚を覚えるかもしれないが、 プロジェクトの発表時 にソニー・ピクチャーズ エンタテインメントが全世界での配給を行うことと、任天堂とともに共同出資することが明らかになっている。 リンク役のベンジャミン・エヴァン・エインズワースとゼルダ役のボー・ブラガソン。 写真：任天堂 任天堂のゲーム映画としては、2026年4月24日（金）に『ザ・スーパーマリオギャラクシー・ムービー』が劇場公開予定。同作はアメリカなどではすでに公開されており、 世界累計の興行収入ではすでに6億ドルを突破 する勢いを見せている。IGNにおけるレビュースコアは10点満点中6点だが、詳しい内容は レビュー記事 を参照してほしい。 Box Office Mojoの興行収入データを参照 すると、2025年だと6億ドルは年間トップ10に肉薄する金額であり、『ザ・スーパーマリオギャラクシー・ムービー』が公開から間もないことからもその凄まじさがわかるだろう。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/the-legend-of-zelda-movie-live-action/83155/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article></div>
+</section>
+</div><footer>Watch Hub + — Generated at 2026-04-16 23:27</footer>
+<script>
+function setPageLang(lang) {
+  localStorage.setItem('page_lang_pref', lang);
+  document.querySelectorAll('.page-lang-btn').forEach(function(btn){ btn.classList.remove('active'); });
+  var enBtn = document.getElementById('btnPageEN');
+  var jaBtn = document.getElementById('btnPageJA');
+  document.querySelectorAll('.item-card').forEach(function(card){
+    var enPane = card.querySelector('.lang-en');
+    var jaPane = card.querySelector('.lang-ja');
+    if(!enPane || !jaPane) return;
+    if(lang === 'ja') {
+      enPane.classList.add('hidden');
+      jaPane.classList.remove('hidden');
+      if(jaBtn) jaBtn.classList.add('active');
+      if(enBtn) enBtn.classList.remove('active');
+    } else {
+      enPane.classList.remove('hidden');
+      jaPane.classList.add('hidden');
+      if(enBtn) enBtn.classList.add('active');
+      if(jaBtn) jaBtn.classList.remove('active');
+    }
+  });
+}
+function switchCardLang(btn, lang) {
+  var card = btn.closest('.item-card');
+  if (!card) return;
+  card.querySelectorAll('.card-lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var enPane = card.querySelector('.lang-en');
+  var jaPane = card.querySelector('.lang-ja');
+  if (lang === 'ja') { if(enPane) enPane.classList.add('hidden'); if(jaPane) jaPane.classList.remove('hidden'); }
+  else { if(enPane) enPane.classList.remove('hidden'); if(jaPane) jaPane.classList.add('hidden'); }
+}
+function markRead(btn, id) {
+  localStorage.setItem('watch_hub_plus_read_' + id, '1');
+  var card = btn.closest('.item-card');
+  if (card) card.classList.add('is-read');
+}
+(function(){
+  document.querySelectorAll('.item-card').forEach(function(card){
+    var id = card.dataset.cardid;
+    if(localStorage.getItem('watch_hub_plus_read_' + id) === '1') card.classList.add('is-read');
+  });
+  var current = localStorage.getItem('page_lang_pref') || 'en';
+  setPageLang(current);
+})();
+
+(function(){
+  var fRegion = 'JP';
+  var fScore = 'all';
+  var fPlatform = 'all';
+  var search = '';
+  function applyFilters(){
+    document.querySelectorAll('.item-card').forEach(function(card){
+      var show = true;
+      if(fRegion !== 'all' && (card.dataset.region || '') !== fRegion) show = false;
+      if(fScore !== 'all' && parseInt(card.dataset.score || '1', 10) < parseInt(fScore, 10)) show = false;
+      if(fPlatform !== 'all' && (card.dataset.platform || '') !== fPlatform) show = false;
+      if(search && !(card.textContent || '').toLowerCase().includes(search.toLowerCase())) show = false;
+      card.style.display = show ? '' : 'none';
+    });
+    document.querySelectorAll('.mini-item[data-region]').forEach(function(item){
+      var show = true;
+      if(fRegion !== 'all' && (item.dataset.region || '') !== fRegion) show = false;
+      if(fPlatform !== 'all' && (item.dataset.platform || '') !== fPlatform) show = false;
+      item.style.display = show ? '' : 'none';
+    });
+  }
+  document.querySelectorAll('.flt-region').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.flt-region').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      fRegion = btn.dataset.region;
+      applyFilters();
+    });
+  });
+  document.querySelectorAll('.flt-score').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.flt-score').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      fScore = btn.dataset.score;
+      applyFilters();
+    });
+  });
+  document.querySelectorAll('.flt-platform').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.flt-platform').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      fPlatform = btn.dataset.platform;
+      applyFilters();
+    });
+  });
+  var sb = document.getElementById('searchBox');
+  if(sb){ sb.addEventListener('input', function(){ search = this.value; applyFilters(); }); }
+  applyFilters();
+})();
+
+</script>
+</body></html>

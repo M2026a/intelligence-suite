@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Watch Hub +</title>
+<style>
+:root{--bg:#08111e;--panel:#101a2a;--panel2:#0c1523;--line:#1f2b40;--text:#eef4ff;--muted:#93a4bf;--accent:#4ea1ff;--accent2:#15314f}
+*{box-sizing:border-box}html,body{margin:0;padding:0;background:linear-gradient(180deg,#08111e 0%,#0c1627 100%);color:var(--text);font-family:Inter,'Hiragino Sans','Yu Gothic UI',sans-serif}
+a{color:inherit;text-decoration:none}body{padding-top:0}
+.wrap,.main{width:min(1280px,94vw);margin:0 auto}
+header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:18px 0 12px}
+.title h1{margin:0;font-size:28px;line-height:1.2}.sub{margin-top:6px;color:var(--muted);font-size:13px}
+.nav{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0 12px}.nav a{padding:10px 14px;border-radius:10px;background:var(--panel2);border:1px solid var(--line);font-size:14px;font-weight:700}.nav a.active{background:var(--accent2);border-color:var(--accent);color:#eef6ff}.filters-panel{margin-bottom:18px}
+.page-lang-btn,.card-lang-btn,.read-btn,.flt-btn,.open-btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer}
+.page-lang-btn.active,.card-lang-btn.active,.flt-btn.active{background:var(--accent2);border-color:var(--accent)}
+.right-controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:18px}
+.main > .panel:first-child{position:static}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:0}
+.filter-label{font-size:12px;color:var(--muted);font-weight:700}
+.search{min-width:240px;background:#0b1320;border:1px solid var(--line);color:var(--text);padding:9px 12px;border-radius:10px}
+.main-grid,.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.grid.list{grid-template-columns:1fr}
+.card,.mini-item,.category-panel{min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
+.card.score-5{border-left:4px solid #ffd700}
+.card.score-4{border-left:4px solid #4ea1ff}
+.card.is-read{opacity:.62}
+.card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;min-width:0;flex-wrap:wrap}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;font-size:11px;color:var(--muted);min-width:0;overflow-wrap:anywhere;word-break:break-word}
+.lang-badge,.tag{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700}
+.lang-badge.ja{background:#14375d;border-color:#4ea1ff}
+.lang-badge.en{background:#24301f;border-color:#15c39a}
+.tag-new{background:#17391e;border-color:#15c39a;color:#93ffd8}.tag-hot{background:#14375d;border-color:#4ea1ff}.tag-caution{background:#3f1b1d;border-color:#ff7b7b}.tag-neutral{background:#1d2635;border-color:#4b5b78}
+.tags{display:flex;gap:6px;flex-wrap:wrap;min-width:0;overflow-wrap:anywhere;word-break:break-word}.summary{font-size:13px;line-height:1.7;color:#d6e0f0;overflow-wrap:anywhere;word-break:break-word}.hidden{display:none!important}
+.card h3{margin:0;font-size:17px;line-height:1.45;overflow-wrap:anywhere;word-break:break-word}.open-btn{margin-top:auto;display:inline-flex;justify-content:center;background:var(--accent2);border-color:var(--accent);max-width:100%;white-space:normal;text-align:center}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 12px;min-width:0;flex-wrap:wrap}.section-head h2{margin:0;font-size:20px;overflow-wrap:anywhere;word-break:break-word}.count-badge{color:var(--muted);font-size:12px;overflow-wrap:anywhere;word-break:break-word}
+.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:0}
+.category-grid.single{grid-template-columns:repeat(3,minmax(0,1fr))}
+.category-panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}.mini-list{display:grid;gap:8px}.mini-item{padding:10px;border-radius:12px;background:#0c1422;border:1px solid #1d2a40}.mini-item a{font-size:13px;line-height:1.5}.mini-meta{font-size:11px;color:var(--muted);margin-top:4px}
+footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size:12px}
+@media(max-width:980px){.category-grid.single{grid-template-columns:1fr}}
+@media(max-width:760px){body{padding-top:0}.top{flex-direction:column}.title h1{font-size:24px}.right-controls{justify-content:flex-start}.search{min-width:0;width:100%}.nav{padding-bottom:8px}.nav a{font-size:13px;padding:9px 12px}.grid,.main-grid,.category-grid{grid-template-columns:1fr}.card,.category-panel,.mini-item{width:100%;max-width:100%}.card-top,.card-meta,.tags,.section-head{width:100%}.card h3{font-size:16px;line-height:1.4}.summary{font-size:13px;line-height:1.65}.open-btn{width:100%}}
+</style>
+</head>
+<body>
+<header>
+<div class='wrap'>
+  <div class='top'>
+    <div class='title'>
+      <h1>🎭 Watch Hub + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 映画・配信・アニメ・ゲーム・芸能</span></h1>
+      <div class='sub'>更新日時：2026-04-16 23:27</div>
+    </div>
+    <div class='right-controls'>
+      <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
+      <button class='page-lang-btn' id='btnPageJA' onclick="setPageLang('ja')">🇯🇵 日本語表示</button>
+    </div>
+  </div>
+  <nav class='nav'><a href="index.html" class="">📋 メイン</a><a href="movie.html" class="">🎬 映画</a><a href="streaming.html" class="">📺 配信</a><a href="anime.html" class="">🎌 アニメ</a><a href="game.html" class="active">🎮 ゲーム</a><a href="entertainment.html" class="">⭐ 芸能</a><a href="trend.html" class="">📈 トレンド</a><a href="analysis.html" class="">📊 分析</a></nav>
+</div>
+</header>
+<div class='main'>
+
+<div class='panel'>
+  <div class='filters'>
+    <span class='filter-label'>地域:</span>
+    <button class='flt-btn flt-region ' data-region='all'>🌍 全部</button>
+    <button class='flt-btn flt-region active' data-region='JP'>🇯🇵 国内</button>
+    <button class='flt-btn flt-region ' data-region='Global'>🌐 海外</button>
+    <span class='filter-label'>スコア:</span>
+    <button class='flt-btn flt-score active' data-score='all'>全部</button>
+    <button class='flt-btn flt-score' data-score='4'>★4以上</button>
+    <button class='flt-btn flt-score' data-score='3'>★3以上</button>
+    
+    <input id='searchBox' class='search' placeholder='タイトル・本文を検索...'>
+  </div>
+</div>
+
+<section class='panel'>
+  <div class='section-head'><h2>🎮 ゲーム 今日の注目 3件</h2><span class='count-badge'>初期表示は国内</span></div>
+  <div class='category-grid single'><div class='mini-item' data-region='JP' data-platform='other'><a href='https://jp.ign.com/xbox-series-x/83146/xboxgame-pass' target='_blank' rel='noopener noreferrer'>Xboxの重役、「Game Passの価格がプレイヤーにとって高くなりすぎた」との認識を社内向けに示したと報道</a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-14 14:08</div></div><div class='mini-item' data-region='JP' data-platform='other'><a href='https://jp.ign.com/pragmata/83148/metacritic2026' target='_blank' rel='noopener noreferrer'>Metacriticで2026年のベストゲームの約半分がカプコン!? 同社が現代の最も安定感のある大手メーカーである理由を考える</a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-14 17:35</div></div><div class='mini-item' data-region='JP' data-platform='other'><a href='https://jp.ign.com/the-legend-of-zelda-movie-live-action/83155/' target='_blank' rel='noopener noreferrer'>ソニー、『ゼルダの伝説』の映画について撮影完了を報告</a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-14 18:56</div></div></div>
+</section>
+<section>
+  <div class='section-head'><h2>📰 最新記事</h2><span class='count-badge'>37件</span></div>
+  <div class='grid'>
+<article class='card item-card score-5' data-cardid='4e2dbd31125c2215f67692edb2a1fe3f' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-14 14:08</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'4e2dbd31125c2215f67692edb2a1fe3f')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Xboxの重役、「Game Passの価格がプレイヤーにとって高くなりすぎた」との認識を社内向けに示したと報道</h3><div class='summary'>幅広い層にアピールできる柔軟なシステムの構築を模索か Microsoftのゲーミング部門CEOであるアシャ・シャルマが、Game Passの価格について「プレイヤーにとって高すぎる状態になっている」という認識を社内向けに示していたことが報じられた。 このことを報道したThe Verge によれば、シャルマは「Game PassがXboxのゲーム体験の中核をなすものである」としつつも、「現在のモデルが最終形ではないことも明らかだ」と指摘したという。また、「短期的にはGame Passはプレイヤーにとって高価になりすぎたため、よりよい価値を提供する必要があり、長いスパンでの試行錯誤が必要ながら長期的にはGame Passをもっと柔軟なサービスへと進化させる予定である」との方針を示したとのこと。 参考として現在のGame Passの月額料金を示すと以下のとおり。「初月は安価に提供」といった例外は省いて記述している。詳細は 公式サイトの比較ページ を参照してほしい。 Essential 850円（税込） Premium 1300円（税込） Ultimate 2750円（税込） PC Game Pass 1550円（税込） Game Passは、2025年10月にプランの大規模改訂と価格の再設定が行われた。このとき、米国ではUltimateプランが50%の増額となり、一部で反発を招いていた。なお、日本ではこのときに為替の影響もあってかUltimateプランは倍額に近い変更となっている（参考： GAME Watchの当時の記事 ）。 シャルマは、2026年3月のGDCでも 「ゲーム機やGame Passといった製品を幅広い層に向け、さらに魅力的なものにしたい」ということを関係者に対して語っていたと報じられている 。今回の報道と合わせて見れば「Game Passの価格をどう設定するか」や「さらに安価なプランを生み出せないか」といった点がXboxの戦略上の争点となっていると考えるのは自然だろう。 Xboxは、2026年6月8日にXbox Games Showcase 2026とGears of …</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/xbox-series-x/83146/xboxgame-pass' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='17c8b5f714358e0871ba7c748f1ff28c' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-14 17:35</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'17c8b5f714358e0871ba7c748f1ff28c')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Metacriticで2026年のベストゲームの約半分がカプコン!? 同社が現代の最も安定感のある大手メーカーである理由を考える</h3><div class='summary'>『プラグマタ』の静かだが確実に魅力的な着地が意味するもの 『バイオハザード7 レジデント イービル』を2016年に発売してから、カプコンの好調が続いている。「バイオハザード」シリーズはもちろん、「モンスターハンター」も国内に留まらず世界的なヒットとなり、「ストリートファイター」シリーズも対戦ゲームとして再燃している。 そんなカプコンでも、2026年ほど好調なスタートはちょっと見たことがない。カプコン以外のパブリッシャーでもここまでの大作ラッシュは珍しいし、どれも高評価となると前例すら思いつかないほどだ。 2月には『バイオハザード レクイエム』がリリースとなり、レビュー集積サイトMetacriticでは PS５版が89点のメタスコア を獲得し、 現時点では『ぽこ あ ポケモン』に続いて2026年の最も評価されたゲーム となっている（表示こそされないが、Metacriticは小数点による優劣があるようだ）。サバイバルホラーの恐怖体験とド派手なTPSアクションを融合したゲームプレイが絶賛されたことはもちろん、圧倒的なディテールのグラフィックスも話題となった。他機種と同時にリリースした Nintendo Switch 2版もクオリティの高さも注目を集めて 、同機で同時にリリースした「バイオハザード7」の移植「ゴールドエディション」も 87点のメタスコア を記録した。 3月は『モンスターハンターストーリーズ3 ～運命の双竜～』がリリースされた。あくまでスピンオフのRPG作品であるが、海外メディアの多くは「シリーズ本編に匹敵する面白さ」と評し、これも PS5版が86点のメタスコア を獲得している。 いよいよ4月17日（Switch 2版は24日）に発売を迎える新規IP『プラグマタ』のレビューもついに解禁された。 IGN JAPANのレビュー では8点を付けており、「コンパクトかつ緻密に作り込まれた完全新作TPS」と評した。ほかのメディアでも高評価となっており、 PS5版のメタスコアは記事執筆時点で88件のレビューが掲載済みで86点 という高得点に落ち着いている。よりレビュー数の少ない他機種版も、以下のようにいずれも高いメタスコアを記録している。 Switch 2版 （89点） PC版 （88点） &lt;a href=&quot;https://www.metacritic.com/game/pragmata/critic-reviews/?platform=xbox-series-x&quot; …</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/pragmata/83148/metacritic2026' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='2efc5dab4cfbb8436a9515fd999b9698' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-14 18:56</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'2efc5dab4cfbb8436a9515fd999b9698')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ソニー、『ゼルダの伝説』の映画について撮影完了を報告</h3><div class='summary'>撮影はほぼ予定どおり進んだ模様 ソニーが、ラスベガスで開催中のCinemaConで実写映画版『ゼルダの伝説』の撮影が終了したことを告知した。それ以外に新しい情報はなく、公開日も変わらず2027年5月7日予定だという。 撮影はニュージーランドで行われている ことが過去に明らかになっており、もともと2026年4月まで撮影が行われることになっていた。したがってほぼ予定どおりの進行と言える。 任天堂のゲームの映画にソニーの名前が出るとちょっと不思議な感覚を覚えるかもしれないが、 プロジェクトの発表時 にソニー・ピクチャーズ エンタテインメントが全世界での配給を行うことと、任天堂とともに共同出資することが明らかになっている。 リンク役のベンジャミン・エヴァン・エインズワースとゼルダ役のボー・ブラガソン。 写真：任天堂 任天堂のゲーム映画としては、2026年4月24日（金）に『ザ・スーパーマリオギャラクシー・ムービー』が劇場公開予定。同作はアメリカなどではすでに公開されており、 世界累計の興行収入ではすでに6億ドルを突破 する勢いを見せている。IGNにおけるレビュースコアは10点満点中6点だが、詳しい内容は レビュー記事 を参照してほしい。 Box Office Mojoの興行収入データを参照 すると、2025年だと6億ドルは年間トップ10に肉薄する金額であり、『ザ・スーパーマリオギャラクシー・ムービー』が公開から間もないことからもその凄まじさがわかるだろう。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/the-legend-of-zelda-movie-live-action/83155/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='7f049ec4f88baf241fd8064dac0e0cfc' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-14 20:01</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'7f049ec4f88baf241fd8064dac0e0cfc')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ゲーム初心者におすすめの入門タイトルをご紹介！「カービィ」から『ホグワーツ・レガシー』まで：#485 音声版 しゃべりすぎGAMER</h3><div class='summary'>今回は、これからゲームを始めたい人や、ビギナーに勧めるべき「最初のラインナップ」をさまざまな角度からご紹介。任天堂の定番タイトル「スーパーマリオ」や「星のカービィ」はもちろん、「バイオハザード」や『フォートナイト』まで、出演者がそれぞれの視点でおすすめゲームを持ち寄った。 ■ゲーム＆映画グッズ専門店「IGN JAPAN STORE」 https://ignstore.jp/ 00:00 オープニング 00:17 テーマ：ゲームビギナー向け入門タイトル 51:55 コメントコーナー ■出演 ロブソン・ダニエル 野口広志 渡邉卓也（フリーライター） IGN JAPAN編集部のスタッフが、長々とゲーム雑談をする“ながら見”推奨番組「しゃべりすぎGAMER」。 コメントコーナーではみなさんからいただいたコメントを紹介したり、返答したりします。ぜひコメントを残してください！ ■「しゃべりすぎGAMER」再生リスト https://www.youtube.com/playlist?list=PL5dP0ylcT42dJXN_5KJECJ8cI9hK690_e ■ポッドキャスト版 iTunes https://podcasts.apple.com/jp/podcast/ign-japan-%E3%81%97%E3%82%83%E3%81%B9%E3%82%8A%E3%81%99%E3%81%8Egamer-%E3%83%9D%E3%83%83%E3%83%89%E3%82%AD%E3%83%A3%E3%82%B9%E3%83%88/id1258418439 Spotify https://open.spotify.com/show/4AKK4MIlRk3Zfj8my703D8?si=x1_N0RZnTWiagXspsoIUkA ■一部使用楽曲 MusMus：http://musmus.main.jp/</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/shaberisugi-gamer/83154/485-gamer' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='3051d4abae830fb4d18fd1f6b4ba2d2e' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-14 21:08</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'3051d4abae830fb4d18fd1f6b4ba2d2e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「バイオハザード」新作映画は“1人の人物を追う物語”に 複雑な仕掛けを排し、原作ゲームのテンポと雰囲気を再現すると監督が語る</h3><div class='summary'>CinemaConの会場では映像も公開 米ラスベガスで開催中のCinemaConにて、「バイオハザード」新作映画の映像の一部が公開された。上映前には、本作の監督・脚本を務めるザック・クレッガーがステージに登壇し、短い時間ながら作品について語った。 監督のクレッガーは、『バーバリアン』に『WEAPONS／ウェポンズ』と、独創的なホラー映画で注目を集めてきた人物。「バイオハザード」の映画化を手がけるにあたっては、自身もゲームシリーズの大ファンである旨を 過去に語っている 。 IGN USの報道 によると、クレッガーは今回のCinemaConでも「これらのゲームに引くくらい多くの時間を費やしてきた」と語り、あらためて原作ゲームへの強い思い入れを強調したという。そして、「バイオハザード」シリーズを「サバイバルホラーの絶対的な金字塔」であると評したそうだ。 続けて監督は、今回の映画化は「バイオハザード」のゲームがもつテンポや雰囲気を再現するものだと説明。一方で、過去に手がけた『WEAPONS／ウェポンズ』のように複数の時間軸や視点を導入する構成ではなく、最初から最後まで1人のキャラクターを追う物語になると 述べた 。 会場で上映された映像については、以下のような内容であったとIGN USは伝えている。 雪の中を一軒の家に向かって歩く男の姿が描かれる。車が故障してしまい、電話を借りる必要があるが、住人は不在のようだ。男は中に入って電話を使おうとし、ようやくつながると「途中で切れてごめん。いま本当に最悪な状況なんだ」と話す。 その後、彼は暗いトンネルの中で「デューン 砂の惑星」のハルコンネン男爵を思わせる巨大な人物の姿を目にし、雪に覆われた町を走り抜ける様子などが映し出される。最後に彼は恋人に「愛していると伝えたかった」とボイスメッセージを残し、自分はここから生きて出られないかもしれないと告げる。 昨年11月には、本作のロケ撮影がプラハで行われていると報じられ、 雪に覆われたラクーンシティが映画に登場するのではないかと推測されていた 。本作では雪の描写も印象的な要素のひとつとなりそうだ。 「バイオハザード」新作映画は2026年9月18日に米国公開予定。 バイオハザード …</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/resident-evil-2026/83158/1' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='7f476efa3b06e903b9b77d7174b34d9d' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-15 20:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'7f476efa3b06e903b9b77d7174b34d9d')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>日本の道路、驚異の再現度！『Forza Horizon 6』感想トーク：音声版 今週遊んだゲーム 04/15/2026</h3><div class='summary'>IGN JAPAN編集部のスタッフが、最近遊んだゲームについて話す番組 ■ゲーム＆映画グッズ専門店「IGN JAPAN STORE」 https://ignstore.jp/ 00:00 オープニング 00:27 『Forza Horizon 6 』 12:57 『スーパーマリオギャラクシー2 』 21:07 『Fishbowl』 ■出演 ロブソン・ダニエル 野口広志 渡邉卓也（フリーライター） ■「今週遊んだゲーム」の再生リストはこちら https://www.youtube.com/playlist?list=PL5dP0ylcT42fwUkuleiG6Qrz0NS0sL59- ■「しゃべりすぎGAMER」の再生リストはこちら https://www.youtube.com/playlist?list=PL5dP0ylcT42dJXN_5KJECJ8cI9hK690_e ■ポッドキャスト版 iTunes https://podcasts.apple.com/jp/podcast/ign-japan-%E3%81%97%E3%82%83%E3%81%B9%E3%82%8A%E3%81%99%E3%81%8Egamer-%E3%83%9D%E3%83%83%E3%83%89%E3%82%AD%E3%83%A3%E3%82%B9%E3%83%88/id1258418439 Spotify https://open.spotify.com/show/4AKK4MIlRk3Zfj8my703D8?si=x1_N0RZnTWiagXspsoIUkA ■一部使用楽曲 MusMus：http://musmus.main.jp/</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/shaberisugi-gamer/83167/forza-horizon-6-04152026' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='911f6fede3b9806ab6930c8de0b5754f' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-16 08:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'911f6fede3b9806ab6930c8de0b5754f')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ハナコ岡部がマツダスタジアムで人生初始球式、「新しいカギ」と広島カープのコラボ企画も</h3><div class='summary'>ハナコ岡部が、5月9日（土）に広島・マツダスタジアムで行われる「広島東洋カープ対東京ヤクルトスワローズ」の始球式に登場する。これはテレビ新広島の主催イベント「TSSスポンサードゲーム」の一環で実施されるもの。テレビ新広島（TSS）は「新しいカギでずきゅん。TSS全力応援デー」として同ゲームを盛り上げる。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/news/668476' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='7c8325ee45acf05553fa31a2e9681a88' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-16 10:02</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'7c8325ee45acf05553fa31a2e9681a88')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『トモダチコレクション わくわく生活』は異常に厳しい共有制限に泣く、最高に笑えるシミュレーションゲーム――IGN USのレビューを全文掲載</h3><div class='summary'>自分だけのシュールなコミュニティーを作ろう 海外メディアを中心に、『トモダチコレクション わくわく生活』のレビューが掲載された。IGN JAPANでも独自のレビューを掲載予定だが、一足先にIGN USのレビューをお届けしよう。レビュースコアは7点だ。 『トモダチコレクション わくわく生活』における私の島は、巨大なデジタルのドールハウスのようなものだ。しかもそれは、量産されたおもちゃを並べるだけのものではなく、奥深いMiiスタジオによって再現された自分や友人、有名人、さらには架空のキャラクターたちによって命の吹き込まれた、魅力的な空間になっている。 彼らに服を着せたり、食事を与えたり、ちょっとした恋愛ドラマに首を突っ込んだりするのは、子供のように無邪気に楽しめる要素だ。しかし単なるおもちゃとは違い、それぞれのMiiは独自の生活や思考、そしてどこか不思議な個性を持った声を備えている。その結果として本作は、プレイヤーの創造力に応じて楽しさがどんどん広がっていく。非常にユーモラスであり、自分だけの文明が作れるようなシミュレーターと言える。 アイデアを注ぎ込めば注ぎ込むほど楽しさも増していく。自分自身の性格や内輪ネタ、くだらない発想までもが反映されたMiiたちのコミュニティが徐々に出来上がっていく。しかも本作は、思わず共有したくなるような瞬間を次々と生み出してくれる。だからこそ、お気に入りの出来事やキャラクター、創作を共有するのが非常に難しい（場合によっては不可能な）仕様には、どうしても不満が残る。 友達と遊べない、あるいはせめて見せびらかすこともできないおもちゃに、どれほどの意味があるだろうか。本来は極めてソーシャルな体験になるはずのゲームが、逆にどこか孤立したものになってしまっている点は残念だ。この大きな問題が、魅力あふれる楽園に影を落としている。 島の住人たちを観察する前に、まずは彼らを作り出さなければならない。『トモダチコレクション わくわく生活』で過ごした35時間のうち、かなりの時間をこの刷新されたMiiスタジオでのキャラクター作成に費やすことになった。3DSで発売された『トモダチコレクション 新生活』から直接移ってきた人にとって、これは大きな進化だ。前髪と後髪を組み合わせられる豊富な髪型、サブカラーの設定、さらには目の形や瞳のディテールに至るまで、カスタマイズの自由度が大幅に向上している。しかも今回は、Miiに耳まで付けられるようになっているのだ！ 作れるキャラクターはこれまで以上に魅力的だ。ゲーム全体はHD化によるシャープなビジュアルの恩恵も受けつつ、このシリーズ独特のシンプルな魅力をしっかりと保っている。私はもともとMii作りが得意なほうではないが、この新しいツールの充実した機能のおかげで、自分の分身となるキャラクターもかなり満足のいく仕上がりにすることができた。 筆者のMii。あなたの島でも再現してみては？ Miiの作成スキルを磨かざるを得なかった理由のひとつが、他人と共有する手段が極めて限定されていることだ。共有はローカル通信のみに制限されているので、同じ場所にいる相手としか共有できない。3DSではMiiをQRコードとして保存し、オンラインに投稿することで、世界中のプレイヤーと共有できただけに、これは残念だ。 『トモダチコレクション わくわく生活』をプレイする多くの人のように、私のキャラクリのスキルは超一流ではない。体験版でほかのプレイヤーが作ったMiiの中には本当に素晴らしいものがたくさんあって、本来ならワクワクするはずだが、実際には「そのキャラクターを自分の島に迎えられない」という事実に寂しさを感じてしまう。もちろん、自分で再現しようと頑張ることもできるだろう。でも自分の限界は分かっている――同じクオリティには到底届かない。 興味深いことに、先述した3DSのQRコードを使って、昔のMiiを新しい島に連れてくるかなり無茶な裏技は一応存在する。まず古い3DSを引っ張り出してMiiのQRコードを読み取り、そのMiiをamiiboにコピーし、それをSwitchでスキャンして、ようやくゲーム内に取り込む――という手順だ。私はこの方法で、3DS時代のMiiをいくつも『トモダチコレクション わくわく生活』に連れてきた。宮本茂やレジー・フィサメイ（米任天堂の元社長）といった、任天堂公式のMiiも含まれている。 また、Switch版『ミートピア』を購入した約200万人のひとりであれば、同作にある共有機能を経由してMiiを密輸することも可能だ。ただし独自のメイクシステムの影響で、移植されたMiiの再現度はあまり高くならないケースも多い。 しかし、2026年にもなって、世界中でMiiを直接共有する最も確実な方法が、15年前の携帯ゲーム機を経由することだなんて、本当に理にかなっているのだろうか……。前作ではそれほど感じなかった「キャラクリのスキルの差」が、本作では楽しみの幅にそのまま影響してしまうので、やはり残念だ。本作を最大限に楽しむには、Mii作りそのものが好きであるか、あるいはキャラクタークリエイトにかなりの時間を費やす角があるかだろう。 島での暮らし こうした大きな欠点があるのは本当に惜しい。というのも、それ以外の部分は本当に気に入っているからだ。ひとたび数人のキャラクターが島を歩き回るようになると――島全体がひとつながりの空間になった点は、メニュー形式だった前作からの大きな進化だ――魅力が一気に開花する。 私はまず、自分と婚約者、そして大好きなメジャーリーグの選手2人を追加するところから始めた。そして何より感心したのが、性格カスタマイズの正確さと細やかさだ。いくつかのスライダーを調整するだけで、各Miiには16種類の性格タイプのいずれかが割り当てられるのだが、これが驚くほど的確で、再現しようとした人物の本質をしっかり捉えていると感じることが多かった。 私は「クール系きっちり型」と診断され、詳細な性格が「控え目、注意深い、しぶとい、論理的、口調が淡々としている。何でもマジメにこなすタイプ。おとなしめだけど、言いたいことは言う。ルールを破ることはほとんどない。」だった。もし私のことを知っている人なら、まさに的確だと感じるはずだ。 また、あらかじめ人間関係を設定しておくことで、現実の家族同士のMiiが恋愛関係になってしまうのを防ぐこともできるし、恋愛対象の設定も選べるようになっている。これは、次の「トモダチコレクション」をより包括的なものにするという、任天堂が 10年前に掲げた約束 をしっかりと果たした結果だと言える。 &lt;iframe allow=&quot;autoplay; fullscreen …</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/tomodachi-collection-wakuwaku-seikatsu/83170/ign-us' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='ce67ec55a0a7e30495143a5bff42fa69' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-16 10:30</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'ce67ec55a0a7e30495143a5bff42fa69')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『トモダチコレクション わくわく生活』はプレイヤーの情熱次第で評価が変わるゲーム？海外レビュー分析で見えてくる魅力と問題点</h3><div class='summary'>その仕組み全体は、プレイヤーが注ぎ込むものによってのみ動き続ける 『トモダチコレクション わくわく生活』が発売を迎え、各所でレビューが掲載された。 IGN USのレビューを翻訳記事 としてすでに紹介しているが、IGN JAPANでも筆者（クラベ）が独自のレビューをお届けする予定だ。本稿では海外メディアにおける本作の評価の傾向を分析する。 レビュー集積サイトMetacriticでは記事執筆時点で59件のレビューが登録されており、78点のメタスコアを記録 している。決して悪いスコアではないものの、体験版の好評ぶりを考えると、もう少し高いスコアを期待したかったところ。 分析を始める前に、海外における「トモダチコレクション」シリーズの背景を改めて確認しよう。日本で2009年に発売された1作目『トモダチコレクション』はDSを代表するソフトで、376万本も売れた、社会現象と呼ぶのにふさわしいほど流行したタイトルだ。しかし、本作はそもそも海外では発売すらしていなかった。 2013年に3DSに登場した続編『トモダチコレクション 新生活』は、欧米で「Tomodachi Life」としてリリースを迎えた。タイトルに日本語「Tomodachi」を残したことからもわかるように、あえてジャパニーズな雰囲気を残した、ニッチなタイトルとして登場した。しかし、そんな本作は ヨーロッパだけで200万本以上を売り上げる など、一定の人気を獲得した。一方で、「同性愛者のMiiを作れない」ことで批判を浴びた。その後、シリーズの展開がなくなり、欧米では任天堂の一風変わった単発タイトルとして歴史に残ることとなった。1作目が一世を風靡した国内とは大きな違いがあると言えそうだ。 『Tomodachi Life』こと『トモダチコレクション 新生活』のメタスコアは71点 とあまり高くはないが、これは同性愛者の設定がないことによる不満も大きい模様。なお、近年は本作を愛するゲームライターも多くなっているイメージだ。IGN USのポッドキャスト番組「Nintendo Live Chat」でも頻繁に本作に対する愛を形容する出演者が複数いる。 そんな『Tomodachi Life』が海外で発売してから12年、ついに続編『トモダチコレクション わくわく生活』が発売されたわけだ。78点のメタスコアは前作よりも一回り高く、今作ではMiiの恋愛対象を性別と関係なく設定できるようになっているので、まずその問題はクリアしている。一方で、 IGN US（70点） も指摘する別の問題が浮かび上がっている。それは共有設定の厳しい制限である。 『トモダチコレクション わくわく生活』は、創造力に応えてくれるユニークで風変わりな楽園への鍵をプレイヤーに手渡してくれる作品だ。そしてその世界は、自分自身の個性をそのまま映し出す鏡のようでもある――だからこそ、この楽しさをもっと気軽に友人たちと共有できたなら、と思わずにはいられない。 そう、本作は前作ではより自由にできたMiiなどの共有が難しくなっている。スクリーンショットでさえ、ほとんどのSwitchゲームが対応している「スマホへアップロード」の機能が使えない。 「子供を守るという観点がその判断の大きな理由になっているのだろう」とIGN USはおそらくの原因に理解を示しながらも「安全策を設ける仕組み」をいくらでも用意できたはずだと主張している。レビュー自体は共有の厳しい制限を除けば大きなマイナスを挙げていないので、この問題がなければおそらくは80点または90点のスコアだったのだろう。そう、前作と同様に、仕様の抱える問題が本質的には素晴らしいゲームの足枷となっているのだ。 「さあ、肩の力を抜いてリラックスし、とことんバカで、ぶっ飛んでいて、奇妙な世界に飛び込もう――2026年最高のゲームがここにある。私はこのゲームから手が離せなくなっているし、ライフシミュレーションが好きなら、きっとあなたも同じ気持ちになるはずだ」という Pocket Tactics（100点） の陽気なレビューからすれば、「トモダチコレクション」と相性のいいプレイヤーならこれ以上のゲームはないらしい。 ところが、問題は共有の制限だけではない。「トモダチコレクション」の面白さはプレイヤーの想像力に委ねられている側面も強く、ゲームそのものはかなりシンプルで、同じようなシチュエーションの繰り返しも多い。 「活気あふれる島でMiiたちを管理するユニークなライフシミュレーションゲームで、人間関係やユーモア、予想外のやり取りに重きを置いている。ただし、その長期的な魅力は、ある程度の繰り返し要素を受け入れられるかどうかに左右される」と&lt;a …</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://jp.ign.com/tomodachi-collection-wakuwaku-seikatsu/83172/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='c563214b99a3376853d95d7a8218fbdc' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-16 17:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'c563214b99a3376853d95d7a8218fbdc')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>［インタビュー］「FFXIV」パッチ7.5“彼方に至る路”の展望や，新ジョブ“魔獣使い”の遊び応えについて吉田直樹氏に聞いた</h3><div class='summary'>スクウェア・エニックスのMMORPG「ファイナルファンタジーXIV」で，4月28日に最新パッチ7.5「彼方に至る路」が実装予定だ。次につながる新メインクエスト，新たなリミテッドジョブ，「エコーズオブヴァナ・ディール」の最終章など注目の本パッチについて，プロデューサー兼ディレクターの吉田直樹氏に聞いた。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/199/G019924/20260414043/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='4bde4bbdf0156a68895911825e2cff37' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-16 17:03</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'4bde4bbdf0156a68895911825e2cff37')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「SDガンダム ジージェネレーション エターナル」1周年記念映像を公開。Ex-Sガンダムやガンダム・ファラクト（Season2仕様）が本日参戦</h3><div class='summary'>バンダイナムコエンターテインメントは本日，シミュレーションゲーム「SDガンダムジージェネレーションエターナル」がサービス開始から1周年を迎えたことを記念し，特別映像を公開した。あわせて，最大3000ダイヤを獲得できるパネルミッションなど，各種アニバーサリー施策を開始している。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/633/G063395/20260416034/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='12edd7cb02ce366c168c9d583c4d0b92' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-16 17:10</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'12edd7cb02ce366c168c9d583c4d0b92')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>写真を通して世界を見つめ，少女と世界の真相を解き明かそう。「OPUS: Prism Peak」，配信開始</h3><div class='summary'>集英社ゲームズは本日（2026年4月16日），新作タイトル「OPUS:PrismPeak」をリリースした。本作は，久々に故郷へ帰省する途中で事故に遭い，突如不思議な世界「ボウの地」に迷い込んでしまった写真家の主人公が，そこで出会った記憶喪失の少女と協力して「帰り道」を探すアドベンチャーゲームだ。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/766/G076688/20260416037/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='0c85b1cee75fe5bf3f6a59672e37274e' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-16 17:52</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'0c85b1cee75fe5bf3f6a59672e37274e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>“英国発”のゲームショーケース「Galaxies Spring Showcase 2026」は4月17日4：00に配信。50本超の発表と7つのワールドプレミアを予定</h3><div class='summary'>デジタルゲームショーケース「GalaxiesSpringShowcase2026」が，日本時間2026年4月17日4：00に配信される。欧州のパブリッシャやスタジオを中心にパートナーとして名を連ねる同イベントでは，50本以上のタイトル情報と7つのワールドプレミアが公開される予定だ。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/991/G999110/20260416038/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='1654119ff921477f1688b62bafd1c4c2' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-16 18:05</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'1654119ff921477f1688b62bafd1c4c2')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>東欧の孤島に住む一家の歪んだ愛情と飢えを描く，サイコホラーADV「Good Children Say Grace」の体験版が一般公開。SteamおよびItch.ioで無料配信中</h3><div class='summary'>カナダの個人開発者DenisMorozoff氏が手がけるサイコホラーアドベンチャー「GoodChildrenSayGrace」の体験版が，4月15日にSteamおよびItch.ioで配信された。本作は，1980年代の東欧の孤島を舞台に，ある一家の歪んだ愛情と飢えをマンガ的な語り口で描く作品で，プレイヤーの選択によって物語が大きく分岐する。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/991/G099166/20260416040/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='19135059a9863623481e04d14a711e4e' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-16 18:08</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'19135059a9863623481e04d14a711e4e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「NITRO GEN OMEGA」，正式版にあたる「バージョン1.0」を5月12日にPC，PS5，Xbox Series X|S向けに発売</h3><div class='summary'>BeepJapanは本日（2026年4月16日），Steamで早期アクセスを実施している「NITROGENOMEGA」の正式版にあたる「バージョン1.0」を，5月12日にPC，PS5，XboxSeriesX|S向けに，5月14日にSwitch向けに発売すると発表した。プレイヤーは傭兵部隊の指揮官として部隊を編成し，広大な世界を探索し，さまざまなクエストやミッションに挑む。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/845/G084576/20260416039/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='eb988579c7a1de209d18a79d12bcfd83' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-16 19:16</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'eb988579c7a1de209d18a79d12bcfd83')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>サンゴ礁を再生し，海の生態系を蘇らせていく。海中都市建設シム「Life Below」，2026年5月26日に発売</h3><div class='summary'>Megapopが手がける新作タイトル「LifeBelow」は，2026年5月26日に発売されることが明らかになった。本作は，サンゴ礁の再生を通じて海中の生態系を立て直していく海洋都市建設シミュレーションゲームだ。ストーリーモードのシナリオは，シナリオライターとして知られるリアンナ・プラチェット氏が手がけている。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/939/G093959/20260416043/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='ef3b17135a431c729d4728ace4d70ce0' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-16 19:45</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'ef3b17135a431c729d4728ace4d70ce0')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「メイプルストーリー」，新イベント「カルシオンオクトフェスタ」を開催</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/011/G001163/20260416044/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='b917aa7dd2084da9c70e5d611711c0a0' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-16 19:47</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'b917aa7dd2084da9c70e5d611711c0a0')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>自由にコンベアを配置し，迅速に寿司を提供しよう。「回転寿司シミュレーター」，Steamで配信開始</h3><div class='summary'>MizukiGamesは本日（2026年4月16日），新作タイトル「回転寿司シミュレーター」をSteamでリリースした。本作は，回転寿司屋の店長となって，店舗を設計し，日々変化する仕入れ価格や顧客の好みをチェックしながら，迅速にサービスを提供する経営シミュレーションゲームだ。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/898/G089896/20260416046/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='43108df70e50ce7f9882261b03b2f7b5' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-16 19:50</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'43108df70e50ce7f9882261b03b2f7b5')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>超現実都市オープンワールドRPG「NTE: Neverness to Everness」，ヘテロシティでの店舗経営やカーライフを収録した最新映像を公開</h3><div class='summary'>PerfectWorldGamesは本日，同社が4月29日にリリースを予定している新作オープンワールドRPG「NTE:NevernesstoEverness」のリリースゲームプレイトレイラーを公開した。また，本作の最新情報を発表する「正式リリース予告番組」が4月18日20：30から配信される。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/817/G081722/20260416042/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='3f373a5179e6fb47452ce19d0d6d4510' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-16 20:22</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'3f373a5179e6fb47452ce19d0d6d4510')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「ぷよぷよ」35周年“だいれんさ！” プロジェクトの続報が公開に。東リベや広島とのコラボが決定</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/202/G020261/20260416049/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='71db401826c83c0181c23f7e445c2058' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-16 20:50</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'71db401826c83c0181c23f7e445c2058')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>決して否定せず，間違えない“完璧な伴侶”を本当に愛せるのかーー分岐型ナラティブスリラーADV「Limerence」発表</h3><div class='summary'>SalixGamesは，新作タイトル「Limerence」を発表した。本作は分岐型ナラティブ・スリラーアドベンチャーゲームで，30代の女性クレアとAIパートナーのカイが関係を築いていく過程を描く。親密さや依存といった人間関係の本質をテーマにした物語が展開される。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/999/G099990/20260416050/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='54d174d192bfeb7d8b702ed207f3d4dd' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-16 22:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'54d174d192bfeb7d8b702ed207f3d4dd')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「G-MODEアーカイブス+」にバンダイナムコ作品が参入。「ゼノサーガ パイドパイパー」「ナムコクロニクル」復刻決定</h3><div class='summary'>ジー・モードは，本日配信した特別番組「G-MODEアーカイブス6周年記念生放送」で，バンダイナムコ作品の「ゼノサーガパイドパイパー」と「ナムコクロニクル」を，PC/Switch向けに配信すると発表した。また，RPG「DIGITALDEVILSAGAアバタール・チューナーA&#x27;sTESTServer完全版」が本日配信開始となった。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/999/G099947/20260415044/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='f89f21c16f006513f91b125a8304dc60' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-16 23:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'f89f21c16f006513f91b125a8304dc60')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>［プレイレポ］ネクソンの新作「Vindictus: Defying Fate」は，ハイリターンの追撃アクションが楽しすぎる。至近距離で殴り合える刺激的な戦いに進化</h3><div class='summary'>ネクソンが開発中のアクションRPG「Vindictus:DefyingFate」のオンラインデモセッションが実施された。前回のパブリック・アルファテスト版からどのように変化したのか，改善点やバトルの見どころを紹介しよう。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/780/G078042/20260416029/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='44230ed3d3d3354b1b16eadaf8867353' data-region='JP' data-score='3' data-platform='netflix'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Netflix新作</span><span>2026-01-07 17:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'44230ed3d3d3354b1b16eadaf8867353')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>さぁ、今年はどんな作品が待っている? Netflix、2026年配信予定のシリーズ、映画、ゲームを発表 - About Netflix</h3><div class='summary'>さぁ、今年はどんな作品が待っている? Netflix、2026年配信予定のシリーズ、映画、ゲームを発表 About Netflix</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag'>Netflix</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMingFBVV95cUxNSVJWaVNJeEdyeE9ya2V2OTN4d0tJSi1XWUlweDVLNllqQjltWmQtbUt5YWVxV2N1YnRneUJkLXRrZDN4Z1RKQ0VNNDNXVzFkNEtOQW16UnpCb0dRZlY2SnV2UFF5cUtNN24xS3B0a3FoWnFqREJYZ0plejJCaVdiWEpfYzRGR0R2Uldnc3pkaTY3UkFKeklWZ3hQRDJnZw?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='d8ad5247ab7c32562ea9f8f7bd63a271' data-region='JP' data-score='3' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-14 15:47</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'d8ad5247ab7c32562ea9f8f7bd63a271')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>KTCの24インチモニター「H24V27」がAmazonにて20％オフでタイムセール中</h3><div class='summary'>深みのある黒と鮮やかな映像が特徴のVAパネルを搭載 KTCの24インチモニター「H24V27」 がAmazonにて20％オフでタイムセール中だ。 本製品は、深みのある黒と鮮やかな映像が特徴のVAパネルを搭載した24インチのフルHDモニター。日常のデスクワークはもちろん、映画や動画の視聴といったエンターテインメント用途でも活躍してくれる。 リフレッシュレートは最大100Hz、応答速度は1msとなっているので、一般的な60Hzのモニターよりも滑らかな映像でゲームなどのコンテンツが楽しめる。また、Adaptive Sync技術もサポートしており、ゲームプレイ時に発生するティアリングやカクつきを抑えることが可能だ。 &lt;a class=&quot;commerceblock-image-cta&quot; data-amazon=&quot;amz&quot; href=&quot;https://www.amazon.co.jp/dp/B0FC23FGGL?tag=zdintlignjp-22&amp;ascsubtag=c%7C83139&quot; …</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://jp.ign.com/gaming-device/83139/ktc24h24v27amazon20' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='a91244e7f0c86bcc13fe71ef5df46bd9' data-region='JP' data-score='3' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-14 20:01</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'a91244e7f0c86bcc13fe71ef5df46bd9')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ゲーム初心者におすすめの入門タイトルをご紹介！「カービィ」から『ホグワーツ・レガシー』まで：#485 しゃべりすぎGAMER</h3><div class='summary'>IGN JAPAN編集部のスタッフが、長々とゲーム雑談をする“ながら見”推奨番組「しゃべりすぎGAMER」。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://jp.ign.com/gamer-1/83156/485-gamer' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='d0008023d6e0871db43bbb8608492a92' data-region='JP' data-score='3' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-15 08:46</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'d0008023d6e0871db43bbb8608492a92')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Godzilla Minus Zero - Official First Look Teaser</h3><div class='summary'>GODZILLA MINUS ZERO picks up in 1949, two years after the tumultuous events of Godzilla Minus One, and continues the story of the Shikishima family as they face an all-new calamity.</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://jp.ign.com/godzilla-minus-zero/83162/godzilla-minus-zero-official-first-look-teaser' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='d5ba8cb18bb33259744909fbdf01a3fa' data-region='JP' data-score='3' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-15 15:34</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'d5ba8cb18bb33259744909fbdf01a3fa')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『Marathon』レビュー：スカベンジのハードルを落としたカジュアルな脱出系シューター</h3><div class='summary'>Bungieなりの答えが詰まった意欲作 『Marathon』は、老舗FPSメーカーであるBungieが、その開発力を脱出系に注ぎ込んだ意欲作。本作を70時間プレイしたレビューをお届けしていく。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://jp.ign.com/marathon/83152/marathon' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='fb6db49f8f70bfe99a3367aee0e49956' data-region='JP' data-score='3' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-15 20:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'fb6db49f8f70bfe99a3367aee0e49956')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>日本の道路、驚異の再現度！『Forza Horizon 6』感想トーク：今週遊んだゲーム 04/15/2026</h3><div class='summary'>IGN JAPAN編集部のスタッフが、最近遊んだゲームについて話す番組</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://jp.ign.com/gamer-1/83168/forza-horizon-6-04152026' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='23931528bcd3bb4473bcf8943f74a82f' data-region='JP' data-score='3' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-15 20:57</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'23931528bcd3bb4473bcf8943f74a82f')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ワイヤレスイヤホン「EarFun Air Pro 4」がAmazonにて最大22％オフでタイムセール中</h3><div class='summary'>aptX LosslessやLDAC対応で原音に忠実な高品質なサウンド ワイヤレスイヤホン「EarFun Air Pro 4」がAmazonにて最大22％オフでタイムセール中だ。タイムセールの対象となっているのはブラックとホワイトの2色。参考としてネイビーのAmazon上での割引率も記載する。 ブラック 22%オフ ホワイト 20%オフ ネイビー 15%オフ …</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://jp.ign.com/gaming-device/83157/earfun-air-pro-4amazon22' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='7ce2a86ef0c620395dbc0a7829b6a64d' data-region='JP' data-score='3' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>IGN Japan</span><span>2026-04-16 14:11</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'7ce2a86ef0c620395dbc0a7829b6a64d')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Philipsの超軽量ゲーミングマウス「SPK9418」が26%オフでセール中 本体重量わずか52g、2025年末発売の製品が早くもお買い得に</h3><div class='summary'>長時間の使用も快適 2025年12月に発売されたばかりのPhilipsのゲーミングマウス「SPK9418」がAmazonにて最大26％オフでタイムセール中だ。タイムセールの対象となっているのはブラック1とブラック2の2色。ホワイトはタイムセールではないようだが、Amazon上で過去30日間で最安の価格設定となっている。 ブラック1 26%オフ ブラック2 23%オフ ホワイト 23%オフ 本製品は、わずか約52gの超軽量設計ボディが特徴のワイヤレスゲーミングマウス。右手専用のエルゴノミクスデザインにより、長時間のゲームプレイや日々の作業でも、手首や肩への負担を大幅に軽減してくれる。 &lt;img alt=&quot;&quot; …</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://jp.ign.com/gaming-device/83169/philipsspk941826-52g2025' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='5b95ba331926d9b62ca6d5c2c57ba946' data-region='JP' data-score='3' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-16 17:08</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'5b95ba331926d9b62ca6d5c2c57ba946')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ドラえもんと一緒に22世紀まで続く和菓子屋を目指せ。「ドラえもんのどら焼き屋さん物語」Switch向けパッケージ版，本日発売</h3><div class='summary'>カイロソフトは本日，経営シム「ドラえもんのどら焼き屋さん物語」のSwitch向けパッケージ版を発売した。プレイヤーは，店舗の調理場や店内を自由にレイアウトして，どら焼きやたい焼き，いちご大福などのスイーツを販売し，22世紀まで続く和菓子屋に発展させるのが目的だ。スペシャルガイドブックが同梱される。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/744/G074437/20260416036/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='8f08cb17f589de975995e42f6961c942' data-region='JP' data-score='3' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-16 20:01</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'8f08cb17f589de975995e42f6961c942')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「メイプルストーリーＭ」，新職業「リン」を実装</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/324/G032445/20260416047/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='0720eb2f47109389ef3b074f47fae2f5' data-region='JP' data-score='3' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-16 20:30</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'0720eb2f47109389ef3b074f47fae2f5')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「チェンクロ」，拒絶の乙女 ククリが登場する天魔バグリス襲来支援フェスを開催</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/223/G022384/20260416052/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='b9de8613658776dfd01d1a34c721f702' data-region='JP' data-score='3' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-16 20:36</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'b9de8613658776dfd01d1a34c721f702')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「ドールズフロントライン2」，ボイスドラマ第1弾「クルカイ」をリリース</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/631/G063178/20260416054/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='1c6647afbad18385e29ef754704333d9' data-region='JP' data-score='3' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-16 20:43</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'1c6647afbad18385e29ef754704333d9')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>海賊オープンワールドサバイバル「Windrose」，発売から48時間で販売本数50万本を突破。Steamでの最大同時接続者数は10万人近くに</h3><div class='summary'>ポケットペアパブリッシングは本日（2026年4月16日），「Windrose」の販売本数が，発売から48時間で50万本を突破したことを明かした。本作は，“黒ひげ”こと「エドワード・ティーチ」に抗う1人の船長となり旅をする，海賊時代を舞台としたオープンワールドサバイバルクラフトゲームだ。</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://www.4gamer.net/games/966/G096663/20260416053/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='809534df732044e43ad475ffb35dcc49' data-region='JP' data-score='2' data-platform='prime'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Prime Video新作</span><span>2026-03-01 17:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'809534df732044e43ad475ffb35dcc49')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Amazonプライムビデオ 2026年2月配信の見放題作品一覧 『劇場版トリリオンゲーム』『おーい、応為』、『ジョジョ第１～6部』ほか。エヴァフェスPPVも実施 - uzurea.net</h3><div class='summary'>Amazonプライムビデオ 2026年2月配信の見放題作品一覧 『劇場版トリリオンゲーム』『おーい、応為』、『ジョジョ第１～6部』ほか。エヴァフェスPPVも実施 uzurea.net</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag'>Prime</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiV0FVX3lxTE5tUUJROFdNU3p4VGZ3LXU4ZVhiTGVRY3BGZ3BwamtNenctZmxGZlBJT1JBYmhLUWlCTi1sQmx4bHRkakt1UVhnYVVNdlZ6aUMzNTBHUVZnbw?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article></div>
+</section>
+</div><footer>Watch Hub + — Generated at 2026-04-16 23:27</footer>
+<script>
+function setPageLang(lang) {
+  localStorage.setItem('page_lang_pref', lang);
+  document.querySelectorAll('.page-lang-btn').forEach(function(btn){ btn.classList.remove('active'); });
+  var enBtn = document.getElementById('btnPageEN');
+  var jaBtn = document.getElementById('btnPageJA');
+  document.querySelectorAll('.item-card').forEach(function(card){
+    var enPane = card.querySelector('.lang-en');
+    var jaPane = card.querySelector('.lang-ja');
+    if(!enPane || !jaPane) return;
+    if(lang === 'ja') {
+      enPane.classList.add('hidden');
+      jaPane.classList.remove('hidden');
+      if(jaBtn) jaBtn.classList.add('active');
+      if(enBtn) enBtn.classList.remove('active');
+    } else {
+      enPane.classList.remove('hidden');
+      jaPane.classList.add('hidden');
+      if(enBtn) enBtn.classList.add('active');
+      if(jaBtn) jaBtn.classList.remove('active');
+    }
+  });
+}
+function switchCardLang(btn, lang) {
+  var card = btn.closest('.item-card');
+  if (!card) return;
+  card.querySelectorAll('.card-lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var enPane = card.querySelector('.lang-en');
+  var jaPane = card.querySelector('.lang-ja');
+  if (lang === 'ja') { if(enPane) enPane.classList.add('hidden'); if(jaPane) jaPane.classList.remove('hidden'); }
+  else { if(enPane) enPane.classList.remove('hidden'); if(jaPane) jaPane.classList.add('hidden'); }
+}
+function markRead(btn, id) {
+  localStorage.setItem('watch_hub_plus_read_' + id, '1');
+  var card = btn.closest('.item-card');
+  if (card) card.classList.add('is-read');
+}
+(function(){
+  document.querySelectorAll('.item-card').forEach(function(card){
+    var id = card.dataset.cardid;
+    if(localStorage.getItem('watch_hub_plus_read_' + id) === '1') card.classList.add('is-read');
+  });
+  var current = localStorage.getItem('page_lang_pref') || 'en';
+  setPageLang(current);
+})();
+
+(function(){
+  var fRegion = 'JP';
+  var fScore = 'all';
+  var fPlatform = 'all';
+  var search = '';
+  function applyFilters(){
+    document.querySelectorAll('.item-card').forEach(function(card){
+      var show = true;
+      if(fRegion !== 'all' && (card.dataset.region || '') !== fRegion) show = false;
+      if(fScore !== 'all' && parseInt(card.dataset.score || '1', 10) < parseInt(fScore, 10)) show = false;
+      if(fPlatform !== 'all' && (card.dataset.platform || '') !== fPlatform) show = false;
+      if(search && !(card.textContent || '').toLowerCase().includes(search.toLowerCase())) show = false;
+      card.style.display = show ? '' : 'none';
+    });
+    document.querySelectorAll('.mini-item[data-region]').forEach(function(item){
+      var show = true;
+      if(fRegion !== 'all' && (item.dataset.region || '') !== fRegion) show = false;
+      if(fPlatform !== 'all' && (item.dataset.platform || '') !== fPlatform) show = false;
+      item.style.display = show ? '' : 'none';
+    });
+  }
+  document.querySelectorAll('.flt-region').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.flt-region').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      fRegion = btn.dataset.region;
+      applyFilters();
+    });
+  });
+  document.querySelectorAll('.flt-score').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.flt-score').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      fScore = btn.dataset.score;
+      applyFilters();
+    });
+  });
+  document.querySelectorAll('.flt-platform').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.flt-platform').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      fPlatform = btn.dataset.platform;
+      applyFilters();
+    });
+  });
+  var sb = document.getElementById('searchBox');
+  if(sb){ sb.addEventListener('input', function(){ search = this.value; applyFilters(); }); }
+  applyFilters();
+})();
+
+</script>
+</body></html>

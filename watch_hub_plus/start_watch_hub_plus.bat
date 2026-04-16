@@ -3,7 +3,7 @@ chcp 65001 >nul
 set PYTHONIOENCODING=utf-8
 cd /d "%~dp0"
 echo ==============================================
-echo   Watch Hub +
+echo   watch_hub_plus
 echo ==============================================
 echo.
 echo [1/3] Installing requirements...

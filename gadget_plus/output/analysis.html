@@ -26,14 +26,14 @@ header{position:sticky;top:0;z-index:50;background:rgba(13,16,22,.96);backdrop-f
 .nav a:hover{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.06)}
 .nav a.active{background:linear-gradient(135deg,#4ea1ff,#5a86ff);border-color:transparent;color:#fff;box-shadow:0 4px 16px rgba(78,161,255,.3)}
 .main{max-width:1480px;margin:18px auto;padding:0 20px 40px}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px;overflow:hidden}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
 .stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
 .stat .num{font-size:26px;font-weight:800;margin-bottom:4px}
 .stat .label{color:var(--muted);font-size:12px}
 .stat .icon{font-size:22px;margin-bottom:8px}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center;width:100%;max-width:100%;box-sizing:border-box}
-.flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;box-sizing:border-box}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s}
 .flt-btn:hover{border-color:var(--accent)}
 .flt-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
 .search{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 12px;font-size:13px;min-width:220px}
@@ -100,7 +100,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='top'>
     <div class='title'>
       <h1>📱 Gadget + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ ガジェット・家電・便利グッズ情報</span></h1>
-      <div class='sub'>更新日時：2026-04-16 11:35</div>
+      <div class='sub'>更新日時：2026-04-16 11:52</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -127,7 +127,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div>
       <div style='font-size:13px;color:var(--muted);margin-bottom:10px'>重要タグ</div>
       <div style='display:flex;gap:14px;flex-wrap:wrap'>
-        <div style='text-align:center'><div style='font-size:24px;font-weight:800;color:#4ea1ff'>28</div><div style='color:var(--muted);font-size:11px'>📱 スマホ・タブレット</div></div>
+        <div style='text-align:center'><div style='font-size:24px;font-weight:800;color:#4ea1ff'>29</div><div style='color:var(--muted);font-size:11px'>📱 スマホ・タブレット</div></div>
         <div style='text-align:center'><div style='font-size:24px;font-weight:800;color:#e74c3c'>26</div><div style='color:var(--muted);font-size:11px'>💻 PC・周辺機器</div></div>
         <div style='text-align:center'><div style='font-size:24px;font-weight:800;color:#2ecc71'>22</div><div style='color:var(--muted);font-size:11px'>📷 カメラ・オーディオ</div></div>
         <div style='text-align:center'><div style='font-size:24px;font-weight:800;color:#f39c12'>4</div><div style='color:var(--muted);font-size:11px'>🏠 スマート家電</div></div>
@@ -138,11 +138,11 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='two-col'>
     <div class='panel'>
       <h2 style='margin:0 0 14px;font-size:16px'>📡 ソース別記事数</h2>
-      <table class='table'><thead><tr><th>ソース</th><th>地域</th><th>種別</th><th>件数</th></tr></thead><tbody><tr><td>Engadget</td><td>🌐 海外</td><td></td><td style='font-weight:800'>48</td></tr><tr><td>ケータイ Watch</td><td>🇯🇵 国内</td><td></td><td style='font-weight:800'>30</td></tr><tr><td>AV Watch</td><td>🇯🇵 国内</td><td></td><td style='font-weight:800'>20</td></tr><tr><td>ITmedia PC USER</td><td>🇯🇵 国内</td><td></td><td style='font-weight:800'>20</td></tr><tr><td>Gizmodo</td><td>🌐 海外</td><td></td><td style='font-weight:800'>20</td></tr><tr><td>デジカメ Watch</td><td>🇯🇵 国内</td><td></td><td style='font-weight:800'>20</td></tr><tr><td>家電 Watch</td><td>🇯🇵 国内</td><td></td><td style='font-weight:800'>15</td></tr><tr><td>The Verge Tech</td><td>🌐 海外</td><td></td><td style='font-weight:800'>10</td></tr></tbody></table>
+      <table class='table'><thead><tr><th>ソース</th><th>地域</th><th>種別</th><th>件数</th></tr></thead><tbody><tr><td>Engadget</td><td>🌐 海外</td><td></td><td style='font-weight:800'>48</td></tr><tr><td>ケータイ Watch</td><td>🇯🇵 国内</td><td></td><td style='font-weight:800'>30</td></tr><tr><td>Gizmodo</td><td>🌐 海外</td><td></td><td style='font-weight:800'>20</td></tr><tr><td>AV Watch</td><td>🇯🇵 国内</td><td></td><td style='font-weight:800'>20</td></tr><tr><td>ITmedia PC USER</td><td>🇯🇵 国内</td><td></td><td style='font-weight:800'>20</td></tr><tr><td>デジカメ Watch</td><td>🇯🇵 国内</td><td></td><td style='font-weight:800'>20</td></tr><tr><td>家電 Watch</td><td>🇯🇵 国内</td><td></td><td style='font-weight:800'>15</td></tr><tr><td>The Verge Tech</td><td>🌐 海外</td><td></td><td style='font-weight:800'>10</td></tr></tbody></table>
     </div>
     <div class='panel'>
       <h2 style='margin:0 0 14px;font-size:16px'>🏷 テーマ別記事数</h2>
-      <table class='table'><thead><tr><th>テーマ</th><th>件数</th></tr></thead><tbody><tr><td><span style='color:#636e72'>➖ その他</span></td><td style='font-weight:800'>85</td></tr><tr><td><span style='color:#ff5c5c'>💻 PC・周辺機器</span></td><td style='font-weight:800'>41</td></tr><tr><td><span style='color:#7c4dff'>📱 スマホ・タブレット</span></td><td style='font-weight:800'>32</td></tr><tr><td><span style='color:#00a8ff'>📷 カメラ・オーディオ</span></td><td style='font-weight:800'>31</td></tr><tr><td><span style='color:#a55eea'>📝 レビュー・比較</span></td><td style='font-weight:800'>19</td></tr><tr><td><span style='color:#20bf6b'>🏠 スマート家電</span></td><td style='font-weight:800'>5</td></tr><tr><td><span style='color:#f7b731'>🧰 便利グッズ</span></td><td style='font-weight:800'>3</td></tr></tbody></table>
+      <table class='table'><thead><tr><th>テーマ</th><th>件数</th></tr></thead><tbody><tr><td><span style='color:#636e72'>➖ その他</span></td><td style='font-weight:800'>84</td></tr><tr><td><span style='color:#ff5c5c'>💻 PC・周辺機器</span></td><td style='font-weight:800'>41</td></tr><tr><td><span style='color:#7c4dff'>📱 スマホ・タブレット</span></td><td style='font-weight:800'>33</td></tr><tr><td><span style='color:#00a8ff'>📷 カメラ・オーディオ</span></td><td style='font-weight:800'>31</td></tr><tr><td><span style='color:#a55eea'>📝 レビュー・比較</span></td><td style='font-weight:800'>19</td></tr><tr><td><span style='color:#20bf6b'>🏠 スマート家電</span></td><td style='font-weight:800'>5</td></tr><tr><td><span style='color:#f7b731'>🧰 便利グッズ</span></td><td style='font-weight:800'>3</td></tr></tbody></table>
     </div>
   </div>
-</div><footer>Gadget + — Generated at 2026-04-16 11:35</footer></body></html>
+</div><footer>Gadget + — Generated at 2026-04-16 11:52</footer></body></html>

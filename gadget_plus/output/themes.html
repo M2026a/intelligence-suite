@@ -26,14 +26,14 @@ header{position:sticky;top:0;z-index:50;background:rgba(13,16,22,.96);backdrop-f
 .nav a:hover{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.06)}
 .nav a.active{background:linear-gradient(135deg,#4ea1ff,#5a86ff);border-color:transparent;color:#fff;box-shadow:0 4px 16px rgba(78,161,255,.3)}
 .main{max-width:1480px;margin:18px auto;padding:0 20px 40px}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px;overflow:hidden}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
 .stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
 .stat .num{font-size:26px;font-weight:800;margin-bottom:4px}
 .stat .label{color:var(--muted);font-size:12px}
 .stat .icon{font-size:22px;margin-bottom:8px}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center;width:100%;max-width:100%;box-sizing:border-box}
-.flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;box-sizing:border-box}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s}
 .flt-btn:hover{border-color:var(--accent)}
 .flt-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
 .search{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 12px;font-size:13px;min-width:220px}
@@ -100,7 +100,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='top'>
     <div class='title'>
       <h1>📱 Gadget + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ ガジェット・家電・便利グッズ情報</span></h1>
-      <div class='sub'>更新日時：2026-04-16 11:35</div>
+      <div class='sub'>更新日時：2026-04-16 11:52</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -168,9 +168,26 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='theme-section' data-section='スマホ・タブレット'>
   <div class='theme-header'>
     <span class='theme-badge' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>📱 スマホ・タブレット</span>
-    <span style='color:var(--muted);font-size:13px'>Phones / Tablets · <span class='section-count'>32</span>件</span>
+    <span style='color:var(--muted);font-size:13px'>Phones / Tablets · <span class='section-count'>33</span>件</span>
   </div>
   <div class='grid theme-grid'>
+<article class='card item-card'
+  data-cardid='item-227d7f3b9310'
+  data-themes='スマホ・タブレット'
+  data-lang='ja'
+  data-score='4'
+  data-source='ケータイ Watch'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ケータイ Watch</span><span>2026-04-16 02:42</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-227d7f3b9310')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ソフトバンクから「Galaxy A57 5G」、23日発売 Starlinkにも対応</h3><div class='summary'>ソフトバンクは、サムスン電子製のAndroidスマートフォン「Samsung Galaxy A57 5G」を4月23日に発売する。予約受付はすでに始まっている。ソフトバンクオンラインショップでの価格は9万3600円。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>📱 スマホ・タブレット</span><span class='tag tag-usd-strong'>📱 スマホ・タブレット</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://k-tai.watch.impress.co.jp/docs/news/2102121.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
 <article class='card item-card'
   data-cardid='item-f08bad9fe258'
   data-themes='スマホ・タブレット'
@@ -1663,23 +1680,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://dc.watch.impress.co.jp/docs/review/newproduct/2097854.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-e6c819ffcd9a'
-  data-themes='カメラ・オーディオ'
-  data-lang='ja'
-  data-score='4'
-  data-source='AV Watch'
-  data-sentiment='neutral'
-  data-importance='cloud_platform'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-15 22:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-e6c819ffcd9a')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>ロスレス対応で高音質化、JBLのBluetoothスピーカー「JBL GO 5」は4月23日発売</h3><div class='summary'>ハーマンインターナショナルは、JBLの小型ポータブルBluetoothスピーカー「JBL GO 5」の発売日を4月23日に決定した。価格はオープンで、直販サイトの価格は7,700円。新たにUSB-C経由でのロスレスオーディオ再生に対応したほか、スピーカーユニットやアンプも強化。音質を進化させた。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2101968.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-24a08e78202d'
   data-themes='カメラ・オーディオ'
   data-lang='ja'
@@ -1695,6 +1695,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>岡嶋和幸の「あとで買う」 1,791点目：大きく開くスタイリッシュなカメラポーチ - デジカメ Watch</h3><div class='summary'>ネットショップのカートの中にある「あとで買う」には、様子見をしているなど気になるアイテムがたくさん入っています。この連載では、フォトライフに関連する製品を中心にその中身をお届けします。どのような物に興味を持ち、どのような視点で選んでいるのかなど、日々の物欲をお楽しみください。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://dc.watch.impress.co.jp/docs/column/okajima/2101986.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-e6c819ffcd9a'
+  data-themes='カメラ・オーディオ'
+  data-lang='ja'
+  data-score='4'
+  data-source='AV Watch'
+  data-sentiment='neutral'
+  data-importance='cloud_platform'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-15 22:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-e6c819ffcd9a')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ロスレス対応で高音質化、JBLのBluetoothスピーカー「JBL GO 5」は4月23日発売</h3><div class='summary'>ハーマンインターナショナルは、JBLの小型ポータブルBluetoothスピーカー「JBL GO 5」の発売日を4月23日に決定した。価格はオープンで、直販サイトの価格は7,700円。新たにUSB-C経由でのロスレスオーディオ再生に対応したほか、スピーカーユニットやアンプも強化。音質を進化させた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>📷 カメラ・オーディオ</span><span class='tag tag-jpy-strong'>📷 カメラ・オーディオ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2101968.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-2eabae7f7e53'
@@ -2762,9 +2779,31 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='theme-section' data-section='その他'>
   <div class='theme-header'>
     <span class='theme-badge' style='background:#636e7222;border-color:#636e72;color:#636e72'>➖ その他</span>
-    <span style='color:var(--muted);font-size:13px'>Others · <span class='section-count'>85</span>件</span>
+    <span style='color:var(--muted);font-size:13px'>Others · <span class='section-count'>84</span>件</span>
   </div>
   <div class='grid theme-grid'>
+<article class='card item-card'
+  data-cardid='item-9c527241f63f'
+  data-themes='その他'
+  data-lang='en'
+  data-score='2'
+  data-source='Gizmodo'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Gizmodo</span><span>2026-04-16 02:45</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-9c527241f63f')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>That Movie with AI Val Kilmer as a Priest Has a Trailer Now</h3><div class='summary'>It features Kilmer-type images of various apparent ages.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>AIヴァル・キルマーが司祭役で出演する映画の予告編が公開中</h3><div class='summary'>さまざまな見かけの年齢のキルマータイプの画像が特徴です。</div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://gizmodo.com/that-movie-with-ai-val-kilmer-as-a-priest-has-a-trailer-now-2000747169' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
 <article class='card item-card'
   data-cardid='item-18b246d7ea91'
   data-themes='その他'
@@ -3017,7 +3056,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Federal jury finds concert business Live Nation is a monopoly</h3><div class='summary'>Live Nation, which operates the Ticketmaster platform, has been determined to be a monopoly . A federal jury handed down its decision today that the company violated federal and state antitrust rules. This finding won&#x27;t surprise anyone who has used Ticketmaster and been sticker-shocked by their fina</div></div>
-<div class='lang-pane lang-ja hidden'><h3>連邦陪審、ライブ・ネイションは独占企業であるとコンサート事業を認定</h3><div class='summary'>Ticketmaster プラットフォームを運営する Live Nation は、独占企業であると判断されました。連邦陪審は本日、同社が連邦および州の独占禁止法に違反したとの判決を下した。 Ticketmaster を使用し、その FINA に衝撃を受けた人なら、この発見は驚くべきことではないでしょう。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>連邦陪審、ライブ・ネイションは独占企業であるとコンサート事業を認定</h3><div class='summary'>Ticketmaster プラットフォームを運営する Live Nation は、独占企業であると判断されました。連邦陪審は本日、同社が連邦および州の独占禁止法に違反したとの判決を下した。この発見は、Ticketmaster を使用し、その FINA に衝撃を受けた人なら誰でも驚くことではないでしょう。</div></div>
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://www.engadget.com/entertainment/music/federal-jury-finds-concert-business-live-nation-is-a-monopoly-203924011.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -3308,28 +3347,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://gizmodo.com/apples-smart-glasses-are-stepping-into-a-privacy-minefield-2000746809' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-b76df5520a45'
-  data-themes='その他'
-  data-lang='en'
-  data-score='1'
-  data-source='Gizmodo'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Gizmodo</span><span>2026-04-15 15:45</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-b76df5520a45')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Allbirds Is Getting Out of the Shoe Business and Pivoting to AI Infrastructure</h3><div class='summary'>Say hello to Newbird AI, a radical experiment in buying GPUs and praying that profits follow.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Allbirds が靴ビジネスから撤退し、AI インフラストラクチャに軸足を移す</h3><div class='summary'>Newbird AI に挨拶しましょう。これは、GPU を購入し、利益が続くことを祈るという過激な実験です。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://gizmodo.com/allbirds-is-getting-out-of-the-shoe-business-and-pivoting-to-ai-infrastructure-2000746830' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-784c7bd3aba8'
   data-themes='その他'
   data-lang='en'
@@ -3447,40 +3464,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.theverge.com/tech/912346/amazon-fire-tv-stick-hd-slimmest-ever' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-9eee05a7ca6e'
-  data-themes='その他'
-  data-lang='ja'
-  data-score='1'
-  data-source='AV Watch'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-15 13:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-9eee05a7ca6e')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>Amazon、隣のHDMIに干渉しない「Fire TV Stick HD」6980円。高速化、給電はUSB-Cに</h3><div class='summary'>Amazonは、HDMIケーブルと同等の太さを実現し、テレビからの直接給電に対応した新しいストリーミングメディアプレーヤー「Fire TV Stick HD」を発表した。価格は6,980円で、4月30日から出荷する。すでに予約受付を開始している。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2101925.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-20e11376e1b8'
-  data-themes='その他'
-  data-lang='ja'
-  data-score='1'
-  data-source='AV Watch'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-15 13:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-20e11376e1b8')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>Amazon、Fire TVに新UI導入。日本向けに開発した「アニメタブ」</h3><div class='summary'>Amazonは、Fire TVシリーズ向けにホーム画面のデザインやコンテンツ・アプリの表示方法、操作性を刷新した新しいUI(ユーザーインターフェース)の提供を日本でも開始する。新しいUIでは日本向けに開発した「アニメ タブ」も用意する。まずは4月30日に出荷開始する新しい「Fire TV Stick HD」から提供し、その後は現行のFire TVモデルにも順次展開する。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2101924.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-1b0b3191596a'
   data-themes='その他'
   data-lang='ja'
@@ -3513,6 +3496,40 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>Amazon「Fire TV」デバイスのUIが刷新、日本独自の「アニメタブ」で“春アニメ”検索も容易に</h3><div class='summary'>アマゾンジャパンは15日、同社製のストリーミングメディアプレイヤー「Fire TV」シリーズで、新しいユーザーインターフェイス（UI）を導入すると発表した。</div></div>
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://k-tai.watch.impress.co.jp/docs/news/2101993.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-9eee05a7ca6e'
+  data-themes='その他'
+  data-lang='ja'
+  data-score='1'
+  data-source='AV Watch'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-15 13:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-9eee05a7ca6e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Amazon、隣のHDMIに干渉しない「Fire TV Stick HD」6980円。高速化、給電はUSB-Cに</h3><div class='summary'>Amazonは、HDMIケーブルと同等の太さを実現し、テレビからの直接給電に対応した新しいストリーミングメディアプレーヤー「Fire TV Stick HD」を発表した。価格は6,980円で、4月30日から出荷する。すでに予約受付を開始している。</div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2101925.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-20e11376e1b8'
+  data-themes='その他'
+  data-lang='ja'
+  data-score='1'
+  data-source='AV Watch'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>AV Watch</span><span>2026-04-15 13:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-20e11376e1b8')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Amazon、Fire TVに新UI導入。日本向けに開発した「アニメタブ」</h3><div class='summary'>Amazonは、Fire TVシリーズ向けにホーム画面のデザインやコンテンツ・アプリの表示方法、操作性を刷新した新しいUI(ユーザーインターフェース)の提供を日本でも開始する。新しいUIでは日本向けに開発した「アニメ タブ」も用意する。まずは4月30日に出荷開始する新しい「Fire TV Stick HD」から提供し、その後は現行のFire TVモデルにも順次展開する。</div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://av.watch.impress.co.jp/docs/news/2101924.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-edf7a7babb25'
@@ -4064,7 +4081,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>NAACP sues xAI over data center pollution</h3><div class='summary'>The NAACP is suing xAI and a subsidiary called MZX Tech for allegedly operating unpermitted methane gas turbines to power its Colossus 2 data center in South Memphis. The association is asking the federal district court of the Northern District of Mississippi to declare that the company has violated</div></div>
-<div class='lang-pane lang-ja hidden'><h3>NAACP、データセンター汚染をめぐりxAIを提訴</h3><div class='summary'>NAACPは、南メンフィスにあるColossus 2データセンターに電力を供給するために無許可のメタンガスタービンを稼働させたとして、xAIとMZX Techという子会社を訴えている。同協会はミシシッピ州北部地区連邦地方裁判所に対し、同社が違反行為を行ったと宣言するよう求めている。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>NAACP、データセンター汚染をめぐりxAIを提訴</h3><div class='summary'>NAACPは、南メンフィスにあるColossus 2データセンターに電力を供給するために無許可でメタンガスタービンを稼働させたとして、xAIとMZX Techという子会社を訴えている。同協会はミシシッピ州北部地区連邦地方裁判所に対し、同社が違反行為を行ったと宣言するよう求めている。</div></div>
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://www.engadget.com/ai/naacp-sues-xai-over-data-center-pollution-213511352.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -4201,23 +4218,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>工事不要の後付けスマートロック AI指紋認証で0.5秒解錠</h3><div class='summary'>Dreame Technology Japanは、スマートロック「Dreame Sakura Lock Vision Pro」を、4月10日に発売した。価格は34,980円で、4月30日までは期間限定特別価格の26,982円で販売する。</div></div>
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://kaden.watch.impress.co.jp/docs/news/2101457.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-bb69c17c5cec'
-  data-themes='その他'
-  data-lang='ja'
-  data-score='1'
-  data-source='ケータイ Watch'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ケータイ Watch</span><span>2026-04-14 06:40</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-bb69c17c5cec')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>クアルコムとSnap、次世代ARグラス「Specs」向けに提携拡大</h3><div class='summary'>クアルコムとSnapは、Snapの次世代ARグラス「Specs」に「Snapdragon XR」プラットフォームを搭載するための、複数年におよぶ戦略的提携を締結した。両社が10年にわたり築いてきた協力関係をさらに拡大する提携となる。</div></div>
-  <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://k-tai.watch.impress.co.jp/docs/news/2101551.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-b92345bf6576'
@@ -4369,7 +4369,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Rockstar Games has confirmed it was hit by third-party data breach</h3><div class='summary'>An experienced hacking group has claimed to have infiltrated Rockstar Games &#x27; cloud servers, while the game publisher has confirmed that there was a &quot;third-party data breach.&quot; ShinyHunters, a hacker group that&#x27;s been linked to data breaches targeting Microsoft, Google, Ticketmaster and others, poste</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ロックスター・ゲームスはサードパーティによるデータ侵害を受けたことを認めた</h3><div class='summary'>経験豊富なハッキンググループがロックスター・ゲームスのクラウドサーバーに侵入したと主張する一方、ゲームパブリッシャーは「サードパーティによるデータ侵害」があったことを認めた。 ShinyHunters は、Microsoft、Google、Ticketmaster などを対象としたデータ侵害に関与しているハッカー グループです。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ロックスター・ゲームスはサードパーティによるデータ侵害を受けたことを認めた</h3><div class='summary'>経験豊富なハッキンググループがロックスター・ゲームスのクラウドサーバーに侵入したと主張している一方、ゲームパブリッシャーは「サードパーティによるデータ侵害」があったことを認めている。 ShinyHunters は、Microsoft、Google、Ticketmaster などを対象としたデータ侵害に関与しているハッカー グループです。</div></div>
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.engadget.com/cybersecurity/rockstar-games-has-confirmed-it-was-hit-by-third-party-data-breach-175112621.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -4395,7 +4395,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='tags'><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.engadget.com/big-tech/ibm-settles-its-dei-lawsuit-with-the-doj-for-17-million-153749285.html?src=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div>
-</div></div><footer>Gadget + — Generated at 2026-04-16 11:35</footer></body></html>
+</div></div><footer>Gadget + — Generated at 2026-04-16 11:52</footer></body></html>
 <script>
 var pageLang = 'en';
 function setPageLang(lang) {

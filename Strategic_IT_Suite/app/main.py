@@ -27,6 +27,8 @@ MAIN_FUTURE_TIMEOUT = 25
 
 CONFIG = json.loads((ROOT / "shared" / "config.json").read_text(encoding="utf-8"))
 
+HISTORY_DAYS = int(CONFIG.get("history_days", 14))
+
 def format_date(raw):
     if not raw:
         return ""
@@ -489,8 +491,27 @@ def init_db():
         """
     )
 
+    cur.execute(
+        """
+        CREATE TABLE IF NOT EXISTS articles (
+            link TEXT PRIMARY KEY,
+            title TEXT,
+            summary TEXT,
+            pub_dt TEXT,
+            source TEXT,
+            category TEXT
+        )
+        """
+    )
+
     con.commit()
     return con
+
+
+def cleanup_db(con):
+    cutoff = (datetime.now(JST) - timedelta(days=HISTORY_DAYS)).isoformat()
+    con.execute("DELETE FROM articles WHERE pub_dt < ? AND pub_dt != ''", (cutoff,))
+    con.commit()
 
 
 def save_run_history(con, run_at, risk_entries, dev_articles, config_result, legal_news=None):
@@ -1725,6 +1746,7 @@ def main():
         seen_older.add(key)
         deduped_older_dev_articles.append(article)
     deduped_older_dev_articles = deduped_older_dev_articles[:200]
+    cleanup_db(con)
     con.close()
 
     html_text = build_html(

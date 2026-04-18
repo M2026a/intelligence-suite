@@ -1,4 +1,6 @@
 @echo off
+chcp 65001 > nul
+set PYTHONIOENCODING=utf-8
 cd /d "%~dp0"
 echo ==============================================
 echo   Photo_Finder
@@ -15,7 +17,4 @@ if errorlevel 1 pause & exit /b 1
 echo [3/3] Opening dashboard...
 start "" "%~dp0output\index.html"
 
-pause
-
-start "" output\index.html
 pause

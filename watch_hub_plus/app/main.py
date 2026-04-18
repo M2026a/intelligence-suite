@@ -395,6 +395,8 @@ def translate_items(items: list[dict], cache: dict) -> None:
             done += 1
             if done % 5 == 0 or done == len(targets):
                 log(f"  翻訳進捗: {done}/{len(targets)}")
+    if len(cache) > 5000:
+        cache = dict(list(cache.items())[-5000:])
     save_json(TRANSLATE_CACHE_FILE, cache)
 
 

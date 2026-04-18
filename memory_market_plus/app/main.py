@@ -746,7 +746,7 @@ def render_7day_trend_panel() -> str:
 
 def db_cleanup(conn: sqlite3.Connection) -> None:
     """HISTORY_DAYS日より古い記事を削除"""
-    cutoff = (datetime.now(JST) - timedelta(days=HISTORY_DAYS * 2)).isoformat()
+    cutoff = (datetime.now(JST) - timedelta(days=HISTORY_DAYS)).isoformat()
     conn.execute("DELETE FROM articles WHERE pub_dt < ? AND pub_dt != ''", (cutoff,))
     conn.commit()
 
@@ -833,6 +833,8 @@ def translate_items(items: list[dict], cache: dict) -> None:
             if done % 10 == 0 or done == len(en_items):
                 log(f"  翻訳進捗: {done}/{len(en_items)}")
 
+    if len(cache) > 5000:
+        cache = dict(list(cache.items())[-5000:])
     save_json(TRANSLATE_CACHE_FILE, cache)
     log("  ✓ 翻訳完了・キャッシュ保存")
 
@@ -1380,7 +1382,7 @@ function switchCardLang(btn, lang) {
 def read_js() -> str:
     return """
 <script>
-var READ_KEY = 'memory_information_suite_read';
+var READ_KEY = 'memory_market_plus_read';
 function getReadSet() {
   try { return new Set(JSON.parse(localStorage.getItem(READ_KEY) || '[]')); } catch(e) { return new Set(); }
 }

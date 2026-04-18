@@ -260,6 +260,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # ===== HTML（全ツール）=====
           git add index.html || true
           git add ai_plus/output/*.html || true
           git add it_plus/output/*.html || true
@@ -283,5 +285,19 @@ jobs:
           git add sports_plus/output/*.html || true
           git add smart_news_viewer/output/*.html || true
           git add watch_hub_plus/output/*.html || true
+
+          # ===== DB（保存前提ツールのみ）=====
+          git add ai_plus/output/*.db || true
+          git add it_plus/output/*.db || true
+          git add market_plus/output/*.db || true
+          git add memory_market_plus/output/*.db || true
+          git add pc_industry_suite/output/*.db || true
+          git add camera_industry_suite/output/*.db || true
+          git add executive_signal/output/*.db || true
+          git add auto_industry_suite/output/*.db || true
+          git add IdeaTrendEngine/output/*.db || true
+          git add Strategic_IT_Suite/output/*.db || true
+          git add smart_news_viewer/output/*.db || true
+
           git diff --staged --quiet || git commit -m "parallel update $(TZ=Asia/Tokyo date +'%Y-%m-%d %H:%M JST')"
           git push

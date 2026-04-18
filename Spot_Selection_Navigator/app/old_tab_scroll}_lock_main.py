@@ -7,7 +7,7 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 SpotSelectionNavigator"
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 LocalSearchLauncher"
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_DIR = ROOT / "output"
@@ -162,7 +162,7 @@ def page_index() -> str:
         ".topbar-title{font-size:17px;font-weight:800;color:var(--text)}"
         ".topbar-title span{color:var(--muted);font-weight:400;margin-left:6px}"
         ".topbar-meta{font-size:12px;color:var(--muted);margin-top:3px}"
-        ".tab-wrap{background:#0e1628;border-bottom:1px solid var(--line);padding:8px 16px;overflow-x:auto;white-space:nowrap;position:static;max-width:1060px;width:100%;margin:0 auto;box-sizing:border-box}"
+        ".tab-wrap{background:#0e1628;border-bottom:1px solid var(--line);padding:8px 16px;overflow-x:visible;white-space:normal;position:sticky;top:49px;z-index:40;max-width:1060px;width:100%;margin:0 auto;box-sizing:border-box}"
         ".tab-wrap::-webkit-scrollbar{height:4px}"
         ".tab-wrap::-webkit-scrollbar-thumb{background:var(--line);border-radius:2px}"
         ".tabs{display:flex;gap:6px;flex-wrap:wrap}"

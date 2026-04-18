@@ -729,7 +729,7 @@ def db_save_run(conn: sqlite3.Connection, total: int, ok: int, err: int) -> None
 
 def db_cleanup(conn: sqlite3.Connection) -> None:
     """HISTORY_DAYS日より古い記事を削除"""
-    cutoff = (now_jst() - timedelta(days=HISTORY_DAYS * 2)).isoformat()
+    cutoff = (now_jst() - timedelta(days=HISTORY_DAYS)).isoformat()
     conn.execute("DELETE FROM articles WHERE pub_dt < ? AND pub_dt != ''", (cutoff,))
     conn.commit()
 
@@ -816,6 +816,8 @@ def translate_items(items: list[dict], cache: dict) -> None:
             if done % 10 == 0 or done == len(en_items):
                 log(f"  翻訳進捗: {done}/{len(en_items)}")
 
+    if len(cache) > 5000:
+        cache = dict(list(cache.items())[-5000:])
     save_json(TRANSLATE_CACHE_FILE, cache)
     log("  ✓ 翻訳完了・キャッシュ保存")
 

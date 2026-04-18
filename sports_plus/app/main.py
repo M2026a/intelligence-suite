@@ -46,7 +46,7 @@ THEMES = json.loads((SHARED / "themes.json").read_text(encoding="utf-8"))["theme
 APP_NAME = CONFIG["app_name"]
 DB_FILE = OUTPUT_DIR / CONFIG["db_name"]
 TRANSLATE_CACHE_FILE = OUTPUT_DIR / "translate_cache.json"
-USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 WatchHubPlus"
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 SportsPlus"
 TIMEOUT = 15
 NEW_HOURS = int(CONFIG.get("new_badge_hours", 6))
 MAX_ITEMS_PER_SOURCE = int(CONFIG.get("max_items_per_source", 20))
@@ -393,6 +393,8 @@ def translate_items(items: list[dict], cache: dict) -> None:
             done += 1
             if done % 5 == 0 or done == len(targets):
                 log(f"  翻訳進捗: {done}/{len(targets)}")
+    if len(cache) > 5000:
+        cache = dict(list(cache.items())[-5000:])
     save_json(TRANSLATE_CACHE_FILE, cache)
 
 

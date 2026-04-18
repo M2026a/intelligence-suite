@@ -25,6 +25,7 @@ from config.sources import MODULE_SOURCES
 
 _CONFIG = json.loads((ROOT / "shared" / "config.json").read_text(encoding="utf-8"))
 TRANSLATE_WORKERS: int = int(_CONFIG.get("translate_workers", 4))
+HISTORY_DAYS: int = int(_CONFIG.get("history_days", 14))
 TRANSLATE_RETRIES: int = int(_CONFIG.get("translate_retries", 2))
 
 OUTPUT_DIR = ROOT / "output"
@@ -50,7 +51,10 @@ def _load_cache() -> None:
 def _save_cache() -> None:
     try:
         OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-        CACHE_PATH.write_text(json.dumps(_TRANSLATION_CACHE, ensure_ascii=False, indent=2), encoding="utf-8")
+        cache = _TRANSLATION_CACHE
+        if len(cache) > 5000:
+            cache = dict(list(cache.items())[-5000:])
+        CACHE_PATH.write_text(json.dumps(cache, ensure_ascii=False, indent=2), encoding="utf-8")
     except Exception:
         pass
 
@@ -240,6 +244,8 @@ def main() -> None:
     article_count = upsert_articles(conn, all_articles)
     print("  - Saving SQLite signals...")
     insert_signals(conn, signals)
+    from app.db import cleanup_db
+    cleanup_db(conn, HISTORY_DAYS)
     conn.close()
 
     print("  - Building HTML...")

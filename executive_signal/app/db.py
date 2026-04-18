@@ -129,3 +129,12 @@ def insert_signals(conn: sqlite3.Connection, signals: list[dict[str, Any]]) -> N
         signals,
     )
     conn.commit()
+
+
+def cleanup_db(conn: sqlite3.Connection, history_days: int) -> None:
+    from datetime import datetime, timedelta
+    from zoneinfo import ZoneInfo
+    JST = ZoneInfo("Asia/Tokyo")
+    cutoff = (datetime.now(JST) - timedelta(days=history_days)).isoformat()
+    conn.execute("DELETE FROM articles WHERE published < ? AND published != ''", (cutoff,))
+    conn.commit()

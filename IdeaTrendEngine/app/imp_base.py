@@ -79,8 +79,10 @@ SHARED_DIR = ROOT / "shared"
 DB_PATH: Path | None = None
 ERROR_LOG_PATH = LOG_DIR / "app_errors.log"
 TIMEOUT = 8
-TRANSLATE_WORKERS = 4
-TRANSLATE_RETRIES = 2
+_CONFIG = json.loads((ROOT / "shared" / "config.json").read_text(encoding="utf-8"))
+TRANSLATE_WORKERS = int(_CONFIG.get("translate_workers", 4))
+TRANSLATE_RETRIES = int(_CONFIG.get("translate_retries", 2))
+HISTORY_DAYS = int(_CONFIG.get("history_days", 14))
 TRANSLATE_CACHE_FILE = OUTPUT_DIR / "translate_cache.json"
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -281,6 +283,8 @@ def translate_items(conn: sqlite3.Connection, cache: dict) -> None:
             (item.get("title_ja", ""), item.get("summary_ja", ""), item["id"])
         )
     conn.commit()
+    if len(cache) > 5000:
+        cache = dict(list(cache.items())[-5000:])
     p = TRANSLATE_CACHE_FILE
     p.write_text(json.dumps(cache, ensure_ascii=False, indent=2), encoding="utf-8")
 
@@ -1026,6 +1030,9 @@ def main() -> None:
             path.write_text(html, encoding="utf-8")
             print(f"  ✓ {filename}")
     finally:
+        cutoff = (datetime.now(JST) - timedelta(days=HISTORY_DAYS)).isoformat()
+        conn.execute("DELETE FROM ideas WHERE pub_dt < ? AND pub_dt != ''", (cutoff,))
+        conn.commit()
         conn.close()
     print()
     print("[DONE] 生成完了")

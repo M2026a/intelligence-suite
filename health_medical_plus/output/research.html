@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Health / Medical +</title>
+<style>
+:root{--bg:#08111e;--panel:#101a2a;--panel2:#0c1523;--line:#1f2b40;--text:#eef4ff;--muted:#93a4bf;--accent:#4ea1ff;--accent2:#15314f}
+*{box-sizing:border-box}html,body{margin:0;padding:0;background:linear-gradient(180deg,#08111e 0%,#0c1627 100%);color:var(--text);font-family:Inter,'Hiragino Sans','Yu Gothic UI',sans-serif}
+a{color:inherit;text-decoration:none}body{padding-top:0}
+.wrap,.main{width:min(1280px,94vw);margin:0 auto}
+header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:18px 0 12px}
+.title h1{margin:0;font-size:28px;line-height:1.2}.sub{margin-top:6px;color:var(--muted);font-size:13px}
+.nav{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0 12px}.nav a{padding:10px 14px;border-radius:10px;background:var(--panel2);border:1px solid var(--line);font-size:14px;font-weight:700}.nav a.active{background:var(--accent2);border-color:var(--accent);color:#eef6ff}.filters-panel{margin-bottom:18px}
+.page-lang-btn,.card-lang-btn,.read-btn,.flt-btn,.open-btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer}
+.page-lang-btn.active,.card-lang-btn.active,.flt-btn.active{background:var(--accent2);border-color:var(--accent)}
+.right-controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:18px}
+.main > .panel:first-child{position:static}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:0}
+.filter-label{font-size:12px;color:var(--muted);font-weight:700}
+.search{min-width:240px;background:#0b1320;border:1px solid var(--line);color:var(--text);padding:9px 12px;border-radius:10px}
+.main-grid,.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;align-items:stretch}
+.grid.list{grid-template-columns:1fr}
+.card,.mini-item,.category-panel{min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
+.card.score-5{border-left:4px solid #ffd700}
+.card.score-4{border-left:4px solid #4ea1ff}
+.card.is-read{opacity:1}
+.card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;min-width:0;flex-wrap:wrap}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;font-size:11px;color:var(--muted);min-width:0;overflow-wrap:anywhere;word-break:break-word}
+.lang-badge,.tag{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700}
+.lang-badge.ja{background:#14375d;border-color:#4ea1ff}
+.lang-badge.en{background:#24301f;border-color:#15c39a}
+.tag-new{background:#17391e;border-color:#15c39a;color:#93ffd8}.tag-hot{background:#14375d;border-color:#4ea1ff}.tag-caution{background:#3f1b1d;border-color:#ff7b7b}.tag-neutral{background:#1d2635;border-color:#4b5b78}
+.tags{display:flex;gap:6px;flex-wrap:wrap;min-width:0;overflow-wrap:anywhere;word-break:break-word}.lang-pane{display:flex;flex-direction:column;gap:10px;min-width:0}.summary{font-size:13px;line-height:1.7;color:#d6e0f0;overflow-wrap:anywhere;word-break:break-word;display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden;min-height:8.2em}.hidden{display:none!important}
+.card h3{margin:0;font-size:17px;line-height:1.45;overflow-wrap:anywhere;word-break:break-word;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-height:4.35em}.open-btn{margin-top:auto;display:inline-flex;justify-content:center;background:var(--accent2);border-color:var(--accent);max-width:100%;white-space:normal;text-align:center}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 12px;min-width:0;flex-wrap:wrap}.section-head h2{margin:0;font-size:20px;overflow-wrap:anywhere;word-break:break-word}.count-badge{color:var(--muted);font-size:12px;overflow-wrap:anywhere;word-break:break-word}
+.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:0}
+.category-grid.single{grid-template-columns:repeat(3,minmax(0,1fr))}
+.category-panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}.mini-list{display:grid;gap:8px}.mini-item{padding:10px;border-radius:12px;background:#0c1422;border:1px solid #1d2a40}.mini-item a{font-size:13px;line-height:1.5}.mini-meta{font-size:11px;color:var(--muted);margin-top:4px}
+footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size:12px}
+@media(max-width:980px){.category-grid.single{grid-template-columns:1fr}}
+@media(max-width:760px){body{padding-top:0}.top{flex-direction:column}.title h1{font-size:24px}.right-controls{justify-content:flex-start}.search{min-width:0;width:100%}.nav{padding-bottom:8px}.nav a{font-size:13px;padding:9px 12px}.grid,.main-grid,.category-grid{grid-template-columns:1fr}.card,.category-panel,.mini-item{width:100%;max-width:100%}.card-top,.card-meta,.tags,.section-head{width:100%}.card h3{font-size:16px;line-height:1.4}.summary{font-size:13px;line-height:1.65}.open-btn{width:100%}}
+</style>
+</head>
+<body>
+<header>
+<div class='wrap'>
+  <div class='top'>
+    <div class='title'>
+      <h1>🩺 Health / Medical + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 健康・医療情報</span></h1>
+      <div class='sub'>更新日時：2026-04-19 09:08</div>
+    </div>
+    <div class='right-controls'>
+      <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
+      <button class='page-lang-btn' id='btnPageJA' onclick="setPageLang('ja')">🇯🇵 日本語表示</button>
+    </div>
+  </div>
+  <nav class='nav'><a href="index.html" class="">🏠 メイン</a><a href="health.html" class="">🩺 健康</a><a href="medical.html" class="">🏥 医療</a><a href="research.html" class="active">🧬 研究</a><a href="prevention_longevity.html" class="">🧓 予防 / 長寿</a><a href="public_info.html" class="">🏛 公的情報</a><a href="analysis.html" class="">📊 分析</a></nav>
+</div>
+</header>
+<div class='main'>
+
+<div class='panel'>
+  <div class='filters'>
+    <span class='filter-label'>地域:</span>
+    <button type='button' class='flt-btn flt-region active' data-region='all' onclick="setRegionFilter('all', this)">🌍 全部</button>
+    <button type='button' class='flt-btn flt-region ' data-region='JP' onclick="setRegionFilter('JP', this)">🇯🇵 国内</button>
+    <button type='button' class='flt-btn flt-region ' data-region='Global' onclick="setRegionFilter('Global', this)">🌐 海外</button>
+    <span class='filter-label'>スコア:</span>
+    <button type='button' class='flt-btn flt-score active' data-score='all' onclick="setScoreFilter('all', this)">全部</button>
+    <button type='button' class='flt-btn flt-score' data-score='4' onclick="setScoreFilter('4', this)">★4以上</button>
+    <button type='button' class='flt-btn flt-score' data-score='3' onclick="setScoreFilter('3', this)">★3以上</button>
+    <input id='searchBox' class='search' placeholder='タイトル・本文を検索...' oninput="setSearchFilter(this.value)">
+  </div>
+</div>
+
+<section class='panel'>
+  <div class='section-head'><h2>🧬 研究 今日の注目 3件</h2><span class='count-badge js-visible-count' data-target='.js-mini-scope .mini-item'>0件</span></div>
+  <div class='category-grid single js-mini-scope'><div class='mini-item' data-region='JP'><a href='https://www.mhlw.go.jp/stf/newpage_72657.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>令和７年度第９回医薬品等安全対策部会安全対策調査会 議事録</span></a><div class='mini-meta'>🇯🇵 国内 / ★3 / 2026-04-17 14:22</div></div><div class='mini-item' data-region='JP'><a href='https://www.mhlw.go.jp/toukei/list/105-1c.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>薬事工業生産動態統計令和8年1月分月報について</span></a><div class='mini-meta'>🇯🇵 国内 / ★3 / 2026-04-17 11:00</div></div><div class='mini-item' data-region='Global'><a href='https://medicalxpress.com/news/2026-04-chronic-pain-odds-vaping-survey.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>Chronic pain tied to almost twice the odds of smoking and vaping, survey shows</span><span class='lang-ja hidden'>慢性的な痛みは喫煙や電子タバコを吸う確率のほぼ2倍と関連していることが調査で判明</span></a><div class='mini-meta'>🌐 海外 / ★2 / 2026-04-19 07:00</div></div></div>
+</section>
+<section>
+  <div class='section-head'><h2>📰 最新記事</h2><span class='count-badge js-visible-count' data-target='.item-card'>0件</span></div>
+  <div class='grid'>
+<article class='card item-card ' data-cardid='361e887948f6a064e965901ed522e415' data-region='JP' data-score='3'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>厚生労働省 新着情報</span><span>2026-04-17 14:22</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '361e887948f6a064e965901ed522e415')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>令和７年度第９回医薬品等安全対策部会安全対策調査会 議事録</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🧬 研究</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://www.mhlw.go.jp/stf/newpage_72657.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='fa1b7d13d48b7f54815e1f53d6050ef1' data-region='JP' data-score='3'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>厚生労働省 新着情報</span><span>2026-04-17 11:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'fa1b7d13d48b7f54815e1f53d6050ef1')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>薬事工業生産動態統計令和8年1月分月報について</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏛 公的情報</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://www.mhlw.go.jp/toukei/list/105-1c.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='91744d842bcef66954a1339188c75d2b' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Healthy Living</span><span>2026-04-19 07:00</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '91744d842bcef66954a1339188c75d2b')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Chronic pain tied to almost twice the odds of smoking and vaping, survey shows</h3><div class='summary'>New research from the University of Kansas shows people who experience chronic pain tend to consume cigarettes and e-cigarettes at higher rates than others. The findings, based on analysis of the National Health Interview Survey from 2014–2023, should inform therapies for both chronic pain and smoking cessation.</div></div><div class='lang-pane lang-ja hidden'><h3>慢性的な痛みは喫煙や電子タバコを吸う確率のほぼ2倍と関連していることが調査で判明</h3><div class='summary'>カンザス大学の新しい研究によると、慢性的な痛みを経験している人は他の人よりも紙巻きタバコや電子タバコの摂取率が高い傾向にあることが示されています。 2014年から2023年までの国民健康面接調査の分析に基づいたこの調査結果は、慢性疼痛と禁煙の両方の治療に役立つはずだ。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🧬 研究</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-chronic-pain-odds-vaping-survey.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='5fe94f4894d9c5290e81096cd7aabf60' data-region='Global' data-score='4'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Fitness</span><span>2026-03-14 14:56</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '5fe94f4894d9c5290e81096cd7aabf60')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>A lab mistake at Cambridge reveals a powerful new way to modify drug molecules</h3><div class='summary'>Cambridge scientists have discovered a light-powered chemical reaction that lets researchers modify complex drug molecules at the final stages of development. Unlike traditional methods that rely on toxic chemicals and harsh conditions, the new approach uses an LED lamp to create essential carbon–carbon bonds under mild conditions. This could make drug discovery faster and more environmentally friendly. The breakthrough was uncovered unexpectedly during a failed laboratory experiment.</div></div><div class='lang-pane lang-ja hidden'><h3>ケンブリッジ大学の研究室のミスにより、薬物分子を修飾する強力な新しい方法が明らかになった</h3><div class='summary'>ケンブリッジの科学者は、研究者が開発の最終段階で複雑な薬物分子を変更できるようにする光による化学反応を発見した。有毒化学物質や過酷な条件に依存する従来の方法とは異なり、新しいアプローチでは LED ランプを使用して、温和な条件下で必須の炭素-炭素結合を生成します。これにより、創薬がより迅速になり、より環境に優しいものになる可能性があります。その突破口は、失敗した実験室で予期せず発見されました。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🧬 研究</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/03/260313062539.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='131e632c7f197eea817c5cc88223a10f' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Top Health</span><span>2026-04-17 20:44</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '131e632c7f197eea817c5cc88223a10f')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Scientists discover bacteria can “explode” to spread antibiotic resistance</h3><div class='summary'>Scientists have uncovered a surprising twist in how bacteria share genes—including those that spread antibiotic resistance. Tiny virus-like particles called gene transfer agents (GTAs), once ancient viral invaders, have been repurposed by bacteria into delivery systems that shuttle DNA between neighboring cells. The study reveals a key control hub of three genes, dubbed LypABC, that triggers bacterial cells to burst open and release these DNA-packed couriers.</div></div><div class='lang-pane lang-ja hidden'><h3>科学者は細菌が「爆発」して抗生物質耐性を広める可能性があることを発見</h3><div class='summary'>科学者たちは、抗生物質耐性を広める遺伝子を含め、細菌がどのように遺伝子を共有するかについて驚くべきねじれを発見した。遺伝子導入剤 (GTA) と呼ばれる小さなウイルスのような粒子は、かつてはウイルスの侵入者でしたが、細菌によって隣接する細胞間で DNA をやり取りする送達システムに再利用されました。この研究により、LypABCと呼ばれる3つの遺伝子の重要な制御ハブが細菌細胞を爆発させて、DNAが詰まった運び屋を放出するきっかけとなることが明らかになった。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🧬 研究</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#00d2d322;border-color:#00d2d3;color:#00d2d3'>🦠 感染症・公衆衛生</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260416071953.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='cc9042a6d983c119c3a55cb3d801cab7' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Healthy Aging</span><span>2026-04-16 03:40</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'cc9042a6d983c119c3a55cb3d801cab7')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Keeping your teeth could add years of independent living, study finds</h3><div class='summary'>A study led by the National Dental Centre Singapore (NDCS), in collaboration with researchers from Duke-NUS Medical School, has found that maintaining more natural teeth is associated with significantly more years of independent living among older adults, especially among those who do not use removable dental prostheses. The study, published in the Journal of Epidemiology and Community Health, assessed how tooth retention influences the number of years lived with and without limitations in daily activities (Activities of Daily Living [ADLs], such as bathing, dressing and eating and physical function such as walking and climbing stairs).</div></div><div class='lang-pane lang-ja hidden'><h3>歯を残しておけば何年も自立した生活ができる可能性があることが研究で判明</h3><div class='summary'>シンガポール国立歯科センター (NDCS) が主導し、デューク NUS 医科大学の研究者と協力して行った研究では、より自然な歯を維持することが、高齢者、特に取り外し可能な歯科補綴物を使用していない高齢者の自立生活の年数が大幅に伸びることに関連していることが判明しました。 Journal of Epidemiology and Community Healthに掲載されたこの研究では、日常生活活動（入浴、着替え、食事などの日常生活活動（ADL）や、歩行、階段の上り下りなどの身体機能）に制限がある場合とない場合で、歯の保持年数がどのように影響するかを評価した。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🧬 研究</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🍽️ 食事</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-teeth-years-independent.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='139432c7eaf50668355671c121856747' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Sleep Medicine</span><span>2026-04-15 05:40</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '139432c7eaf50668355671c121856747')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Study reveals how dreams affect our emotions in day-to-day life</h3><div class='summary'>There are a few reasons why we might dream, say neuroscientists. Even dreams that are scary may serve a purpose: One prevalent idea is that fear in dreams could help people deal with fear in waking life, much like exposure therapy. One University of Kansas researcher recently tested this concept. Garrett Baber, a KU doctoral student in clinical psychology, sought to test whether emotions experienced within dreams—like fear and joy—change feelings the following morning. The research is published in the journal SLEEP.</div></div><div class='lang-pane lang-ja hidden'><h3>夢が日常生活の感情にどのような影響を与えるかを研究が明らかに</h3><div class='summary'>私たちが夢を見るのにはいくつかの理由がある、と神経科学者は言います。怖い夢にも目的があるかもしれません。一般的な考え方の 1 つは、夢の中の恐怖は、暴露療法と同じように、目覚めた生活の恐怖に対処するのに役立つ可能性があるというものです。カンザス大学の研究者の一人は最近、この概念をテストしました。臨床心理学を専攻する大学院博士課程の学生であるギャレット・バーバー氏は、夢の中で経験した恐怖や喜びなどの感情が翌朝の感情に変化をもたらすかどうかをテストしようとしました。この研究は雑誌「SLEEP」に掲載されています。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🧬 研究</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>😴 睡眠</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-reveals-affect-emotions-day-life.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='bded10216f78a0b93d3e66958d48665a' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Healthy Aging</span><span>2026-04-13 17:12</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'bded10216f78a0b93d3e66958d48665a')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Scientists were wrong about lifespan. Your genes matter way more than we thought</h3><div class='summary'>For years, scientists believed our lifespan was mostly shaped by environment and chance, with genetics playing only a minor role. But a new study from the Weizmann Institute flips that idea on its head, revealing that genes may actually account for about half of the differences in how long people live. By analyzing massive twin datasets—including twins raised apart—and using innovative simulations to filter out deaths from accidents and other external causes, researchers uncovered a hidden genetic influence that had been masked for decades.</div></div><div class='lang-pane lang-ja hidden'><h3>科学者は寿命について間違っていました。あなたの遺伝子は私たちが思っている以上に重要です</h3><div class='summary'>科学者たちは長年にわたり、私たちの寿命は主に環境と偶然によって決まり、遺伝学が果たす役割は小さいと信じてきました。しかし、ワイツマン研究所の新しい研究はその考えをひっくり返し、人間の寿命の差の約半分は実際には遺伝子が原因である可能性があることを明らかにした。研究者らは、別々に育てられた双子を含む大規模な双子のデータセットを分析し、革新的なシミュレーションを使用して事故やその他の外的原因による死亡を除外することで、数十年にわたって隠蔽されてきた隠れた遺伝的影響を明らかにした。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🧬 研究</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260411022047.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='f7a7db2c6fdfea0e1bcedbd1191f4c59' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Nutrition</span><span>2026-04-12 21:58</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'f7a7db2c6fdfea0e1bcedbd1191f4c59')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Why Ozempic doesn’t work for everyone: Scientists just found a hidden reason</h3><div class='summary'>A new study reveals that popular diabetes and weight-loss drugs like Ozempic and Wegovy may not work as effectively for about 10% of people due to specific genetic variants. These individuals appear to have a puzzling condition called “GLP-1 resistance,” where their bodies produce higher levels of the hormone targeted by these drugs—but don’t respond to it properly.</div></div><div class='lang-pane lang-ja hidden'><h3>オゼンピックが誰にとっても効果がない理由: 科学者は隠された理由を発見しました</h3><div class='summary'>新しい研究では、オゼンピックやウィゴビーなどの一般的な糖尿病薬や減量薬が、特定の遺伝子変異により約 10% の人には効果的に作用しない可能性があることが明らかになりました。これらの人たちは、「GLP-1耐性」と呼ばれる不可解な症状を抱えているようで、体内でこれらの薬の標的となるホルモンがより高レベルで生成されるが、それに適切に反応しない。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🧬 研究</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260411022029.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='de741b2e7d8c1223905b29fcfd93ced1' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Nutrition</span><span>2026-04-04 21:29</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'de741b2e7d8c1223905b29fcfd93ced1')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Binge drinking just once a month may triple your risk of liver scarring</h3><div class='summary'>Many people think that occasional binge drinking is harmless if they otherwise drink in moderation, but new research suggests that assumption may be dangerously wrong. A large U.S. study found that people with metabolic dysfunction–associated steatotic liver disease (MASLD), a condition affecting about one in three adults, face a much higher risk of serious liver scarring if they engage in heavy drinking even just once a month.</div></div><div class='lang-pane lang-ja hidden'><h3>月に一度の暴飲暴食で肝瘢痕化リスクが3倍になる可能性がある</h3><div class='summary'>多くの人は、適度に飲酒していれば、時折の暴飲暴食は無害であると考えていますが、新しい研究では、その仮定が危険なほど間違っている可能性があることが示唆されています。米国の大規模研究では、成人の約3人に1人が罹患する代謝機能不全関連脂肪性肝疾患（MASLD）患者は、たとえ月に1回でも大量飲酒をすると、重篤な肝瘢痕化のリスクがはるかに高くなることが判明した。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🧬 研究</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260404082652.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='84c50ce727ad64b28e2e6efec85e1ae2' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Fitness</span><span>2026-04-03 13:19</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '84c50ce727ad64b28e2e6efec85e1ae2')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Scientists say BMI gets it wrong for over one third of adults</h3><div class='summary'>A new study suggests that one of the most widely used health metrics, BMI, may be getting it wrong for a large portion of the population. By comparing BMI classifications with precise body fat measurements using advanced DXA scans, researchers found that more than one-third of adults were placed in incorrect weight categories. Many people labeled as overweight or obese did not actually have the corresponding body fat levels, while others were missed entirely.</div></div><div class='lang-pane lang-ja hidden'><h3>科学者らは、成人の3分の1以上がBMIについて誤解していると述べている</h3><div class='summary'>新しい研究は、最も広く使用されている健康指標の 1 つである BMI が、人口の大部分にとって誤解されている可能性があることを示唆しています。研究者らは、BMI 分類と高度な DXA スキャンを使用した正確な体脂肪測定値を比較することにより、成人の 3 分の 1 以上が誤った体重カテゴリに分類されていることを発見しました。過体重または肥満と分類された人の多くは、実際には対応する体脂肪レベルを持っていませんでしたが、完全に見逃されていた人もいます。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🧬 研究</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260402000229.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='21877b3ec2c8d50d61c00f19f083ae54' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Healthy Aging</span><span>2026-03-01 00:25</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '21877b3ec2c8d50d61c00f19f083ae54')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>How the body really ages: 7 million cells mapped across 21 organs</h3><div class='summary'>Scientists have built a massive cellular atlas showing how aging reshapes the body across 21 organs. Studying nearly 7 million cells, they found that aging starts earlier than expected and unfolds in a coordinated way throughout the body. About a quarter of cell types change in number over time, and many of these shifts differ between males and females. The research also highlights shared genetic “hotspots” that could become targets for anti-aging therapies.</div></div><div class='lang-pane lang-ja hidden'><h3>身体は実際にどのように老化するのか: 21 の臓器にマッピングされた 700 万個の細胞</h3><div class='summary'>科学者たちは、老化が 21 の臓器にわたって身体をどのように再形成するかを示す大規模な細胞アトラスを構築しました。約700万個の細胞を研究した結果、老化は予想よりも早く始まり、体全体で協調して進行することが判明した。細胞型の約 4 分の 1 は時間の経過とともに数が変化し、その変化の多くは男性と女性で異なります。この研究はまた、アンチエイジング治療の標的となる可能性がある共通の遺伝的「ホットスポット」にも焦点を当てている。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🧬 研究</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/02/260228082717.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='02320102d556c3d46690915bc5fee5f9' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Top Health</span><span>2026-04-16 15:56</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '02320102d556c3d46690915bc5fee5f9')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>How low should blood pressure go? Science has the answer</h3><div class='summary'>New research suggests that aiming for a lower blood pressure target may deliver bigger heart health benefits than previously thought. Using large datasets and simulation models, scientists found that keeping systolic blood pressure below 120 mm Hg could reduce the risk of heart attack, stroke, and heart failure more than higher targets.</div></div><div class='lang-pane lang-ja hidden'><h3>血圧はどのくらいまで下げるべきでしょうか？科学が答えを持っています</h3><div class='summary'>新しい研究は、より低い血圧目標を目指すことが、これまで考えられていたよりも大きな心臓の健康上の利点をもたらす可能性があることを示唆しています。科学者たちは、大規模なデータセットとシミュレーション モデルを使用して、収縮期血圧を 120 mm Hg 未満に維持すると、より高い目標値よりも心臓発作、脳卒中、心不全のリスクを軽減できることを発見しました。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🧬 研究</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260416025024.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='c7863feb084c615d4933df910759e279' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Top Health</span><span>2026-04-15 17:36</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'c7863feb084c615d4933df910759e279')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Scientists discover gene that helps the brain repair itself</h3><div class='summary'>A surprising discovery from high-altitude animals like yaks and Tibetan antelopes could reshape how we treat nerve damage in humans. Scientists found that a genetic mutation helping these animals survive low-oxygen environments also protects and repairs the myelin sheath—the vital coating around nerve fibers that’s damaged in diseases like multiple sclerosis (MS) and cerebral paralysis.</div></div><div class='lang-pane lang-ja hidden'><h3>科学者が脳の自己修復を助ける遺伝子を発見</h3><div class='summary'>ヤクやチベットカモシカなどの高地に生息する動物からの驚くべき発見は、人間の神経損傷の治療方法を変える可能性があります。科学者らは、これらの動物が低酸素環境で生き残るのに役立っている遺伝子変異が、多発性硬化症（MS）や脳麻痺などの疾患で損傷した神経線維の周囲の重要なコーティングであるミエリン鞘を保護し、修復していることを発見した。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🧬 研究</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260415043630.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='5b6b766a97069a68976e2a1a8faa38ec' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Fitness</span><span>2026-04-07 16:56</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '5b6b766a97069a68976e2a1a8faa38ec')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Scientists say 7 days of meditation can rewire your brain</h3><div class='summary'>A single week of intensive meditation and mind-body practices led to measurable changes across the brain and body. Researchers observed improved brain efficiency, boosted immune signaling, and increased natural pain relief chemicals in participants’ blood. The effects even promoted neuron growth and stronger brain connectivity. Surprisingly, the experience mirrored psychedelic-like brain states—without any drugs involved.</div></div><div class='lang-pane lang-ja hidden'><h3>科学者たちは、7日間の瞑想で脳の配線を再配線できると発表</h3><div class='summary'>1 週間の集中的な瞑想と心身の実践により、脳と身体全体に目に見える変化がもたらされました。研究者らは、参加者の血液中の脳効率の向上、免疫シグナル伝達の促進、天然鎮痛化学物質の増加を観察しました。この効果は、ニューロンの成長と脳の接続の強化も促進しました。驚くべきことに、この体験は薬物を一切使用せずに、サイケデリックな脳状態を反映していました。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🧬 研究</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260406192913.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='40dfe933d4840c531c66eeab033803e3' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Nutrition</span><span>2026-04-07 08:28</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '40dfe933d4840c531c66eeab033803e3')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Scientists discover hidden brain switch that tells you to stop eating</h3><div class='summary'>Your brain’s “stop eating” signal may come from an unexpected source. Researchers found that astrocytes—once thought to just support neurons—actually play a key role in controlling appetite. After a meal, glucose triggers tanycytes, which send signals to astrocytes that then activate fullness neurons. This newly discovered pathway could lead to innovative treatments for obesity and eating disorders.</div></div><div class='lang-pane lang-ja hidden'><h3>科学者が、食べるのをやめるという脳の隠されたスイッチを発見</h3><div class='summary'>脳の「食べるのをやめよう」という信号は、予期せぬソースから発信される可能性があります。研究者らは、かつてはニューロンをサポートするだけだと考えられていたアストロサイトが、実際には食欲の制御において重要な役割を果たしていることを発見した。食後、グルコースはタニーサイトを誘発し、アストロサイトに信号を送り、満腹ニューロンを活性化します。この新たに発見された経路は、肥満や摂食障害の革新的な治療法につながる可能性があります。</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🧬 研究</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🍽️ 食事</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260406192811.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article></div>
+  <div class='summary no-results hidden'>条件に一致する記事がありません。</div>
+</section>
+</div><footer>Health / Medical + — Generated at 2026-04-19 09:08</footer>
+<script>
+function safeStorageGet(key) {
+  try { return window.localStorage ? localStorage.getItem(key) : null; } catch (e) { return null; }
+}
+function safeStorageSet(key, value) {
+  try { if (window.localStorage) localStorage.setItem(key, value); } catch (e) {}
+}
+function setPageLang(lang) {
+  document.querySelectorAll('.page-lang-btn').forEach(function(btn){ btn.classList.remove('active'); });
+  var enBtn = document.getElementById('btnPageEN');
+  var jaBtn = document.getElementById('btnPageJA');
+  if(lang === 'ja') {
+    if(jaBtn) jaBtn.classList.add('active');
+    if(enBtn) enBtn.classList.remove('active');
+  } else {
+    if(enBtn) enBtn.classList.add('active');
+    if(jaBtn) jaBtn.classList.remove('active');
+  }
+  document.querySelectorAll('.item-card, .mini-item').forEach(function(block){
+    var enPane = block.querySelector('.lang-en');
+    var jaPane = block.querySelector('.lang-ja');
+    if(!enPane || !jaPane) return;
+    var cardEnBtn = block.querySelector('.card-lang-btn[data-lang="en"]');
+    var cardJaBtn = block.querySelector('.card-lang-btn[data-lang="ja"]');
+    if(lang === 'ja') {
+      enPane.classList.add('hidden');
+      jaPane.classList.remove('hidden');
+      if(cardJaBtn) cardJaBtn.classList.add('active');
+      if(cardEnBtn) cardEnBtn.classList.remove('active');
+    } else {
+      enPane.classList.remove('hidden');
+      jaPane.classList.add('hidden');
+      if(cardEnBtn) cardEnBtn.classList.add('active');
+      if(cardJaBtn) cardJaBtn.classList.remove('active');
+    }
+  });
+}
+function switchCardLang(btn, lang) {
+  var card = btn.closest('.item-card');
+  if (!card) return;
+  card.querySelectorAll('.card-lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var enPane = card.querySelector('.lang-en');
+  var jaPane = card.querySelector('.lang-ja');
+  if (lang === 'ja') { if(enPane) enPane.classList.add('hidden'); if(jaPane) jaPane.classList.remove('hidden'); }
+  else { if(enPane) enPane.classList.remove('hidden'); if(jaPane) jaPane.classList.add('hidden'); }
+  if(btn.blur) btn.blur();
+}
+function markRead(btn, id) {
+  safeStorageSet('health_medical_plus_read_' + id, '1');
+  var card = btn.closest('.item-card');
+  if (card) card.classList.add('is-read');
+  if (btn) {
+    btn.textContent = '既読済み';
+    btn.classList.add('active');
+    if(btn.blur) btn.blur();
+  }
+}
+function getVisibleCount(scope, selector) {
+  var root = scope || document;
+  return Array.prototype.filter.call(root.querySelectorAll(selector), function(el) {
+    return el.style.display !== 'none';
+  }).length;
+}
+function refreshVisibleCounts() {
+  document.querySelectorAll('.js-visible-count').forEach(function(el){
+    var selector = el.dataset.target || '.item-card';
+    var section = el.closest('section') || document;
+    el.textContent = getVisibleCount(section, selector) + '件';
+  });
+  document.querySelectorAll('section').forEach(function(sec){
+    var empty = sec.querySelector('.no-results');
+    if(!empty) return;
+    var visibleCards = getVisibleCount(sec, '.item-card');
+    empty.classList.toggle('hidden', visibleCards > 0);
+  });
+}
+function syncFilterButtons() {
+  document.querySelectorAll('.flt-region').forEach(function(btn){
+    btn.classList.toggle('active', (btn.dataset.region || 'all') === window.__healthRegion);
+  });
+  document.querySelectorAll('.flt-score').forEach(function(btn){
+    btn.classList.toggle('active', (btn.dataset.score || 'all') === window.__healthScore);
+  });
+}
+function applyHealthFilters() {
+  var region = window.__healthRegion || 'all';
+  var score = window.__healthScore || 'all';
+  var search = (window.__healthSearch || '').toLowerCase();
+  document.querySelectorAll('.item-card').forEach(function(card){
+    var show = true;
+    if(region !== 'all' && (card.dataset.region || '') !== region) show = false;
+    if(score !== 'all' && parseInt(card.dataset.score || '1', 10) < parseInt(score, 10)) show = false;
+    if(search && (card.textContent || '').toLowerCase().indexOf(search) === -1) show = false;
+    card.style.display = show ? '' : 'none';
+  });
+  document.querySelectorAll('.mini-item[data-region]').forEach(function(item){
+    var show = true;
+    if(region !== 'all' && (item.dataset.region || '') !== region) show = false;
+    if(search && (item.textContent || '').toLowerCase().indexOf(search) === -1) show = false;
+    item.style.display = show ? '' : 'none';
+  });
+  syncFilterButtons();
+  refreshVisibleCounts();
+}
+function setRegionFilter(region, btn) {
+  window.__healthRegion = region || 'all';
+  applyHealthFilters();
+  if(btn && btn.blur) btn.blur();
+}
+function setScoreFilter(score, btn) {
+  window.__healthScore = score || 'all';
+  applyHealthFilters();
+  if(btn && btn.blur) btn.blur();
+}
+function setSearchFilter(value) {
+  window.__healthSearch = value || '';
+  applyHealthFilters();
+}
+(function(){
+  document.querySelectorAll('.item-card').forEach(function(card){
+    var id = card.dataset.cardid;
+    if(safeStorageGet('health_medical_plus_read_' + id) === '1') {
+      card.classList.add('is-read');
+      var btn = card.querySelector('.read-btn');
+      if (btn) {
+        btn.textContent = '既読済み';
+        btn.classList.add('active');
+      }
+    }
+  });
+  setPageLang('en');
+  var activeRegion = document.querySelector('.flt-region.active');
+  var activeScore = document.querySelector('.flt-score.active');
+  var sb = document.getElementById('searchBox');
+  window.__healthRegion = activeRegion ? (activeRegion.dataset.region || 'all') : 'all';
+  window.__healthScore = activeScore ? (activeScore.dataset.score || 'all') : 'all';
+  window.__healthSearch = sb ? (sb.value || '') : '';
+  refreshVisibleCounts();
+  applyHealthFilters();
+})();
+</script>

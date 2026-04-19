@@ -1,0 +1,861 @@
+<!doctype html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Health / Medical +</title>
+<style>
+:root{--bg:#08111e;--panel:#101a2a;--panel2:#0c1523;--line:#1f2b40;--text:#eef4ff;--muted:#93a4bf;--accent:#4ea1ff;--accent2:#15314f}
+*{box-sizing:border-box}html,body{margin:0;padding:0;background:linear-gradient(180deg,#08111e 0%,#0c1627 100%);color:var(--text);font-family:Inter,'Hiragino Sans','Yu Gothic UI',sans-serif}
+a{color:inherit;text-decoration:none}body{padding-top:0}
+.wrap,.main{width:min(1280px,94vw);margin:0 auto}
+header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:18px 0 12px}
+.title h1{margin:0;font-size:28px;line-height:1.2}.sub{margin-top:6px;color:var(--muted);font-size:13px}
+.nav{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0 12px}.nav a{padding:10px 14px;border-radius:10px;background:var(--panel2);border:1px solid var(--line);font-size:14px;font-weight:700}.nav a.active{background:var(--accent2);border-color:var(--accent);color:#eef6ff}.filters-panel{margin-bottom:18px}
+.page-lang-btn,.card-lang-btn,.read-btn,.flt-btn,.open-btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer}
+.page-lang-btn.active,.card-lang-btn.active,.flt-btn.active{background:var(--accent2);border-color:var(--accent)}
+.right-controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:18px}
+.main > .panel:first-child{position:static}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:0}
+.filter-label{font-size:12px;color:var(--muted);font-weight:700}
+.search{min-width:240px;background:#0b1320;border:1px solid var(--line);color:var(--text);padding:9px 12px;border-radius:10px}
+.main-grid,.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;align-items:stretch}
+.grid.list{grid-template-columns:1fr}
+.card,.mini-item,.category-panel{min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
+.card.score-5{border-left:4px solid #ffd700}
+.card.score-4{border-left:4px solid #4ea1ff}
+.card.is-read{opacity:1}
+.card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;min-width:0;flex-wrap:wrap}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;font-size:11px;color:var(--muted);min-width:0;overflow-wrap:anywhere;word-break:break-word}
+.lang-badge,.tag{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700}
+.lang-badge.ja{background:#14375d;border-color:#4ea1ff}
+.lang-badge.en{background:#24301f;border-color:#15c39a}
+.tag-new{background:#17391e;border-color:#15c39a;color:#93ffd8}.tag-hot{background:#14375d;border-color:#4ea1ff}.tag-caution{background:#3f1b1d;border-color:#ff7b7b}.tag-neutral{background:#1d2635;border-color:#4b5b78}
+.tags{display:flex;gap:6px;flex-wrap:wrap;min-width:0;overflow-wrap:anywhere;word-break:break-word}.lang-pane{display:flex;flex-direction:column;gap:10px;min-width:0}.summary{font-size:13px;line-height:1.7;color:#d6e0f0;overflow-wrap:anywhere;word-break:break-word;display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden;min-height:8.2em}.hidden{display:none!important}
+.card h3{margin:0;font-size:17px;line-height:1.45;overflow-wrap:anywhere;word-break:break-word;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-height:4.35em}.open-btn{margin-top:auto;display:inline-flex;justify-content:center;background:var(--accent2);border-color:var(--accent);max-width:100%;white-space:normal;text-align:center}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 12px;min-width:0;flex-wrap:wrap}.section-head h2{margin:0;font-size:20px;overflow-wrap:anywhere;word-break:break-word}.count-badge{color:var(--muted);font-size:12px;overflow-wrap:anywhere;word-break:break-word}
+.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:0}
+.category-grid.single{grid-template-columns:repeat(3,minmax(0,1fr))}
+.category-panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}.mini-list{display:grid;gap:8px}.mini-item{padding:10px;border-radius:12px;background:#0c1422;border:1px solid #1d2a40}.mini-item a{font-size:13px;line-height:1.5}.mini-meta{font-size:11px;color:var(--muted);margin-top:4px}
+footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size:12px}
+@media(max-width:980px){.category-grid.single{grid-template-columns:1fr}}
+@media(max-width:760px){body{padding-top:0}.top{flex-direction:column}.title h1{font-size:24px}.right-controls{justify-content:flex-start}.search{min-width:0;width:100%}.nav{padding-bottom:8px}.nav a{font-size:13px;padding:9px 12px}.grid,.main-grid,.category-grid{grid-template-columns:1fr}.card,.category-panel,.mini-item{width:100%;max-width:100%}.card-top,.card-meta,.tags,.section-head{width:100%}.card h3{font-size:16px;line-height:1.4}.summary{font-size:13px;line-height:1.65}.open-btn{width:100%}}
+</style>
+</head>
+<body>
+<header>
+<div class='wrap'>
+  <div class='top'>
+    <div class='title'>
+      <h1>🩺 Health / Medical + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 健康・医療情報</span></h1>
+      <div class='sub'>更新日時：2026-04-19 09:08</div>
+    </div>
+    <div class='right-controls'>
+      <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
+      <button class='page-lang-btn' id='btnPageJA' onclick="setPageLang('ja')">🇯🇵 日本語表示</button>
+    </div>
+  </div>
+  <nav class='nav'><a href="index.html" class="">🏠 メイン</a><a href="health.html" class="">🩺 健康</a><a href="medical.html" class="active">🏥 医療</a><a href="research.html" class="">🧬 研究</a><a href="prevention_longevity.html" class="">🧓 予防 / 長寿</a><a href="public_info.html" class="">🏛 公的情報</a><a href="analysis.html" class="">📊 分析</a></nav>
+</div>
+</header>
+<div class='main'>
+
+<div class='panel'>
+  <div class='filters'>
+    <span class='filter-label'>地域:</span>
+    <button type='button' class='flt-btn flt-region active' data-region='all' onclick="setRegionFilter('all', this)">🌍 全部</button>
+    <button type='button' class='flt-btn flt-region ' data-region='JP' onclick="setRegionFilter('JP', this)">🇯🇵 国内</button>
+    <button type='button' class='flt-btn flt-region ' data-region='Global' onclick="setRegionFilter('Global', this)">🌐 海外</button>
+    <span class='filter-label'>スコア:</span>
+    <button type='button' class='flt-btn flt-score active' data-score='all' onclick="setScoreFilter('all', this)">全部</button>
+    <button type='button' class='flt-btn flt-score' data-score='4' onclick="setScoreFilter('4', this)">★4以上</button>
+    <button type='button' class='flt-btn flt-score' data-score='3' onclick="setScoreFilter('3', this)">★3以上</button>
+    <input id='searchBox' class='search' placeholder='タイトル・本文を検索...' oninput="setSearchFilter(this.value)">
+  </div>
+</div>
+
+<section class='panel'>
+  <div class='section-head'><h2>🏥 医療 今日の注目 3件</h2><span class='count-badge js-visible-count' data-target='.js-mini-scope .mini-item'>0件</span></div>
+  <div class='category-grid single js-mini-scope'><div class='mini-item' data-region='JP'><a href='https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000121431_00485.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>新型コロナウイルス感染症に関する報道発表資料を更新しました</span></a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-17 13:55</div></div><div class='mini-item' data-region='JP'><a href='https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/kekkaku-kansenshou01/houdou_00023.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>インフルエンザに関する報道発表資料を更新しました</span></a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-17 13:55</div></div><div class='mini-item' data-region='JP'><a href='https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/houkokusuunosuii_00007.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>インフルエンザ・新型コロナウイルス感染症の定点当たり報告数の推移を更新しました</span></a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-17 13:55</div></div></div>
+</section>
+<section>
+  <div class='section-head'><h2>📰 最新記事</h2><span class='count-badge js-visible-count' data-target='.item-card'>0件</span></div>
+  <div class='grid'>
+<article class='card item-card score-5' data-cardid='1a59d9722f03464777bb20ee7503fc1e' data-region='JP' data-score='5'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>厚生労働省 新着情報</span><span>2026-04-17 13:55</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '1a59d9722f03464777bb20ee7503fc1e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>新型コロナウイルス感染症に関する報道発表資料を更新しました</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏛 公的情報</span><span class='tag' style='background:#00d2d322;border-color:#00d2d3;color:#00d2d3'>🦠 感染症・公衆衛生</span><span class='tag' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>📋 医療制度・行政</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000121431_00485.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='0c65b493273ada70b0ddc39ab63844f9' data-region='JP' data-score='5'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>厚生労働省 新着情報</span><span>2026-04-17 13:55</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '0c65b493273ada70b0ddc39ab63844f9')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>インフルエンザに関する報道発表資料を更新しました</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏛 公的情報</span><span class='tag' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>📋 医療制度・行政</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/kekkaku-kansenshou01/houdou_00023.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='d6582e240ccdb6be1e3238cee3ecf054' data-region='JP' data-score='5'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>厚生労働省 新着情報</span><span>2026-04-17 13:55</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'd6582e240ccdb6be1e3238cee3ecf054')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>インフルエンザ・新型コロナウイルス感染症の定点当たり報告数の推移を更新しました</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#00d2d322;border-color:#00d2d3;color:#00d2d3'>🦠 感染症・公衆衛生</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/houkokusuunosuii_00007.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='0966cec64bf8bf39255a2d1ed39e102d' data-region='JP' data-score='3'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>厚生労働省 新着情報</span><span>2026-04-17 13:55</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '0966cec64bf8bf39255a2d1ed39e102d')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>インフルエンザの発生状況を更新しました</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏛 公的情報</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/kekkaku-kansenshou01/houdou.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='dde7217a458100acdcecee502432ed6b' data-region='JP' data-score='3'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>厚生労働省 新着情報</span><span>2026-04-17 00:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'dde7217a458100acdcecee502432ed6b')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>第74回ハンセン病元患者家族補償金認定審査会</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag' style='background:#ff6b6b22;border-color:#ff6b6b;color:#ff6b6b'>🏛 公的情報</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://www.mhlw.go.jp/stf/newpage_72621.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='afe9abce8c16beada067120220d09dca' data-region='Global' data-score='3'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Cancer</span><span>2026-04-19 08:30</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'afe9abce8c16beada067120220d09dca')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Pinpointing barriers to timely head and neck cancer treatment in rural areas</h3><div class='summary'>A new study led by researchers at Dartmouth Cancer Center pinpoints why many patients in rural areas experience delays in receiving critical follow-up treatment for head and neck cancer, and what can be done to address those gaps. Published in JAMA Otolaryngology–Head &amp; Neck Surgery, the study examines factors that influence whether patients begin postoperative radiotherapy within the recommended six-week window after surgery, the timeframe known to improve survival for patients with head and neck squamous cell carcinoma.</div></div><div class='lang-pane lang-ja hidden'><h3>農村部におけるタイムリーな頭頸部がん治療の障壁を正確に特定</h3><div class='summary'>ダートマスがんセンターの研究者らが主導した新たな研究は、地方の多くの患者が頭頸部がんの重要なフォローアップ治療を受けるのに遅れを経験している理由と、それらのギャップに対処するために何ができるかを正確に示している。 JAMA耳鼻咽喉科・頭頸部外科に掲載されたこの研究では、頭頸部扁平上皮がん患者の生存率を向上させることが知られている術後推奨6週間以内に患者が術後放射線療法を開始するかどうかに影響を与える要因を検討している。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-caution'>⚠ 注意</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-barriers-neck-cancer-treatment-rural.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='9b572466c592af780a01bb6cac350865' data-region='Global' data-score='4'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Preventive Medicine</span><span>2026-04-18 19:40</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '9b572466c592af780a01bb6cac350865')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Emergency room survey uncovers measles vaccine gaps and hesitancy across the US</h3><div class='summary'>Measles remains one of the most contagious infectious diseases, spread through coughing and sneezing, with even small declines in vaccination coverage leading to outbreaks. As of 2026, California has reported its highest annual measles case count in seven years. In response to this growing concern, researchers have begun examining gaps in measles-related knowledge and vaccination coverage.</div></div><div class='lang-pane lang-ja hidden'><h3>緊急治療室の調査で全米の麻疹ワクチンの不足と躊躇が明らかに</h3><div class='summary'>麻疹は依然として最も伝染性の高い感染症の 1 つであり、咳やくしゃみによって広がり、ワクチン接種率がわずかに低下しただけでも大流行につながります。 2026年の時点で、カリフォルニア州では麻疹の年間感染者数が過去7年間で最高となったと報告されている。この懸念の高まりに応えて、研究者らは麻疹関連の知識とワクチン接種率のギャップを調査し始めた。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#00d2d322;border-color:#00d2d3;color:#00d2d3'>🦠 感染症・公衆衛生</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-emergency-room-survey-uncovers-measles.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='5ac311da8a447ff30317d7d6e43329e7' data-region='Global' data-score='4'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Preventive Medicine</span><span>2026-04-17 11:40</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '5ac311da8a447ff30317d7d6e43329e7')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Cough drops from several brands being recalled, FDA says</h3><div class='summary'>Several common cough drop brands are being pulled from shelves after officials raised concerns about how they were made.</div></div><div class='lang-pane lang-ja hidden'><h3>いくつかのブランドの咳止めドロップがリコールされるとFDAが発表</h3><div class='summary'>当局が製造方法について懸念を表明したことを受け、いくつかの一般的な咳止めブランドが棚から撤去されている。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-brands-recalled-fda.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='e69b792c2effcfc80f2f9beb59bee117' data-region='Global' data-score='4'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Cancer</span><span>2026-04-17 05:20</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'e69b792c2effcfc80f2f9beb59bee117')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Global trial shows novel treatment for triple-negative breast cancer nearly doubles survival</h3><div class='summary'>A global, multicenter phase III trial, TROPION-Breast02, led by a senior medical oncologist and researcher from the National Cancer Centre Singapore, has demonstrated a significant breakthrough in improving the survival of patients with untreated, advanced triple negative breast cancer (TNBC) using the novel antibody-drug conjugate (ADC) datopotamab deruxtecan (Dato-DXd). Published in the Annals of Oncology, the findings demonstrate the potential of Dato-DXd as an effective new treatment option for this aggressive disease.</div></div><div class='lang-pane lang-ja hidden'><h3>トリプルネガティブ乳がんに対する新たな治療法が世界規模の試験で生存率をほぼ2倍にすることが示された</h3><div class='summary'>シンガポール国立がんセンターの上級腫瘍内科医および研究者が主導する世界的な多施設共同第III相試験であるTROPION-Breast02は、新規の抗体薬物複合体（ADC）であるダトポタマブ デルクステカン（Dato-DXd）を使用して、未治療の進行性トリプルネガティブ乳がん（TNBC）患者の生存率を改善するという重要な進歩を実証した。 Annals of Oncology に発表されたこの研究結果は、この悪性度の高い疾患に対する効果的な新しい治療選択肢として Dato-DXd の可能性を示しています。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-global-trial-treatment-triple-negative.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='b67be600b4e9e37e50ef91525ef455a3' data-region='Global' data-score='4'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Top Health</span><span>2026-04-15 16:26</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'b67be600b4e9e37e50ef91525ef455a3')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>95% of people carry this virus and scientists may have just found how to stop it</h3><div class='summary'>Scientists have taken a major step toward stopping Epstein-Barr virus (EBV), an extremely common infection linked to cancer and chronic disease. By using mice engineered with human antibody genes, researchers created powerful human-like antibodies that block the virus from attaching to and entering immune cells. One of these antibodies completely prevented infection in lab models with human immune systems, marking a breakthrough after years of difficulty tackling EBV’s ability to invade nearly all B cells.</div></div><div class='lang-pane lang-ja hidden'><h3>95%の人がこのウイルスを保有しており、科学者はウイルスを阻止する方法を見つけたばかりかもしれない</h3><div class='summary'>科学者たちは、がんや慢性疾患に関連する非常に一般的な感染症であるエプスタイン・バーウイルス（EBV）の阻止に向けて大きな一歩を踏み出しました。研究者らは、ヒト抗体遺伝子を組み込んだマウスを使用して、ウイルスが免疫細胞に付着して侵入するのを阻止する強力なヒト様抗体を作成した。これらの抗体の 1 つは、ヒトの免疫システムを備えた実験室モデルでの感染を完全に防ぎ、ほぼすべての B 細胞に侵入する EBV の能力に対する長年の困難な取り組みを経て画期的な進歩を遂げました。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#00d2d322;border-color:#00d2d3;color:#00d2d3'>🦠 感染症・公衆衛生</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260414075650.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='8684a85ab0bc17482e1db4c7568c9631' data-region='Global' data-score='3'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Sleep Medicine</span><span>2026-04-04 22:00</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '8684a85ab0bc17482e1db4c7568c9631')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Depression may harm young people&#x27;s physical health long before any obvious signs appear</h3><div class='summary'>A groundbreaking new study tracking almost 2,000 young Australians for a decade has challenged a long-held assumption about depression and physical health, finding disrupted sleep was a stronger predictor of later insulin resistance rather than weight gain. The research from the University of Sydney&#x27;s Brain and Mind Centre found that weight gain is not the main reason depression is linked to later insulin resistance, which is an early marker of diabetes and heart disease.</div></div><div class='lang-pane lang-ja hidden'><h3>うつ病は、明らかな兆候が現れるずっと前に、若者の身体的健康を損なう可能性があります</h3><div class='summary'>約2,000人のオーストラリアの若者を10年間追跡した画期的な新しい研究は、うつ病と身体的健康に関する長年の思い込みに疑問を投げかけ、体重増加よりもむしろ睡眠障害がその後のインスリン抵抗性のより強力な予測因子であることを発見した。シドニー大学の脳と心センターの研究では、体重増加がうつ病とその後のインスリン抵抗性（糖尿病や心臓病の初期マーカー）に関連している主な理由ではないことが判明した。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>😴 睡眠</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-03-depression-young-people-physical-health.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='cf32eef1e0be5cedc791e29917241235' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Healthy Aging</span><span>2026-04-18 07:00</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'cf32eef1e0be5cedc791e29917241235')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Childhood obesity casts a long shadow, slashing education, pay and work prospects well into adulthood</h3><div class='summary'>New research to be presented at the European Congress on Obesity (ECO 2026, Istanbul, Turkey, 12–15 May) shows that living with obesity in childhood is associated with lower future levels of education, employment, and earnings. The study is by Dr. Lise Bjerregaard, Dr. Elisabeth Andersen, and research group leader Dr. Jennifer Lyn Baker of the Center for Clinical Research and Prevention, Copenhagen University Hospital—Bispebjerg and Frederiksberg, Copenhagen, Denmark.</div></div><div class='lang-pane lang-ja hidden'><h3>小児期の肥満は長い影を落とし、成人期まで教育、給与、仕事の見通しに大きな影響を与える</h3><div class='summary'>欧州肥満会議（ECO 2026、トルコ、イスタンブール、5月12～15日）で発表される新たな研究は、幼少期に肥満を抱えた生活を続けると、将来の教育、雇用、収入のレベルが低下することに関連していることを示している。この研究は、デンマーク、コペンハーゲンのビスペビャルおよびフレデリクスバーグにあるコペンハーゲン大学病院臨床研究予防センターのリセ・ビェレガード博士、エリザベス・アンダーセン博士、研究グループリーダーのジェニファー・リン・ベイカー博士によって行われた。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-childhood-obesity-shadow-slashing-pay.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='d2855149cfab04beee29d05389480e6e' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Preventive Medicine</span><span>2026-04-17 22:40</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'd2855149cfab04beee29d05389480e6e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Family-led firearm strategy goes &#x27;beyond the screen&#x27; to curb suicide risk</h3><div class='summary'>A new University of Michigan study, published in Injury Prevention, tested a method called the Family Safety Net in Alaska, which shifts suicide prevention away from individual screening and toward household action. This change, researchers say, could help reach people who are often missed by standard tools.</div></div><div class='lang-pane lang-ja hidden'><h3>自殺リスクを抑制するために家族主導の銃器戦略が「画面を超えて」進む</h3><div class='summary'>『Injury Prevention』誌に掲載されたミシガン大学の新しい研究では、自殺予防を個人のスクリーニングから家庭内の行動に移す、ファミリー・セーフティ・ネットと呼ばれる方法をアラスカ州でテストした。研究者らは、この変更は、標準ツールでは見逃しがちな人々にリーチするのに役立つ可能性があると述べている。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-family-firearm-strategy-screen-curb.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='f66b6d1b74a66463662a26da5c8f2d26' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Preventive Medicine</span><span>2026-04-17 18:00</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'f66b6d1b74a66463662a26da5c8f2d26')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Fructose emerges as a key driver of metabolic disease</h3><div class='summary'>A new report, published in Nature Metabolism, is shedding light on the distinct and underappreciated role of fructose in driving disease, separate from its role as a simple source of calories.</div></div><div class='lang-pane lang-ja hidden'><h3>フルクトースが代謝性疾患の主要な要因として浮上</h3><div class='summary'>Nature Metabolism に掲載された新しいレポートは、単純なカロリー源としての果糖の役割とは別に、疾患の促進における果糖の明確で過小評価されている役割に光を当てています。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-fructose-emerges-key-driver-metabolic.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='bba77d827320a79f220a8d0f1b15c85a' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Preventive Medicine</span><span>2026-04-17 06:00</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'bba77d827320a79f220a8d0f1b15c85a')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Teen substance use linked to peer pressure and well-being, study finds</h3><div class='summary'>Researchers at The University of Manchester have identified a range of key risk and protective factors influencing whether young people vape, drink alcohol, smoke or use drugs. Based on data from more than 30,000 pupils aged 12–15, the study, published in the International Journal of Drug Policy, provides one of the most comprehensive pictures to date of adolescent substance use in England, highlighting the importance of social, emotional and environmental influences.</div></div><div class='lang-pane lang-ja hidden'><h3>10代の薬物使用が仲間からのプレッシャーと幸福感に関連していることが研究で判明</h3><div class='summary'>マンチェスター大学の研究者は、若者が電子タバコを吸うか、アルコールを飲むか、喫煙するか、薬物を使用するかに影響を与えるさまざまな主要なリスクと保護要因を特定しました。 International Journal of Drug Policyに掲載されたこの研究は、12歳から15歳までの3万人以上の生徒からのデータに基づいており、社会的、感情的、環境的影響の重要性を強調し、英国における青少年の薬物使用に関するこれまでで最も包括的な全体像の1つを提供している。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>📋 医療制度・行政</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-teen-substance-linked-peer-pressure.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='d9c879acaf3b5de1f672404d47f3e143' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Cancer</span><span>2026-04-17 05:40</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'd9c879acaf3b5de1f672404d47f3e143')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Liver cancer roadmap links tumor hallmarks to treatment, including targetable mutations</h3><div class='summary'>A new review from the Icahn School of Medicine at Mount Sinai and the Hospital Clínic de Barcelona provides one of the clearest roadmaps to date for understanding and treating liver cancer, one of the deadliest cancers worldwide. Published in Cell, the study, &quot;Hallmarks of Liver Cancer: Therapeutic Implications&quot;, applies the widely used &quot;Hallmarks of Cancer&quot; framework to liver tumors, linking the biology of the disease to treatment strategies, including immunotherapy and precision medicine approaches, particularly in the approximately 45% of bile duct cancers that harbor targetable mutations.</div></div><div class='lang-pane lang-ja hidden'><h3>肝臓がんのロードマップは、標的化可能な変異を含む腫瘍の特徴と治療を結びつける</h3><div class='summary'>マウントサイナイのアイカーン医科大学とバルセロナ病院からの新しいレビューは、世界で最も致死率の高い癌の一つである肝臓癌の理解と治療について、これまでで最も明確なロードマップの1つを提供しています。 Cellに掲載されたこの研究「肝がんの特徴：治療への影響」は、広く使用されている「がんの特徴」フレームワークを肝腫瘍に適用し、特に標的化可能な変異を保有する胆管がんの約45％において、疾患の生物学を免疫療法や精密医療アプローチなどの治療戦略に結びつけている。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🍽️ 食事</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-liver-cancer-roadmap-links-tumor.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='7403f103c1b757757baa3a36a3a0479d' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Preventive Medicine</span><span>2026-04-17 04:20</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '7403f103c1b757757baa3a36a3a0479d')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Colon cancer deaths in younger adults rose mainly among those without degrees, study says</h3><div class='summary'>The worrisome rise in colorectal cancer deaths in younger adults is concentrated in people with less education, suggesting socioeconomic factors could be driving the escalation, according to a new study.</div></div><div class='lang-pane lang-ja hidden'><h3>研究によると、若年成人の結腸がん死亡は主に学位のない人の間で増加した</h3><div class='summary'>新しい研究によると、若年層における結腸直腸がんによる死亡の憂慮すべき増加は教育を受けていない人々に集中しており、社会経済的要因がその増加を促進している可能性があることを示唆している。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-colon-cancer-deaths-younger-adults.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='fc70a86da09cbdba431b599b57c106f7' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Cancer</span><span>2026-04-17 02:20</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'fc70a86da09cbdba431b599b57c106f7')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Chemical NDMA is much more likely to cause cancerous mutations after early-life exposure, study suggests</h3><div class='summary'>A new study from MIT suggests that a carcinogen that has been found in medications and in drinking water contaminated by chemical plants may have a much more severe impact on children than adults. In a study of mice, the researchers found that juveniles exposed to drinking water containing this compound, known as NDMA, showed dramatically higher rates of DNA damage and cancer than adults.</div></div><div class='lang-pane lang-ja hidden'><h3>化学物質NDMAは、幼少期に暴露された後に癌性突然変異を引き起こす可能性がはるかに高いことが研究で示唆されている</h3><div class='summary'>マサチューセッツ工科大学（MIT）の新しい研究は、医薬品や化学工場で汚染された飲料水から検出された発がん物質が、大人よりも子供にはるかに深刻な影響を与える可能性があることを示唆している。研究者らは、マウスを対象とした研究で、NDMAとして知られるこの化合物を含む飲料水にさらされた幼体では、成体よりもDNA損傷やがんの発生率が劇的に高いことを発見した。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-chemical-ndma-cancerous-mutations-early.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='1619801b60d7d30e20296a9f1da2c000' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Cancer</span><span>2026-04-16 23:40</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '1619801b60d7d30e20296a9f1da2c000')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Biological shield can prevent skin cancer cells from transforming into aggressive metastatic forms</h3><div class='summary'>A new study has identified a molecular guardian that keeps skin cells from forgetting what they are and transforming into aggressive, migratory killers. By stabilizing a master genetic switch, this protein shield prevents common skin tumors from undergoing a dangerous metamorphosis and spreading to the lungs.</div></div><div class='lang-pane lang-ja hidden'><h3>生物学的シールドは、皮膚がん細胞が攻撃的な転移性形態に変化するのを防ぐことができます</h3><div class='summary'>新しい研究により、皮膚細胞が本来の姿を忘れて攻撃的で移動性の殺人者に変化するのを防ぐ分子守護者が特定された。このタンパク質シールドは、マスター遺伝子スイッチを安定化することにより、一般的な皮膚腫瘍が危険な変態を起こして肺に広がるのを防ぎます。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-biological-shield-skin-cancer-cells.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='20ce67deab1fae073ad4607558227eff' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Top Health</span><span>2026-04-16 18:19</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '20ce67deab1fae073ad4607558227eff')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Common IBS medications linked to higher risk of death in major study</h3><div class='summary'>A massive, nearly 20-year study tracking over 650,000 Americans with irritable bowel syndrome is raising new questions about the long-term safety of common treatments. Researchers found that some widely used medications—including antidepressants and certain antidiarrheal drugs—were linked to a small but noticeable increase in the risk of death over time.</div></div><div class='lang-pane lang-ja hidden'><h3>一般的なIBS治療薬は主要な研究で死亡リスクの上昇と関連している</h3><div class='summary'>過敏性腸症候群の65万人以上のアメリカ人を追跡したほぼ20年にわたる大規模な研究により、一般的な治療法の長期的な安全性について新たな疑問が生じている。研究者らは、抗うつ薬や特定の下痢止め薬など、広く使用されているいくつかの薬剤が、時間の経過とともに小さいながらも顕著な死亡リスクの増加に関連していることを発見しました。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>📋 医療制度・行政</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260415043617.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='c0772f46db758f6955bdaafc7f3d1620' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Preventive Medicine</span><span>2026-04-16 18:00</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'c0772f46db758f6955bdaafc7f3d1620')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Korean women with CVD face gaps in risk factor control, study finds</h3><div class='summary'>Korean women with heart disease showed higher awareness and treatment of major risk factors, but lower control rates, pointing to the need for sex-specific strategies to close the gap, according to a study being presented at ACC Asia 2026 Together with KSC Spring Conference taking place in Gyeongju, South Korea, on April 17–18.</div></div><div class='lang-pane lang-ja hidden'><h3>CVDの韓国人女性は危険因子管理のギャップに直面していることが研究で判明</h3><div class='summary'>4月17～18日に韓国の慶州で開催されるACC Asia 2026 Together with KSC Spring Conferenceで発表された研究によると、心臓病を患う韓国人女性は主要な危険因子に対する認識と治療が高いものの、コントロール率が低く、ギャップを埋めるための性特有の戦略の必要性を指摘している。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-korean-women-cvd-gaps-factor.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='cc479db83c67e9bed023dd9c78b17b3b' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Preventive Medicine</span><span>2026-04-16 07:40</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'cc479db83c67e9bed023dd9c78b17b3b')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Medicare quality measures were capped even as most eligible doctors never reported them</h3><div class='summary'>New research from the Harvey L. Neiman Health Policy Institute found that most Merit-Based Incentive Payment System (MIPS) quality measures designated as &quot;topped out&quot; by the Centers for Medicare &amp; Medicaid Services (CMS) were reported by only a small fraction of eligible physicians, suggesting these measures may not reflect consistently high performance across clinicians.</div></div><div class='lang-pane lang-ja hidden'><h3>メディケアの質の評価には、適格な医師のほとんどが報告をしなかったにも関わらず、上限が設けられていた</h3><div class='summary'>ハーベイ・L・ニーマン医療政策研究所の新しい研究では、メディケア・メディケイド・サービスセンター（CMS）によって「最高レベル」と指定された成果報酬型インセンティブ支払いシステム（MIPS）の品質指標のほとんどが、適格な医師のほんの一部によって報告されていることが判明し、これらの指標が臨床医全体の一貫した高いパフォーマンスを反映していない可能性があることが示唆されています。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>📋 医療制度・行政</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-medicare-quality-capped-eligible-doctors.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='b5f9970aaf1e7e0b0940a53da91da3c2' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Healthy Aging</span><span>2026-04-16 05:40</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'b5f9970aaf1e7e0b0940a53da91da3c2')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>After the ICU, some older adults less likely to receive home-based rehabilitation</h3><div class='summary'>Home is often where recovery begins after being hospitalized for a serious illness. But for some people, it may also be where gaps in care arise. In a recent study, Yale School of Medicine&#x27;s Snigdha Jain, MD, MHS, and colleagues found that social factors, such as income and education, can be associated with whether an older adult receives home-based rehabilitation services after an intensive care unit (ICU) stay. The findings are published in Annals of the American Thoracic Society.</div></div><div class='lang-pane lang-ja hidden'><h3>ICU の後、一部の高齢者は自宅でのリハビリテーションを受ける可能性が低くなります</h3><div class='summary'>重い病気で入院した後、回復が始まる場所は多くの場合自宅です。しかし、一部の人にとっては、ケアのギャップが生じる場所でもあるかもしれません。最近の研究で、イェール大学医学部のスニグダ・ジェイン医師、MHSらは、高齢者が集中治療室（ICU）滞在後に在宅リハビリテーションサービスを受けるかどうかには、収入や教育などの社会的要因が関連している可能性があることを発見した。この研究結果は、米国胸部学会年報に掲載されています。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-icu-older-adults-home-based.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='6371be297b6decf7c7a5d8f87b78a7ac' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Healthy Living</span><span>2026-04-16 05:20</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '6371be297b6decf7c7a5d8f87b78a7ac')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Effective cholesterol absorption from the intestine may increase the risk of serious cardiac events</h3><div class='summary'>The way in which the body processes cholesterol affects the risk of cardiovascular diseases. LDL cholesterol is obtained from saturated fats in food and from hepatic cholesterol synthesis. Its accumulation in the arterial walls can obstruct blood flow. In a study published in the Journal of Internal Medicine, long-term monitoring has revealed that high cholesterol absorption predicted myocardial infarctions and cardiac mortality in patients who had previously had an acute coronary artery event. The worst prognosis was seen in patients with the highest cholesterol absorption, while low cholesterol absorption was associated with a better prognosis.</div></div><div class='lang-pane lang-ja hidden'><h3>腸からのコレステロールの効果的な吸収により、重篤な心臓イベントのリスクが高まる可能性がある</h3><div class='summary'>体がコレステロールを処理する方法は、心血管疾患のリスクに影響します。 LDLコレステロールは、食品中の飽和脂肪および肝臓のコレステロール合成から得られます。動脈壁に蓄積すると、血流が妨げられることがあります。 Journal of Internal Medicine 誌に掲載された研究では、長期モニタリングにより、コレステロール吸収が高いと、以前に急性冠動脈イベントを起こしたことがある患者の心筋梗塞と心臓死亡率が予測されることが明らかになりました。最も悪い予後は、コレステロール吸収が最も高い患者に見られましたが、コレステロール吸収が低いほど予後は良好でした。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🍽️ 食事</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-effective-cholesterol-absorption-intestine-cardiac.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='abe8cc02d90643bef2fb556c1fdf93ae' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Top Health</span><span>2026-04-15 12:11</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'abe8cc02d90643bef2fb556c1fdf93ae')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>This common gout drug may slash heart attack and stroke risk</h3><div class='summary'>A major new study reveals that treating gout may do far more than ease painful joint flare-ups—it could also protect the heart. Researchers found that patients who took common gout medications like allopurinol and successfully lowered their blood urate levels had a significantly reduced risk of heart attacks, strokes, and cardiovascular death over five years.</div></div><div class='lang-pane lang-ja hidden'><h3>この一般的な痛風薬は心臓発作や脳卒中のリスクを軽減する可能性がある</h3><div class='summary'>新しい重要な研究により、痛風の治療は痛みを伴う関節の発赤を和らげるだけでなく、心臓を保護する可能性があることが明らかになりました。研究者らは、アロプリノールなどの一般的な痛風治療薬を服用し、血中尿酸値の低下に成功した患者は、5年間にわたって心臓発作、脳卒中、心血管死のリスクが大幅に減少していることを発見した。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🍽️ 食事</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260414075646.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='cc99f11b1027aecf8f2558e76dd95aab' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Sleep Medicine</span><span>2026-04-10 20:00</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'cc99f11b1027aecf8f2558e76dd95aab')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Study identifies why nightmares persist in children and how to break the cycle</h3><div class='summary'>Research from the University of Oklahoma and the University of Tulsa proposes a new model to explain why nightmares can persist over time in children and how therapy can be designed to break that cycle.</div></div><div class='lang-pane lang-ja hidden'><h3>子どもたちの悪夢が続く理由と悪夢の悪夢を断ち切る方法が研究で判明</h3><div class='summary'>オクラホマ大学とタルサ大学の研究は、なぜ子供たちの悪夢が長期にわたって続くのか、そしてその悪夢のサイクルを断ち切るためにどのように治療をデザインできるのかを説明する新しいモデルを提案しています。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-nightmares-persist-children.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='9c7871b59678a4be6e726360b13a4383' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Sleep Medicine</span><span>2026-04-10 06:40</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '9c7871b59678a4be6e726360b13a4383')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>AI model suggests CPAP can massively swing heart risk in sleep apnea</h3><div class='summary'>Mount Sinai researchers have created an analytic tool using machine learning that can predict cardiovascular disease risk in millions of patients with obstructive sleep apnea, a serious sleep disorder, according to findings recently published in Communications Medicine. The team said their study is the first to provide estimates of whether continuous positive airway pressure (CPAP), a widely used therapy for obstructive sleep apnea, will increase or decrease an individual&#x27;s cardiovascular risk. It highlights the potential for precision medicine and varied approaches to tailor clinical care and reduce cardiovascular disease risk in vulnerable patients.</div></div><div class='lang-pane lang-ja hidden'><h3>AI モデルは、CPAP が睡眠時無呼吸症候群における心臓のリスクを大きく変動させる可能性があることを示唆しています</h3><div class='summary'>最近Communications Medicine誌に発表された研究結果によると、マウント・サイナイの研究者らは、重篤な睡眠障害である閉塞性睡眠時無呼吸症候群の数百万人の患者における心血管疾患のリスクを予測できる機械学習を使用した分析ツールを作成した。研究チームは、閉塞性睡眠時無呼吸症候群の治療法として広く使用されている持続気道陽圧法（CPAP）が個人の心血管リスクを増加させるか減少させるかについての推定値を提供したのは今回の研究が初めてだと述べた。これは、臨床ケアをカスタマイズし、脆弱な患者の心血管疾患のリスクを軽減するための精密医療とさまざまなアプローチの可能性を強調しています。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>😴 睡眠</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-ai-cpap-massively-heart-apnea.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='0194a11de8214aa35f5c17c780f0407f' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Sleep Medicine</span><span>2026-04-08 00:20</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '0194a11de8214aa35f5c17c780f0407f')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Sleep patterns may reveal hidden heart risks</h3><div class='summary'>People whose sleep apnea changes dramatically from night to night are 30% more likely to have a heart attack, stroke, or heart failure, reveals a new study from Flinders University. The research, published in the journal SLEEP, shows that it is not just how severe sleep apnea is that matters, but how much it fluctuates, with wide night-to-night swings in breathing problems during sleep linked to a higher risk of serious heart disease.</div></div><div class='lang-pane lang-ja hidden'><h3>睡眠パターンから隠れた心臓リスクが明らかになる可能性がある</h3><div class='summary'>睡眠時無呼吸が夜ごとに劇的に変化する人は、心臓発作、脳卒中、または心不全を起こす可能性が 30% 高いことが、フリンダース大学の新しい研究で明らかになりました。 SLEEP誌に掲載されたこの研究は、重要なのは睡眠時無呼吸の重症度だけではなく、睡眠時無呼吸がどの程度変動するかであることを示しており、睡眠中の呼吸障害の昼夜による大きな変動が重篤な心臓病のリスクの上昇と関連していることを示している。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>😴 睡眠</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-caution'>⚠ 注意</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-patterns-reveal-hidden-heart.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='2f077c3a53d81fbe0dcd6fb005ea116d' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Sleep Medicine</span><span>2026-04-05 04:30</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '2f077c3a53d81fbe0dcd6fb005ea116d')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Irregular bedtime linked to higher risk of cardiac events</h3><div class='summary'>An irregular bedtime in midlife may signal an increased risk of cardiovascular disease. A new study from the University of Oulu suggests that large swings in when people go to bed could double the risk of serious cardiac events—particularly among those who get less than eight hours of sleep.</div></div><div class='lang-pane lang-ja hidden'><h3>不規則な就寝時間は心臓イベントのリスク上昇と関連している</h3><div class='summary'>中年期の就寝時間が不規則になると、心血管疾患のリスクが高まる可能性があります。オウル大学の新しい研究は、就寝時間の変動が大きいと、特に睡眠時間が 8 時間未満の人の場合、重篤な心臓イベントのリスクが 2 倍になる可能性があることを示唆しています。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>😴 睡眠</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-03-irregular-bedtime-linked-higher-cardiac.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='da4deb9a8e63a3046567bc40b7117f20' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Sleep Medicine</span><span>2026-04-03 07:00</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'da4deb9a8e63a3046567bc40b7117f20')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Study shows association between obstructive sleep apnea, all-cause mortality and cardiovascular events</h3><div class='summary'>New research to be presented at the European Congress on Obesity (ECO 2026, Istanbul, Turkey, 12–15 May) shows that those living with obstructive sleep apnea (OSA) have a 71% higher risk of cardiovascular events (CVEs) or death from any cause (all-cause mortality) compared with those not living with OSA.</div></div><div class='lang-pane lang-ja hidden'><h3>閉塞性睡眠時無呼吸症候群、全死因死亡率、心血管イベントとの関連性を研究が示す</h3><div class='summary'>欧州肥満会議（ECO 2026、トルコ、イスタンブール、5月12～15日）で発表される新しい研究は、閉塞性睡眠時無呼吸症候群（OSA）を患っている人は、OSAを患っていない人に比べて、心血管イベント（CVE）または何らかの原因による死亡（全死因死亡）のリスクが71％高いことを示している。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>😴 睡眠</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-association-obstructive-apnea-mortality-cardiovascular.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='2e49275e1489fad1c3b69a6d2b9cdcf6' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Sleep Medicine</span><span>2026-03-31 08:40</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '2e49275e1489fad1c3b69a6d2b9cdcf6')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>EEG during sleep reveals changing infant brain rhythms at 3 and 6 months</h3><div class='summary'>Electrical signals from the brain could help identify potential issues in the organ&#x27;s development, a new study reports. Scientists from the University of Fribourg in Switzerland and the University of Surrey investigated electrical activity in the brains of sleeping infants longitudinally, at ages 3 and 6 months. They examined three electrical signals with distinct frequencies: slow wave activity (0.75–4.25 Hz), theta (4.5–7.5 Hz) power and sigma (9.75–14.75 Hz) power, which are key markers of sleep depth and brain development.</div></div><div class='lang-pane lang-ja hidden'><h3>睡眠中の脳波検査により、生後3か月と6か月の乳児の脳リズムの変化が明らかになる</h3><div class='summary'>脳からの電気信号は、臓器の発達における潜在的な問題を特定するのに役立つ可能性があると、新しい研究が報告している。スイスのフリブー​​ル大学とサリー大学の科学者らは、眠っている生後3か月と6か月の乳児の脳の電気活動を縦断的に調査した。彼らは、異なる周波数を持つ 3 つの電気信号、すなわち徐波活動 (0.75 ～ 4.25 Hz)、シータ (4.5 ～ 7.5 Hz) パワー、およびシグマ (9.75 ～ 14.75 Hz) パワーを調べました。これらは睡眠の深さと脳の発達の重要なマーカーです。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>😴 睡眠</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-03-eeg-reveals-infant-brain-rhythms.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='6e2b1abf19d2a472db50b9db27466cd4' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Sleep Medicine</span><span>2026-03-28 07:00</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '6e2b1abf19d2a472db50b9db27466cd4')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Study finds wearable data may help predict patient engagement in remote COPD rehabilitation</h3><div class='summary'>Sleep data captured with a wearable device could help clinicians better tailor care by identifying patients with chronic obstructive pulmonary disease (COPD) who may need additional support to participate in pulmonary rehabilitation, according to new research published in Mayo Clinic Proceedings: Digital Health.</div></div><div class='lang-pane lang-ja hidden'><h3>研究により、ウェアラブルデータが遠隔COPDリハビリテーションへの患者の関与を予測するのに役立つ可能性があることが判明</h3><div class='summary'>Mayo Clinic Proceedings: Digital Healthに掲載された新しい研究によると、ウェアラブルデバイスで収集された睡眠データは、肺リハビリテーションに参加するために追加のサポートが必要な慢性閉塞性肺疾患（COPD）患者を特定することで、臨床医がケアをより適切に調整するのに役立つ可能性があるという。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>😴 睡眠</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-03-wearable-patient-engagement-remote-copd.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='1145c56f6ec481c9ec9f30f9f8bbabff' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Fitness</span><span>2026-03-24 10:06</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '1145c56f6ec481c9ec9f30f9f8bbabff')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Women over 50 lost 35% more weight with this surprising combo</h3><div class='summary'>Postmenopausal women may have a powerful new edge in the battle against weight gain. A Mayo Clinic study found that those using menopausal hormone therapy while taking the obesity drug tirzepatide lost about 35% more weight than those on the drug alone. The findings hint at a surprising synergy between hormones and cutting-edge weight-loss medications, potentially opening the door to more effective, personalized treatments for millions of women facing increased cardiometabolic risks after menopause.</div></div><div class='lang-pane lang-ja hidden'><h3>50歳以上の女性はこの驚くべき組み合わせで35％以上体重を減らした</h3><div class='summary'>閉経後の女性は、体重増加との戦いにおいて強力な新たな優位性を獲得できる可能性があります。メイヨークリニックの研究では、肥満治療薬チルゼパチドを服用しながら更年期ホルモン療法を受けている人は、薬のみを服用している人に比べて体重が約35％減少したことが判明した。この研究結果は、ホルモンと最先端の減量薬の間に驚くべき相乗効果があることを示唆しており、閉経後の心臓代謝リスクの増加に直面している何百万人もの女性にとって、より効果的で個別化された治療への扉が開かれる可能性がある。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/03/260323005543.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='3098f2890d8461438f71d0493899a233' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Fitness</span><span>2026-03-20 12:08</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '3098f2890d8461438f71d0493899a233')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>What happens after Ozempic shocked researchers</h3><div class='summary'>Stopping popular weight-loss injections like Ozempic or Mounjaro might not trigger the dramatic rebound many fear. A large real-world study of nearly 8,000 patients found that most people who discontinue these drugs manage to keep the weight off—or even continue losing—by restarting treatment, switching medications, or adopting lifestyle changes. While earlier clinical trials suggested rapid weight regain, this new evidence paints a more hopeful picture.</div></div><div class='lang-pane lang-ja hidden'><h3>オゼンピックが研究者たちに衝撃を与えた後、何が起こるのか</h3><div class='summary'>オゼンピックやムンジャロなどの人気の減量注射を中止しても、多くの人が懸念しているような劇的なリバウンドを引き起こすことはないかもしれません。約8,000人の患者を対象とした大規模な実際の研究では、これらの薬を中止したほとんどの人が、治療を再開したり、薬を変更したり、ライフスタイルを変えたりすることで体重の減少を維持、さらには減少を続けていることがわかりました。以前の臨床試験では体重が急速に回復することが示唆されていましたが、この新しい証拠はより希望に満ちた状況を描いています。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/03/260319044648.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='2ee6678ff9418540e59e73810066cc82' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Healthy Aging</span><span>2026-03-09 05:45</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '2ee6678ff9418540e59e73810066cc82')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>165,000 dementia patients reveal hidden stroke risk from common drug</h3><div class='summary'>A massive UK study of more than 165,000 dementia patients has uncovered troubling new evidence about risperidone, a commonly used drug for severe agitation. Researchers found the antipsychotic increases stroke risk in dementia patients across the board—including those with no prior heart disease or stroke—challenging the long-held belief that some patients might be safer candidates than others. Because risperidone is the only drug of its type licensed for dementia, doctors often use it as a last resort when distressing symptoms become unmanageable.</div></div><div class='lang-pane lang-ja hidden'><h3>165,000人の認知症患者が一般的な薬に隠れた脳卒中リスクを明らかに</h3><div class='summary'>16万5,000人を超える認知症患者を対象とした英国の大規模研究で、重度の興奮に一般的に使用される薬であるリスペリドンに関する厄介な新たな証拠が明らかになった。研究者らは、抗精神病薬が認知症患者全体（心臓病や脳卒中を患っていない患者も含む）の脳卒中リスクを増加させることを発見し、一部の患者は他の患者よりも安全な患者である可能性があるという長年の信念に疑問を呈した。リスペリドンは、この種の薬剤として認可された唯一の認知症薬であるため、医師は、つらい症状が手に負えなくなった場合の最終手段としてリスペリドンを使用することがよくあります。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/03/260307213244.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='eb8791b95b27499bbb3d9235dacfd899' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Cancer</span><span>2026-04-19 03:00</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'eb8791b95b27499bbb3d9235dacfd899')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>How mRNA cancer vaccines still destroy tumors when a key immune cell is missing</h3><div class='summary'>The advent of mRNA vaccines against SARS-CoV-2 in 2020 changed the course of the COVID-19 pandemic. Now, the Nobel Prize–winning technology is being adapted to fight cancer, with mRNA vaccines in clinical trials for melanoma, small-cell lung cancer and bladder cancer, among others, opening the door to new ways of preventing and treating the disease.</div></div><div class='lang-pane lang-ja hidden'><h3>重要な免疫細胞が欠損している場合でも、mRNAがんワクチンがどのようにして腫瘍を破壊するのか</h3><div class='summary'>2020 年の SARS-CoV-2 に対する mRNA ワクチンの出現により、新型コロナウイルス感染症のパンデミックの方向性が変わりました。現在、ノーベル賞を受賞したこの技術はがんと闘うために応用されており、特に黒色腫、小細胞肺がん、膀胱がんなどに対するmRNAワクチンの臨床試験が行われ、病気の予防と治療の新たな方法への扉が開かれています。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🍽️ 食事</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#00d2d322;border-color:#00d2d3;color:#00d2d3'>🦠 感染症・公衆衛生</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-mrna-cancer-vaccines-destroy-tumors.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='70f4c7ff53dd699d139b276398216c1e' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Healthy Aging</span><span>2026-04-18 06:40</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '70f4c7ff53dd699d139b276398216c1e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Cutting calories to slow aging—without compromising health</h3><div class='summary'>Restricting calorie intake in species such as mice, rhesus monkeys, and fruit flies has been shown to extend their lifespans. In some cases, these animals not only live longer, but are also free of disease. But when pushed too far, calorie restriction can have negative impacts. Mice that undergo a 40% reduction in calorie intake, for example, are more susceptible to infections, less likely to reproduce, and experience stunted growth.</div></div><div class='lang-pane lang-ja hidden'><h3>健康を損なうことなく、カロリーをカットして老化を遅らせる</h3><div class='summary'>マウス、アカゲザル、ショウジョウバエなどの種のカロリー摂取量を制限すると、寿命が延びることが示されています。場合によっては、これらの動物は長生きするだけでなく、病気にならないこともあります。しかし、カロリー制限がやりすぎると、悪影響を及ぼす可能性があります。たとえば、カロリー摂取量が 40% 減少したマウスは、感染症にかかりやすくなり、繁殖する可能性が低くなり、成長が阻害されます。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#00d2d322;border-color:#00d2d3;color:#00d2d3'>🦠 感染症・公衆衛生</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-calories-aging-compromising-health.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='613603281f4dcdb3d9afb2c29ba3f277' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Healthy Living</span><span>2026-04-18 04:00</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '613603281f4dcdb3d9afb2c29ba3f277')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Healthy diets may expose younger non-smokers to lung cancer risk through pesticides</h3><div class='summary'>A diet rich in fruit, vegetables, and whole grains is generally recommended for better health and to lower the risk of cancer and other diseases. However, new research from USC Norris Comprehensive Cancer Center, part of Keck Medicine of USC, presented at the annual meeting of the American Association for Cancer Research suggests that this type of diet may put non-smoking Americans under the age of 50 at greater risk of developing lung cancer.</div></div><div class='lang-pane lang-ja hidden'><h3>健康的な食事は、若い非喫煙者を農薬による肺がんのリスクにさらす可能性がある</h3><div class='summary'>健康状態を改善し、がんやその他の病気のリスクを下げるために、果物、野菜、全粒穀物を豊富に含む食事が一般的に推奨されています。しかし、米国がん研究協会の年次総会で発表された、南カリフォルニア大学ケック医学の一部である合衆国ノリス総合がんセンターの新しい研究は、この種の食生活では、50歳未満の非喫煙者のアメリカ人が肺がんを発症するリスクが高まる可能性があることを示唆している。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🍽️ 食事</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-healthy-diets-expose-younger-smokers.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='cc3d4c5188ea9f2cfe7210b387cd8554' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Preventive Medicine</span><span>2026-04-18 03:20</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'cc3d4c5188ea9f2cfe7210b387cd8554')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Many parents of children and teens unaware of minimum legal age for tobacco</h3><div class='summary'>Most parents of children and adolescents aged 10 to 19 years are unaware that the U.S. federal minimum legal age (MLA) for tobacco sales is 21 years, according to research published online April 14 in Pediatrics.</div></div><div class='lang-pane lang-ja hidden'><h3>子供や十代の若者を持つ親の多くは、タバコを吸う最低法定年齢を知らない</h3><div class='summary'>4月14日オンライン版Pediatricsに掲載された研究結果によると、10歳から19歳までの子供や青少年の親のほとんどは、米国連邦政府によるタバコ販売の最低法定年齢（MLA）が21歳であることを知らないという。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-parents-children-teens-unaware-minimum.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='bfa0dd959d690d6664b17d91087c28e0' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Cancer</span><span>2026-04-18 02:40</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'bfa0dd959d690d6664b17d91087c28e0')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>A new era of personalized care for patients with meningioma</h3><div class='summary'>A comprehensive new review led by Mayo Clinic is helping shape how clinicians diagnose and treat meningioma, the most common primary brain tumor, with a focus on personalized, patient-centered care and the latest advances in precision oncology. Published in Nature Reviews Clinical Oncology, the review brings together global expertise to map the future of meningioma care, highlighting innovations that aim to improve outcomes and quality of life for patients.</div></div><div class='lang-pane lang-ja hidden'><h3>髄膜腫患者に対する個別化されたケアの新時代</h3><div class='summary'>メイヨークリニックが主導する包括的な新しいレビューは、個別化された患者中心のケアと高精度腫瘍学の最新の進歩に焦点を当て、臨床医が最も一般的な原発性脳腫瘍である髄膜腫を診断および治療する方法を形作るのに役立っています。 Nature Reviews Clinical Oncology に掲載されたこのレビューは、髄膜腫治療の将来像を描くために世界的な専門知識を結集し、患者の転帰と生活の質の向上を目指すイノベーションに焦点を当てています。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-era-personalized-patients-meningioma.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='cf676bac06b12e49162b9d559ef358ce' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Cancer</span><span>2026-04-18 01:20</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'cf676bac06b12e49162b9d559ef358ce')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Older mice may offer new insight into cancer and aging</h3><div class='summary'>Cancer risk increases with age and is often more aggressive and difficult to treat in older adults. However, fewer than 10% of mouse studies use aged animals, with most relying on mice roughly equivalent to humans in their early 20s. This discrepancy is one potential reason so many cancer drugs that show promise in preclinical models go on to fail in human trials.</div></div><div class='lang-pane lang-ja hidden'><h3>高齢のマウスはがんと老化について新たな洞察をもたらす可能性がある</h3><div class='summary'>がんのリスクは年齢とともに増加し、高齢者では攻撃性が高く、治療が困難なことがよくあります。しかし、高齢の動物を使用したマウス研究は 10% 未満で、ほとんどが 20 代前半の人間にほぼ相当するマウスに依存しています。この矛盾は、前臨床モデルで有望性を示した多くの抗がん剤が人体試験で失敗し続ける潜在的な理由の 1 つです。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-older-mice-insight-cancer-aging.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='09b83ee20f39c7978cbbbd7e01493a1c' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Cancer</span><span>2026-04-17 20:00</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '09b83ee20f39c7978cbbbd7e01493a1c')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Innovative surgery relieves chronic leg and arm swelling</h3><div class='summary'>Advances in cancer treatment mean more people are living longer after a cancer diagnosis. But some survivors develop lymphedema—long-term swelling in the arms, hands, legs or feet that can cause pain, limit movement and raise the risk of serious infections. The condition can also affect body image and mental health.</div></div><div class='lang-pane lang-ja hidden'><h3>革新的な手術により慢性的な脚と腕の腫れを軽減します</h3><div class='summary'>がん治療の進歩により、がんと診断されてからより長く生きる人が増えています。しかし、生存者の中にはリンパ浮腫を発症する人もいます。リンパ浮腫とは、腕、手、足の長期的な腫れで、痛みを引き起こし、動きを制限し、重篤な感染症のリスクを高める可能性があります。この状態はボディイメージや精神的健康にも影響を与える可能性があります。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#00d2d322;border-color:#00d2d3;color:#00d2d3'>🦠 感染症・公衆衛生</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-surgery-relieves-chronic-leg-arm.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='d5709c82cdbd22dec9fd70cebbd87e20' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Nutrition</span><span>2026-04-17 12:49</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'd5709c82cdbd22dec9fd70cebbd87e20')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Scientists discover natural hormone that reverses obesity</h3><div class='summary'>A hormone called FGF21 can reverse obesity in mice by activating a newly identified brain circuit tied to metabolism. Surprisingly, it works in the hindbrain—the same region targeted by GLP-1 drugs like Ozempic and Wegovy—but through a completely different mechanism. Instead of suppressing appetite, FGF21 ramps up the body’s energy burning. This insight could pave the way for more targeted weight-loss and liver disease treatments.</div></div><div class='lang-pane lang-ja hidden'><h3>科学者が肥満を逆転させる天然ホルモンを発見</h3><div class='summary'>FGF21と呼ばれるホルモンは、代謝に関連する新たに同定された脳回路を活性化することにより、マウスの肥満を逆転させることができる。驚くべきことに、これは後脳（Ozempic や Wegovy などの GLP-1 薬が標的とする領域と同じ領域）で機能しますが、まったく異なるメカニズムを通じて機能します。 FGF21 は食欲を抑制するのではなく、体のエネルギー燃焼を促進します。この洞察は、よりターゲットを絞った減量と肝疾患の治療への道を開く可能性があります。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260416071954.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='1207976191e61719ced34389c56d3973' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Top Health</span><span>2026-04-17 12:28</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '1207976191e61719ced34389c56d3973')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Scientists supercharge immune cells to destroy cancer more effectively</h3><div class='summary'>Researchers have found a way to make cancer-killing immune cells more powerful and precise. By adding specific signaling components, they boosted the cells’ readiness to attack tumors. Surprisingly, briefly suppressing the cells with a drug before use made them even more effective later. The approach could help create safer, stronger next-gen cancer treatments.</div></div><div class='lang-pane lang-ja hidden'><h3>科学者はがんをより効果的に破壊するために免疫細胞を強化します</h3><div class='summary'>研究者らは、がんを殺す免疫細胞をより強力かつ正確にする方法を発見した。特定のシグナル伝達成分を追加することで、細胞の腫瘍攻撃の準備を強化しました。驚くべきことに、使用前に薬剤で細胞を一時的に抑制すると、その後の細胞の効果がさらに高まりました。このアプローチは、より安全で強力な次世代のがん治療法の開発に役立つ可能性があります。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260416072001.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='9c377b90368f1ce383b2d9eec1daa9a2' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Cancer</span><span>2026-04-17 06:20</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '9c377b90368f1ce383b2d9eec1daa9a2')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>First-line targeted therapy shows antitumor activity in patients with advanced lung cancer</h3><div class='summary'>First-line zongertinib showed antitumor activity in treatment-naive patients with advanced or metastatic HER2-mutant non-small cell lung cancer (NSCLC), providing a safe and effective oral targeted treatment alternative to chemotherapy, according to researchers at The University of Texas MD Anderson Cancer Center.</div></div><div class='lang-pane lang-ja hidden'><h3>第一選択の標的療法は進行性肺がん患者における抗腫瘍活性を示す</h3><div class='summary'>テキサス大学MDアンダーソンがんセンターの研究者らによると、第一選択薬のゾンゲルチニブは、未治療の進行性または転移性HER2変異非小細胞肺がん（NSCLC）患者において抗腫瘍活性を示し、化学療法に代わる安全かつ効果的な経口標的治療を提供するという。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-line-therapy-antitumor-patients-advanced.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='b71f8405e1074a7d3ed6bc1eafc2f112' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Cancer</span><span>2026-04-17 05:20</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'b71f8405e1074a7d3ed6bc1eafc2f112')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Robotic or laparoscopic surgery can be successful for gallbladder cancer in select patients</h3><div class='summary'>Gallbladder cancer (GBC) is a rare form of cancer with no signs or symptoms in the early stages. In the U.S., approximately 2,000 people die annually from this condition, with only 20% diagnosed at an early stage. Surgery remains the most effective treatment. Although minimally invasive approaches—laparoscopic and robotic—are increasingly used in gastrointestinal oncology, their use in GBC is limited and comparing robotic surgery to laparoscopic and conventional surgery approaches remains limited and controversial.</div></div><div class='lang-pane lang-ja hidden'><h3>ロボット手術または腹腔鏡手術は一部の患者の胆嚢がんに成功する可能性がある</h3><div class='summary'>胆嚢がん (GBC) は、初期段階では兆候や症状が見られない稀ながんです。米国では、毎年約 2,000 人がこの病気で死亡しており、早期に診断されたのはわずか 20% です。依然として手術が最も効果的な治療法です。消化器腫瘍学では低侵襲アプローチ（腹腔鏡やロボット）の使用が増えていますが、GBC での使用は限られており、ロボット手術と腹腔鏡や従来の手術アプローチとの比較は依然として限定的であり、物議を醸しています。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-robotic-laparoscopic-surgery-successful-gallbladder.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='e0a0347132e41f5c5c3ea1d2b3e61d74' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Cancer</span><span>2026-04-17 03:20</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'e0a0347132e41f5c5c3ea1d2b3e61d74')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Severe male infertility tied to higher colorectal and thyroid cancer risk</h3><div class='summary'>Men with severely reduced fertility are at greater risk of developing other health conditions later in life. A research team from Lund University in Sweden has now shown that these men are also more likely to develop colorectal cancer and thyroid cancer.</div></div><div class='lang-pane lang-ja hidden'><h3>重度の男性不妊症は結腸直腸がんや甲状腺がんのリスクが高いと関連している</h3><div class='summary'>生殖能力が著しく低下している男性は、後年に他の健康状態を発症するリスクが高くなります。スウェーデンのルンド大学の研究チームは、こうした男性は結腸直腸がんや甲状腺がんを発症する可能性が高いことを示した。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-severe-male-infertility-higher-colorectal.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='da92fee9dbcc3660586d4a7e3998e321' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Preventive Medicine</span><span>2026-04-17 02:20</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'da92fee9dbcc3660586d4a7e3998e321')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Health information delivered as a video game can bridge the communication gap between patients and providers</h3><div class='summary'>Imagine you and your partner are sitting in the waiting room of your doctor&#x27;s office, waiting for your appointment to get birth control—and instead of calculating how many other people will be called before you, or perusing old magazines, a nurse hands you a digital tablet and encourages you to play a game.</div></div><div class='lang-pane lang-ja hidden'><h3>ビデオゲームとして提供される健康情報は、患者と医療提供者の間のコミュニケーションギャップを埋めることができます</h3><div class='summary'>あなたとあなたのパートナーが診療所の待合室に座って、避妊の予約を待っているところを想像してみてください。そして、看護師は、あなたより先に呼ばれる他の人が何人いるかを計算したり、古い雑誌を熟読したりする代わりに、あなたにデジタル タブレットを渡し、ゲームをするよう勧めます。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-health-video-game-bridge-communication.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='46a402ca5bc1570ae5a816a4d29f962b' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Cancer</span><span>2026-04-17 02:00</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '46a402ca5bc1570ae5a816a4d29f962b')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>First-of-its-kind drug aims to protect the heart while increasing effectiveness of cancer treatments</h3><div class='summary'>A team of University of Alberta researchers has developed a cardio-oncology drug that protects the heart from chemotherapy damage while enhancing the effectiveness of cancer treatments against tumor growth and spread. In a paper published as the cover story in Science Translational Medicine, the team identifies the target protein ZNF281 and a new drug they&#x27;ve developed called ZIM, or ZNF281 Interfering Molecule.</div></div><div class='lang-pane lang-ja hidden'><h3>がん治療の有効性を高めながら心臓を保護することを目的とした、この種初の薬剤</h3><div class='summary'>アルバータ大学の研究チームは、腫瘍の増殖と拡大に対するがん治療の有効性を高めながら、化学療法による損傷から心臓を保護する心臓腫瘍薬を開発した。 『Science Translational Medicine』誌のカバーストーリーとして掲載された論文の中で、研究チームは標的タンパク質ZNF281と、彼らが開発したZIM（ZNF281干渉分子）と呼ばれる新薬を特定した。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-kind-drug-aims-heart-effectiveness.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='d8129640c6fb54e871715736bf389a16' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Cancer</span><span>2026-04-17 00:20</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'd8129640c6fb54e871715736bf389a16')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Key protein may explain why triple-negative breast cancer spreads so fast</h3><div class='summary'>Researchers at Ben-Gurion University of the Negev have identified a protein that plays a central role in enabling aggressive breast cancer cells to spread to other parts of the body. Triple-negative breast cancer remains one of the most challenging diagnoses to receive. While medical advances have improved the ability to surgically remove primary tumors, the true danger lies in metastasis, which is the spread of cancer cells to vital organs like the lungs, liver, or brain. Researchers at Ben-Gurion University of the Negev have now identified a specific protein, PKC-eta (protein kinase C-eta), that drives this deadly cell migration in triple-negative breast cancer, offering a new avenue of hope for treating this aggressive disease.</div></div><div class='lang-pane lang-ja hidden'><h3>トリプルネガティブ乳がんがなぜこれほど急速に広がるのか、重要なタンパク質が説明できる可能性がある</h3><div class='summary'>ネゲブのベングリオン大学の研究者は、進行性の乳がん細胞が体の他の部分に広がることを可能にする中心的な役割を果たすタンパク質を特定した。トリプルネガティブ乳がんは、依然として診断が最も難しいものの 1 つです。医学の進歩により原発腫瘍を外科的に除去する能力は向上しましたが、本当の危険は転移、つまり肺、肝臓、脳などの重要な器官へのがん細胞の広がりにあります。ネゲブのベングリオン大学の研究者らは、トリプルネガティブ乳がんにおいてこの致命的な細胞遊走を促進する特定のタンパク質であるPKC-eta（プロテインキナーゼC-eta）を同定し、この悪性度の高い乳がんの治療に新たな希望の道を提供することになった。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🍽️ 食事</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-key-protein-triple-negative-breast.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='53e74329cd04b80e5a1fd58e521c8adc' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Cancer</span><span>2026-04-16 23:00</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '53e74329cd04b80e5a1fd58e521c8adc')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>This shrimp-inspired camera sees hidden cancer spread and could transform how surgeons remove lymph nodes</h3><div class='summary'>Researchers have developed a compact camera that captures ultraviolet, near-infrared, and visible images using a single chip. Inspired by the multiwavelength vision capability of the mantis shrimp, the camera could help surgeons identify lymph nodes connected to a tumor and assess whether cancer has spread to them, making cancer surgery safer and less invasive.</div></div><div class='lang-pane lang-ja hidden'><h3>エビにヒントを得たこのカメラは隠れたがんの広がりを確認し、外科医のリンパ節切除方法を変える可能性がある</h3><div class='summary'>研究者らは、単一チップを使用して紫外、近赤外、可視画像をキャプチャするコンパクトカメラを開発しました。シャコの多波長視覚能力にヒントを得たこのカメラは、外科医が腫瘍に関連するリンパ節を特定し、がんがリンパ節に転移しているかどうかを評価するのに役立ち、がん手術をより安全で侵襲性の低いものにする可能性がある。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-shrimp-camera-hidden-cancer-surgeons.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='f6bc0b914a60b2ac2e356164a009740b' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Cancer</span><span>2026-04-16 18:00</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'f6bc0b914a60b2ac2e356164a009740b')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Confirmed precursor to commonest form of esophageal cancer offers opportunities to catch the disease early</h3><div class='summary'>Scientists have found the strongest evidence to date that a condition known as Barrett&#x27;s esophagus is the starting point for all cases of esophageal adenocarcinoma—the most common type of esophageal cancer in the developed world—even when telltale signs of this pre-cancerous stage are no longer visible. The findings, published in Nature Medicine, could help improve screening for and early detection of esophageal cancer, the sixth-most deadly cancer, helping improve outcomes for the disease.</div></div><div class='lang-pane lang-ja hidden'><h3>最も一般的な形態の食道がんの前駆体であることが確認され、この病気を早期に発見する機会が得られる</h3><div class='summary'>科学者たちは、バレット食道として知られる症状が、先進国で最も一般的なタイプの食道癌である食道腺癌のすべての症例の出発点であるという、これまでで最も有力な証拠を発見した。この前癌段階の明らかな兆候はもはや目に見えない。 Nature Medicineに掲載されたこの研究結果は、6番目に死亡率の高いがんである食道がんのスクリーニングと早期発見を改善し、この病気の転帰を改善するのに役立つ可能性がある。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-precursor-commonest-esophageal-cancer-opportunities.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='1f4207ddfbcfa155acdc26457b0277c4' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Top Health</span><span>2026-04-16 12:50</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '1f4207ddfbcfa155acdc26457b0277c4')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>This cheap drug could help people with type 1 diabetes use less insulin</h3><div class='summary'>A surprising new clinical trial has revealed that metformin—a cheap, century-old drug widely used for type 2 diabetes—may help people with type 1 diabetes in an unexpected way. While researchers initially hoped it would reduce insulin resistance, they instead found it allows patients to use about 12% less insulin while maintaining stable blood sugar levels.</div></div><div class='lang-pane lang-ja hidden'><h3>この安価な薬は、1型糖尿病患者のインスリン使用量を減らすのに役立つ可能性がある</h3><div class='summary'>驚くべき新しい臨床試験により、メトホルミン（1世紀前から2型糖尿病に広く使用されている安価な薬）が、予期せぬ方法で1型糖尿病患者を助ける可能性があることが明らかになった。研究者らは当初、インスリン抵抗性が低下することを期待していましたが、代わりに、安定した血糖値を維持しながら、患者が使用するインスリンの量を約 12% 削減できることがわかりました。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260415043628.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='26ad9fd5df8be3c640a9cc3e972e8ae4' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Preventive Medicine</span><span>2026-04-16 10:20</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '26ad9fd5df8be3c640a9cc3e972e8ae4')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>EPA delays decisions on &#x27;forever chemicals&#x27;</h3><div class='summary'>The U.S. Environmental Protection Agency (EPA) has paused decisions on uses for dozens of &quot;forever chemicals,&quot; also known as PFAS. The delay includes proposed changes regarding how several of these chemicals can be used, according to one of two people familiar with the situation who spoke to The Washington Post. The two commented anonymously because they were not authorized to speak to the press.</div></div><div class='lang-pane lang-ja hidden'><h3>EPA、「永久化学物質」に関する決定を遅らせる</h3><div class='summary'>米国環境保護庁（EPA）は、PFASとしても知られる数十の「永久化学物質」の使用に関する決定を一時停止した。ワシントン・ポスト紙の取材に応じた状況に詳しい関係者２人のうちの１人によると、この遅延には、これらの化学物質のいくつかの使用方法に関する変更案が含まれているという。 2人は報道陣に話す権限がなかったため、匿名でコメントした。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-caution'>⚠ 注意</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-epa-delays-decisions-chemicals.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='caf9ded95b29d87ebd99506ec16242dd' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Healthy Aging</span><span>2026-04-16 09:00</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'caf9ded95b29d87ebd99506ec16242dd')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Anti-amyloid Alzheimer&#x27;s drugs show no clinically meaningful effect</h3><div class='summary'>Drugs that target amyloid beta proteins in the brain likely have no clinically meaningful positive effects, while increasing the risk of bleeding and swelling in the brain, a new review in the Cochrane Database of Systematic Reviews has found.</div></div><div class='lang-pane lang-ja hidden'><h3>抗アミロイドアルツハイマー病薬は臨床的に意味のある効果を示さない</h3><div class='summary'>脳内のアミロイドベータタンパク質を標的とする薬剤は、脳内の出血や腫れのリスクを増加させる一方で、臨床的に意味のあるプラスの効果を持たない可能性が高いことが、コクラン・データベース・オブ・システマティック・レビューの新しいレビューで判明した。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-anti-amyloid-alzheimer-drugs-clinically.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='f75373b793dfecb2aa0a7ba984bd3bec' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Preventive Medicine</span><span>2026-04-16 08:00</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'f75373b793dfecb2aa0a7ba984bd3bec')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>A better flu shot may be coming: How epitope targeting could widen protection</h3><div class='summary'>Doctors recommend getting your flu shot annually, since the specific influenza strain it targets varies from year to year. But what if the shot could be more effective while protecting against more strains? Researchers from the University of Missouri School of Medicine are one step closer to making this happen. When the immune system sees a new strain of a familiar virus, it typically focuses on the parts it &quot;remembers&quot; most, even if those regions have changed. &quot;Epitope-spanning antigenic variation reprograms immunodominance and broadens immunity in sequential influenza vaccination&quot; was recently published in Nature Communications.</div></div><div class='lang-pane lang-ja hidden'><h3>より優れたインフルエンザワクチンが登場するかもしれない：エピトープターゲティングがどのように防御を拡大できるか</h3><div class='summary'>対象となる特定のインフルエンザ株は年によって異なるため、医師は毎年インフルエンザの予防接種を受けることを推奨しています。しかし、より多くの負担から身を守りながら、ショットをより効果的にできたらどうなるでしょうか?ミズーリ大学医学部の研究者たちは、これの実現に一歩近づいています。免疫系は、よく知られたウイルスの新種を認識すると、たとえその領域が変化していても、通常、最も「記憶している」部分に焦点を当てます。 「逐次インフルエンザワクチン接種におけるエピトープ全域の抗原変異が免疫優性を再プログラムし、免疫を拡大する」という論文が最近、Nature Communications 誌に掲載されました。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#00d2d322;border-color:#00d2d3;color:#00d2d3'>🦠 感染症・公衆衛生</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-flu-shot-epitope-widen.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='ffce3b0e2979bf2bef59b318755c52a9' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Preventive Medicine</span><span>2026-04-16 07:30</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'ffce3b0e2979bf2bef59b318755c52a9')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>What raises vaccination rates most? Access, community outreach and incentives lead the list</h3><div class='summary'>Extending vaccination opportunities, involving community members alongside health care professionals in communicating about vaccines, and providing financial incentives are among the most effective ways to increase vaccine uptake, finds an analysis of international trial evidence published by The BMJ.</div></div><div class='lang-pane lang-ja hidden'><h3>ワクチン接種率を最も高めるものは何ですか?アクセス、コミュニティへの支援、インセンティブがリストの上位を占めています</h3><div class='summary'>BMJが発表した国際臨床試験の証拠の分析によると、ワクチン接種の機会を拡大し、ワクチンについてのコミュニケーションに医療専門家とともに地域住民を巻き込み、金銭的インセンティブを提供することが、ワクチン摂取量を増やす最も効果的な方法の一つであることが判明した。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#00d2d322;border-color:#00d2d3;color:#00d2d3'>🦠 感染症・公衆衛生</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-vaccination-access-community-outreach-incentives.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='bf9346ee42e606550bbde096304cd67b' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Sleep Medicine</span><span>2026-04-16 04:00</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'bf9346ee42e606550bbde096304cd67b')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Waking at 3 am every night? Here&#x27;s what may be going on</h3><div class='summary'>It&#x27;s 3am. The room is dark, the house is silent, but your brain is suddenly wide awake. Many people find themselves waking at roughly the same time each night and start to wonder whether something is wrong with their sleep.</div></div><div class='lang-pane lang-ja hidden'><h3>毎晩午前3時に起きていますか？ここで何が起こっている可能性がありますか</h3><div class='summary'>午前3時です。部屋は暗く、家は静かですが、あなたの脳は突然目覚めます。多くの人は、毎晩ほぼ同じ時間に目が覚めて、自分の睡眠に何か問題があるのではないかと疑い始めます。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>😴 睡眠</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-night.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='018475eea07804b6e6334ceaaa0a5ec1' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Health &amp; Medicine</span><span>2026-04-13 23:02</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '018475eea07804b6e6334ceaaa0a5ec1')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>New toothpaste stops gum disease without killing good bacteria</h3><div class='summary'>Scientists have developed a new way to fight gum disease without wiping out the mouth’s helpful bacteria—a major shift from traditional treatments. Instead of killing everything, this targeted approach blocks only the harmful microbes that drive periodontitis, allowing beneficial bacteria to thrive and restore balance naturally.</div></div><div class='lang-pane lang-ja hidden'><h3>新しい歯磨き粉は善玉菌を殺さずに歯周病を阻止する</h3><div class='summary'>科学者たちは、口の中の有益な細菌を一掃することなく歯周病と戦う新しい方法を開発しました。これは従来の治療法からの大きな転換です。この標的を絞ったアプローチは、すべてを殺すのではなく、歯周炎を引き起こす有害な微生物のみをブロックし、有益な細菌が増殖してバランスを自然に回復できるようにします。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260413043141.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='44fd95c4ef0bdc4b784eb3b9fee0c379' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Nutrition</span><span>2026-04-13 11:34</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '44fd95c4ef0bdc4b784eb3b9fee0c379')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Stanford scientists discover “natural Ozempic” without side effects</h3><div class='summary'>A newly discovered molecule could reshape the future of weight loss treatments by mimicking the powerful appetite-suppressing effects of drugs like Ozempic — but without many of the unpleasant side effects. Identified using artificial intelligence, this tiny peptide, called BRP, appears to act directly on the brain’s appetite-control center, helping animals eat less and lose fat without nausea or muscle loss.</div></div><div class='lang-pane lang-ja hidden'><h3>スタンフォードの科学者が副作用のない「天然オゼンピック」を発見</h3><div class='summary'>新たに発見された分子は、オゼンピックのような薬の強力な食欲抑制効果を模倣することで、減量治療の未来を変える可能性があるが、不快な副作用はほとんどない。人工知能を使って特定されたBRPと呼ばれるこの小さなペプチドは、脳の食欲制御中枢に直接作用し、動物の食欲を減らし、吐き気や筋肉の減少を引き起こすことなく脂肪を減らすのに役立つようです。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260412221946.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='002f4384e00f824ae36f1e3ffd73e8b0' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Healthy Aging</span><span>2026-04-10 23:12</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '002f4384e00f824ae36f1e3ffd73e8b0')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Scientists say we’ve been treating Alzheimer’s all wrong</h3><div class='summary'>Alzheimer’s isn’t just one problem—it’s a tangled mix of biology, aging, and overall health. That’s why drugs targeting a single factor have fallen short, even as new treatments show modest benefits. Scientists are now pushing toward multi-pronged strategies, from gene editing to brain-cell rejuvenation and gut health interventions. The goal: stop treating Alzheimer’s as one disease and start tackling it as a complex system.</div></div><div class='lang-pane lang-ja hidden'><h3>科学者たちは、私たちのアルツハイマー病治療はまったく間違っていたと言う</h3><div class='summary'>アルツハイマー病は単なる 1 つの問題ではなく、生物学、老化、健康全体が複雑に絡み合った問題です。新しい治療法がわずかな効果を示しているにもかかわらず、単一の要因を標的とする薬では不十分なのがそのためです。科学者たちは現在、遺伝子編集から脳細胞の若返り、腸の健康への介入まで、多角的な戦略に取り組んでいます。目標は、アルツハイマー病を 1 つの病気として扱うのをやめ、複雑なシステムとして取り組み始めることです。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🍽️ 食事</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag tag-caution'>⚠ 注意</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260409101111.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='d6fd6d3a0148d905e68096e838aca60d' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Sleep Medicine</span><span>2026-04-10 10:40</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'd6fd6d3a0148d905e68096e838aca60d')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>A &#x27;wake-up call&#x27; from leading sleep scientists: Nighttime warming threatens the sleep of billions</h3><div class='summary'>As the world heats up, nights are warming faster than days where most people live—and this ambient heat affects how well and how long people sleep. A new article by eminent sleep scientists, including the presidents of the World Sleep Society and International Pediatric Sleep Association, suggests that warm nights are already degrading sleep for billions of people worldwide. The problem is poised to become significantly worse if this trend continues without further adaptation.</div></div><div class='lang-pane lang-ja hidden'><h3>一流の睡眠科学者からの「警鐘」：夜間の温暖化が何十億もの人々の睡眠を脅かしている</h3><div class='summary'>世界の温暖化に伴い、ほとんどの人が住んでいる日中よりも早く夜の方が暖かくなり、この周囲の熱が人々の睡眠の質や睡眠時間に影響を与えます。世界睡眠協会や国際小児睡眠協会の会長を含む著名な睡眠科学者による新しい論文は、暖かい夜がすでに世界中の何十億もの人々の睡眠を低下させていることを示唆しています。さらなる適応がなければこの傾向が続くと、問題は大幅に悪化する恐れがあります。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>😴 睡眠</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-caution'>⚠ 注意</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-scientists-nighttime-threatens-billions.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='f3e1baca268a2251e9f4324a5d44d5f9' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Nutrition</span><span>2026-04-09 15:57</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'f3e1baca268a2251e9f4324a5d44d5f9')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Scientists discover spice synergy that boosts anti-inflammation 100x</h3><div class='summary'>Chronic inflammation often works quietly in the background but can fuel serious diseases like diabetes, heart disease, and cancer. New research reveals that everyday plant compounds—like menthol from mint, cineole from eucalyptus, and capsaicin from chili peppers—can team up inside immune cells to dramatically boost their anti-inflammatory power. While individual compounds showed modest effects, certain combinations amplified results hundreds of times over by activating different cellular pathways at once.</div></div><div class='lang-pane lang-ja hidden'><h3>科学者たちは抗炎症作用を100倍高めるスパイスの相乗効果を発見</h3><div class='summary'>慢性炎症はバックグラウンドで静かに作用することが多いですが、糖尿病、心臓病、がんなどの深刻な病気を引き起こす可能性があります。新しい研究では、ミントのメントール、ユーカリのシネオール、唐辛子のカプサイシンなど、日常的に使用されている植物化合物が免疫細胞内で協力して、抗炎症力を劇的に高めることができることが明らかになりました。個々の化合物は中程度の効果を示しましたが、特定の組み合わせでは、さまざまな細胞経路を一度に活性化することにより、結果が何百倍も増幅されました。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260408225950.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='f2e24c7bcd9fcb69f1305be0be74e679' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Sleep Medicine</span><span>2026-04-08 23:40</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'f2e24c7bcd9fcb69f1305be0be74e679')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Lab-grown pineal gland organoids produce melatonin, offering a new sleep model</h3><div class='summary'>Organoids are miniature, simplified versions of an organ. Over the past two decades, scientists have developed them for the gut, lung, liver, mammary gland, brain, and more. Now, researchers at Yale School of Medicine (YSM) have organoid-ized the pineal gland, a small structure in the brain that regulates sleep patterns through its production of the hormone melatonin.</div></div><div class='lang-pane lang-ja hidden'><h3>研究室で成長させた松果体オルガノイドがメラトニンを生成し、新しい睡眠モデルを提供</h3><div class='summary'>オルガノイドは、臓器を簡略化した小型版です。過去 20 年にわたり、科学者たちは腸、肺、肝臓、乳腺、脳などのためにそれらを開発してきました。今回、エール大学医学部（YSM）の研究者らは、ホルモンのメラトニンの生成を通じて睡眠パターンを調節する脳内の小さな構造である松果体をオルガノイド化した。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>😴 睡眠</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-lab-grown-pineal-gland-organoids.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='61d4e2a61091d4a072bed28dc2d3b2ef' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Nutrition</span><span>2026-04-03 17:55</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '61d4e2a61091d4a072bed28dc2d3b2ef')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>This 5-day diet helped Crohn’s patients feel better fast</h3><div class='summary'>A new clinical trial suggests that what people eat could finally offer real relief for Crohn’s disease, a condition that has long lacked clear dietary guidance. Researchers found that a “fasting-mimicking diet” — involving just five days a month of very low-calorie, plant-based meals — led to noticeable improvements in symptoms for most participants. Even more striking, the diet didn’t just make patients feel better; it also reduced key biological markers of inflammation linked to the disease.</div></div><div class='lang-pane lang-ja hidden'><h3>この 5 日間の食事療法により、クローン病患者の体調はすぐに良くなりました</h3><div class='summary'>新しい臨床試験は、人々が食べるものによって、長い間明確な食事指導が欠如していたクローン病にようやく真の救済をもたらす可能性があることを示唆している。研究者らは、月にたった5日間、非常に低カロリーで植物ベースの食事を摂る「絶食模倣ダイエット」が、ほとんどの参加者の症状の顕著な改善につながったことを発見した。さらに驚くべきことに、この食事療法は患者の気分を良くするだけではありませんでした。また、この病気に関連する炎症の重要な生物学的マーカーも減少しました。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🍽️ 食事</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>📋 医療制度・行政</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260402042751.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='824216d98c2a5257bf36e99d61b3a518' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Sleep Medicine</span><span>2026-04-03 10:40</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '824216d98c2a5257bf36e99d61b3a518')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>How to enjoy Easter chocolate without wrecking your sleep</h3><div class='summary'>Easter is here and chocolate is everywhere—crowding shop shelves, piling up on desks, and likely already sitting in your pantry.</div></div><div class='lang-pane lang-ja hidden'><h3>睡眠を妨げずにイースターチョコレートを楽しむ方法</h3><div class='summary'>イースターが到来し、チョコレートはいたるところにあふれています。お店の棚は混雑し、机の上には山積みになり、すでに食料庫に眠っているかもしれません。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>😴 睡眠</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-enjoy-easter-chocolate.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='67e72b9cf0ecafabed63b0bf4e615f4a' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Sleep Medicine</span><span>2026-04-02 02:20</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '67e72b9cf0ecafabed63b0bf4e615f4a')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>The body&#x27;s internal clock can be determined from a hair sample</h3><div class='summary'>A research team at Charité–Universitätsmedizin Berlin has developed a test that can determine a person&#x27;s chronotype based on their hair roots. It is intended to lay the foundation for circadian medicine—that is, medicine that is more closely aligned with the human body&#x27;s internal clock. Applied to approximately 4,000 people, the new method also reveals that women and men differ slightly in their biological rhythms, and that lifestyle has a greater influence than previously assumed. The results have now been published in the journal Proceedings of the National Academy of Sciences.</div></div><div class='lang-pane lang-ja hidden'><h3>体内時計は毛髪サンプルから特定できる</h3><div class='summary'>ベルリン慈善大学の研究チームは、毛根に基づいて人のクロノタイプを判定できる検査を開発した。これは概日医学、つまり人体の体内時計とより密接に連携した医学の基礎を築くことを目的としています。この新しい方法を約4,000人に適用したところ、女性と男性では生体リズムがわずかに異なり、ライフスタイルがこれまで考えられていたよりも大きな影響を与えていることも明らかになった。この結果は現在、雑誌『米国科学アカデミー紀要』に掲載されている。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-body-internal-clock-hair-sample.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='b154428c5a42cad5aae64b875c701a89' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Sleep Medicine</span><span>2026-04-01 05:20</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'b154428c5a42cad5aae64b875c701a89')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Exploding head syndrome: The surprisingly common condition with a terrifying name</h3><div class='summary'>Have you ever been drifting off to sleep when suddenly you hear what sounds like a gunshot, a door slamming, or an explosion inside your head? You jolt awake, heart pounding, sit upright in bed, but the room is silent.</div></div><div class='lang-pane lang-ja hidden'><h3>頭爆発症候群: 恐ろしい名前を持つ、驚くほど一般的な症状</h3><div class='summary'>眠りに落ちたとき、突然頭の中で銃声、ドアが閉まる音、爆発音のような音が聞こえたことがありますか?あなたはドクドクと目覚め、心臓が高鳴り、ベッドに背筋を伸ばして座っていますが、部屋は沈黙しています。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>😴 睡眠</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-03-syndrome-common-condition.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='376736a0fbd822fe5ab1b50d8d12ac97' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Sleep Medicine</span><span>2026-03-30 02:00</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '376736a0fbd822fe5ab1b50d8d12ac97')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Subtle brainwave patterns detected during sleep EEG can help predict dementia risk</h3><div class='summary'>Our date of birth doesn&#x27;t always match the age of our brain. How old our brain really is depends on our biological age, shaped by the wear and tear our cells experience over time. Genetics, environmental factors, and lifestyle choices all play a role in shaping how young or old our body&#x27;s components are. A biological age higher than your actual chronological age can signal an increased risk of age-related diseases and health problems.</div></div><div class='lang-pane lang-ja hidden'><h3>睡眠EEG中に検出される微妙な脳波パターンは認知症リスクの予測に役立つ可能性がある</h3><div class='summary'>私たちの生年月日は脳の年齢と必ずしも一致しません。私たちの脳の実際の年齢は、時間の経過とともに細胞が受ける磨耗によって形成される生物学的年齢によって決まります。遺伝学、環境要因、ライフスタイルの選択はすべて、私たちの体の構成要素がどの程度若いか古いかを形成するのに役割を果たします。実際の暦年齢よりも生物学的年齢が高い場合は、加齢に関連した病気や健康上の問題のリスクが増加していることを示している可能性があります。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>😴 睡眠</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag tag-caution'>⚠ 注意</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-03-subtle-brainwave-patterns-eeg-dementia.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='5f4cb9e4da31c12e1ce499b04d612599' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Sleep Medicine</span><span>2026-03-29 01:30</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '5f4cb9e4da31c12e1ce499b04d612599')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Do you love sleeping with your pet? Science reveals there&#x27;s a tricky trade‑off</h3><div class='summary'>For some pet guardians, their pets are present in their lives from the moment they wake up to the moment they go to bed. This happens because cats, dogs and other companion animals are increasingly perceived as family members. I&#x27;m not talking about the distant cousin, for example, but the ones who really take part in our everyday lives.</div></div><div class='lang-pane lang-ja hidden'><h3>ペットと一緒に寝るのは好きですか？科学は、難しいトレードオフがあることを明らかにしました</h3><div class='summary'>ペットの保護者の中には、朝起きた瞬間から寝る瞬間まで、ペットが生活の中に存在している人もいます。これは、猫、犬、その他の伴侶動物が家族の一員として認識されることが増えているために起こります。たとえば、私は遠いいとこについて話しているのではなく、私たちの日常生活に実際に参加している人々について話しています。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>😴 睡眠</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-03-pet-science-reveals-tricky-tradeoff.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article></div>
+  <div class='summary no-results hidden'>条件に一致する記事がありません。</div>
+</section>
+</div><footer>Health / Medical + — Generated at 2026-04-19 09:08</footer>
+<script>
+function safeStorageGet(key) {
+  try { return window.localStorage ? localStorage.getItem(key) : null; } catch (e) { return null; }
+}
+function safeStorageSet(key, value) {
+  try { if (window.localStorage) localStorage.setItem(key, value); } catch (e) {}
+}
+function setPageLang(lang) {
+  document.querySelectorAll('.page-lang-btn').forEach(function(btn){ btn.classList.remove('active'); });
+  var enBtn = document.getElementById('btnPageEN');
+  var jaBtn = document.getElementById('btnPageJA');
+  if(lang === 'ja') {
+    if(jaBtn) jaBtn.classList.add('active');
+    if(enBtn) enBtn.classList.remove('active');
+  } else {
+    if(enBtn) enBtn.classList.add('active');
+    if(jaBtn) jaBtn.classList.remove('active');
+  }
+  document.querySelectorAll('.item-card, .mini-item').forEach(function(block){
+    var enPane = block.querySelector('.lang-en');
+    var jaPane = block.querySelector('.lang-ja');
+    if(!enPane || !jaPane) return;
+    var cardEnBtn = block.querySelector('.card-lang-btn[data-lang="en"]');
+    var cardJaBtn = block.querySelector('.card-lang-btn[data-lang="ja"]');
+    if(lang === 'ja') {
+      enPane.classList.add('hidden');
+      jaPane.classList.remove('hidden');
+      if(cardJaBtn) cardJaBtn.classList.add('active');
+      if(cardEnBtn) cardEnBtn.classList.remove('active');
+    } else {
+      enPane.classList.remove('hidden');
+      jaPane.classList.add('hidden');
+      if(cardEnBtn) cardEnBtn.classList.add('active');
+      if(cardJaBtn) cardJaBtn.classList.remove('active');
+    }
+  });
+}
+function switchCardLang(btn, lang) {
+  var card = btn.closest('.item-card');
+  if (!card) return;
+  card.querySelectorAll('.card-lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var enPane = card.querySelector('.lang-en');
+  var jaPane = card.querySelector('.lang-ja');
+  if (lang === 'ja') { if(enPane) enPane.classList.add('hidden'); if(jaPane) jaPane.classList.remove('hidden'); }
+  else { if(enPane) enPane.classList.remove('hidden'); if(jaPane) jaPane.classList.add('hidden'); }
+  if(btn.blur) btn.blur();
+}
+function markRead(btn, id) {
+  safeStorageSet('health_medical_plus_read_' + id, '1');
+  var card = btn.closest('.item-card');
+  if (card) card.classList.add('is-read');
+  if (btn) {
+    btn.textContent = '既読済み';
+    btn.classList.add('active');
+    if(btn.blur) btn.blur();
+  }
+}
+function getVisibleCount(scope, selector) {
+  var root = scope || document;
+  return Array.prototype.filter.call(root.querySelectorAll(selector), function(el) {
+    return el.style.display !== 'none';
+  }).length;
+}
+function refreshVisibleCounts() {
+  document.querySelectorAll('.js-visible-count').forEach(function(el){
+    var selector = el.dataset.target || '.item-card';
+    var section = el.closest('section') || document;
+    el.textContent = getVisibleCount(section, selector) + '件';
+  });
+  document.querySelectorAll('section').forEach(function(sec){
+    var empty = sec.querySelector('.no-results');
+    if(!empty) return;
+    var visibleCards = getVisibleCount(sec, '.item-card');
+    empty.classList.toggle('hidden', visibleCards > 0);
+  });
+}
+function syncFilterButtons() {
+  document.querySelectorAll('.flt-region').forEach(function(btn){
+    btn.classList.toggle('active', (btn.dataset.region || 'all') === window.__healthRegion);
+  });
+  document.querySelectorAll('.flt-score').forEach(function(btn){
+    btn.classList.toggle('active', (btn.dataset.score || 'all') === window.__healthScore);
+  });
+}
+function applyHealthFilters() {
+  var region = window.__healthRegion || 'all';
+  var score = window.__healthScore || 'all';
+  var search = (window.__healthSearch || '').toLowerCase();
+  document.querySelectorAll('.item-card').forEach(function(card){
+    var show = true;
+    if(region !== 'all' && (card.dataset.region || '') !== region) show = false;
+    if(score !== 'all' && parseInt(card.dataset.score || '1', 10) < parseInt(score, 10)) show = false;
+    if(search && (card.textContent || '').toLowerCase().indexOf(search) === -1) show = false;
+    card.style.display = show ? '' : 'none';
+  });
+  document.querySelectorAll('.mini-item[data-region]').forEach(function(item){
+    var show = true;
+    if(region !== 'all' && (item.dataset.region || '') !== region) show = false;
+    if(search && (item.textContent || '').toLowerCase().indexOf(search) === -1) show = false;
+    item.style.display = show ? '' : 'none';
+  });
+  syncFilterButtons();
+  refreshVisibleCounts();
+}
+function setRegionFilter(region, btn) {
+  window.__healthRegion = region || 'all';
+  applyHealthFilters();
+  if(btn && btn.blur) btn.blur();
+}
+function setScoreFilter(score, btn) {
+  window.__healthScore = score || 'all';
+  applyHealthFilters();
+  if(btn && btn.blur) btn.blur();
+}
+function setSearchFilter(value) {
+  window.__healthSearch = value || '';
+  applyHealthFilters();
+}
+(function(){
+  document.querySelectorAll('.item-card').forEach(function(card){
+    var id = card.dataset.cardid;
+    if(safeStorageGet('health_medical_plus_read_' + id) === '1') {
+      card.classList.add('is-read');
+      var btn = card.querySelector('.read-btn');
+      if (btn) {
+        btn.textContent = '既読済み';
+        btn.classList.add('active');
+      }
+    }
+  });
+  setPageLang('en');
+  var activeRegion = document.querySelector('.flt-region.active');
+  var activeScore = document.querySelector('.flt-score.active');
+  var sb = document.getElementById('searchBox');
+  window.__healthRegion = activeRegion ? (activeRegion.dataset.region || 'all') : 'all';
+  window.__healthScore = activeScore ? (activeScore.dataset.score || 'all') : 'all';
+  window.__healthSearch = sb ? (sb.value || '') : '';
+  refreshVisibleCounts();
+  applyHealthFilters();
+})();
+</script>

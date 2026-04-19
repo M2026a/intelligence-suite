@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Health / Medical +</title>
+<style>
+:root{--bg:#08111e;--panel:#101a2a;--panel2:#0c1523;--line:#1f2b40;--text:#eef4ff;--muted:#93a4bf;--accent:#4ea1ff;--accent2:#15314f}
+*{box-sizing:border-box}html,body{margin:0;padding:0;background:linear-gradient(180deg,#08111e 0%,#0c1627 100%);color:var(--text);font-family:Inter,'Hiragino Sans','Yu Gothic UI',sans-serif}
+a{color:inherit;text-decoration:none}body{padding-top:0}
+.wrap,.main{width:min(1280px,94vw);margin:0 auto}
+header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:18px 0 12px}
+.title h1{margin:0;font-size:28px;line-height:1.2}.sub{margin-top:6px;color:var(--muted);font-size:13px}
+.nav{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0 12px}.nav a{padding:10px 14px;border-radius:10px;background:var(--panel2);border:1px solid var(--line);font-size:14px;font-weight:700}.nav a.active{background:var(--accent2);border-color:var(--accent);color:#eef6ff}.filters-panel{margin-bottom:18px}
+.page-lang-btn,.card-lang-btn,.read-btn,.flt-btn,.open-btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer}
+.page-lang-btn.active,.card-lang-btn.active,.flt-btn.active{background:var(--accent2);border-color:var(--accent)}
+.right-controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:18px}
+.main > .panel:first-child{position:static}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:0}
+.filter-label{font-size:12px;color:var(--muted);font-weight:700}
+.search{min-width:240px;background:#0b1320;border:1px solid var(--line);color:var(--text);padding:9px 12px;border-radius:10px}
+.main-grid,.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;align-items:stretch}
+.grid.list{grid-template-columns:1fr}
+.card,.mini-item,.category-panel{min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
+.card.score-5{border-left:4px solid #ffd700}
+.card.score-4{border-left:4px solid #4ea1ff}
+.card.is-read{opacity:1}
+.card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;min-width:0;flex-wrap:wrap}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;font-size:11px;color:var(--muted);min-width:0;overflow-wrap:anywhere;word-break:break-word}
+.lang-badge,.tag{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700}
+.lang-badge.ja{background:#14375d;border-color:#4ea1ff}
+.lang-badge.en{background:#24301f;border-color:#15c39a}
+.tag-new{background:#17391e;border-color:#15c39a;color:#93ffd8}.tag-hot{background:#14375d;border-color:#4ea1ff}.tag-caution{background:#3f1b1d;border-color:#ff7b7b}.tag-neutral{background:#1d2635;border-color:#4b5b78}
+.tags{display:flex;gap:6px;flex-wrap:wrap;min-width:0;overflow-wrap:anywhere;word-break:break-word}.lang-pane{display:flex;flex-direction:column;gap:10px;min-width:0}.summary{font-size:13px;line-height:1.7;color:#d6e0f0;overflow-wrap:anywhere;word-break:break-word;display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden;min-height:8.2em}.hidden{display:none!important}
+.card h3{margin:0;font-size:17px;line-height:1.45;overflow-wrap:anywhere;word-break:break-word;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-height:4.35em}.open-btn{margin-top:auto;display:inline-flex;justify-content:center;background:var(--accent2);border-color:var(--accent);max-width:100%;white-space:normal;text-align:center}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 12px;min-width:0;flex-wrap:wrap}.section-head h2{margin:0;font-size:20px;overflow-wrap:anywhere;word-break:break-word}.count-badge{color:var(--muted);font-size:12px;overflow-wrap:anywhere;word-break:break-word}
+.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:0}
+.category-grid.single{grid-template-columns:repeat(3,minmax(0,1fr))}
+.category-panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}.mini-list{display:grid;gap:8px}.mini-item{padding:10px;border-radius:12px;background:#0c1422;border:1px solid #1d2a40}.mini-item a{font-size:13px;line-height:1.5}.mini-meta{font-size:11px;color:var(--muted);margin-top:4px}
+footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size:12px}
+@media(max-width:980px){.category-grid.single{grid-template-columns:1fr}}
+@media(max-width:760px){body{padding-top:0}.top{flex-direction:column}.title h1{font-size:24px}.right-controls{justify-content:flex-start}.search{min-width:0;width:100%}.nav{padding-bottom:8px}.nav a{font-size:13px;padding:9px 12px}.grid,.main-grid,.category-grid{grid-template-columns:1fr}.card,.category-panel,.mini-item{width:100%;max-width:100%}.card-top,.card-meta,.tags,.section-head{width:100%}.card h3{font-size:16px;line-height:1.4}.summary{font-size:13px;line-height:1.65}.open-btn{width:100%}}
+</style>
+</head>
+<body>
+<header>
+<div class='wrap'>
+  <div class='top'>
+    <div class='title'>
+      <h1>🩺 Health / Medical + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 健康・医療情報</span></h1>
+      <div class='sub'>更新日時：2026-04-19 09:08</div>
+    </div>
+    <div class='right-controls'>
+      <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
+      <button class='page-lang-btn' id='btnPageJA' onclick="setPageLang('ja')">🇯🇵 日本語表示</button>
+    </div>
+  </div>
+  <nav class='nav'><a href="index.html" class="">🏠 メイン</a><a href="health.html" class="">🩺 健康</a><a href="medical.html" class="">🏥 医療</a><a href="research.html" class="">🧬 研究</a><a href="prevention_longevity.html" class="">🧓 予防 / 長寿</a><a href="public_info.html" class="">🏛 公的情報</a><a href="analysis.html" class="active">📊 分析</a></nav>
+</div>
+</header>
+<div class='main'>
+<section class='panel'>
+  <div class='section-head'><h2>📊 分析サマリー</h2><span class='count-badge'>174件 / 更新:2026-04-19 09:08</span></div>
+  <div class='category-grid'><section class='category-panel'><div class='section-head'><h2>カテゴリ別件数</h2></div><div class='mini-list'><div class='mini-item'><div style='font-weight:700'>🩺 健康</div><div class='mini-meta'>69件</div></div><div class='mini-item'><div style='font-weight:700'>🏥 医療</div><div class='mini-meta'>70件</div></div><div class='mini-item'><div style='font-weight:700'>🧬 研究</div><div class='mini-meta'>16件</div></div><div class='mini-item'><div style='font-weight:700'>🧓 予防 / 長寿</div><div class='mini-meta'>7件</div></div><div class='mini-item'><div style='font-weight:700'>🏛 公的情報</div><div class='mini-meta'>18件</div></div></div></section><section class='category-panel'><div class='section-head'><h2>地域別件数</h2></div><div class='mini-list'><div class='mini-item'><div style='font-weight:700'>🇯🇵 国内</div><div class='mini-meta'>20件</div></div><div class='mini-item'><div style='font-weight:700'>🌐 海外</div><div class='mini-meta'>154件</div></div></div></section><section class='category-panel'><div class='section-head'><h2>カテゴリ×地域件数</h2></div><div class='mini-list'><div class='mini-item'><div style='font-weight:700'>🩺 健康</div><div class='mini-meta'>国内 1件 / 海外 68件</div></div><div class='mini-item'><div style='font-weight:700'>🏥 医療</div><div class='mini-meta'>国内 5件 / 海外 65件</div></div><div class='mini-item'><div style='font-weight:700'>🧬 研究</div><div class='mini-meta'>国内 2件 / 海外 14件</div></div><div class='mini-item'><div style='font-weight:700'>🧓 予防 / 長寿</div><div class='mini-meta'>国内 0件 / 海外 7件</div></div><div class='mini-item'><div style='font-weight:700'>🏛 公的情報</div><div class='mini-meta'>国内 18件 / 海外 0件</div></div></div></section><section class='category-panel'><div class='section-head'><h2>トピック件数</h2></div><div class='mini-list'><div class='mini-item'><div style='font-weight:700'>研究成果</div><div class='mini-meta'>142件</div></div><div class='mini-item'><div style='font-weight:700'>疾患・治療</div><div class='mini-meta'>74件</div></div><div class='mini-item'><div style='font-weight:700'>食事</div><div class='mini-meta'>35件</div></div><div class='mini-item'><div style='font-weight:700'>認知機能</div><div class='mini-meta'>33件</div></div><div class='mini-item'><div style='font-weight:700'>睡眠</div><div class='mini-meta'>20件</div></div><div class='mini-item'><div style='font-weight:700'>医療制度・行政</div><div class='mini-meta'>15件</div></div><div class='mini-item'><div style='font-weight:700'>感染症・公衆衛生</div><div class='mini-meta'>13件</div></div><div class='mini-item'><div style='font-weight:700'>運動</div><div class='mini-meta'>6件</div></div></div></section><section class='category-panel'><div class='section-head'><h2>直近7日 活発なカテゴリ</h2></div><div class='mini-list'><div class='mini-item'><div style='font-weight:700'>🏥 医療</div><div class='mini-meta'>直近7日 45件</div></div><div class='mini-item'><div style='font-weight:700'>🩺 健康</div><div class='mini-meta'>直近7日 37件</div></div><div class='mini-item'><div style='font-weight:700'>🏛 公的情報</div><div class='mini-meta'>直近7日 18件</div></div><div class='mini-item'><div style='font-weight:700'>🧬 研究</div><div class='mini-meta'>直近7日 9件</div></div><div class='mini-item'><div style='font-weight:700'>🧓 予防 / 長寿</div><div class='mini-meta'>直近7日 4件</div></div></div></section><section class='category-panel'><div class='section-head'><h2>0件カテゴリ</h2></div><div class='mini-list'><div class='mini-item'><div style='font-weight:700'>🧓 予防 / 長寿</div><div class='mini-meta'>国内0件</div></div><div class='mini-item'><div style='font-weight:700'>🏛 公的情報</div><div class='mini-meta'>海外0件</div></div></div></section></div>
+</section>
+</div><footer>Health / Medical + — Generated at 2026-04-19 09:08</footer>
+<script>
+function safeStorageGet(key) {
+  try { return window.localStorage ? localStorage.getItem(key) : null; } catch (e) { return null; }
+}
+function safeStorageSet(key, value) {
+  try { if (window.localStorage) localStorage.setItem(key, value); } catch (e) {}
+}
+function setPageLang(lang) {
+  document.querySelectorAll('.page-lang-btn').forEach(function(btn){ btn.classList.remove('active'); });
+  var enBtn = document.getElementById('btnPageEN');
+  var jaBtn = document.getElementById('btnPageJA');
+  if(lang === 'ja') {
+    if(jaBtn) jaBtn.classList.add('active');
+    if(enBtn) enBtn.classList.remove('active');
+  } else {
+    if(enBtn) enBtn.classList.add('active');
+    if(jaBtn) jaBtn.classList.remove('active');
+  }
+  document.querySelectorAll('.item-card, .mini-item').forEach(function(block){
+    var enPane = block.querySelector('.lang-en');
+    var jaPane = block.querySelector('.lang-ja');
+    if(!enPane || !jaPane) return;
+    var cardEnBtn = block.querySelector('.card-lang-btn[data-lang="en"]');
+    var cardJaBtn = block.querySelector('.card-lang-btn[data-lang="ja"]');
+    if(lang === 'ja') {
+      enPane.classList.add('hidden');
+      jaPane.classList.remove('hidden');
+      if(cardJaBtn) cardJaBtn.classList.add('active');
+      if(cardEnBtn) cardEnBtn.classList.remove('active');
+    } else {
+      enPane.classList.remove('hidden');
+      jaPane.classList.add('hidden');
+      if(cardEnBtn) cardEnBtn.classList.add('active');
+      if(cardJaBtn) cardJaBtn.classList.remove('active');
+    }
+  });
+}
+function switchCardLang(btn, lang) {
+  var card = btn.closest('.item-card');
+  if (!card) return;
+  card.querySelectorAll('.card-lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var enPane = card.querySelector('.lang-en');
+  var jaPane = card.querySelector('.lang-ja');
+  if (lang === 'ja') { if(enPane) enPane.classList.add('hidden'); if(jaPane) jaPane.classList.remove('hidden'); }
+  else { if(enPane) enPane.classList.remove('hidden'); if(jaPane) jaPane.classList.add('hidden'); }
+  if(btn.blur) btn.blur();
+}
+function markRead(btn, id) {
+  safeStorageSet('health_medical_plus_read_' + id, '1');
+  var card = btn.closest('.item-card');
+  if (card) card.classList.add('is-read');
+  if (btn) {
+    btn.textContent = '既読済み';
+    btn.classList.add('active');
+    if(btn.blur) btn.blur();
+  }
+}
+function getVisibleCount(scope, selector) {
+  var root = scope || document;
+  return Array.prototype.filter.call(root.querySelectorAll(selector), function(el) {
+    return el.style.display !== 'none';
+  }).length;
+}
+function refreshVisibleCounts() {
+  document.querySelectorAll('.js-visible-count').forEach(function(el){
+    var selector = el.dataset.target || '.item-card';
+    var section = el.closest('section') || document;
+    el.textContent = getVisibleCount(section, selector) + '件';
+  });
+  document.querySelectorAll('section').forEach(function(sec){
+    var empty = sec.querySelector('.no-results');
+    if(!empty) return;
+    var visibleCards = getVisibleCount(sec, '.item-card');
+    empty.classList.toggle('hidden', visibleCards > 0);
+  });
+}
+function syncFilterButtons() {
+  document.querySelectorAll('.flt-region').forEach(function(btn){
+    btn.classList.toggle('active', (btn.dataset.region || 'all') === window.__healthRegion);
+  });
+  document.querySelectorAll('.flt-score').forEach(function(btn){
+    btn.classList.toggle('active', (btn.dataset.score || 'all') === window.__healthScore);
+  });
+}
+function applyHealthFilters() {
+  var region = window.__healthRegion || 'all';
+  var score = window.__healthScore || 'all';
+  var search = (window.__healthSearch || '').toLowerCase();
+  document.querySelectorAll('.item-card').forEach(function(card){
+    var show = true;
+    if(region !== 'all' && (card.dataset.region || '') !== region) show = false;
+    if(score !== 'all' && parseInt(card.dataset.score || '1', 10) < parseInt(score, 10)) show = false;
+    if(search && (card.textContent || '').toLowerCase().indexOf(search) === -1) show = false;
+    card.style.display = show ? '' : 'none';
+  });
+  document.querySelectorAll('.mini-item[data-region]').forEach(function(item){
+    var show = true;
+    if(region !== 'all' && (item.dataset.region || '') !== region) show = false;
+    if(search && (item.textContent || '').toLowerCase().indexOf(search) === -1) show = false;
+    item.style.display = show ? '' : 'none';
+  });
+  syncFilterButtons();
+  refreshVisibleCounts();
+}
+function setRegionFilter(region, btn) {
+  window.__healthRegion = region || 'all';
+  applyHealthFilters();
+  if(btn && btn.blur) btn.blur();
+}
+function setScoreFilter(score, btn) {
+  window.__healthScore = score || 'all';
+  applyHealthFilters();
+  if(btn && btn.blur) btn.blur();
+}
+function setSearchFilter(value) {
+  window.__healthSearch = value || '';
+  applyHealthFilters();
+}
+(function(){
+  document.querySelectorAll('.item-card').forEach(function(card){
+    var id = card.dataset.cardid;
+    if(safeStorageGet('health_medical_plus_read_' + id) === '1') {
+      card.classList.add('is-read');
+      var btn = card.querySelector('.read-btn');
+      if (btn) {
+        btn.textContent = '既読済み';
+        btn.classList.add('active');
+      }
+    }
+  });
+  setPageLang('en');
+  var activeRegion = document.querySelector('.flt-region.active');
+  var activeScore = document.querySelector('.flt-score.active');
+  var sb = document.getElementById('searchBox');
+  window.__healthRegion = activeRegion ? (activeRegion.dataset.region || 'all') : 'all';
+  window.__healthScore = activeScore ? (activeScore.dataset.score || 'all') : 'all';
+  window.__healthSearch = sb ? (sb.value || '') : '';
+  refreshVisibleCounts();
+  applyHealthFilters();
+})();
+</script>

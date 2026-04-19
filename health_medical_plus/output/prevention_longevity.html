@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Health / Medical +</title>
+<style>
+:root{--bg:#08111e;--panel:#101a2a;--panel2:#0c1523;--line:#1f2b40;--text:#eef4ff;--muted:#93a4bf;--accent:#4ea1ff;--accent2:#15314f}
+*{box-sizing:border-box}html,body{margin:0;padding:0;background:linear-gradient(180deg,#08111e 0%,#0c1627 100%);color:var(--text);font-family:Inter,'Hiragino Sans','Yu Gothic UI',sans-serif}
+a{color:inherit;text-decoration:none}body{padding-top:0}
+.wrap,.main{width:min(1280px,94vw);margin:0 auto}
+header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:18px 0 12px}
+.title h1{margin:0;font-size:28px;line-height:1.2}.sub{margin-top:6px;color:var(--muted);font-size:13px}
+.nav{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0 12px}.nav a{padding:10px 14px;border-radius:10px;background:var(--panel2);border:1px solid var(--line);font-size:14px;font-weight:700}.nav a.active{background:var(--accent2);border-color:var(--accent);color:#eef6ff}.filters-panel{margin-bottom:18px}
+.page-lang-btn,.card-lang-btn,.read-btn,.flt-btn,.open-btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer}
+.page-lang-btn.active,.card-lang-btn.active,.flt-btn.active{background:var(--accent2);border-color:var(--accent)}
+.right-controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:18px}
+.main > .panel:first-child{position:static}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:0}
+.filter-label{font-size:12px;color:var(--muted);font-weight:700}
+.search{min-width:240px;background:#0b1320;border:1px solid var(--line);color:var(--text);padding:9px 12px;border-radius:10px}
+.main-grid,.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;align-items:stretch}
+.grid.list{grid-template-columns:1fr}
+.card,.mini-item,.category-panel{min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
+.card.score-5{border-left:4px solid #ffd700}
+.card.score-4{border-left:4px solid #4ea1ff}
+.card.is-read{opacity:1}
+.card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;min-width:0;flex-wrap:wrap}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;font-size:11px;color:var(--muted);min-width:0;overflow-wrap:anywhere;word-break:break-word}
+.lang-badge,.tag{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700}
+.lang-badge.ja{background:#14375d;border-color:#4ea1ff}
+.lang-badge.en{background:#24301f;border-color:#15c39a}
+.tag-new{background:#17391e;border-color:#15c39a;color:#93ffd8}.tag-hot{background:#14375d;border-color:#4ea1ff}.tag-caution{background:#3f1b1d;border-color:#ff7b7b}.tag-neutral{background:#1d2635;border-color:#4b5b78}
+.tags{display:flex;gap:6px;flex-wrap:wrap;min-width:0;overflow-wrap:anywhere;word-break:break-word}.lang-pane{display:flex;flex-direction:column;gap:10px;min-width:0}.summary{font-size:13px;line-height:1.7;color:#d6e0f0;overflow-wrap:anywhere;word-break:break-word;display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden;min-height:8.2em}.hidden{display:none!important}
+.card h3{margin:0;font-size:17px;line-height:1.45;overflow-wrap:anywhere;word-break:break-word;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-height:4.35em}.open-btn{margin-top:auto;display:inline-flex;justify-content:center;background:var(--accent2);border-color:var(--accent);max-width:100%;white-space:normal;text-align:center}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 12px;min-width:0;flex-wrap:wrap}.section-head h2{margin:0;font-size:20px;overflow-wrap:anywhere;word-break:break-word}.count-badge{color:var(--muted);font-size:12px;overflow-wrap:anywhere;word-break:break-word}
+.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:0}
+.category-grid.single{grid-template-columns:repeat(3,minmax(0,1fr))}
+.category-panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}.mini-list{display:grid;gap:8px}.mini-item{padding:10px;border-radius:12px;background:#0c1422;border:1px solid #1d2a40}.mini-item a{font-size:13px;line-height:1.5}.mini-meta{font-size:11px;color:var(--muted);margin-top:4px}
+footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size:12px}
+@media(max-width:980px){.category-grid.single{grid-template-columns:1fr}}
+@media(max-width:760px){body{padding-top:0}.top{flex-direction:column}.title h1{font-size:24px}.right-controls{justify-content:flex-start}.search{min-width:0;width:100%}.nav{padding-bottom:8px}.nav a{font-size:13px;padding:9px 12px}.grid,.main-grid,.category-grid{grid-template-columns:1fr}.card,.category-panel,.mini-item{width:100%;max-width:100%}.card-top,.card-meta,.tags,.section-head{width:100%}.card h3{font-size:16px;line-height:1.4}.summary{font-size:13px;line-height:1.65}.open-btn{width:100%}}
+</style>
+</head>
+<body>
+<header>
+<div class='wrap'>
+  <div class='top'>
+    <div class='title'>
+      <h1>🩺 Health / Medical + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 健康・医療情報</span></h1>
+      <div class='sub'>更新日時：2026-04-19 09:08</div>
+    </div>
+    <div class='right-controls'>
+      <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
+      <button class='page-lang-btn' id='btnPageJA' onclick="setPageLang('ja')">🇯🇵 日本語表示</button>
+    </div>
+  </div>
+  <nav class='nav'><a href="index.html" class="">🏠 メイン</a><a href="health.html" class="">🩺 健康</a><a href="medical.html" class="">🏥 医療</a><a href="research.html" class="">🧬 研究</a><a href="prevention_longevity.html" class="active">🧓 予防 / 長寿</a><a href="public_info.html" class="">🏛 公的情報</a><a href="analysis.html" class="">📊 分析</a></nav>
+</div>
+</header>
+<div class='main'>
+
+<div class='panel'>
+  <div class='filters'>
+    <span class='filter-label'>地域:</span>
+    <button type='button' class='flt-btn flt-region active' data-region='all' onclick="setRegionFilter('all', this)">🌍 全部</button>
+    <button type='button' class='flt-btn flt-region ' data-region='JP' onclick="setRegionFilter('JP', this)">🇯🇵 国内</button>
+    <button type='button' class='flt-btn flt-region ' data-region='Global' onclick="setRegionFilter('Global', this)">🌐 海外</button>
+    <span class='filter-label'>スコア:</span>
+    <button type='button' class='flt-btn flt-score active' data-score='all' onclick="setScoreFilter('all', this)">全部</button>
+    <button type='button' class='flt-btn flt-score' data-score='4' onclick="setScoreFilter('4', this)">★4以上</button>
+    <button type='button' class='flt-btn flt-score' data-score='3' onclick="setScoreFilter('3', this)">★3以上</button>
+    <input id='searchBox' class='search' placeholder='タイトル・本文を検索...' oninput="setSearchFilter(this.value)">
+  </div>
+</div>
+
+<section class='panel'>
+  <div class='section-head'><h2>🧓 予防 / 長寿 今日の注目 3件</h2><span class='count-badge js-visible-count' data-target='.js-mini-scope .mini-item'>0件</span></div>
+  <div class='category-grid single js-mini-scope'><div class='mini-item' data-region='Global'><a href='https://medicalxpress.com/news/2026-04-greater-optimism-dementia-years.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>Greater optimism tied to 15% lower dementia risk over 14 years</span><span class='lang-ja hidden'>楽観的になると認知症リスクが 14 年間で 15% 低下する</span></a><div class='mini-meta'>🌐 海外 / ★2 / 2026-04-17 02:00</div></div><div class='mini-item' data-region='Global'><a href='https://medicalxpress.com/news/2026-04-loneliness-highest-older-australians-partners.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>Loneliness highest among older Australians without partners or children</span><span class='lang-ja hidden'>パートナーや子供のいない高齢のオーストラリア人で最も孤独感が高い</span></a><div class='mini-meta'>🌐 海外 / ★2 / 2026-04-17 01:40</div></div><div class='mini-item' data-region='Global'><a href='https://www.sciencedaily.com/releases/2026/04/260407073850.htm' target='_blank' rel='noopener noreferrer'><span class='lang-en'>Your vitamin D levels in midlife could shape your brain decades later</span><span class='lang-ja hidden'>中年期のビタミンDレベルが数十年後の脳を形作る可能性がある</span></a><div class='mini-meta'>🌐 海外 / ★2 / 2026-04-07 20:47</div></div></div>
+</section>
+<section>
+  <div class='section-head'><h2>📰 最新記事</h2><span class='count-badge js-visible-count' data-target='.item-card'>0件</span></div>
+  <div class='grid'>
+<article class='card item-card ' data-cardid='8f86270471612dc7490a8bd1d43c1fe1' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Healthy Aging</span><span>2026-04-17 02:00</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '8f86270471612dc7490a8bd1d43c1fe1')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Greater optimism tied to 15% lower dementia risk over 14 years</h3><div class='summary'>The more optimistic a person is, the lower their risk of developing dementia, according to a new study led by Harvard T.H. Chan School of Public Health. The research, published April 8 in the Journal of the American Geriatrics Society, was led by Säde Stenlund, research associate in the Department of Social and Behavioral Sciences. Other Harvard Chan co-authors included Hayami Koga, Peter James, Justin Farmer, Colleen McGrath, and Laura Kubzansky.</div></div><div class='lang-pane lang-ja hidden'><h3>楽観的になると認知症リスクが 14 年間で 15% 低下する</h3><div class='summary'>ハーバード大学TH.チャン公衆衛生大学院。この研究は、4月8日にJournal of the American Geriatrics Societyに発表され、社会行動科学部の研究員であるSäde Stenlund氏が主導しました。ハーバード・チャンの他の共著者には、古賀速水、ピーター・ジェームス、ジャスティン・ファーマー、コリーン・マクグラス、ローラ・クブザンスキーが含まれる。</div></div>
+  <div class='tags'><span class='tag' style='background:#ffb84d22;border-color:#ffb84d;color:#ffb84d'>🧓 予防 / 長寿</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag' style='background:#00d2d322;border-color:#00d2d3;color:#00d2d3'>🦠 感染症・公衆衛生</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-greater-optimism-dementia-years.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='6adfe0e1a344d6d88783cda72f543e5c' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Healthy Aging</span><span>2026-04-17 01:40</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '6adfe0e1a344d6d88783cda72f543e5c')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Loneliness highest among older Australians without partners or children</h3><div class='summary'>As Australia&#x27;s population ages and loneliness becomes a growing public health concern, new research from Monash University has found that older Australians without close family ties face significantly higher rates of loneliness. The study, &quot;Family ties, kinlessness, and loneliness among older Australians,&quot; published in the Archives of Gerontology and Geriatrics, is one of the first studies to examine how different family configurations shape loneliness across both community and long-term care settings.</div></div><div class='lang-pane lang-ja hidden'><h3>パートナーや子供のいない高齢のオーストラリア人で最も孤独感が高い</h3><div class='summary'>オーストラリアの人口高齢化が進み、孤独が公衆衛生上の懸念を増大させる中、モナシュ大学の新たな研究で、家族とのつながりのない高齢のオーストラリア人は、孤独率が著しく高いことが判明した。老年学・老年医学アーカイブスに掲載されたこの研究「オーストラリアの高齢者の家族の絆、親族の無さ、孤独」は、家族構成の違いが地域社会と長期介護の両方の現場で孤独感をどのように形成するかを調査した最初の研究の1つである。</div></div>
+  <div class='tags'><span class='tag' style='background:#ffb84d22;border-color:#ffb84d;color:#ffb84d'>🧓 予防 / 長寿</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#00d2d322;border-color:#00d2d3;color:#00d2d3'>🦠 感染症・公衆衛生</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-loneliness-highest-older-australians-partners.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='7bea8b550ff64738e2c9adc0bc23a930' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Healthy Aging</span><span>2026-04-07 20:47</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '7bea8b550ff64738e2c9adc0bc23a930')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Your vitamin D levels in midlife could shape your brain decades later</h3><div class='summary'>Vitamin D levels in midlife may play a bigger role in long-term brain health than previously thought. In a study following nearly 800 people over 16 years, those with higher vitamin D levels in their 30s and 40s had lower levels of tau protein later on, a key marker linked to dementia.</div></div><div class='lang-pane lang-ja hidden'><h3>中年期のビタミンDレベルが数十年後の脳を形作る可能性がある</h3><div class='summary'>中年期のビタミンDレベルは、これまで考えられていたよりも長期的な脳の健康に大きな役割を果たしている可能性があります。約800人を16年間にわたって追跡した研究では、30代と40代でビタミンDレベルが高かった人は、その後、認知症に関連する重要なマーカーであるタウタンパク質のレベルが低かった。</div></div>
+  <div class='tags'><span class='tag' style='background:#ffb84d22;border-color:#ffb84d;color:#ffb84d'>🧓 予防 / 長寿</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260407073850.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='639c3f24875997716608ca9d5f3df3ea' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Healthy Aging</span><span>2026-03-30 14:07</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '639c3f24875997716608ca9d5f3df3ea')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Just a few minutes of effort could lower your risk of 8 major diseases</h3><div class='summary'>Just a few minutes of getting out of breath each day could dramatically cut your risk of major diseases—including heart disease, dementia, and diabetes. A large study of nearly 100,000 people found that it’s not just how much you move, but how intensely you move that matters. Short bursts of vigorous activity—like rushing for a bus or climbing stairs quickly—were linked to striking reductions in disease risk, especially for inflammatory conditions and brain health.</div></div><div class='lang-pane lang-ja hidden'><h3>ほんの数分の努力で 8 つの主要な病気のリスクを下げることができます</h3><div class='summary'>毎日数分間息切れするだけで、心臓病、認知症、糖尿病などの主要な病気のリスクを劇的に減らすことができます。約10万人を対象とした大規模な研究では、どれだけ動くかだけではなく、どれだけ激しく動くかが重要であることがわかりました。バスに急ぐ、階段を素早く登るなど、短時間の激しい活動は、特に炎症状態や脳の健康に関する病気のリスクの大幅な減少につながりました。</div></div>
+  <div class='tags'><span class='tag' style='background:#ffb84d22;border-color:#ffb84d;color:#ffb84d'>🧓 予防 / 長寿</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/03/260330001126.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='b37f38e122793b472c840a5d7abe6873' data-region='Global' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Healthy Aging</span><span>2026-03-18 19:47</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'b37f38e122793b472c840a5d7abe6873')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Your daily coffee may be protecting your brain, 43-year study finds</h3><div class='summary'>Your morning coffee or tea could be quietly supporting your brain health. A long-term study found that moderate consumption of caffeinated coffee or tea was linked to an 18% lower risk of dementia and better cognitive performance over time. The benefits appeared strongest at 2–3 cups of coffee or 1–2 cups of tea daily—and even held true for people genetically predisposed to dementia.</div></div><div class='lang-pane lang-ja hidden'><h3>毎日のコーヒーが脳を守っている可能性があることが43年間の研究で判明</h3><div class='summary'>朝のコーヒーや紅茶があなたの脳の健康を静かにサポートしている可能性があります。長期的な研究では、カフェイン入りのコーヒーまたは紅茶を適度に摂取すると、認知症のリスクが 18% 低下し、長期にわたって認知能力が向上することがわかりました。この効果は、毎日コーヒー 2 ～ 3 杯または紅茶 1 ～ 2 杯の場合に最も強く現れ、遺伝的に認知症になりやすい人にも当てはまります。</div></div>
+  <div class='tags'><span class='tag' style='background:#ffb84d22;border-color:#ffb84d;color:#ffb84d'>🧓 予防 / 長寿</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/03/260318033138.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='65cb47fcf4b4de7a4050645ad27d2d57' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Healthy Aging</span><span>2026-04-17 04:40</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '65cb47fcf4b4de7a4050645ad27d2d57')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Loneliness can affect your memory, but that doesn&#x27;t mean it leads to dementia</h3><div class='summary'>Loneliness is something most of us will experience at some point. It is a normal emotion, not a character flaw. But it is also something that can quietly affect how we think and remember, and researchers have long debated whether it might even raise the risk of dementia.</div></div><div class='lang-pane lang-ja hidden'><h3>孤独は記憶力に影響を与える可能性がありますが、だからといって認知症につながるわけではありません</h3><div class='summary'>孤独は私たちのほとんどが一度は経験するものです。それは正常な感情であり、性格上の欠陥ではありません。しかし、それは私たちの考え方や記憶に静かに影響を与える可能性があるものでもあり、研究者たちはそれが認知症のリスクを高める可能性さえあるのかどうかについて長い間議論してきました。</div></div>
+  <div class='tags'><span class='tag' style='background:#ffb84d22;border-color:#ffb84d;color:#ffb84d'>🧓 予防 / 長寿</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-loneliness-affect-memory-doesnt-dementia.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='b067897ab3fc54ccde2849e82db9eb84' data-region='Global' data-score='1'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Healthy Aging</span><span>2026-04-17 01:20</span></div>
+    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'b067897ab3fc54ccde2849e82db9eb84')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Strong social health linked to better brain function and resilience</h3><div class='summary'>A major international research collaboration led by UNSW Sydney&#x27;s Center for Healthy Brain Aging (CHeBA), in partnership with an international consortium of six leading universities, has found that social health—how individuals interact with and are supported by their social environments—plays a critical role in maintaining cognitive function and building the brain&#x27;s resilience against dementia.</div></div><div class='lang-pane lang-ja hidden'><h3>強力な社会的健康は脳の機能と回復力の向上につながります</h3><div class='summary'>UNSWシドニーの健康脳老化センター（CHeBA）が主導し、主要6大学からなる国際コンソーシアムと提携した大規模な国際研究共同研究では、社会的健康（個人がどのように社会環境と関わり、社会環境に支えられているか）が、認知機能を維持し、認知症に対する脳の回復力を構築する上で重要な役割を果たしていることが判明した。</div></div>
+  <div class='tags'><span class='tag' style='background:#ffb84d22;border-color:#ffb84d;color:#ffb84d'>🧓 予防 / 長寿</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
+  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-strong-social-health-linked-brain.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article></div>
+  <div class='summary no-results hidden'>条件に一致する記事がありません。</div>
+</section>
+</div><footer>Health / Medical + — Generated at 2026-04-19 09:08</footer>
+<script>
+function safeStorageGet(key) {
+  try { return window.localStorage ? localStorage.getItem(key) : null; } catch (e) { return null; }
+}
+function safeStorageSet(key, value) {
+  try { if (window.localStorage) localStorage.setItem(key, value); } catch (e) {}
+}
+function setPageLang(lang) {
+  document.querySelectorAll('.page-lang-btn').forEach(function(btn){ btn.classList.remove('active'); });
+  var enBtn = document.getElementById('btnPageEN');
+  var jaBtn = document.getElementById('btnPageJA');
+  if(lang === 'ja') {
+    if(jaBtn) jaBtn.classList.add('active');
+    if(enBtn) enBtn.classList.remove('active');
+  } else {
+    if(enBtn) enBtn.classList.add('active');
+    if(jaBtn) jaBtn.classList.remove('active');
+  }
+  document.querySelectorAll('.item-card, .mini-item').forEach(function(block){
+    var enPane = block.querySelector('.lang-en');
+    var jaPane = block.querySelector('.lang-ja');
+    if(!enPane || !jaPane) return;
+    var cardEnBtn = block.querySelector('.card-lang-btn[data-lang="en"]');
+    var cardJaBtn = block.querySelector('.card-lang-btn[data-lang="ja"]');
+    if(lang === 'ja') {
+      enPane.classList.add('hidden');
+      jaPane.classList.remove('hidden');
+      if(cardJaBtn) cardJaBtn.classList.add('active');
+      if(cardEnBtn) cardEnBtn.classList.remove('active');
+    } else {
+      enPane.classList.remove('hidden');
+      jaPane.classList.add('hidden');
+      if(cardEnBtn) cardEnBtn.classList.add('active');
+      if(cardJaBtn) cardJaBtn.classList.remove('active');
+    }
+  });
+}
+function switchCardLang(btn, lang) {
+  var card = btn.closest('.item-card');
+  if (!card) return;
+  card.querySelectorAll('.card-lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var enPane = card.querySelector('.lang-en');
+  var jaPane = card.querySelector('.lang-ja');
+  if (lang === 'ja') { if(enPane) enPane.classList.add('hidden'); if(jaPane) jaPane.classList.remove('hidden'); }
+  else { if(enPane) enPane.classList.remove('hidden'); if(jaPane) jaPane.classList.add('hidden'); }
+  if(btn.blur) btn.blur();
+}
+function markRead(btn, id) {
+  safeStorageSet('health_medical_plus_read_' + id, '1');
+  var card = btn.closest('.item-card');
+  if (card) card.classList.add('is-read');
+  if (btn) {
+    btn.textContent = '既読済み';
+    btn.classList.add('active');
+    if(btn.blur) btn.blur();
+  }
+}
+function getVisibleCount(scope, selector) {
+  var root = scope || document;
+  return Array.prototype.filter.call(root.querySelectorAll(selector), function(el) {
+    return el.style.display !== 'none';
+  }).length;
+}
+function refreshVisibleCounts() {
+  document.querySelectorAll('.js-visible-count').forEach(function(el){
+    var selector = el.dataset.target || '.item-card';
+    var section = el.closest('section') || document;
+    el.textContent = getVisibleCount(section, selector) + '件';
+  });
+  document.querySelectorAll('section').forEach(function(sec){
+    var empty = sec.querySelector('.no-results');
+    if(!empty) return;
+    var visibleCards = getVisibleCount(sec, '.item-card');
+    empty.classList.toggle('hidden', visibleCards > 0);
+  });
+}
+function syncFilterButtons() {
+  document.querySelectorAll('.flt-region').forEach(function(btn){
+    btn.classList.toggle('active', (btn.dataset.region || 'all') === window.__healthRegion);
+  });
+  document.querySelectorAll('.flt-score').forEach(function(btn){
+    btn.classList.toggle('active', (btn.dataset.score || 'all') === window.__healthScore);
+  });
+}
+function applyHealthFilters() {
+  var region = window.__healthRegion || 'all';
+  var score = window.__healthScore || 'all';
+  var search = (window.__healthSearch || '').toLowerCase();
+  document.querySelectorAll('.item-card').forEach(function(card){
+    var show = true;
+    if(region !== 'all' && (card.dataset.region || '') !== region) show = false;
+    if(score !== 'all' && parseInt(card.dataset.score || '1', 10) < parseInt(score, 10)) show = false;
+    if(search && (card.textContent || '').toLowerCase().indexOf(search) === -1) show = false;
+    card.style.display = show ? '' : 'none';
+  });
+  document.querySelectorAll('.mini-item[data-region]').forEach(function(item){
+    var show = true;
+    if(region !== 'all' && (item.dataset.region || '') !== region) show = false;
+    if(search && (item.textContent || '').toLowerCase().indexOf(search) === -1) show = false;
+    item.style.display = show ? '' : 'none';
+  });
+  syncFilterButtons();
+  refreshVisibleCounts();
+}
+function setRegionFilter(region, btn) {
+  window.__healthRegion = region || 'all';
+  applyHealthFilters();
+  if(btn && btn.blur) btn.blur();
+}
+function setScoreFilter(score, btn) {
+  window.__healthScore = score || 'all';
+  applyHealthFilters();
+  if(btn && btn.blur) btn.blur();
+}
+function setSearchFilter(value) {
+  window.__healthSearch = value || '';
+  applyHealthFilters();
+}
+(function(){
+  document.querySelectorAll('.item-card').forEach(function(card){
+    var id = card.dataset.cardid;
+    if(safeStorageGet('health_medical_plus_read_' + id) === '1') {
+      card.classList.add('is-read');
+      var btn = card.querySelector('.read-btn');
+      if (btn) {
+        btn.textContent = '既読済み';
+        btn.classList.add('active');
+      }
+    }
+  });
+  setPageLang('en');
+  var activeRegion = document.querySelector('.flt-region.active');
+  var activeScore = document.querySelector('.flt-score.active');
+  var sb = document.getElementById('searchBox');
+  window.__healthRegion = activeRegion ? (activeRegion.dataset.region || 'all') : 'all';
+  window.__healthScore = activeScore ? (activeScore.dataset.score || 'all') : 'all';
+  window.__healthSearch = sb ? (sb.value || '') : '';
+  refreshVisibleCounts();
+  applyHealthFilters();
+})();
+</script>

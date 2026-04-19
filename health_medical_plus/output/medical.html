@@ -8,7 +8,7 @@
 :root{--bg:#08111e;--panel:#101a2a;--panel2:#0c1523;--line:#1f2b40;--text:#eef4ff;--muted:#93a4bf;--accent:#4ea1ff;--accent2:#15314f}
 *{box-sizing:border-box}html,body{margin:0;padding:0;background:linear-gradient(180deg,#08111e 0%,#0c1627 100%);color:var(--text);font-family:Inter,'Hiragino Sans','Yu Gothic UI',sans-serif}
 a{color:inherit;text-decoration:none}body{padding-top:0}
-.wrap,.main{width:min(1280px,94vw);margin:0 auto}
+.wrap,.main{width:min(1480px,94vw);margin:0 auto}
 header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:18px 0 12px}
 .title h1{margin:0;font-size:28px;line-height:1.2}.sub{margin-top:6px;color:var(--muted);font-size:13px}
@@ -40,7 +40,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-fi
 .category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:0}
 .category-grid.single{grid-template-columns:repeat(3,minmax(0,1fr))}
 .category-panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}.mini-list{display:grid;gap:8px}.mini-item{padding:10px;border-radius:12px;background:#0c1422;border:1px solid #1d2a40}.mini-item a{font-size:13px;line-height:1.5}.mini-meta{font-size:11px;color:var(--muted);margin-top:4px}
-footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size:12px}
+footer{width:min(1480px,94vw);margin:20px auto 36px;color:var(--muted);font-size:12px}
 @media(max-width:980px){.category-grid.single{grid-template-columns:1fr}}
 @media(max-width:760px){body{padding-top:0}.top{flex-direction:column}.title h1{font-size:24px}.right-controls{justify-content:flex-start}.search{min-width:0;width:100%}.nav{padding-bottom:8px}.nav a{font-size:13px;padding:9px 12px}.grid,.main-grid,.category-grid{grid-template-columns:1fr}.card,.category-panel,.mini-item{width:100%;max-width:100%}.card-top,.card-meta,.tags,.section-head{width:100%}.card h3{font-size:16px;line-height:1.4}.summary{font-size:13px;line-height:1.65}.open-btn{width:100%}}
 </style>
@@ -51,7 +51,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='top'>
     <div class='title'>
       <h1>🩺 Health / Medical + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 健康・医療情報</span></h1>
-      <div class='sub'>更新日時：2026-04-19 09:52</div>
+      <div class='sub'>更新日時：2026-04-19 13:36</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -165,15 +165,6 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
   <a class='open-btn' href='https://medicalxpress.com/news/2026-04-global-trial-treatment-triple-negative.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card score-4' data-cardid='25cfe040ba8e0adafdf91c832965a74d' data-region='Global' data-score='4'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Preventive Medicine</span><span>2026-04-16 11:00</span></div>
-    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '25cfe040ba8e0adafdf91c832965a74d')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Poor hygiene and food handling practices increase the risk of bacterial outbreaks in Brazilian households</h3><div class='summary'>A significant number of Brazilians engage in improper food hygiene and handling practices at home. Examples include washing meat in the kitchen sink and failing to properly wash vegetables. These findings were revealed by a nationwide survey that examined food hygiene, handling, and storage habits in 5,000 households of various income levels across all regions of Brazil.</div></div><div class='lang-pane lang-ja hidden'><h3>ブラジルの家庭では、劣悪な衛生状態と食品の取り扱いにより細菌が発生するリスクが増加しています</h3><div class='summary'>かなりの数のブラジル人が家庭で不適切な食品衛生や取り扱い行為を行っています。例としては、キッチンのシンクで肉を洗ったり、野菜を適切に洗わなかったりすることが挙げられます。これらの調査結果は、ブラジル全地域のさまざまな所得レベルの5,000世帯を対象に、食品の衛生、取り扱い、保管習慣を調査した全国調査で明らかになった。</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🍽️ 食事</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
-  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-poor-hygiene-food-bacterial-outbreaks.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
 <article class='card item-card score-4' data-cardid='b67be600b4e9e37e50ef91525ef455a3' data-region='Global' data-score='4'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Health &amp; Medicine</span><span>2026-04-15 16:26</span></div>
@@ -218,15 +209,6 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='lang-pane lang-en'><h3>Family-led firearm strategy goes &#x27;beyond the screen&#x27; to curb suicide risk</h3><div class='summary'>A new University of Michigan study, published in Injury Prevention, tested a method called the Family Safety Net in Alaska, which shifts suicide prevention away from individual screening and toward household action. This change, researchers say, could help reach people who are often missed by standard tools.</div></div><div class='lang-pane lang-ja hidden'><h3>自殺リスクを抑制するために家族主導の銃器戦略が「画面を超えて」進む</h3><div class='summary'>『Injury Prevention』誌に掲載されたミシガン大学の新しい研究では、自殺予防を個人のスクリーニングから家庭内の行動に移す、ファミリー・セーフティ・ネットと呼ばれる方法をアラスカ州でテストした。研究者らは、この変更は、標準ツールでは見逃しがちな人々にリーチするのに役立つ可能性があると述べている。</div></div>
   <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
   <a class='open-btn' href='https://medicalxpress.com/news/2026-04-family-firearm-strategy-screen-curb.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='858077589c26bfea6af532a1cab9cfd8' data-region='Global' data-score='2'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Preventive Medicine</span><span>2026-04-17 20:20</span></div>
-    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '858077589c26bfea6af532a1cab9cfd8')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-en'><h3>E-cigarette devices expose users to toxic metals, mouse study reveals</h3><div class='summary'>A study published in Analytical and Bioanalytical Chemistry by University of Technology Sydney (UTS) researchers showed that even short-term vaping at exposure levels below typical daily human use resulted in measurable accumulation of toxic metals in lung tissue—including lead, copper and nickel.</div></div><div class='lang-pane lang-ja hidden'><h3>電子タバコデバイスはユーザーを有毒金属にさらす、マウスの研究で判明</h3><div class='summary'>シドニー工科大学（UTS）の研究者らが『Analytical and Bioanalytical Chemistry』に発表した研究では、人間が日常的に使用する典型的な曝露レベルを下回る短期間の電子タバコの使用でも、肺組織に鉛、銅、ニッケルなどの有毒金属が測定可能な量で蓄積することが示された。</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
-  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-cigarette-devices-expose-users-toxic.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card ' data-cardid='f66b6d1b74a66463662a26da5c8f2d26' data-region='Global' data-score='2'>
   <div class='card-top'>
@@ -444,18 +426,9 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🍽️ 食事</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#00d2d322;border-color:#00d2d3;color:#00d2d3'>🦠 感染症・公衆衛生</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
   <a class='open-btn' href='https://medicalxpress.com/news/2026-04-mrna-cancer-vaccines-destroy-tumors.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card ' data-cardid='e017889c6e958a0cdc6517d4524ed263' data-region='Global' data-score='1'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Preventive Medicine</span><span>2026-04-19 00:00</span></div>
-    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, 'e017889c6e958a0cdc6517d4524ed263')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Why private gardens mattered so much during the first COVID-19 lockdown</h3><div class='summary'>A team of researchers led by the University of Aberdeen has found that private gardens played a vital role in supporting people&#x27;s well-being during the U.K.&#x27;s first COVID-19 lockdown, when access to public green spaces was significantly restricted.</div></div><div class='lang-pane lang-ja hidden'><h3>最初の新型コロナウイルス感染症によるロックダウンで個人の庭園がそれほど重要だった理由</h3><div class='summary'>アバディーン大学率いる研究チームは、英国初の新型コロナウイルス感染症によるロックダウン中、公共の緑地へのアクセスが大幅に制限されていた際に、民間の庭園が人々の幸福を支える上で重要な役割を果たしていたことを発見した。</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
-  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-private-gardens-covid-lockdown.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
 <article class='card item-card ' data-cardid='70f4c7ff53dd699d139b276398216c1e' data-region='Global' data-score='1'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Preventive Medicine</span><span>2026-04-18 06:40</span></div>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Healthy Living</span><span>2026-04-18 06:40</span></div>
     <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '70f4c7ff53dd699d139b276398216c1e')">既読</button></div>
   </div>
   <div class='lang-pane lang-en'><h3>Cutting calories to slow aging—without compromising health</h3><div class='summary'>Restricting calorie intake in species such as mice, rhesus monkeys, and fruit flies has been shown to extend their lifespans. In some cases, these animals not only live longer, but are also free of disease. But when pushed too far, calorie restriction can have negative impacts. Mice that undergo a 40% reduction in calorie intake, for example, are more susceptible to infections, less likely to reproduce, and experience stunted growth.</div></div><div class='lang-pane lang-ja hidden'><h3>健康を損なうことなく、カロリーをカットして老化を遅らせる</h3><div class='summary'>マウス、アカゲザル、ショウジョウバエなどの種のカロリー摂取量を制限すると、寿命が延びることが示されています。場合によっては、これらの動物は長生きするだけでなく、病気にならないこともあります。しかし、カロリー制限がやりすぎると、悪影響を及ぼす可能性があります。たとえば、カロリー摂取量が 40% 減少したマウスは、感染症にかかりやすくなり、繁殖する可能性が低くなり、成長が阻害されます。</div></div>
@@ -464,7 +437,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
 </article>
 <article class='card item-card ' data-cardid='613603281f4dcdb3d9afb2c29ba3f277' data-region='Global' data-score='1'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Cancer</span><span>2026-04-18 04:00</span></div>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Healthy Living</span><span>2026-04-18 04:00</span></div>
     <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '613603281f4dcdb3d9afb2c29ba3f277')">既読</button></div>
   </div>
   <div class='lang-pane lang-en'><h3>Healthy diets may expose younger non-smokers to lung cancer risk through pesticides</h3><div class='summary'>A diet rich in fruit, vegetables, and whole grains is generally recommended for better health and to lower the risk of cancer and other diseases. However, new research from USC Norris Comprehensive Cancer Center, part of Keck Medicine of USC, presented at the annual meeting of the American Association for Cancer Research suggests that this type of diet may put non-smoking Americans under the age of 50 at greater risk of developing lung cancer.</div></div><div class='lang-pane lang-ja hidden'><h3>健康的な食事は、若い非喫煙者を農薬による肺がんのリスクにさらす可能性がある</h3><div class='summary'>健康状態を改善し、がんやその他の病気のリスクを下げるために、果物、野菜、全粒穀物を豊富に含む食事が一般的に推奨されています。しかし、米国がん研究協会の年次総会で発表された、南カリフォルニア大学ケック医学の一部である合衆国ノリス総合がんセンターの新しい研究は、この種の食生活では、50歳未満の非喫煙者のアメリカ人が肺がんを発症するリスクが高まる可能性があることを示唆している。</div></div>
@@ -497,15 +470,6 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='lang-pane lang-en'><h3>Older mice may offer new insight into cancer and aging</h3><div class='summary'>Cancer risk increases with age and is often more aggressive and difficult to treat in older adults. However, fewer than 10% of mouse studies use aged animals, with most relying on mice roughly equivalent to humans in their early 20s. This discrepancy is one potential reason so many cancer drugs that show promise in preclinical models go on to fail in human trials.</div></div><div class='lang-pane lang-ja hidden'><h3>高齢のマウスはがんと老化について新たな洞察をもたらす可能性がある</h3><div class='summary'>がんのリスクは年齢とともに増加し、高齢者では攻撃性が高く、治療が困難なことがよくあります。しかし、高齢の動物を使用したマウス研究は 10% 未満で、ほとんどが 20 代前半の人間にほぼ相当するマウスに依存しています。この矛盾は、前臨床モデルで有望性を示した多くの抗がん剤が人体試験で失敗し続ける潜在的な理由の 1 つです。</div></div>
   <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
   <a class='open-btn' href='https://medicalxpress.com/news/2026-04-older-mice-insight-cancer-aging.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='688de1399e8a39c3785aab0594005e53' data-region='Global' data-score='1'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Medical Xpress Preventive Medicine</span><span>2026-04-18 01:00</span></div>
-    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '688de1399e8a39c3785aab0594005e53')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-en'><h3>New guidance says all average-risk females aged 50–74 should undergo biennial mammography screening</h3><div class='summary'>New guidance from the American College of Physicians (ACP) says all average-risk females ages 50 to 74 should receive biennial screening mammography for breast cancer. Females between the ages of 40 and 49 should discuss with their doctor their risk for breast cancer and the benefits and harms of screening.</div></div><div class='lang-pane lang-ja hidden'><h3>新しいガイダンスでは、50～74歳の平均リスクの女性はすべて隔年マンモグラフィ検査を受ける必要があるとしている</h3><div class='summary'>米国内科医協会（ACP）の新たな指針では、50歳から74歳までの平均リスクの女性はすべて乳がんのマンモグラフィ検査を隔年で受けるべきだとしている。 40 歳から 49 歳までの女性は、乳がんのリスクとスクリーニングの利点と害について医師と話し合う必要があります。</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
-  <a class='open-btn' href='https://medicalxpress.com/news/2026-04-guidance-average-females-aged-biennial.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card ' data-cardid='09b83ee20f39c7978cbbbd7e01493a1c' data-region='Global' data-score='1'>
   <div class='card-top'>
@@ -678,18 +642,9 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
   <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260414090114.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card ' data-cardid='018475eea07804b6e6334ceaaa0a5ec1' data-region='Global' data-score='1'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Health &amp; Medicine</span><span>2026-04-13 23:02</span></div>
-    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '018475eea07804b6e6334ceaaa0a5ec1')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-en'><h3>New toothpaste stops gum disease without killing good bacteria</h3><div class='summary'>Scientists have developed a new way to fight gum disease without wiping out the mouth’s helpful bacteria—a major shift from traditional treatments. Instead of killing everything, this targeted approach blocks only the harmful microbes that drive periodontitis, allowing beneficial bacteria to thrive and restore balance naturally.</div></div><div class='lang-pane lang-ja hidden'><h3>新しい歯磨き粉は善玉菌を殺さずに歯周病を阻止する</h3><div class='summary'>科学者たちは、口の中の有益な細菌を一掃することなく歯周病と戦う新しい方法を開発しました。これは従来の治療法からの大きな転換です。この標的を絞ったアプローチは、すべてを殺すのではなく、歯周炎を引き起こす有害な微生物のみをブロックし、有益な細菌が増殖してバランスを自然に回復できるようにします。</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
-  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260413043141.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
 <article class='card item-card ' data-cardid='44fd95c4ef0bdc4b784eb3b9fee0c379' data-region='Global' data-score='1'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Nutrition</span><span>2026-04-13 11:34</span></div>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Fitness</span><span>2026-04-13 11:34</span></div>
     <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '44fd95c4ef0bdc4b784eb3b9fee0c379')">既読</button></div>
   </div>
   <div class='lang-pane lang-en'><h3>Stanford scientists discover “natural Ozempic” without side effects</h3><div class='summary'>A newly discovered molecule could reshape the future of weight loss treatments by mimicking the powerful appetite-suppressing effects of drugs like Ozempic — but without many of the unpleasant side effects. Identified using artificial intelligence, this tiny peptide, called BRP, appears to act directly on the brain’s appetite-control center, helping animals eat less and lose fat without nausea or muscle loss.</div></div><div class='lang-pane lang-ja hidden'><h3>スタンフォードの科学者が副作用のない「天然オゼンピック」を発見</h3><div class='summary'>新たに発見された分子は、オゼンピックのような薬の強力な食欲抑制効果を模倣することで、減量治療の未来を変える可能性があるが、不快な副作用はほとんどない。人工知能を使って特定されたBRPと呼ばれるこの小さなペプチドは、脳の食欲制御中枢に直接作用し、動物の食欲を減らし、吐き気や筋肉の減少を引き起こすことなく脂肪を減らすのに役立つようです。</div></div>
@@ -731,15 +686,6 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='lang-pane lang-en'><h3>Lab-grown pineal gland organoids produce melatonin, offering a new sleep model</h3><div class='summary'>Organoids are miniature, simplified versions of an organ. Over the past two decades, scientists have developed them for the gut, lung, liver, mammary gland, brain, and more. Now, researchers at Yale School of Medicine (YSM) have organoid-ized the pineal gland, a small structure in the brain that regulates sleep patterns through its production of the hormone melatonin.</div></div><div class='lang-pane lang-ja hidden'><h3>研究室で成長させた松果体オルガノイドがメラトニンを生成し、新しい睡眠モデルを提供</h3><div class='summary'>オルガノイドは、臓器を簡略化した小型版です。過去 20 年にわたり、科学者たちは腸、肺、肝臓、乳腺、脳などのためにそれらを開発してきました。今回、エール大学医学部（YSM）の研究者らは、ホルモンのメラトニンの生成を通じて睡眠パターンを調節する脳内の小さな構造である松果体をオルガノイド化した。</div></div>
   <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>😴 睡眠</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#f78fb322;border-color:#f78fb3;color:#f78fb3'>🧠 認知機能</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
   <a class='open-btn' href='https://medicalxpress.com/news/2026-04-lab-grown-pineal-gland-organoids.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='61d4e2a61091d4a072bed28dc2d3b2ef' data-region='Global' data-score='1'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>ScienceDaily Nutrition</span><span>2026-04-03 17:55</span></div>
-    <div class='card-lang-toggle'><button class='card-lang-btn active' data-lang='en' onclick="switchCardLang(this, 'en')">EN</button><button class='card-lang-btn' data-lang='ja' onclick="switchCardLang(this, 'ja')">JA</button><button class='read-btn' onclick="markRead(this, '61d4e2a61091d4a072bed28dc2d3b2ef')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-en'><h3>This 5-day diet helped Crohn’s patients feel better fast</h3><div class='summary'>A new clinical trial suggests that what people eat could finally offer real relief for Crohn’s disease, a condition that has long lacked clear dietary guidance. Researchers found that a “fasting-mimicking diet” — involving just five days a month of very low-calorie, plant-based meals — led to noticeable improvements in symptoms for most participants. Even more striking, the diet didn’t just make patients feel better; it also reduced key biological markers of inflammation linked to the disease.</div></div><div class='lang-pane lang-ja hidden'><h3>この 5 日間の食事療法により、クローン病患者の体調はすぐに良くなりました</h3><div class='summary'>新しい臨床試験は、人々が食べるものによって、長い間明確な食事指導が欠如していたクローン病にようやく真の救済をもたらす可能性があることを示唆している。研究者らは、月にたった5日間、非常に低カロリーで植物ベースの食事を摂る「絶食模倣ダイエット」が、ほとんどの参加者の症状の顕著な改善につながったことを発見した。さらに驚くべきことに、この食事療法は患者の気分を良くするだけではありませんでした。また、この病気に関連する炎症の重要な生物学的マーカーも減少しました。</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏥 医療</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🍽️ 食事</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>💊 疾患・治療</span><span class='tag' style='background:#6c5ce722;border-color:#6c5ce7;color:#6c5ce7'>🔬 研究成果</span><span class='tag' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>📋 医療制度・行政</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
-  <a class='open-btn' href='https://www.sciencedaily.com/releases/2026/04/260402042751.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card ' data-cardid='824216d98c2a5257bf36e99d61b3a518' data-region='Global' data-score='1'>
   <div class='card-top'>
@@ -788,7 +734,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
 </article></div>
   <div class='summary no-results hidden'>条件に一致する記事がありません。</div>
 </section>
-</div><footer>Health / Medical + — Generated at 2026-04-19 09:52</footer>
+</div><footer>Health / Medical + — Generated at 2026-04-19 13:36</footer>
 <script>
 function safeStorageGet(key) {
   try { return window.localStorage ? localStorage.getItem(key) : null; } catch (e) { return null; }

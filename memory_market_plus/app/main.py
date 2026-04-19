@@ -905,7 +905,7 @@ def extract_article_text(url: str, allow_insecure_ssl_retry: bool = False) -> di
 
 def source_keywords(source: dict) -> list[str]:
     kws = [text_lower(k) for k in source.get("include_keywords", []) if str(k).strip()]
-    company = text_lower(source.get("company", ""))
+    company = text_lower(source.get("company") or "")
     if company:
         kws.append(company)
     return sorted(set(kws))
@@ -1143,7 +1143,7 @@ def fetch_source(source: dict, themes_cfg: dict) -> tuple[list[dict], bool]:
                     continue
                 if is_image_or_gallery_item(title, summary, link):
                     continue
-                items.append(source_item_from_parts(source, title, summary, link, pub_dt, article.get("text", "")))
+                items.append(source_item_from_parts(source, title, summary, link, pub_dt, article.get("text", "") if fetch_article else ""))
                 if len(items) >= article_limit:
                     break
             log(f"  ✓ {name}: {len(items)}件")

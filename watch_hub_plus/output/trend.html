@@ -34,7 +34,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-fi
 .lang-badge.ja{background:#14375d;border-color:#4ea1ff}
 .lang-badge.en{background:#24301f;border-color:#15c39a}
 .tag-new{background:#17391e;border-color:#15c39a;color:#93ffd8}.tag-hot{background:#14375d;border-color:#4ea1ff}.tag-caution{background:#3f1b1d;border-color:#ff7b7b}.tag-neutral{background:#1d2635;border-color:#4b5b78}
-.tags{display:flex;gap:6px;flex-wrap:wrap;min-width:0;overflow-wrap:anywhere;word-break:break-word}.summary{font-size:13px;line-height:1.7;color:#d6e0f0;overflow-wrap:anywhere;word-break:break-word}.hidden{display:none!important}
+.tags{display:flex;gap:6px;flex-wrap:wrap;min-width:0;overflow-wrap:anywhere;word-break:break-word}.summary{font-size:13px;line-height:1.7;color:#d6e0f0;overflow-wrap:anywhere;word-break:break-word;display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}.hidden{display:none!important}
 .card h3{margin:0;font-size:17px;line-height:1.45;overflow-wrap:anywhere;word-break:break-word}.open-btn{margin-top:auto;display:inline-flex;justify-content:center;background:var(--accent2);border-color:var(--accent);max-width:100%;white-space:normal;text-align:center}
 .section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 12px;min-width:0;flex-wrap:wrap}.section-head h2{margin:0;font-size:20px;overflow-wrap:anywhere;word-break:break-word}.count-badge{color:var(--muted);font-size:12px;overflow-wrap:anywhere;word-break:break-word}
 .category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:0}
@@ -51,7 +51,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='top'>
     <div class='title'>
       <h1>🎭 Watch Hub + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 映画・配信・アニメ・ゲーム・芸能</span></h1>
-      <div class='sub'>更新日時：2026-04-19 09:18</div>
+      <div class='sub'>更新日時：2026-04-19 09:28</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -463,15 +463,6 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
   <a class='open-btn' href='https://natalie.mu/eiga/news/668746' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card score-5' data-cardid='c5e3b220faae319051a9deb9a3769f07' data-region='JP' data-score='5' data-platform='other'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-18 12:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'c5e3b220faae319051a9deb9a3769f07')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>「マユリカのうなげろりん!!」イベントグッズ公開 中谷父の名言が両面アクキーに</h3><div class='summary'>5月1日（金）に東京・LINE CUBE SHIBUYAで開催されるイベント「マユリカのうなげろりん！！presents 日本の大学いきましょか～冨島桜でイギギギギ！やる気はあるけどやめときます～」のオリジナルグッズが発表された。</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
-  <a class='open-btn' href='https://natalie.mu/owarai/news/668821' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
 <article class='card item-card score-5' data-cardid='28e353fbfbbeea73b62e707412a767c8' data-region='JP' data-score='5' data-platform='other'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>4Gamer</span><span>2026-04-18 12:00</span></div>
@@ -489,6 +480,15 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='lang-pane lang-ja'><h3>結のほえほえゲーム演説：第263回「いにしえのヲタクが『ゆんゆん電波シンドローム』をプレイしたら魂にブッ刺さった話」</h3><div class='summary'>すべての楽曲が“電波ソング”で注目を集めるリズムゲーム「ゆんゆん電波シンドローム」。そんな本作の収録予定楽曲の一覧を見て，驚きと喜びで「おいおいおいおい！！！！」となった結さんが，収録楽曲を通して電波ソング愛を語ります。</div></div>
   <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>🎮 ゲーム</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
   <a class='open-btn' href='https://www.4gamer.net/games/326/G032635/20260417007/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='c5e3b220faae319051a9deb9a3769f07' data-region='JP' data-score='5' data-platform='other'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>natalie お笑い/芸能</span><span>2026-04-18 12:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'c5e3b220faae319051a9deb9a3769f07')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「マユリカのうなげろりん!!」イベントグッズ公開 中谷父の名言が両面アクキーに</h3><div class='summary'>5月1日（金）に東京・LINE CUBE SHIBUYAで開催されるイベント「マユリカのうなげろりん！！presents 日本の大学いきましょか～冨島桜でイギギギギ！やる気はあるけどやめときます～」のオリジナルグッズが発表された。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🎬 映画</span><span class='tag' style='background:#ff7bb022;border-color:#ff7bb0;color:#ff7bb0'>⭐ 芸能</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://natalie.mu/owarai/news/668821' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card score-5' data-cardid='cb07cc2f1af4c2a02f189d0e53a517cc' data-region='JP' data-score='5' data-platform='other'>
   <div class='card-top'>
@@ -778,6 +778,15 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag'>Prime</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
   <a class='open-btn' href='https://news.google.com/rss/articles/CBMiWkFVX3lxTFBjdE5WMUdwWWJDcTJCVEZpdlN4SnFrLTl2Ny1Wa3FyZU1IV3ZuT2VKeEw2ZUt4RzdfZnpwWkFUVzQ3Tld4WTFEaFdjSGlJRUNsOG9aWlBCSng2Zw?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
+<article class='card item-card score-4' data-cardid='983108a3f1d9c54b204a8260678cbd69' data-region='JP' data-score='4' data-platform='prime'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Prime Video新作</span><span>2026-03-31 16:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'983108a3f1d9c54b204a8260678cbd69')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>画像・写真 | 【PrimeVideo】2026年4月の新着作品：『ザ・ボーイズ』完結や新作アニメなど充実ラインアップ 9枚目 - オリコンニュース</h3><div class='summary'>画像・写真 | 【PrimeVideo】2026年4月の新着作品：『ザ・ボーイズ』完結や新作アニメなど充実ラインアップ 9枚目 オリコンニュース</div></div>
+  <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag'>Prime</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiWkFVX3lxTFBYTXZ2MGdHMTh4ajlfWWFKeU94STVuU2F1eTNCcTRVWnRLTERvcTZqZzA1NHV1UVgxZjlNQ2ZKekNCVXp1X3hHSVd5OFRWSVdrdFVlZjIydEhfdw?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
 <article class='card item-card score-4' data-cardid='20ba1789751d3aacd236dc2dc6cd16ea' data-region='JP' data-score='4' data-platform='prime'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Prime Video新作</span><span>2026-04-01 16:00</span></div>
@@ -787,14 +796,14 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#00a8e122;border-color:#00a8e1;color:#00a8e1'>📦 Prime</span><span class='tag'>Prime</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
   <a class='open-btn' href='https://news.google.com/rss/articles/CBMiggFBVV95cUxNZlZEVHhjdjliVTlNbHgtc2NEY0lCUXNMRGhqeGEzbFhlaEIyTG8tWk85Q1RGalhxZW5KY1ZxcE5ZS1Z4WkIzaHFNMEtrOE56bTg3YWxUVk5xR1NRcUJvRlg0UEFNZTRTSjdEal9ETWZ5Uk5oX2RmWlA2cUd4cmN0dVRR?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card score-4' data-cardid='afec1d4eebd62c15bb9fd41e3df7a85f' data-region='JP' data-score='4' data-platform='disney'>
+<article class='card item-card score-4' data-cardid='7eb2b15b312aa43c2801c943feb68882' data-region='JP' data-score='4' data-platform='netflix'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Disney+新作</span><span>2026-04-03 16:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'afec1d4eebd62c15bb9fd41e3df7a85f')">既読</button></div>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Netflix新作</span><span>2026-04-06 16:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'7eb2b15b312aa43c2801c943feb68882')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>ディズニープラスで見れるおすすめ映画・ドラマ50選！ジャンル別紹介 - オリコン顧客満足度ランキング</h3><div class='summary'>ディズニープラスで見れるおすすめ映画・ドラマ50選！ジャンル別紹介 オリコン顧客満足度ランキング</div></div>
-  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#8cc7ff22;border-color:#8cc7ff;color:#8cc7ff'>✨ Disney+</span><span class='tag'>Disney+</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
-  <a class='open-btn' href='https://news.google.com/rss/articles/CBMihAFBVV95cUxNamZrbjBvcVdRWFRCWmtvLTAwbDVhVXpZajNNSVFPM1dnX29WSkdPYndYZGE5UU9kZkl2bzU4OFpUeUJjRHdnNEwwYTVrZnZKdm5USjBKN3A1aVFPUGlMM1BoaVBPSTY5Ui10T0hLcEFmYXo1X3FBM1Q5b0JkbDhmOHdIZ08?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-ja'><h3>Netflixで配信予定の新作・人気韓国ドラマ ラインナップ【2026年最新】 - dramanavi.net</h3><div class='summary'>Netflixで配信予定の新作・人気韓国ドラマ ラインナップ【2026年最新】 dramanavi.net</div></div>
+  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 Netflix</span><span class='tag'>Netflix</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiSEFVX3lxTE4zelBTYm5vSUxUTGMxZFVrdGVnaGdncGRydEJXR0VUeWdDWHJoS09Xc3J0VXY2QnVjWm93Ry12MFdPcG00THYtSA?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card score-4' data-cardid='c1df92e4df89c7199ba07900deed7454' data-region='JP' data-score='4' data-platform='disney'>
   <div class='card-top'>
@@ -804,15 +813,6 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='lang-pane lang-ja'><h3>映画『ズートピア２』が4月15日(水)よりディズニープラスで見放題独占配信開始！｜Disney+（ディズニープラス）公式 - ディズニープラス</h3><div class='summary'>映画『ズートピア２』が4月15日(水)よりディズニープラスで見放題独占配信開始！｜Disney+（ディズニープラス）公式 ディズニープラス</div></div>
   <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#8cc7ff22;border-color:#8cc7ff;color:#8cc7ff'>✨ Disney+</span><span class='tag'>Disney+</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
   <a class='open-btn' href='https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBkSzNFYlhKOVRmb1lQc3JZTktiTDFBV0h5VHhHbDNickV1aWt3TzFOMnVMU3MyRWExUi1DeFhMRmQ5YjVsOXp3REpUUk5BUXM2aF9QMW1qSHpPR3M0WlZHMS1NdmsxWE0?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card score-4' data-cardid='7eb2b15b312aa43c2801c943feb68882' data-region='JP' data-score='4' data-platform='netflix'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Google News - Netflix新作</span><span>2026-04-06 16:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'7eb2b15b312aa43c2801c943feb68882')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>Netflixで配信予定の新作・人気韓国ドラマ ラインナップ【2026年最新】 - dramanavi.net</h3><div class='summary'>Netflixで配信予定の新作・人気韓国ドラマ ラインナップ【2026年最新】 dramanavi.net</div></div>
-  <div class='tags'><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 配信</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag' style='background:#e5091422;border-color:#e50914;color:#e50914'>📺 Netflix</span><span class='tag'>Netflix</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
-  <a class='open-btn' href='https://news.google.com/rss/articles/CBMiSEFVX3lxTE4zelBTYm5vSUxUTGMxZFVrdGVnaGdncGRydEJXR0VUeWdDWHJoS09Xc3J0VXY2QnVjWm93Ry12MFdPcG00THYtSA?oc=5' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card score-4' data-cardid='8910e148b4026135433550e1d7741079' data-region='JP' data-score='4' data-platform='prime'>
   <div class='card-top'>
@@ -918,7 +918,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
     <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Anime News Network</span><span>2026-04-18 03:52</span></div>
     <div class='card-lang-toggle'><button class='card-lang-btn active' onclick="switchCardLang(this,'en')">EN</button><button class='card-lang-btn' onclick="switchCardLang(this,'ja')">JA</button><button class='read-btn' onclick="markRead(this,'011506d704bc26f9340a3343185a865b')">既読</button></div>
   </div>
-  <div class='lang-pane lang-en'><h3>Yen Press Licenses &#x27;Full Metal Panic! Family&#x27;, Two A.M. at the Dining Table, N Manga, More Titles</h3><div class='summary'>Also: See You at That Site of Grace After Work , Your Castle&#x27;s Little Helper novels</div></div><div class='lang-pane lang-ja hidden'><h3>円プレスライセンス『フルメタル・パニック！ファミリー』、午前2時食卓にて、N マンガ、その他のタイトル</h3><div class='summary'>関連記事: 仕事の後に、恵みの現場で会いましょう、あなたの城の小さなヘルパーの小説</div></div>
+  <div class='lang-pane lang-en'><h3>Yen Press Licenses &#x27;Full Metal Panic! Family&#x27;, Two A.M. at the Dining Table, N Manga, More Titles</h3><div class='summary'>Also: See You at That Site of Grace After Work , Your Castle&#x27;s Little Helper novels</div></div><div class='lang-pane lang-ja hidden'><h3>円プレスライセンス『フルメタル・パニック！ファミリー』、午前2時食卓にて、N マンガ、その他のタイトル</h3><div class='summary'>関連記事: 仕事の後には、恵みの現場で会いましょう 、 あなたの城の小さなヘルパーの小説</div></div>
   <div class='tags'><span class='tag' style='background:#8e7dff22;border-color:#8e7dff;color:#8e7dff'>🎌 アニメ</span><span class='tag' style='background:#ffd16622;border-color:#ffd166;color:#ffd166'>📈 トレンド</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
   <a class='open-btn' href='https://www.animenewsnetwork.com/news/2026-04-17/yen-press-licenses-full-metal-panic-family-two-a.m-at-the-dining-table-n-manga-more-titles/.236508' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -986,7 +986,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <a class='open-btn' href='https://www.animenewsnetwork.com/news/2026-04-18/fatal-fury-city-of-the-wolves-game-trailer-reveals-april-24-release-date-for-wolfgang-krauser-dlc-/.236521' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div>
 </section>
-</div><footer>Watch Hub + — Generated at 2026-04-19 09:18</footer>
+</div><footer>Watch Hub + — Generated at 2026-04-19 09:28</footer>
 <script>
 function setPageLang(lang) {
   localStorage.setItem('page_lang_pref', lang);

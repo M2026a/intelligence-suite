@@ -748,10 +748,15 @@ header{position:sticky;top:0;z-index:50;background:rgba(13,16,22,.96);backdrop-f
 .main{max-width:1480px;margin:18px auto;padding:0 20px 40px}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
+.stat-grid-compact{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:10px;margin-bottom:16px;align-items:stretch}
+.stat-grid-compact .stat{min-width:0;padding:12px}
 .stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
 .stat .num{font-size:26px;font-weight:800;margin-bottom:4px}
+.stat-grid-compact .num{font-size:18px;line-height:1.1}
 .stat .label{color:var(--muted);font-size:12px}
+.stat-grid-compact .label{font-size:11px}
 .stat .icon{font-size:22px;margin-bottom:8px}
+.stat-grid-compact .icon{font-size:18px;margin-bottom:6px}
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
 .flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s}
 .flt-btn:hover{border-color:var(--accent)}
@@ -811,6 +816,8 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   .grid{grid-template-columns:1fr}
   .search{min-width:160px;width:100%}
   .card-top{flex-direction:column}
+  .stat-grid-compact{grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:8px}
+  .stat-grid-compact .stat{min-width:0;padding:10px}
 }
 """
 
@@ -1227,21 +1234,24 @@ def render_index(items: list[dict], themes_cfg: dict) -> str:
         color = td.get("color", "#636e72")
         icon  = td.get("icon", "")
         theme_btns += f"<button class='flt-btn flt-theme' data-theme='{html.escape(tk)}'>{icon} {html.escape(tk)} ({cnt})</button>"
-
     cards_html = "".join(card_html(item, themes_cfg) for item in items)
 
-    stat_grid = f"""
-<div class='stat-grid'>
-  <div class='stat'><div class='icon'>📰</div><div class='num'>{total}</div><div class='label'>総記事数</div></div>
-  <div class='stat'><div class='icon'>🆕</div><div class='num' style='color:#2ecc71'>{new_count}</div><div class='label'>直近{NEW_HOURS}h 新着</div></div>
-  <div class='stat'><div class='icon'>📷</div><div class='num' style='color:#4ea1ff'>{new_products_count}</div><div class='label'>新製品</div></div>
-  <div class='stat'><div class='icon'>👀</div><div class='num' style='color:#e74c3c'>{rumors_count}</div><div class='label'>噂・リーク</div></div>
-  <div class='stat'><div class='icon'>🖼</div><div class='num' style='color:#2ecc71'>{reviews_count}</div><div class='label'>レビュー・作例</div></div>
-  <div class='stat'><div class='icon'>🏢</div><div class='num' style='color:#f39c12'>{company_count}</div><div class='label'>企業動向</div></div>
-  <div class='stat'><div class='icon'>🌍</div><div class='num' style='color:#a29bfe'>{market_count}</div><div class='label'>市場・写真文化</div></div>
-  <div class='stat'><div class='icon'>🏷</div><div class='num'>{other_count}</div><div class='label'>その他</div></div>
-  <div class='stat'><div class='icon'>🏛</div><div class='num'>{official_count}</div><div class='label'>公式ソース</div></div>
-</div>"""
+    mini_stats = [
+        ("📰", total, "総記事数"),
+        ("🆕", new_count, f"直近{NEW_HOURS}h"),
+        ("📷", new_products_count, "新製品"),
+        ("👀", rumors_count, "噂・リーク"),
+        ("🖼", reviews_count, "レビュー・作例"),
+        ("🏢", company_count, "企業動向"),
+        ("🌍", market_count, "市場・写真文化"),
+        ("🏷", other_count, "その他"),
+        ("🏛", official_count, "公式ソース"),
+    ]
+
+    stat_grid = "<div class='stat-grid stat-grid-compact'>" + ''.join(
+        f"<div class='stat'><div class='icon'>{icon}</div><div class='num'>{num}</div><div class='label'>{label}</div></div>"
+        for icon, num, label in mini_stats
+    ) + "</div>"
 
     return (
         header_html("index.html", stamp)

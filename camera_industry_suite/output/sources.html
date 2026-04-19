@@ -28,10 +28,15 @@ header{position:sticky;top:0;z-index:50;background:rgba(13,16,22,.96);backdrop-f
 .main{max-width:1480px;margin:18px auto;padding:0 20px 40px}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
+.stat-grid-compact{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:10px;margin-bottom:16px;align-items:stretch}
+.stat-grid-compact .stat{min-width:0;padding:12px}
 .stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
 .stat .num{font-size:26px;font-weight:800;margin-bottom:4px}
+.stat-grid-compact .num{font-size:18px;line-height:1.1}
 .stat .label{color:var(--muted);font-size:12px}
+.stat-grid-compact .label{font-size:11px}
 .stat .icon{font-size:22px;margin-bottom:8px}
+.stat-grid-compact .icon{font-size:18px;margin-bottom:6px}
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
 .flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s}
 .flt-btn:hover{border-color:var(--accent)}
@@ -91,6 +96,8 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   .grid{grid-template-columns:1fr}
   .search{min-width:160px;width:100%}
   .card-top{flex-direction:column}
+  .stat-grid-compact{grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:8px}
+  .stat-grid-compact .stat{min-width:0;padding:10px}
 }
 </style>
 </head>
@@ -100,7 +107,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='top'>
     <div class='title'>
       <h1>📷 Camera Industry Suite <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ カメラ業界ニュースを収集・分類</span></h1>
-      <div class='sub'>更新日時：2026-04-19 09:29</div>
+      <div class='sub'>更新日時：2026-04-19 09:47</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -745,7 +752,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Canon’s Retro Camera is Coming as the EOS R8 Mark II</h3><div class='summary'>There has been a lot of talk for quite some time that Canon would be releasing a retro-themed EOS R camera. We pushed the idea that since the AE-1 is celebrating its 50th birthday this year, Canon could mark the occasion with a retro camera—which we dubbed the “RE-1” to keep it simple. However, it […]</div></div>
-<div class='lang-pane lang-ja hidden'><h3>キヤノンのレトロカメラがEOS R8 Mark IIとして登場</h3><div class='summary'>キヤノンがレト​​ロをテーマにしたEOS Rカメラを発売するという話はかなり前からあった。 AE-1 が今年 50 周年を迎えるので、キヤノンはレトロなカメラで記念すべきではないかという考えを推し進めました。シンプルにするために、このカメラを「RE-1」と名付けました。ただし、それは […]</div></div>
+<div class='lang-pane lang-ja hidden'><h3>キヤノンのレトロカメラがEOS R8 Mark IIとして登場</h3><div class='summary'>キヤノンがレト​​ロをテーマにしたEOS Rカメラを発売するという話はかなり前からあった。 AE-1 が今年 50 周年を迎えるので、キヤノンはレトロなカメラで記念すべきではないかという考えを推し進めました。シンプルにするために、このカメラを「RE-1」と名付けました。しかし、それは […]</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>📷 新製品</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>👀 噂・リーク</span><span class='tag tag-usd-strong'>📷 新製品・発表</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.canonrumors.com/canons-retro-camera-is-coming-as-the-eos-r8-mark-ii/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -855,7 +862,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Freefly joined the L-Mount Alliance</h3><div class='summary'>Freefly, the US-based maker of professional drones, MoVI gimbals, and high-speed cinema cameras such as the Ember S5K (capable of 5K/600 fps on Super 35 sensors), officially joined the L-Mount Alliance today, becoming its 11th member since the consortium’s founding in 2018 by Leica, Panasonic, and Sigma (now also inclu</div></div>
-<div class='lang-pane lang-ja hidden'><h3>FreeflyがLマウントアライアンスに加盟</h3><div class='summary'>プロ用ドローン、MoVI ジンバル、および Ember S5K (スーパー 35 センサーで 5K/600 fps が可能) などの高速シネマ カメラを製造する米国のメーカーである Freefly は、本日、L マウント アライアンスに正式に参加し、ライカ、パナソニック、シグマによる 2018 年のコンソーシアム設立以来 11 番目のメンバーとなりました。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>FreeflyがLマウントアライアンスに加盟</h3><div class='summary'>プロ用ドローン、MoVI ジンバル、および Ember S5K (スーパー 35 センサーで 5K/600 fps が可能) などの高速シネマ カメラを製造する米国のメーカーである Freefly は、本日、L マウント アライアンスに正式に参加し、ライカ、パナソニック、シグマによる 2018 年のコンソーシアム設立以来 11 番目のメンバーとなりました (現在は、L マウント アライアンスも含まれています)。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>📷 新製品</span><span class='tag tag-usd-strong'>📷 新製品・発表</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://leicarumors.com/2026/04/17/freefly-joined-the-l-mount-alliance.aspx/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -877,7 +884,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Totally wild Rumors about a new Sony “super thin” APS-C E-mount camera</h3><div class='summary'>I am 100% certain that Sony will unveil the new Sony A7rVI in May. I’m also keeping an eye on the rumors about the cameras Sony will announce after the A7rVI. But I wanted to share this extremely far-fetched rumor, which comes from an anonymous source. Of course, there’s a high probability that it’s fake… The post Tota</div></div>
-<div class='lang-pane lang-ja hidden'><h3>新しいソニー「超薄型」APS-C Eマウントカメラに関する完全にワイルドな噂</h3><div class='summary'>私はソニーが5月に新しいSony A7rVIを発表すると100％確信しています。ソニーがα7rVIの後に発表するカメラに関する噂にも注目しています。しかし、私は匿名の情報源から来たこの非常に突飛な噂を共有したいと思いました。もちろん偽物の可能性が高いですが… The post Tota</div></div>
+<div class='lang-pane lang-ja hidden'><h3>新しいソニー「超薄型」APS-C Eマウントカメラに関する完全にワイルドな噂</h3><div class='summary'>私はソニーが5月に新しいSony A7rVIを発表すると100%確信しています。ソニーがα7rVIの後に発表するカメラに関する噂にも注目しています。しかし、私は匿名の情報源から来たこの非常に突飛な噂を共有したいと思いました。もちろん偽物の可能性が高いですが… The post Tota</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>👀 噂・リーク</span><span class='tag tag-usd-strong'>📷 新製品・発表</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.sonyalpharumors.com/rumors-about-a-new-sony-super-thin-aps-c-e-mount-camera/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -987,7 +994,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Here are the two full-frame Z-mount lenses Viltrox will announce next week at the 2026 NAB show: 35mm f/1.8 &amp; 55mm f/1.8 EVO APO</h3><div class='summary'>Here are the two Z-mount lenses Viltrox will announce next week at the 2026 NAB show (previously reported here) – you can already pre-order them at Foto Erhardt: Viltrox AF 35mm f/1.8 EVO APO full-frame lens for Nikon Z-mount Main features: First standard AF lens with APO design for maximum color accuracy. Bright f/1.8</div></div>
-<div class='lang-pane lang-ja hidden'><h3>こちらは、Viltrox が来週 2026 NAB ショーで発表する 2 つのフルフレーム Z マウント レンズです: 35mm f/1.8 および 55mm f/1.8 EVO APO</h3><div class='summary'>これは、Viltrox が来週 2026 NAB ショーで発表する 2 つの Z マウント レンズです (以前ここで報告されました) – Foto Erhardt ではすでに予約注文できます: Viltrox AF 35mm f/1.8 EVO APO フルフレーム レンズ (ニコン Z マウント用) 主な特徴: 色精度を最大限に高める APO 設計を備えた初の標準 AF レンズ。明るいf/1.8</div></div>
+<div class='lang-pane lang-ja hidden'><h3>こちらは、Viltrox が来週 2026 NAB ショーで発表する 2 つのフルフレーム Z マウント レンズです: 35mm f/1.8 および 55mm f/1.8 EVO APO</h3><div class='summary'>これは、Viltrox が来週 2026 NAB ショーで発表する 2 つの Z マウント レンズです (以前ここで報告されました) – Foto Erhardt ですでに予約注文できます: Viltrox AF 35mm f/1.8 EVO APO フルフレーム レンズ (ニコン Z マウント用) 主な特徴: 色精度を最大限に高める APO 設計を備えた初の標準 AF レンズ。明るいf/1.8</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>📷 新製品</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>👀 噂・リーク</span><span class='tag tag-usd-strong'>📷 新製品・発表</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://nikonrumors.com/2026/04/16/here-are-the-two-full-frame-z-mount-lenses-viltrox-will-announce-next-week-at-the-2026-nab-show-35mm-f-1-8-55mm-f-1-8-evo-apo.aspx/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -1097,7 +1104,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Blackmagic Design Announces DaVinci Resolve 21, Public Beta Available Now</h3><div class='summary'>Major update adds new Photo page bringing Hollywood’smost advanced color tools to still photos, plus hundreds of new featuresincluding even more AI tools, new motion graphic effects, Fairlight folder tracks and more! Blackmagic Design today announced DaVinci Resolve 21, a significant update introducing the new Photo pa</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Blackmagic Design、DaVinci Resolve 21を発表、パブリックベータ版が利用可能に</h3><div class='summary'>メジャー アップデートでは、ハリウッドの最先端のカラー ツールを静止写真に追加する新しい写真ページが追加され、さらに多くの AI ツール、新しいモーション グラフィック エフェクト、フェアライト フォルダー トラックなどを含む何百もの新機能が追加されました。 Blackmagic Designは本日、新しいPhoto paを導入する重要なアップデートであるDaVinci Resolve 21を発表しました。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Blackmagic Design、DaVinci Resolve 21を発表、パブリックベータ版が利用可能に</h3><div class='summary'>メジャー アップデートでは、ハリウッドの最先端のカラー ツールを静止写真に追加する新しい写真ページが追加され、さらに、さらに多くの AI ツール、新しいモーション グラフィック エフェクト、フェアライト フォルダー トラックなどを含む数百の新機能が追加されました。 Blackmagic Designは本日、新しいPhoto paを導入する重要なアップデートであるDaVinci Resolve 21を発表した。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>📷 新製品</span><span class='tag tag-usd-strong'>📷 新製品・発表</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.canonrumors.com/blackmagic-design-announces-davinci-resolve-21-public-beta-available-now/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -1229,7 +1236,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Additional information on the new 7Artisans 35mm f/2.8 lens for M/L39 mount</h3><div class='summary'>Here are some additional slides on the upcoming 7Artisans 35mm f/2.8 lens for M/L39 mount (check the official 7Artisans website for updates and see also this post for more information): New 7Artisans 35mm f/2.8 lens for L39 mount coming soon The post Additional information on the new 7Artisans 35mm f/2.8 lens for M/L39</div></div>
-<div class='lang-pane lang-ja hidden'><h3>M/L39 マウント用の新しい 7Artisans 35mm f/2.8 レンズに関する追加情報</h3><div class='summary'>M/L39 マウント用の今後の 7Artisans 35mm f/2.8 レンズに関する追加のスライドは次のとおりです (最新情報については 7Artisans の公式 Web サイトを確認してください。詳細については、この投稿も参照してください): L39 マウント用の新しい 7Artisans 35mm f/2.8 レンズが近日公開される 投稿 M/L39 用の新しい 7Artisans 35mm f/2.8 レンズに関する追加情報</div></div>
+<div class='lang-pane lang-ja hidden'><h3>M/L39 マウント用の新しい 7Artisans 35mm f/2.8 レンズに関する追加情報</h3><div class='summary'>ここに、M/L39 マウント用の今後の 7Artisans 35mm f/2.8 レンズに関する追加のスライドがいくつかあります (最新情報については 7Artisans の公式 Web サイトを確認してください。詳細については、この投稿も参照してください): L39 マウント用の新しい 7Artisans 35mm f/2.8 レンズが近日公開される 投稿 M/L39 用の新しい 7Artisans 35mm f/2.8 レンズに関する追加情報</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>👀 噂・リーク</span><span class='tag tag-usd-strong'>📷 新製品・発表</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://leicarumors.com/2026/04/15/additional-information-on-the-new-7artisans-35mm-f-2-8-lens-for-m-l39-mount.aspx/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -1383,7 +1390,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>New Leica Store Chicago is coming soon with a new M11-P Chicago Edition 17 camera</h3><div class='summary'>Leica Camera will open a new 5,000 sq. ft. flagship &amp; gallery store in Chicago on April 30th. To commemorate the event, the company has launched a new Leica M11-P Chicago Edition 17 camera: “Named after “The Atelier” Commemoration: 1917, Leica introduces the Chicago Edition 17, a limited-edition silver Leica M11-P with</div></div>
-<div class='lang-pane lang-ja hidden'><h3>新しいライカ ストア シカゴに、新しい M11-P Chicago Edition 17 カメラが間もなく登場します</h3><div class='summary'>ライカカメラは4月30日にシカゴに5,000平方フィートの新しい旗艦店兼ギャラリーストアをオープンする。このイベントを記念して、同社は新しいライカ M11-P シカゴ エディション 17 カメラを発売しました。「「アトリエ」にちなんで命名されました。1917 年記念、ライカは限定版のシルバー ライカ M11-P シカゴ エディション 17 を発表しました。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>新しいライカ ストア シカゴに、新しい M11-P Chicago Edition 17 カメラが間もなく登場します</h3><div class='summary'>ライカカメラは4月30日、シカゴに5,000平方フィートの新しい旗艦店兼ギャラリーストアをオープンする。このイベントを記念して、同社は新しいライカ M11-P シカゴ エディション 17 カメラを発売しました。「「アトリエ」にちなんで命名されました。1917 年記念、ライカは限定版のシルバー ライカ M11-P シカゴ エディション 17 を発表しました。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>📷 新製品</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>👀 噂・リーク</span><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🏢 企業動向</span><span class='tag tag-usd-strong'>📷 新製品・発表</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://leicarumors.com/2026/04/14/new-leica-store-chicago-is-coming-soon.aspx/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -3724,7 +3731,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🏢 企業動向</span><span class='tag tag-usd-strong'>📷 新製品・発表</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.dpreview.com/news/1255407909/peak-design-l-bracket-survey' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div>
-</div><footer>Camera Industry Suite — Generated at 2026-04-19 09:29</footer></body></html>
+</div><footer>Camera Industry Suite — Generated at 2026-04-19 09:47</footer></body></html>
 <script>
 var pageLang = 'en';
 function setPageLang(lang) {

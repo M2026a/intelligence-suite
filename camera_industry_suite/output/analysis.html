@@ -28,10 +28,15 @@ header{position:sticky;top:0;z-index:50;background:rgba(13,16,22,.96);backdrop-f
 .main{max-width:1480px;margin:18px auto;padding:0 20px 40px}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
+.stat-grid-compact{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:10px;margin-bottom:16px;align-items:stretch}
+.stat-grid-compact .stat{min-width:0;padding:12px}
 .stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
 .stat .num{font-size:26px;font-weight:800;margin-bottom:4px}
+.stat-grid-compact .num{font-size:18px;line-height:1.1}
 .stat .label{color:var(--muted);font-size:12px}
+.stat-grid-compact .label{font-size:11px}
 .stat .icon{font-size:22px;margin-bottom:8px}
+.stat-grid-compact .icon{font-size:18px;margin-bottom:6px}
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
 .flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s}
 .flt-btn:hover{border-color:var(--accent)}
@@ -91,6 +96,8 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   .grid{grid-template-columns:1fr}
   .search{min-width:160px;width:100%}
   .card-top{flex-direction:column}
+  .stat-grid-compact{grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:8px}
+  .stat-grid-compact .stat{min-width:0;padding:10px}
 }
 </style>
 </head>
@@ -100,7 +107,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='top'>
     <div class='title'>
       <h1>📷 Camera Industry Suite <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ カメラ業界ニュースを収集・分類</span></h1>
-      <div class='sub'>更新日時：2026-04-19 09:29</div>
+      <div class='sub'>更新日時：2026-04-19 09:47</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -147,4 +154,4 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
       <table class='table'><thead><tr><th>テーマ</th><th>件数</th></tr></thead><tbody><tr><td><span style='color:#4ea1ff'>📷 新製品</span></td><td style='font-weight:800'>90</td></tr><tr><td><span style='color:#ff6b81'>👀 噂・リーク</span></td><td style='font-weight:800'>52</td></tr><tr><td><span style='color:#a29bfe'>🌍 市場・写真文化</span></td><td style='font-weight:800'>24</td></tr><tr><td><span style='color:#1dd1a1'>🖼 レビュー・作例</span></td><td style='font-weight:800'>22</td></tr><tr><td><span style='color:#ff9f43'>🏢 企業動向</span></td><td style='font-weight:800'>16</td></tr><tr><td><span style='color:#636e72'> その他</span></td><td style='font-weight:800'>13</td></tr></tbody></table>
     </div>
   </div>
-</div><footer>Camera Industry Suite — Generated at 2026-04-19 09:29</footer></body></html>
+</div><footer>Camera Industry Suite — Generated at 2026-04-19 09:47</footer></body></html>

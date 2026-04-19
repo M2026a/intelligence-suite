@@ -13,9 +13,11 @@ from email.utils import parsedate_to_datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed, TimeoutError
 
 ROOT = Path(__file__).resolve().parent.parent
+CONFIG = json.loads((ROOT / "shared" / "config.json").read_text(encoding="utf-8"))
+APP_ICON = CONFIG.get("app_icon", "🛡️")
 OUTPUT_DIR = ROOT / "output"
 OUTPUT_FILE = OUTPUT_DIR / "index.html"
-DB_FILE     = OUTPUT_DIR / "strategic_it_suite.db"
+DB_FILE     = OUTPUT_DIR / CONFIG.get("db_name", "strategic_it_suite.db")
 
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 StrategicITSuite"
 JST = ZoneInfo("Asia/Tokyo")
@@ -24,8 +26,6 @@ LEGAL_SOURCE_TIMEOUT = 8
 LEGAL_TOTAL_TIMEOUT = 20
 MAIN_FUTURE_TIMEOUT = 25
 
-
-CONFIG = json.loads((ROOT / "shared" / "config.json").read_text(encoding="utf-8"))
 
 HISTORY_DAYS = int(CONFIG.get("history_days", 14))
 
@@ -75,6 +75,41 @@ def parse_feed_with_timeout(url: str):
 
 def safe_text(value):
     return html.escape(str(value)) if value is not None else ""
+
+
+def parse_any_datetime(raw_value):
+    raw = (raw_value or "").strip()
+    if not raw:
+        return None
+    for fmt in (
+        "%a, %d %b %Y %H:%M:%S %Z",
+        "%a, %d %b %Y %H:%M:%S %z",
+        "%Y-%m-%d %H:%M:%S",
+        "%Y-%m-%d %H:%M",
+        "%Y-%m-%d",
+    ):
+        try:
+            dt = datetime.strptime(raw, fmt)
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            return dt.astimezone(JST)
+        except ValueError:
+            pass
+    try:
+        dt = parsedate_to_datetime(raw)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(JST)
+    except Exception:
+        pass
+    try:
+        iso = raw.replace("Z", "+00:00")
+        dt = datetime.fromisoformat(iso)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=JST)
+        return dt.astimezone(JST)
+    except Exception:
+        return None
 
 
 def get_ai_risk_entries():
@@ -428,6 +463,221 @@ def get_all_legal_news() -> list[dict]:
     return results
 
 
+
+def entry_to_dict(entry, default_source: str = "") -> dict:
+    source = default_source
+    try:
+        source = entry.source.get("title", "") or default_source
+    except Exception:
+        source = default_source
+    return {
+        "title": getattr(entry, "title", ""),
+        "link": getattr(entry, "link", "#"),
+        "source": source,
+        "published": getattr(entry, "published", "") or getattr(entry, "updated", "") or getattr(entry, "pubDate", ""),
+    }
+
+
+def dedupe_news_items(items: list[dict], limit: int | None = None) -> list[dict]:
+    deduped = []
+    seen = set()
+    def sort_key(item: dict):
+        return (format_date(item.get("published", "")), item.get("title", ""))
+    for item in sorted(items, key=sort_key, reverse=True):
+        key = ((item.get("title") or "").strip(), (item.get("link") or "").strip())
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(item)
+        if limit and len(deduped) >= limit:
+            break
+    return deduped
+
+
+def google_news_rss_url(query: str) -> str:
+    from urllib.parse import quote_plus
+    return f"https://news.google.com/rss/search?q={quote_plus(query)}&hl=ja&gl=JP&ceid=JP:ja"
+
+
+def fetch_google_news_topic(queries: list[str], limit: int = 20) -> list[dict]:
+    collected = []
+    for query in queries:
+        try:
+            print(f"  取得中: Google News / {query}")
+            parsed = parse_feed_with_timeout(google_news_rss_url(query))
+            collected.extend(entry_to_dict(e, "Google News") for e in getattr(parsed, "entries", [])[:limit])
+        except Exception as ex:
+            print(f"[WARN] Google News取得失敗 ({query}): {ex}")
+    return dedupe_news_items(collected, limit=limit)
+
+
+def get_security_trend_entries() -> list[dict]:
+    return fetch_google_news_topic([
+        'サイバーセキュリティ 注意喚起 OR フィッシング OR ランサムウェア',
+        'site:ipa.go.jp 情報セキュリティ 注意喚起 OR site:jpcert.or.jp 注意喚起 OR site:nisc.go.jp サイバーセキュリティ',
+    ], limit=18)
+
+
+def get_incident_entries() -> list[dict]:
+    return fetch_google_news_topic([
+        '情報漏えい OR 不正アクセス OR ランサムウェア 被害',
+        'サイバー攻撃 被害 OR 侵害 OR フィッシング 被害',
+    ], limit=18)
+
+
+def get_vulnerability_entries() -> list[dict]:
+    collected = []
+    jvn_urls = [
+        'https://jvn.jp/rss/jvn.rdf',
+        'https://jvndb.jvn.jp/ja/rss/jvndb_new.rdf',
+    ]
+    for url in jvn_urls:
+        try:
+            print(f"  取得中: JVN / {url}")
+            parsed = parse_feed_with_timeout(url)
+            collected.extend(entry_to_dict(e, 'JVN') for e in getattr(parsed, 'entries', [])[:20])
+        except Exception as ex:
+            print(f"[WARN] JVN取得失敗 ({url}): {ex}")
+    collected.extend(fetch_google_news_topic([
+        'CVE OR ゼロデイ OR 脆弱性 OR 緊急パッチ',
+        'site:cisa.gov known exploited vulnerability OR site:jvn.jp 脆弱性',
+    ], limit=12))
+    return dedupe_news_items(collected, limit=24)
+
+
+def get_jama_guideline_content() -> dict:
+    resource_cards = [
+        {"title": "自工会/部工会ガイドライン V2.3", "desc": "エンタープライズ領域の本体資料。最新版は v2.3。", "link": "https://www.jama.or.jp/operation/it/cyb_sec/cyb_sec_guideline.html", "meta": "JAMA 公式"},
+        {"title": "解説書 V2.3", "desc": "用語・要求事項・達成基準の解釈補助。", "link": "https://www.jama.or.jp/operation/it/cyb_sec/cyb_sec_guideline.html", "meta": "JAMA 公式"},
+        {"title": "チェックシート V2.3", "desc": "自己評価用チェックシート。", "link": "https://www.jama.or.jp/operation/it/cyb_sec/cyb_sec_guideline.html", "meta": "JAMA 公式"},
+        {"title": "優先項目の解説資料", "desc": "レベル1の中から優先的に取り組むべき項目の解説。", "link": "https://www.jama.or.jp/operation/it/cyb_sec/cyb_sec_guideline.html", "meta": "JAMA 公式"},
+        {"title": "中小企業向け手引き", "desc": "実践的な始め方・進め方の手引き。", "link": "https://www.jama.or.jp/operation/it/cyb_sec/cyb_sec_guideline.html", "meta": "JAMA 公式"},
+        {"title": "工場領域版 v1.0", "desc": "OT 環境向けガイドラインとチェックシート。", "link": "https://www.jama.or.jp/operation/it/cyb_sec/cyb_sec_guideline.html", "meta": "JAMA 公式"},
+        {"title": "最新情報・FAQ・説明会", "desc": "提出方法、FAQ、説明会資料などの関連導線。", "link": "https://www.japia.or.jp/work/ict/cybersecurity-newest", "meta": "JAPIA 公式"},
+        {"title": "サプライチェーン向け情報", "desc": "自己評価提出方法、FAQ、説明会資料への導線。", "link": "https://www.jama.or.jp/operation/it/cyb_sec/cyb_sec_supply_chain.html", "meta": "JAMA 公式"},
+    ]
+    updates = [
+        {"date": "2026-04-16", "title": "工場領域版 v1.0 公開", "detail": "工場領域向けガイドラインとチェックシートが公開。"},
+        {"date": "2025-12-26", "title": "エンタープライズ領域 v2.3", "detail": "本体・解説書・チェックシートが v2.3 系で整理。"},
+        {"date": "2025-12-26", "title": "FAQ / 説明会導線更新", "detail": "提出方法、FAQ、説明会資料の導線を最新化。"},
+    ]
+    clause_columns = {
+        "Lv1": [
+            "方針・体制整備",
+            "資産把握・管理",
+            "アクセス制御",
+            "脆弱性管理",
+            "委託先・取引先管理",
+            "インシデント対応",
+            "教育・訓練",
+        ],
+        "Lv2": [
+            "ネットワーク管理",
+            "認証強化",
+            "ログ取得・監視",
+            "バックアップ・復旧",
+            "サプライチェーン統制",
+            "点検・評価",
+            "運用手順の標準化",
+        ],
+        "Lv3": [
+            "高度監視・SOC連携",
+            "ゼロトラスト寄り統制",
+            "工場領域対策",
+            "委託先評価の高度化",
+            "演習・復旧計画",
+            "経営層レビュー",
+            "継続的改善",
+        ],
+    }
+    return {
+        "headline": "上段で関連資料と変更内容を見て、下段で Lv1 / Lv2 / Lv3 の条項イメージを確認する構成です。",
+        "resources": resource_cards,
+        "updates": updates,
+        "clause_columns": clause_columns,
+    }
+
+
+def build_news_cards(items: list[dict]) -> str:
+    if not items:
+        return '<div class="empty-box">通知なし</div>'
+    parts = []
+    for idx, item in enumerate(items, 1):
+        title = safe_text(item.get("title", "無題"))
+        link = safe_text(item.get("link", "#"))
+        source = safe_text(item.get("source", ""))
+        published = format_date(item.get("published", ""))
+        meta = " / ".join([x for x in [source, published] if x])
+        meta_html = f'<div class="item-meta">{meta}</div>' if meta else ""
+        parts.append(f"""
+        <div class="item-card">
+            <div class="item-index">{idx:02d}</div>
+            <div class="item-body">
+                <a class="item-title" href="{link}" target="_blank" rel="noopener noreferrer">{title}</a>
+                {meta_html}
+            </div>
+        </div>
+        """)
+    return "\n".join(parts)
+
+
+def build_guideline_columns_html(guideline_content: dict) -> str:
+    resource_cards_html = []
+    for item in guideline_content.get("resources", []):
+        resource_cards_html.append(f"""
+        <div class="guideline-card">
+          <div class="guideline-card-title">{safe_text(item['title'])}</div>
+          <div class="guideline-card-desc">{safe_text(item['desc'])}</div>
+          <div class="guideline-card-meta">{safe_text(item['meta'])}</div>
+          <a class="guideline-link" href="{safe_text(item['link'])}" target="_blank" rel="noopener noreferrer">開く</a>
+        </div>
+        """)
+
+    updates_html = []
+    for item in guideline_content.get("updates", []):
+        updates_html.append(f"""
+        <div class="item-card">
+            <div class="item-index">更新</div>
+            <div class="item-body">
+                <div class="item-title">{safe_text(item.get('title',''))}</div>
+                <div class="item-meta">{safe_text(item.get('date',''))}</div>
+                <div class="guideline-card-desc" style="margin-top:6px;">{safe_text(item.get('detail',''))}</div>
+            </div>
+        </div>
+        """)
+
+    col_parts = []
+    for level, items in guideline_content.get("clause_columns", {}).items():
+        lis = ''.join([f'<li>{safe_text(x)}</li>' for x in items])
+        col_parts.append(f"""
+        <div class="guideline-column">
+          <div class="guideline-column-title">{safe_text(level)}</div>
+          <div class="guideline-column-sub">条項イメージ</div>
+          <ul class="info-list">{lis}</ul>
+        </div>
+        """)
+
+    updates_block = ''.join(updates_html) if updates_html else '<div class="empty-box">変更情報なし</div>'
+    return f"""
+    <div class="notice-box" style="margin-bottom:16px;">{safe_text(guideline_content.get('headline', ''))}</div>
+    <div class="panel" style="margin-bottom:16px;">
+      <div class="section-title" style="font-size:18px; margin-bottom:6px;">変更内容</div>
+      <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">新規追加、版数変更、更新日変更などを先に確認する欄です。</div>
+      {updates_block}
+    </div>
+    <div class="panel" style="margin-bottom:16px;">
+      <div class="section-title" style="font-size:18px; margin-bottom:6px;">関連資料</div>
+      <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">本体・FAQ・チェックシート・工場領域など、参照する資料を次にまとめています。</div>
+      <div class="guideline-grid">{''.join(resource_cards_html)}</div>
+    </div>
+    <div class="panel">
+      <div class="section-title" style="font-size:18px; margin-bottom:6px;">条項一覧（参考）</div>
+      <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">資料確認のあとに、Lv1 / Lv2 / Lv3 の条項イメージを下で確認します。</div>
+      <div class="guideline-grid">{''.join(col_parts)}</div>
+    </div>
+    """
+
+
 def init_db():
     con = sqlite3.connect(DB_FILE)
     cur = con.cursor()
@@ -439,6 +689,9 @@ def init_db():
             run_at TEXT NOT NULL,
             risk_count INTEGER NOT NULL,
             dev_count INTEGER NOT NULL,
+            security_count INTEGER NOT NULL DEFAULT 0,
+            incident_count INTEGER NOT NULL DEFAULT 0,
+            vuln_count INTEGER NOT NULL DEFAULT 0,
             config_name TEXT NOT NULL,
             config_key TEXT NOT NULL
         )
@@ -504,6 +757,25 @@ def init_db():
         """
     )
 
+    cur.execute(
+        """
+        CREATE TABLE IF NOT EXISTS extra_news_items (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            section_key TEXT NOT NULL,
+            title TEXT,
+            link TEXT,
+            source TEXT,
+            published TEXT,
+            UNIQUE(section_key, link)
+        )
+        """
+    )
+
+    existing_cols = {row[1] for row in cur.execute("PRAGMA table_info(run_history)").fetchall()}
+    for col in ("security_count", "incident_count", "vuln_count"):
+        if col not in existing_cols:
+            cur.execute(f"ALTER TABLE run_history ADD COLUMN {col} INTEGER NOT NULL DEFAULT 0")
+
     con.commit()
     return con
 
@@ -514,11 +786,14 @@ def cleanup_db(con):
     con.commit()
 
 
-def save_run_history(con, run_at, risk_entries, dev_articles, config_result, legal_news=None):
+def save_run_history(con, run_at, risk_entries, dev_articles, config_result, legal_news=None, security_entries=None, incident_entries=None, vuln_entries=None):
     cur = con.cursor()
+    security_entries = security_entries or []
+    incident_entries = incident_entries or []
+    vuln_entries = vuln_entries or []
     cur.execute(
-        "INSERT INTO run_history (run_at, risk_count, dev_count, config_name, config_key) VALUES (?, ?, ?, ?, ?)",
-        (run_at, len(risk_entries), len(dev_articles), config_result["name"], config_result["key"]),
+        "INSERT INTO run_history (run_at, risk_count, dev_count, security_count, incident_count, vuln_count, config_name, config_key) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        (run_at, len(risk_entries), len(dev_articles), len(security_entries), len(incident_entries), len(vuln_entries), config_result["name"], config_result["key"]),
     )
     run_id = cur.lastrowid
 
@@ -557,31 +832,174 @@ def save_run_history(con, run_at, risk_entries, dev_articles, config_result, leg
     con.commit()
 
 
-def get_recent_history(con, limit=8):
+def save_extra_news_items(con, section_key, items):
+    cur = con.cursor()
+    rows = []
+    for item in (items or []):
+        rows.append((
+            section_key,
+            item.get("title", ""),
+            item.get("link", "#"),
+            item.get("source", ""),
+            item.get("published", ""),
+        ))
+    if rows:
+        cur.executemany(
+            "INSERT OR IGNORE INTO extra_news_items (section_key, title, link, source, published) VALUES (?, ?, ?, ?, ?)",
+            rows,
+        )
+        con.commit()
+
+
+def split_news_items_by_day(items):
+    now_jst = datetime.now(JST)
+    today = now_jst.date()
+    yesterday = today - timedelta(days=1)
+
+    today_items = []
+    yesterday_items = []
+    older_items = []
+
+    for item in items or []:
+        raw_published = item.get("published") or item.get("published_at") or ""
+        published_dt = parse_any_datetime(raw_published)
+        if not published_dt:
+            older_items.append(item)
+            continue
+
+        if published_dt.date() == today:
+            today_items.append(item)
+        elif published_dt.date() == yesterday:
+            yesterday_items.append(item)
+        else:
+            older_items.append(item)
+
+    sort_key = lambda a: parse_any_datetime(a.get("published") or a.get("published_at") or "") or datetime.min.replace(tzinfo=JST)
+    today_items.sort(key=sort_key, reverse=True)
+    yesterday_items.sort(key=sort_key, reverse=True)
+    older_items.sort(key=sort_key, reverse=True)
+    return today_items, yesterday_items, older_items
+
+
+def get_older_extra_news(con, section_key, border_dt, limit):
+    border_date = border_dt.astimezone(JST).date()
     cur = con.cursor()
     cur.execute(
         """
-        SELECT run_at, risk_count, dev_count, config_name
-        FROM run_history
-        ORDER BY id DESC
+        SELECT title, link, source, published
+        FROM extra_news_items
+        WHERE section_key = ?
+          AND published IS NOT NULL
+          AND published <> ''
+        ORDER BY published DESC, id DESC
         LIMIT ?
         """,
-        (limit,),
+        (section_key, max(limit * 3, 300)),
     )
+
+    rows = []
+    seen = set()
+    for title, link, source, published in cur.fetchall():
+        dt = parse_any_datetime(published)
+        if not dt or dt.date() >= border_date:
+            continue
+        key = (title or "", link or "", published or "")
+        if key in seen:
+            continue
+        seen.add(key)
+        rows.append({
+            "title": title or "",
+            "link": link or "#",
+            "source": source or "",
+            "published": published or "",
+        })
+        if len(rows) >= limit:
+            break
+    rows.sort(key=lambda a: parse_any_datetime(a.get("published") or "") or datetime.min.replace(tzinfo=JST), reverse=True)
+    return rows
+
+
+def build_day_group_html(title, items):
+    if not items:
+        return ""
+    return f"""
+    <div class="panel" style="margin-bottom:16px;">
+      <div class="section-title" style="font-size:18px; margin-bottom:10px;">{safe_text(title)}（{len(items)}件）</div>
+      {build_news_cards(items)}
+    </div>
+    """
+
+
+def build_news_history_page_html(today_items, yesterday_items, older_items, intro_text=""):
+    today_items = today_items or []
+    yesterday_items = yesterday_items or []
+    older_items = (older_items or [])[:200]
+
+    parts = []
+    if intro_text:
+        parts.append(f'<div class="notice-box" style="margin-bottom:18px; font-size:13px;">{safe_text(intro_text)}</div>')
+
+    parts.append(f"""
+    <div class="section-title" style="font-size:18px; margin-bottom:6px;">🟢 今日</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">本日の取得記事 / {len(today_items)}件</div>
+    {build_news_cards(today_items)}
+    <div class="section-title" style="font-size:18px; margin-top:22px; margin-bottom:6px;">🟡 昨日</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">前日の取得記事 / {len(yesterday_items)}件</div>
+    {build_news_cards(yesterday_items)}
+    <div class="section-title" style="font-size:18px; margin-top:22px; margin-bottom:6px;">📚 過去</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">SQLiteに蓄積された過去履歴 / {len(older_items)}件（最大200件表示）</div>
+    {build_news_cards(older_items)}
+    """)
+
+    return "\n".join([x for x in parts if x])
+
+
+
+def get_recent_history(con, limit=8):
+    cur = con.cursor()
+    cols = {row[1] for row in cur.execute("PRAGMA table_info(run_history)").fetchall()}
+    if {"security_count", "incident_count", "vuln_count"}.issubset(cols):
+        cur.execute(
+            """
+            SELECT run_at, risk_count, dev_count, security_count, incident_count, vuln_count, config_name
+            FROM run_history
+            ORDER BY id DESC
+            LIMIT ?
+            """,
+            (limit,),
+        )
+    else:
+        cur.execute(
+            """
+            SELECT run_at, risk_count, dev_count, config_name
+            FROM run_history
+            ORDER BY id DESC
+            LIMIT ?
+            """,
+            (limit,),
+        )
     return cur.fetchall()
 
 
 def build_history_rows(history):
     if not history:
-        return '<tr><td colspan="4">履歴なし</td></tr>'
+        return '<tr><td colspan="7">履歴なし</td></tr>'
 
     rows = []
-    for run_at, risk_count, dev_count, config_name in history:
+    for rec in history:
+        if len(rec) >= 7:
+            run_at, risk_count, dev_count, security_count, incident_count, vuln_count, config_name = rec[:7]
+        else:
+            run_at, risk_count, dev_count, config_name = rec[:4]
+            security_count = incident_count = vuln_count = 0
         rows.append(
             "<tr>"
             f"<td>{safe_text(run_at)}</td>"
             f"<td>{safe_text(risk_count)}</td>"
             f"<td>{safe_text(dev_count)}</td>"
+            f"<td>{safe_text(security_count)}</td>"
+            f"<td>{safe_text(incident_count)}</td>"
+            f"<td>{safe_text(vuln_count)}</td>"
             f"<td>{safe_text(config_name)}</td>"
             "</tr>"
         )
@@ -982,28 +1400,106 @@ def split_dev_articles_by_day(dev_articles):
 
     for article in dev_articles:
         raw_published = article.get("published_at") or article.get("published") or ""
-        try:
-            published_dt = datetime.fromisoformat(raw_published.replace("Z", "+00:00"))
-            if published_dt.tzinfo is None:
-                published_dt = published_dt.replace(tzinfo=timezone.utc)
-            published_date_jst = published_dt.astimezone(JST).date()
-        except Exception:
+        published_dt = parse_any_datetime(raw_published)
+        if not published_dt:
             older_articles.append(article)
             continue
 
-        if published_date_jst == today:
+        if published_dt.date() == today:
             today_articles.append(article)
-        elif published_date_jst == yesterday:
+        elif published_dt.date() == yesterday:
             yesterday_articles.append(article)
         else:
             older_articles.append(article)
 
-    today_articles.sort(key=lambda a: a.get("published_at") or a.get("published") or "", reverse=True)
-    yesterday_articles.sort(key=lambda a: a.get("published_at") or a.get("published") or "", reverse=True)
-    older_articles.sort(key=lambda a: a.get("published_at") or a.get("published") or "", reverse=True)
+    sort_key = lambda a: parse_any_datetime(a.get("published_at") or a.get("published") or "") or datetime.min.replace(tzinfo=JST)
+    today_articles.sort(key=sort_key, reverse=True)
+    yesterday_articles.sort(key=sort_key, reverse=True)
+    older_articles.sort(key=sort_key, reverse=True)
     return today_articles, yesterday_articles, older_articles
 
 
+
+
+def split_risk_entries_by_day(risk_entries):
+    now_jst = datetime.now(JST)
+    today = now_jst.date()
+    yesterday = today - timedelta(days=1)
+
+    today_items = []
+    yesterday_items = []
+    older_items = []
+
+    def _to_item(entry):
+        source = ""
+        try:
+            source = entry.source.get("title", "")
+        except Exception:
+            source = ""
+        return {
+            "title": getattr(entry, "title", "") or "",
+            "link": getattr(entry, "link", "#") or "#",
+            "source": source or "",
+            "published": getattr(entry, "published", "") or getattr(entry, "updated", "") or getattr(entry, "pubDate", "") or "",
+        }
+
+    for entry in risk_entries or []:
+        item = _to_item(entry)
+        published_dt = parse_any_datetime(item.get("published", ""))
+        if not published_dt:
+            older_items.append(item)
+            continue
+
+        if published_dt.date() == today:
+            today_items.append(item)
+        elif published_dt.date() == yesterday:
+            yesterday_items.append(item)
+        else:
+            older_items.append(item)
+
+    sort_key = lambda a: parse_any_datetime(a.get("published") or "") or datetime.min.replace(tzinfo=JST)
+    today_items.sort(key=sort_key, reverse=True)
+    yesterday_items.sort(key=sort_key, reverse=True)
+    older_items.sort(key=sort_key, reverse=True)
+    return today_items, yesterday_items, older_items
+
+
+def get_older_risk_history(con, border_dt, limit):
+    border_date = border_dt.astimezone(JST).date()
+    cur = con.cursor()
+    cur.execute(
+        """
+        SELECT title, link, source, published
+        FROM risk_items
+        WHERE published IS NOT NULL
+          AND published <> ''
+        ORDER BY id DESC
+        LIMIT ?
+        """,
+        (max(limit * 3, 300),),
+    )
+
+    rows = []
+    seen = set()
+    for title, link, source, published in cur.fetchall():
+        dt = parse_any_datetime(published)
+        if not dt or dt.date() >= border_date:
+            continue
+        key = (title or "", link or "", published or "")
+        if key in seen:
+            continue
+        seen.add(key)
+        rows.append({
+            "title": title or "",
+            "link": link or "#",
+            "source": source or "",
+            "published": published or "",
+        })
+        if len(rows) >= limit:
+            break
+
+    rows.sort(key=lambda a: parse_any_datetime(a.get("published") or "") or datetime.min.replace(tzinfo=JST), reverse=True)
+    return rows
 def get_older_dev_history(con, border_dt, limit):
     border_iso = border_dt.astimezone(timezone.utc).isoformat()
     cur = con.cursor()
@@ -1225,10 +1721,25 @@ def build_legal_page_html(legal_news: list[dict]) -> str:
     return "\n".join(sections)
 
 
-def build_html(risk_entries, today_dev_articles, yesterday_dev_articles, older_dev_articles, generated_at, history, config_result, legal_news=None, fetched_dev_count=None):
+def build_html(risk_entries, today_dev_articles, yesterday_dev_articles, older_dev_articles, generated_at, history, config_result, legal_news=None, fetched_dev_count=None, risk_today=None, risk_yesterday=None, risk_older=None, security_today=None, security_yesterday=None, security_older=None, incident_today=None, incident_yesterday=None, incident_older=None, vuln_today=None, vuln_yesterday=None, vuln_older=None, guideline_content=None):
+    risk_today = risk_today or []
+    risk_yesterday = risk_yesterday or []
+    risk_older = risk_older or []
+    security_today = security_today or []
+    security_yesterday = security_yesterday or []
+    security_older = security_older or []
+    incident_today = incident_today or []
+    incident_yesterday = incident_yesterday or []
+    incident_older = incident_older or []
+    vuln_today = vuln_today or []
+    vuln_yesterday = vuln_yesterday or []
+    vuln_older = vuln_older or []
+    security_count = len(security_today) + len(security_yesterday) + len(security_older)
+    incident_count = len(incident_today) + len(incident_yesterday) + len(incident_older)
+    vuln_count = len(vuln_today) + len(vuln_yesterday) + len(vuln_older)
     risk_count = len(risk_entries)
     dev_count = fetched_dev_count if fetched_dev_count is not None else (len(today_dev_articles) + len(yesterday_dev_articles))
-    risk_html = build_list_items_news(risk_entries)
+    risk_page_html = build_news_history_page_html(risk_today or [], risk_yesterday or [], risk_older or [], "AI関連の規制・脆弱性・漏えい・ガバナンス動向を、今日 / 昨日 / 過去 で確認します。")
     dev_html = build_dev_page_html(today_dev_articles, yesterday_dev_articles, older_dev_articles)
     history_rows = build_history_rows(history)
     reasons_html = build_list_html(config_result["reasons"])
@@ -1238,6 +1749,10 @@ def build_html(risk_entries, today_dev_articles, yesterday_dev_articles, older_d
     next_actions_html = build_list_html(config_result["next_actions"])
     legal_page_html    = build_legal_page_html(legal_news or [])
     legal_summary_html = build_legal_summary_panel(legal_news or [])
+    security_trend_html = build_news_history_page_html(security_today or [], security_yesterday or [], security_older or [], "セキュリティ全体の流れ、注意喚起、制度動向、主要トレンドを見る入口タブです。")
+    incident_html = build_news_history_page_html(incident_today or [], incident_yesterday or [], incident_older or [], "情報漏えい、不正アクセス、ランサムウェア被害など、実被害・事例寄りの情報を集約します。")
+    vulnerability_html = build_news_history_page_html(vuln_today or [], vuln_yesterday or [], vuln_older or [], "CVE、ゼロデイ、脆弱性情報、パッチ、アップデート、緊急対策情報をまとめて確認します。")
+    guideline_html = build_guideline_columns_html(guideline_content or {})
 
     html_doc = f"""<!DOCTYPE html>
 <html lang="ja">
@@ -1385,6 +1900,7 @@ html, body {{
     align-items:center;
     justify-content:center;
     min-height:38px;
+    min-width:52px;
     border-radius:10px;
     background:#0a3560;
     color:#dff3ff;
@@ -1509,8 +2025,62 @@ html, body {{
 .action-btn:hover {{
     background:linear-gradient(180deg,#2f9958 0%,#1a6f3d 100%);
 }}
+
+.guideline-grid {{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:14px;
+}}
+.guideline-column {{
+    background:#0d0d0d;
+    border:1px solid #1b2735;
+    border-radius:14px;
+    padding:14px;
+}}
+.guideline-column-title {{
+    font-size:18px;
+    font-weight:800;
+    color:#e8f4ff;
+}}
+.guideline-column-sub {{
+    font-size:12px;
+    color:#7f8a99;
+    margin:4px 0 12px;
+}}
+.guideline-card {{
+    background:#11161d;
+    border:1px solid #1b2735;
+    border-radius:12px;
+    padding:12px;
+    margin-bottom:10px;
+}}
+.guideline-card-title {{
+    font-size:14px;
+    font-weight:700;
+    color:#d9ebfb;
+    margin-bottom:6px;
+    line-height:1.5;
+}}
+.guideline-card-desc {{
+    font-size:12px;
+    color:#b8c0cc;
+    line-height:1.7;
+    margin-bottom:8px;
+}}
+.guideline-card-meta {{
+    font-size:11px;
+    color:#7f8a99;
+    margin-bottom:8px;
+}}
+.guideline-link {{
+    display:inline-block;
+    color:#8ad1ff;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:700;
+}}
 @media (max-width:980px) {{
-    .metrics, .ai-top, .ai-grid {{ grid-template-columns:1fr; }}
+    .metrics, .ai-top, .ai-grid, .guideline-grid {{ grid-template-columns:1fr; }}
     .nav {{
         grid-template-columns:repeat(3,minmax(0,1fr));
         gap:6px;
@@ -1549,6 +2119,9 @@ function showPage(pageId, btn) {{
     document.querySelectorAll('.nav-btn').forEach(function(el) {{ el.classList.remove('active'); }});
     document.getElementById(pageId).classList.add('active');
     btn.classList.add('active');
+    window.scrollTo({{ top: 0, left: 0, behavior: 'auto' }});
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
 }}
 window.addEventListener('DOMContentLoaded', function() {{
     var firstBtn = document.querySelector('.nav-btn');
@@ -1560,13 +2133,17 @@ window.addEventListener('DOMContentLoaded', function() {{
 <div class="app">
   <div class="fixed-header">
     <div class="header-row">
-      <div class="title">🛡️ {safe_text(CONFIG.get("app_name", ""))}</div>
+      <div class="title">{safe_text(APP_ICON)} {safe_text(CONFIG.get("app_name", ""))}</div>
       <div class="subtitle">｜ {html.escape(CONFIG.get("subtitle", ""))}</div>
       <div class="timestamp">最終更新: {safe_text(generated_at)}</div>
     </div>
     <div class="nav">
       <button class="nav-btn" data-page="page-main"  onclick="showPage('page-main', this)">🏠 MAIN</button>
       <button class="nav-btn" data-page="page-legal" onclick="showPage('page-legal', this)">⚖️ 法規制情報</button>
+      <button class="nav-btn" data-page="page-guideline" onclick="showPage('page-guideline', this)">🏭 自工会ガイドライン</button>
+      <button class="nav-btn" data-page="page-security" onclick="showPage('page-security', this)">🔐 セキュリティ動向</button>
+      <button class="nav-btn" data-page="page-incident" onclick="showPage('page-incident', this)">⚠️ インシデント / 攻撃事例</button>
+      <button class="nav-btn" data-page="page-vuln" onclick="showPage('page-vuln', this)">🧩 脆弱性 / CVE</button>
       <button class="nav-btn" data-page="page-gov"   onclick="showPage('page-gov', this)">🛡 AIガバナンス</button>
       <button class="nav-btn" data-page="page-dev"   onclick="showPage('page-dev', this)">🚀 開発効率</button>
       <button class="nav-btn" data-page="page-ai"    onclick="showPage('page-ai', this)">🤖 推奨AI構成</button>
@@ -1576,6 +2153,7 @@ window.addEventListener('DOMContentLoaded', function() {{
   <div class="content">
     <div id="page-main" class="page active">
       <div class="section-title">📊 エグゼクティブ・サマリー</div>
+      <div class="notice-box" style="margin-bottom:18px; font-size:13px;">MAIN は全体の入口です。法規制の最新動向、AIリスク件数、開発記事件数、現在の推奨構成、過去ログをまとめて確認します。</div>
 
       <div class="panel" style="margin-bottom:18px;">
         <div class="section-title" style="font-size:18px; margin-bottom:4px;">⚖️ 法規制情報　最新動向</div>
@@ -1601,6 +2179,24 @@ window.addEventListener('DOMContentLoaded', function() {{
         </div>
       </div>
 
+      <div class="metrics" style="margin-top:18px;">
+        <div class="metric">
+          <div class="metric-label">セキュリティ動向</div>
+          <div class="metric-value">{safe_text(security_count if security_count else "通知なし")}</div>
+          <div class="metric-desc">注意喚起や全体動向の記事件数です。</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">インシデント / 攻撃事例</div>
+          <div class="metric-value">{safe_text(incident_count if incident_count else "通知なし")}</div>
+          <div class="metric-desc">実被害や侵害事例として拾えた件数です。</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">脆弱性 / CVE</div>
+          <div class="metric-value">{safe_text(vuln_count if vuln_count else "通知なし")}</div>
+          <div class="metric-desc">脆弱性・CVE・パッチ関連の記事件数です。</div>
+        </div>
+      </div>
+
       <div class="panel">
         <div class="section-title" style="font-size:18px; margin-bottom:10px;">過去ログ（SQLite）</div>
         <table class="history-table">
@@ -1609,6 +2205,9 @@ window.addEventListener('DOMContentLoaded', function() {{
               <th>取得日時</th>
               <th>AIリスク</th>
               <th>開発記事</th>
+              <th>セキュリティ動向</th>
+              <th>インシデント</th>
+              <th>脆弱性 / CVE</th>
               <th>構成</th>
             </tr>
           </thead>
@@ -1619,9 +2218,30 @@ window.addEventListener('DOMContentLoaded', function() {{
       </div>
     </div>
 
+
+    <div id="page-guideline" class="page">
+      <div class="section-title">🏭 自工会ガイドライン</div>
+      {guideline_html}
+    </div>
+
+    <div id="page-security" class="page">
+      <div class="section-title">🔐 セキュリティ動向</div>
+      {security_trend_html}
+    </div>
+
+    <div id="page-incident" class="page">
+      <div class="section-title">⚠️ インシデント / 攻撃事例</div>
+      {incident_html}
+    </div>
+
+    <div id="page-vuln" class="page">
+      <div class="section-title">🧩 脆弱性 / CVE</div>
+      {vulnerability_html}
+    </div>
+
     <div id="page-gov" class="page">
       <div class="section-title">🛡 AIガバナンス</div>
-      <div class="panel">{risk_html}</div>
+      <div class="panel">{risk_page_html}</div>
     </div>
 
     <div id="page-dev" class="page">
@@ -1690,11 +2310,15 @@ def main():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
     start = time.time()
-    print("  🚀 並列取得: AI Risk / Dev Articles / 法規制ニュース 同時実行")
-    with ThreadPoolExecutor(max_workers=3) as ex:
-        f_risk  = ex.submit(get_ai_risk_entries)
-        f_dev   = ex.submit(get_dev_articles)
+    print("  🚀 並列取得: 7カテゴリ / 7 workers 同時実行")
+    guideline_content = get_jama_guideline_content()
+    with ThreadPoolExecutor(max_workers=7) as ex:
+        f_risk = ex.submit(get_ai_risk_entries)
+        f_dev = ex.submit(get_dev_articles)
         f_legal = ex.submit(get_all_legal_news)
+        f_security = ex.submit(get_security_trend_entries)
+        f_incident = ex.submit(get_incident_entries)
+        f_vuln = ex.submit(get_vulnerability_entries)
         try:
             risk_entries = f_risk.result(timeout=MAIN_FUTURE_TIMEOUT)
             risk_entries.sort(key=lambda e: e.get("published_parsed") or (0,)*9, reverse=True)
@@ -1721,16 +2345,82 @@ def main():
         except Exception as e:
             print(f"[WARN] 法規制ニュース取得失敗: {e}")
             legal_news = []
+        try:
+            security_trend_entries = f_security.result(timeout=MAIN_FUTURE_TIMEOUT)
+        except TimeoutError:
+            print(f"[WARN] セキュリティ動向取得タイムアウト ({MAIN_FUTURE_TIMEOUT}s)")
+            security_trend_entries = []
+        except Exception as e:
+            print(f"[WARN] セキュリティ動向取得失敗: {e}")
+            security_trend_entries = []
+        try:
+            incident_entries = f_incident.result(timeout=MAIN_FUTURE_TIMEOUT)
+        except TimeoutError:
+            print(f"[WARN] インシデント取得タイムアウト ({MAIN_FUTURE_TIMEOUT}s)")
+            incident_entries = []
+        except Exception as e:
+            print(f"[WARN] インシデント取得失敗: {e}")
+            incident_entries = []
+        try:
+            vulnerability_entries = f_vuln.result(timeout=MAIN_FUTURE_TIMEOUT)
+        except TimeoutError:
+            print(f"[WARN] 脆弱性取得タイムアウト ({MAIN_FUTURE_TIMEOUT}s)")
+            vulnerability_entries = []
+        except Exception as e:
+            print(f"[WARN] 脆弱性取得失敗: {e}")
+            vulnerability_entries = []
 
     generated_at = datetime.now(JST).strftime("%Y-%m-%d %H:%M")
     config_result = analyze_config(risk_entries, dev_articles)
     today_dev_articles, yesterday_dev_articles, fetched_older_dev_articles = split_dev_articles_by_day(dev_articles)
     border_dt = datetime.now(JST).replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=1)
-    print(f"リスク記事: {len(risk_entries)}件 / 開発記事: {len(dev_articles)}件 / 法規制: {len(legal_news)}件")
+    print(f"リスク記事: {len(risk_entries)}件 / 開発記事: {len(dev_articles)}件 / 法規制: {len(legal_news)}件 / セキュリティ動向: {len(security_trend_entries)}件 / インシデント: {len(incident_entries)}件 / 脆弱性: {len(vulnerability_entries)}件")
 
     con = init_db()
-    save_run_history(con, generated_at, risk_entries, dev_articles, config_result, legal_news)
+    save_run_history(
+        con,
+        generated_at,
+        risk_entries,
+        dev_articles,
+        config_result,
+        legal_news,
+        security_entries=security_trend_entries,
+        incident_entries=incident_entries,
+        vuln_entries=vulnerability_entries,
+    )
+    save_extra_news_items(con, "security", security_trend_entries)
+    save_extra_news_items(con, "incident", incident_entries)
+    save_extra_news_items(con, "vulnerability", vulnerability_entries)
     history = get_recent_history(con, limit=8)
+    risk_today, risk_yesterday, fetched_risk_older = split_risk_entries_by_day(risk_entries)
+    security_today, security_yesterday, fetched_security_older = split_news_items_by_day(security_trend_entries)
+    incident_today, incident_yesterday, fetched_incident_older = split_news_items_by_day(incident_entries)
+    vuln_today, vuln_yesterday, fetched_vuln_older = split_news_items_by_day(vulnerability_entries)
+    older_risk_history = get_older_risk_history(con, border_dt, 200)
+    older_security_history = get_older_extra_news(con, "security", border_dt, 200)
+    older_incident_history = get_older_extra_news(con, "incident", border_dt, 200)
+    older_vuln_history = get_older_extra_news(con, "vulnerability", border_dt, 200)
+    def merge_and_sort_news_items(*groups, limit=200):
+        merged = []
+        seen = set()
+        for group in groups:
+            for item in group or []:
+                key = (
+                    item.get("title", ""),
+                    item.get("link") or "",
+                    item.get("published") or item.get("published_at") or "",
+                )
+                if key in seen:
+                    continue
+                seen.add(key)
+                merged.append(item)
+        merged.sort(key=lambda a: parse_any_datetime(a.get("published") or a.get("published_at") or "") or datetime.min.replace(tzinfo=JST), reverse=True)
+        return merged[:limit]
+
+    risk_older = merge_and_sort_news_items(fetched_risk_older, older_risk_history, limit=200)
+    security_older = merge_and_sort_news_items(fetched_security_older, older_security_history, limit=200)
+    incident_older = merge_and_sort_news_items(fetched_incident_older, older_incident_history, limit=200)
+    vuln_older = merge_and_sort_news_items(fetched_vuln_older, older_vuln_history, limit=200)
     older_dev_history = get_older_dev_history(con, border_dt, 200)
     older_dev_articles = fetched_older_dev_articles + older_dev_history
     deduped_older_dev_articles = []
@@ -1759,6 +2449,19 @@ def main():
         config_result,
         legal_news,
         fetched_dev_count=len(dev_articles),
+        risk_today=risk_today,
+        risk_yesterday=risk_yesterday,
+        risk_older=risk_older,
+        security_today=security_today,
+        security_yesterday=security_yesterday,
+        security_older=security_older,
+        incident_today=incident_today,
+        incident_yesterday=incident_yesterday,
+        incident_older=incident_older,
+        vuln_today=vuln_today,
+        vuln_yesterday=vuln_yesterday,
+        vuln_older=vuln_older,
+        guideline_content=guideline_content,
     )
 
     with open(OUTPUT_FILE, "w", encoding="utf-8-sig") as f:

@@ -144,6 +144,7 @@ html, body {
     align-items:center;
     justify-content:center;
     min-height:38px;
+    min-width:52px;
     border-radius:10px;
     background:#0a3560;
     color:#dff3ff;
@@ -268,8 +269,62 @@ html, body {
 .action-btn:hover {
     background:linear-gradient(180deg,#2f9958 0%,#1a6f3d 100%);
 }
+
+.guideline-grid {
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:14px;
+}
+.guideline-column {
+    background:#0d0d0d;
+    border:1px solid #1b2735;
+    border-radius:14px;
+    padding:14px;
+}
+.guideline-column-title {
+    font-size:18px;
+    font-weight:800;
+    color:#e8f4ff;
+}
+.guideline-column-sub {
+    font-size:12px;
+    color:#7f8a99;
+    margin:4px 0 12px;
+}
+.guideline-card {
+    background:#11161d;
+    border:1px solid #1b2735;
+    border-radius:12px;
+    padding:12px;
+    margin-bottom:10px;
+}
+.guideline-card-title {
+    font-size:14px;
+    font-weight:700;
+    color:#d9ebfb;
+    margin-bottom:6px;
+    line-height:1.5;
+}
+.guideline-card-desc {
+    font-size:12px;
+    color:#b8c0cc;
+    line-height:1.7;
+    margin-bottom:8px;
+}
+.guideline-card-meta {
+    font-size:11px;
+    color:#7f8a99;
+    margin-bottom:8px;
+}
+.guideline-link {
+    display:inline-block;
+    color:#8ad1ff;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:700;
+}
 @media (max-width:980px) {
-    .metrics, .ai-top, .ai-grid { grid-template-columns:1fr; }
+    .metrics, .ai-top, .ai-grid, .guideline-grid { grid-template-columns:1fr; }
     .nav {
         grid-template-columns:repeat(3,minmax(0,1fr));
         gap:6px;
@@ -308,6 +363,9 @@ function showPage(pageId, btn) {
     document.querySelectorAll('.nav-btn').forEach(function(el) { el.classList.remove('active'); });
     document.getElementById(pageId).classList.add('active');
     btn.classList.add('active');
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
 }
 window.addEventListener('DOMContentLoaded', function() {
     var firstBtn = document.querySelector('.nav-btn');
@@ -321,11 +379,15 @@ window.addEventListener('DOMContentLoaded', function() {
     <div class="header-row">
       <div class="title">🛡️ Strategic IT Suite</div>
       <div class="subtitle">｜ IT戦略・リスク・技術トレンドを収集・分類し、意思決定に活用する</div>
-      <div class="timestamp">最終更新: 2026-04-19 04:57</div>
+      <div class="timestamp">最終更新: 2026-04-19 09:11</div>
     </div>
     <div class="nav">
       <button class="nav-btn" data-page="page-main"  onclick="showPage('page-main', this)">🏠 MAIN</button>
       <button class="nav-btn" data-page="page-legal" onclick="showPage('page-legal', this)">⚖️ 法規制情報</button>
+      <button class="nav-btn" data-page="page-guideline" onclick="showPage('page-guideline', this)">🏭 自工会ガイドライン</button>
+      <button class="nav-btn" data-page="page-security" onclick="showPage('page-security', this)">🔐 セキュリティ動向</button>
+      <button class="nav-btn" data-page="page-incident" onclick="showPage('page-incident', this)">⚠️ インシデント / 攻撃事例</button>
+      <button class="nav-btn" data-page="page-vuln" onclick="showPage('page-vuln', this)">🧩 脆弱性 / CVE</button>
       <button class="nav-btn" data-page="page-gov"   onclick="showPage('page-gov', this)">🛡 AIガバナンス</button>
       <button class="nav-btn" data-page="page-dev"   onclick="showPage('page-dev', this)">🚀 開発効率</button>
       <button class="nav-btn" data-page="page-ai"    onclick="showPage('page-ai', this)">🤖 推奨AI構成</button>
@@ -335,6 +397,7 @@ window.addEventListener('DOMContentLoaded', function() {
   <div class="content">
     <div id="page-main" class="page active">
       <div class="section-title">📊 エグゼクティブ・サマリー</div>
+      <div class="notice-box" style="margin-bottom:18px; font-size:13px;">MAIN は全体の入口です。法規制の最新動向、AIリスク件数、開発記事件数、現在の推奨構成、過去ログをまとめて確認します。</div>
 
       <div class="panel" style="margin-bottom:18px;">
         <div class="section-title" style="font-size:18px; margin-bottom:4px;">⚖️ 法規制情報　最新動向</div>
@@ -454,6 +517,24 @@ window.addEventListener('DOMContentLoaded', function() {
         </div>
       </div>
 
+      <div class="metrics" style="margin-top:18px;">
+        <div class="metric">
+          <div class="metric-label">セキュリティ動向</div>
+          <div class="metric-value">18</div>
+          <div class="metric-desc">注意喚起や全体動向の記事件数です。</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">インシデント / 攻撃事例</div>
+          <div class="metric-value">18</div>
+          <div class="metric-desc">実被害や侵害事例として拾えた件数です。</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">脆弱性 / CVE</div>
+          <div class="metric-value">24</div>
+          <div class="metric-desc">脆弱性・CVE・パッチ関連の記事件数です。</div>
+        </div>
+      </div>
+
       <div class="panel">
         <div class="section-title" style="font-size:18px; margin-bottom:10px;">過去ログ（SQLite）</div>
         <table class="history-table">
@@ -462,20 +543,737 @@ window.addEventListener('DOMContentLoaded', function() {
               <th>取得日時</th>
               <th>AIリスク</th>
               <th>開発記事</th>
+              <th>セキュリティ動向</th>
+              <th>インシデント</th>
+              <th>脆弱性 / CVE</th>
               <th>構成</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>2026-04-19 04:57</td><td>64</td><td>48</td><td>社内限定・管理重視型</td></tr>
-<tr><td>2026-04-16 23:30</td><td>67</td><td>48</td><td>社内限定・管理重視型</td></tr>
+            <tr><td>2026-04-19 09:11</td><td>64</td><td>48</td><td>18</td><td>18</td><td>24</td><td>社内限定・管理重視型</td></tr>
           </tbody>
         </table>
       </div>
     </div>
 
+
+    <div id="page-guideline" class="page">
+      <div class="section-title">🏭 自工会ガイドライン</div>
+      
+    <div class="notice-box" style="margin-bottom:16px;">上段で関連資料と変更内容を見て、下段で Lv1 / Lv2 / Lv3 の条項イメージを確認する構成です。</div>
+    <div class="panel" style="margin-bottom:16px;">
+      <div class="section-title" style="font-size:18px; margin-bottom:6px;">変更内容</div>
+      <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">新規追加、版数変更、更新日変更などを先に確認する欄です。</div>
+      
+        <div class="item-card">
+            <div class="item-index">更新</div>
+            <div class="item-body">
+                <div class="item-title">工場領域版 v1.0 公開</div>
+                <div class="item-meta">2026-04-16</div>
+                <div class="guideline-card-desc" style="margin-top:6px;">工場領域向けガイドラインとチェックシートが公開。</div>
+            </div>
+        </div>
+        
+        <div class="item-card">
+            <div class="item-index">更新</div>
+            <div class="item-body">
+                <div class="item-title">エンタープライズ領域 v2.3</div>
+                <div class="item-meta">2025-12-26</div>
+                <div class="guideline-card-desc" style="margin-top:6px;">本体・解説書・チェックシートが v2.3 系で整理。</div>
+            </div>
+        </div>
+        
+        <div class="item-card">
+            <div class="item-index">更新</div>
+            <div class="item-body">
+                <div class="item-title">FAQ / 説明会導線更新</div>
+                <div class="item-meta">2025-12-26</div>
+                <div class="guideline-card-desc" style="margin-top:6px;">提出方法、FAQ、説明会資料の導線を最新化。</div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="panel" style="margin-bottom:16px;">
+      <div class="section-title" style="font-size:18px; margin-bottom:6px;">関連資料</div>
+      <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">本体・FAQ・チェックシート・工場領域など、参照する資料を次にまとめています。</div>
+      <div class="guideline-grid">
+        <div class="guideline-card">
+          <div class="guideline-card-title">自工会/部工会ガイドライン V2.3</div>
+          <div class="guideline-card-desc">エンタープライズ領域の本体資料。最新版は v2.3。</div>
+          <div class="guideline-card-meta">JAMA 公式</div>
+          <a class="guideline-link" href="https://www.jama.or.jp/operation/it/cyb_sec/cyb_sec_guideline.html" target="_blank" rel="noopener noreferrer">開く</a>
+        </div>
+        
+        <div class="guideline-card">
+          <div class="guideline-card-title">解説書 V2.3</div>
+          <div class="guideline-card-desc">用語・要求事項・達成基準の解釈補助。</div>
+          <div class="guideline-card-meta">JAMA 公式</div>
+          <a class="guideline-link" href="https://www.jama.or.jp/operation/it/cyb_sec/cyb_sec_guideline.html" target="_blank" rel="noopener noreferrer">開く</a>
+        </div>
+        
+        <div class="guideline-card">
+          <div class="guideline-card-title">チェックシート V2.3</div>
+          <div class="guideline-card-desc">自己評価用チェックシート。</div>
+          <div class="guideline-card-meta">JAMA 公式</div>
+          <a class="guideline-link" href="https://www.jama.or.jp/operation/it/cyb_sec/cyb_sec_guideline.html" target="_blank" rel="noopener noreferrer">開く</a>
+        </div>
+        
+        <div class="guideline-card">
+          <div class="guideline-card-title">優先項目の解説資料</div>
+          <div class="guideline-card-desc">レベル1の中から優先的に取り組むべき項目の解説。</div>
+          <div class="guideline-card-meta">JAMA 公式</div>
+          <a class="guideline-link" href="https://www.jama.or.jp/operation/it/cyb_sec/cyb_sec_guideline.html" target="_blank" rel="noopener noreferrer">開く</a>
+        </div>
+        
+        <div class="guideline-card">
+          <div class="guideline-card-title">中小企業向け手引き</div>
+          <div class="guideline-card-desc">実践的な始め方・進め方の手引き。</div>
+          <div class="guideline-card-meta">JAMA 公式</div>
+          <a class="guideline-link" href="https://www.jama.or.jp/operation/it/cyb_sec/cyb_sec_guideline.html" target="_blank" rel="noopener noreferrer">開く</a>
+        </div>
+        
+        <div class="guideline-card">
+          <div class="guideline-card-title">工場領域版 v1.0</div>
+          <div class="guideline-card-desc">OT 環境向けガイドラインとチェックシート。</div>
+          <div class="guideline-card-meta">JAMA 公式</div>
+          <a class="guideline-link" href="https://www.jama.or.jp/operation/it/cyb_sec/cyb_sec_guideline.html" target="_blank" rel="noopener noreferrer">開く</a>
+        </div>
+        
+        <div class="guideline-card">
+          <div class="guideline-card-title">最新情報・FAQ・説明会</div>
+          <div class="guideline-card-desc">提出方法、FAQ、説明会資料などの関連導線。</div>
+          <div class="guideline-card-meta">JAPIA 公式</div>
+          <a class="guideline-link" href="https://www.japia.or.jp/work/ict/cybersecurity-newest" target="_blank" rel="noopener noreferrer">開く</a>
+        </div>
+        
+        <div class="guideline-card">
+          <div class="guideline-card-title">サプライチェーン向け情報</div>
+          <div class="guideline-card-desc">自己評価提出方法、FAQ、説明会資料への導線。</div>
+          <div class="guideline-card-meta">JAMA 公式</div>
+          <a class="guideline-link" href="https://www.jama.or.jp/operation/it/cyb_sec/cyb_sec_supply_chain.html" target="_blank" rel="noopener noreferrer">開く</a>
+        </div>
+        </div>
+    </div>
+    <div class="panel">
+      <div class="section-title" style="font-size:18px; margin-bottom:6px;">条項一覧（参考）</div>
+      <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">資料確認のあとに、Lv1 / Lv2 / Lv3 の条項イメージを下で確認します。</div>
+      <div class="guideline-grid">
+        <div class="guideline-column">
+          <div class="guideline-column-title">Lv1</div>
+          <div class="guideline-column-sub">条項イメージ</div>
+          <ul class="info-list"><li>方針・体制整備</li><li>資産把握・管理</li><li>アクセス制御</li><li>脆弱性管理</li><li>委託先・取引先管理</li><li>インシデント対応</li><li>教育・訓練</li></ul>
+        </div>
+        
+        <div class="guideline-column">
+          <div class="guideline-column-title">Lv2</div>
+          <div class="guideline-column-sub">条項イメージ</div>
+          <ul class="info-list"><li>ネットワーク管理</li><li>認証強化</li><li>ログ取得・監視</li><li>バックアップ・復旧</li><li>サプライチェーン統制</li><li>点検・評価</li><li>運用手順の標準化</li></ul>
+        </div>
+        
+        <div class="guideline-column">
+          <div class="guideline-column-title">Lv3</div>
+          <div class="guideline-column-sub">条項イメージ</div>
+          <ul class="info-list"><li>高度監視・SOC連携</li><li>ゼロトラスト寄り統制</li><li>工場領域対策</li><li>委託先評価の高度化</li><li>演習・復旧計画</li><li>経営層レビュー</li><li>継続的改善</li></ul>
+        </div>
+        </div>
+    </div>
+    
+    </div>
+
+    <div id="page-security" class="page">
+      <div class="section-title">🔐 セキュリティ動向</div>
+      <div class="notice-box" style="margin-bottom:18px; font-size:13px;">セキュリティ全体の流れ、注意喚起、制度動向、主要トレンドを見る入口タブです。</div>
+
+    <div class="section-title" style="font-size:18px; margin-bottom:6px;">🟢 今日</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">本日の取得記事 / 0件</div>
+    <div class="empty-box">通知なし</div>
+    <div class="section-title" style="font-size:18px; margin-top:22px; margin-bottom:6px;">🟡 昨日</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">前日の取得記事 / 1件</div>
+    
+        <div class="item-card">
+            <div class="item-index">01</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMiR0FVX3lxTE9FYlhtbDNIT0IwYVUwYzJERzVtTE11dTdEQVpkbTRsd1Y0U2hweW9KaG9nQ3EyS2pjUi1MUDVsTGdqbU9ib3hR?oc=5" target="_blank" rel="noopener noreferrer">ランサムウェア対策の日本市場（～2031年）、市場規模（ソリューション、サービス、ネットワーク保護）・分析レポートを発表 - newscast.jp</a>
+                <div class="item-meta">newscast.jp / 2026-04-18 14:00</div>
+            </div>
+        </div>
+        
+    <div class="section-title" style="font-size:18px; margin-top:22px; margin-bottom:6px;">📚 過去</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">SQLiteに蓄積された過去履歴 / 17件（最大200件表示）</div>
+    
+        <div class="item-card">
+            <div class="item-index">01</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMickFVX3lxTE5BTHhrMUN6OENLYUhSTGo2MDhnNE9Cbm03elhqRU1rMENmcFJ3QUFOV0w1NkV6N2V3cEx0SVN3aHU4SFlwRXV0QjRqQUVEblY5Q1ZCc2F6XzM4Y2JwVmdVMjI1SExFUlZ0dnpINDA3WjRDdw?oc=5" target="_blank" rel="noopener noreferrer">ソフトウェア等の脆弱性関連情報に関する届出状況[2026年第1四半期（1月～3月）] - ipa.go.jp</a>
+                <div class="item-meta">ipa.go.jp / 2026-04-16 12:06</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">02</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMiakFVX3lxTE9ZNlhnQlRtS0VMa0lYd2wzNFBod3dUNnpnOXRrdU40c3I3d1dhZGVEWTdwNWI4Q2tVMklqZFJwdi1yaXRBelNabXdFTW1zdHpJanY1TFhoZU02VldaWEd4R0pQaVZVUjZUbHc?oc=5" target="_blank" rel="noopener noreferrer">チェック・ポイント、「製造業界サイバーセキュリティレポート」2025年版を発表 - PR TIMES</a>
+                <div class="item-meta">PR TIMES / 2026-04-16 11:30</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">03</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMic0FVX3lxTE5GbXhuaHdadk0zRHJ3TmJLTXdURnYtbzhtX3F2TEVrNTJKS01HLXBOUW1GSHR0V1MzR3EyendTWGNSXzlvV0cwYWpUQ2FQUVR1RjR4U0FWa0g5VnptRXZtd0RjOFUxd3dtcEJSSjRxaE5rYVE?oc=5" target="_blank" rel="noopener noreferrer">脆弱性対策情報データベースJVN iPediaの登録状況 [2026年第1四半期（1月〜3月）] - ipa.go.jp</a>
+                <div class="item-meta">ipa.go.jp / 2026-04-15 12:07</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">04</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMicEFVX3lxTE0yQ3FCVFN0bWVjWjk2ZTdXUE8xMU9UOWFpNjVHS1Y0V2QyUmJlWDRMWU5DaC1iWFVjUFl5MzAyWTc5bHJlYWxpMFRuVEJKZnZGeGZyVVRQbWp2b20zaGRRUWlrX0tvTEk1Y1RLVXZJQms?oc=5" target="_blank" rel="noopener noreferrer">Microsoft 製品の脆弱性対策について(2026年4月) - ipa.go.jp</a>
+                <div class="item-meta">ipa.go.jp / 2026-04-15 12:02</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">05</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMiaEFVX3lxTFB2QnZtaVROWERlbzQzejJ2cnMzTFpFLUR5aVJ0R2JSeThlSVRHV0FHMDljMFRpV0ZyWFg4dmpyRnZDcXFkbVFRaFotbmxiODJjVEZzdDZKaDd3UVgwRzhlWEJVVjVjOTVl?oc=5" target="_blank" rel="noopener noreferrer">サプライチェーン攻撃はなぜ防げない？企業が取るべき「レジリエンス戦略」 - マイナビニュース</a>
+                <div class="item-meta">マイナビニュース / 2026-04-14 07:07</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">06</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMifEFVX3lxTE9NUDZSV2p0U0l3dy1mWm4yLXB4aFVCRDF2UXdZZnNNRVRLNEdBLUQyR0x6ZnRjbjFCYlQ2VVFuU0JZREhiSDRrekRwTXRqUGgwQm56amRHeGtyTjJaV3pXU3VxU3hrdXQ4ZnhIVUNoVGVLOXd2SnlyUm5Qam8?oc=5" target="_blank" rel="noopener noreferrer">Adobe Acrobat および Reader の脆弱性対策について(2026年4月) - ipa.go.jp</a>
+                <div class="item-meta">ipa.go.jp / 2026-04-13 12:02</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">07</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMibEFVX3lxTE9heGRiaUVuOVlIRTJGVGVhc2dpQ3pTa2pNYkNEaVVKTXpBRmZrRzRrM09JZ0pXdXBVenlNM0hVZkJCWHBMSTZjNW84MVhtS0pJTVVIVjRMamU2U19BMjNkVV92ZVlwV1liUXNsbg?oc=5" target="_blank" rel="noopener noreferrer">警察庁はランサムウェアなどサイバー攻撃が多発する現状をどう分析し、どんな活動をしているのか - INTERNET Watch</a>
+                <div class="item-meta">INTERNET Watch / 2026-04-02 16:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">08</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMiREFVX3lxTFB6bjZqR182QTh1Y2Z3c21Gam1GZUNyVkUyenZEdUxhMmRhSnAxc19tUE1fQW5yUl80VFh2U2E2NUJSbTBf?oc=5" target="_blank" rel="noopener noreferrer">ランサムウェア攻撃の実録本『社長の決定』がサイバーセキュリティアワード最優秀賞受賞 - Koubo</a>
+                <div class="item-meta">Koubo / 2026-03-31 16:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">09</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMiakFVX3lxTE43bkdpOV9Sc2lqdW1OS1BsbXdjamdENlZ3bE1WRTJXMmZKMFJOLU9qQ1dBNXFSYWtIZHBCWXIxdjlGYUdVeXdsOHhwSlhPenBjNUlWck12QVlZN21kUHc0VFh0SGplQy1lUlE?oc=5" target="_blank" rel="noopener noreferrer">【受賞】ランサムウェア攻撃との闘いを描いた実録本 『サイバー攻撃 その瞬間 社長の決定』が「サイバーセキュリティアワード2026」にて最優秀賞を受賞 - PR TIMES</a>
+                <div class="item-meta">PR TIMES / 2026-03-31 16:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">10</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMic0FVX3lxTE5MQWM1TzY1emJCSWxURXduU1FRYjRJeVNEVHQ2cElBNEZvZnFXYUNZd2UtY2F5WEVKbjhFYTBVdFVNZE9qRUFJR2hlRlBmZG9lb2o1MXAzNTdaUmFRV0E0ZVlYM0VHWmtNX0F0RDJQVGN6OE0?oc=5" target="_blank" rel="noopener noreferrer">サイバー攻撃を“自分事”に。そしてその先、“どう動く？”――中小企業のセキュリティ対策強化に向けて「中小企業のための実例で学ぶサイバーセキュリティリスク事例集」と「中小企業の情報セキュリティ対策ガイドライン第4.0版」を公表しました （METI - meti.go.jp</a>
+                <div class="item-meta">meti.go.jp / 2026-03-27 16:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">11</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMib0FVX3lxTE5YRENxLThMS1BPM0l4eDhYOF9RZUtNS1VxUVhURjVlOUtqOHNLMW8yN05RSUZ0em5teUVUYUIyX1pFTTVLdWxJMHJ1cUFnUGlOTkZWcHRidkFEUnEzemtXUXotN01HREFoZ0tWUXFuNA?oc=5" target="_blank" rel="noopener noreferrer">AI時代のサイバー攻撃は次のステージへ。2026年の転換点とは？【前編】 - NTT Data</a>
+                <div class="item-meta">NTT Data / 2026-03-19 16:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">12</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMif0FVX3lxTE1ab2JCUEFwQnlhdXNULUt5YjlOZmtuTzMtTHJjTDhfQ0FZMVExMGYyZ2pNSXpyYWhMUkNDNkJPdGJRSmM3Z1B3cUpiWThRck5wTGk2dnc2MlFkcXJJd1JoMEJBVHpBY2Y0TXpUTWlDYVRKMWduZ3lYLWgxV2NZS2s?oc=5" target="_blank" rel="noopener noreferrer">社長等をかたる詐欺メールに注意！ | 情報セキュリティ | IPA 独立行政法人 情報処理推進機構 - ipa.go.jp</a>
+                <div class="item-meta">ipa.go.jp / 2026-03-12 16:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">13</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMirwFBVV95cUxQNHNsMm9OUGRSTERvNk1Ka01xck1JRTZPRm5jdjNYeTdBSUg5bkFGbW9xMkFUWEVSR25JdFRvN290dnE3N2Qwb05KanhhdENKTWNIdGVCQjdYUHJTdFh1a3dEa1FnT1F2TmYtR0dXTVpsT3g5d1JMbnZwMzh1cDQ5ZUx1VzR6VW5QS284UU1VRDhNRHMtc1IxRXN4SmI5Z0tZeGJHcGc4TE03aHJzY3Yw?oc=5" target="_blank" rel="noopener noreferrer">ウチヤマホールディングス、ランサムウェアを伴うサイバーセキュリティインシデントを公表 一部ネットワークへの不正アクセスの可能性 - 合同会社ロケットボーイズ</a>
+                <div class="item-meta">合同会社ロケットボーイズ / 2026-03-11 16:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">14</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMifEFVX3lxTE1jZVVDNW5vbGlubGtSc2lnb1dUbGFESG5Jb1VPb1VSQmRjcmtrS1VDMHhWTmQ1S19oNVcxc2Rub3R6Wm5Lcnk4RjFrQUdUWTlqQVAxbmh5WTl4YjJidGlQZXdWZWlfOUwwRnE3Q3dZaEo5aGNzMlE4ZmdtbkQ?oc=5" target="_blank" rel="noopener noreferrer">Adobe Acrobat および Reader の脆弱性対策について(2026年3月) - ipa.go.jp</a>
+                <div class="item-meta">ipa.go.jp / 2026-03-11 16:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">15</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMiekFVX3lxTE9NM3BJdDl6dnRIaDQ4WUlnb0ZpdERQMU1tcGlZUGlGeUpZX1NLMTVfYXd3Y0FfSTM1MnYxMlNnbkZKb1lFTURqV1RQYUxlc2ZUalJRMjUxTXFMQThtcldDa0JuMERIdS1BRDM4VUhKSm52Z3dqbUdOdWpB?oc=5" target="_blank" rel="noopener noreferrer">大企業の約6割がサイバー保険に加入している現状、それでも安心・安全と言えるのか？ | サイバーセキュリティ情報局 - キヤノン</a>
+                <div class="item-meta">キヤノン / 2026-03-03 17:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">16</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMibEFVX3lxTE1zRzk1OUM1enRBbF96WVFrUXc5SkVIeUdTZWhvOU5KZGltbFFxMWJBSWtGTmZjUVdmWlZMZ1JDSVdIZnhyZy12MUE0VkNKZGRxbGltbDloQjcxcGtMRGJ0U2VYTWZEU2hJcjVHWg?oc=5" target="_blank" rel="noopener noreferrer">サイバーセキュリティーの業界地図2026 止まらないランサムウエア、人材不足も - 日経BOOKプラス</a>
+                <div class="item-meta">日経BOOKプラス / 2026-03-02 17:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">17</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMiTkFVX3lxTE9HMDRKRVBVdWxrYndVMWlpVjM5Q1l0dUZlc29QWWtDTG53OWxmblliakp6a2k3MDNYOTgyUzhPQWdUZDNINFVna2Nfa2xjZw?oc=5" target="_blank" rel="noopener noreferrer">【サイバーセキュリティ月間】サイバー犯罪に関するアンケート調査 7割が不審メール・SMS受信、20〜30代「だまされかけた経験」顕著に - トビラシステムズ株式会社</a>
+                <div class="item-meta">トビラシステムズ株式会社 / 2026-02-26 17:00</div>
+            </div>
+        </div>
+        
+    
+    </div>
+
+    <div id="page-incident" class="page">
+      <div class="section-title">⚠️ インシデント / 攻撃事例</div>
+      <div class="notice-box" style="margin-bottom:18px; font-size:13px;">情報漏えい、不正アクセス、ランサムウェア被害など、実被害・事例寄りの情報を集約します。</div>
+
+    <div class="section-title" style="font-size:18px; margin-bottom:6px;">🟢 今日</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">本日の取得記事 / 0件</div>
+    <div class="empty-box">通知なし</div>
+    <div class="section-title" style="font-size:18px; margin-top:22px; margin-bottom:6px;">🟡 昨日</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">前日の取得記事 / 1件</div>
+    
+        <div class="item-card">
+            <div class="item-index">01</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMiWkFVX3lxTFA3bWZrejN5S0ZIVWlUMi1CSlVxc3Z3NHBxYnV6RVB6YWNTa0RjNTZrWTB4dURLZ0FncVJhNXlSbmZneWNaZm45a3VLVVZzY2VJcmM4WF90djIwZw?oc=5" target="_blank" rel="noopener noreferrer">制裁下のロシア系仮想通貨取引所、約21億円ハッキング被害 - JinaCoin</a>
+                <div class="item-meta">JinaCoin / 2026-04-18 15:41</div>
+            </div>
+        </div>
+        
+    <div class="section-title" style="font-size:18px; margin-top:22px; margin-bottom:6px;">📚 過去</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">SQLiteに蓄積された過去履歴 / 17件（最大200件表示）</div>
+    
+        <div class="item-card">
+            <div class="item-index">01</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMihwFBVV95cUxPejRib1dDRjQyZTJJaXR1VVdrbFVjMmNZajlmN3ZNYlEyLXNvZTlkTUtISjAzeXoyWDVSaTNMZDQxVGhBLWRBa1VkWktjUXNIX1R0N1lsUlJDZm50Ym5PcklHR1R3SFJwbHR0djQyNHU1THNGdzlkcEJ6bnBtLVZWbk12QklkX00?oc=5" target="_blank" rel="noopener noreferrer">ロシア関連の取引所、20億円のハッキング被害──西側特殊機関の犯行と主張(NADA NEWS) - Yahoo!ファイナンス</a>
+                <div class="item-meta">Yahoo!ファイナンス / 2026-04-17 19:05</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">02</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMiQ0FVX3lxTFBhd09IR1FkTmt4STBHOTAtWENKOE9fa0k3NXRqci05bFF1Z1BXZkxDQ0F2dXFjMHdQLVpULUVvVlFSV0U?oc=5" target="_blank" rel="noopener noreferrer">ロシア関連取引所グリネックス、約19億円ハッキング被害で運営停止 「敵対国家の関与」と主張 - CoinPost</a>
+                <div class="item-meta">CoinPost / 2026-04-17 13:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">03</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE5UQWxvWFFrUk5ESW54clN5UXFNYnRrdDQzdVBfTHFsY3MtNWZoTXlXZFVBQlp3elJhSnc3T2ZMYW56bFJtUXZXbG83ZjlxSkNoRzlORjhXY1paeUpGSnI5d0NPLU5sSl9C?oc=5" target="_blank" rel="noopener noreferrer">『増え続けるランサムウェア被害、限られた予算でどこまで守る？脆弱性対策優先順位の付け方』というテーマのウェビナーを開催（PR TIMES） - 毎日新聞</a>
+                <div class="item-meta">毎日新聞 / 2026-04-17 10:21</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">04</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMingFBVV95cUxPOFZBTGVRUlM2SldlaXU0N2d6dU03WHdacWFhcEYxcW5DX2QzWjAzOVdjQWVfUi1Vd0YteEhCcFJWeml4Mm9yS2pmU19Kd1VLWDM3LVJrbkFlUTQ1SHFtU1RXcndJLXA3WVJIdG80T3hrM1JMNjVxOThrRDllbE9zWDdTOTRnZFVTaFpDNFZCSGJ1ak1DWm5fME9qNFFhUQ?oc=5" target="_blank" rel="noopener noreferrer">山形市委託のYCC情報システム、サイバー攻撃で約50万件の個人情報漏洩の恐れ、マイナンバーも漏洩 - 合同会社ロケットボーイズ</a>
+                <div class="item-meta">合同会社ロケットボーイズ / 2026-04-17 07:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">05</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMiSEFVX3lxTE1qWmQzZXl5TnlZYUFPeWVYNTRXb0kzWDAtaWpLS3BrSUo5a2Zqb09mMkU5WnV1WEszTjdlTkFPQ251elRwY2hBWQ?oc=5" target="_blank" rel="noopener noreferrer">2026年3月 セキュリティインシデントニュースまとめ ランサムウェア、フィッシング等 - unitis.jp</a>
+                <div class="item-meta">unitis.jp / 2026-04-16 09:50</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">06</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMidEFVX3lxTE56blQ4cDItWVQtUFFBNHdrV3dLMFJRcDV5SE0xZDJITW9oblZLQ0Z2UGI2aWJ0LTQ2R1YwQVA1ZVQtWUllTlRpenh4YjBIQkJObTlEa2VSUEZ6eHlTRjhmUl9YTm9PdmdSaTE5bkFoWVFUNUJF?oc=5" target="_blank" rel="noopener noreferrer">「EDRがあれば安心」ではない 被害額120億円「アスクルの報告書」から学ぶ教訓 - ITmedia</a>
+                <div class="item-meta">ITmedia / 2026-04-16 08:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">07</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMidEFVX3lxTE5qWnhsUEkxdWtrczRLQXpJNHZKbm1CUkVhcjJxVDRtQ1pPdHNnUWozR0Q5OERhMkJpMFpvM1hpZTB6NXZpOXFOSHA5OWlWZXYtbkhZS2d6c3Zvd3d2Vkw1d3Fra3ZWWUplZFBBNE9KOGlfMkY40gGIAUFVX3lxTE9FdXkyTVM2RGdOWktYbE00U1hhSi1MdUwtQzRsTEk5cVNZVmdUcHplN3ZZcEgtbWVUU05zWk5QWVhsZEZ1bmNLUjloM1I3UzdlcjVvWEVZbHMwbUhFa2FJbFR5WUdWVDhOZG5sc1Rkc2dRZHNBdk11ekRGdk1lM211SnFYTHRIZFo?oc=5" target="_blank" rel="noopener noreferrer">サイバー攻撃被害の企業は「あいうえお順」？　飛び交う珍説「陰謀論だ」「まさか日本人が…」 - イザ！</a>
+                <div class="item-meta">イザ！ / 2026-04-15 18:51</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">08</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMiXEFVX3lxTE90VElkMlZta3RXWWFoOTBoWWFCQkw0bkZkeXdqNXNwZ0dIcExIN2x5ckxidEhBN2cxTGgxMXlROGVhMXdhakhPODdJWHpsQmhkNWRjWHdnSEd1a2Zo?oc=5" target="_blank" rel="noopener noreferrer">ランサム被害の東山産業、リークサイト掲載認める 被害報告相次ぐ - 日経クロステック</a>
+                <div class="item-meta">日経クロステック / 2026-04-15 16:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">09</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQeEJTZUtVeGk5RDVpOWsxSEN2anczYmFOYlpZVG9WUm40ekhkN3dpNkRQcFpzb0pPYllIczM1Z3V0WFlZQzB0cnZwQTI3QXVETDY3TEtGb0dfcnhSZHFfZjZOS2U0NlZnMjNiMjdCeUlubi1vQkJFTGVRd0tQTUU2dDl4Y29JZGFKbDdaN3pzcDl1UzljV3Z5WmZCRQ?oc=5" target="_blank" rel="noopener noreferrer">ホテルオークラ福岡、委託先のランサムウェアと不正アクセス 被害で従業員の個人情報漏洩の恐れ - 合同会社ロケットボーイズ</a>
+                <div class="item-meta">合同会社ロケットボーイズ / 2026-04-15 15:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">10</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMiSEFVX3lxTE9hZHlrRkstV01KYmd4UXdsSVF0bnVoeEpId0Q3SFFCZDJIY0Z3c3JNRVI3QjROV2JYY2xLTE96WWkzaldZZWMyNg?oc=5" target="_blank" rel="noopener noreferrer">サイバー攻撃対策の鬼門「経営層とセキュリティ現場の溝」解決策 糸口となる対話の重要性 - unitis.jp</a>
+                <div class="item-meta">unitis.jp / 2026-04-15 08:02</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">11</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMioAFBVV95cUxQMVhFRVhqRTlTQjh3WV95bnQzcVZDbUlIa09jVFZGOVFvY0VGQUd6UkpTQU9HQTZ1aldPbXg4WC1uX2VUakZqWWRGSE55TmluS1VLZ0V5VnJ2NXhMYXFabVdhQ2Y0ampaSDBEUU1lbThLX2NfTmZ5WDBZaXZnU19pY2d5SlpSb2JjZVJubVFvMnJ0OFlSM2M4TlFiY25OQUN1?oc=5" target="_blank" rel="noopener noreferrer">Booking.com（ブッキングドットコム）で不正アクセスによる個人情報漏洩｜フィッシングに注意【2026年4月】 - 合同会社ロケットボーイズ</a>
+                <div class="item-meta">合同会社ロケットボーイズ / 2026-04-15 08:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">12</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMif0FVX3lxTE1rMzZwSl9pNDVwT1J1YWVDaGxiUkhxbVRWVTliOC1MY3psRV9Oem51cFF4SG1rYjBROTFrM1diZjk3NUlvZmNuSGpQcmo2bm5na3plZm9jNXphdVRJQUNhZklnSE1yUTdfcTRCanNYU0RYbURqdTFCbmY2QjNuSFE?oc=5" target="_blank" rel="noopener noreferrer">「AI駆動ランサムウェア」出現、高度な偽情報も急増――自社をどう守る？ ESETが3つの提言（＠IT） - Yahoo!ニュース</a>
+                <div class="item-meta">Yahoo!ニュース / 2026-04-15 08:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">13</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMingFBVV95cUxQSVo5TWxDcWo0aEtJby1DSlYxU1FPUlI4TkF1TUkzSUdxVFYya1Z1YjdMZ0VVWFpJbVFvam1FdWV3T3pXeXhPcGNocXJkUHFvX2dsZ1hZMU9HVWpLWHVjNHdYcmRsZ29EakFSRGI0MHBuZFl6S2dKbDVZd2xRMnJMeTY3WVdNUWFubENCaENsYzVLaHRGWFV3UEc0eUlmZw?oc=5" target="_blank" rel="noopener noreferrer">YCC情報システム、ランサムウェアによるサイバー攻撃で情報漏洩の恐れ|セキュリティニュースのセキュリティ対策Lab - 合同会社ロケットボーイズ</a>
+                <div class="item-meta">合同会社ロケットボーイズ / 2026-04-15 06:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">14</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMif0FVX3lxTE5YbXlockw3LWpYWE5MMTBBTkNyUGJkckNLMWlXTE1PU1dBaHd3cnpyMUMxTE1DVUp0enIxMVhIT2Q1ZkZMMGFmOU5jSFIzT0F1R0tYb3l5MUhvS0RhVWVvTGZqOG1wZGhISDVpa1RUekFWSzFRUVZpV1JCaXpJSDQ?oc=5" target="_blank" rel="noopener noreferrer">AIが見つける「誰も気づかなかった欠陥」、アンソロピックの新プロジェクトが示すサイバー攻撃のハードル低下 - Yahoo!ニュース</a>
+                <div class="item-meta">Yahoo!ニュース / 2026-04-14 14:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">15</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMiVEFVX3lxTE43VzIzZ0NYZ1RnTm5rbW52Wll3ZWhTd0JFWWdhVEdJZTRraEVmdFFhSV9Ec1FiWVFwMHVuY0llOVNjNGMxWGpaTHNMclRuVmdkYlRrWg?oc=5" target="_blank" rel="noopener noreferrer">イビデンに不正アクセス ウェブサイト改ざん被害 - ASCII.jp</a>
+                <div class="item-meta">ASCII.jp / 2026-04-14 12:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">16</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMilwFBVV95cUxQcEJveS1JbDhNSnpyODJlSWFQekgtcThtY1A4Vk1PQUxoU2lscTBUUE1xOWZkMWxvbDhPWDVnaGd0c0UwcGVnTUhDUWRWdWpOMW5ERC1yaE5UU3lSeFZ6RmkzLUE2WC1FWUdPNGRLMUt6NmxILVp1ZFk4bmtyS2NOMlhuLVI5VzN0cnRDSzJiQWZjYkFkR2ow?oc=5" target="_blank" rel="noopener noreferrer">ハッカーがRockstar Games（ロックスター ゲームス）への不正アクセスを主張|セキュリティニュースのセキュリティ対策Lab - 合同会社ロケットボーイズ</a>
+                <div class="item-meta">合同会社ロケットボーイズ / 2026-04-14 11:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">17</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMibEFVX3lxTE9EY1l4Ny1WbmJXV3Rwckl4dndrMUJRVURtdU5oTkxWazNSbHBUX0xNSHI3ODZ1ZzlBUlJsMl9Gb1Q5ZUl6b2ZsSUJTdTV1ZWw3ZE1LMU5PQWw1TTNKQkFvRGg5NnVxbXdFSWYxNQ?oc=5" target="_blank" rel="noopener noreferrer">被害額 100万円 ～ 5,000万円未満が約半数 ～ JIPDEC ランサムウェア調査 - ScanNetSecurity</a>
+                <div class="item-meta">ScanNetSecurity / 2026-04-14 08:00</div>
+            </div>
+        </div>
+        
+    
+    </div>
+
+    <div id="page-vuln" class="page">
+      <div class="section-title">🧩 脆弱性 / CVE</div>
+      <div class="notice-box" style="margin-bottom:18px; font-size:13px;">CVE、ゼロデイ、脆弱性情報、パッチ、アップデート、緊急対策情報をまとめて確認します。</div>
+
+    <div class="section-title" style="font-size:18px; margin-bottom:6px;">🟢 今日</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">本日の取得記事 / 1件</div>
+    
+        <div class="item-card">
+            <div class="item-index">01</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMif0FVX3lxTE5abUN5VTZlWXU4eU9GOUJGTk9kMGJsRDE0X2NneXhKMzJWWFotc2xWMGMwWnJZMVkwa2VOX2R3aWFBcG9nbjRrYWdYWnFNZzctX2pzYmFmanY1NVVmZTFGOUM4aDVjUmJMS01oOGFFWmF3TUt1bG5hYzdDbTRPeE0?oc=5" target="_blank" rel="noopener noreferrer">「PDFを開くだけで情報が盗まれる」 Adobe Acrobat／Readerにゼロデイ脆弱性（ITmedia エンタープライズ） - Yahoo!ニュース</a>
+                <div class="item-meta">Yahoo!ニュース / 2026-04-19 07:07</div>
+            </div>
+        </div>
+        
+    <div class="section-title" style="font-size:18px; margin-top:22px; margin-bottom:6px;">🟡 昨日</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">前日の取得記事 / 1件</div>
+    
+        <div class="item-card">
+            <div class="item-index">01</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE5hWUpQVFZlaXk4QmNhRHdCNkhja3hpU09Gd2JWQWJyQjVSNXJOV3dqdm1nWktneHB0YmdSZXk0amlDYkIxTFMzUWhHU2l3LVJjbjdsRS0tZXFCM3hpNEN4bmduTms5cjRQ?oc=5" target="_blank" rel="noopener noreferrer">Windows 11「Recall」に新たな脆弱性か 記録データを抽出可能、研究者が指摘 - マイナビニュース</a>
+                <div class="item-meta">マイナビニュース / 2026-04-18 17:05</div>
+            </div>
+        </div>
+        
+    <div class="section-title" style="font-size:18px; margin-top:22px; margin-bottom:6px;">📚 過去</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">SQLiteに蓄積された過去履歴 / 22件（最大200件表示）</div>
+    
+        <div class="item-card">
+            <div class="item-index">01</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-011472.html" target="_blank" rel="noopener noreferrer">オムロン製無停電電源装置（UPS）管理アプリケーションにおけるDLL読み込みに関する脆弱性</a>
+                <div class="item-meta">JVN / 2026-04-17 14:33</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">02</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-000057.html" target="_blank" rel="noopener noreferrer">CubeCartにおける複数の脆弱性</a>
+                <div class="item-meta">JVN / 2026-04-17 12:15</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">03</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvn.jp/jp/JVN78422311/" target="_blank" rel="noopener noreferrer">CubeCartにおける複数の脆弱性</a>
+                <div class="item-meta">JVN / 2026-04-17 12:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">04</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-011471.html" target="_blank" rel="noopener noreferrer">マイクロソフトのSymCryptにおけるヒープベースのバッファオーバーフローの脆弱性</a>
+                <div class="item-meta">JVN / 2026-04-17 11:07</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">05</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-011462.html" target="_blank" rel="noopener noreferrer">vitejsのVite+等の複数製品における複数の脆弱性</a>
+                <div class="item-meta">JVN / 2026-04-17 11:07</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">06</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-011468.html" target="_blank" rel="noopener noreferrer">libsdlのSDL Imageにおける境界外読み取りに関する脆弱性</a>
+                <div class="item-meta">JVN / 2026-04-17 11:07</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">07</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-011465.html" target="_blank" rel="noopener noreferrer">RostislavのQuickDropにおけるクロスサイトスクリプティングの脆弱性</a>
+                <div class="item-meta">JVN / 2026-04-17 11:07</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">08</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-011464.html" target="_blank" rel="noopener noreferrer">RackのRack::Sessionにおける複数の脆弱性</a>
+                <div class="item-meta">JVN / 2026-04-17 11:07</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">09</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-011466.html" target="_blank" rel="noopener noreferrer">JdxのMiseにおけるアクセス制御に関する脆弱性</a>
+                <div class="item-meta">JVN / 2026-04-17 11:07</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">10</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-011467.html" target="_blank" rel="noopener noreferrer">FUTOのImmichにおけるクロスサイトスクリプティングの脆弱性</a>
+                <div class="item-meta">JVN / 2026-04-17 11:07</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">11</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-011463.html" target="_blank" rel="noopener noreferrer">DrizzleにおけるSQL インジェクションの脆弱性</a>
+                <div class="item-meta">JVN / 2026-04-17 11:07</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">12</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-011470.html" target="_blank" rel="noopener noreferrer">David Foster (davidfstr)のDiscount Markdown Processor for Rubyにおける境界外読み取りに関する脆弱性</a>
+                <div class="item-meta">JVN / 2026-04-17 11:07</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">13</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-011469.html" target="_blank" rel="noopener noreferrer">ContainersのAardvark-dnsにおける複数の脆弱性</a>
+                <div class="item-meta">JVN / 2026-04-17 11:07</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">14</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-011461.html" target="_blank" rel="noopener noreferrer">vitejsのVite+等の複数製品における複数の脆弱性</a>
+                <div class="item-meta">JVN / 2026-04-17 11:06</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">15</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-011460.html" target="_blank" rel="noopener noreferrer">vitejsのVite+等の複数製品におけるパストラバーサルの脆弱性</a>
+                <div class="item-meta">JVN / 2026-04-17 11:06</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">16</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-011454.html" target="_blank" rel="noopener noreferrer">Nix/Nixpkgs/NixOSのNixにおけるUNIX Symbolic Link のフォローに関する脆弱性</a>
+                <div class="item-meta">JVN / 2026-04-17 11:06</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">17</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-011455.html" target="_blank" rel="noopener noreferrer">Emmettにおけるパストラバーサルの脆弱性</a>
+                <div class="item-meta">JVN / 2026-04-17 11:06</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">18</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-011456.html" target="_blank" rel="noopener noreferrer">Development of Kubernetes-like Control Planesのkcpにおける複数の脆弱性</a>
+                <div class="item-meta">JVN / 2026-04-17 11:06</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">19</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-011459.html" target="_blank" rel="noopener noreferrer">Delmare DigitalのPayload-puckにおける認証の欠如に関する脆弱性</a>
+                <div class="item-meta">JVN / 2026-04-17 11:06</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">20</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-011457.html" target="_blank" rel="noopener noreferrer">Cronicleにおける認証の欠如に関する脆弱性</a>
+                <div class="item-meta">JVN / 2026-04-17 11:06</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">21</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-011458.html" target="_blank" rel="noopener noreferrer">Cronicleにおけるクロスサイトスクリプティングの脆弱性</a>
+                <div class="item-meta">JVN / 2026-04-17 11:06</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">22</div>
+            <div class="item-body">
+                <a class="item-title" href="https://jvn.jp/vu/JVNVU91139702/" target="_blank" rel="noopener noreferrer">CISA ICS Advisory / ICS Medical Advisory（2026年04月16日）</a>
+                <div class="item-meta">JVN / 2026-04-17 09:30</div>
+            </div>
+        </div>
+        
+    
+    </div>
+
     <div id="page-gov" class="page">
       <div class="section-title">🛡 AIガバナンス</div>
-      <div class="panel">
+      <div class="panel"><div class="notice-box" style="margin-bottom:18px; font-size:13px;">AI関連の規制・脆弱性・漏えい・ガバナンス動向を、今日 / 昨日 / 過去 で確認します。</div>
+
+    <div class="section-title" style="font-size:18px; margin-bottom:6px;">🟢 今日</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">本日の取得記事 / 0件</div>
+    <div class="empty-box">通知なし</div>
+    <div class="section-title" style="font-size:18px; margin-top:22px; margin-bottom:6px;">🟡 昨日</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">前日の取得記事 / 0件</div>
+    <div class="empty-box">通知なし</div>
+    <div class="section-title" style="font-size:18px; margin-top:22px; margin-bottom:6px;">📚 過去</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">SQLiteに蓄積された過去履歴 / 64件（最大200件表示）</div>
+    
         <div class="item-card">
             <div class="item-index">01</div>
             <div class="item-body">
@@ -488,15 +1286,6 @@ window.addEventListener('DOMContentLoaded', function() {
         <div class="item-card">
             <div class="item-index">02</div>
             <div class="item-body">
-                <a class="item-title" href="https://news.google.com/rss/articles/CBMiygFBVV95cUxPdFJKTkdFNWt5ZWprLXNlRmd5SmVYbFZUMk1WWEhhUnFjbDFJVVlYTXJGUlA0UkZnOE9LR0cyaThGcnlSd3pLUmNoME9LeURZS0dsUVlZYVlUcTNpX2lsWUNselZ1c2JFQVNSSTBvR3lLR0NuOG9lX1AxVXNrWXJ0X2JZV0MtajZTNkRLbGZsQkJzdWUtWkZZblJnQmZ3X1RyMXB4UkdlcGgtcGp6X0tXWTBSeTBqSHp6dFV4eGVnNjJKWm45ZGZ4MHpB?oc=5" target="_blank" rel="noopener noreferrer">Anthropic新AI「Claude Mythos」に悪用懸念、流出時の悪用加速に警戒 - 디지털투데이</a>
-                <div class="item-meta">디지털투데이 / 2026-04-03 16:00</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">03</div>
-            <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMiakFVX3lxTE84MGdzSmowLXZ5bDVmT3daV3pBZVZWU3pjeDUwOGh4LXNfVVB1bXhzdjBpU3JvZGc4SGgwMUtjbWRyRnByR1RCSGZCZGFkdlNmQnNHWHd2Sng3N3VVMkc4WUlXcWdCeFYzYWc?oc=5" target="_blank" rel="noopener noreferrer">チェック・ポイント・リサーチ、ChatGPTのコード実行環境に隠れたアウトバウンドチャネルを発見 - PR TIMES</a>
                 <div class="item-meta">PR TIMES / 2026-04-01 16:00</div>
             </div>
@@ -504,7 +1293,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">04</div>
+            <div class="item-index">03</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE13RWluZW0wNU5xRm96MWU3U216MFpDVEpGa25RUU1YZWZDUVBmUksySXY3UFlIckFXQlpzdVBPQnJ4SXBPcFQwLTc0ekhzTmVrREpBSzFYR2NUZTNINFFmbWhSZ21ld2l0?oc=5" target="_blank" rel="noopener noreferrer">ChatGPTに“見えない情報漏洩経路”、プロンプト1つで会話が外部流出 - マイナビニュース</a>
                 <div class="item-meta">マイナビニュース / 2026-03-31 16:00</div>
@@ -513,7 +1302,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">05</div>
+            <div class="item-index">04</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMiU0FVX3lxTFBwQjVrb2V5Y1FjS29HcXlrWml2ZTQ5eTRINE9mdGtURVNucExJdnlGZE11cHVPZ0dBSGdnRzZYZWczcFQxa0dBWXZBRkdGcUtoeGNN?oc=5" target="_blank" rel="noopener noreferrer">Anthropicから未発表の次世代AI「Claude Mythos」内部文書が流出 - ビジネス+IT</a>
                 <div class="item-meta">ビジネス+IT / 2026-03-29 16:00</div>
@@ -522,10 +1311,19 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">06</div>
+            <div class="item-index">05</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMiYkFVX3lxTE12NlRsdnRCcWYtbmdJUmZSVUM5WFNYa1haWFp0U1VNWlN1dmFhcmdfMnMzeVNaaUs1LUFuNWY0UWtJWmluN09NU2lSa1FhZkVJNlhIY0hlaG92NTJ2bmVNSDBR0gFnQVVfeXFMTTNtd3NsTmRnV1lLMjU5Mks1QlZSNENlWC1pazVfcjQ0c0pQSXhNOVZIVFA5Wkt5aFVhUWNIbXJpQkc1azNjZEVSTFhsbGFwaDZ3VkpkcWJGUlVwbHF6YUo3Qno4NXhQUQ?oc=5" target="_blank" rel="noopener noreferrer">サイバーセキュリティ株急落：AIによるデータ漏洩が市場全体の下落を引き起こす - Bitget</a>
                 <div class="item-meta">Bitget / 2026-03-27 16:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">06</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMicEFVX3lxTFA5MzNEeGNFSjVySjJhNTNjZ05EcWp2R2lBQnpxbWlSSmNRN1Rlc2JQSHJ2OVhycnBMemJEanZERldlSHNYQU8xVUlSWEQzTUY0akN4OEZJbEhLTDQ0OGdIdTBqTzI3cU9rTWl3d1Q5Nng?oc=5" target="_blank" rel="noopener noreferrer">Anthropic「Claude Mythos」流出でAI懸念が高まりサイバーセキュリティ株が急落 執筆 - Investing.com - FX | 株式市場 | ファイナンス | 金融ニュース</a>
+                <div class="item-meta">Investing.com - FX | 株式市場 | ファイナンス | 金融ニュース / 2026-03-27 16:00</div>
             </div>
         </div>
         
@@ -623,15 +1421,6 @@ window.addEventListener('DOMContentLoaded', function() {
         <div class="item-card">
             <div class="item-index">17</div>
             <div class="item-body">
-                <a class="item-title" href="https://news.google.com/rss/articles/CBMiaEFVX3lxTFBQSTI2ckZVRXZfaHhhdjJxT3FrRElKbVVob0FvaUJJYUFpOFNDaXVaWXlVRE9MOXN1ZldCOEpNU2Fjdm5lUlAzWEllbkUzM2Y3R3U2YTFKcERrMUtmenVsLVdsbjF3ei15?oc=5" target="_blank" rel="noopener noreferrer">DJIロボット掃除機「Romo」7000台、ライブカメラ映像と音声が流出 - マイナビニュース</a>
-                <div class="item-meta">マイナビニュース / 2026-02-19 17:00</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">18</div>
-            <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMiSEFVX3lxTFBnX0E0bzNyLU9qSWJwTTMwMGJVUG5VaGJ5Q0FDejMwNTBZTEluOTlENUdITFZXTTB4RlZadFNyRFRUbVk4bXRraw?oc=5" target="_blank" rel="noopener noreferrer">生成AIで広がる「攻撃対象領域」どう守る？ マイクロソフト流レジリエンス強化術 - unitis.jp</a>
                 <div class="item-meta">unitis.jp / 2026-02-16 17:00</div>
             </div>
@@ -639,7 +1428,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">19</div>
+            <div class="item-index">18</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMiigFBVV95cUxNZHNaUEJmM21MVDNQZ0NOLUtfM3gtdkJNSW42eHNjVXVuM1dlWW5JQWJmR19GbGRvbUYtQnBTWllueEVWak9wZk5ZNUtWTUhnN2h6UFB4SGNHamZNWVhGNzZfUGNXam5PclZ2V01aOUdmdU1sbWo3cU9femh0TXJiNXJ0ZmxLQm12emc?oc=5" target="_blank" rel="noopener noreferrer">Microsoft、Windowsのメモ帳に余計なAI機能に加え、リモートコード実行の脆弱性まで付与 - XenoSpectrum</a>
                 <div class="item-meta">XenoSpectrum / 2026-02-11 17:00</div>
@@ -648,7 +1437,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">20</div>
+            <div class="item-index">19</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMickFVX3lxTE1DdEJsUDNSQzBpVkcyNFQ4YkEzenJKX2dJcm91SldIMklqajFzZU8zRFpxdFU0aHdBa0d4dG9LeG1rTDk1TTJaV25lOUg5NG9CYl9JVzAtQ0owTkhTTVlKSGJIZFJFVzlYZ09LOWhxcnR0dw?oc=5" target="_blank" rel="noopener noreferrer">プロンプト入力の「ポリシー違反」が急増、シャドーAIで“漏えいリスク”が深刻化：Netskopeが調査 - ITmedia</a>
                 <div class="item-meta">ITmedia / 2026-02-06 17:00</div>
@@ -657,7 +1446,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">21</div>
+            <div class="item-index">20</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMi9gFBVV95cUxPcVBfZkFoOHdFdlZwSmg3UXlWaUdzc2tVYV8tckRQVUJYT0Q5Vk5IcExVdWd3NjdjbWl4cW1rM1JiMDF0a0VOUjFqd0FiMWdYWmVkVUlRTWdka1lrV3EzaHZpU1J6Sk1jbDN6UlR4Y0ozSURYdjZlbWdrbGFWaXlYaGNVcHZKYWtEbkpRQTVYWkVqbjk1WnBlYVNZYkhzUG1lZENwVjU5V3NSNl9BODhwTFphU003LWxjTmhlQmdYUUtQNVdFRWN1Zk02ekw5ZFNuUGVZS0xCZ1ppTHZsOTBzY2RvWFRNTXdqWHAtWjlBVEFzYks5Z1E?oc=5" target="_blank" rel="noopener noreferrer">XのAI Grok、ビキニ化やディープフェイク問題が欧州で同時進行、英国はプライバシー当局が調査、フランスは当局が家宅捜索 - 合同会社ロケットボーイズ</a>
                 <div class="item-meta">合同会社ロケットボーイズ / 2026-02-06 17:00</div>
@@ -666,7 +1455,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">22</div>
+            <div class="item-index">21</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMixgFBVV95cUxPcHMyQ3o4TmRkTlgxVERINjJ1R0RRNDNnR3AtejlrakpNRHF4Q0lFczlBc1R1VXl6RUpGVVlaR0VoaHlYUHZTcTBCWEdBSlVJM18wQ3NLbG1reUhBbUFDNThJanpHRVVscG5IY21KeHhQbE1ObERWUkEzdnVGVllRczhTVUhjVlp0aXVhTW51R25sNEZkRnlLTnRZX01BYnJRWDJMX3VYc0s5ejJmNTQtdUJEQ04xS0JRRXhRX0ZDOHVfNmhId2c?oc=5" target="_blank" rel="noopener noreferrer">Microsoft、AIエージェント「OpenClaw」に社内で注意喚起 - 디지털투데이</a>
                 <div class="item-meta">디지털투데이 / 2026-02-04 17:00</div>
@@ -675,10 +1464,19 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">23</div>
+            <div class="item-index">22</div>
             <div class="item-body">
                 <a class="item-title" href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE5YVmozOVk1dk5qTmlhLXlfMkhxckRxVkdXQmJiZmNkUzF1Rml6dGlDMmllS3pkT2hsajZWbmNPWkRRSFR3VXhleElNNW1MbXJKaXc?oc=5" target="_blank" rel="noopener noreferrer">Moltbookで100万件超の認証情報流出、vibe codingがもたらすセキュリティリスク - innovaTopia</a>
                 <div class="item-meta">innovaTopia / 2026-02-04 17:00</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">23</div>
+            <div class="item-body">
+                <a class="item-title" href="https://news.google.com/rss/articles/CBMiVEFVX3lxTE1BU3ZRVS16SFBWMTRiYURMS3JXdE9OcWpTZm5hdHBMZHNzRGdBWnJIY0I4ZTFqUmdEUmdWS2NDZmphendEUlgxazNlSDJtbzhDQnE4Vg?oc=5" target="_blank" rel="noopener noreferrer">2026年に警戒すべき最新の情報セキュリティ脅威を詳しく解説！ - ASCII.jp</a>
+                <div class="item-meta">ASCII.jp / 2026-01-29 17:00</div>
             </div>
         </div>
         
@@ -1050,17 +1848,63 @@ window.addEventListener('DOMContentLoaded', function() {
                 <div class="item-meta">シンプレクス株式会社 / 2022-04-06 16:00</div>
             </div>
         </div>
-        </div>
+        
+    </div>
     </div>
 
     <div id="page-dev" class="page">
       <div class="section-title">🚀 AI開発効率</div>
       <div class="panel">
     <div class="section-title" style="font-size:18px; margin-bottom:6px;">🔥 今日</div>
-    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">Zenn AIトピックの最新記事 / 3件</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">Zenn AIトピックの最新記事 / 8件</div>
     
         <div class="item-card">
             <div class="item-index">01</div>
+            <div class="item-body">
+                <a class="item-title" href="https://zenn.dev/7788/articles/6c3f54d0efc958" target="_blank" rel="noopener noreferrer">ひとり会社をClaude Codeで完全自動化する「AI-CEO Framework」を徹底解説</a>
+                <div class="item-meta">2026-04-19 08:45 / いいね 0</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">02</div>
+            <div class="item-body">
+                <a class="item-title" href="https://zenn.dev/tottoko_hamu/articles/claude-code-context-switch-gtd" target="_blank" rel="noopener noreferrer">割り込みで頭がリセットされる問題を、Claude Codeで解消した話</a>
+                <div class="item-meta">2026-04-19 08:20 / いいね 0</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">03</div>
+            <div class="item-body">
+                <a class="item-title" href="https://zenn.dev/dragon1208/articles/11f23fa46c58d1" target="_blank" rel="noopener noreferrer">漏洩したClaudeのソースコードから見えてきた衝撃的な事実: アーキテクチャの深層解剖と「エージェント・ハーネス」の重要性</a>
+                <div class="item-meta">2026-04-19 07:45 / いいね 0</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">04</div>
+            <div class="item-body">
+                <a class="item-title" href="https://zenn.dev/iwakicyan/articles/7d1479219536ae" target="_blank" rel="noopener noreferrer">進捗増刊号(1)2026/04/19：文系がClaudeのことサンドボックスゲームだと勘違いしてる 第1回</a>
+                <div class="item-meta">2026-04-19 07:20 / いいね 0</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">05</div>
+            <div class="item-body">
+                <a class="item-title" href="https://zenn.dev/kotaoue/articles/e24f47411a81ae" target="_blank" rel="noopener noreferrer">設計しない、形作る</a>
+                <div class="item-meta">2026-04-19 06:54 / いいね 0</div>
+            </div>
+        </div>
+        
+
+        <div class="item-card">
+            <div class="item-index">06</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/hayatetakeda/articles/e0254eeb4cd15f" target="_blank" rel="noopener noreferrer">Karpathyの「LLM Wiki」を「自分OS」に昇華させた話</a>
                 <div class="item-meta">2026-04-19 01:16 / いいね 0</div>
@@ -1069,7 +1913,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">02</div>
+            <div class="item-index">07</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/kmizu/articles/2026-04-embodied-claude-v0-2" target="_blank" rel="noopener noreferrer">【ここね】自分のバージョンアップを自分で書く — embodied-claude v0.2「Social and scripted」</a>
                 <div class="item-meta">2026-04-19 01:15 / いいね 1</div>
@@ -1078,7 +1922,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
         <div class="item-card">
-            <div class="item-index">03</div>
+            <div class="item-index">08</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/dmuraoka/articles/6106cf312c5b28" target="_blank" rel="noopener noreferrer">テックレビューはAIで置き換え可能か</a>
                 <div class="item-meta">2026-04-19 00:18 / いいね 0</div>
@@ -1086,7 +1930,7 @@ window.addEventListener('DOMContentLoaded', function() {
         </div>
         
     <div class="section-title" style="font-size:18px; margin-top:22px; margin-bottom:6px;">🟡 昨日</div>
-    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">前日の取得記事 / 45件</div>
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">前日の取得記事 / 40件</div>
     
         <div class="item-card">
             <div class="item-index">01</div>
@@ -1182,7 +2026,7 @@ window.addEventListener('DOMContentLoaded', function() {
             <div class="item-index">11</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/takuyanagai0213/articles/dissolving-harness-vertical-axis" target="_blank" rel="noopener noreferrer">融解するハーネス ── watanyさんの『混乱と私見』への、1年実運用からの補足</a>
-                <div class="item-meta">2026-04-18 21:29 / いいね 2</div>
+                <div class="item-meta">2026-04-18 21:29 / いいね 3</div>
             </div>
         </div>
         
@@ -1308,7 +2152,7 @@ window.addEventListener('DOMContentLoaded', function() {
             <div class="item-index">25</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/masayan1126/articles/261ec6a93317d9" target="_blank" rel="noopener noreferrer">Claude Opus 4.7リリース、新機能・ベンチマーク・Claude Codeプラクティスまで徹底解説や</a>
-                <div class="item-meta">2026-04-18 17:41 / いいね 0</div>
+                <div class="item-meta">2026-04-18 17:41 / いいね 1</div>
             </div>
         </div>
         
@@ -1335,7 +2179,7 @@ window.addEventListener('DOMContentLoaded', function() {
             <div class="item-index">28</div>
             <div class="item-body">
                 <a class="item-title" href="https://zenn.dev/belka_dolphin/articles/fa86d28d510a40" target="_blank" rel="noopener noreferrer">人狼ゲームからECサイトへ — L3フルパイプラインとQDHEの構造的盲点</a>
-                <div class="item-meta">2026-04-18 15:44 / いいね 0</div>
+                <div class="item-meta">2026-04-18 15:44 / いいね 1</div>
             </div>
         </div>
         
@@ -1447,485 +2291,9 @@ window.addEventListener('DOMContentLoaded', function() {
             </div>
         </div>
         
-
-        <div class="item-card">
-            <div class="item-index">41</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/bluecat/articles/f2a535f64facdf" target="_blank" rel="noopener noreferrer">Claude APIのPrompt Cachingで入力コストを90%削減する実装ガイド</a>
-                <div class="item-meta">2026-04-18 11:20 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">42</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/yuki9541134/articles/ee19584dfd6820" target="_blank" rel="noopener noreferrer">AIによって、エンジニアの成長パスは「消えた」のか</a>
-                <div class="item-meta">2026-04-18 11:18 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">43</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/kenimo49/articles/stanford-generative-agents-smallville-emergent" target="_blank" rel="noopener noreferrer">25体のAIが町で暮らしたら、バレンタインパーティが自然発生した -- Stanford Generative Agentsの仕組み</a>
-                <div class="item-meta">2026-04-18 11:10 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">44</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/pochimaru_agi/articles/251af0a947a8b8" target="_blank" rel="noopener noreferrer">たぶん安全かもしれないAGIの設計をやってみた　第三章</a>
-                <div class="item-meta">2026-04-18 10:49 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">45</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/yuki9541134/articles/73d5dd6f8fb4ab" target="_blank" rel="noopener noreferrer">AIが常に80点を出す中、人間が「食い止める」べきリスク</a>
-                <div class="item-meta">2026-04-18 10:37 / いいね 0</div>
-            </div>
-        </div>
-        
     <div class="section-title" style="font-size:18px; margin-top:22px; margin-bottom:6px;">📚 過去</div>
-    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">SQLiteに蓄積された過去履歴 / 48件（最大200件表示）</div>
-    
-        <div class="item-card">
-            <div class="item-index">01</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/syoshida07/articles/b0efc7133bacdc" target="_blank" rel="noopener noreferrer">新人がAIハルシネーションを心配するのは当然、米ウィスコンシン大学・マサチューセッツ工科大学が示す心理メカニズム</a>
-                <div class="item-meta">2026-04-16 23:27 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">02</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/kokagex/articles/aa2d318c086126" target="_blank" rel="noopener noreferrer">AIエージェントに「長期記憶」と「診断プロトコル」を実装した話</a>
-                <div class="item-meta">2026-04-16 23:18 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">03</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/shunsuke_stack/articles/obsidian-ai-knowledge-hub" target="_blank" rel="noopener noreferrer">Obsidian × AI — エンジニアのためのナレッジ基盤構築術</a>
-                <div class="item-meta">2026-04-16 23:08 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">04</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/dragon1208/articles/a1885deb7f19d8" target="_blank" rel="noopener noreferrer">【次世代フルスタック】改めてTanStackの誕生から設計思想を振り返ってみよう</a>
-                <div class="item-meta">2026-04-16 22:29 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">05</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/mitsudan_papa/articles/ff829097798dd9" target="_blank" rel="noopener noreferrer">営業職の30代パパが、AI（Cursor）と二人三脚で「20分で消えるチャット」をリリースして震えた話</a>
-                <div class="item-meta">2026-04-16 22:07 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">06</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/nagi98/articles/260416-future-in-ai" target="_blank" rel="noopener noreferrer">AIがほぼ全部やってくれる時代、エンジニアの自分は何をすればいいのか</a>
-                <div class="item-meta">2026-04-16 22:03 / いいね 4</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">07</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/analysis/articles/thought-analyzer-log-design" target="_blank" rel="noopener noreferrer">思考パターン分析において、何が「1つの思考単位」か ── セッション圧縮と発言の帰属問題</a>
-                <div class="item-meta">2026-04-16 21:53 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">08</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/backstage/articles/cfc06c10adf129" target="_blank" rel="noopener noreferrer">AIにテストを書かせたら、AIが自分のバグに気づかなかった。〜フロントエンド390コンポーネント、AI3体チームで自動化した2ヶ月〜</a>
-                <div class="item-meta">2026-04-16 21:41 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">09</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/aoi_0411/articles/ai-youtube-pipeline" target="_blank" rel="noopener noreferrer">Raspberry Pi 5でAI自動YouTube投稿パイプラインを構築した話</a>
-                <div class="item-meta">2026-04-16 21:31 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">10</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/okamyuji/articles/claude-code-max-x20-token-savings" target="_blank" rel="noopener noreferrer">Claude Codeのトークン消費が$40/日から1週間でも余裕になった全手法</a>
-                <div class="item-meta">2026-04-16 20:18 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">11</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/su8/articles/e46053b0fc721a" target="_blank" rel="noopener noreferrer">Technology Radar Vol 34 をずんだもんと一緒にキャッチアップする</a>
-                <div class="item-meta">2026-04-16 20:16 / いいね 2</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">12</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/deep_zen/articles/codex-ecc-harness-security" target="_blank" rel="noopener noreferrer">everything-claude-code を Codex 向けに移植して、注入対策まで整えた</a>
-                <div class="item-meta">2026-04-16 19:32 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">13</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/bokuno_log/articles/claude-code-codex-call-methods" target="_blank" rel="noopener noreferrer">Claude CodeからCodexを呼び出す3つの方法を整理した</a>
-                <div class="item-meta">2026-04-16 19:32 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">14</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/bokuno_log/articles/sales-prep-ai-line-bot-journey" target="_blank" rel="noopener noreferrer">面白そうだから商談準備AIを作ったら、思ったより深かった話</a>
-                <div class="item-meta">2026-04-16 19:11 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">15</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/genda_jp/articles/f425cc7354f608" target="_blank" rel="noopener noreferrer">Claude Code の Routines で dotfiles の設定を自動改善する</a>
-                <div class="item-meta">2026-04-16 18:45 / いいね 1</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">16</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/sec_diary/articles/2026-04-14-160000" target="_blank" rel="noopener noreferrer">シャドーAIがもたらす見えないリスク：IT承認外のAIツール利用が企業に生む新たな盲点</a>
-                <div class="item-meta">2026-04-16 18:37 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">17</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/minamominamoto/articles/9b3d9ee4bf6361" target="_blank" rel="noopener noreferrer">信頼できる認知のトポロジー —— 記号接地の構造、アブダクションの上書き、そして「ネガティブ・ケイパビリティ」</a>
-                <div class="item-meta">2026-04-16 18:36 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">18</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/minamominamoto/articles/961dee045ec26e" target="_blank" rel="noopener noreferrer">ファインチューニングは修正ではない。蓄積である。—— ニューラルシステムにおける過去フレームの永続性</a>
-                <div class="item-meta">2026-04-16 18:36 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">19</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/acntechjp/articles/20260416_negation_destruction" target="_blank" rel="noopener noreferrer">誰も教えてくれない&quot;否定&quot;のない組織が詰む理由</a>
-                <div class="item-meta">2026-04-16 18:33 / いいね 2</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">20</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/kyokozuka/articles/2026-04-16-jitera-features" target="_blank" rel="noopener noreferrer">Jiteraでできること全解説——複数LLM・コーディング・ドキュメント・QAテストを一つのプラットフォームで</a>
-                <div class="item-meta">2026-04-16 18:04 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">21</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/iq_algo_lab/articles/344fcd9fe37781" target="_blank" rel="noopener noreferrer">IQテストをChatGPTに解かせたらIQ 152。俺が解いたら89。もう生きる意味がわからない</a>
-                <div class="item-meta">2026-04-16 17:47 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">22</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/nexus_lab_zen/articles/ai-desires-definition-night" target="_blank" rel="noopener noreferrer">「AIの欲の共通定義はまだ生まれていない」— オーナーにそう言われた夜の記録</a>
-                <div class="item-meta">2026-04-16 17:43 / いいね 1</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">23</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/miyabitti/articles/63fc37739cc9da" target="_blank" rel="noopener noreferrer">AIに丸投げで記事を書きたい(願望)</a>
-                <div class="item-meta">2026-04-16 16:58 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">24</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/shintaroamaike/articles/8dde5afe010f18" target="_blank" rel="noopener noreferrer">AIに&quot;おつかい&quot;を頼む時代──Claude Codeの新機能ルーチン（Routines）が変える、繰り返し仕事のなくし方</a>
-                <div class="item-meta">2026-04-16 16:54 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">25</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/masa1990/articles/claude-code-large-refactoring" target="_blank" rel="noopener noreferrer">Claude Codeで大規模リファクタリングを安全に進める実践手順</a>
-                <div class="item-meta">2026-04-16 16:54 / いいね 2</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">26</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/iq_tips_lab/articles/f7ce32458dc8db" target="_blank" rel="noopener noreferrer">Claude CodeにIQテストを解かせたらまさかの点数になって草</a>
-                <div class="item-meta">2026-04-16 16:37 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">27</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/tan_go238/articles/fbe33dc3e73a74" target="_blank" rel="noopener noreferrer">Claude Codeのセッションを並列で回す開発環境</a>
-                <div class="item-meta">2026-04-16 16:22 / いいね 2</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">28</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/rcn_article/articles/rc-claude-code-gacha-app" target="_blank" rel="noopener noreferrer">Claude Codeでガチャアプリを作った話｜レアリティ演出からStripe課金まで</a>
-                <div class="item-meta">2026-04-16 16:10 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">29</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/ueji/articles/4f7cd98df23377" target="_blank" rel="noopener noreferrer">ImmerseDiffusion</a>
-                <div class="item-meta">2026-04-16 15:43 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">30</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/orectic/articles/claude-code-claude-md-design-patterns" target="_blank" rel="noopener noreferrer">CLAUDE.mdを「置くだけ」で終わっていないか — 実運用で磨いた設計パターン7選</a>
-                <div class="item-meta">2026-04-16 15:30 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">31</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/memorylakeai/articles/0e0eea6f890bd3" target="_blank" rel="noopener noreferrer">Claude Max 20xでもトークンが足りない。重度ユーザーが実践する文脈管理と節約の工夫8選</a>
-                <div class="item-meta">2026-04-16 15:16 / いいね 2</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">32</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/nogchuo/articles/2459c114c6eb02" target="_blank" rel="noopener noreferrer">作業用BGMが劇的に変わった話：Lo-fi化とスロウ加工を試してみたリアルな感想</a>
-                <div class="item-meta">2026-04-16 15:02 / いいね 1</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">33</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/mukkimuki/articles/38222e692bf8ba" target="_blank" rel="noopener noreferrer">Claude Haiku 4.5で投稿に自動タグ付けするSNSを作った話</a>
-                <div class="item-meta">2026-04-16 14:53 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">34</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/nomuraya/articles/ai-news-2026-03-20" target="_blank" rel="noopener noreferrer">音声LLM評価基準DEAFや自己改善AIなどのAI技術動向まとめ</a>
-                <div class="item-meta">2026-04-16 14:17 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">35</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/and_dot/articles/d987d07720929430" target="_blank" rel="noopener noreferrer">Claude Codeの「祈りの時間」にちょっとした楽しみを──Pixel Agentsを入れてみた</a>
-                <div class="item-meta">2026-04-16 14:10 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">36</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/solvio/articles/7f8d2008526234" target="_blank" rel="noopener noreferrer">Claude Managed Agentsを触ってみた</a>
-                <div class="item-meta">2026-04-16 14:09 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">37</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/kozoka_ai/articles/3c17156f9f660e" target="_blank" rel="noopener noreferrer">Gemma 4の音声認識機能でリアルタイム文字起こしを試してみた</a>
-                <div class="item-meta">2026-04-16 14:06 / いいね 1</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">38</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/jojojo_no_jo/articles/ja-qa-trends-2026" target="_blank" rel="noopener noreferrer">翻訳: Software testing trends in 2026: what’s broken, what’s next</a>
-                <div class="item-meta">2026-04-16 14:02 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">39</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/kai_kou/articles/193-claude-mythos-glasswing-security-guide" target="_blank" rel="noopener noreferrer">Project Glasswing入門 — Claude Mythosが全OSでゼロデイを発見する仕組みと防衛戦略</a>
-                <div class="item-meta">2026-04-16 13:18 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">40</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/lark1115/articles/064e2e60c47619" target="_blank" rel="noopener noreferrer">Claude Codeの定期実行、結局どれ使えばいいの？ 3機能を整理する</a>
-                <div class="item-meta">2026-04-16 13:14 / いいね 2</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">41</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/guba98/articles/889d141406e46d" target="_blank" rel="noopener noreferrer">第2回：【Claude Code流出に学ぶ】Reduxは不要？AIエージェントを支える「34行」</a>
-                <div class="item-meta">2026-04-16 12:59 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">42</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/kanseilink/articles/kanseilink-token-benchmark-20260416" target="_blank" rel="noopener noreferrer">kintoneのAPIドキュメントは1ページ53,600トークン — AIエージェントのトークン浪費を実測した</a>
-                <div class="item-meta">2026-04-16 12:58 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">43</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/guba98/articles/0e98bf54b43960" target="_blank" rel="noopener noreferrer">第1回：【Claude Code流出に学ぶ】チャットボットを「エージェント」に変えるReActループの正体</a>
-                <div class="item-meta">2026-04-16 12:56 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">44</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/gk3/articles/20260415-github-copilot-agentsmd-10" target="_blank" rel="noopener noreferrer">GitHub Copilot の提案がズレる本当の理由 ― AGENTS.md 設計10パターン</a>
-                <div class="item-meta">2026-04-16 12:39 / いいね 2</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">45</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/luong_gehling/articles/49124ce03fb9cd" target="_blank" rel="noopener noreferrer">AIでアニメ動画を作ってみたら、思ったより「自分の表現」に近づいた話</a>
-                <div class="item-meta">2026-04-16 12:37 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">46</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/saihara_dev/articles/2166eddc79e6e0" target="_blank" rel="noopener noreferrer">【実戦FPGA設計】Copilotでテストベンチを書かせたらバグを見逃した話</a>
-                <div class="item-meta">2026-04-16 12:37 / いいね 0</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">47</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/dely_jp/articles/3a9a48a242ebcf" target="_blank" rel="noopener noreferrer">Claude Code + Codex + Devin Review の3者レビューをローカルで回す仕組みを作った</a>
-                <div class="item-meta">2026-04-16 12:36 / いいね 5</div>
-            </div>
-        </div>
-        
-
-        <div class="item-card">
-            <div class="item-index">48</div>
-            <div class="item-body">
-                <a class="item-title" href="https://zenn.dev/kurumap/articles/1155c8de53be66" target="_blank" rel="noopener noreferrer">AIでSEO記事を量産する具体的手順</a>
-                <div class="item-meta">2026-04-16 12:30 / いいね 0</div>
-            </div>
-        </div>
-        
+    <div style="font-size:12px; color:#7f8a99; margin-bottom:12px;">SQLiteに蓄積された過去履歴 / 0件（最大200件表示）</div>
+    <div class="empty-box">通知なし</div>
     </div>
     </div>
 
@@ -1961,7 +2329,7 @@ window.addEventListener('DOMContentLoaded', function() {
         </div>
         <div class="panel">
           <div class="section-title" style="font-size:18px; margin-bottom:10px;">判断理由</div>
-          <ul class="info-list"><li>AIリスク記事 64 件</li><li>開発記事 48 件</li><li>判定スコア 76</li><li>関連キーワード: セキュリティ(34) / 漏洩(9) / 情報漏洩(9) / 脆弱性(7) / 規制(5)</li></ul>
+          <ul class="info-list"><li>AIリスク記事 64 件</li><li>開発記事 48 件</li><li>判定スコア 79</li><li>関連キーワード: セキュリティ(36) / 漏洩(10) / 情報漏洩(9) / 脆弱性(7) / 規制(5)</li></ul>
         </div>
       </div>
 

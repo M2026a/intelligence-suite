@@ -100,7 +100,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='top'>
     <div class='title'>
       <h1>📰 Smart News Viewer <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 国内外ニュースを横断収集し、重要トピックを一目で把握</span></h1>
-      <div class='sub'>更新日時：2026-04-19 14:06</div>
+      <div class='sub'>更新日時：2026-04-19 15:17</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -124,7 +124,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='cb-card'>
   <div class='cb-name'>🌐 BBC Global</div>
   <div style='color:var(--muted);font-size:12px;margin-bottom:8px'>海外総合ニュース</div>
-  <div class='cb-count'>25</div>
+  <div class='cb-count'>22</div>
   <div style='color:var(--muted);font-size:11px'>件の記事</div>
   <div class='cb-recent'>最新: </div>
 </div>
@@ -138,7 +138,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='cb-card'>
   <div class='cb-name'>🏛 NHK 政治</div>
   <div style='color:var(--muted);font-size:12px;margin-bottom:8px'>国内の政治・政策</div>
-  <div class='cb-count'>56</div>
+  <div class='cb-count'>65</div>
   <div style='color:var(--muted);font-size:11px'>件の記事</div>
   <div class='cb-recent'>最新: </div>
 </div>
@@ -159,9 +159,9 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='cb-card'>
   <div class='cb-name'>🔬 NASA News</div>
   <div style='color:var(--muted);font-size:12px;margin-bottom:8px'>科学・宇宙</div>
-  <div class='cb-count'>0</div>
+  <div class='cb-count'>10</div>
   <div style='color:var(--muted);font-size:11px'>件の記事</div>
-  <div class='cb-recent'>最新: 記事なし</div>
+  <div class='cb-recent'>最新: </div>
 </div>
 <div class='cb-card'>
   <div class='cb-name'>🏅 BBC Sport</div>
@@ -246,8 +246,30 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   if(sb) sb.addEventListener('input',function(){search=this.value; apply();});
 })();
 </script>
-  <div style='margin-bottom:12px;font-weight:700;font-size:15px'>注目ソース関連記事（<span id='cbCount'>236</span>件）</div>
+  <div style='margin-bottom:12px;font-weight:700;font-size:15px'>注目ソース関連記事（<span id='cbCount'>252</span>件）</div>
   <div class='grid' id='cbGrid'>
+<article class='card item-card'
+  data-cardid='item-ffd13ea709ee'
+  data-themes='総合・国際'
+  data-lang='en'
+  data-score='5'
+  data-source='BBC World'
+  data-sentiment='bullish'
+  data-importance='health_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-ffd13ea709ee')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Australia&#x27;s most-decorated soldier vows to &#x27;fight&#x27; war crime charges</h3><div class='summary'>Ben Roberts-Smith has given his first statement since he was charged with five counts of the war crime of murder last week.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>オーストラリアで最も勲章を獲得した兵士、戦争犯罪容疑と「戦う」と誓う</h3><div class='summary'>ベン・ロバーツ＝スミス氏は先週、殺人という戦争犯罪５件で起訴されて以来、初めての声明を発表した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/cy91r7ww3weo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
 <article class='card item-card'
   data-cardid='item-422016ab2627'
   data-themes='総合・国際|テクノロジー|文化・エンタメ'
@@ -269,6 +291,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>フランスの映画スター、ナタリー・ベイさんが77歳で死去、メディア報道</h3><div class='summary'>エマニュエル・マクロン大統領は、フランスはフランス映画界の重鎮たちを「愛し、夢を抱き、成長してきた」と述べた。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.bbc.com/news/articles/cn9q48y9wr7o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-8caf0fe85fc7'
+  data-themes='総合・国際'
+  data-lang='en'
+  data-score='5'
+  data-source='BBC World'
+  data-sentiment='bearish'
+  data-importance='health_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-8caf0fe85fc7')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Chernobyl&#x27;s last wedding: The couple who married as a nuclear disaster unfolded</h3><div class='summary'>Serhiy and Iryna married 40 years ago, unaware a nuclear reactor had exploded less than 3 miles away.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>チェルノブイリ最後の結婚式: 核災害が起こる中で結婚したカップル</h3><div class='summary'>セルヒイとイリーナは40年前、原子炉が3マイルも離れて爆発したことに気づかずに結婚した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/c0q92lx8q75o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-c7390fc9f826'
@@ -491,6 +535,94 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/cycling/articles/cx2vld6yl3no?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-dc8c809d16b7'
+  data-themes='科学|文化・エンタメ'
+  data-lang='en'
+  data-score='5'
+  data-source='NASA News'
+  data-sentiment='bullish'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>NASA News</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-dc8c809d16b7')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>CSDA Quality Assessment Report Evaluates Satellogic NewSat Data</h3><div class='summary'>The report adds to the growing documentation on commercial data’s contributions to Earth science research and applications.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>CSDA 品質評価レポートが Satellogic NewSat データを評価</h3><div class='summary'>このレポートは、地球科学の研究と応用に対する商用データの貢献に関する文書の増加に加えています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://science.nasa.gov/uncategorized/csda-quality-assessment-report-evaluates-satellogic-newsat-data/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-3e6ba1d63063'
+  data-themes='総合・国際|科学|文化・エンタメ'
+  data-lang='en'
+  data-score='5'
+  data-source='NASA News'
+  data-sentiment='bullish'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>NASA News</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-3e6ba1d63063')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>NASA Artemis II Human Research Data Methodology Challenge</h3><div class='summary'>NASA’s Human Research Program (HRP) uses research to develop methods to protect the health and performance of astronauts in space. In support of NASA’s goals for long-term missions on the surface of the Moon and human exploration of Mars, HRP is using ground research facilities, the International Sp</div></div>
+<div class='lang-pane lang-ja hidden'><h3>NASA Artemis II 人間研究データ方法論チャレンジ</h3><div class='summary'>NASA の人間研究プログラム (HRP) は、研究を利用して宇宙飛行士の健康とパフォーマンスを保護する方法を開発しています。月面での長期ミッションと火星の有人探査という NASA の目標を支援するため、HRP は地上研究施設、国際研究施設を使用しています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.nasa.gov/directorates/stmd/prizes-challenges-crowdsourcing-program/center-of-excellence-for-collaborative-innovation-coeci/nasa-artemis-ii-human-research-data-methodology-challenge/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-98fe0a4c02fa'
+  data-themes='テクノロジー|科学|文化・エンタメ'
+  data-lang='en'
+  data-score='5'
+  data-source='NASA News'
+  data-sentiment='bullish'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>NASA News</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-98fe0a4c02fa')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>NASA, OPM Announce New NASA Force Website, Open Job Applications</h3><div class='summary'>NASA and the U.S. Office of Personnel Management (OPM) launched the NASA Force website on Friday, opening applications for roles aimed at recruiting the nation’s top engineers and technologists to support America’s air and space program. NASA Force, a new hiring initiative developed in partnership w</div></div>
+<div class='lang-pane lang-ja hidden'><h3>NASAとOPMが新しいNASA Force Webサイトと求人募集を発表</h3><div class='summary'>NASAと米国人事管理局（OPM）は金曜日、NASA Forceのウェブサイトを開設し、米国の航空宇宙計画を支援する国内トップクラスのエンジニアや技術者の採用を目的とした役職への応募を開始した。 NASA Force は、米国とのパートナーシップにより開発された新しい雇用イニシアチブです。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.nasa.gov/news-release/nasa-opm-announce-new-nasa-force-website-open-job-applications/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-f5d659cefb0b'
+  data-themes='科学|文化・エンタメ'
+  data-lang='en'
+  data-score='5'
+  data-source='NASA News'
+  data-sentiment='bullish'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>NASA News</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-f5d659cefb0b')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Quality Assessment Report Evaluates Tomorrow.io Precipitation Radar Data</h3><div class='summary'>The report adds to the growing documentation on commercial data’s contributions to Earth science research and applications.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>品質評価レポートで Tomorrow.io の降水レーダー データを評価</h3><div class='summary'>このレポートは、地球科学の研究と応用に対する商用データの貢献に関する文書の増加に加えています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://science.nasa.gov/science-research/earth-science/quality-assessment-report-evaluates-tomorrow-io-precipitation-radar-data/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-c59ab7a66553'
   data-themes='政治・政策'
   data-lang='ja'
@@ -705,6 +837,50 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://techcrunch.com/2026/04/17/anthropic-launches-claude-design-a-new-product-for-creating-quick-visuals/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-89769d108e58'
+  data-themes='科学|文化・エンタメ'
+  data-lang='en'
+  data-score='4'
+  data-source='NASA News'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>NASA News</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-89769d108e58')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Volunteers Discover Rare Space Weather Events Using Their Ears</h3><div class='summary'>Scientists are working to understand exactly how these waves behave, and the team behind NASA’s Heliophysics Audified: Resonances in Plasmas (HARP) citizen science project approaches this in a unique way: they compare the Earth’s magnetic field to a giant harp in space.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ボランティアが耳を使って珍しい宇宙気象現象を発見</h3><div class='summary'>科学者たちは、これらの波がどのように動作するかを正確に理解するために取り組んでおり、NASA のヘリオ物理学検証: プラズマの共鳴 (HARP) 市民科学プロジェクトの背後にあるチームは、ユニークな方法でこれにアプローチしています。彼らは、地球の磁場を宇宙の巨大なハープに例えています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://science.nasa.gov/get-involved/citizen-science/volunteers-discover-rare-space-weather-events-using-their-ears/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-52372e88081d'
+  data-themes='テクノロジー|科学|文化・エンタメ'
+  data-lang='en'
+  data-score='4'
+  data-source='NASA News'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>NASA News</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-52372e88081d')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>NASA Invites Media to Latvia Artemis Accords Signing Ceremony</h3><div class='summary'>The Republic of Latvia will sign the Artemis Accords during a ceremony at 9 a.m. EDT Monday, April 20, at NASA Headquarters in Washington. NASA Administrator Jared Isaacman will host Dace Melbārde, Latvia’s minister for education and science; Jānis Beķeris, chargé d’affaires at the Embassy of the Re</div></div>
+<div class='lang-pane lang-ja hidden'><h3>NASA、ラトビアのアルテミス協定調印式にメディアを招待</h3><div class='summary'>ラトビア共和国は、4月20日月曜日午前9時（東部夏時間）にワシントンのNASA本部で行われる式典でアルテミス協定に署名する。 NASA長官のジャレッド・アイザックマン氏が、ラトビアの教育科学大臣デイス・メルバルデ氏を迎える予定だ。ヤニス・ベイリス、リビア大使館臨時代理大使</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.nasa.gov/news-release/nasa-invites-media-to-latvia-artemis-accords-signing-ceremony/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-b525a8974016'
   data-themes='政治・政策'
   data-lang='ja'
@@ -720,6 +896,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>高市首相 “デモ参加のみで市民が調査対象は想定されず”</h3><div class='summary'>「国家情報局」を設置するための法案をめぐり、高市総理大臣は政府の政策に反対するデモそのものが監視対象となることや、デモに参加したことのみを理由に市民が調査の対象になることは想定されないという認識を示しました。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260417/k10015101491000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-659a0e17783b'
+  data-themes='総合・国際|市場・ビジネス|テクノロジー'
+  data-lang='ja'
+  data-score='4'
+  data-source='NHK 政治'
+  data-sentiment='bullish'
+  data-importance='food_recall'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK 政治</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-659a0e17783b')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>最先端画像センサー量産計画に最大600億円補助 経産省</h3><div class='summary'>赤澤経済産業大臣は17日の閣議のあとの会見で、ソニーグループの関連企業が最先端の画像センサーを量産する計画に対し、最大600億円を補助すると発表しました。画像センサーは今後、自動運転やAIロボット向けの世界的な需要拡大が見込まれていて、経済安全保障の観点から供給力を確保したいねらいです。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#e74c3c22;border-color:#e74c3c;color:#e74c3c'>💹 市場・ビジネス</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-usd-weak'>💹 市場・ビジネス</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260417/k10015101601000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-c70b45f65f0f'
@@ -773,6 +966,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260415/k10015100311000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-91843338ed28'
+  data-themes='総合・国際|市場・ビジネス'
+  data-lang='ja'
+  data-score='4'
+  data-source='NHK 政治'
+  data-sentiment='bullish'
+  data-importance='food_recall'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK 政治</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-91843338ed28')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>片山財務相G20など出席へ イラン情勢受けた経済や市場動向議論</h3><div class='summary'>片山財務大臣はアメリカのワシントンで開かれるG20＝主要20か国の財務相・中央銀行総裁会議などに出席することを明らかにしました。会議ではイラン情勢を受けて混乱が続く世界経済や金融市場の安定に向けた議論が行われる見通しです。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#e74c3c22;border-color:#e74c3c;color:#e74c3c'>💹 市場・ビジネス</span><span class='tag tag-usd-weak'>💹 市場・ビジネス</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260414/k10015098841000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-8a880ef74c51'
   data-themes='市場・ビジネス|テクノロジー'
   data-lang='ja'
@@ -822,28 +1032,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>“猫草”は猫にとっておいしいのか？ 「旨味がバナナやメロンより強く、苦味が弱い」 日獣大が味覚分析</h3><div class='summary'>日本獣医生命科学大学に所属する研究者らが発表した論文「猫草としてのイネ科植物への味覚分析手法の応用」は、ネコが「猫草」を好んで食べる理由を味覚の観点から探った研究報告だ。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2604/17/news050.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-60e775ad3121'
-  data-themes='テクノロジー'
-  data-lang='en'
-  data-score='3'
-  data-source='BBC World'
-  data-sentiment='bearish'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-60e775ad3121')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Strait of Hormuz closed again, Iran says, as ships attacked</h3><div class='summary'>Iran is blaming a US blockade for the closure, saying it breaches the ceasefire reached between the two countries.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>船舶攻撃でホルムズ海峡が再び閉鎖、イラン発表</h3><div class='summary'>イランは閉鎖の原因は米国の封鎖だと非難し、両国間で合意した停戦違反だと主張している。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/news/articles/cx2631x6nelo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-fe0f10fafb34'
@@ -912,7 +1100,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/news/articles/cvg4mrm2vm0o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-ec959635edfb'
+  data-cardid='item-12cd3e4c161d'
   data-themes='総合・国際'
   data-lang='en'
   data-score='3'
@@ -925,79 +1113,13 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-ec959635edfb')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-12cd3e4c161d')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>HiPP recalls jarred baby food in Austria over contamination fears</h3><div class='summary'>Police are investigating whether jars sold in Spar shops were criminally interfered with.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>HiPP、オーストリアで汚染の懸念から瓶詰の離乳食をリコール</h3><div class='summary'>警察はスパーの店舗で販売されていた瓶に刑事介入があったかどうか捜査している。</div></div>
+  <div class='lang-pane lang-en'><h3>&#x27;Croatia, but cheaper&#x27;: The quirky holiday spots on trend for 2026</h3><div class='summary'>Montenegro and Albania are among the places rising in popularity for Britons seeking a holiday away from tourist traps.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>「クロアチアだけど安い」: 2026 年のトレンドの風変わりな休暇スポット</h3><div class='summary'>モンテネグロとアルバニアは、観光客の罠から離れて休暇を過ごしたい英国人の間で人気が高まっている場所の一つです。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/news/articles/c4gly4qkx1go?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-7785af93ee9c'
-  data-themes='政治・政策|文化・エンタメ'
-  data-lang='en'
-  data-score='3'
-  data-source='BBC World'
-  data-sentiment='neutral'
-  data-importance='breed_adoption'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-7785af93ee9c')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Millions listen to Ethiopian star&#x27;s song taking swipe at government</h3><div class='summary'>The country&#x27;s biggest musician Teddy Afro laments a lack of unity in the country on his new track.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>何百万人もの人々が政府を攻撃するエチオピアのスターの歌を聴く</h3><div class='summary'>この国最大のミュージシャン、テディ・アフロは、新曲で国内の団結の欠如を嘆いている。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/news/articles/cqj81g5dxkyo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-c2f53d2b3047'
-  data-themes='テクノロジー'
-  data-lang='en'
-  data-score='3'
-  data-source='BBC World'
-  data-sentiment='bearish'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-c2f53d2b3047')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Ceasefire with Israel brings respite to Lebanon, but obstacles to peace remain</h3><div class='summary'>The halt to weeks of fighting is being celebrated in Lebanon, but it will be difficult to ensure it lasts.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>イスラエルとの停戦はレバノンに安息をもたらすが、和平への障害は依然として残る</h3><div class='summary'>レバノンでは数週間にわたる戦闘の停止が祝われているが、それを確実に継続させるのは難しいだろう。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/news/articles/crm10w4ynj1o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-f1c225861aea'
-  data-themes='総合・国際'
-  data-lang='en'
-  data-score='3'
-  data-source='BBC World'
-  data-sentiment='bearish'
-  data-importance='health_alert'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-f1c225861aea')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>What we know about the Israel-Lebanon ceasefire</h3><div class='summary'>A 10-day truce between the two countries is now in effect, with Iran-backed Hezbollah voicing support, as negotiations continue between the US and Iran.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>イスラエルとレバノンの停戦について私たちが知っていること</h3><div class='summary'>米国とイランの間で交渉が続く中、イランの支援を受けるヒズボラも支持を表明しており、両国間には10日間の休戦協定が発効している。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/news/articles/cwy32277e58o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/c747r0l8n7do?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-64b801fb6aaa'
@@ -1198,8 +1320,30 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c1l9yyp28peo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-2d9697b27ba3'
-  data-themes='テクノロジー|スポーツ|文化・エンタメ'
+  data-cardid='item-3bcc1860e434'
+  data-themes='スポーツ|文化・エンタメ'
+  data-lang='en'
+  data-score='3'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-3bcc1860e434')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>How will Arteta set Arsenal up for Man City showdown?</h3><div class='summary'>Novel solutions, no matter how small, might decide the Premier League title. We take a closer look at how Arsenal have played recently and what this means for the run-in.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>アルテタはマンシティ対決に向けてアーセナルをどのように準備するだろうか？</h3><div class='summary'>たとえどんなに小さなものであっても、斬新な解決策がプレミアリーグのタイトルを決めるかもしれない。アーセナルが最近どのようなプレーをしてきたのか、そしてそれが慣らし運転にとって何を意味するのかを詳しく見てみましょう。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c1eq2xdyg3wo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-20e943c34db9'
+  data-themes='テクノロジー|スポーツ'
   data-lang='en'
   data-score='3'
   data-source='BBC Sport'
@@ -1211,13 +1355,13 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-2d9697b27ba3')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-20e943c34db9')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>Why Arsenal fans are nervous before Man City meeting</h3><div class='summary'>Arsenal were booed off after their Premier League defeat by Bournemouth - and boss Mikel Arteta will not want tension to seep on to the pitch against Manchester City.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>アーセナルファンがマンシティ戦前に緊張する理由</h3><div class='summary'>プレミアリーグでボーンマスに敗れたアーセナルはブーイングを浴びたが、ミケル・アルテタ監督はマンチェスター・シティ戦でピッチに緊張が広がることを望んでいないだろう。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cpvx32k0jd2o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-en'><h3>Bournemouth owners close to Exeter Chiefs takeover</h3><div class='summary'>The billionaire owners of Premier League side Bournemouth are closing in on a takeover of Exeter Chiefs.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ボーンマスのオーナーがエクセター・チーフスの買収に近づいている</h3><div class='summary'>プレミアリーグのボーンマスの億万長者オーナーがエクセター・チーフスの買収に迫っている。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/rugby-union/articles/cvg0dg03402o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-852dd0315567'
@@ -1264,7 +1408,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/football/videos/c705y5893pyo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-45bf92e68c3d'
+  data-cardid='item-8bc3ea71c3d3'
   data-themes='テクノロジー|スポーツ|文化・エンタメ'
   data-lang='en'
   data-score='3'
@@ -1277,13 +1421,13 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-45bf92e68c3d')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-8bc3ea71c3d3')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>Nobody says who called first, but Arteta and Guardiola speak again - Balague</h3><div class='summary'>As Manchester City prepare to host Arsenal in Sunday&#x27;s crucial Premier League meeting between the top two, European football expert Guillem Balague looks at how the two managers have evolved.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>誰が最初に電話をかけたかは誰も明かしていないが、アルテタとグアルディオラが再び話す - バラグ</h3><div class='summary'>マンチェスター・シティが日曜の重要なプレミアリーグ上位２チームの対戦でアーセナルを迎える準備をする中、欧州サッカーの専門家ギエム・バラグ氏が両監督がどのように進化したかを考察する。</div></div>
+  <div class='lang-pane lang-en'><h3>Why Man City&#x27;s &#x27;leg-beaters&#x27; can make the difference against Arsenal</h3><div class='summary'>Tony Pulis explains why Manchester City&#x27;s attacking players could prove to be their match-winners in Sunday&#x27;s Premier League title showdown with leaders Arsenal.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>マンシティの「レッグビーター」がアーセナルに対して違いを生み出すことができる理由</h3><div class='summary'>トニー・ピュリスが、日曜のプレミアリーグ優勝決定戦、首位アーセナルとの対決でマンチェスター・シティの攻撃的選手たちが勝者となる理由を説明した。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cd6lld4q57po?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cnv88q6l9q6o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-c1b842b4c70a'
@@ -1484,28 +1628,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cz902873dnko?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-2fe04e5f9cc0'
-  data-themes='テクノロジー|スポーツ|文化・エンタメ'
-  data-lang='en'
-  data-score='3'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-2fe04e5f9cc0')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>John Terry and Colchester - what both parties have to gain from takeover</h3><div class='summary'>BBC Sport explores John Terry&#x27;s imminent takeover of Colchester, why ex-pros are buying clubs, and what the feeling is among fans.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ジョン・テリーとコルチェスター - 買収から両当事者が得られるもの</h3><div class='summary'>BBCスポーツは、ジョン・テリーによるコルチェスターの差し迫った買収、なぜ元プロがクラブを買収するのか、そしてファンの間ではどのような感情があるのかを探る。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cddqq94dv4ro?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-e21280e55f78'
   data-themes='テクノロジー|スポーツ|文化・エンタメ'
   data-lang='en'
@@ -1570,6 +1692,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>主流の魅力を求めて戦うベアナックルボクシングはどの程度安全なのでしょうか?</h3><div class='summary'>新しいBBCのドキュメンタリーでは、格闘家のリアム・&#x27;ロッキー&#x27;・リースがアドレナリンを愛する理由をBBCスポーツに語って、ベアナックルボクシングの隆盛に焦点を当てている。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.bbc.com/sport/articles/ckglvpm2m8mo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-2e75e1614b80'
+  data-themes='科学|文化・エンタメ'
+  data-lang='en'
+  data-score='3'
+  data-source='NASA News'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>NASA News</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-2e75e1614b80')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>NASA’s SPHEREx Observatory Maps Interstellar Ice in Milky Way</h3><div class='summary'>An observation made by NASA’s SPHEREx (Spectro-Photometer for the History of the Universe, Epoch of Reionization, and Ices Explorer) shows the chemical signatures of water ice (shown in bright blue) and polycyclic aromatic hydrocarbons (orange) in Cygnus X, one of the most active and turbulent regio</div></div>
+<div class='lang-pane lang-ja hidden'><h3>NASA の SPHEREx 天文台が天の川の星間氷の地図を作成</h3><div class='summary'>NASA の SPHEREx (宇宙の歴史、再電離の時代、および氷の探査のための分光光度計) による観測では、最も活動的で乱流領域の 1 つであるはくちょう座 X における水の氷 (明るい青色で表示) と多環芳香族炭化水素 (オレンジ色) の化学的特徴が示されています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.nasa.gov/image-article/nasas-spherex-observatory-maps-interstellar-ice-in-milky-way/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-48ac60f286e0'
@@ -1638,6 +1782,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>藤井孝男氏が死去 83歳 運輸相など歴任</h3><div class='summary'>衆議院議員や参議院議員を務め、運輸大臣などを歴任した藤井孝男氏が急性心筋梗塞のため、亡くなりました。83歳でした。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260417/k10015101291000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-0aed34e6d2cb'
+  data-themes='総合・国際|科学'
+  data-lang='ja'
+  data-score='3'
+  data-source='NHK 政治'
+  data-sentiment='neutral'
+  data-importance='health_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK 政治</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-0aed34e6d2cb')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>高市首相 5月から医療用手袋5000万枚の備蓄放出を表明</h3><div class='summary'>中東情勢を受けた関係閣僚会議で、高市総理大臣は、世界的な感染症の流行に備えて国が備蓄している医療用の手袋のうち、5000万枚を来月から医療機関向けに放出すると明らかにしました。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260416/k10015101031000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-0903830b990f'
@@ -1740,6 +1901,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>自民 石井参院幹事長ら新グループ “情報交換や議員育成を”</h3><div class='summary'>自民党の石井参議院幹事長らが、党所属の有志の参議院議員でつくる新たな議員グループを立ち上げ、情報交換や議員の育成などを行っていくことになりました。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260415/k10015099991000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-b46b8235b72d'
+  data-themes='総合・国際|政治・政策'
+  data-lang='ja'
+  data-score='3'
+  data-source='NHK 政治'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK 政治</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-b46b8235b72d')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>健康保険法などの改正案 衆院厚生労働委で実質的な審議始まる</h3><div class='summary'>市販薬と似た成分や効能を持つ「OTC類似薬」を処方された患者に追加負担を求めるとした健康保険法などの改正案は、15日、衆議院厚生労働委員会で実質的な審議が始まりました。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260415/k10015099971000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-1a823de3384f'
@@ -1946,6 +2124,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260413/k10015097991000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-129a2d16a5a4'
+  data-themes='総合・国際|政治・政策'
+  data-lang='ja'
+  data-score='3'
+  data-source='NHK 政治'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK 政治</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-129a2d16a5a4')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>陸上自衛隊 無人機の活用進める新部署設置</h3><div class='summary'>陸上自衛隊に、ドローンなどの無人機の活用を進める部署が新たに設置され、小泉防衛大臣は、自衛隊員の危険を軽減するため、自衛隊を無人機などを駆使する組織に変革したいと強調しました。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260413/k10015098381000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-764159c16c2d'
   data-themes='総合・国際|政治・政策'
   data-lang='ja'
@@ -2087,7 +2282,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/news/articles/ce84j261kj1o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-8bbeca009f85'
+  data-cardid='item-6e33c5f46eb9'
   data-themes='総合・国際'
   data-lang='en'
   data-score='2'
@@ -2100,13 +2295,13 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-8bbeca009f85')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-6e33c5f46eb9')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>Madonna joins Sabrina Carpenter to surprise Coachella</h3><div class='summary'>The Queen of Pop makes a guest appearance during the Espresso singer&#x27;s headline set.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>マドンナ、サブリナ・カーペンターと共演してコーチェラを驚かせる</h3><div class='summary'>エスプレッソ歌手のヘッドラインセットにクイーン・オブ・ポップがゲスト出演します。</div></div>
+  <div class='lang-pane lang-en'><h3>Harry and Meghan&#x27;s trip felt like a royal tour - except many Aussies weren&#x27;t interested</h3><div class='summary'>The Sussexes&#x27; four-day tour of Australia appears to have fallen flat with some.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ハリー王子とメーガン妃の旅行は王室旅行のように感じられたが、多くのオーストラリア人が興味を示さなかったことを除けば</h3><div class='summary'>サセックス夫妻の4日間のオーストラリア遠征は、一部では失敗に終わったようだ。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/news/articles/c77my6gnpy4o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/cwyx014e2wqo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-a3962d18b5dc'
@@ -2153,7 +2348,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/news/articles/cp84rye3lg8o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-c79e99d049e6'
+  data-cardid='item-8bbeca009f85'
   data-themes='総合・国際'
   data-lang='en'
   data-score='2'
@@ -2166,35 +2361,35 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-c79e99d049e6')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-8bbeca009f85')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>Three sentenced for &#x27;man in bear suit&#x27; insurance scam</h3><div class='summary'>Video went viral after investigators determined the purported ursine was actually a man in a costume.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>「クマのスーツを着た男」保険金詐欺で3人に判決</h3><div class='summary'>捜査当局が、このウシとされる人物が実際には着ぐるみを着た男性であると判断した後、ビデオは急速に広まった。</div></div>
+  <div class='lang-pane lang-en'><h3>Madonna joins Sabrina Carpenter to surprise Coachella</h3><div class='summary'>The Queen of Pop makes a guest appearance during the Espresso singer&#x27;s headline set.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>マドンナ、サブリナ・カーペンターと共演してコーチェラを驚かせる</h3><div class='summary'>エスプレッソ歌手のヘッドラインセットにクイーン・オブ・ポップがゲスト出演します。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/news/articles/czxrq7rx9lqo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/c77my6gnpy4o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-8cac87ee0f87'
+  data-cardid='item-3360ae52a811'
   data-themes='総合・国際'
   data-lang='en'
   data-score='2'
   data-source='BBC World'
   data-sentiment='neutral'
-  data-importance='health_alert'
+  data-importance='food_recall'
   data-isnew='false'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-8cac87ee0f87')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-3360ae52a811')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>One dead after car hits pedestrians in Melbourne, police say</h3><div class='summary'>A man is arrested following a collision in which police say a car mounted a kerb and struck pedestrians.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>メルボルンで車が歩行者にはね、１人死亡 警察発表</h3><div class='summary'>警察によると、車が縁石に乗り上げて歩行者をはねたという衝突事故で男が逮捕された。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/news/articles/c20dy511v3lo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-en'><h3>Scammers are becoming ever more sophisticated - this is what the fightback looks like</h3><div class='summary'>Scams have exploded over the last few years. Can countries and companies come together to turn the tables on the scammers?</div></div>
+<div class='lang-pane lang-ja hidden'><h3>詐欺師はますます巧妙化しています - これが反撃の様子です</h3><div class='summary'>ここ数年で詐欺が急増しています。国や企業が団結して詐欺師に対して形勢を逆転させることはできるだろうか？</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-weak'>💹 市場・ビジネス</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/cj60pl5g4z4o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-6368b15dae5e'
@@ -2219,30 +2414,8 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/news/articles/c4g40npz37lo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-9b352aaa18c6'
-  data-themes='総合・国際'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC World'
-  data-sentiment='neutral'
-  data-importance='health_alert'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-9b352aaa18c6')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>What does it take to survive in the Arctic? These rangers have an idea</h3><div class='summary'>The BBC spent time with the Canadian military in the country&#x27;s northernmost region - this is what they taught us about dealing with extreme conditions.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>北極で生き残るためには何が必要ですか?このレンジャーにはアイデアがある</h3><div class='summary'>BBC は、カナダ最北端の地域でカナダ軍と時間を過ごしました。これが、極限状況への対処について彼らが私たちに教えてくれたことです。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/news/videos/ckgepkp3zgjo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-c479e114b0df'
-  data-themes='テクノロジー'
+  data-cardid='item-f358b4ffcc0f'
+  data-themes='科学'
   data-lang='en'
   data-score='2'
   data-source='BBC World'
@@ -2254,13 +2427,13 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-c479e114b0df')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-f358b4ffcc0f')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>What next for South African opposition firebrand Malema after his five-year prison sentence?</h3><div class='summary'>The sentence raises huge questions marks over the political future of one of South Africa&#x27;s most controversial politicians.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>南アフリカの反政府活動家マレマは、5年の懲役刑を受けて次は何をするのでしょうか？</h3><div class='summary'>この判決は、南アフリカで最も物議を醸している政治家の一人の政治的将来に大きな疑問を投げかけている。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/news/articles/cdxkd6rvk0do?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-en'><h3>The South Korean authors rising above a tide of hate to become bestsellers</h3><div class='summary'>A quiet revolution is unfolding as women writers carve out space in the wake of an anti-feminist backlash.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>憎悪の潮流を乗り越えてベストセラーになる韓国の作家たち</h3><div class='summary'>反フェミニストの反発を受けて女性作家たちがスペースを切り開く中、静かな革命が展開している。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/cm2rpl7xzpvo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-af2382b16144'
@@ -2813,28 +2986,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cr4171dw46go?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-cc291cf4d939'
-  data-themes='テクノロジー'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='bullish'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-cc291cf4d939')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Iraola bowing out in style - where will he go next?</h3><div class='summary'>Any suggestion of distraction following Andoni Iraola&#x27;s decision to leave Bournemouth was firmly dismissed by his players in their statement victory against Newcastle.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>スタイリッシュにお辞儀をするイラオラ - 次はどこへ行くのでしょうか?</h3><div class='summary'>アンドニ・イラオラのボーンマス退団決定後の気を散らすような示唆は、ニューカッスル戦で勝利を収めた選手たちによって断固として却下された。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c20dyjd604qo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-cc14797e24a6'
   data-themes='テクノロジー'
   data-lang='en'
@@ -3009,6 +3160,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>4か月後、セルティックとセント・ミレンが再びハムデンで対戦し、すべてが変わる</h3><div class='summary'>セント・ミレンはセルティックに対するショックカップでの勝利を期待しているが、今回は状況が異なる可能性がある。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cj944xwm3mjo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-cc291cf4d939'
+  data-themes='テクノロジー'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='bullish'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-cc291cf4d939')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Iraola bowing out in style - where will he go next?</h3><div class='summary'>Any suggestion of distraction following Andoni Iraola&#x27;s decision to leave Bournemouth was firmly dismissed by his players in their statement victory against Newcastle.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>スタイリッシュにお辞儀をするイラオラ - 次はどこへ行くのでしょうか?</h3><div class='summary'>アンドニ・イラオラのボーンマス退団決定後の気を散らすような示唆は、ニューカッスル戦で勝利を収めた選手たちによって断固として却下された。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c20dyjd604qo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-c811d084c3e3'
@@ -3385,28 +3558,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/football/articles/ckgxpklxj5wo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-193500209c17'
-  data-themes='スポーツ'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-193500209c17')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>What it&#x27;s really like to try to make it to F1</h3><div class='summary'>BBC Sport explores the financial reality of two drivers with experience of trying to climb the motorsport ladder to reach Formula 1.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>F1に挑戦するのは実際どんな感じか</h3><div class='summary'>BBC Sport は、F1 に到達するためにモータースポーツのはしごを登ろうとした経験を持つ 2 人のドライバーの経済的現実を調査します。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/formula1/articles/cgld6r0e73go?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-0cd73a9f9086'
   data-themes='スポーツ'
   data-lang='en'
@@ -3583,6 +3734,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/football/articles/ce8e6y90g2jo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-193500209c17'
+  data-themes='スポーツ'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-193500209c17')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>What it&#x27;s really like to try to make it to F1</h3><div class='summary'>BBC Sport explores the financial reality of two drivers with experience of trying to climb the motorsport ladder to reach Formula 1.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>F1に挑戦するのは実際どんな感じか</h3><div class='summary'>BBC Sport は、F1 に到達するためにモータースポーツのはしごを登ろうとした経験を持つ 2 人のドライバーの経済的現実を調査します。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/formula1/articles/cgld6r0e73go?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-aaaba2569f9f'
   data-themes='スポーツ'
   data-lang='en'
@@ -3737,6 +3910,72 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cr71enxvrd3o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-e554f1e915cc'
+  data-themes='科学'
+  data-lang='en'
+  data-score='2'
+  data-source='NASA News'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>NASA News</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-e554f1e915cc')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Webinar 4/29: NASA CSDA Program Vendor Focus- MDA Space</h3><div class='summary'>Join us April 29 at 2:00 p.m. EDT to learn more about CSDA program vendor MDA Space.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ウェビナー 4/29: NASA CSDA プログラム ベンダー フォーカス - MDA スペース</h3><div class='summary'>4月29日午後2時からご参加ください。 EDT では、CSDA プログラム ベンダー MDA Space について詳しく知ることができます。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://science.nasa.gov/science-research/earth-science/webinar-4-29-nasa-csda-program-vendor-focus-mda-space/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-f4399fba1890'
+  data-themes='テクノロジー'
+  data-lang='en'
+  data-score='2'
+  data-source='NASA News'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>NASA News</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-f4399fba1890')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Spring Rains Saturate Michigan</h3><div class='summary'>Above-normal precipitation has swollen rivers and damaged infrastructure statewide.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>春の雨がミシガンを飽和させる</h3><div class='summary'>平年を上回る降水量により、州全体の河川が増水し、インフラが損傷した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://science.nasa.gov/earth/earth-observatory/spring-rains-saturate-michigan/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-e9afc6b641c7'
+  data-themes='科学'
+  data-lang='en'
+  data-score='2'
+  data-source='NASA News'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>NASA News</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-e9afc6b641c7')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>At the Edge of Light</h3><div class='summary'>In this photo taken on April 6, 2026, a portion of the Moon’s far side is seen along the terminator—the boundary between lunar day and night—where low-angle sunlight casts long shadows across the surface. A section of Orientale Basin is visible along the upper right portion of the lunar disk, its st</div></div>
+<div class='lang-pane lang-ja hidden'><h3>光の端で</h3><div class='summary'>2026 年 4 月 6 日に撮影されたこの写真では、月の裏側の一部がターミネーター (月の昼と夜の境界) に沿って見えており、低角度の太陽光が表面全体に長い影を落としています。オリエンタル盆地の一部が月円盤の右上部分に沿って見えます。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.nasa.gov/image-article/at-the-edge-of-light/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-4aec64c2f2ab'
   data-themes='総合・国際'
   data-lang='ja'
@@ -3749,7 +3988,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
     <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-4aec64c2f2ab')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>渋谷 バス停に車突っ込む 運転の男性意識なし 歩行者1人搬送</h3><div class='summary'>19日午前、東京・渋谷区で車がバス停に突っ込む事故があり、消防によりますと、車の運転手が意識がなく、歩行者1人が病院に搬送されました。</div></div>
+  <div class='lang-pane lang-ja'><h3>東京 渋谷 バス停に車突っ込む 運転の男性死亡 歩行者1人軽傷</h3><div class='summary'>19日午前、東京 渋谷区で、車がバス停に突っ込む事故があり、車の運転手が死亡したほか、歩行者1人が軽いけがをしました。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260419/k10015102841000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -3766,26 +4005,9 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
     <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-f3dd2b841ba8')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>各地で気温上昇 関東や近畿で夏日のところも 体調管理に注意</h3><div class='summary'>19日は北海道から近畿にかけての広い範囲で晴れて気温が上がっていて、午前中から25度以上の夏日になっているところがあります。午後はさらに気温が上がる見込みで、こまめに水分を補給するなど体調の管理に注意してください。</div></div>
+  <div class='lang-pane lang-ja'><h3>各地で気温上昇 広い範囲で夏日に 体調管理に注意を</h3><div class='summary'>19日は北海道から東海にかけての広い範囲で晴れて気温が上がっていて、各地で25度以上の夏日になっています。こまめに水分を補給するなど体調の管理に注意してください。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260419/k10015102831000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-24d6b6f412c7'
-  data-themes='総合・国際'
-  data-lang='ja'
-  data-score='2'
-  data-source='NHK'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-24d6b6f412c7')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>震度5強 長野 大町 屋根瓦が落ちるなど被害 片づけに追われる</h3><div class='summary'>18日、震度5強の揺れを観測した長野県大町市では、住宅の屋根から瓦が落ちるなどの被害があり、19日朝から片づけなどに追われる人たちの姿が見られました。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260419/k10015102891000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-3da351ce0b90'
@@ -3805,7 +4027,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260419/k10015102821000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-74d4b11303b8'
+  data-cardid='item-80cd4ff1dd7d'
   data-themes='総合・国際'
   data-lang='ja'
   data-score='2'
@@ -3815,15 +4037,32 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   data-isnew='false'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-74d4b11303b8')">既読</button></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-80cd4ff1dd7d')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>IT関連会社 遺体遺棄事件 峠周辺で捜索続く 警視庁</h3><div class='summary'>去年から行方が分からなくなっている東京のIT関連会社の50代の男性役員とみられる遺体を遺棄したとして、会社の代表を務める49歳の容疑者が逮捕された事件で、警視庁は19日も遺体が遺棄された可能性がある東京と神奈川の県境にある峠の周辺を捜索しています。容疑者は男性が行方不明になったあと、レンタカーで付近を訪れていたとみられるということで、警視庁が詳しいいきさつを調べています。</div></div>
+  <div class='lang-pane lang-ja'><h3>池袋暴走事故から7年 遺族が追悼 交通事故防止への思い訴え</h3><div class='summary'>東京 池袋で高齢ドライバーの車が暴走し、母親と幼い子どもが死亡した事故から7年となる19日、遺族が事故現場を訪れ、亡くなった2人を悼むとともに、交通事故防止への思いを訴えました。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260419/k10015102871000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260419/k10015102981000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-dd7873d206ad'
-  data-themes='スポーツ'
+  data-cardid='item-0da7e0be9118'
+  data-themes='総合・国際'
+  data-lang='ja'
+  data-score='2'
+  data-source='NHK'
+  data-sentiment='neutral'
+  data-importance='health_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-0da7e0be9118')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>体操 全日本選手権 男子 橋本大輝が大会6連覇</h3><div class='summary'>世界選手権などの代表選考を兼ねた体操の全日本選手権は男子の決勝が行われ、橋本大輝選手が大会6連覇を果たしました。大会6連覇は、2008年から2017年に史上最多となる10連覇を達成した内村航平さん以来です。2位はパリオリンピック3冠の岡慎之助選手、3位は川上翔平選手でした。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260419/k10015102971000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-24d6b6f412c7'
+  data-themes='総合・国際'
   data-lang='ja'
   data-score='2'
   data-source='NHK'
@@ -3832,11 +4071,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   data-isnew='false'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-dd7873d206ad')">既読</button></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-24d6b6f412c7')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>ドジャース 大谷翔平 最終打席でヒット 連続出塁は50試合に</h3><div class='summary'>大リーグ、ドジャースの大谷翔平選手がロッキーズ戦に先発出場し、最後の打席でヒットを打って、自身が持つ日本選手の連続出塁記録を50試合に伸ばしました。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260419/k10015102911000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-ja'><h3>震度5強 長野 大町 屋根瓦が落ちるなど被害 片づけに追われる</h3><div class='summary'>18日、震度5強の揺れを観測した長野県大町市では、住宅の屋根から瓦が落ちるなどの被害があり、19日朝から片づけなどに追われる人たちの姿が見られました。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260419/k10015102891000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-677a1ef3d66c'
+  data-themes='政治・政策'
+  data-lang='ja'
+  data-score='2'
+  data-source='NHK 政治'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK 政治</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-677a1ef3d66c')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>自民 辺野古沖転覆事故受け “安全確保の徹底を” 政府に提言</h3><div class='summary'>アメリカ軍普天間基地の移設工事が行われている沖縄県名護市辺野古の沖合で研修旅行中の高校生など2人が死亡した船の転覆事故を受けて、自民党は、全国の学校の修学旅行などの安全確保を徹底するよう政府に提言しました。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260417/k10015101921000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-6069b1726498'
@@ -3907,6 +4163,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260416/k10015100771000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-b3bc15aa0f95'
+  data-themes='政治・政策'
+  data-lang='ja'
+  data-score='2'
+  data-source='NHK 政治'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK 政治</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-b3bc15aa0f95')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>再審見直し修正案 維新から不十分との意見相次ぐ</h3><div class='summary'>再審制度の見直しをめぐり、政府は日本維新の会にも修正案を示しました。出席者からは、再審開始の決定に対する検察による不服申し立てに関する修正内容は不十分だという意見が相次ぎました。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260416/k10015100981000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-cd5c065bca01'
   data-themes='政治・政策'
   data-lang='ja'
@@ -3973,6 +4246,40 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>衆院議長 皇室典範改正 立法府としての総意を早期にまとめたい</h3><div class='summary'>安定的な皇位継承をめぐり、森衆議院議長は、今の国会で皇室典範を改正したいという考えを示しました。党内で議論中だとする中道改革連合に、1か月後をめどに見解を示すよう求めた上で、各党・各会派の協議を重ね、立法府としての総意を早期にまとめたいとしています。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260416/k10015100391000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-1aa40e4dce23'
+  data-themes='政治・政策'
+  data-lang='ja'
+  data-score='2'
+  data-source='NHK 政治'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK 政治</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-1aa40e4dce23')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>再審見直し修正案 自民 政府にさらなる対応可能か検討求める</h3><div class='summary'>再審制度の見直しをめぐり、政府は与党内からの反対意見を受けて自民党の会議に修正案を示しました。出席者からは再審開始の決定に対する検察による不服申し立てに関する修正内容に賛否両論が出て、党はさらなる対応が可能か検討するよう政府に求めました。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260416/k10015099791000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-218e37711726'
+  data-themes='政治・政策'
+  data-lang='ja'
+  data-score='2'
+  data-source='NHK 政治'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK 政治</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-218e37711726')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>皇位継承で各党意見 森衆院議長“今国会で皇室典範改正を”</h3><div class='summary'>安定的な皇位継承のあり方をめぐり、衆参両院の議長・副議長と各党・各会派の代表者による協議が行われ、皇族数を確保する方策などについて、それぞれが意見を表明しました。森衆議院議長は、立法府としての総意の取りまとめを急いだ上で、今の国会で皇室典範の改正案を成立させたいという考えを示しました。記事後半では各党・各会派の見解もお伝えしています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260415/k10015099951000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-61e580595043'
@@ -4875,7 +5182,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2604/15/news073.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div>
-</div><footer>Smart News Viewer — Generated at 2026-04-19 14:06</footer></body></html>
+</div><footer>Smart News Viewer — Generated at 2026-04-19 15:17</footer></body></html>
 <script>
 var pageLang = 'en';
 function setPageLang(lang) {

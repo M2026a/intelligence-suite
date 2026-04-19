@@ -26,9 +26,10 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urljoin
 
 import feedparser, requests
+from bs4 import BeautifulSoup
 from deep_translator import GoogleTranslator
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -52,6 +53,141 @@ TRANSLATE_CACHE_FILE = OUTPUT / "translate_cache.json"
 DB_FILE              = OUTPUT / CONFIG.get("db_name", "market_plus.db")
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 MarketPlus"
 TIMEOUT    = 15
+
+
+# ─── ノイズ除去 / 市場関連性判定 ───────────────────────────────────
+
+STRICT_SOURCE_THRESHOLDS = {
+    "Yahoo Finance": 3.0,
+    "BBC Business": 2.0,
+    "NHK経済": 2.0,
+    "東洋経済オンライン": 2.0,
+    "CNBC Economy": 2.0,
+    "MarketWatch": 2.0,
+    "The Economist": 2.0,
+    "BIS": 2.0,
+    "METI News Releases": 1.5,
+    "METI Statistics": 1.5,
+    "財務省": 1.5,
+    "内閣府": 1.5,
+    "JPX Market News": 1.2,
+    "金融庁": 2.1,
+    "CoinPost": 1.8,
+    "Minkabu Stocks": 1.6,
+    "Minkabu Commodities": 1.4,
+}
+
+SOURCE_FALLBACK_ALLOWED = {
+    "Federal Reserve", "Federal Reserve Monetary Policy", "ECB", "日本銀行",
+    "Bank of Japan Statistics", "BLS（米労働統計）", "BEA News Releases",
+    "U.S. Census Economic Indicators", "FXStreet", "Investing.com（Forex）", "JPX Market News", "金融庁", "CoinPost", "Minkabu Stocks", "Minkabu Commodities", "WSJ Markets", "Bloomberg Markets", "CoinDesk"
+}
+
+STRONG_MARKET_TERMS = [
+    "federal reserve", "fed", "fomc", "frb", "ecb", "boj", "bank of japan", "bis",
+    "rate hike", "rate cut", "policy rate", "interest rate", "monetary policy", "利上げ", "利下げ", "金融政策", "政策金利",
+    "treasury yield", "bond yield", "10-year yield", "2-year yield", "real yield", "国債利回り", "米10年債", "米2年債", "長期金利", "実質金利", "利回り",
+    "usd/jpy", "eur/usd", "gbp/usd", "ドル円", "ユーロドル", "為替", "円高", "円安", "ドル高", "ドル安", "介入",
+    "xauusd", "gold", "bullion", "金価格", "金etf",
+    "bitcoin", "btc", "ethereum", "eth", "crypto", "cryptocurrency", "stablecoin", "ステーブルコイン", "仮想通貨", "暗号資産",
+    "cpi", "pce", "ppi", "nonfarm payroll", "nfp", "payroll", "jobless claims", "gdp", "pmi", "ism", "retail sales", "consumer confidence",
+    "消費者物価", "雇用統計", "失業率", "小売売上高", "消費者信頼感", "鉱工業生産",
+    "s&p 500", "nasdaq", "dow", "nikkei", "topix", "日経平均", "米国株", "日本株", "株式市場", "earnings", "etf",
+    "東証", "東京証券取引所", "プライム市場", "スタンダード市場", "グロース市場", "reit", "jpx日経", "信用取引", "売買代金", "売買高",
+    "金先物", "金相場", "金標準", "貴金属", "白金", "銀", "ジパングコイン",
+    "ビットコイン", "イーサリアム", "xrp", "ソラナ", "電子決済手段", "資金決済法", "暗号資産交換業",
+    "brent", "wti", "crude oil", "原油価格", "opec","財政", "予算", "国際収支", "経常収支", "貿易収支", "鉱工業生産", "設備投資", "景気動向指数"
+]
+
+WEAK_MARKET_TERMS = [
+    "inflation", "prices", "economy", "economic", "market", "markets", "stocks", "shares", "bond", "bonds", "currency", "currencies", "tariff", "sanctions",
+    "インフレ", "物価", "景気", "市場", "株", "債券", "通貨", "関税", "制裁", "景況感", "景気後退"
+]
+
+NOISE_TERMS = [
+    "netflix", "disney", "warner", "hastings", "streaming", "television", "tv", "dog tv", "犬向け", "social supermarket", "supermarket",
+    "cruise line", "cruise lines", "video game", "gaming", "movie", "movies", "celebrity", "sports", "football", "soccer",
+    "会長職", "就任", "社長就任", "人事", "番組", "映画", "ドラマ", "芸能", "スポーツ", "犬", "スーパー", "キャンペーン", "特設ページ",
+    "gamefi", "nft", "メタバース", "イベント開催", "カンファレンス", "初心者", "始め方", "ランキング"
+]
+
+HARD_ADMIN_NOISE_TERMS = [
+    "見学会", "コンテスト", "グランプリ", "表彰", "受賞", "募集", "公募", "記念", "開催しました",
+    "開催について", "実施について", "挨拶", "祝辞", "式典", "大会", "イベント", "セミナー", "ワークショップ", "親子", "金融経済教育"
+]
+
+HARD_EXCLUDE_SOURCES = {"NVIDIA Press Room", "Intel Press Releases"}
+
+
+def match_score(text: str, keywords: list[str], weight: float) -> float:
+    seen = set()
+    score = 0.0
+    for kw in keywords:
+        k = text_lower(kw)
+        if k in text and k not in seen:
+            seen.add(k)
+            score += weight
+    return score
+
+
+def market_relevance_score(source_name: str, title: str, summary: str) -> float:
+    combined = text_lower(f"{title} {summary}")
+    score = 0.0
+    score += match_score(combined, STRONG_MARKET_TERMS, 1.0)
+    score += match_score(combined, WEAK_MARKET_TERMS, 0.45)
+    if any(text_lower(k) in combined for k in ["usd/jpy", "eur/usd", "gbp/usd", "ドル円", "ユーロドル", "xauusd", "bitcoin", "btc", "ethereum", "eth"]):
+        score += 1.2
+    if any(text_lower(k) in combined for k in ["fomc", "federal reserve", "frb", "ecb", "boj", "bank of japan", "政策金利", "金融政策決定会合"]):
+        score += 1.0
+    if any(text_lower(k) in combined for k in ["cpi", "pce", "ppi", "nfp", "雇用統計", "消費者物価", "gdp", "pmi", "ism"]):
+        score += 1.0
+    if any(text_lower(k) in combined for k in ["treasury yield", "10-year yield", "2-year yield", "米10年債", "長期金利", "国債利回り"]):
+        score += 1.0
+    return score
+
+
+def is_noise_article(source_name: str, title: str, summary: str) -> bool:
+    combined = text_lower(f"{title} {summary}")
+    if source_name in HARD_EXCLUDE_SOURCES:
+        return True
+    score = market_relevance_score(source_name, title, summary)
+    _OFFICIAL_JP = {"財務省", "内閣府", "金融庁", "METI News Releases", "METI Statistics"}
+    if source_name not in _OFFICIAL_JP:
+        if any(text_lower(term) in combined for term in HARD_ADMIN_NOISE_TERMS) and score < 4.0:
+            return True
+    if any(text_lower(term) in combined for term in NOISE_TERMS) and score < 3.0:
+        return True
+    threshold = STRICT_SOURCE_THRESHOLDS.get(source_name)
+    if threshold is not None and score < threshold:
+        return True
+    return False
+
+
+def pick_keyword_items(items: list[dict], keywords: list[str], preferred_themes: list[str] | None = None,
+                       source_keyword_map: dict[str, list[str]] | None = None,
+                       source_exclude_terms: dict[str, list[str]] | None = None) -> list[dict]:
+    preferred_themes = preferred_themes or []
+    source_keyword_map = source_keyword_map or {}
+    source_exclude_terms = source_exclude_terms or {}
+    kws = [text_lower(k) for k in keywords]
+    picked = []
+    for x in items:
+        hay = text_lower(' '.join([
+            x.get('title',''), x.get('summary',''), x.get('title_ja',''), x.get('summary_ja',''),
+            ' '.join(x.get('themes',[])), x.get('source','')
+        ]))
+        src = x.get('source','')
+        hit = any(k in hay for k in kws)
+        if not hit and preferred_themes:
+            hit = any(t in x.get('themes', []) for t in preferred_themes)
+        if not hit and src in source_keyword_map:
+            hit = any(text_lower(k) in hay for k in source_keyword_map[src])
+        if hit and src in source_exclude_terms:
+            if any(text_lower(t) in hay for t in source_exclude_terms[src]):
+                hit = False
+        if hit:
+            picked.append(x)
+    return picked
 
 
 # ─── USD/JPY 影響キーワード ───────────────────────────────────────
@@ -449,9 +585,9 @@ def infer_theme_from_source(source_name: str) -> list[str]:
         (("federal reserve", "fed", "fomc", "monetary policy", "bank of japan", "boj", "ecb", "bis", "central bank"), "金利・中央銀行"),
         (("cpi", "ppi", "inflation", "price index", "bls", "労働統計"), "インフレ・物価"),
         (("gdp", "economic", "industrial production", "employment", "unemployment", "census", "bea", "retail", "trade"), "雇用・景気"),
-        (("fiscal", "budget", "tax", "subsidy", "cabinet office", "ministry of finance", "meti", "cao", "mof", "内閣府", "財務省", "経産省"), "財政"),
+        (("fiscal", "budget", "tax", "subsidy", "cabinet office", "ministry of finance", "meti", "cao", "mof", "内閣府", "財務省", "経産省", "金融庁"), "財政"),
         (("nvidia", "intel", "semiconductor", "chip", "gpu", "memory", "hbm", "dram", "nand"), "半導体・産業"),
-        (("japan", "boj", "meti", "cabinet office", "ministry of finance", "日銀", "日本", "財務省", "経産省", "内閣府", "nhk"), "日本"),
+        (("japan", "boj", "meti", "cabinet office", "ministry of finance", "日銀", "日本", "財務省", "経産省", "内閣府", "nhk", "jpx", "金融庁"), "日本"),
     ]
     matched = [label for keys, label in mapping if any(k in src for k in keys)]
     return matched or ["その他"]
@@ -681,6 +817,103 @@ def translate_items(items: list[dict], cache: dict) -> None:
 
 # ─── データ収集 ───────────────────────────────────────────────────
 
+def parse_entry_datetime(entry) -> tuple[datetime | None, str]:
+    pub_dt = None
+    try:
+        if hasattr(entry, "published_parsed") and entry.published_parsed:
+            pub_dt = datetime(*entry.published_parsed[:6], tzinfo=timezone.utc)
+        elif hasattr(entry, "updated_parsed") and entry.updated_parsed:
+            pub_dt = datetime(*entry.updated_parsed[:6], tzinfo=timezone.utc)
+    except:
+        pub_dt = None
+    if pub_dt:
+        pub_dt = pub_dt.astimezone(JST)
+        if now_jst() - pub_dt > timedelta(days=HISTORY_DAYS):
+            return None, ""
+        return pub_dt, pub_dt.strftime("%Y-%m-%d %H:%M")
+    return None, ""
+
+COINPOST_INCLUDE_TERMS = [
+    "ビットコイン", "btc", "イーサリアム", "eth", "xrp", "ソラナ", "暗号資産", "仮想通貨",
+    "ステーブルコイン", "etf", "ジパングコイン", "電子決済手段", "資金決済法", "暗号資産交換",
+    "defi", "web3", "トークン", "ブロックチェーン", "暗号", "クリプト"
+]
+COINPOST_EXCLUDE_TERMS = [
+    "初心者", "始め方", "ランキング", "比較", "学習", "取引所比較", "イベント", "カンファレンス",
+    "gamefi", "nft", "メタバース", "広告", "pr", "求人", "webx", "動画", "特集"
+]
+
+JPX_HTML_INCLUDE_TERMS = [
+    "日経平均", "TOPIX", "東証", "東京証券取引所", "株式市場", "株価指数", "売買代金", "売買高", "信用取引",
+    "ETF", "REIT", "自己株式", "プライム市場", "スタンダード市場", "グロース市場", "先物価格", "最終清算数値",
+    "最終決済価格", "金標準", "金限日", "貴金属", "白金", "銀"
+]
+JPX_HTML_EXCLUDE_TERMS = [
+    "見学", "採用", "特設", "お知らせ", "サイト更新情報", "JPXからのお知らせ", "注意喚起"
+]
+MINKABU_STOCK_INCLUDE_TERMS = [
+    "東京株式", "国内株式市場見通し", "新興市場見通し", "日経平均", "TOPIX", "東証", "東京証券取引所", "日本株",
+    "株式相場", "株価", "相場見通し", "売買動向", "プライム", "グロース", "スタンダード", "個別株", "半導体株"
+]
+MINKABU_STOCK_EXCLUDE_TERMS = [
+    "株主優待", "お申し込み方法", "IR情報を見る", "おすすめ", "初心者", "比較", "ランキング", "PR", "広告"
+]
+MINKABU_GOLD_INCLUDE_TERMS = [
+    "金価格", "金相場", "金先物", "金標準", "金限日", "ゴールド", "貴金属", "白金", "プラチナ", "銀"
+]
+MINKABU_GOLD_EXCLUDE_TERMS = [
+    "ゴム", "原油", "ガソリン", "灯油", "大豆", "とうもろこし", "小豆", "セミナー", "ランキング"
+]
+
+def fetch_html_items(source: dict) -> list[dict]:
+    name = source["name"]
+    url = source["url"]
+    lang = source.get("lang", "ja")
+    allowed_domains = source.get("allowed_domains", [normalize_host(url)])
+    resp = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=TIMEOUT)
+    resp.raise_for_status()
+    apparent = getattr(resp, 'apparent_encoding', None) or resp.encoding or 'utf-8'
+    if apparent:
+        resp.encoding = apparent
+    soup = BeautifulSoup(resp.content, "html.parser", from_encoding=apparent)
+    items = []
+    seen = set()
+
+    def collect_links(include_terms: list[str], exclude_terms: list[str], min_len: int = 8, limit: int = 30):
+        local = []
+        for a in soup.select('a[href]'):
+            href = urljoin(url, a.get('href',''))
+            title = clean_text(a.get_text(' ', strip=True))
+            if not title or len(title) < min_len:
+                continue
+            if href in seen:
+                continue
+            if not is_allowed_domain(href, allowed_domains):
+                continue
+            t_low = text_lower(title)
+            if not any(text_lower(k) in t_low for k in include_terms):
+                continue
+            if any(text_lower(k) in t_low for k in exclude_terms):
+                continue
+            seen.add(href)
+            local.append({
+                'title': title, 'summary': '', 'link': href, 'published': '', 'pub_dt': '',
+                'lang': lang, 'source': name, 'region': source.get('region',''), 'official': bool(source.get('official', False))
+            })
+            if len(local) >= limit:
+                break
+        return local
+
+    if name == "CoinPost":
+        items.extend(collect_links(COINPOST_INCLUDE_TERMS, COINPOST_EXCLUDE_TERMS, min_len=12, limit=20))
+    elif name == "JPX Market News":
+        items.extend(collect_links(JPX_HTML_INCLUDE_TERMS, JPX_HTML_EXCLUDE_TERMS, min_len=6, limit=30))
+    elif name == "Minkabu Stocks":
+        items.extend(collect_links(MINKABU_STOCK_INCLUDE_TERMS, MINKABU_STOCK_EXCLUDE_TERMS, min_len=10, limit=30))
+    elif name == "Minkabu Commodities":
+        items.extend(collect_links(MINKABU_GOLD_INCLUDE_TERMS, MINKABU_GOLD_EXCLUDE_TERMS, min_len=8, limit=20))
+    return items
+
 def fetch_source(source: dict, themes_cfg: dict) -> tuple[list[dict], bool]:
     name = source["name"]
     url  = source["url"]
@@ -689,40 +922,48 @@ def fetch_source(source: dict, themes_cfg: dict) -> tuple[list[dict], bool]:
 
     log(f"  取得中: {name}")
     try:
-        resp = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=TIMEOUT)
-        resp.raise_for_status()
-        feed = feedparser.parse(resp.content)
+        if source.get("type") == "html":
+            raw_items = fetch_html_items(source)
+        else:
+            resp = requests.get(url, headers={"User-Agent": USER_AGENT, "Accept": "application/rss+xml, application/xml, text/xml, */*"}, timeout=TIMEOUT)
+            resp.raise_for_status()
+            feed = feedparser.parse(resp.content)
+            raw_items = []
+            for entry in feed.entries:
+                raw_items.append({
+                    'title': clean_text(getattr(entry, "title", "")),
+                    'summary': clean_text(getattr(entry, "summary", getattr(entry, "description", ""))),
+                    'link': getattr(entry, "link", ""),
+                    'entry': entry,
+                })
     except Exception as e:
         log(f"  ⚠ {name}: {e}")
         return [], False
 
     items = []
-    for entry in feed.entries:
-        title   = clean_text(getattr(entry, "title", ""))
-        summary = clean_text(getattr(entry, "summary", getattr(entry, "description", "")))
-        link    = getattr(entry, "link", "")
+    for raw in raw_items:
+        title = raw.get('title','')
+        summary = raw.get('summary','')
+        link = raw.get('link','')
 
         if not title or not link: continue
         if not is_allowed_domain(link, allowed_domains): continue
         if is_image_or_gallery_item(title, summary, link): continue
 
-        pub_dt = None
-        try:
-            if hasattr(entry, "published_parsed") and entry.published_parsed:
-                pub_dt = datetime(*entry.published_parsed[:6], tzinfo=timezone.utc)
-            elif hasattr(entry, "updated_parsed") and entry.updated_parsed:
-                pub_dt = datetime(*entry.updated_parsed[:6], tzinfo=timezone.utc)
-        except: pass
-
-        if pub_dt:
-            pub_dt = pub_dt.astimezone(JST)
-            if now_jst() - pub_dt > timedelta(days=HISTORY_DAYS): continue
-            pub_str = pub_dt.strftime("%Y-%m-%d %H:%M")
+        entry = raw.get('entry')
+        if entry is not None:
+            pub_dt, pub_str = parse_entry_datetime(entry)
+            if raw.get('entry') is not None and pub_dt is None and pub_str == '' and hasattr(entry, 'published_parsed') and entry.published_parsed:
+                continue
         else:
-            pub_str = ""
+            pub_dt = None
+            pub_str = raw.get('published','') or ''
+
+        if is_noise_article(name, title, summary):
+            continue
 
         themes = classify_themes(title, summary, lang, themes_cfg)
-        if themes == ["その他"]:
+        if themes == ["その他"] and name in SOURCE_FALLBACK_ALLOWED:
             themes = infer_theme_from_source(name)
 
         fx_impact = detect_fx_impact(title, summary, themes)
@@ -858,10 +1099,15 @@ header{position:sticky;top:0;z-index:50;background:rgba(13,16,22,.96);backdrop-f
 .main{max-width:1480px;margin:18px auto;padding:0 20px 40px}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
+.stat-grid-compact{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:10px;margin-bottom:16px;align-items:stretch}
+.stat-grid-compact .stat{min-width:0;padding:12px}
 .stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
 .stat .num{font-size:26px;font-weight:800;margin-bottom:4px}
+.stat-grid-compact .num{font-size:18px;line-height:1.1}
 .stat .label{color:var(--muted);font-size:12px}
+.stat-grid-compact .label{font-size:11px}
 .stat .icon{font-size:22px;margin-bottom:8px}
+.stat-grid-compact .icon{font-size:18px;margin-bottom:6px}
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
 .flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s}
 .flt-btn:hover{border-color:var(--accent)}
@@ -921,6 +1167,8 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   .grid{grid-template-columns:1fr}
   .search{min-width:160px;width:100%}
   .card-top{flex-direction:column}
+  .stat-grid-compact{grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:8px}
+  .stat-grid-compact .stat{min-width:0;padding:10px}
 }
 """
 
@@ -999,10 +1247,13 @@ def header_html(active: str, stamp: str) -> str:
     nav_items = [
         ("index.html",        "📋 メイン"),
         ("pickup.html",       "⭐ 注目記事"),
-        ("fx_impact.html",    "💱 為替影響"),
+        ("fx_impact.html",    "💱 為替"),
         ("central_bank.html", "🏦 中央銀行"),
-        ("themes.html",       "🏷 テーマ別"),
-        ("sources.html",      "🏛 注目ソース"),
+        ("gold.html",         "🪙 金"),
+        ("crypto.html",       "₿ 仮想通貨"),
+        ("equities.html",     "📈 株式"),
+        ("rates.html",        "📉 債券 / 金利"),
+        ("indicators.html",   "🧾 経済指標"),
         ("analysis.html",     "📊 分析"),
     ]
     nav = "".join(
@@ -1022,7 +1273,7 @@ def header_html(active: str, stamp: str) -> str:
 <div class='wrap'>
   <div class='top'>
     <div class='title'>
-      <h1>📊 {html.escape(APP_NAME)} <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ {html.escape(CONFIG.get("subtitle", ""))}</span></h1>
+      <h1>{html.escape(CONFIG.get('app_icon','📊'))} {html.escape(APP_NAME)} <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ {html.escape(CONFIG.get("subtitle", ""))}</span></h1>
       <div class='sub'>更新日時：{stamp}</div>
     </div>
     <div class='right-controls'>
@@ -1119,6 +1370,83 @@ def card_html(item: dict, themes_cfg: dict) -> str:
 </article>"""
 
 
+
+def region_filter_block(prefix: str, include_view: bool = False, include_search: bool = True) -> str:
+    view_html = """
+    <button class='flt-btn flt-view-{p} active' data-view='cards'>▦ カード</button>
+    <button class='flt-btn flt-view-{p}' data-view='list'>≡ リスト</button>
+    """.replace('{p}', prefix) if include_view else ""
+    search_html = f"<input id='searchBox_{prefix}' class='search' placeholder='タイトル・本文を検索...'>" if include_search else ""
+    return f"""
+<div class='panel'>
+  <div class='filters'>
+    <span class='filter-label'>地域:</span>
+    <button class='flt-btn flt-region-{prefix} active' data-lang='all'>🌍 全部</button>
+    <button class='flt-btn flt-region-{prefix}' data-lang='ja'>🇯🇵 国内</button>
+    <button class='flt-btn flt-region-{prefix}' data-lang='en'>🌐 海外</button>
+    {view_html}
+    {search_html}
+  </div>
+</div>"""
+
+
+def region_filter_script(prefix: str, grid_id: str) -> str:
+    return f"""
+<script>
+(function(){{
+  var fLang='all', fView='cards', search='';
+  function apply(){{
+    var visible=0;
+    document.querySelectorAll('#{grid_id} .item-card').forEach(function(card){{
+      var show=true;
+      if(fLang!=='all' && (card.dataset.lang||'')!==fLang) show=false;
+      if(search && !(card.textContent||'').toLowerCase().includes(search.toLowerCase())) show=false;
+      card.style.display=show?'':'none';
+      if(show) visible++;
+    }});
+    var grid=document.getElementById('{grid_id}');
+    if(grid) grid.classList.toggle('list', fView==='list');
+    var cnt=document.getElementById('{prefix}Count');
+    if(cnt) cnt.textContent=visible;
+  }}
+  document.querySelectorAll('.flt-region-{prefix}').forEach(function(btn){{
+    btn.addEventListener('click',function(){{
+      document.querySelectorAll('.flt-region-{prefix}').forEach(function(b){{b.classList.remove('active');}});
+      btn.classList.add('active'); fLang=btn.dataset.lang; apply();
+    }});
+  }});
+  document.querySelectorAll('.flt-view-{prefix}').forEach(function(btn){{
+    btn.addEventListener('click',function(){{
+      document.querySelectorAll('.flt-view-{prefix}').forEach(function(b){{b.classList.remove('active');}});
+      btn.classList.add('active'); fView=btn.dataset.view; apply();
+    }});
+  }});
+  var sb=document.getElementById('searchBox_{prefix}');
+  if(sb) sb.addEventListener('input',function(){{search=this.value; apply();}});
+  apply();
+}})();
+</script>"""
+
+
+def render_keyword_page(active: str, title: str, desc: str, items: list[dict], themes_cfg: dict, keywords: list[str], preferred_themes: list[str] | None = None,
+                        source_keyword_map: dict[str, list[str]] | None = None,
+                        source_exclude_terms: dict[str, list[str]] | None = None) -> str:
+    stamp = jst_stamp()
+    picked = pick_keyword_items(items, keywords, preferred_themes, source_keyword_map, source_exclude_terms)
+    cards_html = ''.join(card_html(it, themes_cfg) for it in picked)
+    prefix = active.replace('.html','')
+    body = f"""
+<div class='main'>
+  <div class='panel' style='margin-bottom:16px'>
+    <h2 style='margin:0 0 14px;font-size:16px'>{title}</h2>
+    <div style='color:var(--muted);font-size:13px'>{desc}</div>
+  </div>
+  {region_filter_block(prefix, include_view=True, include_search=True)}
+  <div style='margin-bottom:12px;font-weight:700;font-size:15px'>記事一覧（<span id='{prefix}Count'>{len(picked)}</span>件）</div>
+  <div class='grid' id='{prefix}Grid'>{cards_html}</div>
+</div>"""
+    return header_html(active, stamp) + body + footer_html(stamp) + page_lang_js() + read_js() + region_filter_script(prefix, f'{prefix}Grid')
+
 # ─── メインページ ─────────────────────────────────────────────────
 
 def filter_js(sources: list[str]) -> str:
@@ -1186,40 +1514,50 @@ def filter_js(sources: list[str]) -> str:
 
 def render_index(items: list[dict], themes_cfg: dict) -> str:
     stamp = jst_stamp()
-    total         = len(items)
-    new_count     = sum(1 for x in items if x.get("is_new"))
-    official_count= sum(1 for x in items if x.get("official"))
-    usd_strong    = sum(1 for x in items if x.get("fx_impact") == "usd_strong")
-    usd_weak      = sum(1 for x in items if x.get("fx_impact") == "usd_weak")
-    jpy_strong    = sum(1 for x in items if x.get("fx_impact") == "jpy_strong")
-    jpy_weak      = sum(1 for x in items if x.get("fx_impact") == "jpy_weak")
+    total = len(items)
+    new_count = sum(1 for x in items if x.get("is_new"))
+    pickup_count = sum(1 for x in items if x.get("score", 0) >= 4)
+    official_count = sum(1 for x in items if x.get("official"))
+
+    def kw_count(words: list[str], themes: list[str] | None = None) -> int:
+        themes = themes or []
+        cnt = 0
+        for x in items:
+            hay = ' '.join([x.get('title',''), x.get('summary',''), x.get('title_ja',''), x.get('summary_ja','')]).lower()
+            hit = any(w.lower() in hay for w in words)
+            if not hit and themes:
+                hit = any(t in x.get('themes', []) for t in themes)
+            if hit:
+                cnt += 1
+        return cnt
+
+    mini_stats = [
+        ("📰", total, "総記事数"),
+        ("🆕", new_count, f"直近{NEW_HOURS}h"),
+        ("⭐", pickup_count, "注目記事"),
+        ("💱", kw_count(["usd/jpy","eur/usd","gbp/usd","fx","forex","為替","円高","円安","ドル高","ドル安"],["日本"]), "為替"),
+        ("🏦", kw_count(["federal reserve","ecb","bank of japan","boj","fomc","central bank","中央銀行","金融政策"],["金利・中央銀行"]), "中央銀行"),
+        ("🪙", kw_count(["gold","xauusd","bullion","金価格","金etf"]), "金"),
+        ("₿", kw_count(["bitcoin","btc","ethereum","eth","crypto","暗号資産","仮想通貨"]), "仮想通貨"),
+        ("📈", kw_count(["s&p 500","nasdaq","dow","nikkei","topix","stocks","equity","株式"]), "株式"),
+        ("📉", kw_count(["yield","treasury","bond","国債","利回り","長期金利","実質金利"],["金利・中央銀行"]), "債券 / 金利"),
+        ("🧾", kw_count(["cpi","pce","nfp","gdp","pmi","ism","雇用統計","消費者物価","失業率"],["インフレ・物価","雇用・景気"]), "経済指標"),
+    ]
+    stat_grid = "<div class='stat-grid stat-grid-compact'>" + ''.join(
+        f"<div class='stat'><div class='icon'>{icon}</div><div class='num'>{num}</div><div class='label'>{label}</div></div>" for icon, num, label in mini_stats
+    ) + "</div>"
 
     theme_counts = Counter()
     for item in items:
-        for t in item.get("themes", []): theme_counts[t] += 1
-
+        for t in item.get("themes", []):
+            theme_counts[t] += 1
     source_list = sorted(set(x.get("source","") for x in items))
-
     theme_btns = "<button class='flt-btn flt-theme active' data-theme='all'>📋 すべて</button>"
     for tk, td in themes_cfg["themes"].items():
-        cnt   = theme_counts.get(tk, 0)
-        color = td.get("color", "#636e72")
-        icon  = td.get("icon", "")
+        cnt = theme_counts.get(tk, 0)
+        icon = td.get("icon", "")
         theme_btns += f"<button class='flt-btn flt-theme' data-theme='{html.escape(tk)}'>{icon} {html.escape(tk)} ({cnt})</button>"
-
     cards_html = "".join(card_html(item, themes_cfg) for item in items)
-
-    stat_grid = f"""
-<div class='stat-grid'>
-  <div class='stat'><div class='icon'>📰</div><div class='num'>{total}</div><div class='label'>総記事数</div></div>
-  <div class='stat'><div class='icon'>🆕</div><div class='num' style='color:#2ecc71'>{new_count}</div><div class='label'>直近{NEW_HOURS}h 新着</div></div>
-  <div class='stat'><div class='icon'>🟢</div><div class='num' style='color:#4ea1ff'>{usd_strong}</div><div class='label'>USD Bullish</div></div>
-  <div class='stat'><div class='icon'>🔴</div><div class='num' style='color:#e74c3c'>{usd_weak}</div><div class='label'>USD Bearish</div></div>
-  <div class='stat'><div class='icon'>🔵</div><div class='num' style='color:#2ecc71'>{jpy_strong}</div><div class='label'>JPY Bullish</div></div>
-  <div class='stat'><div class='icon'>🟡</div><div class='num' style='color:#f39c12'>{jpy_weak}</div><div class='label'>JPY Bearish</div></div>
-  <div class='stat'><div class='icon'>🏛</div><div class='num'>{official_count}</div><div class='label'>公式ソース</div></div>
-</div>"""
-
     return (
         header_html("index.html", stamp)
         + f"""
@@ -1274,7 +1612,9 @@ def render_fx_impact(items: list[dict], themes_cfg: dict) -> str:
         ("jpy_strong", "JPY Bullish", "円高材料",   "fx-jpy-strong"),
         ("jpy_weak",   "JPY Bearish", "円安材料",   "fx-jpy-weak"),
     ]
-    cats = {key: [x for x in items if x.get("fx_impact") == key] for key, *_ in tab_cfg}
+    _CRYPTO_ONLY_SOURCES = {"CoinPost", "CoinDesk"}
+    fx_items = [x for x in items if x.get("source") not in _CRYPTO_ONLY_SOURCES]
+    cats = {key: [x for x in fx_items if x.get("fx_impact") == key] for key, *_ in tab_cfg}
     neutral_count = sum(1 for x in items if x.get("fx_impact") == "neutral")
 
     fx_css = """
@@ -1522,6 +1862,99 @@ def render_central_bank(items: list[dict], themes_cfg: dict) -> str:
 </div>"""
     return header_html("central_bank.html", stamp) + body + footer_html(stamp) + page_lang_js() + read_js()
 
+
+
+def render_gold(items: list[dict], themes_cfg: dict) -> str:
+    source_keywords = {
+        'Yahoo Finance': ['gold', 'xauusd', 'bullion', 'gold etf'],
+        'BBC Business': ['gold', 'bullion'],
+        'NHK経済': ['金価格', '金相場', 'ゴールド', '金etf'],
+        '東洋経済オンライン': ['金価格', '金相場', 'ゴールド', '金etf'],
+        'JPX Market News': ['金', '金価格', '金相場', '金先物', '金標準', '金限日', '貴金属', '白金', '銀'],
+        'Minkabu Commodities': ['金価格', '金相場', '金先物', 'ゴールド', '貴金属', '白金', 'プラチナ', '銀'],
+    }
+    return render_keyword_page('gold.html', '🪙 金', 'XAUUSD、金ETF、安全資産需要などの材料を整理します。', items, themes_cfg,
+        ['gold','xauusd','bullion','gold etf','金価格','金etf','金相場','ゴールド','safe haven','安全資産'],
+        source_keyword_map=source_keywords)
+
+
+def render_crypto(items: list[dict], themes_cfg: dict) -> str:
+    source_keywords = {
+        'Yahoo Finance': ['bitcoin', 'btc', 'ethereum', 'eth', 'crypto', 'cryptocurrency', 'stablecoin'],
+        'BBC Business': ['bitcoin', 'btc', 'ethereum', 'eth', 'crypto', 'stablecoin'],
+        'NHK経済': ['暗号資産', '仮想通貨', 'ビットコイン', 'イーサリアム', 'ステーブルコイン'],
+        '東洋経済オンライン': ['暗号資産', '仮想通貨', 'ビットコイン', 'イーサリアム', 'ステーブルコイン'],
+        'BIS': ['stablecoin', 'crypto', 'cryptocurrency', 'token'],
+        '金融庁': ['暗号資産', '仮想通貨', 'ビットコイン', 'イーサリアム', 'ステーブルコイン', '資金決済法', '電子決済手段'],
+        'CoinPost': ['ビットコイン', 'BTC', 'イーサリアム', 'ETH', 'XRP', 'ソラナ', '暗号資産', '仮想通貨', 'ステーブルコイン', 'ジパングコイン'],
+    }
+    return render_keyword_page('crypto.html', '₿ 仮想通貨', 'BTC・ETH中心の暗号資産市場、ETF、規制、取引所動向を整理します。', items, themes_cfg,
+        ['bitcoin','btc','ethereum','eth','crypto','cryptocurrency','暗号資産','仮想通貨','ビットコイン','イーサリアム','stablecoin','ステーブルコイン','bitcoin etf','crypto etf'],
+        source_keyword_map=source_keywords)
+
+
+def render_equities(items: list[dict], themes_cfg: dict) -> str:
+    source_keywords = {
+        'JPX Market News': ['日経平均', 'topix', 'TOPIX', '東証', '東京証券取引所', '日本株', '株式', 'ETF', 'REIT', 'プライム市場', 'スタンダード市場', 'グロース市場', 'JPX日経', '売買代金', '売買高'],
+        'Yahoo Finance': ['stocks', 'equity', 'nikkei', 'topix', 'japan stocks', 'earnings', 'etf'],
+        'NHK経済': ['日本株', '日経平均', '東証', 'TOPIX', '株価', 'ETF'],
+        '東洋経済オンライン': ['日本株', '日経平均', '東証', 'TOPIX', '株価', 'ETF'],
+        'JPX Market News': ['日経平均', 'TOPIX', '東証', '株式', 'ETF', 'REIT', 'プライム市場', 'スタンダード市場', 'グロース市場', '売買代金', '売買高', '信用取引', '自己株式'],
+        'Minkabu Stocks': ['日経平均', 'TOPIX', '東証', '東京株式', '国内株式市場見通し', '新興市場見通し', '株式相場', '株価', '個別株', '半導体株'],
+    }
+    source_excludes = {
+        'JPX Market News': ['売買停止', '注意喚起', '見学', 'セミナー', 'コンテスト'],
+        'CoinPost': ['暗号資産', '仮想通貨', 'ビットコイン', 'btc', 'イーサリアム', 'eth', 'xrp', 'ソラナ', 'ステーブルコイン', 'ミームコイン', 'web3', 'nft', 'defi', 'gamefi'],
+        'Minkabu Stocks': ['優待', 'おすすめ', 'ランキング', 'PR', '広告'],
+    }
+    return render_keyword_page('equities.html', '📈 株式', '株式市場、主要指数、大型株・半導体株などの相場材料を整理します。', items, themes_cfg,
+        ['stocks','equity','s&p 500','nasdaq','dow','nikkei','topix','株式','日経平均','東証','東京証券取引所','日本株','ETF','REIT','プライム市場','スタンダード市場','グロース市場','JPX日経','半導体株','株価'], ['半導体・産業'], source_keywords, source_excludes)
+
+
+def render_rates(items: list[dict], themes_cfg: dict) -> str:
+    source_keywords = {
+        'Bank of Japan Statistics': ['国債', '金利', '利回り', 'プライムレート', 'コールレート', '貸出約定平均金利', '預金金利', '預金種類別', '債券売買高'],
+        '日本銀行': ['国債', '金利', '利回り', '金融市場', '市場調節', '長短プライムレート'],
+        '財務省': ['国債', '国債金利情報', '債券', '利回り'],
+        'JPX Market News': ['国債', '債券', '利回り', '金利', '金先物', '長期金利'],
+        'Federal Reserve': ['yield', 'treasury', 'bond', 'interest rate', 'policy rate'],
+        'Federal Reserve Monetary Policy': ['yield', 'interest rate', 'policy rate'],
+        'ECB': ['yield', 'bond', 'interest rate', 'policy rate'],
+    }
+    source_excludes = {
+        'Bank of Japan Statistics': ['見学会', 'コンテスト', 'グランプリ', '開催', '募集', '挨拶'],
+        '日本銀行': ['見学会', 'コンテスト', 'グランプリ', '開催', '募集', '挨拶'],
+        '財務省': ['見学会', 'コンテスト', 'グランプリ', '開催', '募集', '挨拶'],
+        'JPX Market News': ['売買停止', '注意喚起', '見学', 'セミナー'],
+    }
+    return render_keyword_page('rates.html', '📉 債券 / 金利', '米10年債、米2年債、長短金利、利回り変化などの背景を整理します。', items, themes_cfg,
+        ['yield','treasury','bond','bonds','10-year','2-year','policy rate','interest rate','国債','利回り','長期金利','短期金利','実質金利','プライムレート','コールレート','貸出約定平均金利','預金金利'],
+        ['金利・中央銀行'], source_keywords, source_excludes)
+
+
+def render_indicators(items: list[dict], themes_cfg: dict) -> str:
+    source_keywords = {
+        'Bank of Japan Statistics': ['物価指数', '企業物価', '国内企業物価', '景気', '指数', 'マネーストック', '資金循環', '貸出', '預金'],
+        '日本銀行': ['展望レポート', '経済・物価情勢', '物価', '景気'],
+        '内閣府': ['gdp', '国内総生産', '景気動向指数', '景気ウォッチャー', '機械受注', '消費動向', '月例経済報告'],
+        'METI Statistics': ['鉱工業生産', '第3次産業活動指数', '全産業活動指数', '商業動態', '特定サービス産業動態'],
+        '財務省': ['国際収支', '貿易統計', '法人企業統計'],
+        '金融庁': ['NISA', '資産運用', '金融商品', '市場制度', '開示', '投資信託'],
+        'BLS（米労働統計）': ['cpi', 'ppi', 'employment', 'payroll', 'jobless', 'unemployment'],
+        'BEA News Releases': ['gdp', 'personal income', 'pce', 'gross domestic product'],
+        'U.S. Census Economic Indicators': ['retail sales', 'housing', 'durable goods', 'inventories', 'economic indicator'],
+    }
+    source_excludes = {
+        'Bank of Japan Statistics': ['見学会', 'コンテスト', 'グランプリ', '開催', '募集', '挨拶'],
+        '日本銀行': ['見学会', 'コンテスト', 'グランプリ', '開催', '募集', '挨拶'],
+        '内閣府': ['見学会', 'コンテスト', 'グランプリ', '開催', '募集', '挨拶'],
+        'METI Statistics': ['見学会', 'コンテスト', 'グランプリ', '開催', '募集', '挨拶'],
+        '財務省': ['見学会', 'コンテスト', 'グランプリ', '開催', '募集', '挨拶'],
+        'JPX Market News': ['売買停止', '注意喚起', '見学', 'セミナー'],
+    }
+    return render_keyword_page('indicators.html', '🧾 経済指標', 'CPI、PCE、雇用統計、GDP、ISM など市場を動かす主要指標を整理します。', items, themes_cfg,
+        ['cpi','pce','ppi','nfp','payroll','gdp','pmi','ism','retail sales','consumer confidence','雇用統計','消費者物価','失業率','有効求人倍率','景気動向指数','景気ウォッチャー','鉱工業生産','機械受注','国際収支','貿易統計','企業物価','国内企業物価'],
+        ['インフレ・物価','雇用・景気'], source_keywords, source_excludes)
 
 # ─── テーマ別ページ ───────────────────────────────────────────────
 
@@ -2038,7 +2471,7 @@ def _build_pickup_tab(top3: list, rest: list, themes_cfg: dict) -> str:
         rank_cards = "".join(_build_rank_card(i+4, it) for i, it in enumerate(rest))
         rest_html  = f"""<div class='ranking-section'>
   <div class='ranking-hdr'><h3>📋 ランキング #{4}〜#{3+len(rest)}</h3><span class='count-badge'>{len(rest)}件</span></div>
-  <div class='rank-grid'>{rank_cards}</div>
+  <div class='rank-grid' id='pickupGrid'>{rank_cards}</div>
 </div>"""
     return f"<div class='top3-grid'>{top3_html}</div>{rest_html}"
 
@@ -2082,7 +2515,7 @@ function switchPickupTab(tab, btn) {{
   btn.classList.add('active');
 }}
 </script>"""
-    return header_html("pickup.html", stamp) + body + footer_html(stamp) + page_lang_js() + read_js()
+    return header_html("pickup.html", stamp) + body + footer_html(stamp) + page_lang_js() + read_js() + region_filter_script('pickup','pickupGrid')
 
 
 # ─── メイン ──────────────────────────────────────────────────────
@@ -2118,8 +2551,11 @@ def main() -> None:
         ("pickup.html",       render_pickup(items, themes_cfg)),
         ("fx_impact.html",    render_fx_impact(items, themes_cfg)),
         ("central_bank.html", render_central_bank(items, themes_cfg)),
-        ("themes.html",       render_themes(items, themes_cfg)),
-        ("sources.html",      render_sources(items, themes_cfg)),
+        ("gold.html",         render_gold(items, themes_cfg)),
+        ("crypto.html",       render_crypto(items, themes_cfg)),
+        ("equities.html",     render_equities(items, themes_cfg)),
+        ("rates.html",        render_rates(items, themes_cfg)),
+        ("indicators.html",   render_indicators(items, themes_cfg)),
         ("analysis.html",     render_analysis(items, themes_cfg)),
     ]
     for filename, content in pages:

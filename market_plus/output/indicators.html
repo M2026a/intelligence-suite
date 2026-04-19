@@ -1,0 +1,1131 @@
+<!doctype html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Market + - indicators.html</title>
+<style>
+:root{
+  --bg:#0d1016;--panel:#151a23;--panel2:#1b2230;--line:#2a3446;
+  --text:#ebf0f8;--muted:#9ba9bc;--accent:#4ea1ff;--accent2:#1e2f49;
+  --ok:#1f6f53;--warn:#8a5a17;--bad:#7c3038;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Segoe UI',Meiryo,sans-serif}
+a{color:inherit;text-decoration:none}
+header{position:sticky;top:0;z-index:50;background:rgba(13,16,22,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.wrap{max-width:1480px;margin:0 auto;padding:14px 20px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.title h1{margin:0;font-size:22px;font-weight:800}
+.title .sub{margin-top:4px;color:var(--muted);font-size:12px}
+.right-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.page-lang-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:9px 14px;font-size:13px;cursor:pointer;transition:all .15s}
+.page-lang-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.nav a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;border:1px solid rgba(255,255,255,.10);color:var(--text);background:rgba(255,255,255,.03);padding:10px 18px;border-radius:999px;font-size:13px;font-weight:700;white-space:nowrap;transition:all .18s ease}
+.nav a:hover{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.06)}
+.nav a.active{background:linear-gradient(135deg,#4ea1ff,#5a86ff);border-color:transparent;color:#fff;box-shadow:0 4px 16px rgba(78,161,255,.3)}
+.main{max-width:1480px;margin:18px auto;padding:0 20px 40px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
+.stat-grid-compact{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:10px;margin-bottom:16px;align-items:stretch}
+.stat-grid-compact .stat{min-width:0;padding:12px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+.stat .num{font-size:26px;font-weight:800;margin-bottom:4px}
+.stat-grid-compact .num{font-size:18px;line-height:1.1}
+.stat .label{color:var(--muted);font-size:12px}
+.stat-grid-compact .label{font-size:11px}
+.stat .icon{font-size:22px;margin-bottom:8px}
+.stat-grid-compact .icon{font-size:18px;margin-bottom:6px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s}
+.flt-btn:hover{border-color:var(--accent)}
+.flt-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
+.search{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 12px;font-size:13px;min-width:220px}
+.search::placeholder{color:var(--muted)}
+.filter-label{color:var(--muted);font-size:12px;white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.grid.list{grid-template-columns:1fr}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;transition:border-color .18s,opacity .18s}
+.card:hover{border-color:var(--accent)}
+.card.is-read{opacity:.45}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;color:var(--muted);font-size:12px;align-items:center}
+.card-lang-toggle{display:flex;gap:5px;flex-shrink:0;align-items:center}
+.card-lang-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;white-space:nowrap;transition:all .15s}
+.card-lang-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
+.read-btn{background:var(--panel2);border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;transition:all .15s}
+.read-btn:hover{border-color:#666}
+.card h3{margin:0;font-size:15px;line-height:1.5;font-weight:700}
+.summary{color:#ced7e6;font-size:13px;line-height:1.6}
+.lang-pane.hidden{display:none!important}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.tag{display:inline-block;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:600;border:1px solid transparent}
+.tag-official{background:#173126;border-color:#2f7254;color:#c6f1dc}
+.tag-score5,.tag-score4{background:#1e1a3a;border-color:#a78bfa;color:#e0d9ff}
+.tag-score3{background:#1e2f49;border-color:#4ea1ff;color:#cae2ff}
+.tag-score2{background:#2d2014;border-color:#8a6a31;color:#ffe0a2}
+.tag-score1{background:#1e1e1e;border-color:#444;color:#aaa}
+.tag-theme{font-size:11px;padding:3px 8px;border-radius:999px;border:1px solid transparent;font-weight:600}
+.tag-new{background:#1a2e1a;border-color:#2ecc71;color:#2ecc71;font-weight:800;animation:pulse 1.5s infinite}
+.tag-bullish{background:#1a2e1a;border-color:#2ecc71;color:#2ecc71}
+.tag-bearish{background:#2e1a1a;border-color:#e74c3c;color:#e74c3c}
+.tag-neutral{background:#1e1e2e;border-color:#636e72;color:#9ba9bc}
+.tag-usd-strong{background:#1a2040;border-color:#4ea1ff;color:#a8d4ff}
+.tag-usd-weak{background:#2e1a1a;border-color:#e74c3c;color:#ffb3b3}
+.tag-jpy-strong{background:#1a2e1a;border-color:#2ecc71;color:#a8ffcc}
+.tag-jpy-weak{background:#2e2a1a;border-color:#f39c12;color:#ffe0a2}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.lang-badge{font-size:11px;padding:2px 6px;border-radius:4px;background:#2a3446;color:var(--muted)}
+.lang-badge.ja{background:#173126;color:#c6f1dc}
+.lang-badge.en{background:#1e2f49;color:#cae2ff}
+.open-btn{display:inline-flex;justify-content:center;align-items:center;background:var(--accent2);border:1px solid var(--accent);color:#eaf4ff;border-radius:10px;padding:9px 14px;font-size:13px;font-weight:700;margin-top:4px;transition:all .15s}
+.open-btn:hover{background:#2a4a80}
+.theme-section{margin-bottom:28px}
+.theme-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.theme-header h2{margin:0;font-size:17px;font-weight:800}
+.theme-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:999px;font-size:13px;font-weight:700;border:1px solid transparent}
+.cb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.cb-card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px}
+.cb-card .cb-name{font-weight:800;font-size:15px;margin-bottom:8px}
+.cb-card .cb-count{font-size:22px;font-weight:800;color:var(--accent)}
+.cb-card .cb-recent{font-size:12px;color:var(--muted);margin-top:6px}
+footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);font-size:12px}
+@media(max-width:700px){
+  .wrap,.main,footer{padding-left:12px;padding-right:12px}
+  .grid{grid-template-columns:1fr}
+  .search{min-width:160px;width:100%}
+  .card-top{flex-direction:column}
+  .stat-grid-compact{grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:8px}
+  .stat-grid-compact .stat{min-width:0;padding:10px}
+}
+</style>
+</head>
+<body>
+<header>
+<div class='wrap'>
+  <div class='top'>
+    <div class='title'>
+      <h1>📊 Market + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 投資・金融市場</span></h1>
+      <div class='sub'>更新日時：2026-04-19 09:10</div>
+    </div>
+    <div class='right-controls'>
+      <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
+      <button class='page-lang-btn' id='btnPageJA' onclick="setPageLang('ja')">🇯🇵 日本語表示</button>
+    </div>
+  </div>
+  <nav class='nav'><a href="index.html" class="">📋 メイン</a><a href="pickup.html" class="">⭐ 注目記事</a><a href="fx_impact.html" class="">💱 為替</a><a href="central_bank.html" class="">🏦 中央銀行</a><a href="gold.html" class="">🪙 金</a><a href="crypto.html" class="">₿ 仮想通貨</a><a href="equities.html" class="">📈 株式</a><a href="rates.html" class="">📉 債券 / 金利</a><a href="indicators.html" class="active">🧾 経済指標</a><a href="analysis.html" class="">📊 分析</a></nav>
+</div>
+</header>
+<div class='main'>
+  <div class='panel' style='margin-bottom:16px'>
+    <h2 style='margin:0 0 14px;font-size:16px'>🧾 経済指標</h2>
+    <div style='color:var(--muted);font-size:13px'>CPI、PCE、雇用統計、GDP、ISM など市場を動かす主要指標を整理します。</div>
+  </div>
+  
+<div class='panel'>
+  <div class='filters'>
+    <span class='filter-label'>地域:</span>
+    <button class='flt-btn flt-region-indicators active' data-lang='all'>🌍 全部</button>
+    <button class='flt-btn flt-region-indicators' data-lang='ja'>🇯🇵 国内</button>
+    <button class='flt-btn flt-region-indicators' data-lang='en'>🌐 海外</button>
+    
+    <button class='flt-btn flt-view-indicators active' data-view='cards'>▦ カード</button>
+    <button class='flt-btn flt-view-indicators' data-view='list'>≡ リスト</button>
+    
+    <input id='searchBox_indicators' class='search' placeholder='タイトル・本文を検索...'>
+  </div>
+</div>
+  <div style='margin-bottom:12px;font-weight:700;font-size:15px'>記事一覧（<span id='indicatorsCount'>42</span>件）</div>
+  <div class='grid' id='indicatorsGrid'>
+<article class='card item-card'
+  data-cardid='item-b22b7a018043'
+  data-themes='インフレ・物価|地政学・貿易|要人発言|半導体・産業'
+  data-lang='en'
+  data-score='3'
+  data-source='Bloomberg Markets'
+  data-sentiment='bearish'
+  data-importance='usd_weak'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Bloomberg Markets</span><span>2026-04-18 23:14</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-b22b7a018043')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Strait of Hormuz Shut, US Blockade Intensifies, and Gunfire Reported</h3><div class='summary'>Bloomberg News White House Correspondent Jeff Mason and The Associated Press&#x27; International Correspondent Philip Crowther join David Gura and Christina Ruffini on Bloomberg This Weekend following Iran&#x27;s Islamic Revolutionary Guard Corps releasing a statement that the Strait of Hormuz was shifted bac</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ホルムズ海峡閉鎖、米国の封鎖強化、銃撃報道も</h3><div class='summary'>ブルームバーグニュース ホワイトハウス特派員のジェフ・メイソン氏とAP通信の国際特派員フィリップ・クラウザー氏が、イランイスラム革命防衛隊がホルムズ海峡を元に戻したとする声明を発表したことを受けて、デビッド・グラ氏とクリスティーナ・ルフィニ氏とともにブルームバーグで今週末放送する。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎤 要人発言</span><span class='tag tag-theme' style='background:#9b59b622;border-color:#9b59b6;color:#9b59b6'>💾 半導体・産業</span><span class='tag tag-usd-weak'>🔴 USD Bearish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bloomberg.com/news/videos/2026-04-18/blockade-intensifies-vessels-report-gunfire-video' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-78ac544aa9de'
+  data-themes='インフレ・物価|地政学・貿易|要人発言'
+  data-lang='en'
+  data-score='3'
+  data-source='Bloomberg Markets'
+  data-sentiment='bearish'
+  data-importance='jpy_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Bloomberg Markets</span><span>2026-04-18 23:03</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-78ac544aa9de')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Why Oil Markets Won’t Recover Quickly From the Iran War</h3><div class='summary'>The war in Iran has sent shockwaves through global energy markets, pushing oil and gas prices higher and raising concerns about long-term supply disruptions. IEA Executive Director Fatih Birol tells Chrystia Freeland that even if the Strait of Hormuz reopens soon, damage to more than 80 energy facil</div></div>
+<div class='lang-pane lang-ja hidden'><h3>石油市場がイラン戦争からすぐに回復しない理由</h3><div class='summary'>イラン戦争は世界のエネルギー市場に衝撃を与え、石油とガスの価格を押し上げ、長期的な供給途絶に対する懸念を高めている。 IEA事務局長ファティ・ビロル氏はクリスティア・フリーランドに対し、たとえホルムズ海峡がすぐに再開したとしても、80以上のエネルギー施設に被害が及ぶ可能性があると語った。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎤 要人発言</span><span class='tag tag-jpy-strong'>🔵 JPY Bullish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bloomberg.com/news/videos/2026-04-18/why-oil-markets-won-t-recover-quickly-from-the-iran-war-video' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-ab53cd3121cd'
+  data-themes='雇用・景気|地政学・貿易|要人発言'
+  data-lang='en'
+  data-score='3'
+  data-source='Bloomberg Markets'
+  data-sentiment='neutral'
+  data-importance='jpy_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Bloomberg Markets</span><span>2026-04-18 22:30</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-ab53cd3121cd')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Strong Earnings Results Can’t Save Stocks from Dimming Forecasts</h3><div class='summary'>Stocks are surging to new highs on the prospects of peace in the Middle East and what has so far been robust first quarter earnings results. But strategists say the key to further equity upside will be corporate outlooks.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>好決算でも株価の低迷予想は救えない</h3><div class='summary'>中東和平の見通しとこれまでの好調な第1四半期決算を受けて株価は新高値を更新している。しかしストラテジストらは、株価がさらに上昇する鍵となるのは企業見通しだと指摘する。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎤 要人発言</span><span class='tag tag-jpy-strong'>🔵 JPY Bullish</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bloomberg.com/news/articles/2026-04-18/strong-earnings-results-can-t-save-stocks-from-dimming-forecasts' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-494a6742ae05'
+  data-themes='インフレ・物価|地政学・貿易|半導体・産業'
+  data-lang='en'
+  data-score='3'
+  data-source='Bloomberg Markets'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Bloomberg Markets</span><span>2026-04-18 21:26</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-494a6742ae05')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Stocks Jump in Face of Uncertainty Over Strait of Hormuz</h3><div class='summary'>A ceasefire between Israel and Hezbollah in Lebanon and news that Iran allegedly decided to reopen the Strait of Hormuz to commercial shipping sent risky assets surging anew on Friday. This surge extended a rally that pushed the S&amp;P 500 to a fresh record and fueling its biggest monthly advance since</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ホルムズ海峡をめぐる不確実性を受けて株価が急騰</h3><div class='summary'>イスラエルとレバノンのヒズボラ間の停戦と、イランがホルムズ海峡を商業海運に再開することを決定したとされる報道により、金曜日にはリスク資産が新たに急増した。この急騰により上昇幅が拡大し、S&amp;P 500 指数は新記録を更新し、月間としては以来最大の上昇率を達成しました。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-theme' style='background:#9b59b622;border-color:#9b59b6;color:#9b59b6'>💾 半導体・産業</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bloomberg.com/news/videos/2026-04-18/stocks-jump-in-face-of-uncertainty-over-strait-of-hormuz-video' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-32cb1fc0c87f'
+  data-themes='金利・中央銀行|インフレ・物価|地政学・貿易|要人発言'
+  data-lang='en'
+  data-score='4'
+  data-source='Bloomberg Markets'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Bloomberg Markets</span><span>2026-04-18 21:04</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-32cb1fc0c87f')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Hank Paulson on Iran War, Inflation, and Market Risk</h3><div class='summary'>The war in Iran is putting pressure on global energy markets, but its broader economic impact could be even farther-reaching. Former US Treasury Secretary Hank Paulson says the conflict is likely to push inflation higher, keep interest rates elevated, and strain industries from airlines to agricultu</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ハンク・ポールソンが語るイラン戦争、インフレ、市場リスク</h3><div class='summary'>イラン戦争は世界のエネルギー市場に圧力をかけているが、その広範な経済的影響はさらに広範囲に及ぶ可能性がある。元米財務長官ハンク・ポールソン氏は、紛争によりインフレが上昇し、金利が高止まりし、航空会社から農業に至るまで産業に負担がかかる可能性が高いと述べた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎤 要人発言</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.bloomberg.com/news/videos/2026-04-18/hank-paulson-on-iran-war-inflation-and-market-risk-video' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-26b50b98f3d6'
+  data-themes='インフレ・物価'
+  data-lang='en'
+  data-score='2'
+  data-source='Investing.com（Forex）'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Investing.com（Forex）</span><span>2026-04-18 19:54</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-26b50b98f3d6')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Merchant vessels report gunfire as they attempt to cross Hormuz, shipping sources say</h3><div class='summary'></div></div>
+<div class='lang-pane lang-ja hidden'><h3>商船がホルムズを通過しようとして銃撃を報告、海運関係者が発表</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.investing.com/news/stock-market-news/merchant-vessels-report-gunfire-as-they-attempt-to-cross-hormuz-shipping-sources-say-4622148' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-707636f72190'
+  data-themes='雇用・景気'
+  data-lang='en'
+  data-score='2'
+  data-source='Bloomberg Markets'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Bloomberg Markets</span><span>2026-04-18 17:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-707636f72190')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Odd Lots: Why Economists Might Be Getting AI Wrong (Podcast)</h3><div class='summary'>Everyone knows that new technologies can be really disruptive to the labor market, but eventually new jobs emerge and things come back into balance. And there is a sense in which many view AI with the same lens. Yes, there will be pain in some sectors, but then there will be productivity gains and n</div></div>
+<div class='lang-pane lang-ja hidden'><h3>奇数のロット: 経済学者が AI を誤解している理由 (ポッドキャスト)</h3><div class='summary'>新しいテクノロジーが労働市場に大きな破壊をもたらす可能性があることは誰もが知っていますが、最終的には新しい仕事が生まれ、物事はバランスを取り戻します。そして、多くの人が AI を同じレンズで見ているという感覚があります。はい、一部のセクターでは痛みが生じるでしょうが、その場合は生産性が向上し、</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bloomberg.com/news/audio/2026-04-18/odd-lots-why-economists-might-be-getting-ai-wrong-podcast' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-2c8b8cbea5e8'
+  data-themes='インフレ・物価|地政学・貿易'
+  data-lang='en'
+  data-score='5'
+  data-source='FXStreet'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-18 06:29</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-2c8b8cbea5e8')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Singapore: CPI seen higher on energy shock – DBS</h3><div class='summary'>DBS Group Research expects Singapore’s March 2026 core and headline inflation to rise to 1.6% and 1.8% year-on-year, from 1.4% and 1.2% in February. The report links this to imported energy price pressures after the Middle East conflict.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>シンガポール：エネルギーショックでCPIは上昇 – DBS</h3><div class='summary'>DBSグループリサーチは、シンガポールの2026年3月のコアインフレ率と総合インフレ率が前年比1.6％と1.8％に、2月の1.4％と1.2％から上昇すると予想している。報告書はこれを中東紛争後の輸入エネルギー価格圧力と関連付けている。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/singapore-cpi-seen-higher-on-energy-shock-dbs-202604172129' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-b45a61763611'
+  data-themes='雇用・景気|地政学・貿易'
+  data-lang='en'
+  data-score='4'
+  data-source='FXStreet'
+  data-sentiment='bearish'
+  data-importance='usd_weak'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-18 04:51</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-b45a61763611')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>China: Policy easing expectations trimmed – DBS</h3><div class='summary'>DBS Group Research economists highlight that China’s Q1 2026 GDP growth accelerated to 5.0% year-on-year, driven by strong external demand and resilient industrial production, while domestic demand in consumption, investment and credit stayed weak.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>中国：政策緩和期待が後退 – DBS</h3><div class='summary'>DBSグループリサーチのエコノミストらは、中国の2026年第1四半期のGDP成長率が、強い外需と回復力のある鉱工業生産に牽引され、前年同期比5.0％に加速した一方、国内の消費、投資、信用需要は依然として低迷していることを強調している。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-usd-weak'>🔴 USD Bearish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/china-policy-easing-expectations-trimmed-dbs-202604171951' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-f861229e72b9'
+  data-themes='インフレ・物価|地政学・貿易'
+  data-lang='en'
+  data-score='4'
+  data-source='FXStreet'
+  data-sentiment='bearish'
+  data-importance='usd_weak'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-18 04:09</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-f861229e72b9')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Gold surges past $4,850 as Hormuz reopening crushes the US Dollar</h3><div class='summary'>Gold (XAU/USD) price rallies on Friday ahead of the weekend, breaking past the $4,850 level and rising more than 1.50%, as the US-Iran conflict seems to be de-escalating after Iran reopened the Strait of Hormuz, easing inflationary pressures worldwide.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ホルムズの再開が米ドルを押し下げる中、金は4,850ドルを超えて急騰</h3><div class='summary'>イランがホルムズ海峡を再開し、世界中でインフレ圧力が緩和されたことを受けて米国とイランの対立が激化しつつあるように見える中、金（XAU/USD）価格は週末を前に金曜日に反発し、4,850ドルの水準を突破し、1.50％以上上昇した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-usd-weak'>🔴 USD Bearish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/gold-surges-past-4-850-as-hormuz-reopening-crushes-the-us-dollar-202604171909' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-421518ad9549'
+  data-themes='雇用・景気|地政学・貿易'
+  data-lang='en'
+  data-score='3'
+  data-source='FXStreet'
+  data-sentiment='bearish'
+  data-importance='jpy_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-18 04:08</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-421518ad9549')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Asia FX: De-escalation hopes support regional currencies – MUFG</h3><div class='summary'>MUFG’s Senior Currency Analyst Lloyd Chan notes that improved diplomatic signals in the Middle East have boosted risk sentiment, softening the US Dollar (USD) and supporting Asian FX. However, high US front-end yields still underpin the Dollar, and bond markets remain cautious.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>アジア為替：エスカレーションの緩和により地域通貨のサポートを期待 – MUFG</h3><div class='summary'>MUFGのシニア通貨アナリスト、ロイド・チャン氏は、中東における外交シグナルの改善がリスクセンチメントを高め、米ドル（USD）を軟化させ、アジア為替を支援していると指摘する。しかし、米国のフロントエンド利回りの高さが依然ドルを下支えしており、債券市場は引き続き慎重だ。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-jpy-strong'>🔵 JPY Bullish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/asia-fx-de-escalation-hopes-support-regional-currencies-mufg-202604171908' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-99046e51a960'
+  data-themes='金利・中央銀行|雇用・景気|地政学・貿易|要人発言'
+  data-lang='en'
+  data-score='3'
+  data-source='CNBC Economy'
+  data-sentiment='bearish'
+  data-importance='jpy_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>CNBC Economy</span><span>2026-04-18 04:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-99046e51a960')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Fed Governor Waller says Iran war and labor market risks are keeping central bank on hold</h3><div class='summary'>Federal Reserve Governor Christopher Waller on Friday said current economic conditions are complicating the approach to interest rates.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ウォラーFRB理事、イラン戦争と労働市場のリスクにより中銀の活動は停止されていると発言</h3><div class='summary'>米連邦準備制度理事会のクリストファー・ウォーラー総裁は金曜日、現在の経済状況が金利へのアプローチを複雑にしていると述べた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎤 要人発言</span><span class='tag tag-jpy-strong'>🔵 JPY Bullish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.cnbc.com/2026/04/17/fed-governor-waller-says-iran-war-and-labor-market-risks-are-keeping-central-bank-on-hold.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-92a86affe5df'
+  data-themes='インフレ・物価|地政学・貿易|日本'
+  data-lang='en'
+  data-score='3'
+  data-source='FXStreet'
+  data-sentiment='bearish'
+  data-importance='usd_weak'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-18 03:28</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-92a86affe5df')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>USD/JPY slides as Iran reopens Hormuz, WTI plunges and USD weakens</h3><div class='summary'>USD/JPY edges lower on Friday as the Japanese Yen (JPY) strengthens against a softer US Dollar (USD), with easing Oil prices providing additional support, given Japan’s heavy reliance on imported energy. At the time of writing, the pair is trading around 158.18, down 0.61% on the day.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>イランがホルムズを再開、WTIが急落、米ドル安で米ドル/円が下落</h3><div class='summary'>日本が輸入エネルギーに大きく依存していることを考えると、原油価格の緩和がさらなる支援となり、日本円（JPY）が軟化した米ドル（USD）に対して上昇するため、金曜日の米ドル/円は小幅に下落した。本稿執筆時点では、このペアは158.18付近で取引されており、この日は0.61％下落した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-usd-weak'>🔴 USD Bearish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/usd-jpy-slides-as-iran-reopens-hormuz-wti-plunges-and-usd-weakens-202604171828' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-b8c40492dfab'
+  data-themes='金利・中央銀行|雇用・景気|要人発言'
+  data-lang='en'
+  data-score='3'
+  data-source='FXStreet'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-18 03:20</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-b8c40492dfab')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Fed’s Waller: Will closely watch jobs data for growing signs of stress</h3><div class='summary'>Christopher Waller, a member of the Federal Reserve (Fed), speaks about the economic outlook and monetary policy at Auburn University in Alabama on Friday. He stated that the break-even rate for the job market is currently likely around zero.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>FRBのウォラー氏：ストレスの兆候が増大していないか雇用統計を注意深く監視する</h3><div class='summary'>米連邦準備理事会（FRB）理事のクリストファー・ウォーラー氏が金曜日、アラバマ州オーバーン大学で経済見通しと金融政策について講演する。同氏は、雇用市場の損益分岐点率は現在ほぼゼロになる可能性が高いと述べた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎤 要人発言</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/feds-waller-will-closely-watch-jobs-data-for-growing-signs-of-stress-202604171820' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-099f4f595477'
+  data-themes='雇用・景気'
+  data-lang='en'
+  data-score='2'
+  data-source='FXStreet'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-18 02:45</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-099f4f595477')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>USD/CHF falls as Iran declares Strait of Hormuz open</h3><div class='summary'>The Swiss Franc (CHF) strengthens against the US Dollar (USD) on Friday, with USD/CHF on track for a second consecutive weekly decline as the Greenback remains under pressure amid improving market sentiment on hopes of a potential US-Iran deal.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>イランがホルムズ海峡開通宣言で米ドル/スイスフラン下落</h3><div class='summary'>金曜日、スイスフラン（CHF）は米ドル（USD）に対して上昇し、米国とイランの合意の可能性への期待で市場心理が改善する中、米ドルが依然として圧力を受けているため、USD/CHFは2週間連続の下落傾向にある。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/usd-chf-falls-as-iran-declares-strait-of-hormuz-open-202604171745' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-16c9e310256d'
+  data-themes='インフレ・物価|地政学・貿易'
+  data-lang='en'
+  data-score='3'
+  data-source='Yahoo Finance'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Yahoo Finance</span><span>2026-04-18 02:37</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-16c9e310256d')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Gold Climbs Fourth Straight Week; Soft PPI and Weak Dollar Outshine Ceasefire</h3><div class='summary'></div></div>
+<div class='lang-pane lang-ja hidden'><h3>金は4週連続で上昇。軟調なPPIとドル安が停戦を上回る</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://finance.yahoo.com/markets/commodities/articles/gold-climbs-fourth-straight-week-173715651.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-ce031bfdac94'
+  data-themes='金利・中央銀行|インフレ・物価|雇用・景気|地政学・貿易|要人発言'
+  data-lang='en'
+  data-score='3'
+  data-source='FXStreet'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-18 02:11</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-ce031bfdac94')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Fed’s Daly: Could leave rates where they are</h3><div class='summary'>Mary Daly, President of the Federal Reserve (Fed) Bank of San Francisco, spoke at the University of California-Berkeley&#x27;s Fisher Center on Friday. She indicated that, at this point, she is observing whether higher oil prices are affecting the prices of other goods and services.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>FRBの日報：金利は現状維持の可能性</h3><div class='summary'>サンフランシスコ連邦準備銀行（FRB）のメアリー・デイリー総裁は金曜日、カリフォルニア大学バークレー校のフィッシャーセンターで講演した。同氏は、現時点では原油価格の高騰が他の商品やサービスの価格に影響を与えているかどうかを観察していると述べた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎤 要人発言</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/feds-daly-could-leave-rates-where-they-are-202604171711' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-600e38a71fe3'
+  data-themes='金利・中央銀行|インフレ・物価|地政学・貿易'
+  data-lang='en'
+  data-score='4'
+  data-source='FXStreet'
+  data-sentiment='bearish'
+  data-importance='usd_weak'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-18 01:17</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-600e38a71fe3')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Gold rises as Iran reopens Hormuz, Oil plunges and Fed rate cut bets strengthen</h3><div class='summary'>Gold (XAU/USD) gains traction on Friday as US-Iran deal hopes and the reopening of the Strait of Hormuz push Oil prices lower, easing inflation pressure and reinforcing expectations of Federal Reserve (Fed) interest rate cuts.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>イランのホルムズ再開で金が上昇、原油急落、FRBの利下げ観測強まる</h3><div class='summary'>米国とイランの合意への期待とホルムズ海峡の再開により原油価格が下落し、インフレ圧力が緩和され、連邦準備理事会（FRB）の利下げ期待が強まる中、金（XAU/USD）は金曜日に勢いを増した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-usd-weak'>🔴 USD Bearish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/gold-steady-near-4-800-as-us-iran-deal-hopes-grow-fed-rate-cut-bets-return-202604171218' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-0edf1c6a4ac2'
+  data-themes='インフレ・物価|地政学・貿易'
+  data-lang='en'
+  data-score='5'
+  data-source='FXStreet'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-18 01:14</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-0edf1c6a4ac2')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>USD/CAD declines on softer US Dollar as Strait of Hormuz reopens, Canada CPI looms</h3><div class='summary'>USD/CAD declines on Friday, trading around 1.3670 at the time of writing, down 0.26% on the day. The pair remains under pressure as the Canadian Dollar (CAD) strengthens against the US Dollar (USD) despite a sharp drop in Oil prices.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ホルムズ海峡再開、カナダCPIが迫る中、米ドル軟調を受けて米ドル/カナダドルが下落</h3><div class='summary'>金曜日の米ドル/カナダドルは下落し、執筆時点では1.3670付近で取引されており、この日は0.26%下落した。原油価格の急落にもかかわらず、カナダドル（CAD）が米ドル（USD）に対して上昇しているため、通貨ペアは引き続き圧力にさらされています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/usd-cad-declines-on-softer-us-dollar-as-strait-of-hormuz-reopens-canada-cpi-looms-202604171614' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-fd9620cc7b27'
+  data-themes='雇用・景気|地政学・貿易'
+  data-lang='en'
+  data-score='3'
+  data-source='FXStreet'
+  data-sentiment='bearish'
+  data-importance='jpy_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-18 00:31</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-fd9620cc7b27')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>AUD/USD rallies as Hormuz reopening eases oil shock fears, risk sentiment improves</h3><div class='summary'>The AUD/USD surged toward the 0.7200 price region on Friday, as improving headlines out of the Middle East weigh on the US Dollar (USD) and support risk-sensitive currencies like the Australian Dollar (AUD).</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ホルムズの再開でオイルショックの懸念が和らぎ、リスクセンチメントが改善し、豪ドル/米ドルが上昇</h3><div class='summary'>中東情勢の改善が米ドル（USD）を圧迫し、豪ドル（AUD）などのリスク敏感通貨を支援する中、金曜日の豪ドル/米ドルは0.7200価格帯に向けて上昇した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-jpy-strong'>🔵 JPY Bullish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/aud-usd-rallies-as-hormuz-reopening-eases-oil-shock-fears-risk-sentiment-improves-202604171531' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-313e63ad0257'
+  data-themes='雇用・景気'
+  data-lang='en'
+  data-score='2'
+  data-source='FXStreet'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-17 23:59</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-313e63ad0257')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>EUR/USD edges higher as Iran reopens Strait of Hormuz, Oil tumbles</h3><div class='summary'>The Euro (EUR) edges higher against the US Dollar (USD) on Friday as the Greenback comes under heavy selling pressure after Iran’s decision to reopen the Strait of Hormuz improved overall market sentiment and raised hopes for a potential US-Iran peace agreement.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>イランがホルムズ海峡を再開し、原油価格が下落する中、ユーロ/米ドルは上昇</h3><div class='summary'>ホルムズ海峡を再開するイランの決定を受けて市場全体のセンチメントが改善し、米国とイランの和平合意の可能性への期待が高まったことを受けて、ドルに強い売り圧力がかかる中、金曜日のユーロ（EUR）は対米ドル（USD）に対して小幅上昇した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/eur-usd-edges-higher-as-iran-reopens-strait-of-hormuz-oil-tumbles-202604171459' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-427553e0955c'
+  data-themes='雇用・景気|地政学・貿易'
+  data-lang='en'
+  data-score='3'
+  data-source='FXStreet'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-17 23:50</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-427553e0955c')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Germany: China shock shows tentative turn – Deutsche Bank</h3><div class='summary'>Deutsche Bank’s Robin Winkler argues that German manufacturing faces an ongoing &quot;China shock&quot; as Germany’s trade deficit with China has reached a record size and now exceeds its surplus with the US.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ドイツ：中国ショックが暫定的な方向転換を示す – ドイツ銀行</h3><div class='summary'>ドイツ銀行のロビン・ウィンクラー氏は、ドイツの対中貿易赤字が記録的な規模に達し、今や対米黒字を上回っているため、ドイツの製造業は継続的な「チャイナ・ショック」に直面していると主張する。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/germany-china-shock-shows-tentative-turn-deutsche-bank-202604171450' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-8d789a8f2537'
+  data-themes='インフレ・物価'
+  data-lang='en'
+  data-score='4'
+  data-source='FXStreet'
+  data-sentiment='bearish'
+  data-importance='usd_weak'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-17 23:20</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-8d789a8f2537')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Sweden: Core downside surprise shapes VAT impact view – Danske Bank</h3><div class='summary'>Danske Research Team reviews Sweden’s March inflation, highlighting a downside surprise in core inflation and energy, driven by a sharper-than-expected fall in electricity prices and broad food price declines.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>スウェーデン：中核的な下振れが意外なVAT影響の見方 – Danske Bank</h3><div class='summary'>ダンスケ調査チームはスウェーデンの3月のインフレを調査し、電力価格の予想以上の急激な下落と食料価格の広範な下落によってコアインフレとエネルギーが下振れしていることを浮き彫りにしている。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-usd-weak'>🔴 USD Bearish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/sweden-core-downside-surprise-shapes-vat-impact-view-danske-bank-202604171420' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-ba37d689255e'
+  data-themes='インフレ・物価|地政学・貿易'
+  data-lang='en'
+  data-score='4'
+  data-source='FXStreet'
+  data-sentiment='bearish'
+  data-importance='jpy_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-17 22:59</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-ba37d689255e')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Energy: Softer inflation shock expected – BNP Paribas</h3><div class='summary'>BNP Paribas economist Hélène Baudchon compares the current Oil and gas price surge linked to the war in Iran with the 2022 energy shock.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>エネルギー：インフレショックの緩和が予想される – BNPパリバ</h3><div class='summary'>BNPパリバのエコノミスト、エレーヌ・ボードション氏は、イラン戦争に関連した現在の石油とガス価格の高騰を2022年のエネルギーショックと比較している。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-jpy-strong'>🔵 JPY Bullish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/energy-softer-inflation-shock-expected-bnp-paribas-202604171359' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-7e089a51c473'
+  data-themes='金利・中央銀行'
+  data-lang='ja'
+  data-score='3'
+  data-source='Bank of Japan Statistics'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>Bank of Japan Statistics</span><span>2026-04-17 08:50</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-7e089a51c473')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「預金種類別店頭表示金利の平均年利率等」の訂正について</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='http://www.boj.or.jp/statistics/outline/notice_2026/not260417a.pdf' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-e02b19709176'
+  data-themes='インフレ・物価|半導体・産業'
+  data-lang='en'
+  data-score='3'
+  data-source='BBC Business'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Business</span><span>2026-04-17 01:34</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-e02b19709176')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Social supermarket opens to cut food bills</h3><div class='summary'>The store, in Mablethorpe, buys surplus stock so it can keep prices low.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>食費削減のためソーシャルスーパーマーケットがオープン</h3><div class='summary'>マーブルソープにあるこの店は、価格を低く抑えるために余剰在庫を買い取っています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#9b59b622;border-color:#9b59b6;color:#9b59b6'>💾 半導体・産業</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/c747rd00388o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-2b8a81d61a36'
+  data-themes='雇用・景気|地政学・貿易'
+  data-lang='en'
+  data-score='3'
+  data-source='BIS'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span class='tag tag-official'>🏛 公式</span><span>BIS</span><span>2026-04-16 21:47</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-2b8a81d61a36')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>CPMI-IOSCO assesses that the United Kingdom has implemented the Principles for financial market infrastructures for two FMI types, but recommends some improvements</h3><div class='summary'>The UK&#x27;s framework for systemically important payment systems and central securities depositories/securities settlement systems is complete and consistent with the CPMI-IOSCO Principles for financial market infrastructures (PFMI) in most aspects. The CPMI-IOSCO assessment identified some areas for i</div></div>
+<div class='lang-pane lang-ja hidden'><h3>CPMI-IOSCOは、英国が2つのFMIタイプの金融市場インフラ原則を実施していると評価しているが、いくつかの改善を勧告している</h3><div class='summary'>システム上重要な決済システムおよび中央証券保管機関/証券決済システムに関する英国の枠組みは完全であり、ほとんどの面で CPMI-IOSCO の金融市場インフラ原則 (PFMI) と一致しています。 CPMI-IOSCO の評価では、次のようないくつかの分野が特定されました。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bis.org/press/p260416.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-acefc5bf12d8'
+  data-themes='雇用・景気|地政学・貿易'
+  data-lang='en'
+  data-score='3'
+  data-source='BIS'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span class='tag tag-official'>🏛 公式</span><span>BIS</span><span>2026-04-16 21:44</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-acefc5bf12d8')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Implementation monitoring of PFMI: Level 2 assessment report for UK payment systems and central securities depositories/securities settlement systems</h3><div class='summary'>The Bank for International Settlements&#x27; Committee on Payments and Market Infrastructures (CPMI) and the International Organization of Securities Commissions (IOSCO) closely monitor the implementation of the Principles for financial market infrastructures (PFMI). This report presents the conclusions </div></div>
+<div class='lang-pane lang-ja hidden'><h3>PFMIの導入モニタリング：英国の決済システムおよび中央証券保管機関/証券決済システムのレベル2評価レポート</h3><div class='summary'>国際決済銀行の決済・市場インフラ委員会（CPMI）と証券監督者国際機構（IOSCO）は、金融市場インフラ原則（PFMI）の実施を注意深く監視しています。このレポートは結論を示します</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bis.org/cpmi/publ/d231.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-882e3514c3b9'
+  data-themes='雇用・景気|地政学・貿易'
+  data-lang='en'
+  data-score='4'
+  data-source='BBC Business'
+  data-sentiment='bearish'
+  data-importance='jpy_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Business</span><span>2026-04-16 16:08</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-882e3514c3b9')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>China&#x27;s economy grows faster than expected despite Iran war</h3><div class='summary'>The better-than-expected GDP data comes as Asian countries have been hit hard by the impact of the conflict.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>イラン戦争にもかかわらず、中国経済は予想を上回るペースで成長</h3><div class='summary'>アジア諸国が紛争の影響で大きな打撃を受けている中で、予想を上回るGDP統計が発表された。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-jpy-strong'>🔵 JPY Bullish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/c4gxjpekk19o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-c942ab1d9362'
+  data-themes='雇用・景気'
+  data-lang='en'
+  data-score='3'
+  data-source='CNBC Economy'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>CNBC Economy</span><span>2026-04-16 16:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-c942ab1d9362')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>UK economy grew 0.5% in February, beating economists&#x27; expectations by a long shot</h3><div class='summary'>Economists polled by Reuters expected U.K. gross domestic product (GDP) to have expanded by 0.1% month-on-month.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>英国経済は2月に0.5％成長し、エコノミストの予想を大幅に上回った</h3><div class='summary'>ロイターがまとめたエコノミストらは英国の国内総生産（ＧＤＰ）が前月比０．１％拡大すると予想していた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.cnbc.com/2026/04/16/uk-gdp-march-2026-iran-war.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-750c5cf2e279'
+  data-themes='雇用・景気|財政'
+  data-lang='ja'
+  data-score='4'
+  data-source='NHK経済'
+  data-sentiment='bearish'
+  data-importance='usd_weak'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK経済</span><span>2026-04-13 20:34</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-750c5cf2e279')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>高市首相 「債務残高対GDP比を安定的に低下」 中核目標に</h3><div class='summary'>今後の財政運営のあり方をめぐり高市総理大臣は、債務残高の対GDP比を安定的に引き下げていくことを中核の目標として位置づける方針を示しました。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-theme' style='background:#e74c3c22;border-color:#e74c3c;color:#e74c3c'>🏛️ 財政</span><span class='tag tag-usd-weak'>🔴 USD Bearish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260413/k10015098481000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-45529957a558'
+  data-themes='金利・中央銀行|雇用・景気'
+  data-lang='en'
+  data-score='3'
+  data-source='Federal Reserve'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span class='tag tag-official'>🏛 公式</span><span>Federal Reserve</span><span>2026-04-11 05:15</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-45529957a558')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Federal Reserve Board announces approval of application by Burke &amp; Herbert Financial Services Corp.</h3><div class='summary'>Federal Reserve Board announces approval of application by Burke &amp; Herbert Financial Services Corp.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>連邦準備制度理事会はバーク・アンド・ハーバート・ファイナンシャル・サービス・コーポレーションによる申請の承認を発表。</h3><div class='summary'>連邦準備制度理事会はバーク・アンド・ハーバート・ファイナンシャル・サービス・コーポレーションによる申請の承認を発表。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.federalreserve.gov/newsevents/pressreleases/orders20260410a.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-8255ded7cf93'
+  data-themes='雇用・景気'
+  data-lang='en'
+  data-score='3'
+  data-source='U.S. Census Economic Indicators'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span class='tag tag-official'>🏛 公式</span><span>U.S. Census Economic Indicators</span><span>2026-04-10 23:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-8255ded7cf93')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Manufacturers&#x27; Shipments, Inventories, and Orders</h3><div class='summary'>New orders for manufactured goods in February, up three of the last four months, increased $0.3 billion or virtually unchanged to $619.6 billion. February 2026: +0.0° % Change January 2026 (r): +0.0° % Change</div></div>
+<div class='lang-pane lang-ja hidden'><h3>メーカー出荷・在庫・受注状況</h3><div class='summary'>２月の工業製品の新規受注は、過去４カ月のうち３カ月増加し、３億ドル増加かほぼ変わらずの６１９６億ドルとなった。 2026年2月: +0.0° %変化 2026年1月(r): +0.0° %変化</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.census.gov/manufacturing/m3/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-91441316e786'
+  data-themes='インフレ・物価'
+  data-lang='ja'
+  data-score='3'
+  data-source='日本銀行'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>日本銀行</span><span>2026-04-10 08:50</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-91441316e786')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>企業物価指数（3月）</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='http://www.boj.or.jp/statistics/pi/cgpi_release/cgpi2603.pdf' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-6ef8c6f9a88d'
+  data-themes='金利・中央銀行|日本'
+  data-lang='ja'
+  data-score='3'
+  data-source='Bank of Japan Statistics'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>Bank of Japan Statistics</span><span>2026-04-10 08:50</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-6ef8c6f9a88d')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「貸出・預金動向」の訂正について</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='http://www.boj.or.jp/statistics/outline/notice_2026/not260410a.pdf' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-d35fea9194e8'
+  data-themes='金利・中央銀行|インフレ・物価|地政学・貿易'
+  data-lang='en'
+  data-score='4'
+  data-source='CNBC Economy'
+  data-sentiment='bearish'
+  data-importance='jpy_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>CNBC Economy</span><span>2026-04-09 23:38</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-d35fea9194e8')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Inflation held sticky at 3% as U.S. headed into war with Iran, key Fed gauge shows</h3><div class='summary'>The gauge released Thursday offers the Federal Reserve a snapshot of conditions leading into the Iran war.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>米国がイランとの戦争に突入する中、インフレ率は3%で安定維持、FRBの主要指標が示す</h3><div class='summary'>木曜日に発表された指標は、連邦準備制度にイラン戦争に至る状況のスナップショットを提供する。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-jpy-strong'>🔵 JPY Bullish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.cnbc.com/2026/04/09/core-inflation-was-3percent-in-february-as-expected-key-fed-gauge-shows.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-d7ae24bf4479'
+  data-themes='雇用・景気'
+  data-lang='en'
+  data-score='3'
+  data-source='U.S. Census Economic Indicators'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span class='tag tag-official'>🏛 公式</span><span>U.S. Census Economic Indicators</span><span>2026-04-09 23:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-d7ae24bf4479')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Monthly Wholesale Trade: Sales and Inventories</h3><div class='summary'>February 2026 sales of merchant wholesalers were $751.9 billion, up 2.7 percent (+/- 0.4 percent) from last month. End-of-month inventories were $919.6 billion, up 0.8 percent (+/- 0.4 percent) from last month. February 2026: +0.8 % Change in Inventories January 2026 (r): -0.3 % Change in Inventorie</div></div>
+<div class='lang-pane lang-ja hidden'><h3>月次卸売業の売上と在庫</h3><div class='summary'>2026年2月の商業卸売業者の売上高は7,519億ドルで、前月比2.7パーセント（±0.4パーセント）増加しました。月末在庫は9196億ドルで、前月比0.8％（±0.4％）増加した。 2026年2月: +0.8 % 在庫変化率 2026年1月(r): -0.3 % 在庫変化率</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.census.gov/wholesale/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-33d7ce388bd3'
+  data-themes='雇用・景気|地政学・貿易|要人発言|財政'
+  data-lang='en'
+  data-score='4'
+  data-source='BEA News Releases'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span class='tag tag-official'>🏛 公式</span><span>BEA News Releases</span><span>2026-04-09 21:30</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-33d7ce388bd3')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>GDP (Third Estimate), Industries, Corporate Profits, State GDP, and State Personal Income, 4th Quarter and Year 2025</h3><div class='summary'>Real gross domestic product (GDP) increased at an annual rate of 0.5 percent in the fourth quarter of 2025 (October, November, and December), according to the third estimate released today by the U.S. Bureau of Economic Analysis. In the third quarter of 2025, real GDP increased 4.4 percent. The cont</div></div>
+<div class='lang-pane lang-ja hidden'><h3>GDP（第3次推定）、産業、企業利益、州GDP、州個人所得、2025年第4四半期および2025年</h3><div class='summary'>米国経済分析局が本日発表した第3次推計によると、2025年第4四半期（10月、11月、12月）の実質国内総生産（GDP）は年率0.5％増加した。 2025 年第 3 四半期の実質 GDP は 4.4% 増加しました。続き</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎤 要人発言</span><span class='tag tag-theme' style='background:#e74c3c22;border-color:#e74c3c;color:#e74c3c'>🏛️ 財政</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.bea.gov/news/2026/gdp-third-estimate-industries-corporate-profits-state-gdp-and-state-personal-income-4th' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-f9e40f9b8d7f'
+  data-themes='インフレ・物価|要人発言|財政'
+  data-lang='en'
+  data-score='3'
+  data-source='BEA News Releases'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span class='tag tag-official'>🏛 公式</span><span>BEA News Releases</span><span>2026-04-09 21:30</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-f9e40f9b8d7f')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Personal Income and Outlays, February 2026</h3><div class='summary'>Personal income decreased $18.2 billion (0.1 percent at a monthly rate) in February, according to estimates released today by the U.S. Bureau of Economic Analysis. Disposable personal income (DPI)-personal income less personal current taxes-decreased $18.3 billion (0.1 percent), and personal consump</div></div>
+<div class='lang-pane lang-ja hidden'><h3>個人の収入と支出、2026 年 2 月</h3><div class='summary'>米国経済分析局が本日発表した推計によると、2月の個人所得は182億ドル（月率0.1％）減少した。個人可処分所得（DPI）（個人所得から個人の現行税金を差し引いたもの）は183億ドル（0.1％）減少し、個人消費も減少した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎤 要人発言</span><span class='tag tag-theme' style='background:#e74c3c22;border-color:#e74c3c;color:#e74c3c'>🏛️ 財政</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bea.gov/news/2026/personal-income-and-outlays-february-2026' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-4cd4ec80d5af'
+  data-themes='雇用・景気'
+  data-lang='en'
+  data-score='3'
+  data-source='U.S. Census Economic Indicators'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span class='tag tag-official'>🏛 公式</span><span>U.S. Census Economic Indicators</span><span>2026-04-08 23:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-4cd4ec80d5af')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Business Formation Statistics</h3><div class='summary'>Total U.S. Business Applications were 491,941 in March 2026, down 0.9% from February 2026. March 2026: -0.9° % Change February 2026 (r): -5.7° % Change</div></div>
+<div class='lang-pane lang-ja hidden'><h3>企業形成統計</h3><div class='summary'>2026 年 3 月の米国ビジネスアプリケーションの合計は 491,941 件で、2026 年 2 月から 0.9% 減少しました。 2026 年 3 月: -0.9° % 変化 2026 年 2 月 (r): -5.7° % 変化</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.census.gov/econ/bfs/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-006d5ca7c819'
+  data-themes='インフレ・物価'
+  data-lang='ja'
+  data-score='3'
+  data-source='日本銀行'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>日本銀行</span><span>2026-04-06 14:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-006d5ca7c819')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>（論文）2020年以降の物価上昇局面におけるわが国の最終需要・中間需要物価指数（FD-ID指数）の特徴点</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='http://www.boj.or.jp/research/brp/ron_2026/ron260406a.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-5ab920339177'
+  data-themes='金利・中央銀行|インフレ・物価'
+  data-lang='ja'
+  data-score='4'
+  data-source='Minkabu Commodities'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Minkabu Commodities</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-5ab920339177')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ＮＹ金・銀市況＝続落、インフレ懸念で米金利上昇・ドル高で買い続かず</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://fu.minkabu.jp/news/663841' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article></div>
+</div><footer>Market + — Generated at 2026-04-19 09:10</footer></body></html>
+<script>
+var pageLang = 'en';
+function setPageLang(lang) {
+  pageLang = lang;
+  document.getElementById('btnPageEN').classList.toggle('active', lang === 'en');
+  document.getElementById('btnPageJA').classList.toggle('active', lang === 'ja');
+  document.querySelectorAll('.item-card').forEach(function(card) {
+    if ((card.dataset.lang || 'en') === 'ja') return;
+    var enPane = card.querySelector('.lang-en');
+    var jaPane = card.querySelector('.lang-ja');
+    var enBtn = card.querySelector('.card-lang-btn[data-l="en"]');
+    var jaBtn = card.querySelector('.card-lang-btn[data-l="ja"]');
+    if (!enPane || !jaPane) return;
+    if (lang === 'ja') {
+      enPane.classList.add('hidden'); jaPane.classList.remove('hidden');
+      if(enBtn) enBtn.classList.remove('active');
+      if(jaBtn) jaBtn.classList.add('active');
+    } else {
+      enPane.classList.remove('hidden'); jaPane.classList.add('hidden');
+      if(enBtn) enBtn.classList.add('active');
+      if(jaBtn) jaBtn.classList.remove('active');
+    }
+  });
+}
+function switchCardLang(btn, lang) {
+  var card = btn.closest('.item-card');
+  if (!card) return;
+  card.querySelectorAll('.card-lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var enPane = card.querySelector('.lang-en');
+  var jaPane = card.querySelector('.lang-ja');
+  if (!enPane || !jaPane) return;
+  if (lang === 'ja') { enPane.classList.add('hidden'); jaPane.classList.remove('hidden'); }
+  else { enPane.classList.remove('hidden'); jaPane.classList.add('hidden'); }
+}
+</script>
+
+<script>
+var READ_KEY = 'market_plus_read';
+function getReadSet() {
+  try { return new Set(JSON.parse(localStorage.getItem(READ_KEY) || '[]')); } catch(e) { return new Set(); }
+}
+function saveReadSet(s) { try { localStorage.setItem(READ_KEY, JSON.stringify([...s])); } catch(e) {} }
+function markRead(btn, cardId) {
+  var card = btn.closest('.item-card');
+  var rs = getReadSet();
+  if (rs.has(cardId)) { rs.delete(cardId); card.classList.remove('is-read'); btn.textContent = '既読'; }
+  else { rs.add(cardId); card.classList.add('is-read'); btn.textContent = '未読に戻す'; }
+  saveReadSet(rs);
+}
+(function applyRead() {
+  var rs = getReadSet();
+  document.querySelectorAll('.item-card[data-cardid]').forEach(function(card) {
+    if (rs.has(card.dataset.cardid)) {
+      card.classList.add('is-read');
+      var btn = card.querySelector('.read-btn');
+      if (btn) btn.textContent = '未読に戻す';
+    }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var fLang='all', fView='cards', search='';
+  function apply(){
+    var visible=0;
+    document.querySelectorAll('#indicatorsGrid .item-card').forEach(function(card){
+      var show=true;
+      if(fLang!=='all' && (card.dataset.lang||'')!==fLang) show=false;
+      if(search && !(card.textContent||'').toLowerCase().includes(search.toLowerCase())) show=false;
+      card.style.display=show?'':'none';
+      if(show) visible++;
+    });
+    var grid=document.getElementById('indicatorsGrid');
+    if(grid) grid.classList.toggle('list', fView==='list');
+    var cnt=document.getElementById('indicatorsCount');
+    if(cnt) cnt.textContent=visible;
+  }
+  document.querySelectorAll('.flt-region-indicators').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.flt-region-indicators').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active'); fLang=btn.dataset.lang; apply();
+    });
+  });
+  document.querySelectorAll('.flt-view-indicators').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.flt-view-indicators').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active'); fView=btn.dataset.view; apply();
+    });
+  });
+  var sb=document.getElementById('searchBox_indicators');
+  if(sb) sb.addEventListener('input',function(){search=this.value; apply();});
+  apply();
+})();
+</script>

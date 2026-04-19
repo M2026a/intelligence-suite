@@ -1,0 +1,818 @@
+<!doctype html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Market + - crypto.html</title>
+<style>
+:root{
+  --bg:#0d1016;--panel:#151a23;--panel2:#1b2230;--line:#2a3446;
+  --text:#ebf0f8;--muted:#9ba9bc;--accent:#4ea1ff;--accent2:#1e2f49;
+  --ok:#1f6f53;--warn:#8a5a17;--bad:#7c3038;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Segoe UI',Meiryo,sans-serif}
+a{color:inherit;text-decoration:none}
+header{position:sticky;top:0;z-index:50;background:rgba(13,16,22,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.wrap{max-width:1480px;margin:0 auto;padding:14px 20px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.title h1{margin:0;font-size:22px;font-weight:800}
+.title .sub{margin-top:4px;color:var(--muted);font-size:12px}
+.right-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.page-lang-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:9px 14px;font-size:13px;cursor:pointer;transition:all .15s}
+.page-lang-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.nav a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;border:1px solid rgba(255,255,255,.10);color:var(--text);background:rgba(255,255,255,.03);padding:10px 18px;border-radius:999px;font-size:13px;font-weight:700;white-space:nowrap;transition:all .18s ease}
+.nav a:hover{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.06)}
+.nav a.active{background:linear-gradient(135deg,#4ea1ff,#5a86ff);border-color:transparent;color:#fff;box-shadow:0 4px 16px rgba(78,161,255,.3)}
+.main{max-width:1480px;margin:18px auto;padding:0 20px 40px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
+.stat-grid-compact{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:10px;margin-bottom:16px;align-items:stretch}
+.stat-grid-compact .stat{min-width:0;padding:12px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+.stat .num{font-size:26px;font-weight:800;margin-bottom:4px}
+.stat-grid-compact .num{font-size:18px;line-height:1.1}
+.stat .label{color:var(--muted);font-size:12px}
+.stat-grid-compact .label{font-size:11px}
+.stat .icon{font-size:22px;margin-bottom:8px}
+.stat-grid-compact .icon{font-size:18px;margin-bottom:6px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s}
+.flt-btn:hover{border-color:var(--accent)}
+.flt-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
+.search{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 12px;font-size:13px;min-width:220px}
+.search::placeholder{color:var(--muted)}
+.filter-label{color:var(--muted);font-size:12px;white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.grid.list{grid-template-columns:1fr}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;transition:border-color .18s,opacity .18s}
+.card:hover{border-color:var(--accent)}
+.card.is-read{opacity:.45}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;color:var(--muted);font-size:12px;align-items:center}
+.card-lang-toggle{display:flex;gap:5px;flex-shrink:0;align-items:center}
+.card-lang-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;white-space:nowrap;transition:all .15s}
+.card-lang-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
+.read-btn{background:var(--panel2);border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;transition:all .15s}
+.read-btn:hover{border-color:#666}
+.card h3{margin:0;font-size:15px;line-height:1.5;font-weight:700}
+.summary{color:#ced7e6;font-size:13px;line-height:1.6}
+.lang-pane.hidden{display:none!important}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.tag{display:inline-block;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:600;border:1px solid transparent}
+.tag-official{background:#173126;border-color:#2f7254;color:#c6f1dc}
+.tag-score5,.tag-score4{background:#1e1a3a;border-color:#a78bfa;color:#e0d9ff}
+.tag-score3{background:#1e2f49;border-color:#4ea1ff;color:#cae2ff}
+.tag-score2{background:#2d2014;border-color:#8a6a31;color:#ffe0a2}
+.tag-score1{background:#1e1e1e;border-color:#444;color:#aaa}
+.tag-theme{font-size:11px;padding:3px 8px;border-radius:999px;border:1px solid transparent;font-weight:600}
+.tag-new{background:#1a2e1a;border-color:#2ecc71;color:#2ecc71;font-weight:800;animation:pulse 1.5s infinite}
+.tag-bullish{background:#1a2e1a;border-color:#2ecc71;color:#2ecc71}
+.tag-bearish{background:#2e1a1a;border-color:#e74c3c;color:#e74c3c}
+.tag-neutral{background:#1e1e2e;border-color:#636e72;color:#9ba9bc}
+.tag-usd-strong{background:#1a2040;border-color:#4ea1ff;color:#a8d4ff}
+.tag-usd-weak{background:#2e1a1a;border-color:#e74c3c;color:#ffb3b3}
+.tag-jpy-strong{background:#1a2e1a;border-color:#2ecc71;color:#a8ffcc}
+.tag-jpy-weak{background:#2e2a1a;border-color:#f39c12;color:#ffe0a2}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.lang-badge{font-size:11px;padding:2px 6px;border-radius:4px;background:#2a3446;color:var(--muted)}
+.lang-badge.ja{background:#173126;color:#c6f1dc}
+.lang-badge.en{background:#1e2f49;color:#cae2ff}
+.open-btn{display:inline-flex;justify-content:center;align-items:center;background:var(--accent2);border:1px solid var(--accent);color:#eaf4ff;border-radius:10px;padding:9px 14px;font-size:13px;font-weight:700;margin-top:4px;transition:all .15s}
+.open-btn:hover{background:#2a4a80}
+.theme-section{margin-bottom:28px}
+.theme-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.theme-header h2{margin:0;font-size:17px;font-weight:800}
+.theme-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:999px;font-size:13px;font-weight:700;border:1px solid transparent}
+.cb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.cb-card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px}
+.cb-card .cb-name{font-weight:800;font-size:15px;margin-bottom:8px}
+.cb-card .cb-count{font-size:22px;font-weight:800;color:var(--accent)}
+.cb-card .cb-recent{font-size:12px;color:var(--muted);margin-top:6px}
+footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);font-size:12px}
+@media(max-width:700px){
+  .wrap,.main,footer{padding-left:12px;padding-right:12px}
+  .grid{grid-template-columns:1fr}
+  .search{min-width:160px;width:100%}
+  .card-top{flex-direction:column}
+  .stat-grid-compact{grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:8px}
+  .stat-grid-compact .stat{min-width:0;padding:10px}
+}
+</style>
+</head>
+<body>
+<header>
+<div class='wrap'>
+  <div class='top'>
+    <div class='title'>
+      <h1>📊 Market + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 投資・金融市場</span></h1>
+      <div class='sub'>更新日時：2026-04-19 09:10</div>
+    </div>
+    <div class='right-controls'>
+      <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
+      <button class='page-lang-btn' id='btnPageJA' onclick="setPageLang('ja')">🇯🇵 日本語表示</button>
+    </div>
+  </div>
+  <nav class='nav'><a href="index.html" class="">📋 メイン</a><a href="pickup.html" class="">⭐ 注目記事</a><a href="fx_impact.html" class="">💱 為替</a><a href="central_bank.html" class="">🏦 中央銀行</a><a href="gold.html" class="">🪙 金</a><a href="crypto.html" class="active">₿ 仮想通貨</a><a href="equities.html" class="">📈 株式</a><a href="rates.html" class="">📉 債券 / 金利</a><a href="indicators.html" class="">🧾 経済指標</a><a href="analysis.html" class="">📊 分析</a></nav>
+</div>
+</header>
+<div class='main'>
+  <div class='panel' style='margin-bottom:16px'>
+    <h2 style='margin:0 0 14px;font-size:16px'>₿ 仮想通貨</h2>
+    <div style='color:var(--muted);font-size:13px'>BTC・ETH中心の暗号資産市場、ETF、規制、取引所動向を整理します。</div>
+  </div>
+  
+<div class='panel'>
+  <div class='filters'>
+    <span class='filter-label'>地域:</span>
+    <button class='flt-btn flt-region-crypto active' data-lang='all'>🌍 全部</button>
+    <button class='flt-btn flt-region-crypto' data-lang='ja'>🇯🇵 国内</button>
+    <button class='flt-btn flt-region-crypto' data-lang='en'>🌐 海外</button>
+    
+    <button class='flt-btn flt-view-crypto active' data-view='cards'>▦ カード</button>
+    <button class='flt-btn flt-view-crypto' data-view='list'>≡ リスト</button>
+    
+    <input id='searchBox_crypto' class='search' placeholder='タイトル・本文を検索...'>
+  </div>
+</div>
+  <div style='margin-bottom:12px;font-weight:700;font-size:15px'>記事一覧（<span id='cryptoCount'>28</span>件）</div>
+  <div class='grid' id='cryptoGrid'>
+<article class='card item-card'
+  data-cardid='item-3360ae52a811'
+  data-themes='その他'
+  data-lang='en'
+  data-score='1'
+  data-source='BBC Business'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge en'>🌐 海外</span><span>BBC Business</span><span>2026-04-19 08:02</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-3360ae52a811')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Scammers are becoming ever more sophisticated - this is what the fightback looks like</h3><div class='summary'>Scams have exploded over the last few years. Can countries and companies come together to turn the tables on the scammers?</div></div>
+<div class='lang-pane lang-ja hidden'><h3>詐欺師はますます巧妙化しています - これが反撃の様子です</h3><div class='summary'>ここ数年で詐欺が急増しています。国や企業が団結して詐欺師に対して形勢を逆転させることはできるだろうか？</div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/cj60pl5g4z4o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-99166aeeed54'
+  data-themes='その他'
+  data-lang='en'
+  data-score='1'
+  data-source='CoinDesk'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge en'>🌐 海外</span><span>CoinDesk</span><span>2026-04-19 05:53</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-99166aeeed54')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>2026&#x27;s biggest crypto exploit: $292 million gets drained from Kelp DAO with wrapped ether stranded across 20 chains</h3><div class='summary'></div></div>
+<div class='lang-pane lang-ja hidden'><h3>2026年最大の暗号通貨エクスプロイト：ラップされたイーサが20のチェーンにまたがって取り残され、Kelp DAOから2億9,200万ドルが流出</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://www.coindesk.com/tech/2026/04/19/2026-s-biggest-crypto-exploit-kelp-dao-hit-for-usd292-million-with-wrapped-ether-stranded-across-20-chains' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-eab7428fce1e'
+  data-themes='その他'
+  data-lang='en'
+  data-score='1'
+  data-source='CoinDesk'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge en'>🌐 海外</span><span>CoinDesk</span><span>2026-04-19 05:21</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-eab7428fce1e')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>From smelters to servers: Alcoa to cash in on crypto’s thirst for energy</h3><div class='summary'></div></div>
+<div class='lang-pane lang-ja hidden'><h3>製錬所からサーバーまで：アルコア、仮想通貨のエネルギー渇望を現金化</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://www.coindesk.com/business/2026/04/18/from-smelters-to-servers-alcoa-to-cash-in-on-crypto-s-thirst-for-energy' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-f7fe8c71a73a'
+  data-themes='その他'
+  data-lang='en'
+  data-score='3'
+  data-source='CoinDesk'
+  data-sentiment='bearish'
+  data-importance='usd_weak'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge en'>🌐 海外</span><span>CoinDesk</span><span>2026-04-19 04:18</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-f7fe8c71a73a')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>AI is increasingly eating into VC fundings and here is how crypto firms are adapting</h3><div class='summary'></div></div>
+<div class='lang-pane lang-ja hidden'><h3>AIはVCの資金をますます侵食しており、仮想通貨企業がどのように適応しているかは次のとおりです</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-usd-weak'>🔴 USD Bearish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.coindesk.com/business/2026/04/18/ai-is-increasingly-eating-into-vc-fundings-and-here-is-how-crypto-firms-are-adapting' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-b710636ae23f'
+  data-themes='その他'
+  data-lang='en'
+  data-score='1'
+  data-source='CoinDesk'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>CoinDesk</span><span>2026-04-18 23:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-b710636ae23f')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Zondacrypto under fire as Poland&#x27;s prime minister links exchange to legislative interference</h3><div class='summary'></div></div>
+<div class='lang-pane lang-ja hidden'><h3>ポーランド首相が為替と立法介入を結び付けたため、ゾンダクリプトが批判を浴びる</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://www.coindesk.com/business/2026/04/18/zondacrypto-under-fire-as-poland-s-prime-minister-links-exchange-to-legislative-interference' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-2f949644312d'
+  data-themes='その他'
+  data-lang='en'
+  data-score='1'
+  data-source='CoinDesk'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>CoinDesk</span><span>2026-04-18 22:21</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-2f949644312d')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Bitcoin &#x27;plebs eat first&#x27; mining pool Parasite finds its second BTC block</h3><div class='summary'></div></div>
+<div class='lang-pane lang-ja hidden'><h3>ビットコイン「国民が先に食べる」マイニングプール、パラサイトが2つ目のBTCブロックを発見</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://www.coindesk.com/tech/2026/04/18/bitcoin-plebs-eat-first-mining-pool-parasite-finds-its-second-btc-block' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-231f1a9d2dd9'
+  data-themes='地政学・貿易'
+  data-lang='en'
+  data-score='3'
+  data-source='CoinDesk'
+  data-sentiment='bearish'
+  data-importance='jpy_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>CoinDesk</span><span>2026-04-18 22:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-231f1a9d2dd9')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Ethereum co-founder Joseph Lubin warns of the dangers of AI being controlled by a few big tech firms</h3><div class='summary'></div></div>
+<div class='lang-pane lang-ja hidden'><h3>イーサリアムの共同創設者ジョセフ・ルービン氏、AIが少数の大手ハイテク企業に支配される危険性を警告</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-jpy-strong'>🔵 JPY Bullish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.coindesk.com/tech/2026/04/18/ethereum-co-founder-joseph-lubin-warns-of-the-dangers-of-ai-being-controlled-by-a-few-big-tech-firms' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-3cd298b67160'
+  data-themes='その他'
+  data-lang='en'
+  data-score='1'
+  data-source='CoinDesk'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>CoinDesk</span><span>2026-04-18 21:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-3cd298b67160')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Former UK Prime Minister sees economy on &#x27;very negative trajectory,&#x27; indicates support for bitcoin</h3><div class='summary'></div></div>
+<div class='lang-pane lang-ja hidden'><h3>元英国首相、経済は「非常にネガティブな軌道」にあると見ており、ビットコインへの支持を示唆</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://www.coindesk.com/markets/2026/04/18/former-uk-prime-minister-sees-economy-on-very-negative-trajectory-indicates-support-for-bitcoin' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-79ffaad65d83'
+  data-themes='その他'
+  data-lang='en'
+  data-score='1'
+  data-source='CoinDesk'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>CoinDesk</span><span>2026-04-18 14:04</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-79ffaad65d83')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Bitcoin falls back to $76,000 as Iran shuts Hormuz again</h3><div class='summary'></div></div>
+<div class='lang-pane lang-ja hidden'><h3>イランがホルムズを再び封鎖し、ビットコインは7万6000ドルまで下落</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://www.coindesk.com/markets/2026/04/18/bearish-bets-lose-usd593-million-as-bitcoin-jumps-with-iran-fully-opening-hormuz' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-da1771662d07'
+  data-themes='その他'
+  data-lang='en'
+  data-score='1'
+  data-source='CoinDesk'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>CoinDesk</span><span>2026-04-18 13:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-da1771662d07')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Stripe doubles down on blockchain and stablecoins, aiming to become &#x27;AWS for money&#x27;</h3><div class='summary'></div></div>
+<div class='lang-pane lang-ja hidden'><h3>Stripe はブロックチェーンとステーブルコインを倍増させ、「お金のための AWS」になることを目指す</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://www.coindesk.com/business/2026/04/18/stripe-doubles-down-on-blockchain-and-stablecoins-aiming-to-become-aws-for-money' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-d26d2582f2cd'
+  data-themes='金利・中央銀行'
+  data-lang='en'
+  data-score='2'
+  data-source='CoinDesk'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>CoinDesk</span><span>2026-04-18 12:51</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-d26d2582f2cd')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>How a quantum computer can be used to actually steal your bitcoin in &#x27;9 minutes&#x27;</h3><div class='summary'></div></div>
+<div class='lang-pane lang-ja hidden'><h3>量子コンピューターを使用して実際に「9分」でビットコインを盗む方法</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.coindesk.com/tech/2026/04/18/how-a-quantum-computer-can-be-used-to-actually-steal-your-bitcoin-in-9-minutes' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-1ec02ce7426e'
+  data-themes='半導体・産業'
+  data-lang='en'
+  data-score='2'
+  data-source='FXStreet'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-18 05:38</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-1ec02ce7426e')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>AI: Competitive edge debate – UBS</h3><div class='summary'>UBS Chief Economist Paul Donovan assesses how Artificial Intelligence (AI) may affect productivity and whether the European Union (EU) could gain an advantage over the United States (US).</div></div>
+<div class='lang-pane lang-ja hidden'><h3>AI: 競争力に関する議論 – UBS</h3><div class='summary'>UBSのチーフエコノミスト、ポール・ドノバン氏は、人工知能（AI）が生産性にどのような影響を及ぼす可能性があるか、また欧州連合（EU）が米国（US）に対して優位性を獲得できるかどうかを評価している。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#9b59b622;border-color:#9b59b6;color:#9b59b6'>💾 半導体・産業</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/ai-competitive-edge-debate-ubs-202604172038' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-ce031bfdac94'
+  data-themes='金利・中央銀行|インフレ・物価|雇用・景気|地政学・貿易|要人発言'
+  data-lang='en'
+  data-score='3'
+  data-source='FXStreet'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-18 02:11</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-ce031bfdac94')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Fed’s Daly: Could leave rates where they are</h3><div class='summary'>Mary Daly, President of the Federal Reserve (Fed) Bank of San Francisco, spoke at the University of California-Berkeley&#x27;s Fisher Center on Friday. She indicated that, at this point, she is observing whether higher oil prices are affecting the prices of other goods and services.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>FRBの日報：金利は現状維持の可能性</h3><div class='summary'>サンフランシスコ連邦準備銀行（FRB）のメアリー・デイリー総裁は金曜日、カリフォルニア大学バークレー校のフィッシャーセンターで講演した。同氏は、現時点では原油価格の高騰が他の商品やサービスの価格に影響を与えているかどうかを観察していると述べた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎤 要人発言</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/feds-daly-could-leave-rates-where-they-are-202604171711' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-0bb53b575425'
+  data-themes='その他'
+  data-lang='en'
+  data-score='1'
+  data-source='CoinDesk'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>CoinDesk</span><span>2026-04-18 01:01</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-0bb53b575425')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Beaten-down digital asset treasury names lead crypto stock surge as bitcoin hits $78,000</h3><div class='summary'></div></div>
+<div class='lang-pane lang-ja hidden'><h3>ビットコインが7万8000ドルに達し、デジタル資産財務省が仮想通貨株急騰の先頭に立つと指名</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://www.coindesk.com/markets/2026/04/17/beaten-down-digital-asset-treasury-names-lead-crypto-stock-surge-as-bitcoin-hits-usd78-000' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-29cb31199469'
+  data-themes='その他'
+  data-lang='en'
+  data-score='1'
+  data-source='CoinDesk'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>CoinDesk</span><span>2026-04-18 00:29</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-29cb31199469')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Don’t get AI agents and stablecoin transfers? Enroll in CoinDesk University</h3><div class='summary'></div></div>
+<div class='lang-pane lang-ja hidden'><h3>AI エージェントやステーブルコインの送金を利用できない場合は、 CoinDesk University に登録する</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://www.coindesk.com/opinion/2026/04/17/don-t-get-ai-agents-and-stablecoin-transfers-enroll-in-coindesk-university' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-35da3b491eda'
+  data-themes='その他'
+  data-lang='en'
+  data-score='1'
+  data-source='CoinDesk'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>CoinDesk</span><span>2026-04-17 22:38</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-35da3b491eda')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Back in the black: Strategy surges 8% as bitcoin&#x27;s rise to $77,000 puts holdings in profit</h3><div class='summary'></div></div>
+<div class='lang-pane lang-ja hidden'><h3>黒字転換：ビットコインが77,000ドルに上昇し保有資産が利益を得る中、戦略は8%急上昇</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://www.coindesk.com/markets/2026/04/17/strategy-back-in-profit-as-bitcoin-hits-two-and-a-half-month-high-above-usd76-300' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-29d541a226e8'
+  data-themes='その他'
+  data-lang='en'
+  data-score='1'
+  data-source='CoinDesk'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>CoinDesk</span><span>2026-04-17 22:08</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-29d541a226e8')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Bitcoin rises past $76,000, aiming at major breakout as oil plunges on Iran cooldown</h3><div class='summary'></div></div>
+<div class='lang-pane lang-ja hidden'><h3>ビットコインは76,000ドルを超えて上昇、イランの冷却期間で原油価格が急落する中、大幅なブレイクアウトを狙う</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://www.coindesk.com/markets/2026/04/17/bitcoin-rises-past-usd76-000-aiming-at-major-breakout-as-oil-plunges-on-iran-cooldown' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-55659f136335'
+  data-themes='要人発言'
+  data-lang='en'
+  data-score='2'
+  data-source='CoinDesk'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>CoinDesk</span><span>2026-04-17 21:33</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-55659f136335')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>France&#x27;s finance minister calls for more euro stablecoins in sign of government policy shift</h3><div class='summary'></div></div>
+<div class='lang-pane lang-ja hidden'><h3>フランス財務大臣、政府の政策転換の兆候としてユーロステーブルコインの追加を呼びかけ</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎤 要人発言</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.coindesk.com/policy/2026/04/17/french-government-pivots-from-slamming-privately-issued-stablecoins-to-supporting-them' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-ab4f8e53ec9e'
+  data-themes='地政学・貿易'
+  data-lang='en'
+  data-score='3'
+  data-source='CoinDesk'
+  data-sentiment='bearish'
+  data-importance='jpy_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>CoinDesk</span><span>2026-04-17 20:16</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-ab4f8e53ec9e')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Bitcoin’s ceasefire boost is starting to fizzle out as investors look for real-world results</h3><div class='summary'></div></div>
+<div class='lang-pane lang-ja hidden'><h3>投資家が現実世界での結果を求める中、ビットコインの停戦効果は消え始めている</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-jpy-strong'>🔵 JPY Bullish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.coindesk.com/daybook-us/2026/04/17/bitcoin-s-ceasefire-boost-is-starting-to-fizzle-out-as-investors-look-for-real-world-results' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-e02b19709176'
+  data-themes='インフレ・物価|半導体・産業'
+  data-lang='en'
+  data-score='3'
+  data-source='BBC Business'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Business</span><span>2026-04-17 01:34</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-e02b19709176')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Social supermarket opens to cut food bills</h3><div class='summary'>The store, in Mablethorpe, buys surplus stock so it can keep prices low.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>食費削減のためソーシャルスーパーマーケットがオープン</h3><div class='summary'>マーブルソープにあるこの店は、価格を低く抑えるために余剰在庫を買い取っています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#9b59b622;border-color:#9b59b6;color:#9b59b6'>💾 半導体・産業</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/c747rd00388o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-27e7873ac2dd'
+  data-themes='金利・中央銀行|要人発言|半導体・産業'
+  data-lang='en'
+  data-score='3'
+  data-source='BIS'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span class='tag tag-official'>🏛 公式</span><span>BIS</span><span>2026-04-09 17:04</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-27e7873ac2dd')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Michael S Barr: Brief remarks on stablecoins</h3><div class='summary'>Speech by Mr Michael S Barr, Member of the Board of Governors of the Federal Reserve System, at &quot;The GENIUS Act in practice: key questions for stablecoin regulation&quot;, The Federalist Society, Washington DC, 31 March 2026.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Michael S Barr: ステーブルコインに関する簡単なコメント</h3><div class='summary'>2026年3月31日、ワシントンDCのフェデラリスト・ソサエティ「実際のGENIUS法：ステーブルコイン規制の重要な質問」における連邦準備制度理事会メンバーのマイケル・S・バール氏の講演。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎤 要人発言</span><span class='tag tag-theme' style='background:#9b59b622;border-color:#9b59b6;color:#9b59b6'>💾 半導体・産業</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bis.org/review/r260408b.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-66d9c8902d4e'
+  data-themes='その他'
+  data-lang='ja'
+  data-score='1'
+  data-source='CoinPost'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CoinPost</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-66d9c8902d4e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>BTC 12,013,227 2.23</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://coinpost.jp/crypto/bitcoin/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-7c6ebb97b809'
+  data-themes='その他'
+  data-lang='ja'
+  data-score='1'
+  data-source='CoinPost'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CoinPost</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-7c6ebb97b809')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ETH 372,936 3.31</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://coinpost.jp/crypto/ethereum/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-53dbacb64fd0'
+  data-themes='その他'
+  data-lang='ja'
+  data-score='1'
+  data-source='CoinPost'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CoinPost</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-53dbacb64fd0')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>2 仮想通貨XRP、ソラナで『wXRP』として利用可能に</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://coinpost.jp/?p=703026' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-71f575a00ba3'
+  data-themes='その他'
+  data-lang='ja'
+  data-score='1'
+  data-source='CoinPost'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CoinPost</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-71f575a00ba3')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>3 米ビッグス下院議員、3月にビットコイン現物ETFに最大4000万円投資</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://coinpost.jp/?p=703088' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-847e84354e80'
+  data-themes='その他'
+  data-lang='ja'
+  data-score='1'
+  data-source='CoinPost'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CoinPost</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-847e84354e80')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>4 ホルムズ海峡再開放で仮想通貨DAT銘柄が大幅上昇、ビットコインは一時78000ドル超</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://coinpost.jp/?p=703028' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-f1e182b4af0d'
+  data-themes='その他'
+  data-lang='ja'
+  data-score='1'
+  data-source='CoinPost'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CoinPost</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-f1e182b4af0d')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ジパングコインをマルチチェーン展開へ、OP採用でソラナ拡大も予定</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://coinpost.jp/?p=703043' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-ed6b375b2a01'
+  data-themes='その他'
+  data-lang='ja'
+  data-score='1'
+  data-source='CoinPost'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CoinPost</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-ed6b375b2a01')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Xの株式・仮想通貨キャッシュタグ機能、開始から3日で10億ドルの取引高を創出</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://coinpost.jp/?p=703031' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article></div>
+</div><footer>Market + — Generated at 2026-04-19 09:10</footer></body></html>
+<script>
+var pageLang = 'en';
+function setPageLang(lang) {
+  pageLang = lang;
+  document.getElementById('btnPageEN').classList.toggle('active', lang === 'en');
+  document.getElementById('btnPageJA').classList.toggle('active', lang === 'ja');
+  document.querySelectorAll('.item-card').forEach(function(card) {
+    if ((card.dataset.lang || 'en') === 'ja') return;
+    var enPane = card.querySelector('.lang-en');
+    var jaPane = card.querySelector('.lang-ja');
+    var enBtn = card.querySelector('.card-lang-btn[data-l="en"]');
+    var jaBtn = card.querySelector('.card-lang-btn[data-l="ja"]');
+    if (!enPane || !jaPane) return;
+    if (lang === 'ja') {
+      enPane.classList.add('hidden'); jaPane.classList.remove('hidden');
+      if(enBtn) enBtn.classList.remove('active');
+      if(jaBtn) jaBtn.classList.add('active');
+    } else {
+      enPane.classList.remove('hidden'); jaPane.classList.add('hidden');
+      if(enBtn) enBtn.classList.add('active');
+      if(jaBtn) jaBtn.classList.remove('active');
+    }
+  });
+}
+function switchCardLang(btn, lang) {
+  var card = btn.closest('.item-card');
+  if (!card) return;
+  card.querySelectorAll('.card-lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var enPane = card.querySelector('.lang-en');
+  var jaPane = card.querySelector('.lang-ja');
+  if (!enPane || !jaPane) return;
+  if (lang === 'ja') { enPane.classList.add('hidden'); jaPane.classList.remove('hidden'); }
+  else { enPane.classList.remove('hidden'); jaPane.classList.add('hidden'); }
+}
+</script>
+
+<script>
+var READ_KEY = 'market_plus_read';
+function getReadSet() {
+  try { return new Set(JSON.parse(localStorage.getItem(READ_KEY) || '[]')); } catch(e) { return new Set(); }
+}
+function saveReadSet(s) { try { localStorage.setItem(READ_KEY, JSON.stringify([...s])); } catch(e) {} }
+function markRead(btn, cardId) {
+  var card = btn.closest('.item-card');
+  var rs = getReadSet();
+  if (rs.has(cardId)) { rs.delete(cardId); card.classList.remove('is-read'); btn.textContent = '既読'; }
+  else { rs.add(cardId); card.classList.add('is-read'); btn.textContent = '未読に戻す'; }
+  saveReadSet(rs);
+}
+(function applyRead() {
+  var rs = getReadSet();
+  document.querySelectorAll('.item-card[data-cardid]').forEach(function(card) {
+    if (rs.has(card.dataset.cardid)) {
+      card.classList.add('is-read');
+      var btn = card.querySelector('.read-btn');
+      if (btn) btn.textContent = '未読に戻す';
+    }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var fLang='all', fView='cards', search='';
+  function apply(){
+    var visible=0;
+    document.querySelectorAll('#cryptoGrid .item-card').forEach(function(card){
+      var show=true;
+      if(fLang!=='all' && (card.dataset.lang||'')!==fLang) show=false;
+      if(search && !(card.textContent||'').toLowerCase().includes(search.toLowerCase())) show=false;
+      card.style.display=show?'':'none';
+      if(show) visible++;
+    });
+    var grid=document.getElementById('cryptoGrid');
+    if(grid) grid.classList.toggle('list', fView==='list');
+    var cnt=document.getElementById('cryptoCount');
+    if(cnt) cnt.textContent=visible;
+  }
+  document.querySelectorAll('.flt-region-crypto').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.flt-region-crypto').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active'); fLang=btn.dataset.lang; apply();
+    });
+  });
+  document.querySelectorAll('.flt-view-crypto').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.flt-view-crypto').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active'); fView=btn.dataset.view; apply();
+    });
+  });
+  var sb=document.getElementById('searchBox_crypto');
+  if(sb) sb.addEventListener('input',function(){search=this.value; apply();});
+  apply();
+})();
+</script>

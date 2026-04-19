@@ -3,7 +3,7 @@
 <head>
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>Market + - central_bank.html</title>
+<title>Market + - rates.html</title>
 <style>
 :root{
   --bg:#0d1016;--panel:#151a23;--panel2:#1b2230;--line:#2a3446;
@@ -114,131 +114,30 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
       <button class='page-lang-btn' id='btnPageJA' onclick="setPageLang('ja')">🇯🇵 日本語表示</button>
     </div>
   </div>
-  <nav class='nav'><a href="index.html" class="">📋 メイン</a><a href="pickup.html" class="">⭐ 注目記事</a><a href="fx_impact.html" class="">💱 為替</a><a href="central_bank.html" class="active">🏦 中央銀行</a><a href="gold.html" class="">🪙 金</a><a href="crypto.html" class="">₿ 仮想通貨</a><a href="equities.html" class="">📈 株式</a><a href="rates.html" class="">📉 債券 / 金利</a><a href="indicators.html" class="">🧾 経済指標</a><a href="analysis.html" class="">📊 分析</a></nav>
+  <nav class='nav'><a href="index.html" class="">📋 メイン</a><a href="pickup.html" class="">⭐ 注目記事</a><a href="fx_impact.html" class="">💱 為替</a><a href="central_bank.html" class="">🏦 中央銀行</a><a href="gold.html" class="">🪙 金</a><a href="crypto.html" class="">₿ 仮想通貨</a><a href="equities.html" class="">📈 株式</a><a href="rates.html" class="active">📉 債券 / 金利</a><a href="indicators.html" class="">🧾 経済指標</a><a href="analysis.html" class="">📊 分析</a></nav>
 </div>
 </header>
 <div class='main'>
   <div class='panel' style='margin-bottom:16px'>
-    <h2 style='margin:0 0 14px;font-size:16px'>🏦 中央銀行モニター</h2>
-    <div class='cb-grid'>
-<div class='cb-card'>
-  <div class='cb-name'>🇺🇸 Federal Reserve</div>
-  <div style='color:var(--muted);font-size:12px;margin-bottom:8px'>米連邦準備制度</div>
-  <div class='cb-count'>6</div>
-  <div style='color:var(--muted);font-size:11px'>件の記事</div>
-  <div class='cb-recent'>最新: 2026-04-17 00:00</div>
-</div>
-<div class='cb-card'>
-  <div class='cb-name'>🇺🇸 Federal Reserve Monetary Policy</div>
-  <div style='color:var(--muted);font-size:12px;margin-bottom:8px'>FRB金融政策リリース</div>
-  <div class='cb-count'>0</div>
-  <div style='color:var(--muted);font-size:11px'>件の記事</div>
-  <div class='cb-recent'>最新: 記事なし</div>
-</div>
-<div class='cb-card'>
-  <div class='cb-name'>🇪🇺 ECB</div>
-  <div style='color:var(--muted);font-size:12px;margin-bottom:8px'>欧州中央銀行</div>
-  <div class='cb-count'>6</div>
-  <div style='color:var(--muted);font-size:11px'>件の記事</div>
-  <div class='cb-recent'>最新: 2026-04-17 22:00</div>
-</div>
-<div class='cb-card'>
-  <div class='cb-name'>🇯🇵 日本銀行</div>
-  <div style='color:var(--muted);font-size:12px;margin-bottom:8px'>Bank of Japan</div>
-  <div class='cb-count'>20</div>
-  <div style='color:var(--muted);font-size:11px'>件の記事</div>
-  <div class='cb-recent'>最新: 2026-04-17 08:50</div>
-</div>
-<div class='cb-card'>
-  <div class='cb-name'>🇯🇵 Bank of Japan Statistics</div>
-  <div style='color:var(--muted);font-size:12px;margin-bottom:8px'>日本銀行 統計</div>
-  <div class='cb-count'>4</div>
-  <div style='color:var(--muted);font-size:11px'>件の記事</div>
-  <div class='cb-recent'>最新: 2026-04-17 17:40</div>
-</div>
-<div class='cb-card'>
-  <div class='cb-name'>🌐 BIS</div>
-  <div style='color:var(--muted);font-size:12px;margin-bottom:8px'>国際決済銀行</div>
-  <div class='cb-count'>6</div>
-  <div style='color:var(--muted);font-size:11px'>件の記事</div>
-  <div class='cb-recent'>最新: 2026-04-16 21:47</div>
-</div></div>
+    <h2 style='margin:0 0 14px;font-size:16px'>📉 債券 / 金利</h2>
+    <div style='color:var(--muted);font-size:13px'>米10年債、米2年債、長短金利、利回り変化などの背景を整理します。</div>
   </div>
   
 <div class='panel'>
   <div class='filters'>
-    <span class='filter-label'>中央銀行:</span>
-    <button class='flt-btn flt-cb-bank active' data-bank='all'>🏦 全行</button>
-    <button class='flt-btn flt-cb-bank' data-bank='Federal Reserve'>🇺🇸 FRB</button>
-    <button class='flt-btn flt-cb-bank' data-bank='ECB'>🇪🇺 ECB</button>
-    <button class='flt-btn flt-cb-bank' data-bank='日本銀行'>🇯🇵 日銀</button>
-    <button class='flt-btn flt-cb-bank' data-bank='BIS'>🌐 BIS</button>
-  </div>
-  <div class='filters'>
     <span class='filter-label'>地域:</span>
-    <button class='flt-btn flt-lang-cb active' data-lang='all'>🌍 全部</button>
-    <button class='flt-btn flt-lang-cb' data-lang='ja'>🇯🇵 国内</button>
-    <button class='flt-btn flt-lang-cb' data-lang='en'>🌐 海外</button>
-    <span class='filter-label'>為替影響:</span>
-    <button class='flt-btn flt-fx-cb active' data-fx='all'>全部</button>
-    <button class='flt-btn flt-fx-cb' data-fx='usd_strong'>🟢 USD Bullish</button>
-    <button class='flt-btn flt-fx-cb' data-fx='usd_weak'>🔴 USD Bearish</button>
-    <button class='flt-btn flt-fx-cb' data-fx='jpy_strong'>🔵 JPY Bullish</button>
-    <button class='flt-btn flt-fx-cb' data-fx='jpy_weak'>🟡 JPY Bearish</button>
-    <button class='flt-btn flt-view-cb active' data-view='cards'>▦ カード</button>
-    <button class='flt-btn flt-view-cb' data-view='list'>≡ リスト</button>
-    <input id='searchBoxCB' class='search' placeholder='タイトル・本文を検索...'>
+    <button class='flt-btn flt-region-rates active' data-lang='all'>🌍 全部</button>
+    <button class='flt-btn flt-region-rates' data-lang='ja'>🇯🇵 国内</button>
+    <button class='flt-btn flt-region-rates' data-lang='en'>🌐 海外</button>
+    
+    <button class='flt-btn flt-view-rates active' data-view='cards'>▦ カード</button>
+    <button class='flt-btn flt-view-rates' data-view='list'>≡ リスト</button>
+    
+    <input id='searchBox_rates' class='search' placeholder='タイトル・本文を検索...'>
   </div>
 </div>
-<script>
-(function(){
-  var fBank='all', fLang='all', fFx='all', fView='cards', search='';
-  function apply(){
-    var visible=0;
-    document.querySelectorAll('#cbGrid .item-card').forEach(function(card){
-      var show=true;
-      if(fBank!=='all' && (card.dataset.source||'')!==fBank) show=false;
-      if(fLang!=='all' && (card.dataset.lang||'')!==fLang) show=false;
-      if(fFx!=='all' && (card.dataset.importance||'')!==fFx) show=false;
-      if(search && !(card.textContent||'').toLowerCase().includes(search.toLowerCase())) show=false;
-      card.style.display=show?'':'none';
-      if(show) visible++;
-    });
-    document.getElementById('cbGrid').classList.toggle('list', fView==='list');
-    var cnt=document.getElementById('cbCount');
-    if(cnt) cnt.textContent=visible;
-  }
-  document.querySelectorAll('.flt-cb-bank').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      document.querySelectorAll('.flt-cb-bank').forEach(function(b){b.classList.remove('active');});
-      btn.classList.add('active'); fBank=btn.dataset.bank; apply();
-    });
-  });
-  document.querySelectorAll('.flt-lang-cb').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      document.querySelectorAll('.flt-lang-cb').forEach(function(b){b.classList.remove('active');});
-      btn.classList.add('active'); fLang=btn.dataset.lang; apply();
-    });
-  });
-  document.querySelectorAll('.flt-fx-cb').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      document.querySelectorAll('.flt-fx-cb').forEach(function(b){b.classList.remove('active');});
-      btn.classList.add('active'); fFx=btn.dataset.fx; apply();
-    });
-  });
-  document.querySelectorAll('.flt-view-cb').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      document.querySelectorAll('.flt-view-cb').forEach(function(b){b.classList.remove('active');});
-      btn.classList.add('active'); fView=btn.dataset.view; apply();
-    });
-  });
-  var sb=document.getElementById('searchBoxCB');
-  if(sb) sb.addEventListener('input',function(){search=this.value; apply();});
-  apply();
-})();
-</script>
-  <div style='margin-bottom:12px;font-weight:700;font-size:15px'>金利・中銀関連記事（<span id='cbCount'>65</span>件）</div>
-  <div class='grid' id='cbGrid'>
+  <div style='margin-bottom:12px;font-weight:700;font-size:15px'>記事一覧（<span id='ratesCount'>38</span>件）</div>
+  <div class='grid' id='ratesGrid'>
 <article class='card item-card'
   data-cardid='item-c779d298408a'
   data-themes='金利・中央銀行'
@@ -306,6 +205,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bloomberg.com/news/videos/2026-04-18/hank-paulson-on-iran-war-inflation-and-market-risk-video' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-c4a62e016ee8'
+  data-themes='地政学・貿易|要人発言'
+  data-lang='en'
+  data-score='3'
+  data-source='Bloomberg Markets'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Bloomberg Markets</span><span>2026-04-18 21:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-c4a62e016ee8')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Hank Paulson Says the US Will Weather Iran War Fallout Better Than Anyone Else</h3><div class='summary'>The former Treasury Secretary says the US will weather fallout from the war better than anyone</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ハンク・ポールソン氏、米国はイラン戦争を誰よりもうまく乗り切るだろうと語る</h3><div class='summary'>元財務長官、米国は誰よりも戦争の余波をうまく乗り切るだろうと語る</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎤 要人発言</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bloomberg.com/news/newsletters/2026-04-18/hank-paulson-says-the-us-will-weather-iran-war-fallout-better-than-anyone-else' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-d26d2582f2cd'
   data-themes='金利・中央銀行'
   data-lang='en'
@@ -328,6 +249,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.coindesk.com/tech/2026/04/18/how-a-quantum-computer-can-be-used-to-actually-steal-your-bitcoin-in-9-minutes' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-421518ad9549'
+  data-themes='雇用・景気|地政学・貿易'
+  data-lang='en'
+  data-score='3'
+  data-source='FXStreet'
+  data-sentiment='bearish'
+  data-importance='jpy_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-18 04:08</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-421518ad9549')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Asia FX: De-escalation hopes support regional currencies – MUFG</h3><div class='summary'>MUFG’s Senior Currency Analyst Lloyd Chan notes that improved diplomatic signals in the Middle East have boosted risk sentiment, softening the US Dollar (USD) and supporting Asian FX. However, high US front-end yields still underpin the Dollar, and bond markets remain cautious.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>アジア為替：エスカレーションの緩和により地域通貨のサポートを期待 – MUFG</h3><div class='summary'>MUFGのシニア通貨アナリスト、ロイド・チャン氏は、中東における外交シグナルの改善がリスクセンチメントを高め、米ドル（USD）を軟化させ、アジア為替を支援していると指摘する。しかし、米国のフロントエンド利回りの高さが依然ドルを下支えしており、債券市場は引き続き慎重だ。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-jpy-strong'>🔵 JPY Bullish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/asia-fx-de-escalation-hopes-support-regional-currencies-mufg-202604171908' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-99046e51a960'
   data-themes='金利・中央銀行|雇用・景気|地政学・貿易|要人発言'
   data-lang='en'
@@ -348,6 +291,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>ウォラーFRB理事、イラン戦争と労働市場のリスクにより中銀の活動は停止されていると発言</h3><div class='summary'>米連邦準備制度理事会のクリストファー・ウォーラー総裁は金曜日、現在の経済状況が金利へのアプローチを複雑にしていると述べた。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎤 要人発言</span><span class='tag tag-jpy-strong'>🔵 JPY Bullish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.cnbc.com/2026/04/17/fed-governor-waller-says-iran-war-and-labor-market-risks-are-keeping-central-bank-on-hold.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-e9683416c694'
+  data-themes='地政学・貿易'
+  data-lang='en'
+  data-score='3'
+  data-source='FXStreet'
+  data-sentiment='bearish'
+  data-importance='usd_weak'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-18 03:26</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-e9683416c694')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>PBoC: Targeted easing over broad cuts – DBS</h3><div class='summary'>DBS Group Research expects the People’s Bank of China (PBoC) to keep the 1-year Loan Prime Rate at 3.00% as Chinese growth has firmed and price dynamics improved. The report notes external demand is supporting industrial activity while domestic momentum is uneven.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>人民銀：大規模な利下げを中心とした的を絞った緩和 – DBS</h3><div class='summary'>DBSグループ・リサーチは、中国の成長が堅調で物価動向が改善していることから、中国人民銀行（人民銀行）が1年物ローンプライムレートを3.00％に維持すると予想している。報告書は、国内の勢いにはばらつきがあるものの、外需が産業活動を支えていると指摘している。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-usd-weak'>🔴 USD Bearish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/pboc-targeted-easing-over-broad-cuts-dbs-202604171826' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-b8c40492dfab'
@@ -416,6 +381,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.fxstreet.com/news/gold-steady-near-4-800-as-us-iran-deal-hopes-grow-fed-rate-cut-bets-return-202604171218' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-0bb53b575425'
+  data-themes='その他'
+  data-lang='en'
+  data-score='1'
+  data-source='CoinDesk'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>CoinDesk</span><span>2026-04-18 01:01</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-0bb53b575425')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Beaten-down digital asset treasury names lead crypto stock surge as bitcoin hits $78,000</h3><div class='summary'></div></div>
+<div class='lang-pane lang-ja hidden'><h3>ビットコインが7万8000ドルに達し、デジタル資産財務省が仮想通貨株急騰の先頭に立つと指名</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://www.coindesk.com/markets/2026/04/17/beaten-down-digital-asset-treasury-names-lead-crypto-stock-surge-as-bitcoin-hits-usd78-000' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-d5ab2a4ad7c7'
   data-themes='金利・中央銀行|要人発言'
   data-lang='en'
@@ -460,40 +447,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp260417~033a4546f5.en.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-b2451c245a27'
-  data-themes='日本'
-  data-lang='ja'
-  data-score='3'
-  data-source='Bank of Japan Statistics'
-  data-sentiment='bearish'
-  data-importance='jpy_strong'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>Bank of Japan Statistics</span><span>2026-04-17 17:40</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-b2451c245a27')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>外国為替市況（4月17日）</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-jpy-strong'>🔵 JPY Bullish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www.boj.or.jp/statistics/market/forex/fxdaily/fxlist/fx260417.pdf' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-c409b2a19345'
-  data-themes='日本'
-  data-lang='ja'
-  data-score='3'
-  data-source='日本銀行'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>日本銀行</span><span>2026-04-17 08:50</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-c409b2a19345')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>銀行券および貨幣受払高等（枚数ベース）（2025年度）</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www.boj.or.jp/statistics/money/rpbc/rpbc2604.pdf' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-7e089a51c473'
   data-themes='金利・中央銀行'
   data-lang='ja'
@@ -531,72 +484,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>連邦準備制度理事会がコミュニティ・バンクシェアズ社に対して執行措置を発動</h3><div class='summary'>連邦準備制度理事会がコミュニティ・バンクシェアズ社に対して執行措置を発動</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.federalreserve.gov/newsevents/pressreleases/enforcement20260416a.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-fef974e2e409'
-  data-themes='地政学・貿易'
-  data-lang='en'
-  data-score='3'
-  data-source='ECB'
-  data-sentiment='bearish'
-  data-importance='jpy_strong'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span class='tag tag-official'>🏛 公式</span><span>ECB</span><span>2026-04-16 22:15</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-fef974e2e409')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Isabel Schnabel: Europe&#x27;s successes and the path forward</h3><div class='summary'></div></div>
-<div class='lang-pane lang-ja hidden'><h3>イザベル・シュナーベル: ヨーロッパの成功と今後の道筋</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-jpy-strong'>🔵 JPY Bullish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp260416~3ae2dad6b3.en.pdf' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-2b8a81d61a36'
-  data-themes='雇用・景気|地政学・貿易'
-  data-lang='en'
-  data-score='3'
-  data-source='BIS'
-  data-sentiment='bullish'
-  data-importance='usd_strong'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span class='tag tag-official'>🏛 公式</span><span>BIS</span><span>2026-04-16 21:47</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-2b8a81d61a36')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>CPMI-IOSCO assesses that the United Kingdom has implemented the Principles for financial market infrastructures for two FMI types, but recommends some improvements</h3><div class='summary'>The UK&#x27;s framework for systemically important payment systems and central securities depositories/securities settlement systems is complete and consistent with the CPMI-IOSCO Principles for financial market infrastructures (PFMI) in most aspects. The CPMI-IOSCO assessment identified some areas for i</div></div>
-<div class='lang-pane lang-ja hidden'><h3>CPMI-IOSCOは、英国が2つのFMIタイプの金融市場インフラ原則を実施していると評価しているが、いくつかの改善を勧告している</h3><div class='summary'>システム上重要な決済システムおよび中央証券保管機関/証券決済システムに関する英国の枠組みは完全であり、ほとんどの面で CPMI-IOSCO の金融市場インフラ原則 (PFMI) と一致しています。 CPMI-IOSCO の評価では、次のようないくつかの分野が特定されました。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bis.org/press/p260416.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-acefc5bf12d8'
-  data-themes='雇用・景気|地政学・貿易'
-  data-lang='en'
-  data-score='3'
-  data-source='BIS'
-  data-sentiment='bullish'
-  data-importance='usd_strong'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span class='tag tag-official'>🏛 公式</span><span>BIS</span><span>2026-04-16 21:44</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-acefc5bf12d8')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Implementation monitoring of PFMI: Level 2 assessment report for UK payment systems and central securities depositories/securities settlement systems</h3><div class='summary'>The Bank for International Settlements&#x27; Committee on Payments and Market Infrastructures (CPMI) and the International Organization of Securities Commissions (IOSCO) closely monitor the implementation of the Principles for financial market infrastructures (PFMI). This report presents the conclusions </div></div>
-<div class='lang-pane lang-ja hidden'><h3>PFMIの導入モニタリング：英国の決済システムおよび中央証券保管機関/証券決済システムのレベル2評価レポート</h3><div class='summary'>国際決済銀行の決済・市場インフラ委員会（CPMI）と証券監督者国際機構（IOSCO）は、金融市場インフラ原則（PFMI）の実施を注意深く監視しています。このレポートは結論を示します</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bis.org/cpmi/publ/d231.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-faf21b09fb38'
@@ -658,23 +545,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>業態別の日銀当座預金残高（3月）</h3><div class='summary'></div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='http://www.boj.or.jp/statistics/boj/other/cabs/cabs.xlsx' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-d677e687fa34'
-  data-themes='日本'
-  data-lang='ja'
-  data-score='3'
-  data-source='日本銀行'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>日本銀行</span><span>2026-04-16 15:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-d677e687fa34')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>（論文）「全国企業短期経済観測調査」の見直しに関する最終案</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www.boj.or.jp/research/brp/ron_2026/ron260416a.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-7ff88346d814'
@@ -838,40 +708,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='http://www.boj.or.jp/intl_finance/meeting/group/gro260414a.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-227353edcf73'
-  data-themes='日本'
-  data-lang='ja'
-  data-score='3'
-  data-source='日本銀行'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>日本銀行</span><span>2026-04-14 10:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-227353edcf73')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>営業毎旬報告（4月10日現在）</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www.boj.or.jp/statistics/boj/other/acmai/release/2026/ac260410.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-c4ed959a4c47'
-  data-themes='日本'
-  data-lang='ja'
-  data-score='3'
-  data-source='日本銀行'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>日本銀行</span><span>2026-04-13 08:50</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-c4ed959a4c47')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>マネーストック（3月）</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www.boj.or.jp/statistics/money/ms/ms2603.pdf' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-45529957a558'
   data-themes='金利・中央銀行|雇用・景気'
   data-lang='en'
@@ -892,79 +728,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>連邦準備制度理事会はバーク・アンド・ハーバート・ファイナンシャル・サービス・コーポレーションによる申請の承認を発表。</h3><div class='summary'>連邦準備制度理事会はバーク・アンド・ハーバート・ファイナンシャル・サービス・コーポレーションによる申請の承認を発表。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.federalreserve.gov/newsevents/pressreleases/orders20260410a.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-8255ded7cf93'
-  data-themes='雇用・景気'
-  data-lang='en'
-  data-score='3'
-  data-source='U.S. Census Economic Indicators'
-  data-sentiment='bullish'
-  data-importance='usd_strong'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span class='tag tag-official'>🏛 公式</span><span>U.S. Census Economic Indicators</span><span>2026-04-10 23:00</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-8255ded7cf93')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Manufacturers&#x27; Shipments, Inventories, and Orders</h3><div class='summary'>New orders for manufactured goods in February, up three of the last four months, increased $0.3 billion or virtually unchanged to $619.6 billion. February 2026: +0.0° % Change January 2026 (r): +0.0° % Change</div></div>
-<div class='lang-pane lang-ja hidden'><h3>メーカー出荷・在庫・受注状況</h3><div class='summary'>２月の工業製品の新規受注は、過去４カ月のうち３カ月増加し、３億ドル増加かほぼ変わらずの６１９６億ドルとなった。 2026年2月: +0.0° %変化 2026年1月(r): +0.0° %変化</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.census.gov/manufacturing/m3/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-2007ba2baa59'
-  data-themes='日本'
-  data-lang='ja'
-  data-score='3'
-  data-source='日本銀行'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>日本銀行</span><span>2026-04-10 16:30</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-2007ba2baa59')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>フェイルの発生状況（3月）</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www.boj.or.jp/statistics/set/bffail/sjgb2603.pdf' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-7d1803dc65fb'
-  data-themes='日本'
-  data-lang='ja'
-  data-score='3'
-  data-source='日本銀行'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>日本銀行</span><span>2026-04-10 08:50</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-7d1803dc65fb')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>貸出・預金動向（3月）</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www.boj.or.jp/statistics/dl/depo/kashi/kasi2603.pdf' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-91441316e786'
-  data-themes='インフレ・物価'
-  data-lang='ja'
-  data-score='3'
-  data-source='日本銀行'
-  data-sentiment='bullish'
-  data-importance='usd_strong'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>日本銀行</span><span>2026-04-10 08:50</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-91441316e786')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>企業物価指数（3月）</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www.boj.or.jp/statistics/pi/cgpi_release/cgpi2603.pdf' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-6ef8c6f9a88d'
@@ -1026,72 +789,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>米国がイランとの戦争に突入する中、インフレ率は3%で安定維持、FRBの主要指標が示す</h3><div class='summary'>木曜日に発表された指標は、連邦準備制度にイラン戦争に至る状況のスナップショットを提供する。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-jpy-strong'>🔵 JPY Bullish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.cnbc.com/2026/04/09/core-inflation-was-3percent-in-february-as-expected-key-fed-gauge-shows.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-d7ae24bf4479'
-  data-themes='雇用・景気'
-  data-lang='en'
-  data-score='3'
-  data-source='U.S. Census Economic Indicators'
-  data-sentiment='bullish'
-  data-importance='usd_strong'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span class='tag tag-official'>🏛 公式</span><span>U.S. Census Economic Indicators</span><span>2026-04-09 23:00</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-d7ae24bf4479')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Monthly Wholesale Trade: Sales and Inventories</h3><div class='summary'>February 2026 sales of merchant wholesalers were $751.9 billion, up 2.7 percent (+/- 0.4 percent) from last month. End-of-month inventories were $919.6 billion, up 0.8 percent (+/- 0.4 percent) from last month. February 2026: +0.8 % Change in Inventories January 2026 (r): -0.3 % Change in Inventorie</div></div>
-<div class='lang-pane lang-ja hidden'><h3>月次卸売業の売上と在庫</h3><div class='summary'>2026年2月の商業卸売業者の売上高は7,519億ドルで、前月比2.7パーセント（±0.4パーセント）増加しました。月末在庫は9196億ドルで、前月比0.8％（±0.4％）増加した。 2026年2月: +0.8 % 在庫変化率 2026年1月(r): -0.3 % 在庫変化率</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.census.gov/wholesale/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-33d7ce388bd3'
-  data-themes='雇用・景気|地政学・貿易|要人発言|財政'
-  data-lang='en'
-  data-score='4'
-  data-source='BEA News Releases'
-  data-sentiment='bullish'
-  data-importance='usd_strong'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span class='tag tag-official'>🏛 公式</span><span>BEA News Releases</span><span>2026-04-09 21:30</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-33d7ce388bd3')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>GDP (Third Estimate), Industries, Corporate Profits, State GDP, and State Personal Income, 4th Quarter and Year 2025</h3><div class='summary'>Real gross domestic product (GDP) increased at an annual rate of 0.5 percent in the fourth quarter of 2025 (October, November, and December), according to the third estimate released today by the U.S. Bureau of Economic Analysis. In the third quarter of 2025, real GDP increased 4.4 percent. The cont</div></div>
-<div class='lang-pane lang-ja hidden'><h3>GDP（第3次推定）、産業、企業利益、州GDP、州個人所得、2025年第4四半期および2025年</h3><div class='summary'>米国経済分析局が本日発表した第3次推計によると、2025年第4四半期（10月、11月、12月）の実質国内総生産（GDP）は年率0.5％増加した。 2025 年第 3 四半期の実質 GDP は 4.4% 増加しました。続き</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎤 要人発言</span><span class='tag tag-theme' style='background:#e74c3c22;border-color:#e74c3c;color:#e74c3c'>🏛️ 財政</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://www.bea.gov/news/2026/gdp-third-estimate-industries-corporate-profits-state-gdp-and-state-personal-income-4th' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-f9e40f9b8d7f'
-  data-themes='インフレ・物価|要人発言|財政'
-  data-lang='en'
-  data-score='3'
-  data-source='BEA News Releases'
-  data-sentiment='bullish'
-  data-importance='usd_strong'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span class='tag tag-official'>🏛 公式</span><span>BEA News Releases</span><span>2026-04-09 21:30</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-f9e40f9b8d7f')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Personal Income and Outlays, February 2026</h3><div class='summary'>Personal income decreased $18.2 billion (0.1 percent at a monthly rate) in February, according to estimates released today by the U.S. Bureau of Economic Analysis. Disposable personal income (DPI)-personal income less personal current taxes-decreased $18.3 billion (0.1 percent), and personal consump</div></div>
-<div class='lang-pane lang-ja hidden'><h3>個人の収入と支出、2026 年 2 月</h3><div class='summary'>米国経済分析局が本日発表した推計によると、2月の個人所得は182億ドル（月率0.1％）減少した。個人可処分所得（DPI）（個人所得から個人の現行税金を差し引いたもの）は183億ドル（0.1％）減少し、個人消費も減少した。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎤 要人発言</span><span class='tag tag-theme' style='background:#e74c3c22;border-color:#e74c3c;color:#e74c3c'>🏛️ 財政</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bea.gov/news/2026/personal-income-and-outlays-february-2026' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-10c6284e88e7'
@@ -1226,198 +923,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.federalreserve.gov/newsevents/pressreleases/other20260408a.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-4cd4ec80d5af'
-  data-themes='雇用・景気'
-  data-lang='en'
-  data-score='3'
-  data-source='U.S. Census Economic Indicators'
-  data-sentiment='bullish'
-  data-importance='usd_strong'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span class='tag tag-official'>🏛 公式</span><span>U.S. Census Economic Indicators</span><span>2026-04-08 23:00</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-4cd4ec80d5af')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Business Formation Statistics</h3><div class='summary'>Total U.S. Business Applications were 491,941 in March 2026, down 0.9% from February 2026. March 2026: -0.9° % Change February 2026 (r): -5.7° % Change</div></div>
-<div class='lang-pane lang-ja hidden'><h3>企業形成統計</h3><div class='summary'>2026 年 3 月の米国ビジネスアプリケーションの合計は 491,941 件で、2026 年 2 月から 0.9% 減少しました。 2026 年 3 月: -0.9° % 変化 2026 年 2 月 (r): -5.7° % 変化</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#1dd1a122;border-color:#1dd1a1;color:#1dd1a1'>💼 雇用・景気</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.census.gov/econ/bfs/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-a184939de850'
-  data-themes='日本'
-  data-lang='ja'
-  data-score='3'
-  data-source='日本銀行'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>日本銀行</span><span>2026-04-08 08:50</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-a184939de850')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>業種別・地域別直接投資（2025年第4四半期、2025年）</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www.boj.or.jp/statistics/br/bop_06/bpdata/diiqcy.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-fec8ceefb8e6'
-  data-themes='日本'
-  data-lang='ja'
-  data-score='3'
-  data-source='日本銀行'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>日本銀行</span><span>2026-04-07 15:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-fec8ceefb8e6')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>コール市場残高（3月）</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www.boj.or.jp/statistics/market/short/call/call.xlsx' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-d58a805067fc'
-  data-themes='日本'
-  data-lang='ja'
-  data-score='3'
-  data-source='日本銀行'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>日本銀行</span><span>2026-04-07 14:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-d58a805067fc')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>消費活動指数</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www.boj.or.jp/research/research_data/cai/index.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-4c440025cf4a'
-  data-themes='日本'
-  data-lang='ja'
-  data-score='3'
-  data-source='日本銀行'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>日本銀行</span><span>2026-04-07 08:50</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-4c440025cf4a')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>日本銀行の対政府取引（3月）</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www.boj.or.jp/statistics/boj/other/tseifu/release/2026/seifu2603.pdf' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-bf92fe19251a'
-  data-themes='日本'
-  data-lang='ja'
-  data-score='3'
-  data-source='日本銀行'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>日本銀行</span><span>2026-04-07 08:50</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-bf92fe19251a')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>マネタリーベースと日本銀行の取引（3月）</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www.boj.or.jp/statistics/boj/other/mbt/mbt2603.pdf' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-3845ee085867'
-  data-themes='日本'
-  data-lang='ja'
-  data-score='3'
-  data-source='日本銀行'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>日本銀行</span><span>2026-04-07 08:50</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-3845ee085867')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>オペレーション（3月）</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www.boj.or.jp/statistics/boj/fm/ope/m_release/2026/ope2603.xlsx' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-e1396802eee5'
-  data-themes='日本'
-  data-lang='ja'
-  data-score='3'
-  data-source='日本銀行'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>日本銀行</span><span>2026-04-06 14:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-e1396802eee5')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>地域経済報告（さくらレポート、2026年4月）</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www.boj.or.jp/research/brp/rer/rer260406.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-006d5ca7c819'
-  data-themes='インフレ・物価'
-  data-lang='ja'
-  data-score='3'
-  data-source='日本銀行'
-  data-sentiment='bullish'
-  data-importance='usd_strong'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>日本銀行</span><span>2026-04-06 14:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-006d5ca7c819')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>（論文）2020年以降の物価上昇局面におけるわが国の最終需要・中間需要物価指数（FD-ID指数）の特徴点</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www.boj.or.jp/research/brp/ron_2026/ron260406a.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-6b68210750c5'
-  data-themes='日本'
-  data-lang='ja'
-  data-score='3'
-  data-source='日本銀行'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>日本銀行</span><span>2026-04-06 14:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-6b68210750c5')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>東海地域業況判断DI（3月）</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www.boj.or.jp/statistics/other/toukai/toukai.xlsx' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-49d491640512'
-  data-themes='日本'
-  data-lang='ja'
-  data-score='3'
-  data-source='日本銀行'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>日本銀行</span><span>2026-04-06 14:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-49d491640512')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>関東甲信越地域業況判断DI（3月）</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www.boj.or.jp/statistics/other/kantou/kantou.xlsx' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-5ab920339177'
   data-themes='金利・中央銀行|インフレ・物価'
   data-lang='ja'
@@ -1433,91 +938,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>ＮＹ金・銀市況＝続落、インフレ懸念で米金利上昇・ドル高で買い続かず</h3><div class='summary'></div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://fu.minkabu.jp/news/663841' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-5c139f046051'
-  data-themes='日本'
-  data-lang='ja'
-  data-score='3'
-  data-source='JPX Market News'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>JPX Market News</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-5c139f046051')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>株式・ETF・REIT等</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.jpx.co.jp/equities/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-8013eaa565c8'
-  data-themes='日本'
-  data-lang='ja'
-  data-score='3'
-  data-source='JPX Market News'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>JPX Market News</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-8013eaa565c8')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>TOPIX（東証株価指数、TPX） TOPIX（東証株価指数、TPX）は、日本の株式市場を広範に網羅するとともに、投資対象としての機能性を有するマーケット・ベンチマークです。</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.jpx.co.jp/markets/indices/topix/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-a8a89f3c42bd'
-  data-themes='日本'
-  data-lang='ja'
-  data-score='3'
-  data-source='JPX Market News'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>JPX Market News</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-a8a89f3c42bd')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>月間相場表（株式） 個別銘柄ごとに、月間ベースの四本値情報や売買高・売買代金についてとりまとめています。相続の際に必要な「終値平均」も掲載しています。</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.jpx.co.jp/markets/statistics-equities/price/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-e58ddc5e27f6'
-  data-themes='日本'
-  data-lang='ja'
-  data-score='3'
-  data-source='JPX Market News'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>JPX Market News</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-e58ddc5e27f6')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>売買内訳データ提供サービス 東証市場の銘柄別日次売買代金・売買高について、発注時のフラグ情報（信用取引・空売り）を用いて細分化したデータを提供しています。</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.jpx.co.jp/markets/paid-info-alternative/tradingdata/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-70947e9aeb86'
-  data-themes='日本'
-  data-lang='ja'
-  data-score='3'
-  data-source='JPX Market News'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>JPX Market News</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-70947e9aeb86')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>売買高・売買代金等</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.jpx.co.jp/markets/equities/volume-and-value/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div>
 </div><footer>Market + — Generated at 2026-04-19 09:10</footer></body></html>
 <script>
@@ -1579,5 +999,40 @@ function markRead(btn, cardId) {
       if (btn) btn.textContent = '未読に戻す';
     }
   });
+})();
+</script>
+
+<script>
+(function(){
+  var fLang='all', fView='cards', search='';
+  function apply(){
+    var visible=0;
+    document.querySelectorAll('#ratesGrid .item-card').forEach(function(card){
+      var show=true;
+      if(fLang!=='all' && (card.dataset.lang||'')!==fLang) show=false;
+      if(search && !(card.textContent||'').toLowerCase().includes(search.toLowerCase())) show=false;
+      card.style.display=show?'':'none';
+      if(show) visible++;
+    });
+    var grid=document.getElementById('ratesGrid');
+    if(grid) grid.classList.toggle('list', fView==='list');
+    var cnt=document.getElementById('ratesCount');
+    if(cnt) cnt.textContent=visible;
+  }
+  document.querySelectorAll('.flt-region-rates').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.flt-region-rates').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active'); fLang=btn.dataset.lang; apply();
+    });
+  });
+  document.querySelectorAll('.flt-view-rates').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.flt-view-rates').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active'); fView=btn.dataset.view; apply();
+    });
+  });
+  var sb=document.getElementById('searchBox_rates');
+  if(sb) sb.addEventListener('input',function(){search=this.value; apply();});
+  apply();
 })();
 </script>

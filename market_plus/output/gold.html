@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Market + - gold.html</title>
+<style>
+:root{
+  --bg:#0d1016;--panel:#151a23;--panel2:#1b2230;--line:#2a3446;
+  --text:#ebf0f8;--muted:#9ba9bc;--accent:#4ea1ff;--accent2:#1e2f49;
+  --ok:#1f6f53;--warn:#8a5a17;--bad:#7c3038;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Segoe UI',Meiryo,sans-serif}
+a{color:inherit;text-decoration:none}
+header{position:sticky;top:0;z-index:50;background:rgba(13,16,22,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.wrap{max-width:1480px;margin:0 auto;padding:14px 20px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.title h1{margin:0;font-size:22px;font-weight:800}
+.title .sub{margin-top:4px;color:var(--muted);font-size:12px}
+.right-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.page-lang-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:9px 14px;font-size:13px;cursor:pointer;transition:all .15s}
+.page-lang-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.nav a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;border:1px solid rgba(255,255,255,.10);color:var(--text);background:rgba(255,255,255,.03);padding:10px 18px;border-radius:999px;font-size:13px;font-weight:700;white-space:nowrap;transition:all .18s ease}
+.nav a:hover{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.06)}
+.nav a.active{background:linear-gradient(135deg,#4ea1ff,#5a86ff);border-color:transparent;color:#fff;box-shadow:0 4px 16px rgba(78,161,255,.3)}
+.main{max-width:1480px;margin:18px auto;padding:0 20px 40px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
+.stat-grid-compact{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:10px;margin-bottom:16px;align-items:stretch}
+.stat-grid-compact .stat{min-width:0;padding:12px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+.stat .num{font-size:26px;font-weight:800;margin-bottom:4px}
+.stat-grid-compact .num{font-size:18px;line-height:1.1}
+.stat .label{color:var(--muted);font-size:12px}
+.stat-grid-compact .label{font-size:11px}
+.stat .icon{font-size:22px;margin-bottom:8px}
+.stat-grid-compact .icon{font-size:18px;margin-bottom:6px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.flt-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;transition:all .15s}
+.flt-btn:hover{border-color:var(--accent)}
+.flt-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
+.search{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:7px 12px;font-size:13px;min-width:220px}
+.search::placeholder{color:var(--muted)}
+.filter-label{color:var(--muted);font-size:12px;white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.grid.list{grid-template-columns:1fr}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;transition:border-color .18s,opacity .18s}
+.card:hover{border-color:var(--accent)}
+.card.is-read{opacity:.45}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;color:var(--muted);font-size:12px;align-items:center}
+.card-lang-toggle{display:flex;gap:5px;flex-shrink:0;align-items:center}
+.card-lang-btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;white-space:nowrap;transition:all .15s}
+.card-lang-btn.active{background:var(--accent2);border-color:var(--accent);color:#eaf4ff}
+.read-btn{background:var(--panel2);border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;transition:all .15s}
+.read-btn:hover{border-color:#666}
+.card h3{margin:0;font-size:15px;line-height:1.5;font-weight:700}
+.summary{color:#ced7e6;font-size:13px;line-height:1.6}
+.lang-pane.hidden{display:none!important}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.tag{display:inline-block;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:600;border:1px solid transparent}
+.tag-official{background:#173126;border-color:#2f7254;color:#c6f1dc}
+.tag-score5,.tag-score4{background:#1e1a3a;border-color:#a78bfa;color:#e0d9ff}
+.tag-score3{background:#1e2f49;border-color:#4ea1ff;color:#cae2ff}
+.tag-score2{background:#2d2014;border-color:#8a6a31;color:#ffe0a2}
+.tag-score1{background:#1e1e1e;border-color:#444;color:#aaa}
+.tag-theme{font-size:11px;padding:3px 8px;border-radius:999px;border:1px solid transparent;font-weight:600}
+.tag-new{background:#1a2e1a;border-color:#2ecc71;color:#2ecc71;font-weight:800;animation:pulse 1.5s infinite}
+.tag-bullish{background:#1a2e1a;border-color:#2ecc71;color:#2ecc71}
+.tag-bearish{background:#2e1a1a;border-color:#e74c3c;color:#e74c3c}
+.tag-neutral{background:#1e1e2e;border-color:#636e72;color:#9ba9bc}
+.tag-usd-strong{background:#1a2040;border-color:#4ea1ff;color:#a8d4ff}
+.tag-usd-weak{background:#2e1a1a;border-color:#e74c3c;color:#ffb3b3}
+.tag-jpy-strong{background:#1a2e1a;border-color:#2ecc71;color:#a8ffcc}
+.tag-jpy-weak{background:#2e2a1a;border-color:#f39c12;color:#ffe0a2}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.lang-badge{font-size:11px;padding:2px 6px;border-radius:4px;background:#2a3446;color:var(--muted)}
+.lang-badge.ja{background:#173126;color:#c6f1dc}
+.lang-badge.en{background:#1e2f49;color:#cae2ff}
+.open-btn{display:inline-flex;justify-content:center;align-items:center;background:var(--accent2);border:1px solid var(--accent);color:#eaf4ff;border-radius:10px;padding:9px 14px;font-size:13px;font-weight:700;margin-top:4px;transition:all .15s}
+.open-btn:hover{background:#2a4a80}
+.theme-section{margin-bottom:28px}
+.theme-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.theme-header h2{margin:0;font-size:17px;font-weight:800}
+.theme-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:999px;font-size:13px;font-weight:700;border:1px solid transparent}
+.cb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.cb-card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px}
+.cb-card .cb-name{font-weight:800;font-size:15px;margin-bottom:8px}
+.cb-card .cb-count{font-size:22px;font-weight:800;color:var(--accent)}
+.cb-card .cb-recent{font-size:12px;color:var(--muted);margin-top:6px}
+footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);font-size:12px}
+@media(max-width:700px){
+  .wrap,.main,footer{padding-left:12px;padding-right:12px}
+  .grid{grid-template-columns:1fr}
+  .search{min-width:160px;width:100%}
+  .card-top{flex-direction:column}
+  .stat-grid-compact{grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:8px}
+  .stat-grid-compact .stat{min-width:0;padding:10px}
+}
+</style>
+</head>
+<body>
+<header>
+<div class='wrap'>
+  <div class='top'>
+    <div class='title'>
+      <h1>📊 Market + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 投資・金融市場</span></h1>
+      <div class='sub'>更新日時：2026-04-19 09:10</div>
+    </div>
+    <div class='right-controls'>
+      <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
+      <button class='page-lang-btn' id='btnPageJA' onclick="setPageLang('ja')">🇯🇵 日本語表示</button>
+    </div>
+  </div>
+  <nav class='nav'><a href="index.html" class="">📋 メイン</a><a href="pickup.html" class="">⭐ 注目記事</a><a href="fx_impact.html" class="">💱 為替</a><a href="central_bank.html" class="">🏦 中央銀行</a><a href="gold.html" class="active">🪙 金</a><a href="crypto.html" class="">₿ 仮想通貨</a><a href="equities.html" class="">📈 株式</a><a href="rates.html" class="">📉 債券 / 金利</a><a href="indicators.html" class="">🧾 経済指標</a><a href="analysis.html" class="">📊 分析</a></nav>
+</div>
+</header>
+<div class='main'>
+  <div class='panel' style='margin-bottom:16px'>
+    <h2 style='margin:0 0 14px;font-size:16px'>🪙 金</h2>
+    <div style='color:var(--muted);font-size:13px'>XAUUSD、金ETF、安全資産需要などの材料を整理します。</div>
+  </div>
+  
+<div class='panel'>
+  <div class='filters'>
+    <span class='filter-label'>地域:</span>
+    <button class='flt-btn flt-region-gold active' data-lang='all'>🌍 全部</button>
+    <button class='flt-btn flt-region-gold' data-lang='ja'>🇯🇵 国内</button>
+    <button class='flt-btn flt-region-gold' data-lang='en'>🌐 海外</button>
+    
+    <button class='flt-btn flt-view-gold active' data-view='cards'>▦ カード</button>
+    <button class='flt-btn flt-view-gold' data-view='list'>≡ リスト</button>
+    
+    <input id='searchBox_gold' class='search' placeholder='タイトル・本文を検索...'>
+  </div>
+</div>
+  <div style='margin-bottom:12px;font-weight:700;font-size:15px'>記事一覧（<span id='goldCount'>10</span>件）</div>
+  <div class='grid' id='goldGrid'>
+<article class='card item-card'
+  data-cardid='item-f861229e72b9'
+  data-themes='インフレ・物価|地政学・貿易'
+  data-lang='en'
+  data-score='4'
+  data-source='FXStreet'
+  data-sentiment='bearish'
+  data-importance='usd_weak'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-18 04:09</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-f861229e72b9')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Gold surges past $4,850 as Hormuz reopening crushes the US Dollar</h3><div class='summary'>Gold (XAU/USD) price rallies on Friday ahead of the weekend, breaking past the $4,850 level and rising more than 1.50%, as the US-Iran conflict seems to be de-escalating after Iran reopened the Strait of Hormuz, easing inflationary pressures worldwide.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ホルムズの再開が米ドルを押し下げる中、金は4,850ドルを超えて急騰</h3><div class='summary'>イランがホルムズ海峡を再開し、世界中でインフレ圧力が緩和されたことを受けて米国とイランの対立が激化しつつあるように見える中、金（XAU/USD）価格は週末を前に金曜日に反発し、4,850ドルの水準を突破し、1.50％以上上昇した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-usd-weak'>🔴 USD Bearish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/gold-surges-past-4-850-as-hormuz-reopening-crushes-the-us-dollar-202604171909' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-3d95b0671aca'
+  data-themes='地政学・貿易|要人発言'
+  data-lang='en'
+  data-score='3'
+  data-source='FXStreet'
+  data-sentiment='bearish'
+  data-importance='jpy_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-18 03:52</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-3d95b0671aca')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Forecasting the upcoming week: Hormuz uncertainty keeps markets on edge as USD softens</h3><div class='summary'>The US Dollar Index (DXY) is losing momentum near 98.00 as safe-haven demand fades on the reopening news, but downside remains limited amid lingering geopolitical risks.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>来週の予測: ホルムズ情勢の不確実性により、米ドルが軟化する中、市場は緊張状態にある</h3><div class='summary'>ドル指数（DXY）は、取引再開のニュースで安全資産への需要が薄れ、98.00付近の勢いを失っているが、地政学リスクが長引く中、下値は限定的となっている。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎤 要人発言</span><span class='tag tag-jpy-strong'>🔵 JPY Bullish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/forecasting-the-upcoming-week-hormuz-uncertainty-keeps-markets-on-edge-as-usd-softens-202604171852' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-16c9e310256d'
+  data-themes='インフレ・物価|地政学・貿易'
+  data-lang='en'
+  data-score='3'
+  data-source='Yahoo Finance'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>Yahoo Finance</span><span>2026-04-18 02:37</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-16c9e310256d')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Gold Climbs Fourth Straight Week; Soft PPI and Weak Dollar Outshine Ceasefire</h3><div class='summary'></div></div>
+<div class='lang-pane lang-ja hidden'><h3>金は4週連続で上昇。軟調なPPIとドル安が停戦を上回る</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://finance.yahoo.com/markets/commodities/articles/gold-climbs-fourth-straight-week-173715651.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-600e38a71fe3'
+  data-themes='金利・中央銀行|インフレ・物価|地政学・貿易'
+  data-lang='en'
+  data-score='4'
+  data-source='FXStreet'
+  data-sentiment='bearish'
+  data-importance='usd_weak'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>FXStreet</span><span>2026-04-18 01:17</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-600e38a71fe3')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Gold rises as Iran reopens Hormuz, Oil plunges and Fed rate cut bets strengthen</h3><div class='summary'>Gold (XAU/USD) gains traction on Friday as US-Iran deal hopes and the reopening of the Strait of Hormuz push Oil prices lower, easing inflation pressure and reinforcing expectations of Federal Reserve (Fed) interest rate cuts.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>イランのホルムズ再開で金が上昇、原油急落、FRBの利下げ観測強まる</h3><div class='summary'>米国とイランの合意への期待とホルムズ海峡の再開により原油価格が下落し、インフレ圧力が緩和され、連邦準備理事会（FRB）の利下げ期待が強まる中、金（XAU/USD）は金曜日に勢いを増した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-theme' style='background:#ff6b8122;border-color:#ff6b81;color:#ff6b81'>🌍 地政学・貿易</span><span class='tag tag-usd-weak'>🔴 USD Bearish</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.fxstreet.com/news/gold-steady-near-4-800-as-us-iran-deal-hopes-grow-fed-rate-cut-bets-return-202604171218' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-2430dc99395d'
+  data-themes='金利・中央銀行'
+  data-lang='en'
+  data-score='3'
+  data-source='Federal Reserve'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span class='tag tag-official'>🏛 公式</span><span>Federal Reserve</span><span>2026-04-10 00:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-2430dc99395d')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Federal Reserve Board announces termination of enforcement actions with Crédit Agricole S.A. and Crédit Agricole Corporate and Investment Bank, Mega International Commercial Bank Co., Ltd, and the Goldman Sachs Group, Inc.</h3><div class='summary'>Federal Reserve Board announces termination of enforcement actions with Crédit Agricole S.A. and Crédit Agricole Corporate and Investment Bank, Mega International Commercial Bank Co., Ltd, and the Goldman Sachs Group, Inc.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>連邦準備制度理事会は、クレディ・アグリコル S.A.、クレディ・アグリコル・コーポレート・アンド・インベストメント・バンク、メガ・インターナショナル・コマーシャル・バンク株式会社、およびゴールドマン・サックス・グループに対する執行措置の終了を発表。</h3><div class='summary'>連邦準備制度理事会は、クレディ・アグリコル S.A.、クレディ・アグリコル・コーポレート・アンド・インベストメント・バンク、メガ・インターナショナル・コマーシャル・バンク株式会社、およびゴールドマン・サックス・グループに対する執行措置の終了を発表。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.federalreserve.gov/newsevents/pressreleases/enforcement20260409a.htm' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-5ab920339177'
+  data-themes='金利・中央銀行|インフレ・物価'
+  data-lang='ja'
+  data-score='4'
+  data-source='Minkabu Commodities'
+  data-sentiment='bullish'
+  data-importance='usd_strong'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Minkabu Commodities</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-5ab920339177')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ＮＹ金・銀市況＝続落、インフレ懸念で米金利上昇・ドル高で買い続かず</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🏦 金利・中央銀行</span><span class='tag tag-theme' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>📈 インフレ・物価</span><span class='tag tag-usd-strong'>🟢 USD Bullish</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://fu.minkabu.jp/news/663841' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-a8a89f3c42bd'
+  data-themes='日本'
+  data-lang='ja'
+  data-score='3'
+  data-source='JPX Market News'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>JPX Market News</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-a8a89f3c42bd')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>月間相場表（株式） 個別銘柄ごとに、月間ベースの四本値情報や売買高・売買代金についてとりまとめています。相続の際に必要な「終値平均」も掲載しています。</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.jpx.co.jp/markets/statistics-equities/price/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-e58ddc5e27f6'
+  data-themes='日本'
+  data-lang='ja'
+  data-score='3'
+  data-source='JPX Market News'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>JPX Market News</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-e58ddc5e27f6')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>売買内訳データ提供サービス 東証市場の銘柄別日次売買代金・売買高について、発注時のフラグ情報（信用取引・空売り）を用いて細分化したデータを提供しています。</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.jpx.co.jp/markets/paid-info-alternative/tradingdata/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-70947e9aeb86'
+  data-themes='日本'
+  data-lang='ja'
+  data-score='3'
+  data-source='JPX Market News'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>JPX Market News</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-70947e9aeb86')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>売買高・売買代金等</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#f1c40f22;border-color:#f1c40f;color:#f1c40f'>🇯🇵 日本</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.jpx.co.jp/markets/equities/volume-and-value/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-65ceda05f32e'
+  data-themes='その他'
+  data-lang='ja'
+  data-score='3'
+  data-source='Minkabu Commodities'
+  data-sentiment='bearish'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Minkabu Commodities</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-65ceda05f32e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ＮＹ金・銀市況＝続落、金融市場のさらなる混乱に備え現金化続く</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://fu.minkabu.jp/news/663696' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article></div>
+</div><footer>Market + — Generated at 2026-04-19 09:10</footer></body></html>
+<script>
+var pageLang = 'en';
+function setPageLang(lang) {
+  pageLang = lang;
+  document.getElementById('btnPageEN').classList.toggle('active', lang === 'en');
+  document.getElementById('btnPageJA').classList.toggle('active', lang === 'ja');
+  document.querySelectorAll('.item-card').forEach(function(card) {
+    if ((card.dataset.lang || 'en') === 'ja') return;
+    var enPane = card.querySelector('.lang-en');
+    var jaPane = card.querySelector('.lang-ja');
+    var enBtn = card.querySelector('.card-lang-btn[data-l="en"]');
+    var jaBtn = card.querySelector('.card-lang-btn[data-l="ja"]');
+    if (!enPane || !jaPane) return;
+    if (lang === 'ja') {
+      enPane.classList.add('hidden'); jaPane.classList.remove('hidden');
+      if(enBtn) enBtn.classList.remove('active');
+      if(jaBtn) jaBtn.classList.add('active');
+    } else {
+      enPane.classList.remove('hidden'); jaPane.classList.add('hidden');
+      if(enBtn) enBtn.classList.add('active');
+      if(jaBtn) jaBtn.classList.remove('active');
+    }
+  });
+}
+function switchCardLang(btn, lang) {
+  var card = btn.closest('.item-card');
+  if (!card) return;
+  card.querySelectorAll('.card-lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var enPane = card.querySelector('.lang-en');
+  var jaPane = card.querySelector('.lang-ja');
+  if (!enPane || !jaPane) return;
+  if (lang === 'ja') { enPane.classList.add('hidden'); jaPane.classList.remove('hidden'); }
+  else { enPane.classList.remove('hidden'); jaPane.classList.add('hidden'); }
+}
+</script>
+
+<script>
+var READ_KEY = 'market_plus_read';
+function getReadSet() {
+  try { return new Set(JSON.parse(localStorage.getItem(READ_KEY) || '[]')); } catch(e) { return new Set(); }
+}
+function saveReadSet(s) { try { localStorage.setItem(READ_KEY, JSON.stringify([...s])); } catch(e) {} }
+function markRead(btn, cardId) {
+  var card = btn.closest('.item-card');
+  var rs = getReadSet();
+  if (rs.has(cardId)) { rs.delete(cardId); card.classList.remove('is-read'); btn.textContent = '既読'; }
+  else { rs.add(cardId); card.classList.add('is-read'); btn.textContent = '未読に戻す'; }
+  saveReadSet(rs);
+}
+(function applyRead() {
+  var rs = getReadSet();
+  document.querySelectorAll('.item-card[data-cardid]').forEach(function(card) {
+    if (rs.has(card.dataset.cardid)) {
+      card.classList.add('is-read');
+      var btn = card.querySelector('.read-btn');
+      if (btn) btn.textContent = '未読に戻す';
+    }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var fLang='all', fView='cards', search='';
+  function apply(){
+    var visible=0;
+    document.querySelectorAll('#goldGrid .item-card').forEach(function(card){
+      var show=true;
+      if(fLang!=='all' && (card.dataset.lang||'')!==fLang) show=false;
+      if(search && !(card.textContent||'').toLowerCase().includes(search.toLowerCase())) show=false;
+      card.style.display=show?'':'none';
+      if(show) visible++;
+    });
+    var grid=document.getElementById('goldGrid');
+    if(grid) grid.classList.toggle('list', fView==='list');
+    var cnt=document.getElementById('goldCount');
+    if(cnt) cnt.textContent=visible;
+  }
+  document.querySelectorAll('.flt-region-gold').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.flt-region-gold').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active'); fLang=btn.dataset.lang; apply();
+    });
+  });
+  document.querySelectorAll('.flt-view-gold').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.flt-view-gold').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active'); fView=btn.dataset.view; apply();
+    });
+  });
+  var sb=document.getElementById('searchBox_gold');
+  if(sb) sb.addEventListener('input',function(){search=this.value; apply();});
+  apply();
+})();
+</script>

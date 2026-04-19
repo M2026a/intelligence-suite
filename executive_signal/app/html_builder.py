@@ -276,7 +276,7 @@ def build_html(articles: list[dict], signals: list[dict], *, warnings: list[str]
 body { margin:0; font-family:Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif; background:linear-gradient(180deg,#07101f 0%,#0a1120 100%); color:var(--text); }
 a { color:var(--accent); text-decoration:none; }
 a:hover { text-decoration:underline; }
-.container { max-width:1200px; margin:0 auto; padding:0 16px 40px; }
+.container { max-width:1480px; margin:0 auto; padding:0 16px 40px; }
 .hero { padding:0 0 8px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
 .brand { display:flex; align-items:center; gap:12px; flex-wrap:wrap; flex:1 1 auto; }
 .hero-title { margin:0; font-size:22px; font-weight:800; line-height:1.2; }
@@ -387,7 +387,7 @@ tbody tr:last-child td { border-bottom:none; }
 .status-zero, .status-unknown { color:#ffd9a1; border-color:#86622d; }
 .status-error { color:#ffb0ab; border-color:#8a423d; }
 .footer-note {
-  max-width: 1200px;
+  max-width: 1480px;
   margin: 20px auto 0 auto;
   padding: 0 16px;
   box-sizing: border-box;

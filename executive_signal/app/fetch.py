@@ -4,6 +4,7 @@ import html
 import re
 from dataclasses import dataclass, asdict
 from datetime import datetime, timezone
+from dateutil.relativedelta import relativedelta
 from zoneinfo import ZoneInfo
 
 _JST = ZoneInfo("Asia/Tokyo")
@@ -79,9 +80,16 @@ def parse_date(value: str | None) -> str:
         return datetime.now(_JST).strftime("%Y-%m-%d %H:%M")
 
 
-def _request_text(url: str) -> str:
-    response = requests.get(url, headers=DEFAULT_HEADERS, timeout=TIMEOUT)
+def _request_text(url: str, referer: str | None = None) -> str:
+    session = requests.Session()
+    headers = DEFAULT_HEADERS.copy()
+
+    if referer:
+        headers["Referer"] = referer
+
+    response = session.get(url, headers=headers, timeout=TIMEOUT)
     response.raise_for_status()
+
     response.encoding = response.encoding or response.apparent_encoding or "utf-8"
     return response.text
 
@@ -146,6 +154,20 @@ def fetch_rss(source: dict[str, Any], module: str) -> list[Article]:
     return []
 
 
+def _build_mofa_monthly_archive_urls(months: int = 3) -> list[str]:
+    now = datetime.now(_JST)
+    urls = []
+
+    for i in range(months):
+        dt = now - relativedelta(months=i)
+
+        urls.append(
+            f"https://www.mofa.go.jp/mofaj/press/release/{dt.strftime('%Y%m')}_index.html"
+        )
+
+    return urls
+
+
 def _allowed_by_patterns(url: str, include_patterns: list[str], exclude_patterns: list[str]) -> bool:
     low = url.lower()
     if include_patterns and not any(p.lower() in low for p in include_patterns):
@@ -157,34 +179,60 @@ def _allowed_by_patterns(url: str, include_patterns: list[str], exclude_patterns
 
 def fetch_html(source: dict[str, Any], module: str) -> list[Article]:
     candidate_urls = [source["url"], *source.get("fallback_urls", [])]
+
     last_exc: Exception | None = None
     include_patterns = source.get("include_url_patterns", [])
     exclude_patterns = source.get("exclude_url_patterns", [])
 
     for candidate_url in candidate_urls:
         try:
-            html_text = _request_text(candidate_url)
+            html_text = _request_text(candidate_url, referer=source["url"])
             soup = BeautifulSoup(html_text, "lxml")
+
             nodes = soup.select(source["item_selector"])
+
             seen: set[str] = set()
             items: list[Article] = []
+
             for node in nodes:
                 href = (node.get("href") or "").strip()
-                if not href or href.startswith("#") or href.startswith("mailto:") or href.startswith("javascript:"):
+
+                if (
+                    not href
+                    or href.startswith("#")
+                    or href.startswith("mailto:")
+                    or href.startswith("javascript:")
+                ):
                     continue
+
                 url = urljoin(source.get("base_url") or candidate_url, href)
+
                 if not _allowed_by_patterns(url, include_patterns, exclude_patterns):
                     continue
+
                 text = normalize_whitespace(node.get_text(" ", strip=True))
+
+                if not text:
+                    text = normalize_whitespace(node.text.strip())
+
+                if not text:
+                    continue
+
                 if len(text) < 12:
                     continue
+
                 norm_title = normalize_for_match(text)
+
                 if len(norm_title) < 8:
                     continue
+
                 url_key = url.lower()
+
                 if url_key in seen:
                     continue
+
                 seen.add(url_key)
+
                 items.append(
                     Article(
                         module=module,
@@ -200,14 +248,20 @@ def fetch_html(source: dict[str, Any], module: str) -> list[Article]:
                         region=source.get("region", "global"),
                     )
                 )
+
                 if len(items) >= MAX_ITEMS_PER_SOURCE:
                     break
+
             if items:
                 return items
+
         except Exception as exc:
             last_exc = exc
+            continue
+
     if last_exc is not None:
         raise last_exc
+
     return []
 
 

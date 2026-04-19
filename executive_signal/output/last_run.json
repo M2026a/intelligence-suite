@@ -1,12 +1,7 @@
 {
-  "article_count": 540,
-  "signal_count": 21,
-  "warnings": [
-    "supply_chain / SEMI Press Releases: 403 Client Error: Forbidden for url: https://www.semi.org/en/news-media-press/semi-press-releases/press-archive",
-    "earnings / Yahoo Finance Earnings: no items fetched",
-    "geo_risk / Digital Agency News: no items fetched",
-    "geo_risk / MOFA Press Releases: 403 Client Error: Forbidden for url: https://www.mofa.go.jp/press/release/202603_index.html"
-  ],
+  "article_count": 588,
+  "signal_count": 24,
+  "warnings": [],
   "source_health": [
     {
       "module": "company",
@@ -129,10 +124,10 @@
     },
     {
       "module": "supply_chain",
-      "source": "SEMI Press Releases",
-      "type": "html",
-      "count": 0,
-      "status": "error"
+      "source": "Semiconductor Engineering",
+      "type": "rss",
+      "count": 10,
+      "status": "ok"
     },
     {
       "module": "failure",
@@ -160,6 +155,13 @@
       "source": "ITmedia Enterprise Security",
       "type": "rss",
       "count": 20,
+      "status": "ok"
+    },
+    {
+      "module": "failure",
+      "source": "JPCERT/CC",
+      "type": "rss",
+      "count": 16,
       "status": "ok"
     },
     {
@@ -220,13 +222,6 @@
     },
     {
       "module": "earnings",
-      "source": "Yahoo Finance Earnings",
-      "type": "rss",
-      "count": 0,
-      "status": "zero"
-    },
-    {
-      "module": "earnings",
       "source": "東洋経済オンライン 企業・経営",
       "type": "rss",
       "count": 20,
@@ -236,8 +231,8 @@
       "module": "geo_risk",
       "source": "Digital Agency News",
       "type": "html",
-      "count": 0,
-      "status": "zero"
+      "count": 2,
+      "status": "ok"
     },
     {
       "module": "geo_risk",
@@ -255,10 +250,10 @@
     },
     {
       "module": "geo_risk",
-      "source": "MOFA Press Releases",
-      "type": "html",
-      "count": 0,
-      "status": "error"
+      "source": "NHK International News",
+      "type": "rss",
+      "count": 20,
+      "status": "ok"
     },
     {
       "module": "geo_risk",
@@ -368,48 +363,25 @@
   ],
   "health_summary": {
     "status_counter": {
-      "ok": 47,
-      "error": 2,
-      "zero": 2
+      "ok": 51
     },
     "module_success_counter": {
       "company": 11,
       "price": 3,
-      "supply_chain": 3,
-      "failure": 6,
+      "supply_chain": 4,
+      "failure": 7,
       "earnings": 7,
-      "geo_risk": 3,
+      "geo_risk": 5,
       "talent": 6,
       "product": 8
     },
     "weakest_sources": [
       {
         "module": "geo_risk",
-        "source": "MOFA Press Releases",
-        "type": "html",
-        "count": 0,
-        "status": "error"
-      },
-      {
-        "module": "supply_chain",
-        "source": "SEMI Press Releases",
-        "type": "html",
-        "count": 0,
-        "status": "error"
-      },
-      {
-        "module": "geo_risk",
         "source": "Digital Agency News",
         "type": "html",
-        "count": 0,
-        "status": "zero"
-      },
-      {
-        "module": "earnings",
-        "source": "Yahoo Finance Earnings",
-        "type": "rss",
-        "count": 0,
-        "status": "zero"
+        "count": 2,
+        "status": "ok"
       },
       {
         "module": "product",
@@ -436,6 +408,27 @@
         "module": "failure",
         "source": "CISA News",
         "type": "html",
+        "count": 10,
+        "status": "ok"
+      },
+      {
+        "module": "failure",
+        "source": "Krebs on Security",
+        "type": "rss",
+        "count": 10,
+        "status": "ok"
+      },
+      {
+        "module": "earnings",
+        "source": "MarketWatch Top Stories",
+        "type": "rss",
+        "count": 10,
+        "status": "ok"
+      },
+      {
+        "module": "company",
+        "source": "Microsoft Blogs",
+        "type": "rss",
         "count": 10,
         "status": "ok"
       }

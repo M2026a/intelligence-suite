@@ -148,6 +148,12 @@ def get_groups() -> List[Dict[str, Any]]:
                     "href": "sports_plus/output/index.html",
                 },
                 {
+                    "title": "Health / Medical +",
+                    "subtitle": "健康・医療情報",
+                    "icon": "🩺",
+                    "href": "health_medical_plus/output/index.html",
+                },
+                {
                     "title": "Takarazuka",
                     "subtitle": "宝塚",
                     "icon": "🎭",

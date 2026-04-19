@@ -8,7 +8,7 @@
 :root{--bg:#08111e;--panel:#101a2a;--panel2:#0c1523;--line:#1f2b40;--text:#eef4ff;--muted:#93a4bf;--accent:#4ea1ff;--accent2:#15314f}
 *{box-sizing:border-box}html,body{margin:0;padding:0;background:linear-gradient(180deg,#08111e 0%,#0c1627 100%);color:var(--text);font-family:Inter,'Hiragino Sans','Yu Gothic UI',sans-serif}
 a{color:inherit;text-decoration:none}body{padding-top:0}
-.wrap,.main{width:min(1280px,94vw);margin:0 auto}
+.wrap,.main{width:min(1480px,94vw);margin:0 auto}
 header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:18px 0 12px}
 .title h1{margin:0;font-size:28px;line-height:1.2}.sub{margin-top:6px;color:var(--muted);font-size:13px}
@@ -40,7 +40,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-fi
 .category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:0}
 .category-grid.single{grid-template-columns:repeat(3,minmax(0,1fr))}
 .category-panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}.mini-list{display:grid;gap:8px}.mini-item{padding:10px;border-radius:12px;background:#0c1422;border:1px solid #1d2a40}.mini-item a{font-size:13px;line-height:1.5}.mini-meta{font-size:11px;color:var(--muted);margin-top:4px}
-footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size:12px}
+footer{width:min(1480px,94vw);margin:20px auto 36px;color:var(--muted);font-size:12px}
 @media(max-width:980px){.category-grid.single{grid-template-columns:1fr}}
 @media(max-width:760px){body{padding-top:0}.top{flex-direction:column}.title h1{font-size:24px}.right-controls{justify-content:flex-start}.search{min-width:0;width:100%}.nav{padding-bottom:8px}.nav a{font-size:13px;padding:9px 12px}.grid,.main-grid,.category-grid{grid-template-columns:1fr}.card,.category-panel,.mini-item{width:100%;max-width:100%}.card-top,.card-meta,.tags,.section-head{width:100%}.card h3{font-size:16px;line-height:1.4}.summary{font-size:13px;line-height:1.65}.open-btn{width:100%}}
 </style>
@@ -51,7 +51,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='top'>
     <div class='title'>
       <h1>🎭 Sports + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ スポーツ情報</span></h1>
-      <div class='sub'>更新日時：2026-04-19 09:53</div>
+      <div class='sub'>更新日時：2026-04-19 13:39</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -79,20 +79,11 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
 
 <section class='panel'>
   <div class='section-head'><h2>🆕 NEW優先 注目3件 × 6種目</h2><span class='count-badge js-visible-count' data-target='.js-mini-scope .mini-item'>0件</span></div>
-  <div class='category-grid js-mini-scope'><section class='category-panel'><div class='section-head'><h2>⚾ 野球</h2><a href='baseball.html' class='count-badge'>もっと見る →</a></div><div class='mini-list'><div class='mini-item' data-region='JP'><a href='https://www.nikkansports.com/baseball/news/202604180001338.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>青森大・小金井凌生、冷静に完封勝利「無駄な力が入ることもなく」考えすぎない投球は成長の証し</span></a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-19 07:44</div></div><div class='mini-item' data-region='JP'><a href='https://www.nikkansports.com/baseball/news/202604180001538.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>【ヤクルト】ウォルターズ抹消 池山監督「もうちょっと試合を…」移籍後初先発は３回途中７失点</span></a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-04-19 05:00</div></div><div class='mini-item' data-region='JP'><a href='https://www.nikkansports.com/baseball/news/202604180002174.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>【西武】群抜く技術と準備力誇る栗山巧でさえ「たまたま」と言う 若獅子たちはどう感じて動くか</span></a><div class='mini-meta'>🇯🇵 国内 / ★2 / 2026-04-19 05:00</div></div></div></section><section class='category-panel'><div class='section-head'><h2>⚽ サッカー</h2><a href='soccer.html' class='count-badge'>もっと見る →</a></div><div class='mini-list'><div class='mini-item' data-region='JP'><a href='https://www.soccer-king.jp/news/world/esp/20260419/2150101.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>激闘制した…ソシエダがPK戦の末にコパ・デル・レイ制覇！ 久保建英は初のタイトル！…アトレティコは惜しくもタイトル逃す</span></a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-19 06:58</div></div><div class='mini-item' data-region='JP'><a href='https://www.nikkansports.com/soccer/news/202604190000102.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>【ACLE】アルアハリが４強、ブリラムを３－２で破る 22日の準決勝で町田と対戦</span></a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-19 09:26</div></div><div class='mini-item' data-region='JP'><a href='https://www.nikkansports.com/soccer/news/202602050000995.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>【百年構想リーグ】水戸－柏、Ｇ大阪－岡山、名古屋－福岡／スコア速報します</span></a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-04-19 08:00</div></div></div></section><section class='category-panel'><div class='section-head'><h2>🏀 バスケット</h2><a href='basketball.html' class='count-badge'>もっと見る →</a></div><div class='mini-list'><div class='mini-item' data-region='Global'><a href='https://www.espn.com/nba/story/_/id/48447222/nba-playoffs-2026-preview-teams-postseason' target='_blank' rel='noopener noreferrer'><span class='lang-en'>Postseason preview: Matchups, biggest questions and what to know</span><span class='lang-ja hidden'>ポストシーズンプレビュー: 対戦、最大の疑問、知っておくべきこと</span></a><div class='mini-meta'>🌐 海外 / ★5 / 2026-04-19 05:05</div></div></div></section><section class='category-panel'><div class='section-head'><h2>🎾 テニス</h2><a href='tennis.html' class='count-badge'>もっと見る →</a></div><div class='mini-list'><div class='mini-item' data-region='JP'><a href='#' target='_blank' rel='noopener noreferrer'><span class='lang-en'>テニス の取得結果がまだありません</span></a><div class='mini-meta'>🇯🇵 国内 / ★1 / 2026-04-19 09:53</div></div></div></section><section class='category-panel'><div class='section-head'><h2>🏁 モータースポーツ</h2><a href='motorsports.html' class='count-badge'>もっと見る →</a></div><div class='mini-list'><div class='mini-item' data-region='Global'><a href='https://www.espn.com/racing/story/_/id/48524261/driver-dies-nurburgring-juha-miettinen-max-verstappen-adac-24h' target='_blank' rel='noopener noreferrer'><span class='lang-en'>Driver dies in German race featuring Verstappen</span><span class='lang-ja hidden'>フェルスタッペンが出場したドイツのレースでドライバー死亡</span></a><div class='mini-meta'>🌐 海外 / ★5 / 2026-04-19 10:04</div></div></div></section><section class='category-panel'><div class='section-head'><h2>🥊 格闘技</h2><a href='combat.html' class='count-badge'>もっと見る →</a></div><div class='mini-list'><div class='mini-item' data-region='JP'><a href='https://www.nikkansports.com/sports/news/202604180001485.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>【柔道】角田夏実さん、小学生相手にともえ投げ披露「楽しんでくれたみたいでうれしい」</span></a><div class='mini-meta'>🇯🇵 国内 / ★1 / 2026-04-18 20:02</div></div></div></section></div>
+  <div class='category-grid js-mini-scope'><section class='category-panel'><div class='section-head'><h2>⚾ 野球</h2><a href='baseball.html' class='count-badge'>もっと見る →</a></div><div class='mini-list'><div class='mini-item' data-region='JP'><a href='https://www.nikkansports.com/baseball/news/202604180001338.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>青森大・小金井凌生、冷静に完封勝利「無駄な力が入ることもなく」考えすぎない投球は成長の証し</span></a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-19 07:44</div></div><div class='mini-item' data-region='JP'><a href='https://www.nikkansports.com/baseball/news/202604190000161.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>【阪神】注目ポイントは先制点 今季は先制すれば９戦９勝 今季２度目の同一カード３連勝へ</span></a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-19 10:01</div></div><div class='mini-item' data-region='JP'><a href='https://www.nikkansports.com/baseball/news/202604190000272.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>【阪神】両側カメラ席付近で球団関係者と球場職員が話し合い 中日福永の負傷で対応策練る</span></a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-04-19 12:13</div></div></div></section><section class='category-panel'><div class='section-head'><h2>⚽ サッカー</h2><a href='soccer.html' class='count-badge'>もっと見る →</a></div><div class='mini-list'><div class='mini-item' data-region='JP'><a href='https://www.nikkansports.com/soccer/news/202604190000102.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>【ACLE】アルアハリが４強、ブリラムを３－２で破る 22日の準決勝で町田と対戦</span></a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-19 09:26</div></div><div class='mini-item' data-region='JP'><a href='https://www.nikkansports.com/sports/news/202604190000156.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>飯村一輝、フルーレ個人初優勝 女子の東晟良は３位 フェンシングＷ杯</span></a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-19 10:07</div></div><div class='mini-item' data-region='JP'><a href='https://www.soccer-king.jp/news/world/esp/20260419/2150195.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>レアル・ソシエダ指揮官、欧州5大のカップ戦を制した初の米国出身監督に「本当に幸せだ」</span></a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-19 11:57</div></div></div></section><section class='category-panel'><div class='section-head'><h2>🏀 バスケット</h2><a href='basketball.html' class='count-badge'>もっと見る →</a></div><div class='mini-list'><div class='mini-item' data-region='JP'><a href='https://www.nikkansports.com/sports/news/202604190000346.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>【バスケ】田中こころ、WNBAバルキリーズの今季活動に参加せず 代表活動のため</span></a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-04-19 12:54</div></div><div class='mini-item' data-region='Global'><a href='https://www.espn.com/nba/story/_/id/48447222/nba-playoffs-2026-preview-teams-postseason' target='_blank' rel='noopener noreferrer'><span class='lang-en'>Postseason preview: Matchups, biggest questions and what to know</span><span class='lang-ja hidden'>ポストシーズンプレビュー: 対戦、最大の疑問、知っておくべきこと</span></a><div class='mini-meta'>🌐 海外 / ★5 / 2026-04-19 12:47</div></div><div class='mini-item' data-region='Global'><a href='https://www.espn.com/mens-college-basketball/story/_/id/48527859/mullins-projected-1st-round-pick-nba-draft-stay-uconn' target='_blank' rel='noopener noreferrer'><span class='lang-en'>Mullins, projected 1st-round pick, to stay at UConn</span><span class='lang-ja hidden'>マリンズ、1巡目指名予定、大学残留へ</span></a><div class='mini-meta'>🌐 海外 / ★2 / 2026-04-19 14:06</div></div></div></section><section class='category-panel'><div class='section-head'><h2>🎾 テニス</h2><a href='tennis.html' class='count-badge'>もっと見る →</a></div><div class='mini-list'><div class='mini-item' data-region='JP'><a href='#' target='_blank' rel='noopener noreferrer'><span class='lang-en'>テニス の取得結果がまだありません</span></a><div class='mini-meta'>🇯🇵 国内 / ★1 / 2026-04-19 13:39</div></div></div></section><section class='category-panel'><div class='section-head'><h2>🏁 モータースポーツ</h2><a href='motorsports.html' class='count-badge'>もっと見る →</a></div><div class='mini-list'><div class='mini-item' data-region='JP'><a href='#' target='_blank' rel='noopener noreferrer'><span class='lang-en'>モータースポーツ の取得結果がまだありません</span></a><div class='mini-meta'>🇯🇵 国内 / ★1 / 2026-04-19 13:39</div></div></div></section><section class='category-panel'><div class='section-head'><h2>🥊 格闘技</h2><a href='combat.html' class='count-badge'>もっと見る →</a></div><div class='mini-list'><div class='mini-item' data-region='JP'><a href='#' target='_blank' rel='noopener noreferrer'><span class='lang-en'>格闘技 の取得結果がまだありません</span></a><div class='mini-meta'>🇯🇵 国内 / ★1 / 2026-04-19 13:39</div></div></div></section></div>
 </section>
 <section>
   <div class='section-head'><h2>📰 最新記事</h2><span class='count-badge js-visible-count' data-target='.item-card'>0件</span></div>
   <div class='grid'>
-<article class='card item-card score-5' data-cardid='b6325406d4900bc0c37a648e33a9a7f4' data-region='JP' data-score='5'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>サッカーキング</span><span>2026-04-19 06:58</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'b6325406d4900bc0c37a648e33a9a7f4')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>激闘制した…ソシエダがPK戦の末にコパ・デル・レイ制覇！ 久保建英は初のタイトル！…アトレティコは惜しくもタイトル逃す</h3><div class='summary'>コパ・デル・レイ（国王杯）決勝が18日に行われ、アトレティコ・マドリードとレアル・ソシエダが対戦した。 通算11度の優勝を狙うアトレティコ・マドリードは、準···</div></div>
-  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
-  <a class='open-btn' href='https://www.soccer-king.jp/news/world/esp/20260419/2150101.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
 <article class='card item-card score-5' data-cardid='bac23579b01e94b649493252d1cc6201' data-region='JP' data-score='5'>
   <div class='card-top'>
     <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 07:44</span></div>
@@ -111,6 +102,42 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔁 移籍・契約</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
   <a class='open-btn' href='https://www.nikkansports.com/soccer/news/202604190000102.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
+<article class='card item-card score-5' data-cardid='afb44c78f47e9da0339e8e26881d7e3b' data-region='JP' data-score='5'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 10:01</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'afb44c78f47e9da0339e8e26881d7e3b')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【阪神】注目ポイントは先制点 今季は先制すれば９戦９勝 今季２度目の同一カード３連勝へ</h3><div class='summary'>阪神が今季2度目の同一カード3連勝を狙う。 前日19日の同戦は3回に森下翔太外野手（25）が左翼線に先制の適時二塁打。その後逆転を許したが、7回に再び森下の適時打と木浪聖也内野手（31）の決勝打が飛び出した。 今季先制した試合は9戦9勝…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000161.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='92c6a438b9ee6ee3214083ffd28a01f3' data-region='JP' data-score='5'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ スポーツ</span><span>2026-04-19 10:07</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '92c6a438b9ee6ee3214083ffd28a01f3')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>飯村一輝、フルーレ個人初優勝 女子の東晟良は３位 フェンシングＷ杯</h3><div class='summary'>フェンシングのワールドカップ（W杯）は18日、カイロでフルーレ個人が行われ、男子は飯村一輝（NTT）が頂点に立った。 W杯で自身初の優勝。女子は東晟良（共同カイテック）が3位だった。（共同）</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/sports/news/202604190000156.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='fc9ac160a567b389395db53db9230c6d' data-region='JP' data-score='5'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>サッカーキング</span><span>2026-04-19 11:57</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'fc9ac160a567b389395db53db9230c6d')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>レアル・ソシエダ指揮官、欧州5大のカップ戦を制した初の米国出身監督に「本当に幸せだ」</h3><div class='summary'>レアル・ソシエダを率いるペッレグリーノ・マタラッツォ監督が、コパ・デル・レイ制覇の喜びを語った。18日にスペイン紙『アス』が伝えた。 18日に行われた決勝で···</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.soccer-king.jp/news/world/esp/20260419/2150195.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='90341d0c8d5cac9fe9dfc63958954ec0' data-region='JP' data-score='5'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ サッカー</span><span>2026-04-19 12:07</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '90341d0c8d5cac9fe9dfc63958954ec0')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Rソシエダードが開始14秒で先制点、Aマドリードは終盤F・アルバレス豪快同点弾／死闘現地ルポ</h3><div class='summary'>【セビリア＝高橋智行通信員】レアル・ソシエダードが、2019－20年以来6シーズンぶり4度目の優勝を果たした。アトレチコ・マドリードとの決勝は前後半を2－2で終え、延長でも決着が付かずPK戦に持ち込まれた。GKマレーロが2本セーブし、4…</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔁 移籍・契約</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/soccer/world/news/202604190000266.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
 <article class='card item-card score-4' data-cardid='88e0367f10c22ccf02ac03e84e45ccf3' data-region='JP' data-score='4'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK スポーツ</span><span>2026-04-18 13:59</span></div>
@@ -119,33 +146,6 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='lang-pane lang-ja'><h3>サッカーＷ杯 決勝会場への列車運賃 通常の11倍の2万3000円台</h3><div class='summary'>ことし6月に開幕するサッカーワールドカップで、アメリカのニューヨーク中心部から東部ニュージャージー州にある試合会場への列車の往復運賃が、日本円で2万3000円余りに設定されました。これは通常の11倍の水準で、高額な運賃が議論を呼んでいます。</div></div>
   <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260418/k10015102281000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card score-4' data-cardid='66a6fc4034873e1e2d97005f676d96ff' data-region='JP' data-score='4'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ スポーツ</span><span>2026-04-18 18:47</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '66a6fc4034873e1e2d97005f676d96ff')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>【バレー】RS４位の大阪Ｍが決勝進出 首位のNEC川崎に２戦連続のストレート勝利</h3><div class='summary'>昨季覇者でレギュラーシーズン（RS）4位の大阪マーヴェラスが、準決勝を突破した。同1位のNECレッドロケッツ川崎と敵地で対戦し、3－0（25－19、25－23、25－15）のストレート勝ち。2戦先勝方式のトーナメントで前日17日に続く快…</div></div>
-  <div class='tags'><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/sports/news/202604180001152.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card score-4' data-cardid='d122c00377fff84874b4def2b3ac4d46' data-region='JP' data-score='4'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ スポーツ</span><span>2026-04-18 19:02</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'd122c00377fff84874b4def2b3ac4d46')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>【バレー】佐藤淑乃うずくまり涙 NEC川崎準決で敗退「もっと長くやりたかった」来季イタリア</h3><div class='summary'>レギュラーシーズン（RS）を1位で通過したNECレッドロケッツ川崎が、準決勝で涙をのんだ。 ホームで同4位の大阪マーヴェラスと対戦し、0－3（19－25、23－25、15－25）。2戦先勝方式のトーナメントでまさかの2戦連続ストレート負…</div></div>
-  <div class='tags'><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/sports/news/202604180001407.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card score-4' data-cardid='9314c8396c825626cfa786061b0fe6fd' data-region='JP' data-score='4'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ スポーツ</span><span>2026-04-18 19:57</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '9314c8396c825626cfa786061b0fe6fd')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>【体操】15歳女子高生・西山実沙が初V「お父さんお母さんに感謝…」全日本個人総合選手権</h3><div class='summary'>15歳の西山実沙（なんばク）が合計110・332点で初優勝を挙げた。跳馬で14・233点、段違い平行棒で14・100点でともに種目別でトップの得点をマーク。平均台では着地でミスが出て13・033点の全体10位の得点で後続に迫られるも、床…</div></div>
-  <div class='tags'><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/sports/news/202604180001151.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card score-4' data-cardid='b6434d740abd64587d7e86102f94d39c' data-region='JP' data-score='4'>
   <div class='card-top'>
@@ -165,31 +165,121 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='tags'><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260418/k10015102571000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card score-4' data-cardid='1b41b610501a3e2733da66b542ec759a' data-region='JP' data-score='4'>
+<article class='card item-card score-4' data-cardid='b6325406d4900bc0c37a648e33a9a7f4' data-region='JP' data-score='4'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>サッカーキング</span><span>2026-04-19 01:07</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '1b41b610501a3e2733da66b542ec759a')">既読</button></div>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>サッカーキング</span><span>2026-04-19 06:58</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'b6325406d4900bc0c37a648e33a9a7f4')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>バイエルン、明日にも優勝の可能性…ドルトムント敗戦により今節引き分け以上で通算35度目のリーグ制覇へ</h3><div class='summary'>バイエルンは、現地時間19日に行われるブンデスリーガ第30節シュトゥットガルト戦で引き分け以上の結果を収めれば、ブンデスリーガ制覇が決まることになった。 ブ···</div></div>
-  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
-  <a class='open-btn' href='https://www.soccer-king.jp/news/world/ger/20260419/2150118.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-ja'><h3>激闘制した…ソシエダがPK戦の末にコパ・デル・レイ制覇！ 久保建英は初のタイトル！…アトレティコは惜しくもタイトル逃す</h3><div class='summary'>コパ・デル・レイ（国王杯）決勝が18日に行われ、アトレティコ・マドリードとレアル・ソシエダが対戦した。 通算11度の優勝を狙うアトレティコ・マドリードは、準···</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://www.soccer-king.jp/news/world/esp/20260419/2150101.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card score-4' data-cardid='e3fd57124e21a43864ade604d872f7bb' data-region='JP' data-score='4'>
+<article class='card item-card score-4' data-cardid='265d31da51b52dd1aa2d12062311264f' data-region='JP' data-score='4'>
   <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 05:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'e3fd57124e21a43864ade604d872f7bb')">既読</button></div>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ スポーツ</span><span>2026-04-19 10:49</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '265d31da51b52dd1aa2d12062311264f')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>【ヤクルト】ウォルターズ抹消 池山監督「もうちょっと試合を…」移籍後初先発は３回途中７失点</h3><div class='summary'>ヤクルトのナッシュ・ウォルターズ投手（28）が戸田で2軍に合流し出場選手登録を抹消された。中日から今季加入し、17日巨人戦で移籍後初登板初先発も3回途中7失点で敗戦投手。 池山監督は「要所要所で踏ん張れるかがカギになってくる。調整なのか…</div></div>
+  <div class='lang-pane lang-ja'><h3>りくりゅう必勝祈願の石清水八幡宮がある八幡市、晴れ着姿を振り返り「おつかれさまでした」</h3><div class='summary'>京都府八幡市の観光協会は19日までにインスタグラムを更新。フィギュアスケートのペア「りくりゅう」こと三浦璃来（24）木原龍一（33）組（木下グループ）が現役引退を発表したことを受け、2人が石清水八幡宮で雑誌の撮影を行い必勝祈願をしたこと…</div></div>
+  <div class='tags'><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/sports/news/202604190000195.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='f43463215782f5a252071e9e060d88e0' data-region='JP' data-score='4'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>サッカーキング</span><span>2026-04-19 10:59</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'f43463215782f5a252071e9e060d88e0')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>レアル・マドリード、DFアセンシオが細菌性腸炎に…数日間で6kg減と現地報道</h3><div class='summary'>レアル・マドリードは18日、スペイン代表DFラウール・アセンシオのメディカルレポートを発表した。 アセンシオは15日に敵地で行われたチャンピオンズリーグ（C···</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://www.soccer-king.jp/news/world/esp/20260419/2150184.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='e0d8c441d9c2a80b1bd0ea34f0911807' data-region='JP' data-score='4'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ サッカー</span><span>2026-04-19 12:11</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'e0d8c441d9c2a80b1bd0ea34f0911807')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>久保建英プロ初タイトルに歓喜「涙のむことたくさんあった、引退する時に誇れるものが増えた」</h3><div class='summary'>【セビリア＝高橋智行通信員】レアル・ソシエダードの日本代表MF久保建英(24）が、プロキャリア初のタイトルを手にした。 3カ月近くに及ぶ負傷離脱から復帰したばかりでベンチスタート。2－2の後半43分から出場した。 オヤルサバルやゲデスな…</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🚑 故障・欠場</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/soccer/world/news/202604190000271.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='4f373e9a4420213580d9c9da3439cfc4' data-region='JP' data-score='4'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 12:13</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '4f373e9a4420213580d9c9da3439cfc4')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【阪神】両側カメラ席付近で球団関係者と球場職員が話し合い 中日福永の負傷で対応策練る</h3><div class='summary'>阪神の試合前練習中に球団関係者と球場職員が一塁側と三塁側カメラ席付近で話し込む姿が見られた。 甲子園では18日の阪神－中日5回戦で中日福永裕基内野手（29）が負傷。福永は3回に阪神佐藤のファウルフライを追ってカメラマン席に頭から落下。担…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🚑 故障・欠場</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000272.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='26f4b345930b46f0338f1db8d8cd0b3e' data-region='JP' data-score='4'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ スポーツ</span><span>2026-04-19 12:31</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '26f4b345930b46f0338f1db8d8cd0b3e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【陸上】国学院大・辻原輝が新副主将に「覚悟を決めて頑張ります」主将は野中恒亨</h3><div class='summary'>国学院大陸上部は19日、ホームページを更新し、26年度の幹部を発表した。 主将は今年1月の箱根駅伝3区で子犬が乱入するハプニングに見舞われながらも区間3位と好走した野中恒亨、副主将は4区4位辻原輝（4年）、田中愛睦、吉田蔵之介の3人が就…</div></div>
+  <div class='tags'><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/sports/athletics/news/202604190000295.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='2d0b0df187af7a8321bf1bfb5d06aac6' data-region='JP' data-score='4'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ サッカー</span><span>2026-04-19 12:48</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '2d0b0df187af7a8321bf1bfb5d06aac6')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>久保建英「復帰が近づくにつれ、また切れたらどうしよう…」「怖い部分もあった」／一問一答２</h3><div class='summary'>【セビリア＝高橋智行通信員】レアル・ソシエダードの日本代表MF久保建英(24）が、プロキャリア初のタイトルを手にした。 試合後のミックスゾーンで、現在の心境など思うことを余すことなく話した。 ◇ ◇ －負傷中の3カ月、どうい…</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🚑 故障・欠場</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/soccer/world/news/202604190000307.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='38d86e225eefe25e1df2efddfe16193f' data-region='JP' data-score='4'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ サッカー</span><span>2026-04-19 12:52</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '38d86e225eefe25e1df2efddfe16193f')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>久保建英「オランダは一番損する相手」「他の強豪と比べ知名度が比例していない」／一問一答４完</h3><div class='summary'>【セビリア＝高橋智行通信員】レアル・ソシエダードの日本代表MF久保建英(24）が、プロキャリア初のタイトルを手にした。 試合後のミックスゾーンで、現在の心境など思うことを余すことなく話した。 ◇ ◇ －日本代表メンバー発表ま…</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/soccer/world/news/202604190000310.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='9da6239f2c045174547ebde3762add19' data-region='JP' data-score='4'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 12:53</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '9da6239f2c045174547ebde3762add19')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【中日】カメラマン席に落下で頭部負傷の福永裕基と花田旭が登録抹消 ブライトと川越が昇格</h3><div class='summary'>中日福永裕基内野手（29）が19日、出場選手登録を抹消された。18日阪神5回戦（甲子園）の3回、阪神佐藤輝明内野手（27）のファウルフライを追ってカメラマン席に頭から落下し、頭部を裂傷。脳しんとう特例措置の対象選手となった。 またドラフ…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🚑 故障・欠場</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000345.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='f8c077d1212abd3b905e0bbc2a3f459e' data-region='JP' data-score='4'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ スポーツ</span><span>2026-04-19 12:54</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'f8c077d1212abd3b905e0bbc2a3f459e')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【バスケ】田中こころ、WNBAバルキリーズの今季活動に参加せず 代表活動のため</h3><div class='summary'>米女子プロバスケットボールWNBAのバルキリーズは18日、ドラフト3巡目で指名したガード田中こころが、今季チームの活動に参加しないと発表した。チームによると代表活動のため。 日本のWリーグ、ENEOSでプレーする20歳の田中はドラフト会…</div></div>
+  <div class='tags'><span class='tag' style='background:#ff9f4322;border-color:#ff9f43;color:#ff9f43'>🏀 バスケット</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/sports/news/202604190000346.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='bf48e10697d68c6d4ae0c5c9f7191df8' data-region='JP' data-score='4'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 12:58</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'bf48e10697d68c6d4ae0c5c9f7191df8')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【日本ハム】清宮幸太郎が今季初めて左翼でスタメン出場 一塁には西川遥輝</h3><div class='summary'>日本ハム清宮幸太郎内野手（26）が今季初めて左翼でスタメン出場する。 今季は、前夜の18日まで19試合すべて一塁での出場だった。一塁は西川遥輝外野手（34）が入る。 【プロ野球スコア速報】はこちら＞＞＞</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000358.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='3f22d76c9c48ece28f6607e6695d1d7f' data-region='JP' data-score='4'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 13:02</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '3f22d76c9c48ece28f6607e6695d1d7f')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【阪神】浜田太貴が再昇格…現役ドラフトで移籍後１軍甲子園初出場へ「一番に結果を残したい」</h3><div class='summary'>阪神浜田太貴外野手（25）が19日、出場選手登録され公示された。 甲子園で試合前練習に参加。「一番に結果を残したい」と意気込んだ。 開幕1軍入りを果たすも、3月30日に登録抹消。「前回はよくなかったので、今回は頑張りたい」。 1軍で出場…</div></div>
   <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔁 移籍・契約</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180001538.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000343.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card score-4' data-cardid='9af977875ba75afd3816778be4d8605d' data-region='JP' data-score='4'>
+<article class='card item-card score-4' data-cardid='6ddb0002fc63ce66cab5828b1f30d1ca' data-region='JP' data-score='4'>
   <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ サッカー</span><span>2026-04-19 08:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '9af977875ba75afd3816778be4d8605d')">既読</button></div>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ サッカー</span><span>2026-04-19 13:13</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '6ddb0002fc63ce66cab5828b1f30d1ca')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>【百年構想リーグ】水戸－柏、Ｇ大阪－岡山、名古屋－福岡／スコア速報します</h3><div class='summary'>Jリーグ百年構想リーグは19日、3試合が行われる。 19日の試合 EAST 水 戸 － － 柏 ▼得点者 WEST G大阪 － － 岡 山 ▼得点者 名古屋 － － 福 岡 ▼得点者 18…</div></div>
-  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
+  <div class='lang-pane lang-ja'><h3>【百年構想リーグ】カズ先発！ 福島ー岐阜、水戸－柏、Ｇ大阪－岡山など／スコア速報中</h3><div class='summary'>Jリーグ百年構想リーグ、J2J3百年構想リーグが19日、行われる。福島ユナイテッドFCのカズことFW三浦知良（59）が、ホームの岐阜戦で先発出場する。開幕節の甲府戦以来のスタメン出場となる。 19日の試合 EAST 水 戸 ０ ０－０ …</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
   <a class='open-btn' href='https://www.nikkansports.com/soccer/news/202602050000995.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card ' data-cardid='15ccf99b9fab2e50b5d6338b33fc57e7' data-region='JP' data-score='3'>
@@ -209,100 +299,10 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='lang-pane lang-ja'><h3>【体操】アジア選手権の女子代表に15歳の西山実沙、岸里奈、岡村真らを選出</h3><div class='summary'>日本体操協会は18日、体操のアジア選手権（6月・中国）女子代表に15歳の西山実沙（なんばク）や岸里奈（戸田市SC）岡村真（相好ク）杉原愛子（TRyAS）宮田笙子（順大）を選出したと発表した。 同じ会場で行われるアジア・ジュニア選手権女子…</div></div>
   <div class='tags'><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★3</span></div>
   <a class='open-btn' href='https://www.nikkansports.com/sports/news/202604180002226.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='66269d226e25e80f5085b6a9d1a6153e' data-region='JP' data-score='2'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>サッカーキング</span><span>2026-04-19 03:58</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '66269d226e25e80f5085b6a9d1a6153e')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>ライプツィヒ、フランクフルトに快勝でリーグ戦4連勝！ 堂安律に出番は訪れず</h3><div class='summary'>ブンデスリーガ第30節が18日に行われ、フランクフルトとライプツィヒが対戦した。 堂安律がベンチスタートとなった試合は、アウェイのライプツィヒがより多くのチ···</div></div>
-  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★2</span></div>
-  <a class='open-btn' href='https://www.soccer-king.jp/news/world/ger/20260419/2150096.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='78ca9a532bd3efdbc0d3ad2042b5fe31' data-region='JP' data-score='2'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 05:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '78ca9a532bd3efdbc0d3ad2042b5fe31')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>【西武】群抜く技術と準備力誇る栗山巧でさえ「たまたま」と言う 若獅子たちはどう感じて動くか</h3><div class='summary'>西武栗山がプロ25年目の1打席目に痛烈なセンター返しを見せた。ヒット。「たまたまじゃないですか？ たまたま。たまたま。でもそのたまたまが次の打席、またチャンスあったら、同じようなスイングができるように」と深い。たまたまの蓄積で2151本…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180002174.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='c35567ad82c62cfeddffaacb82affd1b' data-region='JP' data-score='2'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 05:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'c35567ad82c62cfeddffaacb82affd1b')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>【楽天】浅村栄斗「今までの感覚で入らんと」左飛覚悟も新設テラスで今季１号の恩恵「良かった」</h3><div class='summary'>お立ち台に上がった楽天浅村栄斗内野手（35）は「テラス（ホームランゾーン）、ありがとうございます」と言って、今季1号を喜んだ。 5－1の5回1死一塁、カウント1－1からロッテ田中の高めフォークを振り抜いた。「詰まったし、今までの感覚があ…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180001484.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='55257d0b453ecb32a6a00a5d18f04486' data-region='JP' data-score='2'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 05:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '55257d0b453ecb32a6a00a5d18f04486')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>【とっておきメモ】好投続く阪神湯浅はサブスク解禁KAT－TUNを「毎日聞く」長年のファン</h3><div class='summary'>今季2勝目を挙げた阪神湯浅京己投手（26）は、今春サブスクリプション配信が解禁されたKAT－TUNの楽曲に日々、力をもらっている。 幼い頃、母が赤西仁のファンだった影響でいつしかファンに。小学校低学年の頃には、母と親子2人で三重・尾鷲市…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180001661.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='1ba73a9566546f381c23df17dcb02160' data-region='JP' data-score='2'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>サッカーキング</span><span>2026-04-19 05:57</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '1ba73a9566546f381c23df17dcb02160')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>マンU、クーニャの1点を守り抜きシーズンダブル達成！ チェルシーはリーグ戦4連敗…</h3><div class='summary'>プレミアリーグ第33節が18日に行われ、チェルシーとマンチェスター・ユナイテッドが対戦した。 ホームのチェルシーは前節のマンチェスター・シティ戦に敗戦し、リ···</div></div>
-  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
-  <a class='open-btn' href='https://www.soccer-king.jp/news/world/eng/20260419/2150099.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='1236b9ff3a336a9dba26470822cf798c' data-region='JP' data-score='2'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 06:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '1236b9ff3a336a9dba26470822cf798c')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>【虎になれ】まるで日本シリーズの第７戦のよう…球児監督に「ナイスゲーム」と言わせた試合</h3><div class='summary'>間違いなく熱戦だった。T先制→D逆転→T同点→D勝ち越し→T同点→T勝ち越し…と得点機がめまぐるしく入れ替わる。シーズンも、それも序盤の1試合とはいえ、まるで日本シリーズの第7戦のよう…と言えば言い過ぎかもしれないが両軍の必死さは伝わっ…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/column/torada/news/202604180001757.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='cf5c78622f2912865c1cb987434f4821' data-region='JP' data-score='2'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>サッカーキング</span><span>2026-04-19 06:39</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'cf5c78622f2912865c1cb987434f4821')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>後半ATの失点で降格圏脱出できず…トッテナム指揮官は残留へ意気込む「このチームなら5連勝できる」</h3><div class='summary'>トッテナム・ホットスパーを率いるロベルト・デ・ゼルビ監督が、ブライトン戦後に「このチームなら5連勝できるはずだ」と語った。イギリスメディア『Hayters』が···</div></div>
-  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★2</span></div>
-  <a class='open-btn' href='https://www.soccer-king.jp/news/world/eng/20260419/2150156.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='923590dac7c01321e611b41b62b2665d' data-region='JP' data-score='2'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ サッカー</span><span>2026-04-19 06:48</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '923590dac7c01321e611b41b62b2665d')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>Ｒソシエダード久保、スペイン国王杯Vプロ初タイトル！後半43分から出場し延長経てPK戦制す</h3><div class='summary'>【セビリア＝高橋智行通信員】レアル・ソシエダードの日本代表MF久保建英（24）が、プロ初となるタイトルを獲得した。2－2で90分を終え、延長戦でも決着がつかず、PK戦を制した。長期離脱から復帰したばかりの久保はベンチスタートとなったが後…</div></div>
-  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔁 移籍・契約</span><span class='tag' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🚑 故障・欠場</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/soccer/world/news/202604190000013.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='4bb95ac98f24f1838cc51461d778ec34' data-region='JP' data-score='2'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 07:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '4bb95ac98f24f1838cc51461d778ec34')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>西武平良海馬28回で自責点０、得点圏の被安打も０ 防御率０・00継続なるか／見どころ</h3><div class='summary'>西武平良海馬が今季4試合目の先発。ここまで平良は24回を投げ、失点は4月5日楽天戦の1点だけ。初回1死一、二塁から中堅手の失策によるもので、まだ自責点は0。 今季の被安打は12本あるが、内訳は走者なしの場面で11本、走者一塁で1本。得点…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180001200.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='9af5df2e740f15f3f185f7ce464bd1a8' data-region='JP' data-score='2'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 07:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '9af5df2e740f15f3f185f7ce464bd1a8')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>ヤクルト・ドラ４増居翔太が巨人戦先発、新人の初勝利が巨人戦は16年原樹理以来／見どころ</h3><div class='summary'>ヤクルトのルーキー増居翔太がプロ初先発で初勝利を目指す。ヤクルトの新人が巨人戦でプロ初勝利を挙げれば16年5月1日原樹理以来、10年ぶり。 過去に13人いるが、そのうち9人は救援で記録しており、プロ1勝目が巨人戦の先発勝利は89年9月2…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★2</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180001202.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div>
   <div class='summary no-results hidden'>条件に一致する記事がありません。</div>
 </section>
-</div><footer>Sports + — Generated at 2026-04-19 09:53</footer>
+</div><footer>Sports + — Generated at 2026-04-19 13:39</footer>
 <script>
 function safeStorageGet(key) {
   try { return window.localStorage ? localStorage.getItem(key) : null; } catch (e) { return null; }

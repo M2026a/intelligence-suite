@@ -8,7 +8,7 @@
 :root{--bg:#08111e;--panel:#101a2a;--panel2:#0c1523;--line:#1f2b40;--text:#eef4ff;--muted:#93a4bf;--accent:#4ea1ff;--accent2:#15314f}
 *{box-sizing:border-box}html,body{margin:0;padding:0;background:linear-gradient(180deg,#08111e 0%,#0c1627 100%);color:var(--text);font-family:Inter,'Hiragino Sans','Yu Gothic UI',sans-serif}
 a{color:inherit;text-decoration:none}body{padding-top:0}
-.wrap,.main{width:min(1280px,94vw);margin:0 auto}
+.wrap,.main{width:min(1480px,94vw);margin:0 auto}
 header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:18px 0 12px}
 .title h1{margin:0;font-size:28px;line-height:1.2}.sub{margin-top:6px;color:var(--muted);font-size:13px}
@@ -40,7 +40,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-fi
 .category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:0}
 .category-grid.single{grid-template-columns:repeat(3,minmax(0,1fr))}
 .category-panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}.mini-list{display:grid;gap:8px}.mini-item{padding:10px;border-radius:12px;background:#0c1422;border:1px solid #1d2a40}.mini-item a{font-size:13px;line-height:1.5}.mini-meta{font-size:11px;color:var(--muted);margin-top:4px}
-footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size:12px}
+footer{width:min(1480px,94vw);margin:20px auto 36px;color:var(--muted);font-size:12px}
 @media(max-width:980px){.category-grid.single{grid-template-columns:1fr}}
 @media(max-width:760px){body{padding-top:0}.top{flex-direction:column}.title h1{font-size:24px}.right-controls{justify-content:flex-start}.search{min-width:0;width:100%}.nav{padding-bottom:8px}.nav a{font-size:13px;padding:9px 12px}.grid,.main-grid,.category-grid{grid-template-columns:1fr}.card,.category-panel,.mini-item{width:100%;max-width:100%}.card-top,.card-meta,.tags,.section-head{width:100%}.card h3{font-size:16px;line-height:1.4}.summary{font-size:13px;line-height:1.65}.open-btn{width:100%}}
 </style>
@@ -51,7 +51,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='top'>
     <div class='title'>
       <h1>🎭 Sports + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ スポーツ情報</span></h1>
-      <div class='sub'>更新日時：2026-04-19 09:53</div>
+      <div class='sub'>更新日時：2026-04-19 13:39</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -79,7 +79,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
 
 <section class='panel'>
   <div class='section-head'><h2>⚾ 野球 今日の注目 3件</h2><span class='count-badge js-visible-count' data-target='.js-mini-scope .mini-item'>0件</span></div>
-  <div class='category-grid single js-mini-scope'><div class='mini-item' data-region='JP'><a href='https://www.nikkansports.com/baseball/news/202604180001338.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>青森大・小金井凌生、冷静に完封勝利「無駄な力が入ることもなく」考えすぎない投球は成長の証し</span></a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-19 07:44</div></div><div class='mini-item' data-region='JP'><a href='https://www.nikkansports.com/baseball/news/202604180001538.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>【ヤクルト】ウォルターズ抹消 池山監督「もうちょっと試合を…」移籍後初先発は３回途中７失点</span></a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-04-19 05:00</div></div><div class='mini-item' data-region='JP'><a href='https://www.nikkansports.com/baseball/news/202604180002174.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>【西武】群抜く技術と準備力誇る栗山巧でさえ「たまたま」と言う 若獅子たちはどう感じて動くか</span></a><div class='mini-meta'>🇯🇵 国内 / ★2 / 2026-04-19 05:00</div></div></div>
+  <div class='category-grid single js-mini-scope'><div class='mini-item' data-region='JP'><a href='https://www.nikkansports.com/baseball/news/202604180001338.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>青森大・小金井凌生、冷静に完封勝利「無駄な力が入ることもなく」考えすぎない投球は成長の証し</span></a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-19 07:44</div></div><div class='mini-item' data-region='JP'><a href='https://www.nikkansports.com/baseball/news/202604190000161.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>【阪神】注目ポイントは先制点 今季は先制すれば９戦９勝 今季２度目の同一カード３連勝へ</span></a><div class='mini-meta'>🇯🇵 国内 / ★5 / 2026-04-19 10:01</div></div><div class='mini-item' data-region='JP'><a href='https://www.nikkansports.com/baseball/news/202604190000272.html' target='_blank' rel='noopener noreferrer'><span class='lang-en'>【阪神】両側カメラ席付近で球団関係者と球場職員が話し合い 中日福永の負傷で対応策練る</span></a><div class='mini-meta'>🇯🇵 国内 / ★4 / 2026-04-19 12:13</div></div></div>
 </section>
 <section>
   <div class='section-head'><h2>📰 最新記事</h2><span class='count-badge js-visible-count' data-target='.item-card'>0件</span></div>
@@ -93,95 +93,50 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
   <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180001338.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card score-4' data-cardid='e3fd57124e21a43864ade604d872f7bb' data-region='JP' data-score='4'>
+<article class='card item-card score-5' data-cardid='afb44c78f47e9da0339e8e26881d7e3b' data-region='JP' data-score='5'>
   <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 05:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'e3fd57124e21a43864ade604d872f7bb')">既読</button></div>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 10:01</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'afb44c78f47e9da0339e8e26881d7e3b')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>【ヤクルト】ウォルターズ抹消 池山監督「もうちょっと試合を…」移籍後初先発は３回途中７失点</h3><div class='summary'>ヤクルトのナッシュ・ウォルターズ投手（28）が戸田で2軍に合流し出場選手登録を抹消された。中日から今季加入し、17日巨人戦で移籍後初登板初先発も3回途中7失点で敗戦投手。 池山監督は「要所要所で踏ん張れるかがカギになってくる。調整なのか…</div></div>
+  <div class='lang-pane lang-ja'><h3>【阪神】注目ポイントは先制点 今季は先制すれば９戦９勝 今季２度目の同一カード３連勝へ</h3><div class='summary'>阪神が今季2度目の同一カード3連勝を狙う。 前日19日の同戦は3回に森下翔太外野手（25）が左翼線に先制の適時二塁打。その後逆転を許したが、7回に再び森下の適時打と木浪聖也内野手（31）の決勝打が飛び出した。 今季先制した試合は9戦9勝…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000161.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='4f373e9a4420213580d9c9da3439cfc4' data-region='JP' data-score='4'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 12:13</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '4f373e9a4420213580d9c9da3439cfc4')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【阪神】両側カメラ席付近で球団関係者と球場職員が話し合い 中日福永の負傷で対応策練る</h3><div class='summary'>阪神の試合前練習中に球団関係者と球場職員が一塁側と三塁側カメラ席付近で話し込む姿が見られた。 甲子園では18日の阪神－中日5回戦で中日福永裕基内野手（29）が負傷。福永は3回に阪神佐藤のファウルフライを追ってカメラマン席に頭から落下。担…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🚑 故障・欠場</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000272.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='9da6239f2c045174547ebde3762add19' data-region='JP' data-score='4'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 12:53</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '9da6239f2c045174547ebde3762add19')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【中日】カメラマン席に落下で頭部負傷の福永裕基と花田旭が登録抹消 ブライトと川越が昇格</h3><div class='summary'>中日福永裕基内野手（29）が19日、出場選手登録を抹消された。18日阪神5回戦（甲子園）の3回、阪神佐藤輝明内野手（27）のファウルフライを追ってカメラマン席に頭から落下し、頭部を裂傷。脳しんとう特例措置の対象選手となった。 またドラフ…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🚑 故障・欠場</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000345.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='bf48e10697d68c6d4ae0c5c9f7191df8' data-region='JP' data-score='4'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 12:58</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'bf48e10697d68c6d4ae0c5c9f7191df8')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【日本ハム】清宮幸太郎が今季初めて左翼でスタメン出場 一塁には西川遥輝</h3><div class='summary'>日本ハム清宮幸太郎内野手（26）が今季初めて左翼でスタメン出場する。 今季は、前夜の18日まで19試合すべて一塁での出場だった。一塁は西川遥輝外野手（34）が入る。 【プロ野球スコア速報】はこちら＞＞＞</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000358.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-4' data-cardid='3f22d76c9c48ece28f6607e6695d1d7f' data-region='JP' data-score='4'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 13:02</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '3f22d76c9c48ece28f6607e6695d1d7f')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【阪神】浜田太貴が再昇格…現役ドラフトで移籍後１軍甲子園初出場へ「一番に結果を残したい」</h3><div class='summary'>阪神浜田太貴外野手（25）が19日、出場選手登録され公示された。 甲子園で試合前練習に参加。「一番に結果を残したい」と意気込んだ。 開幕1軍入りを果たすも、3月30日に登録抹消。「前回はよくなかったので、今回は頑張りたい」。 1軍で出場…</div></div>
   <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔁 移籍・契約</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180001538.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='78ca9a532bd3efdbc0d3ad2042b5fe31' data-region='JP' data-score='2'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 05:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '78ca9a532bd3efdbc0d3ad2042b5fe31')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>【西武】群抜く技術と準備力誇る栗山巧でさえ「たまたま」と言う 若獅子たちはどう感じて動くか</h3><div class='summary'>西武栗山がプロ25年目の1打席目に痛烈なセンター返しを見せた。ヒット。「たまたまじゃないですか？ たまたま。たまたま。でもそのたまたまが次の打席、またチャンスあったら、同じようなスイングができるように」と深い。たまたまの蓄積で2151本…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180002174.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='c35567ad82c62cfeddffaacb82affd1b' data-region='JP' data-score='2'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 05:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'c35567ad82c62cfeddffaacb82affd1b')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>【楽天】浅村栄斗「今までの感覚で入らんと」左飛覚悟も新設テラスで今季１号の恩恵「良かった」</h3><div class='summary'>お立ち台に上がった楽天浅村栄斗内野手（35）は「テラス（ホームランゾーン）、ありがとうございます」と言って、今季1号を喜んだ。 5－1の5回1死一塁、カウント1－1からロッテ田中の高めフォークを振り抜いた。「詰まったし、今までの感覚があ…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180001484.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='55257d0b453ecb32a6a00a5d18f04486' data-region='JP' data-score='2'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 05:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '55257d0b453ecb32a6a00a5d18f04486')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>【とっておきメモ】好投続く阪神湯浅はサブスク解禁KAT－TUNを「毎日聞く」長年のファン</h3><div class='summary'>今季2勝目を挙げた阪神湯浅京己投手（26）は、今春サブスクリプション配信が解禁されたKAT－TUNの楽曲に日々、力をもらっている。 幼い頃、母が赤西仁のファンだった影響でいつしかファンに。小学校低学年の頃には、母と親子2人で三重・尾鷲市…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180001661.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='1236b9ff3a336a9dba26470822cf798c' data-region='JP' data-score='2'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 06:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '1236b9ff3a336a9dba26470822cf798c')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>【虎になれ】まるで日本シリーズの第７戦のよう…球児監督に「ナイスゲーム」と言わせた試合</h3><div class='summary'>間違いなく熱戦だった。T先制→D逆転→T同点→D勝ち越し→T同点→T勝ち越し…と得点機がめまぐるしく入れ替わる。シーズンも、それも序盤の1試合とはいえ、まるで日本シリーズの第7戦のよう…と言えば言い過ぎかもしれないが両軍の必死さは伝わっ…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/column/torada/news/202604180001757.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='4bb95ac98f24f1838cc51461d778ec34' data-region='JP' data-score='2'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 07:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '4bb95ac98f24f1838cc51461d778ec34')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>西武平良海馬28回で自責点０、得点圏の被安打も０ 防御率０・00継続なるか／見どころ</h3><div class='summary'>西武平良海馬が今季4試合目の先発。ここまで平良は24回を投げ、失点は4月5日楽天戦の1点だけ。初回1死一、二塁から中堅手の失策によるもので、まだ自責点は0。 今季の被安打は12本あるが、内訳は走者なしの場面で11本、走者一塁で1本。得点…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180001200.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='9af5df2e740f15f3f185f7ce464bd1a8' data-region='JP' data-score='2'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 07:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '9af5df2e740f15f3f185f7ce464bd1a8')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>ヤクルト・ドラ４増居翔太が巨人戦先発、新人の初勝利が巨人戦は16年原樹理以来／見どころ</h3><div class='summary'>ヤクルトのルーキー増居翔太がプロ初先発で初勝利を目指す。ヤクルトの新人が巨人戦でプロ初勝利を挙げれば16年5月1日原樹理以来、10年ぶり。 過去に13人いるが、そのうち9人は救援で記録しており、プロ1勝目が巨人戦の先発勝利は89年9月2…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★2</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180001202.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='0cad3bd4e3cde15b4a8fcd9db7a3eb4c' data-region='JP' data-score='2'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 07:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '0cad3bd4e3cde15b4a8fcd9db7a3eb4c')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>【日本ハム】ホームランラッシュ！とにかく打つ！打つ！打つ！／谷本安美</h3><div class='summary'>日本ハム大ファンのつばきファクトリー谷本安美、元ファイターズガール工藤彩音、タレント花咲楓香が週替わりでコラムに登場します。 ◇ ◇ ◇ 北海道日本ハムファイターズは開幕戦こそ3年連続の勝利とはならず、新庄剛志監督も「くや…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★2</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180001066.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='78f172bf1f5edca726e9fdab546b4003' data-region='JP' data-score='2'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 07:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '78f172bf1f5edca726e9fdab546b4003')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>【とっておきメモ】ヤクルト長岡秀樹 ヘルメットのツバにポイント６項目を貼り付けてサヨナラ打</h3><div class='summary'>ヤクルトが逆転サヨナラ勝ちした。 2－3で迎えた9回、巨人の守護神マルティネスから長岡秀樹内野手（24）がサヨナラ打を放った。打球はしぶとく中前へ。一塁に達すると、ベンチから飛び出してきたチームメートから歓喜のウオーターシャワーを浴びた…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180002234.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='35c4ae8043ea7f3346b4a7a0196ba0d7' data-region='JP' data-score='2'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 07:35</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '35c4ae8043ea7f3346b4a7a0196ba0d7')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>【阪神】88年ぶり中日戦連勝タイ記録 同一カード開幕連勝記録は？</h3><div class='summary'>阪神森下翔太外野手（25）が、自慢の長打力でチームを白星に導いた。 ◇ ◇ ◇ ▼阪神が開幕から同一カード5連勝は昨年の巨人戦以来だが、中日戦では1リーグ時代の37年秋（1分け含む）38年秋に次いで88年ぶり3度目のタイ記…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★2</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180001408.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000343.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card ' data-cardid='9cc7f664bb3d9b9d267416ee36bb449c' data-region='JP' data-score='2'>
   <div class='card-top'>
@@ -201,32 +156,122 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
   <a class='open-btn' href='https://www.nikkansports.com/premium/baseball/news/202604160000404.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card ' data-cardid='88da433df2ac18e3a3762346ec93dca7' data-region='JP' data-score='1'>
+<article class='card item-card ' data-cardid='3a801dde80546463f2a3b3ffb27074c7' data-region='JP' data-score='2'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK スポーツ</span><span>2026-04-17 16:49</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '88da433df2ac18e3a3762346ec93dca7')">既読</button></div>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 09:35</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '3a801dde80546463f2a3b3ffb27074c7')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>トラウト5本 ジャッジ4本 “大リーグの顔” 4連戦でHR打ち合う</h3><div class='summary'>大リーグ、ヤンキースとエンジェルスの4連戦で、エンジェルスのトラウト選手がホームラン5本、ヤンキースのジャッジ選手がホームラン4本を打つ活躍を見せました。2人は、ともにシーズンのMVP＝最優秀選手を3回受賞しているスター選手で、ホームラン数でもリーグトップを争っています。</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260417/k10015101661000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-ja'><h3>【広島】ドラ１平川蓮１軍合流！ フル出場負けなし&quot;もってる新人&quot;合流で連敗の悪い流れ変える</h3><div class='summary'>右肩痛で離脱していた広島ドラフト1位の平川蓮外野手（22）が1軍に合流した。 平川は開幕戦で2点二塁打を放つなど、開幕から4試合続けて「1番中堅」として打線を活性化させていた。だが、3月31日ヤクルト戦の中堅守備でフェンスに激突した際に…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🚑 故障・欠場</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000120.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card ' data-cardid='62301aa3b2e0b44ed2f41a8209338c5d' data-region='JP' data-score='1'>
+<article class='card item-card ' data-cardid='fb371c914fc542619f9b26687d39f5dc' data-region='JP' data-score='2'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK スポーツ</span><span>2026-04-17 19:27</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '62301aa3b2e0b44ed2f41a8209338c5d')">既読</button></div>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 09:37</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'fb371c914fc542619f9b26687d39f5dc')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>バット直撃の球審が緊急手術 審判員の安全対策検討へ NPB</h3><div class='summary'>16日に神宮球場で行われたプロ野球の試合でバッターの手から離れたバットが球審の頭部を直撃した事故で、NPB＝日本野球機構は審判員の安全確保に向け対策を検討していくことになりました。</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260417/k10015101971000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-ja'><h3>落合博満氏「それに戻さなければ浮上のきっかけはない」中日が浮上するためには「あくまでも…」</h3><div class='summary'>元中日監督の落合博満氏（72）が19日、TBS系テレビ「サンデーモーニング」にご意見番として出演。開幕から苦しい戦いが続く中日について語った。 中日は19日の試合前時点で4勝14敗でセ・リーグ最下位に沈んでいる。借金は2ケタの「10」。…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000119.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card ' data-cardid='36aa56639c08c9b44d11ef6629f6c85f' data-region='JP' data-score='1'>
+<article class='card item-card ' data-cardid='9314ebac4920682e6664ab5f6894c1df' data-region='JP' data-score='2'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK スポーツ</span><span>2026-04-17 21:46</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '36aa56639c08c9b44d11ef6629f6c85f')">既読</button></div>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 09:56</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '9314ebac4920682e6664ab5f6894c1df')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>ことしの夏の全国高校野球 全代表校初戦を正午前後避けて実施</h3><div class='summary'>高野連＝日本高校野球連盟などは、ことしの夏の全国高校野球の暑さ対策として、すべての代表校の初戦を含む大会10日目までの試合を、気温が上がりやすい正午前後の時間帯を避けて行うことに決めました。</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260417/k10015102031000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-ja'><h3>中畑清氏「いや～すごいね、下馬評じゃ最下位候補と」セリーグ首位の池山ヤクルト大絶賛「別格」</h3><div class='summary'>元DeNA監督の中畑清氏（72）が19日、TBS系テレビ「サンデーモーニング」にご意見番として出演。開幕から絶好調のヤクルトについて語った。 ヤクルトは、19日の試合前時点で13勝5敗の貯金「8」でセ・リーグ首位を走っている。中畑氏は「…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000159.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='9e3c42fd506a50ad0947d6b94745d2d7' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 10:21</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '9e3c42fd506a50ad0947d6b94745d2d7')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>中畑清氏「有原で勝てないというところが」日本ハムの戦いぶりに言及「まだ20試合」落合博満氏</h3><div class='summary'>元中日監督の落合博満氏（72）と元DeNA監督の中畑清氏（72）が19日、TBS系テレビ「サンデーモーニング」にご意見番として出演。ここまでの日本ハムの戦いぶりについて言及した。 日本ハムは19日の試合前時点で9勝10敗の借金「1」でパ…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000184.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='1a7f2e7594a4c3d1a872b045a95ab69b' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 11:14</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '1a7f2e7594a4c3d1a872b045a95ab69b')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>落合博満氏「投球イニング超えて防御率トップだったら…」大谷翔平サイ・ヤング賞の可能性に言及</h3><div class='summary'>元中日監督の落合博満氏（72）と元DeNA監督の中畑清氏（72）が19日、TBS系テレビ「サンデーモーニング」にご意見番として出演。ドジャース大谷翔平投手（31）のサイ・ヤング賞受賞の可能性について言及した。 落合氏は、大谷がサイ・ヤン…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000216.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='3a36be1b3f1aa2ed4458d97d9cf5a423' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 11:14</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '3a36be1b3f1aa2ed4458d97d9cf5a423')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【阪神】浜田太貴が１軍合流 前日２軍戦では左中間へ本塁打</h3><div class='summary'>阪神浜田太貴外野手（25）が19日、中日戦が行われる甲子園に姿を見せ、試合前練習に参加した。 開幕を1軍で迎えるも、3月30日に登録抹消。2軍戦10試合に出場し、打率2割、1本塁打、2打点だった。前日18日の2軍広島戦（SGL）では左中…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000209.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='a3a1dfbde57fcfccf0f7e133d146892f' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 12:12</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'a3a1dfbde57fcfccf0f7e133d146892f')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【日本ハム】新庄監督から「気合入れて準備しろ」ドラ１大川慈英が１軍初昇格</h3><div class='summary'>日本ハムのドラフト1位ルーキー大川慈英投手（22＝明大）が、1軍初昇格した。2軍では5試合8イニングに登板し、7安打6奪三振2失点の防御率2・25。4月12日のファーム・リーグ、ロッテ戦では2イニングで3三振を奪う快投を披露していた。 …</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000283.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='991e3a7f185b9d277846d018d0f8b87c' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 12:13</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '991e3a7f185b9d277846d018d0f8b87c')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>DeNA筒香嘉智、広島渡辺悠斗ら抹消 阪神浜田太貴、日本ハム大川慈英ら登録／19日公示</h3><div class='summary'>4月19日のプロ野球の出場選手登録と抹消は以下の通り。 【セ・リーグ】 ＜登録＞ 阪神 浜田太貴外野手 DeNA 柴田竜拓内野手 中日 ブライト健太外野手 中日 川越誠司外野手 広島 平川蓮外野手 ＜抹消＞ 阪神 岡城快生外野手 DeN…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000201.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='44f37a36deae513ab6d566ebbc89a5ca' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 12:22</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '44f37a36deae513ab6d566ebbc89a5ca')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【西武】渡部聖弥「３番DH」でスタメン復帰「打つ方には全然問題ない」17日右手親指に死球</h3><div class='summary'>西武渡部聖弥外野手（23）が「3番DH」でスタメンに復帰する。 渡部は17日の日本ハム戦で右手親指に死球を受け、18日にはノックを受けたもののノースロー。さらに1日がたったこの日は、近距離でふわっとした送球を何度かし、打撃練習には問題な…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🚑 故障・欠場</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000296.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='344d67875c4b62bab61ecbf7d319e3bc' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 12:24</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '344d67875c4b62bab61ecbf7d319e3bc')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【ヤクルト】池山監督、サヨナラ勝利後「ベタベタや」興奮冷めやらぬ様子で「よく９回裏は…」</h3><div class='summary'>ヤクルトが逆転サヨナラ勝利で首位キープとなった。 2－3で迎えた9回、巨人の守護神マルティネスを攻め立てた。先頭の田中陽翔内野手（19）が右翼線二塁打で出塁。続く丸山和郁外野手（26）が左越えへ適時二塁打を放ち、同点に追いついた。その後…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000302.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='bfc09e5aad69dcdaedc817c3e9d79400' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 12:30</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'bfc09e5aad69dcdaedc817c3e9d79400')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【阪神】佐藤輝明「あそこは落ちやすい。対策してもいいんじゃないかな」カメラマン席落下防止へ言及</h3><div class='summary'>阪神佐藤輝明内野手（27）がカメラマン席落下防止対策の必要性を訴えた。 18日の中日戦（甲子園）では三塁側へのファウルフライを追った中日福永裕基内野手（29）がカメラマン席に頭から転落。担架で運び出されて救急車で搬送された。 同じく三塁…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000291.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='a030fe62cb47f10ad77d68406ae26a6c' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK スポーツ</span><span>2026-04-19 13:02</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'a030fe62cb47f10ad77d68406ae26a6c')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ドジャース 大谷翔平 最終打席でヒット 連続出塁は50試合に</h3><div class='summary'>大リーグ、ドジャースの大谷翔平選手がロッキーズ戦に先発出場し、最後の打席でヒットを打って、自身が持つ日本選手の連続出塁記録を50試合に伸ばしました。</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260419/k10015102911000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card ' data-cardid='ea31bb1421bb205a99e20fe297354ad3' data-region='JP' data-score='2'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 13:15</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'ea31bb1421bb205a99e20fe297354ad3')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>【日本ハム】高身長歌謡グループ「風輪」翔司、ノーバン105キロのファーストピッチ披露</h3><div class='summary'>平均身長185センチの2人組歌謡グループ「風輪」の拓也、翔司が来場し、東海大四高（現東海大札幌）野球部時代に投手だった翔司が、ファーストピッチに臨んだ。 登板前は「緊張してますが精いっぱい投げたい」。堂々としたフォームから投げ下ろしたボ…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★2</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000416.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card ' data-cardid='5771d4d9d92208a5c1bc189edc2dcf77' data-region='JP' data-score='1'>
   <div class='card-top'>
@@ -246,69 +291,6 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★1</span></div>
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260418/k10015102271000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card ' data-cardid='e6a8b10a9c491fb8a18327e798bc209e' data-region='JP' data-score='1'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-18 22:34</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'e6a8b10a9c491fb8a18327e798bc209e')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>【ソフトバンク】上沢直之ノーノー逃すも昨季から８連勝 小久保監督エースの信頼「本当の軸」</h3><div class='summary'>ソフトバンク上沢直之投手（32）が、9回1死までノーヒットの快投で同率首位対決のオリックスに快勝した。オリックス西川にライナーで中前安打を許すと満員のみずほペイペイドームからため息が漏れた。そこで降板し「あそこで打たれるのが僕らしいな。…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★1</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180002222.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='62c5a2ba45dc7d4cc188c95d892eff87' data-region='JP' data-score='1'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-18 22:44</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '62c5a2ba45dc7d4cc188c95d892eff87')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>【ヤクルト】ミセスのライブ会場から花火 サヨナラ打の長岡秀樹「お祝いしてくれてんのかな」</h3><div class='summary'>花火が上がった直後、燕党の歓声が上がった。9回1死二塁のヤクルトのチャンス。長岡秀樹内野手（24）が打席に入る前、Mrs． GREEN APPLEのライブ中のMUFGスタジアム（国立競技場）から緑が多めのカラフルな花火。チームカラーとも…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180002221.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='04ebde7b73a23b3d38022fe0fb2ee052' data-region='JP' data-score='1'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-18 22:47</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '04ebde7b73a23b3d38022fe0fb2ee052')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>【ソフトバンク】近藤健介が右肘付近に死球受け交代 監督「骨に異常ない」19日は状態見て判断</h3><div class='summary'>ソフトバンク近藤健介外野手（32）が1回の打席でオリックス九里から右肘付近に死球を受け、3回に第2打席が回ってきたところで代打中村晃を送られ途中交代した。今季2度目の指名打者で出場。143キロ直球が右肘付近を直撃し、1度ベンチに戻り治療…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180002223.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='f76d8191e6dd3c19f0f75a07401a8970' data-region='JP' data-score='1'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-18 22:55</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'f76d8191e6dd3c19f0f75a07401a8970')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>【オリックス】首位から一気３位転落、今季最少１安打完封負け 岸田監督「昨日打ち過ぎたかな」</h3><div class='summary'>オリックスが今季最少の1安打で3度目の完封負けを喫し、首位から一気に3位転落となった。 相手先発上沢を前に打線が沈黙した。8回まで出塁は敵失2つと四球2つの4度だけ。9回1死から3番西川が中前打をマークし、ノーヒットノーランを阻止するの…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★1</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180002218.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='0e23d3df4aa56b5496218e0f81c1cba1' data-region='JP' data-score='1'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-18 22:56</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '0e23d3df4aa56b5496218e0f81c1cba1')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>【ソフトバンク】柳町達、ポジティブ思考で２安打３打点「打席では絶対に打つんだ…」</h3><div class='summary'>ポジティブ思考で快打を呼び込んだ。ソフトバンク柳町達外野手（28）が先制の2点適時打を含む2安打3打点と活躍した。 いきなり初回2死満塁で打席が回ってきた。5番山川穂高内野手（34）が四球を選んで塁がすべて埋まった。「ネクスト（バッター…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/column/bankisha/news/202604180002242.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='26520e07c2f1289d9c45bdcef8dc8ba5' data-region='JP' data-score='1'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-18 23:02</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '26520e07c2f1289d9c45bdcef8dc8ba5')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>【ヤクルト】丸山和郁がつば九郎と笑顔で”小競り合い” 長岡秀樹に「もうちょっと…」愛のいじり</h3><div class='summary'>ヤクルトが逆転サヨナラ勝利で首位キープとなった。 2－3で迎えた9回、巨人の守護神マルティネスを攻め立てた。先頭の田中陽翔内野手（19）が右翼線二塁打で出塁。続く丸山和郁外野手（26）が左越えへ適時二塁打を放ち、同点に追いついた。その後…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★1</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180002375.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card ' data-cardid='c5a2e081d064d82fa17a67a1f4fa7ee6' data-region='JP' data-score='1'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-18 23:18</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'c5a2e081d064d82fa17a67a1f4fa7ee6')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>ソフトバンク上沢直之よりノーノー惜しかった人…西口文也は「あと１人」２回に９回“完全”１回</h3><div class='summary'>ソフトバンク上沢直之投手（32）が9回1死まで無安打投球を続けた。ノーヒットノーランまで残り2人だったが、9回1死でオリックス西川に中前打を打たれ、記録達成はならなかった。 今季は、広島栗林良吏投手（29）が3月29日の中日戦で7回まで…</div></div>
-  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★1</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604180002312.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
 <article class='card item-card ' data-cardid='b0b2fe3f02ec69917388b85aea78b8ef' data-region='JP' data-score='1'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK スポーツ</span><span>2026-04-18 23:33</span></div>
@@ -320,7 +302,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
 </article></div>
   <div class='summary no-results hidden'>条件に一致する記事がありません。</div>
 </section>
-</div><footer>Sports + — Generated at 2026-04-19 09:53</footer>
+</div><footer>Sports + — Generated at 2026-04-19 13:39</footer>
 <script>
 function safeStorageGet(key) {
   try { return window.localStorage ? localStorage.getItem(key) : null; } catch (e) { return null; }

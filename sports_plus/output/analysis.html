@@ -8,7 +8,7 @@
 :root{--bg:#08111e;--panel:#101a2a;--panel2:#0c1523;--line:#1f2b40;--text:#eef4ff;--muted:#93a4bf;--accent:#4ea1ff;--accent2:#15314f}
 *{box-sizing:border-box}html,body{margin:0;padding:0;background:linear-gradient(180deg,#08111e 0%,#0c1627 100%);color:var(--text);font-family:Inter,'Hiragino Sans','Yu Gothic UI',sans-serif}
 a{color:inherit;text-decoration:none}body{padding-top:0}
-.wrap,.main{width:min(1280px,94vw);margin:0 auto}
+.wrap,.main{width:min(1480px,94vw);margin:0 auto}
 header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:18px 0 12px}
 .title h1{margin:0;font-size:28px;line-height:1.2}.sub{margin-top:6px;color:var(--muted);font-size:13px}
@@ -40,7 +40,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(9,17,29,.97);backdrop-fi
 .category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:0}
 .category-grid.single{grid-template-columns:repeat(3,minmax(0,1fr))}
 .category-panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}.mini-list{display:grid;gap:8px}.mini-item{padding:10px;border-radius:12px;background:#0c1422;border:1px solid #1d2a40}.mini-item a{font-size:13px;line-height:1.5}.mini-meta{font-size:11px;color:var(--muted);margin-top:4px}
-footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size:12px}
+footer{width:min(1480px,94vw);margin:20px auto 36px;color:var(--muted);font-size:12px}
 @media(max-width:980px){.category-grid.single{grid-template-columns:1fr}}
 @media(max-width:760px){body{padding-top:0}.top{flex-direction:column}.title h1{font-size:24px}.right-controls{justify-content:flex-start}.search{min-width:0;width:100%}.nav{padding-bottom:8px}.nav a{font-size:13px;padding:9px 12px}.grid,.main-grid,.category-grid{grid-template-columns:1fr}.card,.category-panel,.mini-item{width:100%;max-width:100%}.card-top,.card-meta,.tags,.section-head{width:100%}.card h3{font-size:16px;line-height:1.4}.summary{font-size:13px;line-height:1.65}.open-btn{width:100%}}
 </style>
@@ -51,7 +51,7 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='top'>
     <div class='title'>
       <h1>🎭 Sports + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ スポーツ情報</span></h1>
-      <div class='sub'>更新日時：2026-04-19 09:53</div>
+      <div class='sub'>更新日時：2026-04-19 13:39</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -78,21 +78,12 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
 </div>
 
 <section class='panel'>
-  <div class='section-head'><h2>📊 分析サマリー</h2><span class='count-badge'>130件 / 更新:2026-04-19 09:53</span></div>
-  <div class='category-grid'><section class='category-panel'><div class='section-head'><h2>種目別件数</h2></div><div class='mini-list'><div class='mini-item'><div style='font-weight:700'>⚾ 野球</div><div class='mini-meta'>26件</div></div><div class='mini-item'><div style='font-weight:700'>⚽ サッカー</div><div class='mini-meta'>41件</div></div><div class='mini-item'><div style='font-weight:700'>🏀 バスケット</div><div class='mini-meta'>1件</div></div><div class='mini-item'><div style='font-weight:700'>🎾 テニス</div><div class='mini-meta'>0件</div></div><div class='mini-item'><div style='font-weight:700'>🏁 モータースポーツ</div><div class='mini-meta'>1件</div></div><div class='mini-item'><div style='font-weight:700'>🥊 格闘技</div><div class='mini-meta'>1件</div></div></div></section><section class='category-panel'><div class='section-head'><h2>地域別件数</h2></div><div class='mini-list'><div class='mini-item'><div style='font-weight:700'>国内</div><div class='mini-meta'>70件</div></div><div class='mini-item'><div style='font-weight:700'>海外</div><div class='mini-meta'>60件</div></div></div></section><section class='category-panel'><div class='section-head'><h2>トピック件数</h2></div><div class='mini-list'><div class='mini-item'><div style='font-weight:700'>大会・リーグ</div><div class='mini-meta'>83件</div></div><div class='mini-item'><div style='font-weight:700'>試合・結果</div><div class='mini-meta'>75件</div></div><div class='mini-item'><div style='font-weight:700'>選手・チーム</div><div class='mini-meta'>40件</div></div><div class='mini-item'><div style='font-weight:700'>故障・欠場</div><div class='mini-meta'>22件</div></div><div class='mini-item'><div style='font-weight:700'>移籍・契約</div><div class='mini-meta'>10件</div></div></div></section><section class='category-panel'><div class='section-head'><h2>直近7日 活発な種目</h2></div><div class='mini-list'><div class='mini-item'><div style='font-weight:700'>• その他</div><div class='mini-meta'>直近7日 60件</div></div><div class='mini-item'><div style='font-weight:700'>⚽ サッカー</div><div class='mini-meta'>直近7日 40件</div></div><div class='mini-item'><div style='font-weight:700'>⚾ 野球</div><div class='mini-meta'>直近7日 26件</div></div><div class='mini-item'><div style='font-weight:700'>🥊 格闘技</div><div class='mini-meta'>直近7日 1件</div></div><div class='mini-item'><div style='font-weight:700'>🏀 バスケット</div><div class='mini-meta'>直近7日 1件</div></div><div class='mini-item'><div style='font-weight:700'>🏁 モータースポーツ</div><div class='mini-meta'>直近7日 1件</div></div></div></section></div>
+  <div class='section-head'><h2>📊 分析サマリー</h2><span class='count-badge'>130件 / 更新:2026-04-19 13:39</span></div>
+  <div class='category-grid'><section class='category-panel'><div class='section-head'><h2>種目別件数</h2></div><div class='mini-list'><div class='mini-item'><div style='font-weight:700'>⚾ 野球</div><div class='mini-meta'>24件</div></div><div class='mini-item'><div style='font-weight:700'>⚽ サッカー</div><div class='mini-meta'>43件</div></div><div class='mini-item'><div style='font-weight:700'>🏀 バスケット</div><div class='mini-meta'>3件</div></div><div class='mini-item'><div style='font-weight:700'>🎾 テニス</div><div class='mini-meta'>0件</div></div><div class='mini-item'><div style='font-weight:700'>🏁 モータースポーツ</div><div class='mini-meta'>0件</div></div><div class='mini-item'><div style='font-weight:700'>🥊 格闘技</div><div class='mini-meta'>0件</div></div></div></section><section class='category-panel'><div class='section-head'><h2>地域別件数</h2></div><div class='mini-list'><div class='mini-item'><div style='font-weight:700'>国内</div><div class='mini-meta'>70件</div></div><div class='mini-item'><div style='font-weight:700'>海外</div><div class='mini-meta'>60件</div></div></div></section><section class='category-panel'><div class='section-head'><h2>トピック件数</h2></div><div class='mini-list'><div class='mini-item'><div style='font-weight:700'>大会・リーグ</div><div class='mini-meta'>83件</div></div><div class='mini-item'><div style='font-weight:700'>試合・結果</div><div class='mini-meta'>74件</div></div><div class='mini-item'><div style='font-weight:700'>選手・チーム</div><div class='mini-meta'>46件</div></div><div class='mini-item'><div style='font-weight:700'>故障・欠場</div><div class='mini-meta'>26件</div></div><div class='mini-item'><div style='font-weight:700'>移籍・契約</div><div class='mini-meta'>12件</div></div></div></section><section class='category-panel'><div class='section-head'><h2>直近7日 活発な種目</h2></div><div class='mini-list'><div class='mini-item'><div style='font-weight:700'>• その他</div><div class='mini-meta'>直近7日 60件</div></div><div class='mini-item'><div style='font-weight:700'>⚽ サッカー</div><div class='mini-meta'>直近7日 42件</div></div><div class='mini-item'><div style='font-weight:700'>⚾ 野球</div><div class='mini-meta'>直近7日 24件</div></div><div class='mini-item'><div style='font-weight:700'>🏀 バスケット</div><div class='mini-meta'>直近7日 3件</div></div></div></section></div>
 </section>
 <section>
   <div class='section-head'><h2>⭐ 注目記事</h2><span class='count-badge'>スコア上位</span></div>
   <div class='grid'>
-<article class='card item-card score-5' data-cardid='b6325406d4900bc0c37a648e33a9a7f4' data-region='JP' data-score='5'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>サッカーキング</span><span>2026-04-19 06:58</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'b6325406d4900bc0c37a648e33a9a7f4')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>激闘制した…ソシエダがPK戦の末にコパ・デル・レイ制覇！ 久保建英は初のタイトル！…アトレティコは惜しくもタイトル逃す</h3><div class='summary'>コパ・デル・レイ（国王杯）決勝が18日に行われ、アトレティコ・マドリードとレアル・ソシエダが対戦した。 通算11度の優勝を狙うアトレティコ・マドリードは、準···</div></div>
-  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
-  <a class='open-btn' href='https://www.soccer-king.jp/news/world/esp/20260419/2150101.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
 <article class='card item-card score-5' data-cardid='bac23579b01e94b649493252d1cc6201' data-region='JP' data-score='5'>
   <div class='card-top'>
     <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 07:44</span></div>
@@ -111,35 +102,44 @@ footer{width:min(1280px,94vw);margin:20px auto 36px;color:var(--muted);font-size
   <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔁 移籍・契約</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
   <a class='open-btn' href='https://www.nikkansports.com/soccer/news/202604190000102.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card score-4' data-cardid='88e0367f10c22ccf02ac03e84e45ccf3' data-region='JP' data-score='4'>
+<article class='card item-card score-5' data-cardid='afb44c78f47e9da0339e8e26881d7e3b' data-region='JP' data-score='5'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK スポーツ</span><span>2026-04-18 13:59</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '88e0367f10c22ccf02ac03e84e45ccf3')">既読</button></div>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ 野球</span><span>2026-04-19 10:01</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'afb44c78f47e9da0339e8e26881d7e3b')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>サッカーＷ杯 決勝会場への列車運賃 通常の11倍の2万3000円台</h3><div class='summary'>ことし6月に開幕するサッカーワールドカップで、アメリカのニューヨーク中心部から東部ニュージャージー州にある試合会場への列車の往復運賃が、日本円で2万3000円余りに設定されました。これは通常の11倍の水準で、高額な運賃が議論を呼んでいます。</div></div>
-  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260418/k10015102281000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-ja'><h3>【阪神】注目ポイントは先制点 今季は先制すれば９戦９勝 今季２度目の同一カード３連勝へ</h3><div class='summary'>阪神が今季2度目の同一カード3連勝を狙う。 前日19日の同戦は3回に森下翔太外野手（25）が左翼線に先制の適時二塁打。その後逆転を許したが、7回に再び森下の適時打と木浪聖也内野手（31）の決勝打が飛び出した。 今季先制した試合は9戦9勝…</div></div>
+  <div class='tags'><span class='tag' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>⚾ 野球</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/baseball/news/202604190000161.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card score-4' data-cardid='66a6fc4034873e1e2d97005f676d96ff' data-region='JP' data-score='4'>
+<article class='card item-card score-5' data-cardid='92c6a438b9ee6ee3214083ffd28a01f3' data-region='JP' data-score='5'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ スポーツ</span><span>2026-04-18 18:47</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '66a6fc4034873e1e2d97005f676d96ff')">既読</button></div>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ スポーツ</span><span>2026-04-19 10:07</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '92c6a438b9ee6ee3214083ffd28a01f3')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>【バレー】RS４位の大阪Ｍが決勝進出 首位のNEC川崎に２戦連続のストレート勝利</h3><div class='summary'>昨季覇者でレギュラーシーズン（RS）4位の大阪マーヴェラスが、準決勝を突破した。同1位のNECレッドロケッツ川崎と敵地で対戦し、3－0（25－19、25－23、25－15）のストレート勝ち。2戦先勝方式のトーナメントで前日17日に続く快…</div></div>
-  <div class='tags'><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★4</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/sports/news/202604180001152.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-ja'><h3>飯村一輝、フルーレ個人初優勝 女子の東晟良は３位 フェンシングＷ杯</h3><div class='summary'>フェンシングのワールドカップ（W杯）は18日、カイロでフルーレ個人が行われ、男子は飯村一輝（NTT）が頂点に立った。 W杯で自身初の優勝。女子は東晟良（共同カイテック）が3位だった。（共同）</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/sports/news/202604190000156.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
-<article class='card item-card score-4' data-cardid='d122c00377fff84874b4def2b3ac4d46' data-region='JP' data-score='4'>
+<article class='card item-card score-5' data-cardid='fc9ac160a567b389395db53db9230c6d' data-region='JP' data-score='5'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ スポーツ</span><span>2026-04-18 19:02</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'd122c00377fff84874b4def2b3ac4d46')">既読</button></div>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>サッカーキング</span><span>2026-04-19 11:57</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, 'fc9ac160a567b389395db53db9230c6d')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>【バレー】佐藤淑乃うずくまり涙 NEC川崎準決で敗退「もっと長くやりたかった」来季イタリア</h3><div class='summary'>レギュラーシーズン（RS）を1位で通過したNECレッドロケッツ川崎が、準決勝で涙をのんだ。 ホームで同4位の大阪マーヴェラスと対戦し、0－3（19－25、23－25、15－25）。2戦先勝方式のトーナメントでまさかの2戦連続ストレート負…</div></div>
-  <div class='tags'><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★4</span></div>
-  <a class='open-btn' href='https://www.nikkansports.com/sports/news/202604180001407.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-ja'><h3>レアル・ソシエダ指揮官、欧州5大のカップ戦を制した初の米国出身監督に「本当に幸せだ」</h3><div class='summary'>レアル・ソシエダを率いるペッレグリーノ・マタラッツォ監督が、コパ・デル・レイ制覇の喜びを語った。18日にスペイン紙『アス』が伝えた。 18日に行われた決勝で···</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>⭐ 選手・チーム</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-neutral'>➖ 通常</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.soccer-king.jp/news/world/esp/20260419/2150195.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card score-5' data-cardid='90341d0c8d5cac9fe9dfc63958954ec0' data-region='JP' data-score='5'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span>日刊スポーツ サッカー</span><span>2026-04-19 12:07</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this, '90341d0c8d5cac9fe9dfc63958954ec0')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Rソシエダードが開始14秒で先制点、Aマドリードは終盤F・アルバレス豪快同点弾／死闘現地ルポ</h3><div class='summary'>【セビリア＝高橋智行通信員】レアル・ソシエダードが、2019－20年以来6シーズンぶり4度目の優勝を果たした。アトレチコ・マドリードとの決勝は前後半を2－2で終え、延長でも決着が付かずPK戦に持ち込まれた。GKマレーロが2本セーブし、4…</div></div>
+  <div class='tags'><span class='tag' style='background:#15c39a22;border-color:#15c39a;color:#15c39a'>⚽ サッカー</span><span class='tag' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🏟️ 試合・結果</span><span class='tag' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔁 移籍・契約</span><span class='tag' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>🏆 大会・リーグ</span><span class='tag tag-hot'>🔥 Hot</span><span class='tag tag-neutral'>★5</span></div>
+  <a class='open-btn' href='https://www.nikkansports.com/soccer/world/news/202604190000266.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div>
 </section>
-</div><footer>Sports + — Generated at 2026-04-19 09:53</footer>
+</div><footer>Sports + — Generated at 2026-04-19 13:39</footer>
 <script>
 function safeStorageGet(key) {
   try { return window.localStorage ? localStorage.getItem(key) : null; } catch (e) { return null; }

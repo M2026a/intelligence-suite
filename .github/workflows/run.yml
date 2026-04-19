@@ -227,6 +227,11 @@ jobs:
         run: python app/main.py
         continue-on-error: true
 
+      - name: health_medical_plus を実行
+        working-directory: ./health_medical_plus
+        run: python app/main.py
+        continue-on-error: true
+
       - name: 成果物をアップロード
         uses: actions/upload-artifact@v4
         with:
@@ -234,6 +239,7 @@ jobs:
           path: |
             smart_news_viewer/output/*.html
             watch_hub_plus/output/*.html
+            health_medical_plus/output/*.html
           if-no-files-found: warn
 
   commit:
@@ -285,6 +291,7 @@ jobs:
           git add sports_plus/output/*.html || true
           git add smart_news_viewer/output/*.html || true
           git add watch_hub_plus/output/*.html || true
+          git add health_medical_plus/output/*.html || true
 
           # ===== DB（保存前提ツールのみ）=====
           git add ai_plus/output/*.db || true
@@ -298,6 +305,7 @@ jobs:
           git add IdeaTrendEngine/output/*.db || true
           git add Strategic_IT_Suite/output/*.db || true
           git add smart_news_viewer/output/*.db || true
+          git add health_medical_plus/output/*.db || true
 
           git diff --staged --quiet || git commit -m "parallel update $(TZ=Asia/Tokyo date +'%Y-%m-%d %H:%M JST')"
           git push

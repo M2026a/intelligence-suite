@@ -100,7 +100,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='top'>
     <div class='title'>
       <h1>🎭 Takarazuka Information Suite <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 宝塚歌劇の公式情報を収集</span></h1>
-      <div class='sub'>更新日時：2026-04-21 11:11</div>
+      <div class='sub'>更新日時：2026-04-21 16:26</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -114,7 +114,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='filters'>
     <span class='filter-label'>組:</span>
     <button class='flt-btn flt-troupe-s active' data-troupe='all'>ALL</button>
-    <button class='flt-btn flt-troupe-s' data-troupe='花組'>花組 (3)</button><button class='flt-btn flt-troupe-s' data-troupe='月組'>月組 (2)</button><button class='flt-btn flt-troupe-s' data-troupe='雪組'>雪組 (2)</button><button class='flt-btn flt-troupe-s' data-troupe='星組'>星組 (2)</button><button class='flt-btn flt-troupe-s' data-troupe='宙組'>宙組 (1)</button>
+    <button class='flt-btn flt-troupe-s' data-troupe='花組'>花組 (3)</button><button class='flt-btn flt-troupe-s' data-troupe='月組'>月組 (3)</button><button class='flt-btn flt-troupe-s' data-troupe='雪組'>雪組 (2)</button><button class='flt-btn flt-troupe-s' data-troupe='星組'>星組 (2)</button><button class='flt-btn flt-troupe-s' data-troupe='宙組'>宙組 (1)</button>
     <span class='filter-label'>地域:</span>
     <button class='flt-btn flt-lang-s active' data-lang='all'>🌍 全部</button>
     <button class='flt-btn flt-lang-s' data-lang='ja'>🇯🇵 国内</button>
@@ -123,6 +123,25 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   </div>
 </div>
 <div class='grid' id='scheduleGrid'>
+<article class='card item-card'
+  data-cardid='item-424d15c4577f'
+  data-themes='公演スケジュール'
+  data-troupes='月組'
+  data-kind='schedule'
+  data-lang='ja'
+  data-score='3'
+  data-source='宝塚歌劇 公演案内（大劇場・東京）'
+  data-sentiment='neutral'
+  data-importance='performance_update'
+  data-isnew='true'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='tag tag-new'>🆕 NEW</span><span class='lang-badge ja'>🇯🇵 国内</span><span class='tag tag-official'>🏛 公式</span><span>宝塚歌劇 公演案内（大劇場・東京）</span><span>2026-12-12</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-424d15c4577f')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>『天穹のアルテミス』 / 『Belle Époque(ベル エポック)』</h3><div class='summary'>ルナティック・シアター / 『天穹のアルテミス』 / 作・演出/大野 拓史 / レヴュー ロマン / 『Belle Époque(ベル エポック)』 / 作・演出/稲葉 太地 / 宝塚大劇場 / (兵庫県)</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#54a0ff22;border-color:#54a0ff;color:#54a0ff'>🗓 公演スケジュール</span><span class='tag tag-theme' style='background:#1d2d47;border-color:#4ea1ff;color:#cae2ff'>🗓 公演スケジュール</span><span class='tag tag-usd-strong'>🎭 公演更新</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://kageki.hankyu.co.jp/revue/2026/tenkyuunoartemis/index.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
 <article class='card item-card'
   data-cardid='item-e1a2b2cc2130'
   data-themes='公演スケジュール'
@@ -417,7 +436,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   var sb = document.getElementById('searchBoxSchedule');
   if(sb) sb.addEventListener('input', function(){ search = this.value; applyScheduleFilters(); });
 })();
-</script><footer>Takarazuka Information Suite — Generated at 2026-04-21 11:11</footer></body></html>
+</script><footer>Takarazuka Information Suite — Generated at 2026-04-21 16:26</footer></body></html>
 <script>
 var pageLang = 'en';
 function setPageLang(lang) {

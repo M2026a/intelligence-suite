@@ -100,7 +100,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='top'>
     <div class='title'>
       <h1>📰 Smart News Viewer <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 国内外ニュースを横断収集し、重要トピックを一目で把握</span></h1>
-      <div class='sub'>更新日時：2026-04-25 16:07</div>
+      <div class='sub'>更新日時：2026-04-25 22:20</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -124,7 +124,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='cb-card'>
   <div class='cb-name'>🌐 BBC Global</div>
   <div style='color:var(--muted);font-size:12px;margin-bottom:8px'>海外総合ニュース</div>
-  <div class='cb-count'>32</div>
+  <div class='cb-count'>35</div>
   <div style='color:var(--muted);font-size:11px'>件の記事</div>
   <div class='cb-recent'>最新: </div>
 </div>
@@ -138,7 +138,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='cb-card'>
   <div class='cb-name'>🏛 NHK 政治</div>
   <div style='color:var(--muted);font-size:12px;margin-bottom:8px'>国内の政治・政策</div>
-  <div class='cb-count'>60</div>
+  <div class='cb-count'>64</div>
   <div style='color:var(--muted);font-size:11px'>件の記事</div>
   <div class='cb-recent'>最新: </div>
 </div>
@@ -166,7 +166,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='cb-card'>
   <div class='cb-name'>🏅 BBC Sport</div>
   <div style='color:var(--muted);font-size:12px;margin-bottom:8px'>スポーツ</div>
-  <div class='cb-count'>75</div>
+  <div class='cb-count'>64</div>
   <div style='color:var(--muted);font-size:11px'>件の記事</div>
   <div class='cb-recent'>最新: </div>
 </div></div>
@@ -246,8 +246,30 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   if(sb) sb.addEventListener('input',function(){search=this.value; apply();});
 })();
 </script>
-  <div style='margin-bottom:12px;font-weight:700;font-size:15px'>注目ソース関連記事（<span id='cbCount'>252</span>件）</div>
+  <div style='margin-bottom:12px;font-weight:700;font-size:15px'>注目ソース関連記事（<span id='cbCount'>248</span>件）</div>
   <div class='grid' id='cbGrid'>
+<article class='card item-card'
+  data-cardid='item-2fca996b78f2'
+  data-themes='政治・政策|文化・エンタメ'
+  data-lang='en'
+  data-score='5'
+  data-source='BBC World'
+  data-sentiment='bearish'
+  data-importance='breed_adoption'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-2fca996b78f2')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Palestinians in West Bank and some in Gaza vote in local elections</h3><div class='summary'>Local elections are held in the occupied West Bank and in one Gazan city, though Hamas and other groups are not taking part.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ヨルダン川西岸のパレスチナ人とガザの一部のパレスチナ人が地方選挙に投票する</h3><div class='summary'>地方選挙は占領下のヨルダン川西岸とガザの一部都市で行われるが、ハマスやその他のグループは参加していない。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/cn4vej3x0wxo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
 <article class='card item-card'
   data-cardid='item-0082c66fe5fa'
   data-themes='総合・国際|テクノロジー'
@@ -271,28 +293,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/news/articles/cz78x703lrvo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-ad791da35815'
-  data-themes='総合・国際|テクノロジー'
-  data-lang='en'
-  data-score='5'
-  data-source='BBC World'
-  data-sentiment='bullish'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-ad791da35815')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>No 10 says Falklands sovereignty rests with UK after report of US &#x27;review&#x27;</h3><div class='summary'>An internal Pentagon document reportedly raised the prospect of a change in position in retaliation for the UK not joining the Iran war.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>米国の「見直し」報道を受け、No.10はフォークランドの主権は英国にあると主張</h3><div class='summary'>伝えられるところによると、国防総省の内部文書は、英国がイラン戦争に参加しないことへの報復として立場を変える可能性を提起した。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://www.bbc.com/news/articles/cde51y0zgjyo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-f233e437fc2e'
   data-themes='総合・国際|テクノロジー'
   data-lang='en'
@@ -313,6 +313,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>数百万ドルをかけたエベレストの洪水警報システムが錆びたまま放置され、数千人が危険にさらされる</h3><div class='summary'>インジャ氷河湖の洪水警報システムは2016年以来維持されていないと、懸念を抱いた地元住民がBBCに語った。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.bbc.com/news/articles/czjwr93vrrzo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-ad791da35815'
+  data-themes='総合・国際|テクノロジー'
+  data-lang='en'
+  data-score='5'
+  data-source='BBC World'
+  data-sentiment='bullish'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-ad791da35815')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>No 10 says Falklands sovereignty rests with UK after report of US &#x27;review&#x27;</h3><div class='summary'>An internal Pentagon document reportedly raised the prospect of a change in position in retaliation for the UK not joining the Iran war.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>米国の「見直し」報道を受け、No.10はフォークランドの主権は英国にあると主張</h3><div class='summary'>伝えられるところによると、国防総省の内部文書は、英国がイラン戦争に参加しないことへの報復として立場を変える可能性を提起した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/cde51y0zgjyo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-93626584eab6'
@@ -376,7 +398,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Why is this game only legal across Australia one day a year?</h3><div class='summary'>Two-up is a coin toss betting game that was played by Australian soldiers during World War One - it’s now only legal across Australia on 25 April.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>このゲームがオーストラリア全土で年に 1 日だけ合法なのはなぜですか?</h3><div class='summary'>ツーアップは、第一次世界大戦中にオーストラリアの兵士によってプレイされたコイントス賭けゲームです。現在、4 月 25 日からオーストラリア全土でのみ合法となります。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>このゲームがオーストラリア全土で年に 1 日だけ合法なのはなぜですか?</h3><div class='summary'>ツーアップは、第一次世界大戦中にオーストラリアの兵士によってプレイされたコイントスの賭けゲームです。現在、4 月 25 日からオーストラリア全土でのみ合法となります。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.bbc.com/news/videos/ceqw389d5yvo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -420,7 +442,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Another spyware maker caught distributing fake Android snooping apps</h3><div class='summary'>Researchers have found a new case where government authorities used a fake Android app to plant spyware on a target’s phone. The company that allegedly developed the spyware was not previously known to sell this type of software.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>別のスパイウェアメーカーが偽のAndroidスヌーピングアプリの配布を摘発</h3><div class='summary'>研究者らは、政府当局が偽の Android アプリを使用して標的の携帯電話にスパイウェアを仕掛けた新たな事件を発見した。このスパイウェアを開発したとされる企業は、これまでこの種のソフトウェアを販売していたことは知られていませんでした。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>別のスパイウェア メーカーが偽の Android スヌーピング アプリを配布していることを摘発</h3><div class='summary'>研究者らは、政府当局が偽の Android アプリを使用して標的の携帯電話にスパイウェアを仕掛けた新たな事件を発見した。このスパイウェアを開発したとされる企業は、これまでこの種のソフトウェアを販売していたことは知られていませんでした。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-theme' style='background:#e74c3c22;border-color:#e74c3c;color:#e74c3c'>💹 市場・ビジネス</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://techcrunch.com/2026/04/24/another-spyware-maker-caught-distributing-fake-android-snooping-apps/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -447,6 +469,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://techcrunch.com/video/tim-cook-is-stepping-down-what-happens-to-apple-now/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-29615a7a21c8'
+  data-themes='総合・国際|スポーツ'
+  data-lang='en'
+  data-score='5'
+  data-source='BBC Sport'
+  data-sentiment='bearish'
+  data-importance='health_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-29615a7a21c8')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Forest stun Sunderland to boost survival hopes</h3><div class='summary'>Nottingham Forest take a huge step towards Premier League survival, beating Sunderland 5-0 to go eight points clear of the bottom three.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>森がサンダーランドを驚かせ、生き残りの希望を高める</h3><div class='summary'>ノッティンガム・フォレストはサンダーランドを5-0で破り、下位3チームと勝ち点8差をつけ、プレミアリーグ残留に向けて大きな一歩を踏み出した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/videos/c77m2nge048o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-5a8fc27b0ac3'
   data-themes='総合・国際|スポーツ'
   data-lang='en'
@@ -467,72 +511,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>スパーズとウェストハムに注目? 「信じられないほど」安全に向かう森の端</h3><div class='summary'>ノッティンガム・フォレストがサンダーランドで見事な勝利を収めた後、プレミアリーグの降格争いは２頭のレースとなるのだろうか？</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c30rgm097vyo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-e17d67f7896a'
-  data-themes='政治・政策|テクノロジー'
-  data-lang='en'
-  data-score='5'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-e17d67f7896a')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Wing David lost for words over England debut</h3><div class='summary'>Bristol Bears wing Millie David will win her first England cap against Wales on Saturday as the Red Roses shake up selection once more in the Women&#x27;s Six Nations.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ウイングのデイビッド、イングランドデビュー戦で絶句</h3><div class='summary'>ブリストル・ベアーズのミリー・デイビッドは土曜日のウェールズ戦でイングランド初キャップを獲得し、レッドローゼズが女子シックス・ネーションズで再び選出を揺るがすことになる。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/rugby-union/articles/cx26z29pzg2o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-29615a7a21c8'
-  data-themes='総合・国際|スポーツ'
-  data-lang='en'
-  data-score='5'
-  data-source='BBC Sport'
-  data-sentiment='bearish'
-  data-importance='health_alert'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-29615a7a21c8')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Forest stun Sunderland to boost survival hopes</h3><div class='summary'>Nottingham Forest take a huge step towards Premier League survival, beating Sunderland 5-0 to go eight points clear of the bottom three.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>森林がサンダーランドを驚かせ、生き残りの希望を高める</h3><div class='summary'>ノッティンガム・フォレストはサンダーランドを5-0で破り、下位3チームと勝ち点8差をつけ、プレミアリーグ残留に向けて大きな一歩を踏み出した。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/videos/c77m2nge048o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-32cf317746e3'
-  data-themes='総合・国際|テクノロジー'
-  data-lang='en'
-  data-score='5'
-  data-source='BBC Sport'
-  data-sentiment='bearish'
-  data-importance='health_alert'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-32cf317746e3')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>England captain Williams to have neck surgery</h3><div class='summary'>Injured Warrington and England captain George Williams says he is &quot;racing against the clock&quot; to return to action before the World Cup.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>イングランド代表主将ウィリアムズが首の手術へ</h3><div class='summary'>負傷したウォリントンのイングランド代表主将ジョージ・ウィリアムズは、ワールドカップまでに復帰するために「時間との戦い」だと語った。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/rugby-league/articles/cvg02dpy5gqo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-0a746fe90054'
@@ -1063,6 +1041,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2604/22/news026.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-a00cf73244be'
+  data-themes='総合・国際'
+  data-lang='en'
+  data-score='4'
+  data-source='BBC World'
+  data-sentiment='bullish'
+  data-importance='health_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-a00cf73244be')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Explosions and gunfire as armed groups launch coordinated attacks across Mali</h3><div class='summary'>Witnesses report clashes in the centre and north of the country in what has been described as the largest jihadist attack in years.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>マリ全土で武装勢力が連携した攻撃を開始し爆発と銃撃</h3><div class='summary'>目撃者らは、ここ数年で最大規模の聖戦士攻撃と言われているこの国の中部と北部での衝突を報告している。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/clyx7nnrkqdo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-26fdace874d1'
   data-themes='総合・国際'
   data-lang='en'
@@ -1102,7 +1102,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Heated Rivalry, The Housemaid and Fourth Wing: TikTok launches BookTok bestseller list</h3><div class='summary'>The inaugural top 20 is entirely made up of female authors, with Chloe Walsh appearing most frequently.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>激化するライバル関係、『ハウスメイド』、そして第 4 棟: TikTok が BookTok ベストセラー リストを開始</h3><div class='summary'>初回のトップ20はすべて女性作家で構成されており、クロエ・ウォルシュが最も多く登場した。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>激化するライバル関係、『ハウスメイド』、そして第 4 ウィング: TikTok が BookTok ベストセラー リストを開始</h3><div class='summary'>初回のトップ20はすべて女性作家で構成されており、クロエ・ウォルシュが最も多く登場している。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.bbc.com/news/articles/c5yxmy5gnd0o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -1146,31 +1146,9 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>X launches stand-alone XChat app on iOS</h3><div class='summary'>X&#x27;s new app promises private chats, disappearing messages, audio and video calls, and more.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>X が iOS 上でスタンドアロン XChat アプリを起動</h3><div class='summary'>X の新しいアプリは、プライベート チャット、消えるメッセージ、音声通話やビデオ通話などを約束します。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>X が iOS 上でスタンドアロンの XChat アプリを起動</h3><div class='summary'>X の新しいアプリは、プライベート チャット、消えるメッセージ、音声通話やビデオ通話などを約束します。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://techcrunch.com/2026/04/24/x-launches-xchat-app-ios-messaging-iphone/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-47a26d8399f3'
-  data-themes='総合・国際|テクノロジー|スポーツ'
-  data-lang='en'
-  data-score='4'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-47a26d8399f3')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Weekly sports quiz: Seven questions - will you score top marks?</h3><div class='summary'>How much attention have you paid to what&#x27;s happened in the world of sport over the past seven days?</div></div>
-<div class='lang-pane lang-ja hidden'><h3>週刊スポーツクイズ: 7 つの質問 - あなたは高得点を獲得できますか?</h3><div class='summary'>過去 7 日間にスポーツの世界で何が起こったのか、どの程度注意を払ってきましたか?</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/articles/cm29q214re3o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-05042a84d83a'
@@ -1251,6 +1229,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260424/k10015107261000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-d48ddb752e6f'
+  data-themes='総合・国際|スポーツ'
+  data-lang='ja'
+  data-score='4'
+  data-source='NHK 政治'
+  data-sentiment='neutral'
+  data-importance='health_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK 政治</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-d48ddb752e6f')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>スポーツ見る機会確保のあり方 有識者会議を設置し論点整理へ</h3><div class='summary'>スポーツの国際大会の放送や配信の現状を受けて、国はスポーツを見る機会の確保のあり方などについて検討する有識者会議を設置し、ことし秋をめどに論点を整理することになりました。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260424/k10015107231000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-752a218bbfe3'
   data-themes='総合・国際|市場・ビジネス'
   data-lang='ja'
@@ -1302,7 +1297,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>The viral manifesto of &#x27;anti-woke&#x27; tech boss with NHS and defence contracts</h3><div class='summary'>The boss of the controversial tech company with UK government contracts published a 22-point plan on the future of the West.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>NHSと防衛契約に関する「反覚醒」テクノロジー企業トップのバイラルマニフェスト</h3><div class='summary'>英国政府と契約し物議を醸しているテクノロジー企業の社長は、西側諸国の将来に関する22項目の計画を発表した。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>NHSと防衛契約に関する「反覚醒」テクノロジー企業トップのバイラルマニフェスト</h3><div class='summary'>英国政府と契約している物議を醸しているテクノロジー企業の社長は、西側諸国の将来に関する22項目の計画を発表した。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-theme' style='background:#e74c3c22;border-color:#e74c3c;color:#e74c3c'>💹 市場・ビジネス</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-usd-weak'>💹 市場・ビジネス</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.bbc.com/news/articles/c4gjkj7975po?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -1329,28 +1324,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/news/articles/cdxd1v0028vo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-3c1231a10e06'
-  data-themes='総合・国際'
-  data-lang='en'
-  data-score='3'
-  data-source='BBC World'
-  data-sentiment='bearish'
-  data-importance='health_alert'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-3c1231a10e06')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>I moved 1,500 miles to be with my deported husband</h3><div class='summary'>The spouses of illegal immigrants facing deportation must choose between separation or moving to a new country.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>国外追放された夫と一緒に暮らすために1,500マイルも引っ越しました</h3><div class='summary'>強制送還の対象となっている不法移民の配偶者は、別居するか新しい国に移住するかを選択しなければなりません。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/news/articles/cly032z5e71o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-7b9a1638b5aa'
   data-themes='市場・ビジネス'
   data-lang='en'
@@ -1368,7 +1341,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>How the Kremlin&#x27;s internet crackdown is frustrating Russians</h3><div class='summary'>Officials say the restrictions are for public safety, but businesses and the public are feeling the impact.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>クレムリンのインターネット弾圧がロシア国民を苛立たせている理由</h3><div class='summary'>当局はこの制限は公共の安全のためだとしているが、企業や国民はその影響を感じている。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>クレムリンのインターネット弾圧がロシア国民を苛立たせている理由</h3><div class='summary'>当局はこの制限は公共の安全のためだとしているが、企業や国民は影響を感じている。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#e74c3c22;border-color:#e74c3c;color:#e74c3c'>💹 市場・ビジネス</span><span class='tag tag-usd-weak'>💹 市場・ビジネス</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.bbc.com/news/videos/c75kpx2w452o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -1483,6 +1456,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/snooker/articles/c5yw15y0gy6o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-7c4176fe5b7b'
+  data-themes='総合・国際|スポーツ|文化・エンタメ'
+  data-lang='en'
+  data-score='3'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='health_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-7c4176fe5b7b')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Allen sees off Wilson to reach Crucible quarters</h3><div class='summary'>Former world number one Mark Allen defeats Kyren Wilson in a thrilling last-16 match to join the 2026 World Championship quarter-final line-up.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>クルーシブル地区に到着するウィルソンを見送るアレン</h3><div class='summary'>元世界ランキング1位のマーク・アレンがスリリングなベスト16の試合でカイレン・ウィルソンを破り、2026年世界選手権準々決勝のラインナップに加わった。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/snooker/articles/c87w95jxjelo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-3086d32be23a'
   data-themes='スポーツ|文化・エンタメ'
   data-lang='en'
@@ -1503,72 +1498,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>なぜケリーはアーセナルやイングランドの自動スターターではないのでしょうか?</h3><div class='summary'>BBCスポーツは、ライオネスの英雄クロエ・ケリーがクラブや代表の出場枠を保証されていない理由について論じている。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c0q9vx180njo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-0aff658c64d4'
-  data-themes='スポーツ|文化・エンタメ'
-  data-lang='en'
-  data-score='3'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-0aff658c64d4')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Rochdale and York set for &#x27;unique&#x27; title decider</h3><div class='summary'>York City boss Stuart Maynard calls his side&#x27;s final day National League title decider at Rochdale &quot;one of the biggest games in the English football pyramid.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ロッチデールとヨークが「ユニークな」タイトル決定戦に臨む</h3><div class='summary'>ヨーク・シティのスチュアート・メイナード監督は、ロッチデールでの自チームの最終日ナショナルリーグ優勝決定戦を「英国サッカー界の最大の試合の一つ」と呼んでいる。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c1mk47n2ylro?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-cff4d4ad5315'
-  data-themes='スポーツ'
-  data-lang='en'
-  data-score='3'
-  data-source='BBC Sport'
-  data-sentiment='bearish'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-cff4d4ad5315')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Benfica&#x27;s Prestianni banned for homophobic conduct in Real Madrid tie</h3><div class='summary'>Gianluca Prestianni is given a six-game ban by Uefa for homophobic conduct during Benfica&#x27;s Champions League knockout play-off match with Real Madrid in February.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>レアル・マドリー戦でベンフィカのプレスティアーニが同性愛嫌悪行為で出場停止に</h3><div class='summary'>ジャンルカ・プレスティアーニは、2月に行われたベンフィカのチャンピオンズリーグ決勝トーナメント進出決定戦、レアル・マドリード戦で同性愛嫌悪的な行為をしたとしてUEFAから6試合の出場停止処分を受けた。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c239jkx0g02o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-fb1e43fff67b'
-  data-themes='総合・国際|文化・エンタメ'
-  data-lang='en'
-  data-score='3'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='health_alert'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-fb1e43fff67b')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Superb Murphy beats Xiao with session to spare</h3><div class='summary'>Former winner Shaun Murphy produces a fine performance to thrash China&#x27;s Xiao Guodong and become the first player into the World Championship quarter-finals.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>素晴らしいマーフィーが余裕のセッションでシャオを破る</h3><div class='summary'>元優勝者のショーン・マーフィーが素晴らしいパフォーマンスで中国のシャオ・グオドンを破り、世界選手権準々決勝に進出した最初の選手となった。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/snooker/articles/c74v28l3ngqo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-6cd00017e946'
@@ -1615,8 +1544,8 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/athletics/videos/clyx0k5dnyeo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-610a3080b1db'
-  data-themes='テクノロジー|スポーツ'
+  data-cardid='item-40bdbc906d26'
+  data-themes='テクノロジー|文化・エンタメ'
   data-lang='en'
   data-score='3'
   data-source='BBC Sport'
@@ -1628,35 +1557,13 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-610a3080b1db')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-40bdbc906d26')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>Forest condemn Rhinos to eighth consecutive defeat</h3><div class='summary'>Nottingham Forest make it back-to-back Netball Super League wins with an 64-58 victory over a Leeds Rhinos side who fall to an eighth straight defeat.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>フォレスト、ライノスに8連敗を宣告</h3><div class='summary'>ノッティンガム・フォレストはネットボール・スーパーリーグで8連敗となったリーズ・ライノスに64対58で勝利し、連勝を飾った。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/netball/articles/cj60l8yxw8no?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-3cfbd07fc382'
-  data-themes='テクノロジー|スポーツ'
-  data-lang='en'
-  data-score='3'
-  data-source='BBC Sport'
-  data-sentiment='bearish'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-3cfbd07fc382')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>West Brom docked two points for financial breaches</h3><div class='summary'>West Bromwich Albion are given a two-point penalty by the English Football League for breaching profit and sustainability rules.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ウェストブロム、財務違反で勝ち点2を獲得</h3><div class='summary'>ウェスト・ブロムウィッチ・アルビオンは、利益と持続可能性に関する規則に違反したとして、イングランド・フットボールリーグから2点のペナルティを与えられた。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c70528784kjo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-en'><h3>Steelers draft QB with Rodgers future still unclear</h3><div class='summary'>The Pittsburgh Steelers select quarterback Drew Allar on day two of the NFL Draft amid uncertainty over the future of Aaron Rodgers.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>スティーラーズがQBをドラフト、ロジャースの将来はまだ不透明</h3><div class='summary'>ピッツバーグ・スティーラーズは、アーロン・ロジャースの将来が不透明な中、NFLドラフト2日目にクォーターバックのドリュー・アラーを指名した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/american-football/articles/c0e7v5qgpj9o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-f3dc5e3ab55a'
@@ -1676,35 +1583,13 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Mendoza selected as first pick in NFL Draft</h3><div class='summary'>The Las Vegas Raiders select quarterback Fernando Mendoza as the first overall pick of the 2026 NFL Draft.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>メンドーサ、NFLドラフト1位指名</h3><div class='summary'>ラスベガス・レイダースは、2026年のNFLドラフト全体1位でクォーターバックのフェルナンド・メンドーサを指名した。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>メンドーサ、NFLドラフト1位指名</h3><div class='summary'>ラスベガス・レイダースは、2026年NFLドラフトの全体1位指名としてクォーターバックのフェルナンド・メンドーサを指名した。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.bbc.com/sport/american-football/videos/c203v07pw90o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-123a368c6ecb'
-  data-themes='テクノロジー|スポーツ'
-  data-lang='en'
-  data-score='3'
-  data-source='BBC Sport'
-  data-sentiment='bullish'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-123a368c6ecb')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Who will win the title? Reporters, fans and pundits make their predictions</h3><div class='summary'>Will it be Manchester City or Arsenal for the Premier League title? BBC Sport gets pundits, reporters and fans to predict each of their remaining fixtures - and who will win the league.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>誰がタイトルを獲得するでしょうか？記者、ファン、専門家が予想を立てる</h3><div class='summary'>プレミアリーグのタイトルを狙うのはマンチェスター・シティかアーセナルか？ BBC スポーツは、評論家、記者、ファンに残りの試合、そして誰がリーグに勝つかを予想してもらいます。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cn0w49y475wo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-0234d0b52c8c'
-  data-themes='テクノロジー|スポーツ'
+  data-cardid='item-5029e1982417'
+  data-themes='総合・国際|テクノロジー'
   data-lang='en'
   data-score='3'
   data-source='BBC Sport'
@@ -1716,21 +1601,21 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-0234d0b52c8c')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-5029e1982417')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>Bracewell used cocaine after day&#x27;s County Championship play</h3><div class='summary'>Former New Zealand all-rounder Doug Bracewell has admitted using cocaine after the first day of Essex&#x27;s final County Championship match last year.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ブレイスウェルはその日のカウンティチャンピオンシップの試合後にコカインを使用した</h3><div class='summary'>元ニュージーランド代表オールラウンダーのダグ・ブレイスウェルは、昨年のエセックス州最後のカウンティチャンピオンシップ試合の初日後にコカインを使用したことを認めた。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/cricket/articles/c1w4rn2219vo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-en'><h3>GB&#x27;s Potter wins World Triathlon Series opener</h3><div class='summary'>Great Britain&#x27;s Beth Potter wins the opening women&#x27;s race of the 2026 World Triathlon Championship Series in Samarkand, Uzbekistan.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>GBのポッターがワールドトライアスロンシリーズ開幕戦で優勝</h3><div class='summary'>ウズベキスタンのサマルカンドで開催された2026年世界トライアスロン選手権シリーズ開幕女子レースで、イギリスのベス・ポッターが優勝した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/triathlon/articles/c86e8vx414wo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-ffac0ad1e0e9'
+  data-cardid='item-cff4d4ad5315'
   data-themes='スポーツ'
   data-lang='en'
   data-score='3'
   data-source='BBC Sport'
-  data-sentiment='neutral'
+  data-sentiment='bearish'
   data-importance='neutral'
   data-isnew='false'>
   <div class='card-top'>
@@ -1738,13 +1623,35 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-ffac0ad1e0e9')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-cff4d4ad5315')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>How Lineker and Neville became rival media moguls</h3><div class='summary'>BBC sports editor Dan Roan examines how Gary Lineker and Gary Neville became two of the biggest players in a rapidly changing media industry.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>リネカーとネビルはいかにしてライバルのメディア王になったのか</h3><div class='summary'>BBC スポーツ編集者のダン・ローンは、ゲイリー・リネカーとゲイリー・ネビルがどのようにして急速に変化するメディア業界で最大の 2 人になったのかを考察します。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cm293m3mr7zo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-en'><h3>Benfica&#x27;s Prestianni banned for homophobic conduct in Real Madrid tie</h3><div class='summary'>Gianluca Prestianni is given a six-game ban by Uefa for homophobic conduct during Benfica&#x27;s Champions League knockout play-off match with Real Madrid in February.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>レアル・マドリー戦でベンフィカのプレスティアーニが同性愛嫌悪行為で出場停止に</h3><div class='summary'>ジャンルカ・プレスティアーニは、2月に行われたベンフィカのチャンピオンズリーグ決勝トーナメント進出決定戦、レアル・マドリード戦で同性愛嫌悪的な行為をしたとしてUEFAから6試合の出場停止処分を受けた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c239jkx0g02o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-610a3080b1db'
+  data-themes='テクノロジー|スポーツ'
+  data-lang='en'
+  data-score='3'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-610a3080b1db')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Forest condemn Rhinos to eighth consecutive defeat</h3><div class='summary'>Nottingham Forest make it back-to-back Netball Super League wins with an 64-58 victory over a Leeds Rhinos side who fall to an eighth straight defeat.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>フォレスト、ライノスに8連敗を宣告</h3><div class='summary'>ノッティンガム・フォレストはネットボール・スーパーリーグで8連敗に陥ったリーズ・ライノスに64対58で勝利し、連勝を飾った。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/netball/articles/cj60l8yxw8no?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-53c95569464b'
@@ -1786,17 +1693,17 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Man City focusing on winning &#x27;all five games&#x27; in title run-in - Guardiola</h3><div class='summary'>Manchester City manager Pep Guardiola says his side is focusing on winning &quot;all fives games&quot; during the title run-in, after their 1-0 win against Burnley in the Premier League.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>マンシティ、タイトル獲得に向けて「5試合すべて」勝利に焦点を当てる - グアルディオラ</h3><div class='summary'>マンチェスター・シティのジョゼップ・グアルディオラ監督は、プレミアリーグでバーンリーに1-0で勝利した後、チームはタイトル獲得に向けて「5人制の試合すべて」に勝つことに焦点を当てていると語った。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>マンシティ、タイトル獲得に向けて「5試合全勝」に焦点を当てる - グアルディオラ</h3><div class='summary'>マンチェスター・シティのジョゼップ・グアルディオラ監督は、プレミアリーグでバーンリーに1-0で勝利した後、チームはタイトル獲得に向けて「5人制の試合すべて」に勝つことに焦点を当てていると語った。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.bbc.com/sport/football/videos/cjr9x18y9vxo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-96c767e36e5a'
+  data-cardid='item-ffac0ad1e0e9'
   data-themes='スポーツ'
   data-lang='en'
   data-score='3'
   data-source='BBC Sport'
-  data-sentiment='bearish'
+  data-sentiment='neutral'
   data-importance='neutral'
   data-isnew='false'>
   <div class='card-top'>
@@ -1804,21 +1711,21 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-96c767e36e5a')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-ffac0ad1e0e9')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>Rangers fans face ban for derby amid dispute with Celtic</h3><div class='summary'>Rangers ask the Scottish Professional Football League to step in after Celtic refused to give away fans any tickets to the final Old Firm derby of the season unless the Ibrox club&#x27;s Union Bears ultras group is banned.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>レンジャーズファン、セルティックとの争いでダービー出場停止処分を受ける</h3><div class='summary'>アイブロックス・クラブのユニオン・ベアーズ・ウルトラス・グループが禁止されない限り、セルティックがファンに今季最後のオールド・ファーム・ダービーへのチケットを与えることを拒否したことを受け、レンジャーズはスコットランド・プロフットボールリーグに介入を要請した。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cde519lgd2no?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-en'><h3>How Lineker and Neville became rival media moguls</h3><div class='summary'>BBC sports editor Dan Roan examines how Gary Lineker and Gary Neville became two of the biggest players in a rapidly changing media industry.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>リネカーとネビルはいかにしてライバルのメディア王になったのか</h3><div class='summary'>BBC スポーツ編集者のダン・ローンは、ゲイリー・リネカーとゲイリー・ネビルがどのようにして急速に変化するメディア業界で最大の 2 人になったのかを考察します。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cm293m3mr7zo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-5a4cec90ca24'
+  data-cardid='item-123a368c6ecb'
   data-themes='テクノロジー|スポーツ'
   data-lang='en'
   data-score='3'
   data-source='BBC Sport'
-  data-sentiment='neutral'
+  data-sentiment='bullish'
   data-importance='training_behavior'
   data-isnew='false'>
   <div class='card-top'>
@@ -1826,13 +1733,13 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-5a4cec90ca24')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-123a368c6ecb')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>How the Irish Premiership can be won on the final day</h3><div class='summary'>With Larne, Coleraine and Glentoran still in the hunt for the Irish Premiership title heading into the final day, BBC Sport NI takes a look at what needs to happen to decide the destination of the Gibson Cup.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>アイルランド・プレミアシップ最終日にどうやって優勝するか</h3><div class='summary'>ラーン、コールレーン、グレントランがアイリッシュ・プレミアシップのタイトルを目指して最終日を迎える中、BBC Sport NIはギブソン・カップの行き先を決めるために何が起こる必要があるのかを考察する。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cpd573464qeo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-en'><h3>Who will win the title? Reporters, fans and pundits make their predictions</h3><div class='summary'>Will it be Manchester City or Arsenal for the Premier League title? BBC Sport gets pundits, reporters and fans to predict each of their remaining fixtures - and who will win the league.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>誰がタイトルを獲得するでしょうか？記者、ファン、専門家が予想を立てる</h3><div class='summary'>プレミアリーグのタイトルを狙うのはマンチェスター・シティかアーセナルか？ BBC スポーツは、評論家、記者、ファンに残りの試合、そして誰がリーグに勝つかを予想してもらいます。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cn0w49y475wo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-ff5fd8121301'
@@ -2033,21 +1940,21 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.nasa.gov/general/iv-fluid-in-space/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-cca2ce12983c'
+  data-cardid='item-a511eb335bbd'
   data-themes='市場・ビジネス'
   data-lang='ja'
   data-score='3'
-  data-source='NHK'
+  data-source='NHK 政治'
   data-sentiment='neutral'
   data-importance='food_recall'
   data-isnew='false'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-cca2ce12983c')">既読</button></div>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK 政治</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-a511eb335bbd')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>米特使らパキスタンへ 経済・軍事圧力強化 イラン代表団到着</h3><div class='summary'>アメリカのトランプ政権は、特使らがイラン側と協議するため仲介国パキスタンに向かうと明らかにしました。一方、イランの代表団は現地に到着しましたが、目的はパキスタン高官との会談でアメリカとの協議は予定されていないとしていて、両者の協議が何らかのかたちで実現するかはわかっていません。</div></div>
+  <div class='lang-pane lang-ja'><h3>赤澤経産相 就任後初めて東電柏崎刈羽原発を視察</h3><div class='summary'>赤澤経済産業大臣は25日、就任後初めて新潟県にある東京電力柏崎刈羽原子力発電所を視察しました。今月から営業運転が始まったことを踏まえて、会社に対し、安全性向上に不断に取り組むよう求めるとともに、原子力の必要性について国が前面に立って説明していく考えを示しました。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#e74c3c22;border-color:#e74c3c;color:#e74c3c'>💹 市場・ビジネス</span><span class='tag tag-usd-weak'>💹 市場・ビジネス</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260425/k10015107801000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260425/k10015108301000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-7e5dac66c225'
@@ -2065,6 +1972,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>食料品の消費税減税 事業者負担など指摘も 与党 懸念払拭図る</h3><div class='summary'>食料品の消費税減税をめぐり「国民会議」のもとに設置された実務者会議のヒアリングでは、低所得者対策として合理的だという意見の一方、関係団体から事業者の負担や財政への影響を指摘する声が相次ぎました。与党としては、減税の実現に向けて懸念の払拭（ふっしょく）を図り、制度設計を進める方針です。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260425/k10015107991000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-a3f2ece4a7e2'
+  data-themes='総合・国際|政治・政策'
+  data-lang='ja'
+  data-score='3'
+  data-source='NHK 政治'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK 政治</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-a3f2ece4a7e2')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「OTC類似薬」追加負担求める改正案が可決 衆院厚生労働委員会</h3><div class='summary'>市販薬と似た成分や効能を持つ「OTC類似薬」を処方された患者に追加負担を求めるとした健康保険法などの改正案は、衆議院厚生労働委員会で採決が行われ、与野党の賛成多数で可決されました。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260424/k10015107181000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-560c739cd02b'
@@ -2747,6 +2671,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2604/05/news003.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-f83663dca2e3'
+  data-themes='テクノロジー'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC World'
+  data-sentiment='bullish'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-f83663dca2e3')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Seven dead in major Russian attack on Ukraine</h3><div class='summary'>The city of Dnipro was hardest hit, with officials saying four died in a strike on a residential building.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ロシアによるウクライナ大規模攻撃で７人死亡</h3><div class='summary'>最も大きな被害を受けたのはドニプロペトロウシク市で、当局は住宅建物へのストライキで４人が死亡したと発表した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/c0rxk4q0pj0o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-929d2921e5c2'
   data-themes='テクノロジー'
   data-lang='en'
@@ -2767,28 +2713,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>カティア・アドラー：ヨーロッパのNATO同盟諸国は、報道された米国のスペインに対する脅威に反発</h3><div class='summary'>金曜朝、欧州と米国の関係悪化が再びメデューサのような頭をもたげたとBBCの欧州編集者は書いている。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.bbc.com/news/articles/cj40r2gw24wo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-8f7ddb5e1d01'
-  data-themes='総合・国際'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC World'
-  data-sentiment='neutral'
-  data-importance='health_alert'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-8f7ddb5e1d01')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Epstein survivor: Meeting the King would be a &#x27;grand step&#x27;</h3><div class='summary'>A Buckingham Palace source confirmed the Royals will not meet with survivors of sex offender Jeffrey Epstein during their state visit to the US.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>エプスタイン生存者「国王との面会は「大きな一歩」になるだろう」</h3><div class='summary'>バッキンガム宮殿関係者は、王室が米国の国賓訪問中に性犯罪者ジェフリー・エプスタインの生存者たちと面会しないことを認めた。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/news/videos/cwy37w2y64ro?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-17adac9441b2'
@@ -3006,7 +2930,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>South Africa&#x27;s top envoy to Ghana summoned over attacks on foreigners</h3><div class='summary'>A Ghanaian national was confronted by South Africans in a viral clip and questioned about his immigration status.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>南アフリカの駐ガーナ特使、外国人襲撃事件で呼び出される</h3><div class='summary'>ガーナ国民がバイラルクリップで南アフリカ人に対峙され、入国資格について質問された。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>南アフリカの駐ガーナ特使、外国人襲撃容疑で呼び出される</h3><div class='summary'>ガーナ国民がバイラルクリップで南アフリカ人に対峙され、入国資格について質問された。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.bbc.com/news/articles/cp38e5jgxqyo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -3031,6 +2955,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>韓国警察、逃走したオオカミのAI写真を投稿した男を逮捕</h3><div class='summary'>この画像が広く出回ったため、当局は捜索活動を開始した。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.bbc.com/news/articles/c4gx1n0dl9no?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-3c1231a10e06'
+  data-themes='総合・国際'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC World'
+  data-sentiment='neutral'
+  data-importance='health_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-3c1231a10e06')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>&#x27;We cried together&#x27;: Trump&#x27;s deportation drive forces tough decisions for couples</h3><div class='summary'>The spouses of illegal immigrants facing deportation must choose between separation or moving to a new country.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>「私たちは一緒に泣いた」：トランプ氏の国外追放推進がカップルに厳しい決断を迫る</h3><div class='summary'>強制送還の対象となっている不法移民の配偶者は、別居するか新しい国に移住するかを選択しなければなりません。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/cly032z5e71o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-664652cdd573'
@@ -3143,6 +3089,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/news/articles/cm29m732vgno?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-8f7ddb5e1d01'
+  data-themes='総合・国際'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC World'
+  data-sentiment='neutral'
+  data-importance='health_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-8f7ddb5e1d01')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Epstein survivor: Meeting the King would be a &#x27;grand step&#x27;</h3><div class='summary'>A Buckingham Palace source confirmed the Royals will not meet with survivors of sex offender Jeffrey Epstein during their state visit to the US.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>エプスタイン生存者「国王との面会は「大きな一歩」になるだろう」</h3><div class='summary'>バッキンガム宮殿関係者は、王室が米国国賓訪問中に性犯罪者ジェフリー・エプスタインの生存者と面会しないことを認めた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/videos/cwy37w2y64ro?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-4e9e67553f39'
   data-themes='テクノロジー'
   data-lang='en'
@@ -3182,7 +3150,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>&#x27;A dangerous standoff&#x27; as Strait of Hormuz blockade continues</h3><div class='summary'>The US and Iran&#x27;s rival blockades of the Strait of Hormuz have become a &quot;test of wills&quot;, says Lyse Doucet.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ホルムズ海峡封鎖続く「危険な対立」</h3><div class='summary'>米国とイランの対立するホルムズ海峡封鎖は「意志の試練」になったとリセ・ドゥーセ氏は言う。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ホルムズ海峡封鎖続く「危険な対立」</h3><div class='summary'>米国とイランが対立するホルムズ海峡封鎖は「意志の試練」になったとリセ・ドゥーセ氏は言う。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.bbc.com/news/videos/ckgwlgyyyv0o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -3292,7 +3260,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Uber CTO Praveen Neppalli Naga joins stacked StrictlyVC SF lineup for April 30 event</h3><div class='summary'>Surprise! StrictlyVC San Francisco, which will kick off this year’s events lineup for TechCrunch on April 30 at the Sentro Filipino Cultural Center, is getting a new addition to its increasingly stacked lineup of speakers. Uber CTO Praveen Neppalli Naga will join the rest of the lineup to discuss op</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Uber CTO の Praveen Neppalli Naga が、4 月 30 日のイベントでスタックされた StrictlyVC SF のラインナップに加わります</h3><div class='summary'>びっくり！ TechCrunchの今年のイベントラインナップを4月30日にセントロ・フィリピン・カルチュラル・センターで開始するStrictlyVC San Franciscoは、ますます増え続ける講演者のラインナップに新たなメンバーを加えている。 Uber CTO の Praveen Neppalli Naga が残りのラインナップに加わり、この方針について話し合う予定です</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Uber CTO の Praveen Neppalli Naga が、4 月 30 日のイベントでスタックされた StrictlyVC SF のラインナップに加わります</h3><div class='summary'>びっくり！ 4月30日にセントロ・フィリピン文化センターでTechCrunchの今年のイベントラインナップを開始するStrictlyVC San Franciscoは、ますます増え続ける講演者のラインナップに新たなメンバーを加えている。 Uber CTO の Praveen Neppalli Naga が残りのラインナップに加わり、方針について話し合う予定</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://techcrunch.com/2026/04/24/uber-cto-praveen-neppalli-naga-joins-stacked-strictlyvc-sf-lineup-for-april-30-event/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -3429,26 +3397,70 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cy419pnepwpo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-7434cbc4230c'
-  data-themes='テクノロジー'
+  data-cardid='item-6d77cb2bcdc5'
+  data-themes='スポーツ'
   data-lang='en'
   data-score='2'
   data-source='BBC Sport'
   data-sentiment='neutral'
-  data-importance='training_behavior'
+  data-importance='neutral'
   data-isnew='false'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-7434cbc4230c')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-6d77cb2bcdc5')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>Welsh fire, England captain - how Meg Jones became a dual-nation icon</h3><div class='summary'>Swapping Welsh roots for the England captaincy could be enough to turn a nation against you. But Meg Jones is different.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ウェールズの火災、イングランドのキャプテン - メグ・ジョーンズはいかにして二重国家のアイコンになったのか</h3><div class='summary'>ウェールズのルーツをイングランドのキャプテンと交換するだけで、国を敵に回すのに十分かもしれない。しかし、メグ・ジョーンズは違います。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/rugby-union/articles/cx2vr96rnyvo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-en'><h3>James leads Lakers to brink of play-off series win</h3><div class='summary'>LeBron James makes a three-pointer to force overtime before the Los Angeles Lakers move to the brink of series victory in the NBA play-offs.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ジェームズがレイカーズをプレーオフシリーズ優勝の瀬戸際まで導く</h3><div class='summary'>ロサンゼルス・レイカーズがNBAプレーオフでシリーズ勝利の瀬戸際に進む前に、レブロン・ジェームズがスリーポイントシュートを決めて延長戦を強いた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/basketball/articles/cn8d012gqdeo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-67e3e25bd68f'
+  data-themes='スポーツ'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-67e3e25bd68f')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>How Newcastle&#x27;s &#x27;bullies&#x27; became too nice</h3><div class='summary'>How Eddie Howe&#x27;s Newcastle have gone from regularly ruffling feathers to losing 15 Premier League games this season.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ニューカッスルの「いじめっ子」たちはいかにして優しくなりすぎたのか</h3><div class='summary'>エディ・ハウ率いるニューカッスルが、今シーズン、定期的に低迷していたチームから、プレミアリーグで15敗を喫するまでに至った経緯。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c4g8j49dgnxo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-058a8db8f1b4'
+  data-themes='スポーツ'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-058a8db8f1b4')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>London Marathon 2026 - all you need to know</h3><div class='summary'>Everything you need to know about the 46th London Marathon, which is expected to have a record-breaking 59,000 finishers on Sunday.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>2026 年ロンドンマラソン - 知っておくべきことすべて</h3><div class='summary'>日曜日には記録破りの5万9,000人の完走者が見込まれる第46回ロンドンマラソンについて知っておくべきことすべて。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/athletics/articles/c5yjn5m23l1o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-903b37e248fe'
@@ -3473,7 +3485,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c20q5990ny9o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-86893126f373'
+  data-cardid='item-7434cbc4230c'
   data-themes='テクノロジー'
   data-lang='en'
   data-score='2'
@@ -3486,167 +3498,13 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-86893126f373')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-7434cbc4230c')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>Why I stayed at &#x27;struggling&#x27; Man Utd and didn&#x27;t think we&#x27;d be third now - Fernandes</h3><div class='summary'>Manchester United captain Bruno Fernandes speaks to club legend Wayne Rooney in a wide-ranging interview.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>なぜ私は「苦戦中の」マン・ユナイテッドに留まり、今では3位になるとは思わなかったのか - フェルナンデス</h3><div class='summary'>マンチェスター・ユナイテッドのキャプテン、ブルーノ・フェルナンデスが幅広いインタビューでクラブのレジェンド、ウェイン・ルーニーに語った。</div></div>
+  <div class='lang-pane lang-en'><h3>Welsh fire, England captain - how Meg Jones became a dual-nation icon</h3><div class='summary'>Swapping Welsh roots for the England captaincy could be enough to turn a nation against you. But Meg Jones is different.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ウェールズの火災、イングランドのキャプテン - メグ・ジョーンズはいかにして二重国家のアイコンになったのか</h3><div class='summary'>ウェールズのルーツをイングランドのキャプテンと交換するだけで、国を敵に回すのに十分かもしれない。しかし、メグ・ジョーンズは違います。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c0rxl475x8jo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-1a9a08009212'
-  data-themes='スポーツ'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-1a9a08009212')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Could Spurs fans take solace from a season in the Championship?</h3><div class='summary'>Tottenham Hotspur fans will not want to contemplate relegation - but if the worst should happen, they may take solace from a season in the Championship.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>スパーズファンはチャンピオンシップでのシーズンから慰めを得られるでしょうか?</h3><div class='summary'>トッテナム・ホットスパーのファンは降格など考えたくないだろうが、最悪の事態が起こった場合には、チャンピオンシップでのシーズンを過ごすことが慰めになるかもしれない。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c20377veepro?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-3a1eb8867516'
-  data-themes='スポーツ'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-3a1eb8867516')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Defending champion Alcaraz to miss French Open</h3><div class='summary'>Two-time defending champion Carlos Alcaraz says he will miss next month&#x27;s French Open with an ongoing wrist injury.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ディフェンディングチャンピオンのアルカラス、全仏オープン欠場へ</h3><div class='summary'>2度のディフェンディングチャンピオンであるカルロス・アルカラスは、手首の負傷が続いているため、来月の全仏オープンを欠場すると発表した。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/tennis/articles/c15de9d91jwo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-9e6ad7c1c5a4'
-  data-themes='スポーツ'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-9e6ad7c1c5a4')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Bristol go fourth with big win at Newcastle</h3><div class='summary'>Bristol Bears run in eight tries to move back into The Prem&#x27;s top four with a 52-19 win at Newcastle Red Bulls.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ブリストルがニューカッスルに大勝し4位に浮上</h3><div class='summary'>ブリストル・ベアーズは8トライを挙げてニューカッスル・レッドブルズに52-19で勝利し、ザ・プレムのトップ4に返り咲こうとしている。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/rugby-union/articles/c1w4x35d40yo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-edbd831d288a'
-  data-themes='スポーツ'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-edbd831d288a')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Rogers open to European move - Saturday&#x27;s gossip</h3><div class='summary'>Morgan Rogers is open to a European move, Manuel Akanji is set to make his Inter Milan move permanent and Manchester City are confident of signing Elliot Anderson.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ロジャース、欧州移籍に前向き - 土曜日のゴシップ</h3><div class='summary'>モーガン・ロジャースは欧州移籍に前向きで、マヌエル・アカンジはインテル・ミラノへの移籍を完全なものにする予定で、マンチェスター・シティはエリオット・アンダーソンとの契約に自信を持っている。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cp8d3xm7x41o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-84dd6ca76399'
-  data-themes='スポーツ'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-84dd6ca76399')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Leeds stay top with eight-try win over Catalans</h3><div class='summary'>Leeds Rhinos stay top of Super League as they run in eight tries to steamroller Catalans Dragons at Headingley.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>リーズがカタルーニャ人に8トライ勝利で首位を維持</h3><div class='summary'>リーズ・ライノスはヘディングリーでカタルーニャ・ドラゴンズを8トライで圧倒し、スーパーリーグの首位を維持している。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/rugby-league/articles/c995dz05ed1o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-cc743d0758c3'
-  data-themes='スポーツ'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-cc743d0758c3')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Battling Norrie beats Machac to advance in Madrid</h3><div class='summary'>Briton Cameron Norrie says his gritty victory over Tomas Machac to reach the Madrid Open third round was &quot;one of the favourite matches&quot; of his career.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>マドリードでノリーと対戦、マチャックを破り勝ち進む</h3><div class='summary'>英国人のキャメロン・ノリーは、トーマス・マチャックに対する気の抜けた勝利でマドリード・オープン3回戦に進出したことは、キャリアの中で「お気に入りの試合の1つ」だったと語る。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/tennis/articles/cn08dy9n3d1o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-c8520830e68e'
-  data-themes='スポーツ'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-c8520830e68e')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Dragons beat Zebre for first away URC win in four years</h3><div class='summary'>David Richards scores a last-minute try as Dragons beat Zebre in Parma to end their United Rugby Championship away drought.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ドラゴンズがゼブレを破り、4年ぶりのアウェーURC勝利</h3><div class='summary'>ドラゴンズがパルマでゼブレを破り、デビッド・リチャーズが土壇場でトライを決め、アウェイでのユナイテッド・ラグビー・チャンピオンシップの干ばつに終止符を打った。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/rugby-union/articles/cj37dllvl75o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <a class='open-btn' href='https://www.bbc.com/sport/rugby-union/articles/cx2vr96rnyvo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-785595f9ce29'
@@ -3666,7 +3524,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>The Women&#x27;s Six Nations is faster and smarter - but is it better?</h3><div class='summary'>The women&#x27;s Six Nations has evolved with coaches and players working harder and playing smarter</div></div>
-<div class='lang-pane lang-ja hidden'><h3>女子シックスネーションズはより速くて賢いですが、それは優れているのでしょうか？</h3><div class='summary'>女子シックス・ネーションズは、コーチと選手がより懸命に働き、より賢明なプレーをすることで進化してきた</div></div>
+<div class='lang-pane lang-ja hidden'><h3>女子シックス ネーションズはより速く、よりスマートですが、それが優れているのでしょうか?</h3><div class='summary'>女子シックス・ネーションズは、コーチと選手がより懸命に働き、より賢明なプレーをすることで進化してきた</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.bbc.com/sport/rugby-union/articles/cwywv2vndv5o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -3781,7 +3639,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/football/videos/c9d47p6p15yo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-f353630bab6b'
+  data-cardid='item-6d76aaa9afe9'
   data-themes='スポーツ'
   data-lang='en'
   data-score='2'
@@ -3794,16 +3652,38 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-f353630bab6b')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-6d76aaa9afe9')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>The remarkable rise of Chelsea&#x27;s little-known interim boss</h3><div class='summary'>Chelsea&#x27;s interim head coach Calum McFarlane admits this year has been a &quot;whirlwind&quot;, going from obscurity to an FA Cup semi‑final at Wembley.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>チェルシーのあまり知られていない暫定監督の注目すべき台頭</h3><div class='summary'>チェルシーの暫定ヘッドコーチ、カラム・マクファーレンは、今年は無名からウェンブリーでのFAカップ準決勝までの「旋風」だったと認めた。</div></div>
+  <div class='lang-pane lang-en'><h3>FA Cup game: Answer our prompts for a Man City v Southampton prediction</h3><div class='summary'>Answer our seven simple questions and get a prediction from the BBC Sport supercomputer for Saturday&#x27;s FA Cup semi-final between Manchester City and Southampton.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>FA カップの試合: マン シティ対サウサンプトンの予想のプロンプトに答えてください</h3><div class='summary'>7 つの簡単な質問に答えて、土曜日の FA カップ準決勝、マンチェスター シティ対サウサンプトンの試合を BBC スポーツ スーパーコンピューターから予想してください。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c04xw9q99g2o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c8jkzv3xmn1o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-0a90fa72896f'
+  data-cardid='item-dd822849c2fc'
+  data-themes='文化・エンタメ'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-dd822849c2fc')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Korda takes charge of first women&#x27;s major of 2026</h3><div class='summary'>Nelly Korda continues her fine start to the Chevron Championship as she builds a commanding lead in the first women&#x27;s major of the year.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>コルダが2026年の最初の女子メジャーを担当</h3><div class='summary'>ネリー・コルダはシェブロン選手権への好スタートを続け、今年最初の女子メジャーで圧倒的なリードを築いている。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/golf/articles/ceqw4084nd8o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-1a9a08009212'
   data-themes='スポーツ'
   data-lang='en'
   data-score='2'
@@ -3816,16 +3696,16 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-0a90fa72896f')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-1a9a08009212')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>Munoz dies from infection six days after crash</h3><div class='summary'>Colombian rider Cristian Camilo Munoz dies from a knee infection following a crash six days ago.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ムニョスさん、事故から6日後に感染症で死亡</h3><div class='summary'>コロンビアのライダー、クリスティアン・カミロ・ムニョスが6日前の事故により膝の感染症で亡くなった。</div></div>
+  <div class='lang-pane lang-en'><h3>Could Spurs fans take solace from a season in the Championship?</h3><div class='summary'>Tottenham Hotspur fans will not want to contemplate relegation - but if the worst should happen, they may take solace from a season in the Championship.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>スパーズファンはチャンピオンシップでのシーズンから慰めを得られるでしょうか？</h3><div class='summary'>トッテナム・ホットスパーのファンは降格など考えたくないだろうが、最悪の事態が起こった場合には、チャンピオンシップでのシーズンを過ごすことが慰めになるかもしれない。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/cycling/articles/cly0mx0d1lko?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c20377veepro?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-aaa2ccaf8594'
+  data-cardid='item-3612a2a1fea6'
   data-themes='テクノロジー'
   data-lang='en'
   data-score='2'
@@ -3838,13 +3718,13 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-aaa2ccaf8594')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-3612a2a1fea6')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>Furyk to return as US Ryder Cup captain in 2027</h3><div class='summary'>Jim Furyk is confirmed as captain of the US Ryder Cup team in 2027, when the event takes place in Ireland.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>フューリク、2027年に米国ライダーカップキャプテンとして復帰へ</h3><div class='summary'>ジム・フューリックは、2027年にアイルランドで開催されるライダーカップ米国チームのキャプテンに就任することが決定した。</div></div>
+  <div class='lang-pane lang-en'><h3>Fitzpatricks one shot off lead in PGA pairs event</h3><div class='summary'>English brothers Matt and Alex Fitzpatrick move to one shot off the lead at the PGA Tour&#x27;s Zurich Classic of New Orelans pairs event.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>PGAペアイベントでフィッツパトリックスが1打差でリード</h3><div class='summary'>英国人のマット・フィッツパトリックとアレックス・フィッツパトリック兄弟が、PGAツアーのチューリッヒ・クラシック・オブ・ニューオレランズのペアイベントで首位とあと1打差に迫った。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/golf/articles/cz784wpy7nno?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <a class='open-btn' href='https://www.bbc.com/sport/golf/articles/cp8469kk473o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-721698638b06'
@@ -3913,182 +3793,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/formula1/videos/c04xwlvq2nwo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-51bf67089ae5'
-  data-themes='テクノロジー'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-51bf67089ae5')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Why Wembley is special, for FA Cup semi-finals too</h3><div class='summary'>Tony Pulis explains why getting to Wembley is not just special for any manager, it is still hugely important for players, fans and all the staff at any club.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>FAカップ準決勝でもウェンブリーが特別な理由</h3><div class='summary'>トニー・ピュリスは、ウェンブリーに行くことがどの監督にとっても特別なことではなく、どのクラブの選手、ファン、そしてスタッフ全員にとっても非常に重要である理由を説明します。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cyv1rdz32ego?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-f9ad02bbee79'
-  data-themes='テクノロジー'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-f9ad02bbee79')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Cardiff beat Ospreys to improve URC play-off hopes</h3><div class='summary'>Cardiff improve their United Rugby Championship play-off hopes with victory in the Welsh derby against Ospreys at the Arms Park.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>カーディフがオスプレイを破り、URCプレーオフへの望みを高める</h3><div class='summary'>カーディフはアームズ・パークで行われたオスプレイズとのウェールズ・ダービーに勝利し、ユナイテッド・ラグビーチャンピオンシップ・プレーオフへの望みを高めた。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/rugby-union/articles/c5yv1033lvgo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-59ad40bc2524'
-  data-themes='スポーツ'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-59ad40bc2524')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Charity drops choir from London Marathon over founder&#x27;s gender-critical views</h3><div class='summary'>A choir has been told by a disability charity that it will not be welcome at Sunday&#x27;s London Marathon because its founder holds gender-critical views.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>創設者のジェンダー批判的な見解を理由に慈善団体がロンドンマラソンから合唱団を除外</h3><div class='summary'>ある合唱団は、障害者慈善団体から、創設者がジェンダーに批判的な見解を持っているため、日曜のロンドンマラソンでは歓迎されないと通告された。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/athletics/articles/c80m8yv530yo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-a889213a7a0d'
-  data-themes='スポーツ'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-a889213a7a0d')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Quiz: Name the 10 champion jump jockeys before Bowen</h3><div class='summary'>Before Sean Bowen there were only 10 other champion jump jockeys since 1976 - how many can you name?</div></div>
-<div class='lang-pane lang-ja hidden'><h3>クイズ: ボーエンの前にチャンピオンジャンプジョッキー 10 人の名前を答えてください</h3><div class='summary'>ショーン・ボーエン以前には、1976 年以降、チャンピオンジャンプジョッキーは 10 人しかいませんでした。何人の名前を挙げることができますか?</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/horse-racing/articles/c4gx704yn8ko?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-14af7fa1cdfe'
-  data-themes='スポーツ'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-14af7fa1cdfe')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Five things in the EFL: penultimate peril and jittery jeopardy</h3><div class='summary'>Here are five things to look out for across the EFL in this penultimate weekend of the regular season.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>EFL の 5 つの事柄: 最後から 2 番目の危険と神経質な危険</h3><div class='summary'>レギュラーシーズンの最後から2番目の週末にEFL全体で注目すべき5つのことを紹介する。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c5ywnkd7yxxo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-773d23fc554f'
-  data-themes='スポーツ'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-773d23fc554f')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Turkey to return to F1 calendar in 2027</h3><div class='summary'>The Turkish Grand Prix will return to the Formula 1 calendar in 2027 for the first time in six years.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>トルコ、2027年にF1カレンダーに復帰へ</h3><div class='summary'>トルコGPは2027年に6年ぶりにF1カレンダーに復帰する。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/formula1/articles/c17v4g1nq7ko?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-508fa0968346'
-  data-themes='スポーツ'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-508fa0968346')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Former Nigeria striker Eneramo dies during match</h3><div class='summary'>Michael Eneramo, who won 10 caps for the Super Eagles, dies aged 40 after suffering a suspected cardiac arrest during a friendly game.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>元ナイジェリア代表ストライカー、エネラモが試合中に死去</h3><div class='summary'>スーパー・イーグルスで10キャップを獲得したマイケル・エネラモが親善試合中に心停止の疑いで40歳で死去。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c05d3zd1npjo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-7cd48cf0d6f5'
-  data-themes='テクノロジー'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-7cd48cf0d6f5')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Raiders take Mendoza with first pick of NFL Draft</h3><div class='summary'>Mendoza is just third player in history to be a Heisman Trophy winner, a national champion and the first overall draft pick in the same year.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>レイダースがNFLドラフト1位指名でメンドーサを獲得</h3><div class='summary'>メンドーサは、ハイズマントロフィー受賞者、国内チャンピオン、そして同年のドラフト全体1位指名を獲得した史上3人目の選手となる。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/american-football/articles/cp38gxpqvv3o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-acb8d978fc95'
   data-themes='文化・エンタメ'
   data-lang='en'
@@ -4111,7 +3815,29 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cn783mg6mj4o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-35608248f31f'
+  data-cardid='item-86893126f373'
+  data-themes='テクノロジー'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-86893126f373')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Why I stayed at &#x27;struggling&#x27; Man Utd and didn&#x27;t think we&#x27;d be third now - Fernandes</h3><div class='summary'>Manchester United captain Bruno Fernandes speaks to club legend Wayne Rooney in a wide-ranging interview.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>なぜ私は「苦戦中の」マン・ユナイテッドに留まり、今では3位になるとは思わなかったのか - フェルナンデス</h3><div class='summary'>マンチェスター・ユナイテッドのキャプテン、ブルーノ・フェルナンデスが幅広いインタビューでクラブのレジェンド、ウェイン・ルーニーに語った。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c0rxl475x8jo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-edbd831d288a'
   data-themes='スポーツ'
   data-lang='en'
   data-score='2'
@@ -4124,13 +3850,167 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-35608248f31f')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-edbd831d288a')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>Ex-Brighton boss Hughton reveals cancer diagnosis</h3><div class='summary'>Former Brighton and Newcastle manager Chris Hughton reveals he was treated for prostate cancer last year.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>元ブライトン監督のヒュートン氏、がんの診断を明かす</h3><div class='summary'>ブライトンとニューカッスルの元監督クリス・ヒュートンは、昨年前立腺がんの治療を受けていたことを明かした。</div></div>
+  <div class='lang-pane lang-en'><h3>Rogers open to European move - Saturday&#x27;s gossip</h3><div class='summary'>Morgan Rogers is open to a European move, Manuel Akanji is set to make his Inter Milan move permanent and Manchester City are confident of signing Elliot Anderson.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ロジャース、欧州移籍に前向き - 土曜日のゴシップ</h3><div class='summary'>モーガン・ロジャースは欧州移籍に前向きで、マヌエル・アカンジはインテル・ミラノへの移籍を完全なものにする予定で、マンチェスター・シティはエリオット・アンダーソンとの契約に自信を持っている。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c9370qyd5pno?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cp8d3xm7x41o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-f353630bab6b'
+  data-themes='スポーツ'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-f353630bab6b')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>The remarkable rise of Chelsea&#x27;s little-known interim boss</h3><div class='summary'>Chelsea&#x27;s interim head coach Calum McFarlane admits this year has been a &quot;whirlwind&quot;, going from obscurity to an FA Cup semi‑final at Wembley.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>チェルシーのあまり知られていない暫定監督の注目すべき台頭</h3><div class='summary'>チェルシーの暫定ヘッドコーチ、カラム・マクファーレンは、今年は無名からウェンブリーでのFAカップ準決勝までの「旋風」だったと認めた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c04xw9q99g2o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-3a1eb8867516'
+  data-themes='スポーツ'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-3a1eb8867516')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Defending champion Alcaraz to miss French Open</h3><div class='summary'>Two-time defending champion Carlos Alcaraz says he will miss next month&#x27;s French Open with an ongoing wrist injury.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ディフェンディングチャンピオンのアルカラス、全仏オープン欠場へ</h3><div class='summary'>2度のディフェンディングチャンピオンであるカルロス・アルカラスは、手首の負傷が続いているため、来月の全仏オープンを欠場すると発表した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/tennis/articles/c15de9d91jwo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-9e6ad7c1c5a4'
+  data-themes='スポーツ'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-9e6ad7c1c5a4')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Bristol go fourth with big win at Newcastle</h3><div class='summary'>Bristol Bears run in eight tries to move back into The Prem&#x27;s top four with a 52-19 win at Newcastle Red Bulls.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ブリストルがニューカッスルに大勝し4位に浮上</h3><div class='summary'>ブリストル・ベアーズは8トライを挙げてニューカッスル・レッドブルズに52-19で勝利し、ザ・プレムのトップ4に返り咲こうとしている。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/rugby-union/articles/c1w4x35d40yo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-51bf67089ae5'
+  data-themes='テクノロジー'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-51bf67089ae5')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Why Wembley is special, for FA Cup semi-finals too</h3><div class='summary'>Tony Pulis explains why getting to Wembley is not just special for any manager, it is still hugely important for players, fans and all the staff at any club.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>FAカップ準決勝でもウェンブリーが特別な理由</h3><div class='summary'>トニー・ピュリスは、ウェンブリーに行くことがどの監督にとっても特別なことではなく、どのクラブの選手、ファン、そしてスタッフ全員にとっても非常に重要である理由を説明します。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cyv1rdz32ego?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-0a90fa72896f'
+  data-themes='スポーツ'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-0a90fa72896f')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Munoz dies from infection six days after crash</h3><div class='summary'>Colombian rider Cristian Camilo Munoz dies from a knee infection following a crash six days ago.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ムニョスさん、事故から6日後に感染症で死亡</h3><div class='summary'>コロンビアのライダー、クリスティアン・カミロ・ムニョスが6日前の事故により膝の感染症で亡くなった。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/cycling/articles/cly0mx0d1lko?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-cc743d0758c3'
+  data-themes='スポーツ'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-cc743d0758c3')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Battling Norrie beats Machac to advance in Madrid</h3><div class='summary'>Briton Cameron Norrie says his gritty victory over Tomas Machac to reach the Madrid Open third round was &quot;one of the favourite matches&quot; of his career.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>マドリードでノリーと対戦、マチャックを破り勝ち進む</h3><div class='summary'>英国人のキャメロン・ノリーは、トーマス・マチャックに対する気の抜けた勝利でマドリード・オープン3回戦に進出したことは、キャリアの中で「お気に入りの試合の1つ」だったと語る。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/tennis/articles/cn08dy9n3d1o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-aaa2ccaf8594'
+  data-themes='テクノロジー'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-aaa2ccaf8594')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Furyk to return as US Ryder Cup captain in 2027</h3><div class='summary'>Jim Furyk is confirmed as captain of the US Ryder Cup team in 2027, when the event takes place in Ireland.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>フューリク、2027年に米国ライダーカップキャプテンとして復帰へ</h3><div class='summary'>ジム・フューリックは、2027年にアイルランドで開催されるライダーカップ米国チームのキャプテンに就任することが決定した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/golf/articles/cz784wpy7nno?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-3e44ca349341'
@@ -4150,7 +4030,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>&#x27;In his shirt!?&#x27; - Pitcher takes 108mph catch with his jersey</h3><div class='summary'>Seattle Mariners&#x27; pitcher Logan Gilbert &quot;wore one&quot; as he stops a sizzling line drive with his shirt.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>「シャツの中!?」 - 投手がジャージーで時速168マイルのキャッチを取る</h3><div class='summary'>シアトル・マリナーズの投手ローガン・ギルバートは、熱いラインドライブをシャツで止める際に「これを着た」。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>「シャツの中!?」 - ピッチャーがジャージーで時速168マイルのキャッチを取る</h3><div class='summary'>シアトル・マリナーズの投手ローガン・ギルバートは、熱いラインドライブをシャツで止めるときに「これを着た」。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.bbc.com/sport/baseball/videos/cwyw9p4xkr3o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -4263,28 +4143,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>詳細はこちら</h3><div class='summary'>最新のニュース、専門家、分析、ファンの意見、統計、ゴシップを入手</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.bbc.com/sport/football/articles/ce8e6y90g2jo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-9f8808b33f00'
-  data-themes='スポーツ'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-9f8808b33f00')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Season has been big learning experience - Trafford</h3><div class='summary'>Goalkeeper James Trafford says this season has been a &quot;big learning experience&quot; and his move to Manchester City &quot;hasn&#x27;t been the best possible outcome&quot;.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>シーズンは大きな学びの経験となった - トラフォード</h3><div class='summary'>ゴールキーパーのジェームス・トラフォードは、今シーズンは「大きな学習経験」であり、マンチェスター・シティへの移籍は「最高の結果ではなかった」と語った。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cje4j4e8dz7o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-0a59a039eae5'
@@ -4409,43 +4267,9 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
     <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-bc7d212310bc')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>岩手 大槌町 山林火災は住宅近く迫る 1000人規模で消火</h3><div class='summary'>岩手県大槌町の山林火災は25日で発生から4日目となりますが、延焼が続いています。町によりますと複数の地区にある住宅の近くまで火が迫っているということで、1000人以上の規模での懸命な消火活動が行われています。</div></div>
+  <div class='lang-pane lang-ja'><h3>岩手 大槌町 山林火災で住宅近くまで火が迫る地点増える</h3><div class='summary'>岩手県大槌町の山林火災は25日で発生から4日目となりますが、延焼が続いています。消防によりますと住宅の近くに火が迫っている地点がさらに増えているということで、1000人以上の規模での消火活動が行われています。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260425/k10015107961000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-1ff92c13c07a'
-  data-themes='総合・国際'
-  data-lang='ja'
-  data-score='2'
-  data-source='NHK'
-  data-sentiment='neutral'
-  data-importance='health_alert'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-1ff92c13c07a')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>8年前の六本木女性殺人事件 国際手配の容疑者逮捕 容疑否認</h3><div class='summary'>8年前、東京・六本木のマンションで当時、29歳の女性が殺害されているのが見つかった事件で、同居していた47歳の男の容疑者が事件後、マレーシアに出国し国際手配されていましたが、25日、現地から移送され、警視庁に殺人の疑いで逮捕されました。容疑を否認しているということです。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260425/k10015108171000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-566a91e7c187'
-  data-themes='スポーツ'
-  data-lang='ja'
-  data-score='2'
-  data-source='NHK'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-566a91e7c187')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>ミラノ・コルティナ五輪パラ 選手がパレード “りくりゅう”も</h3><div class='summary'>ことし冬のミラノ・コルティナオリンピックとパラリンピックに出場した選手たちが応援への感謝の気持ちを表すパレードが25日、都内で行われ、沿道に集まったおよそ5万人の人たちから祝福のことばなどが贈られました。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260425/k10015108131000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-16af7b47fbb8'
@@ -4465,24 +4289,24 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260425/k10015107811000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-8420768f8091'
+  data-cardid='item-b42b0480ad76'
   data-themes='総合・国際'
   data-lang='ja'
   data-score='2'
   data-source='NHK'
-  data-sentiment='neutral'
-  data-importance='health_alert'
+  data-sentiment='bullish'
+  data-importance='neutral'
   data-isnew='false'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-8420768f8091')">既読</button></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-b42b0480ad76')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>国連 中満事務次長「核軍縮議論 各国は合意形成に柔軟姿勢を」</h3><div class='summary'>世界の核軍縮を議論するNPT＝核拡散防止条約の再検討会議を前に国連の軍縮部門トップの中満事務次長は「核軍縮の成果が失われ、逆行の始まりを目にしている」として、これに歯止めをかけるため各国に合意の形成に向けて柔軟な姿勢で臨むよう求めました。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260425/k10015108181000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-ja'><h3>三陸沖 地震後もスロースリップが継続か 専門家</h3><div class='summary'>今月20日に大地震が発生した三陸沖では、去年11月から「微動」と呼ばれる小さな揺れが頻繁に観測され、地震のあと、その「微動」の場所が徐々に移動していることが専門家の分析でわかりました。プレート境界がゆっくりずれ動く「スロースリップ」が場所を変えながら続いている可能性があり、専門家は周辺の地震の起き方に影響しないか注視しています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260425/k10015108231000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-8ca4ef8fd566'
+  data-cardid='item-919771459c7a'
   data-themes='総合・国際'
   data-lang='ja'
   data-score='2'
@@ -4492,11 +4316,62 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   data-isnew='false'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-8ca4ef8fd566')">既読</button></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-919771459c7a')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>後発地震注意情報 “日頃の備え確認を” 沿岸の商業施設で対策</h3><div class='summary'>今月20日にマグニチュード7.7の大地震が起きた三陸沖では、地震活動が続いています。千島海溝・日本海溝沿いでは、巨大地震が発生する可能性がふだんより高まっているとして「北海道・三陸沖後発地震注意情報」が出されていて、気象庁は引き続き、日頃からの備えを確認するよう呼びかけています。</div></div>
+  <div class='lang-pane lang-ja'><h3>JR福知山線脱線事故 “最後の生存者”が語ったこと</h3><div class='summary'>107人が死亡したJR福知山線の脱線事故から25日で21年となり、事故現場では慰霊式が行われました。ことしの慰霊式には、当時、最後の生存者として救出された男性が初めて参列しました。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260425/k10015108001000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260425/k10015108351000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-54904c5b6f72'
+  data-themes='総合・国際'
+  data-lang='ja'
+  data-score='2'
+  data-source='NHK'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-54904c5b6f72')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>篠原勝之さん死去「ゲージツ家のクマさん」の愛称で親しまれる</h3><div class='summary'>テレビ番組などで「ゲージツ家のクマさん」の愛称で親しまれた美術家の篠原勝之さんが今月17日、亡くなりました。84歳でした。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260425/k10015108431000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-8eee637aeaaf'
+  data-themes='市場・ビジネス'
+  data-lang='ja'
+  data-score='2'
+  data-source='NHK'
+  data-sentiment='neutral'
+  data-importance='food_recall'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-8eee637aeaaf')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>東電 次期会長に産業革新投資機構の横尾社長を招く方向で調整</h3><div class='summary'>東京電力ホールディングスは小林喜光会長が退任し、後任に官民ファンド「産業革新投資機構」の横尾敬介社長を招く方向で調整に入りました。東京電力としては、新たな会長のもと、抜本的な経営改善につながる他社との提携を実現できるかが焦点となります。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#e74c3c22;border-color:#e74c3c;color:#e74c3c'>💹 市場・ビジネス</span><span class='tag tag-usd-weak'>💹 市場・ビジネス</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260425/k10015108381000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-b8db4d2401cb'
+  data-themes='スポーツ'
+  data-lang='ja'
+  data-score='2'
+  data-source='NHK'
+  data-sentiment='neutral'
+  data-importance='health_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-b8db4d2401cb')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ブラインドサッカー アジア選手権 男子 日本は準優勝</h3><div class='summary'>大阪市で開催されたブラインドサッカーのアジア選手権は男子の決勝が行われ、日本は中国に0対1で敗れ、準優勝でした。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260425/k10015108411000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-10ae93ed608a'
@@ -4514,6 +4389,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>自民 作業チーム 国旗損壊 外形的行為で処罰を判断の論点整理</h3><div class='summary'>日本の国旗を損壊する行為を罰する法案をめぐり、自民党の作業チームは処罰対象について、思想・信条の自由を尊重する観点から、意図や目的ではなく、外形的に損壊が確認できる行為かどうかで判断するなどとした論点整理をまとめました。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260424/k10015107481000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-a1e9c40144f4'
+  data-themes='スポーツ'
+  data-lang='ja'
+  data-score='2'
+  data-source='NHK 政治'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK 政治</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-a1e9c40144f4')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>冬の五輪パラのメダリスト 高市首相に大会成果を報告</h3><div class='summary'>ミラノ・コルティナオリンピックとパラリンピックでメダルを獲得した日本選手が24日夜、総理大臣官邸を訪れ、高市総理大臣に大会の成果を報告しました。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260424/k10015107781000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-d90832c4bba4'
@@ -5212,7 +5104,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2604/21/news134.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div>
-</div><footer>Smart News Viewer — Generated at 2026-04-25 16:07</footer></body></html>
+</div><footer>Smart News Viewer — Generated at 2026-04-25 22:20</footer></body></html>
 <script>
 var pageLang = 'en';
 function setPageLang(lang) {

@@ -100,7 +100,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='top'>
     <div class='title'>
       <h1>🖥️ IT + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ ITニュースを収集・一覧化</span></h1>
-      <div class='sub'>更新日時：2026-05-19 11:51</div>
+      <div class='sub'>更新日時：2026-05-19 18:30</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -130,17 +130,17 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   
 <div class='fx-summary-grid'>
   <div class='fx-summary-card fx-usd-strong'>
-    <div class='fx-num' style='color:#7c4dff'>130</div>
+    <div class='fx-num' style='color:#7c4dff'>126</div>
     <div class='fx-label'>🤖 AI・データ</div>
     <div class='fx-desc'>AI / Data</div>
   </div>
   <div class='fx-summary-card fx-usd-weak'>
-    <div class='fx-num' style='color:#ff5c5c'>36</div>
+    <div class='fx-num' style='color:#ff5c5c'>37</div>
     <div class='fx-label'>🔐 セキュリティ</div>
     <div class='fx-desc'>Security</div>
   </div>
   <div class='fx-summary-card fx-jpy-strong'>
-    <div class='fx-num' style='color:#00a8ff'>20</div>
+    <div class='fx-num' style='color:#00a8ff'>19</div>
     <div class='fx-label'>☁️ クラウド・基盤</div>
     <div class='fx-desc'>Cloud / Infra</div>
   </div>
@@ -150,7 +150,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='fx-desc'>Developer Tools</div>
   </div>
   <div class='fx-summary-card' style='background:var(--panel2);border-color:var(--line)'>
-    <div class='fx-num' style='color:var(--muted)'>98</div>
+    <div class='fx-num' style='color:var(--muted)'>103</div>
     <div class='fx-label'>➖ その他</div>
     <div class='fx-desc'>General</div>
   </div>
@@ -164,8 +164,208 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
       <input id='searchBoxImportance' class='search' placeholder='タイトル・本文を検索...'>
     </div>
   </div>
-  <div class='fx-tabs'><button class='fx-tab active' data-key='ai_data' style='background:#1a1233;border-color:#7c4dff;color:#fff' onclick="switchFxTab('ai_data',this)">🤖 AI・データ (130)</button><button class='fx-tab ' data-key='security_alert' style='' onclick="switchFxTab('security_alert',this)">🔐 セキュリティ (36)</button><button class='fx-tab ' data-key='cloud_platform' style='' onclick="switchFxTab('cloud_platform',this)">☁️ クラウド・基盤 (20)</button><button class='fx-tab ' data-key='developer_tools' style='' onclick="switchFxTab('developer_tools',this)">🛠️ 開発ツール (42)</button></div>
+  <div class='fx-tabs'><button class='fx-tab active' data-key='ai_data' style='background:#1a1233;border-color:#7c4dff;color:#fff' onclick="switchFxTab('ai_data',this)">🤖 AI・データ (126)</button><button class='fx-tab ' data-key='security_alert' style='' onclick="switchFxTab('security_alert',this)">🔐 セキュリティ (37)</button><button class='fx-tab ' data-key='cloud_platform' style='' onclick="switchFxTab('cloud_platform',this)">☁️ クラウド・基盤 (19)</button><button class='fx-tab ' data-key='developer_tools' style='' onclick="switchFxTab('developer_tools',this)">🛠️ 開発ツール (42)</button></div>
   <div class='fx-panel active' id='fx-ai_data'><div class='grid'>
+<article class='card item-card'
+  data-cardid='item-dcda6221823e'
+  data-themes='AI・機械学習|クラウド・インフラ|セキュリティ|データ・分析|ハードウェア・半導体'
+  data-lang='en'
+  data-score='5'
+  data-source='InfoQ'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>InfoQ</span><span>2026-05-19 09:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-dcda6221823e')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Article: Kernel-Level Ground Truth: Why eBPF is Replacing User-Space Agents for Security Observability</h3><div class='summary'>eBPF is emerging as a preferred method for security observability over traditional user-space agents. By attaching probes directly to the Linux kernel&#x27;s syscall interface, it provides consistent visibility even during container-level compromises. eBPF reduces security-related CPU consumption and lim</div></div>
+<div class='lang-pane lang-ja hidden'><h3>記事: カーネルレベルのグラウンドトゥルース: セキュリティ可観測性のために eBPF がユーザースペースエージェントを置き換える理由</h3><div class='summary'>eBPF は、従来のユーザー空間エージェントよりもセキュリティの可観測性を実現するための推奨される方法として浮上しています。プローブを Linux カーネルの syscall インターフェイスに直接接続することにより、コンテナ レベルの侵害時でも一貫した可視性が提供されます。 eBPF はセキュリティ関連の CPU 消費量と制限を削減します</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.infoq.com/articles/ebpf-for-security-observability/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-910b7f02d088'
+  data-themes='AI・機械学習|データ・分析|ハードウェア・半導体|企業・業界動向'
+  data-lang='ja'
+  data-score='4'
+  data-source='ZDNET Japan'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ZDNET Japan</span><span>2026-05-19 08:48</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-910b7f02d088')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>デル、「Dell Deskside Agentic AI」を発表--AIとデータの主導権は「企業が握れ！」</h3><div class='summary'>デルの年次カンファレンス「Dell Technologies World 2026」が開幕した。初日はNVIDIA CEOのJensen Huang氏も登場するなど両社の緊密ぶりをアピールした。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://japan.zdnet.com/article/35247694/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-869d5d06c173'
+  data-themes='AI・機械学習'
+  data-lang='en'
+  data-score='1'
+  data-source='The Register'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-05-19 08:30</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-869d5d06c173')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>The class of 2026 has heard enough about AI, thanks</h3><div class='summary'>From campus ceremonies to Linux communities and academic journals, resistance to LLM evangelism is getting louder</div></div>
+<div class='lang-pane lang-ja hidden'><h3>2026 年卒業生は AI について十分に聞いてきました、ありがとう</h3><div class='summary'>キャンパスの式典から Linux コミュニティや学術雑誌に至るまで、LLM の伝道に対する抵抗が大きくなっています</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://www.theregister.com/ai-ml/2026/05/19/the-class-of-2026-has-heard-enough-about-ai-thanks/5242080' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-39778e725b16'
+  data-themes='AI・機械学習|開発ツール・DevOps'
+  data-lang='en'
+  data-score='4'
+  data-source='InfoQ'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>InfoQ</span><span>2026-05-19 06:57</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-39778e725b16')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Vite Version 8: Unified Rust-Based Bundler and Up to 30x Faster Builds</h3><div class='summary'>Vite 8.0 introduces a significant architectural change, migrating from a dual-bundler setup to a single Rust-based bundler called Rolldown. This update enhances build speeds, reporting reductions from 46 seconds to 6 seconds in some projects. The release includes developer experience improvements an</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Vite バージョン 8: 統合された Rust ベースのバンドラーと最大 30 倍高速なビルド</h3><div class='summary'>Vite 8.0 では、アーキテクチャに大きな変更が加えられ、デュアル バンドラー セットアップから Rolldown と呼ばれる単一の Rust ベースのバンドラーに移行しました。このアップデートによりビルド速度が向上し、一部のプロジェクトでは 46 秒から 6 秒に短縮されたことが報告されています。このリリースには、開発者エクスペリエンスの改善が含まれています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.infoq.com/news/2026/05/vite-v8-rust/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-b616889821e1'
+  data-themes='AI・機械学習|クラウド・インフラ|ハードウェア・半導体'
+  data-lang='en'
+  data-score='4'
+  data-source='The Register'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-05-19 06:52</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-b616889821e1')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Baidu says the quiet part out loud – you can’t build AI infrastructure, so clouds can cash in</h3><div class='summary'>CFO says GPU rentals are ‘structurally higher margin than CPU cloud’</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Baidu は静かな部分を大声で言います – AI インフラストラクチャを構築することはできないので、クラウドで利益を得ることができます</h3><div class='summary'>CFOはGPUレンタルは「構造的にCPUクラウドより利益率が高い」と語る</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.theregister.com/off-prem/2026/05/19/baidu-says-the-quiet-part-out-loud-you-cant-build-ai-infrastructure-so-clouds-can-cash-in/5242344' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-41ca2bba2315'
+  data-themes='データ・分析|企業・業界動向'
+  data-lang='ja'
+  data-score='5'
+  data-source='ZDNET Japan'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ZDNET Japan</span><span>2026-05-19 06:19</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-41ca2bba2315')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>SMBC、富士通、ソフトバンクが「国産ヘルスケア基盤」構築で提携--医療費増大の「2040年問題」に挑む</h3><div class='summary'>三井住友フィナンシャルグループ、富士通、ソフトバンクの3社は、持続可能な医療の実現に向けた業務提携を発表した 。医療費増大が懸念される「2040年問題」を見据え、個人の健康データと医療データを統合・活用する「国産ヘルスケア基盤」を共同で構築する。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://japan.zdnet.com/article/35247680/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-67e554abf999'
+  data-themes='AI・機械学習|企業・業界動向'
+  data-lang='en'
+  data-score='2'
+  data-source='TechCrunch'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span>2026-05-19 05:50</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-67e554abf999')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Theo Baker spent four years investigating Stanford. Before he leaves, here’s what he found.</h3><div class='summary'>&quot;There&#x27;s a common refrain among [young] people in this world that it&#x27;s easier to raise money for a startup right now than to get an internship. Which is remarkable, right?&quot;</div></div>
+<div class='lang-pane lang-ja hidden'><h3>テオ・ベイカーはスタンフォードを調査するのに4年を費やした。彼が出発する前に、これが彼が見つけたものです。</h3><div class='summary'>「この世界の若者の間では、インターンシップに参加するよりもスタートアップのために資金を集めるほうが簡単だという考えが一般的です。これは驚くべきことですよね?」</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://techcrunch.com/2026/05/18/theo-baker-spent-four-years-investigating-stanford-before-he-leaves-heres-what-he-found/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-5d5ea3d60d61'
+  data-themes='AI・機械学習|データ・分析'
+  data-lang='en'
+  data-score='2'
+  data-source='The Register'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-05-19 04:27</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-5d5ea3d60d61')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Iran hints it could interfere with submarine cables in the Strait of Hormuz</h3><div class='summary'>Threatens unspecified ‘fees’ and warns of economic consequences – yet only major kinetic action could stop data flows entirely</div></div>
+<div class='lang-pane lang-ja hidden'><h3>イラン、ホルムズ海峡の海底ケーブルに干渉する可能性を示唆</h3><div class='summary'>不特定の「料金」を脅迫し、経済的影響を警告しますが、データの流れを完全に止めることができるのは大規模な動的アクションのみです</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.theregister.com/networks/2026/05/19/iran-hints-it-could-interfere-with-submarine-cables-in-the-strait-of-hormuz/5242319' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-d562aa62b6a7'
+  data-themes='AI・機械学習|開発ツール・DevOps'
+  data-lang='ja'
+  data-score='4'
+  data-source='ITmedia NEWS 国内'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS 国内</span><span>2026-05-19 03:55</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-d562aa62b6a7')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「WWDC26」は6月9日午前2時（日本時間）から Appleがスケジュール公開 新OSなど披露か</h3><div class='summary'>米Appleは5月18日（現地時間）、毎年恒例の年次開発者会議「WWDC26」の詳細スケジュールを発表した。初日の6月8日午前10時（日本時間6月9日午前2時）から行われる基調講演を皮切りに、AI関連における進化や新しいソフトウェア、デベロッパーツールなどの最新アップデートを披露する。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/19/news081.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-0c343e1236ad'
+  data-themes='AI・機械学習|開発ツール・DevOps'
+  data-lang='ja'
+  data-score='4'
+  data-source='CodeZine'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CodeZine</span><span>2026-05-19 03:30</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-0c343e1236ad')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Sansan、国産生成AIプロジェクト「GENIAC」で開発したモデルを自社サービスに実装</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://codezine.jp/article/detail/24263' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
 <article class='card item-card'
   data-cardid='item-9cd1e3347b76'
   data-themes='AI・機械学習|企業・業界動向'
@@ -588,8 +788,8 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/mag/ne/18/00001/00650/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-ca3f388758b7'
-  data-themes='AI・機械学習|開発ツール・DevOps|企業・業界動向'
+  data-cardid='item-fcfdfd1bb956'
+  data-themes='AI・機械学習|ハードウェア・半導体'
   data-lang='ja'
   data-score='2'
   data-source='日経XTECH'
@@ -598,79 +798,11 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   data-isnew='false'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-18 20:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-ca3f388758b7')">既読</button></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-fcfdfd1bb956')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>日産長期戦略「AIを最大限に生かす」、E2E自動運転モデル9割へ</h3><div class='summary'>日産自動車はEnd-to-End（E2E）自動運転技術を今後の成長の柱に据える。将来的に全モデルの9割にE2E技術を採用する方針を明らかにした。新車の開発や部品調達についてはハードウエアとソフトウエアのプラットフォーム（PF）を集約し、部品の種類を7割削減する。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/mag/ne/18/00001/00646/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-419ca1ee8008'
-  data-themes='AI・機械学習|クラウド・インフラ|データ・分析'
-  data-lang='ja'
-  data-score='2'
-  data-source='日経XTECH'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-18 20:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-419ca1ee8008')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>乱立するAIエージェント、富士フイルムBIの勝算「嘘はデータ構造化で防ぐ」</h3><div class='summary'>富士フイルムビジネスイノベーション（富士フイルムBI、旧富士ゼロックス）は、複合機事業に加えて文書関連システムやクラウドサービスの提供を強化している。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/mag/ne/18/00007/00333/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-c203f6aa3773'
-  data-themes='AI・機械学習|開発ツール・DevOps|データ・分析'
-  data-lang='ja'
-  data-score='2'
-  data-source='日経XTECH'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-18 20:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-c203f6aa3773')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>デンソーがE2E自動運転向けにVLA内製へ、CTO「レベル4相当目指す」</h3><div class='summary'>デンソーはEnd-to-End（E2E）自動運転の次世代技術であるVLA（Vision Language Action）モデルを自社で開発していることを明らかにした。E2EのAI（人工知能）モデルとこれまで培ったルールベースの安全ソフトウエアなどを組み合わせて信頼性を高め、人の監視がいらない「レベル4」相当の技術の確立を目指す。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/mag/ne/18/00001/00644/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-b72902f8d119'
-  data-themes='AI・機械学習|クラウド・インフラ|データ・分析'
-  data-lang='ja'
-  data-score='2'
-  data-source='日経XTECH'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-18 20:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-b72902f8d119')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>ルネサス、初の双方向GaNスイッチ AIデータセンターや太陽光発電狙う ほか</h3><div class='summary'>ルネサスエレクトロニクスは同社初となる双方向のGaN（窒化ガリウム）スイッチを発売し、量産を始めた。耐圧は650Vで、AI（人工知能）データセンターの電源や、太陽光発電向けマイクロインバーター、車載オンボードチャージャーなどを狙う。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/mag/ne/18/00106/00030/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-8afeeb6fb39d'
-  data-themes='AI・機械学習|企業・業界動向'
-  data-lang='ja'
-  data-score='2'
-  data-source='日経XTECH'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-18 20:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-8afeeb6fb39d')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>三菱電機も出資するユニコーン予備軍の燈、フィジカルAI「26年内に」</h3><div class='summary'>東京大学発のAI（人工知能）スタートアップ、燈（あかり、東京・千代田）は三菱電機から50億円を調達し、企業評価額は1000億円を超えた。企業価値が10億ドル（約1500億円）以上の未上場企業「ユニコーン」の数は国内では1桁台にとどまるとの推計がある中で、燈が「ユニコーン予備軍」として存在感を高めている。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/mag/ne/18/00001/00662/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-ja'><h3>Excel関数はうろ覚えでOK、ChatGPTにファイルを渡せば数式を自動入力</h3><div class='summary'>日経PC21は創刊以来30年にわたってExcel関数の使い方を解説してきたが、生成AIを使うとやりたいことを文章で伝えるだけで、適切な関数を自動入力したファイルを仕上げてくれる。いちいち自分で関数を入力する手間を省くことができるのだ。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/03588/041400009/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-f7049e614987'
@@ -707,8 +839,8 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/mag/ne/18/00001/00651/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-fcfdfd1bb956'
-  data-themes='AI・機械学習|ハードウェア・半導体'
+  data-cardid='item-8afeeb6fb39d'
+  data-themes='AI・機械学習|企業・業界動向'
   data-lang='ja'
   data-score='2'
   data-source='日経XTECH'
@@ -717,11 +849,79 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   data-isnew='false'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-18 20:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-fcfdfd1bb956')">既読</button></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-8afeeb6fb39d')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>Excel関数はうろ覚えでOK、ChatGPTにファイルを渡せば数式を自動入力</h3><div class='summary'>日経PC21は創刊以来30年にわたってExcel関数の使い方を解説してきたが、生成AIを使うとやりたいことを文章で伝えるだけで、適切な関数を自動入力したファイルを仕上げてくれる。いちいち自分で関数を入力する手間を省くことができるのだ。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/03588/041400009/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-ja'><h3>三菱電機も出資するユニコーン予備軍の燈、フィジカルAI「26年内に」</h3><div class='summary'>東京大学発のAI（人工知能）スタートアップ、燈（あかり、東京・千代田）は三菱電機から50億円を調達し、企業評価額は1000億円を超えた。企業価値が10億ドル（約1500億円）以上の未上場企業「ユニコーン」の数は国内では1桁台にとどまるとの推計がある中で、燈が「ユニコーン予備軍」として存在感を高めている。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/mag/ne/18/00001/00662/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-ca3f388758b7'
+  data-themes='AI・機械学習|開発ツール・DevOps|企業・業界動向'
+  data-lang='ja'
+  data-score='2'
+  data-source='日経XTECH'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-18 20:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-ca3f388758b7')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>日産長期戦略「AIを最大限に生かす」、E2E自動運転モデル9割へ</h3><div class='summary'>日産自動車はEnd-to-End（E2E）自動運転技術を今後の成長の柱に据える。将来的に全モデルの9割にE2E技術を採用する方針を明らかにした。新車の開発や部品調達についてはハードウエアとソフトウエアのプラットフォーム（PF）を集約し、部品の種類を7割削減する。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/mag/ne/18/00001/00646/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-c203f6aa3773'
+  data-themes='AI・機械学習|開発ツール・DevOps|データ・分析'
+  data-lang='ja'
+  data-score='2'
+  data-source='日経XTECH'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-18 20:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-c203f6aa3773')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>デンソーがE2E自動運転向けにVLA内製へ、CTO「レベル4相当目指す」</h3><div class='summary'>デンソーはEnd-to-End（E2E）自動運転の次世代技術であるVLA（Vision Language Action）モデルを自社で開発していることを明らかにした。E2EのAI（人工知能）モデルとこれまで培ったルールベースの安全ソフトウエアなどを組み合わせて信頼性を高め、人の監視がいらない「レベル4」相当の技術の確立を目指す。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/mag/ne/18/00001/00644/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-b72902f8d119'
+  data-themes='AI・機械学習|クラウド・インフラ|データ・分析'
+  data-lang='ja'
+  data-score='2'
+  data-source='日経XTECH'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-18 20:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-b72902f8d119')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ルネサス、初の双方向GaNスイッチ AIデータセンターや太陽光発電狙う ほか</h3><div class='summary'>ルネサスエレクトロニクスは同社初となる双方向のGaN（窒化ガリウム）スイッチを発売し、量産を始めた。耐圧は650Vで、AI（人工知能）データセンターの電源や、太陽光発電向けマイクロインバーター、車載オンボードチャージャーなどを狙う。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/mag/ne/18/00106/00030/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-419ca1ee8008'
+  data-themes='AI・機械学習|クラウド・インフラ|データ・分析'
+  data-lang='ja'
+  data-score='2'
+  data-source='日経XTECH'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-18 20:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-419ca1ee8008')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>乱立するAIエージェント、富士フイルムBIの勝算「嘘はデータ構造化で防ぐ」</h3><div class='summary'>富士フイルムビジネスイノベーション（富士フイルムBI、旧富士ゼロックス）は、複合機事業に加えて文書関連システムやクラウドサービスの提供を強化している。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/mag/ne/18/00007/00333/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-9cd90025f270'
@@ -741,23 +941,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/03384/042300014/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-e11097f657fe'
-  data-themes='AI・機械学習|クラウド・インフラ'
-  data-lang='ja'
-  data-score='2'
-  data-source='日経XTECH'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-18 20:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-e11097f657fe')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>日本ペイントG、コンテナ船積計画にAIエージェント 作業時間を76％削減</h3><div class='summary'>日本ペイントグループが輸出塗料のコンテナ船積計画を自動化するAI（人工知能）エージェントの活用を進めている。2026年5月までに、従来の積載効率を維持しつつ、1カ月当たりの計画作成時間を76％短縮した。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/00001/11744/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-08eb0862d790'
   data-themes='AI・機械学習|企業・業界動向'
   data-lang='ja'
@@ -773,6 +956,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>武田軍も鉄砲を持っていた、「強者が変われない」構図が今のAI戦略に重なる</h3><div class='summary'>「なんでこっち（武田軍）は、鉄砲を使わなかったの？」――。とある週末、6歳の息子と歴史漫画を読んでいたとき、そんな質問が飛んできた。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/00138/051502019/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-e11097f657fe'
+  data-themes='AI・機械学習|クラウド・インフラ'
+  data-lang='ja'
+  data-score='2'
+  data-source='日経XTECH'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-18 20:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-e11097f657fe')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>日本ペイントG、コンテナ船積計画にAIエージェント 作業時間を76％削減</h3><div class='summary'>日本ペイントグループが輸出塗料のコンテナ船積計画を自動化するAI（人工知能）エージェントの活用を進めている。2026年5月までに、従来の積載効率を維持しつつ、1カ月当たりの計画作成時間を76％短縮した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/00001/11744/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-cee509607325'
@@ -1144,7 +1344,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Presentation: Product Thinking for Cloud Native Engineers</h3><div class='summary'>Stéphane Di Cesare and Cat Morris share how engineers can move from being a &quot;cost center&quot; to a value driver using product discovery. They explain the &quot;Double Diamond&quot; framework and why identifying user problems must precede building solutions. Learn to choose the right metrics, build customer empath</div></div>
-<div class='lang-pane lang-ja hidden'><h3>プレゼンテーション: クラウド ネイティブ エンジニアのための製品思考</h3><div class='summary'>Stéphane Di Cesare と Cat Morris が、製品発見を使用してエンジニアが「コスト センター」から価値推進者にどのように移行できるかを共有します。彼らは、「ダブル ダイヤモンド」フレームワークと、ソリューションを構築する前にユーザーの問題を特定する必要がある理由を説明します。適切な指標の選択を学び、顧客共感を構築する</div></div>
+<div class='lang-pane lang-ja hidden'><h3>プレゼンテーション: クラウド ネイティブ エンジニアのための製品思考</h3><div class='summary'>Stéphane Di Cesare と Cat Morris が、製品発見を使用してエンジニアが「コスト センター」から価値推進者にどのように移行できるかを共有します。彼らは、「ダブル ダイヤモンド」フレームワークと、ソリューションを構築する前にユーザーの問題を特定する必要がある理由を説明しています。適切な指標の選択を学び、顧客共感を構築する</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.infoq.com/presentations/product-cloud-native/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -1254,7 +1454,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Navigation API Reaches Baseline Newly Available as Replacement to the History API</h3><div class='summary'>The Navigation API is a new interface for managing client-side navigation in single-page applications, now available in major browsers as of January 2026. It addresses limitations of the prior History API by providing a unified event model and improved history management. Key features include the na</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ナビゲーション API がベースラインに達し、履歴 API の代替として新たに利用可能になりました</h3><div class='summary'>Navigation API は、シングルページ アプリケーションでクライアント側のナビゲーションを管理するための新しいインターフェイスであり、2026 年 1 月の時点で主要なブラウザで利用できるようになりました。統合されたイベント モデルと改善された履歴管理を提供することで、以前の History API の制限に対処します。主な機能には次のものが含まれます。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ナビゲーション API がベースラインに達し、履歴 API の代替として新たに利用可能になりました</h3><div class='summary'>Navigation API は、シングルページ アプリケーションでクライアント側のナビゲーションを管理するための新しいインターフェイスであり、2026 年 1 月の時点で主要なブラウザーで利用できるようになりました。統合されたイベント モデルと改善された履歴管理を提供することで、以前の History API の制限に対処します。主な機能には次のものが含まれます。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.infoq.com/news/2026/05/navigation-api-browser/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -1302,12 +1502,12 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   data-themes='AI・機械学習|クラウド・インフラ|データ・分析'
   data-lang='ja'
   data-score='5'
-  data-source='ITmedia NEWS 企業・業界動向'
+  data-source='ITmedia NEWS 国内'
   data-sentiment='neutral'
   data-importance='ai_data'
   data-isnew='false'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS 企業・業界動向</span><span>2026-05-18 05:38</span></div>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS 国内</span><span>2026-05-18 05:38</span></div>
     <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-af21bd4ba118')">既読</button></div>
   </div>
   <div class='lang-pane lang-ja'><h3>日立製作所の「HMAX」 センサーでデータ収集、AIが解析 保守作業など効率化</h3><div class='summary'>人手不足やインフラの老朽化への対応で、保守・点検作業で鉄道事業者が直面するさまざまな課題に対し、デジタルトランスフォーメーション（DX）やAIを活用する動きが広がっている。日立製作所は、電車の車両などにセンサーを取り付け、膨大なデータを収集し、高性能のAIが分析。保守作業や運用を効率化するソリューションサービス「HMAX」を展開する。</div></div>
@@ -1422,23 +1622,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/15/news115.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-2cb29ea97efb'
-  data-themes='その他'
-  data-lang='ja'
-  data-score='4'
-  data-source='CodeZine'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CodeZine</span><span>2026-05-17 23:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-2cb29ea97efb')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>Anthropicは、Claude Codeのセッションを管理できる「Agent view」を導入</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://codezine.jp/article/detail/24235' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-b75314c7f64d'
   data-themes='AI・機械学習|クラウド・インフラ|データ・分析|企業・業界動向'
   data-lang='ja'
@@ -1456,23 +1639,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://japan.zdnet.com/article/35247351/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-f80d767266d7'
-  data-themes='企業・業界動向'
-  data-lang='ja'
-  data-score='1'
-  data-source='ZDNET Japan'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ZDNET Japan</span><span>2026-05-17 22:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-f80d767266d7')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>脱炭素は本当にコスト？ 取り組み出した企業で起きていること</h3><div class='summary'>企業や組織で脱炭素経営への取り組みや温室効果ガス排出量などの情報開示が求められる昨今、課題も顕在化している。この連載では、脱炭素経営を推進する意義や効果などを解説する。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://japan.zdnet.com/article/35247350/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-8abbb071fe48'
   data-themes='AI・機械学習|開発ツール・DevOps'
   data-lang='ja'
@@ -1488,6 +1654,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>「Red Hat Desktop」と「Fedora Hummingbird」を比較--あなたのAI開発に最適なのは？</h3><div class='summary'>Red HatがAIプログラマー向けに特別に設計された2種類の「Linux」デスクトップ製品を発表した。強化された「Red Hat Advanced Developer Suite」を搭載した「Red Hat Desktop」と、「Fedora Hummingbird Linux」だ。本稿では、これらの製品について、知っておくべきことを解説する。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://japan.zdnet.com/article/35247562/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-f80d767266d7'
+  data-themes='企業・業界動向'
+  data-lang='ja'
+  data-score='1'
+  data-source='ZDNET Japan'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ZDNET Japan</span><span>2026-05-17 22:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-f80d767266d7')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>脱炭素は本当にコスト？ 取り組み出した企業で起きていること</h3><div class='summary'>企業や組織で脱炭素経営への取り組みや温室効果ガス排出量などの情報開示が求められる昨今、課題も顕在化している。この連載では、脱炭素経営を推進する意義や効果などを解説する。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://japan.zdnet.com/article/35247350/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-5ffbcd2eae2e'
@@ -1551,23 +1734,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/03588/041400008/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-2e913d26271a'
-  data-themes='AI・機械学習'
-  data-lang='ja'
-  data-score='1'
-  data-source='日経XTECH'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-17 20:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-2e913d26271a')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>真実を見抜く「ファクト眼」が、AI時代には必要になる</h3><div class='summary'>フェイク（嘘）を見破ることはもちろん、目の前の情報や出来事を、感情や先入観に流されず冷静にファクト（事実）だけを見て判断できる能力のこと。さらに、あふれる情報の中から自分にとって価値のある情報を抜き出し、それ以外の情報はノイズとして脳から捨てることができる能力のこと。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/03605/042800001/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-0fa09957e9b2'
   data-themes='AI・機械学習'
   data-lang='ja'
@@ -1583,6 +1749,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>フィジカルAIで問われるマーケティングの力、日本のロボット産業に期待</h3><div class='summary'>フィジカルAI（人工知能）という言葉を聞く機会が増えている。ロボットや機械に搭載し、センサーなどから得られる情報から認識・判断し、物理的な動きを生成するAI、といった意味合いがある。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/00138/051302018/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-2e913d26271a'
+  data-themes='AI・機械学習'
+  data-lang='ja'
+  data-score='1'
+  data-source='日経XTECH'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-17 20:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-2e913d26271a')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>真実を見抜く「ファクト眼」が、AI時代には必要になる</h3><div class='summary'>フェイク（嘘）を見破ることはもちろん、目の前の情報や出来事を、感情や先入観に流されず冷静にファクト（事実）だけを見て判断できる能力のこと。さらに、あふれる情報の中から自分にとって価値のある情報を抜き出し、それ以外の情報はノイズとして脳から捨てることができる能力のこと。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/03605/042800001/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-0687ec213c6d'
@@ -1712,7 +1895,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Enough with the AI FOMO, go slow-mo, says Domo CDO</h3><div class='summary'>You&#x27;re not the only one annoyed by the hype</div></div>
-<div class='lang-pane lang-ja hidden'><h3>AI FOMO はもういい、スローモーションでいきましょう、と Domo CDO は言います</h3><div class='summary'>誇大宣伝にイライラしているのはあなただけではありません</div></div>
+<div class='lang-pane lang-ja hidden'><h3>AI FOMO はもういい、スローモーションで行こう、と Domo CDO が言う</h3><div class='summary'>誇大宣伝にイライラしているのはあなただけではありません</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://www.theregister.com/ai-ml/2026/05/17/enough-with-the-ai-fomo-go-slow-mo-says-domo-cdo/5240840' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -1737,40 +1920,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>募集: 英国の学校のデジタル責任者。データ、AI、具体的な問題を楽しむ必要がある</h3><div class='summary'>RAAC の準備はできていますか?</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.theregister.com/public-sector/2026/05/17/wanted-digital-chief-for-englands-schools-must-enjoy-data-ai-and-concrete-problems/5240242' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-41952a7c698d'
-  data-themes='AI・機械学習'
-  data-lang='ja'
-  data-score='2'
-  data-source='CodeZine'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CodeZine</span><span>2026-05-17 06:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-41952a7c698d')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>Amazon Bedrockが高度なプロンプト最適化・移行ツールを発表</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://codezine.jp/article/detail/24242' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-f39db22569a5'
-  data-themes='データ・分析'
-  data-lang='ja'
-  data-score='5'
-  data-source='CodeZine'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CodeZine</span><span>2026-05-17 03:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-f39db22569a5')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>Skillsの日本語専用データベース「Agent Skills by ALSEL」が公開</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://codezine.jp/article/detail/24240' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-859b70ce116b'
@@ -1922,31 +2071,9 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>OpenAI co-founder Greg Brockman takes charge of product strategy</h3><div class='summary'>OpenAI&#x27;s latest shake-up comes as the company reportedly plans to combine ChatGPT and its programming product Codex.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>OpenAI 共同創設者 Greg Brockman が製品戦略を担当</h3><div class='summary'>OpenAIの最新の刷新は、同社がChatGPTとそのプログラミング製品Codexを統合する計画があると伝えられている中で行われた。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>OpenAI 共同創設者 Greg Brockman が製品戦略を担当</h3><div class='summary'>OpenAIの最新の刷新は、同社がChatGPTとそのプログラミング製品Codexを統合する計画であると伝えられている中で行われた。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://techcrunch.com/2026/05/16/openai-co-founder-greg-brockman-reportedly-takes-charge-of-product-strategy/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-e0a063b7a71f'
-  data-themes='AI・機械学習|ハードウェア・半導体'
-  data-lang='en'
-  data-score='2'
-  data-source='TechCrunch'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span>2026-05-16 15:00</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-e0a063b7a71f')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>$60B AI chip darling Cerebras almost died early on, burning $8M a month</h3><div class='summary'>Cerebras Systems was 2026&#x27;s biggest tech IPO so far. But years ago, it burned through hundreds of millions working on a chip many believed impossible.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>600億ドルのAIチップ最愛のCerebrasは、月に800万ドルを消費し、早期に死にかけた</h3><div class='summary'>Cerebras Systemsは、これまでのところ2026年最大のテクノロジーIPOとなった。しかし何年も前、多くの人が不可能だと信じていたチップの開発に何億人もの人が費やされました。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://techcrunch.com/2026/05/16/60b-ai-chip-darling-cerebras-almost-died-early-on-burning-8m-a-month/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-cfb7bb1c2122'
@@ -1988,7 +2115,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>One in seven Brits swapped their GP for ChatGPT, study finds</h3><div class='summary'>Patients are using chatbots for medical advice, while the NHS is still debating where AI belongs</div></div>
-<div class='lang-pane lang-ja hidden'><h3>英国人の7人に1人が主治医をChatGPTに交換したことが研究で判明</h3><div class='summary'>患者は医療アドバイスのためにチャットボットを使用しているが、NHS は AI がどこに属するかを未だに議論している</div></div>
+<div class='lang-pane lang-ja hidden'><h3>英国人の7人に1人が主治医をChatGPTに交換したことが研究で判明</h3><div class='summary'>患者は医療アドバイスのためにチャットボットを使用しているが、NHS は AI がどこに属するかをまだ議論している</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://www.theregister.com/ai-ml/2026/05/16/one-in-seven-brits-swapped-their-gp-for-chatgpt-study-finds/5240514' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -2044,7 +2171,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Datacenters slurping up so much juice they boosted prices 75% in largest US energy market</h3><div class='summary'>BYO power for AI bit barns may be the best way to ease the problem, says energy watchdog</div></div>
-<div class='lang-pane lang-ja hidden'><h3>データセンターが大量のジュースを飲み込み、米国最大のエネルギー市場で価格を 75% 押し上げた</h3><div class='summary'>AIビットバーンのBYO電源は問題を軽減する最良の方法かもしれない、とエネルギー監視機関は言う</div></div>
+<div class='lang-pane lang-ja hidden'><h3>データセンターが大量のジュースを飲み込み、米国最大のエネルギー市場で価格を 75% 押し上げた</h3><div class='summary'>AIビットバーンのBYO電力は問題を軽減する最良の方法かもしれない、とエネルギー監視機関は言う</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.theregister.com/on-prem/2026/05/15/datacenters-slurping-juice-help-drive-75-jump-in-pjm-power-prices/5241491' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -2115,28 +2242,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.theregister.com/personal-tech/2026/05/15/localsend-puts-your-sneakernet-out-of-business/5241407' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-b8d3a65e21b8'
-  data-themes='AI・機械学習|クラウド・インフラ|データ・分析'
-  data-lang='en'
-  data-score='5'
-  data-source='InfoQ'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>InfoQ</span><span>2026-05-15 14:04</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-b8d3a65e21b8')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Cloudflare Introduces Workflows V2 with Deterministic Execution and 50K Concurrent Workflows</h3><div class='summary'>Cloudflare introduces Workflows V2, a redesigned distributed workflow orchestration system with deterministic replayable execution, improved observability, and major scaling upgrades, including 50,000 concurrent instances and 2M queued workflows. It supports AI agents, data pipelines, and background</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Cloudflare、確定的実行と50Kの同時ワークフローを備えたワークフローV2を発表</h3><div class='summary'>Cloudflareは、再設計された分散ワークフローオーケストレーションシステムであるWorkflows V2を導入します。これは、確定的な再生可能な実行、可観測性の向上、および50,000の同時インスタンスと2Mのキューワークフローを含む大幅なスケーリングアップグレードを備えています。 AI エージェント、データ パイプライン、バックグラウンドをサポートします</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://www.infoq.com/news/2026/05/cloudflare-workflows-v2-release/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-131a92cd9c51'
   data-themes='AI・機械学習|ハードウェア・半導体'
   data-lang='en'
@@ -2157,111 +2262,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>Anthropic、アンクル・サム、2028年までに中国のAI野望を膝で阻止するよう主張</h3><div class='summary'>クロード・メイカー氏、ワシントンがチップとモデルの管理を強化しない限り、独裁政権が規則を定める可能性があると警告</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.theregister.com/ai-ml/2026/05/15/anthropic-urges-uncle-sam-to-kneecap-chinas-ai-ambitions-before-2028/5241201' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-ba14a5f7c5ce'
-  data-themes='AI・機械学習|クラウド・インフラ|企業・業界動向'
-  data-lang='en'
-  data-score='5'
-  data-source='The Register'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-05-15 10:26</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-ba14a5f7c5ce')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>ZTE showcases at GSMA M360 LATAM 2026, driving future business model restructuring - AI &amp; network two-way integration</h3><div class='summary'>AI-integrated networks can cut costs, boost 5G efficiency, and help regional telcos shift beyond basic connectivity</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ZTE、GSMA M360 LATAM 2026で展示、将来のビジネスモデル再構築を推進 - AIとネットワークの双方向統合</h3><div class='summary'>AI 統合ネットワークはコストを削減し、5G の効率を高め、地域の通信会社が基本的な接続を超えた移行を支援できる</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://www.theregister.com/networks/2026/05/15/zte-showcases-at-gsma-m360-latam-2026-driving-future-business-model-restructuring-ai-network-two-way-integration/5240254' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-e55e1cea1c1a'
-  data-themes='AI・機械学習|セキュリティ'
-  data-lang='en'
-  data-score='2'
-  data-source='The Register'
-  data-sentiment='bearish'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-05-15 10:08</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-e55e1cea1c1a')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>OpenAI caught in TanStack npm supply chain chaos after employee devices compromised</h3><div class='summary'>Attackers stole a limited amount of internal credential material after malware hidden in poisoned packages reached two staff machines</div></div>
-<div class='lang-pane lang-ja hidden'><h3>OpenAI、従業員のデバイスが侵害され、TanStack npm サプライ チェーンの混乱に巻き込まれる</h3><div class='summary'>毒入りパッケージに隠されたマルウェアが 2 台のスタッフ マシンに到達した後、攻撃者は限られた量の内部認証情報を盗みました</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.theregister.com/security/2026/05/15/openai-caught-in-tanstack-npm-supply-chain-chaos-after-employee-devices-compromised/5241019' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-bd81c3db424b'
-  data-themes='AI・機械学習'
-  data-lang='ja'
-  data-score='1'
-  data-source='ITmedia NEWS 国内'
-  data-sentiment='bullish'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS 国内</span><span>2026-05-15 09:55</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-bd81c3db424b')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>「Xperia」の新AI機能を紹介したポストが海外で「最高の反AI広告だ」と物議 ソニーの説明は？</h3><div class='summary'>ソニーのスマートフォン「Xperia」の公式グローバルXアカウントによる、あるポストが「最高の反AI広告だ」などと物議を醸している。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/15/news111.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-6ad204fcf146'
-  data-themes='AI・機械学習'
-  data-lang='en'
-  data-score='1'
-  data-source='The Register'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-05-15 09:45</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-6ad204fcf146')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>UK reloads artillery plans with £1B remote-control howitzer order</h3><div class='summary'>72 Boxer-mounted RCH 155s due from 2028 as Britain fills the gap left by AS-90s sent to Ukraine</div></div>
-<div class='lang-pane lang-ja hidden'><h3>英国、10億ポンドの遠隔制御榴弾砲発注で砲兵計画を再装填</h3><div class='summary'>英国がウクライナに送ったAS-90の穴を埋めるため、2028年からボクサー搭載型RCH 155を72機配備予定</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://www.theregister.com/offbeat/2026/05/15/uk-reloads-artillery-plans-with-1b-remote-control-howitzer-order/5240629' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-e314074c87a2'
-  data-themes='AI・機械学習'
-  data-lang='en'
-  data-score='1'
-  data-source='The Register'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-05-15 09:15</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-e314074c87a2')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Britain&#x27;s latest civil servant is a chatbot trained on GOV.UK misery</h3><div class='summary'>Whitehall says the AI assistant will help citizens navigate public services faster; others may see it as a cheaper alternative to answering the phone</div></div>
-<div class='lang-pane lang-ja hidden'><h3>英国の最新公務員はGOV.UKの悲惨さについて訓練されたチャットボットである</h3><div class='summary'>ホワイトホール氏は、AIアシスタントは国民が公共サービスをより迅速に利用できるようになるだろうと述べている。電話に出るよりも安価な代替手段だと考える人もいるかもしれません</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://www.theregister.com/public-sector/2026/05/15/britains-latest-civil-servant-is-a-chatbot-trained-on-govuk-misery/5240955' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-100e13b42560'
@@ -2417,40 +2417,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://japan.zdnet.com/article/35247554/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-9b00bbf372f0'
-  data-themes='AI・機械学習|セキュリティ'
-  data-lang='ja'
-  data-score='5'
-  data-source='ITmedia NEWS 国内'
-  data-sentiment='bearish'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS 国内</span><span>2026-05-15 01:17</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-9b00bbf372f0')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>AI事業者が争う姿勢 朝日、日経の記事無断使用巡り</h3><div class='summary'>インターネットで生成AIの利用者に回答を作成する際、記事を無断使用して著作権を侵害したとして、朝日新聞社と日経新聞社が米国の事業者Perplexityに無断使用の差し止めと計44億円の損害賠償を求めた訴訟の第1回口頭弁論が東京地裁であった。Perplexity側は請求を退けるよう求めた。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/15/news068.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-25c29148670f'
-  data-themes='企業・業界動向'
-  data-lang='ja'
-  data-score='3'
-  data-source='ZDNET Japan'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ZDNET Japan</span><span>2026-05-15 00:45</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-25c29148670f')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>大林組、ノーコードで建設現場の安全管理をDX--チャット報告からの脱却で「情報の透明性」を向上</h3><div class='summary'>大林組の公田ICJV工事事務所は、インターパークが提供するノーコード業務アプリ作成プラットフォーム「サスケWorks」を活用し、「是正報告アプリ」を構築した。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://japan.zdnet.com/article/35247551/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-0e25d8344ef0'
   data-themes='AI・機械学習|クラウド・インフラ|開発ツール・DevOps|企業・業界動向'
   data-lang='ja'
@@ -2468,59 +2434,8 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/15/news064.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-28d030d5d975'
-  data-themes='企業・業界動向'
-  data-lang='ja'
-  data-score='1'
-  data-source='ZDNET Japan'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ZDNET Japan</span><span>2026-05-14 23:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-28d030d5d975')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>アトラシアン ウィリアムズ F1に聞く、名門復活への組織変革と成績躍進の理由</h3><div class='summary'>F1の名門チームのウィリアムズは、アトラシアンとの提携を通じてレース常勝軍団への道のりを歩んでいる。低迷から復活に向けたこれまでの取り組みを聞いた。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://japan.zdnet.com/article/35247538/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-252fde4a1c31'
-  data-themes='AI・機械学習|開発ツール・DevOps'
-  data-lang='ja'
-  data-score='5'
-  data-source='日経XTECH'
-  data-sentiment='bullish'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-14 20:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-252fde4a1c31')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>KDDI、強化学習で通信基地局の稼働最適化 26年度全国展開</h3><div class='summary'>KDDIとKDDI総合研究所は通信基地局の稼働条件を効率よく最適化するAI（人工知能）技術を開発した。2026年度（2027年3月期）をめどに全国の基地局への導入を始める。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/03505/030500009/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-5fdafd33048e'
+  data-cardid='item-96fee5347896'
   data-themes='AI・機械学習'
-  data-lang='ja'
-  data-score='3'
-  data-source='日経XTECH'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-14 20:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-5fdafd33048e')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>「AirTag」代わりに使えるダイソーの紛失防止タグ、検出精度はほぼ同じ</h3><div class='summary'>全世界の「iPhone」を利用しておおよその位置を特定できる「AirTag」は便利だが、価格が4980円と高い。そこで、ダイソーの「紛失防止タグ」試してみた。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/03582/040800005/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-b8f0d5486de9'
-  data-themes='AI・機械学習|ハードウェア・半導体|企業・業界動向'
   data-lang='ja'
   data-score='2'
   data-source='日経XTECH'
@@ -2529,11 +2444,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   data-isnew='false'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-14 20:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-b8f0d5486de9')">既読</button></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-96fee5347896')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>アナログ・デバイセズ日本法人新代表「フィジカルAIに大きな商機」</h3><div class='summary'>米Analog Devices（ADI）日本法人のアナログ・デバイセズの新たな代表取締役に就いた齊藤秀明氏に話を聞いた。同氏はエンジニアではないが、25年以上にわたって半導体業界でセールスやマネジメントの職を担ってきた。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/00001/11711/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-ja'><h3>「Googleレンズ」に似たiOSのカメラ検索、画像生成もAI連携で進化</h3><div class='summary'>ビジュアルインテリジェンスは、調べたいものがあるときの最初の手段として試したい機能だ。「カメラ」アプリにも文章の翻訳や要約機能は用意されているが、ビジュアルインテリジェンスでは被写体を認識した上で、翻訳や要約、検索といった次の操作が自動的に提示され、少ない手順で結果にたどり着ける。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/03514/040800010/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-69ad28d4b636'
+  data-themes='AI・機械学習'
+  data-lang='ja'
+  data-score='1'
+  data-source='日経XTECH'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-14 20:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-69ad28d4b636')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>謝罪文やお礼文に悩んだらGemini、敬語チェックまでこなす</h3><div class='summary'>お礼文や謝罪文などプレッシャーのかかるメールは、最初の書き出しから悩んでしまう。目上の人に送る際は、敬語の使い方にも気を配らなくてはならない。こうしたメールの悩みはAIに頼るのが解決の近道だ。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/03588/041400007/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-712bf69930d1'
@@ -2608,12 +2540,12 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   data-themes='AI・機械学習|セキュリティ|データ・分析|企業・業界動向'
   data-lang='ja'
   data-score='4'
-  data-source='ITmedia NEWS 企業・業界動向'
+  data-source='ITmedia NEWS セキュリティ'
   data-sentiment='neutral'
   data-importance='ai_data'
   data-isnew='false'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS 企業・業界動向</span><span>2026-05-13 03:00</span></div>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS セキュリティ</span><span>2026-05-13 03:00</span></div>
     <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-87c025ea9f2e')">既読</button></div>
   </div>
   <div class='lang-pane lang-ja'><h3>Claude Mythosがもたらすセキュリティビジネス激変の可能性 二極化していく“業界のこれから”</h3><div class='summary'>IT業界の話題をさらう、Anthropicのセキュリティ特化型エージェント「Claude Mythos」。MythosのようなAIスキャナーの普及がセキュリティ業界の構造にどんな変化をもたらすのか。IT組織作りに携わってきた筆者が視点から分析する。</div></div>
@@ -2671,6 +2603,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.publickey1.jp/blog/26/aigoogle_agent_studioamazon_s3aifoundry_local20264.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div></div><div class='fx-panel ' id='fx-security_alert'><div class='grid'>
+<article class='card item-card'
+  data-cardid='item-1db9fa58faf4'
+  data-themes='企業・業界動向'
+  data-lang='ja'
+  data-score='3'
+  data-source='ITmedia NEWS セキュリティ'
+  data-sentiment='neutral'
+  data-importance='security_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS セキュリティ</span><span>2026-05-19 04:37</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-1db9fa58faf4')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>原子力規制庁、2025年度に業務用スマホ10台紛失 2台は未発見「原発や核情報含まず」</h3><div class='summary'>原子力規制庁は2025年度の1年間に、職員に貸与している業務用スマートフォンの紛失事案が計10件あり、うち2台がいまも見つかっていないことを明らかにした。同庁緊急事案対策室が取材に応じた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-weak'>🔐 セキュリティ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/19/news083.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
 <article class='card item-card'
   data-cardid='item-0a1f7ec52a7a'
   data-themes='セキュリティ'
@@ -2906,7 +2855,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Exploit available for new DirtyDecrypt Linux root escalation flaw</h3><div class='summary'>A recently patched local privilege escalation vulnerability in the Linux kernel&#x27;s rxgk module now has a proof-of-concept exploit that allows attackers to gain root access on some Linux systems. [...]</div></div>
-<div class='lang-pane lang-ja hidden'><h3>新しい DirtyDecrypt Linux ルート エスカレーションの欠陥に対してエクスプロイトが利用可能</h3><div class='summary'>最近パッチが適用された Linux カーネルの rxgk モジュールのローカル権限昇格の脆弱性には、攻撃者が一部の Linux システムで root アクセスを取得できる概念実証エクスプロイトが含まれています。 [...]</div></div>
+<div class='lang-pane lang-ja hidden'><h3>新しい DirtyDecrypt Linux ルート エスカレーションの欠陥に対してエクスプロイトが利用可能</h3><div class='summary'>最近パッチが適用された、Linux カーネルの rxgk モジュールのローカル権限昇格の脆弱性には、攻撃者が一部の Linux システムで root アクセスを取得できる概念実証エクスプロイトが存在します。 [...]</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-usd-weak'>🔐 セキュリティ</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.bleepingcomputer.com/news/security/exploit-available-for-new-dirtydecrypt-linux-root-escalation-flaw/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -2937,12 +2886,12 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   data-themes='セキュリティ'
   data-lang='ja'
   data-score='4'
-  data-source='ITmedia NEWS 企業・業界動向'
+  data-source='ITmedia NEWS セキュリティ'
   data-sentiment='bearish'
   data-importance='security_alert'
   data-isnew='false'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS 企業・業界動向</span><span>2026-05-18 04:20</span></div>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS セキュリティ</span><span>2026-05-18 04:20</span></div>
     <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-3232d6259aef')">既読</button></div>
   </div>
   <div class='lang-pane lang-ja'><h3>PayPay、公金や料金未払いをかたるフィッシング詐欺に注意喚起 送金機能の悪用に警戒</h3><div class='summary'>PayPayは5月15日、各種サービスの未払いや公金の未納を騙るフィッシングメールやSMSについて注意を呼びかけた。通信料金や税金等の未納を理由に、PayPayアプリの「送る・受け取る」機能で残高を送金させようとする手口が確認されているという。</div></div>
@@ -3176,12 +3125,12 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   data-themes='セキュリティ'
   data-lang='ja'
   data-score='5'
-  data-source='ITmedia NEWS 企業・業界動向'
+  data-source='ITmedia NEWS セキュリティ'
   data-sentiment='bearish'
   data-importance='security_alert'
   data-isnew='false'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS 企業・業界動向</span><span>2026-05-14 00:46</span></div>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS セキュリティ</span><span>2026-05-14 00:46</span></div>
     <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-645dd2ac7a4a')">既読</button></div>
   </div>
   <div class='lang-pane lang-ja'><h3>リコージャパン、社内基幹システムに障害 通信回線破損で 「サイバー攻撃ではない」</h3><div class='summary'>主要業務システムが利用できない状態に。商品の納期が遅延している。</div></div>
@@ -3359,6 +3308,62 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/07/news117.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div></div><div class='fx-panel ' id='fx-cloud_platform'><div class='grid'>
 <article class='card item-card'
+  data-cardid='item-81d08cf81c26'
+  data-themes='クラウド・インフラ'
+  data-lang='ja'
+  data-score='3'
+  data-source='ZDNET Japan'
+  data-sentiment='neutral'
+  data-importance='cloud_platform'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ZDNET Japan</span><span>2026-05-19 07:41</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-81d08cf81c26')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>マイクロソフト、「Azure Linux 4.0」を明らかに--初の本格的「Linux」ディストリビューション</h3><div class='summary'>「Azure Linux 4.0」は、Azure上だけでなく、Windows Subsystem for Linux（WSL）でデスクトップ環境でも実行可能だ。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-jpy-strong'>☁️ クラウド・基盤</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://japan.zdnet.com/article/35247689/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-dd93354fb46c'
+  data-themes='クラウド・インフラ'
+  data-lang='ja'
+  data-score='3'
+  data-source='CodeZine'
+  data-sentiment='neutral'
+  data-importance='cloud_platform'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CodeZine</span><span>2026-05-19 02:30</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-dd93354fb46c')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>AWSジャパン、麻布台ヒルズに新オフィスを開設し従業員体験とイノベーション加速へ</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-jpy-strong'>☁️ クラウド・基盤</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://codezine.jp/article/detail/24262' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-e2eddcda097b'
+  data-themes='クラウド・インフラ|ハードウェア・半導体'
+  data-lang='en'
+  data-score='5'
+  data-source='The Register'
+  data-sentiment='neutral'
+  data-importance='cloud_platform'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-05-19 02:02</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-e2eddcda097b')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>VMware quietly debuts Arm hypervisor tech preview</h3><div class='summary'>Supports Nvidia Grace and Ampere processors</div></div>
+<div class='lang-pane lang-ja hidden'><h3>VMware が Arm ハイパーバイザー技術プレビューを静かにデビュー</h3><div class='summary'>Nvidia Grace および Ampere プロセッサをサポート</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-jpy-strong'>☁️ クラウド・基盤</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.theregister.com/virtualization/2026/05/19/vmware-quietly-debuts-arm-hypervisor-tech-preview/5242293' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-2e398c778d3d'
   data-themes='ハードウェア・半導体'
   data-lang='ja'
@@ -3427,7 +3432,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Microsoft remembers that taskbars used to move</h3><div class='summary'>Experimental Windows 11 build restores some old favorites, though the rough edges are still showing</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Microsoftは、タスクバーが以前は移動していたことを思い出します</h3><div class='summary'>実験的な Windows 11 ビルドは古いお気に入りのいくつかを復元しますが、荒削りな部分はまだ残っています</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Microsoftは、タスクバーが以前は移動していたことを覚えている</h3><div class='summary'>実験的な Windows 11 ビルドは古いお気に入りのいくつかを復元しますが、荒削りな部分はまだ残っています</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-jpy-strong'>☁️ クラウド・基盤</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.theregister.com/personal-tech/2026/05/18/microsoft-remembers-that-taskbars-used-to-move/5241875' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -3447,23 +3452,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>Cloudbase、コンテナイメージ画面を横断的管理UIへリニューアル</h3><div class='summary'></div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-jpy-strong'>☁️ クラウド・基盤</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://codezine.jp/article/detail/24248' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-f4c70a6a2580'
-  data-themes='AI・機械学習|クラウド・インフラ'
-  data-lang='ja'
-  data-score='5'
-  data-source='CodeZine'
-  data-sentiment='neutral'
-  data-importance='cloud_platform'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CodeZine</span><span>2026-05-17 23:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-f4c70a6a2580')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>Microsoft、「Azure Container Apps Express」をパブリックプレビュー版で公開</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-jpy-strong'>☁️ クラウド・基盤</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://codezine.jp/article/detail/24233' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-005c8a231ef9'
@@ -3573,7 +3561,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Europe built sovereign clouds to escape US control. Then forgot about the processors</h3><div class='summary'>Intel ME and AMD PSP: The silicon layer nobody certifies</div></div>
-<div class='lang-pane lang-ja hidden'><h3>欧州は米国の支配から逃れるためにソブリンクラウドを構築した。それからプロセッサーのことは忘れました</h3><div class='summary'>Intel ME と AMD PSP: 誰も認定していないシリコン層</div></div>
+<div class='lang-pane lang-ja hidden'><h3>欧州は米国の支配から逃れるためにソブリンクラウドを構築した。それからプロセッサーのことは忘れてしまいました</h3><div class='summary'>Intel ME と AMD PSP: 誰も認定していないシリコン層</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-jpy-strong'>☁️ クラウド・基盤</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.theregister.com/systems/2026/05/16/europe-built-sovereign-clouds-to-escape-us-control-then-forgot-about-the-processors/5237735' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -3598,62 +3586,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>Google、reCAPTCHAの後継としてCloud Fraud Defenseを発表</h3><div class='summary'>最近の Next ‘26 カンファレンスで、Google は reCAPTCHA の後継である Google Cloud Fraud Defense を発表しました。このプラットフォームは、基本的なボット検出を超えて、ログイン、アカウント作成、支払いフローにわたる広範なオンライン詐欺に対処し、組織が不審な行動を検出して不正行為をブロックできるように支援します。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-jpy-strong'>☁️ クラウド・基盤</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.infoq.com/news/2026/05/cloud-fraud-defense-recaptcha/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-535774cbd57c'
-  data-themes='クラウド・インフラ'
-  data-lang='en'
-  data-score='4'
-  data-source='The Register'
-  data-sentiment='neutral'
-  data-importance='cloud_platform'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-05-15 09:59</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-535774cbd57c')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Fusion for the future: XLSMART and ZTE partnering for a boundless digital Indonesia</h3><div class='summary'>7,000 5G sites added in eight months, and now serve 73 million subscribers on Indonesia’s first blanket 5G network.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>未来に向けた融合: XLSMART と ZTE が無限のデジタル インドネシアに向けて提携</h3><div class='summary'>8 か月で 7,000 の 5G サイトが追加され、現在はインドネシア初の包括的な 5G ネットワークで 7,300 万人の加入者にサービスを提供しています。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-jpy-strong'>☁️ クラウド・基盤</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://www.theregister.com/networks/2026/05/15/fusion-for-the-future-xlsmart-and-zte-partnering-for-a-boundless-digital-indonesia/5240898' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-ef9a3702a233'
-  data-themes='クラウド・インフラ|ハードウェア・半導体'
-  data-lang='ja'
-  data-score='4'
-  data-source='ZDNET Japan'
-  data-sentiment='neutral'
-  data-importance='cloud_platform'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ZDNET Japan</span><span>2026-05-15 00:57</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-ef9a3702a233')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>エイチ・エス損保、脱物理サーバーで管理工数大幅削減--「Fileforce」を導入</h3><div class='summary'>エイチ・エス損害保険は、物理環境のファイル基盤を刷新し、クラウドストレージの Fileforce を導入した。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-jpy-strong'>☁️ クラウド・基盤</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://japan.zdnet.com/article/35247552/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-ec2279a8c8b5'
-  data-themes='クラウド・インフラ|データ・分析|企業・業界動向'
-  data-lang='ja'
-  data-score='4'
-  data-source='日経XTECH'
-  data-sentiment='neutral'
-  data-importance='cloud_platform'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-14 20:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-ec2279a8c8b5')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>ダイキン新中計は利益率の回復狙う、インドとデータセンターが成長源</h3><div class='summary'>ダイキン工業が2030年度までの新中期経営計画「FUSION30」を発表した。利益率の低下を課題と捉え、稼ぐ力を強化する。新たな成長源はインド市場の空調機と米国市場のデータセンター向け冷却システム。前者は販売台数を2倍以上に、後者は売上高を3倍以上に引き上げる。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-jpy-strong'>☁️ クラウド・基盤</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/00001/11736/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-caa6be41b137'
@@ -3724,6 +3656,57 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.publickey1.jp/blog/26/awsuae2.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div></div><div class='fx-panel ' id='fx-developer_tools'><div class='grid'>
 <article class='card item-card'
+  data-cardid='item-4a233fd90612'
+  data-themes='開発ツール・DevOps'
+  data-lang='ja'
+  data-score='3'
+  data-source='CodeZine'
+  data-sentiment='neutral'
+  data-importance='developer_tools'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CodeZine</span><span>2026-05-19 07:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-4a233fd90612')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>GitHub App、リクエストごとにトークン形式を手動で切り替え可能に</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://codezine.jp/article/detail/24255' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-cbc5270d927f'
+  data-themes='AI・機械学習|開発ツール・DevOps'
+  data-lang='ja'
+  data-score='4'
+  data-source='CodeZine'
+  data-sentiment='neutral'
+  data-importance='developer_tools'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CodeZine</span><span>2026-05-19 04:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-cbc5270d927f')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>GitHub Copilot、「Grok Code Fast 1」モデルの提供を終了</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://codezine.jp/article/detail/24254' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-8318166339b8'
+  data-themes='開発ツール・DevOps'
+  data-lang='ja'
+  data-score='4'
+  data-source='CodeZine'
+  data-sentiment='neutral'
+  data-importance='developer_tools'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CodeZine</span><span>2026-05-19 02:30</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-8318166339b8')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>GitHub Projectsに「Created」「Updated」「Closed」のタイムスタンプ追加</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://codezine.jp/article/detail/24249' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-060940a69301'
   data-themes='開発ツール・DevOps'
   data-lang='ja'
@@ -3792,23 +3775,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/mag/ne/18/00147/00003/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-2240b88cb906'
-  data-themes='開発ツール・DevOps|ハードウェア・半導体|企業・業界動向'
-  data-lang='ja'
-  data-score='5'
-  data-source='日経XTECH'
-  data-sentiment='bullish'
-  data-importance='developer_tools'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-18 20:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-2240b88cb906')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>1ナノでTSMCと半年差に、CTO直下に技術戦略室や知財部</h3><div class='summary'>先端半導体の受託生産を目指すRapidus（ラピダス、東京・千代田）は2026年末にも、顧客が設計した2nm（ナノメートル）世代のテストチップの生産を始める。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/mag/ne/18/00007/00331/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-cc71b88f404c'
   data-themes='開発ツール・DevOps|ハードウェア・半導体'
   data-lang='ja'
@@ -3843,6 +3809,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/mag/ne/18/00001/00648/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-2240b88cb906'
+  data-themes='開発ツール・DevOps|ハードウェア・半導体|企業・業界動向'
+  data-lang='ja'
+  data-score='5'
+  data-source='日経XTECH'
+  data-sentiment='bullish'
+  data-importance='developer_tools'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-18 20:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-2240b88cb906')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>1ナノでTSMCと半年差に、CTO直下に技術戦略室や知財部</h3><div class='summary'>先端半導体の受託生産を目指すRapidus（ラピダス、東京・千代田）は2026年末にも、顧客が設計した2nm（ナノメートル）世代のテストチップの生産を始める。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/mag/ne/18/00007/00331/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-28e8c8e0ce69'
   data-themes='開発ツール・DevOps|データ・分析'
   data-lang='ja'
@@ -3858,6 +3841,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>ノーベル賞・北川氏「酷評でもデータ信じた」 MOF開発30年、本命はCO2回収</h3><div class='summary'>「今後、空気を資源として利用しなければならない」。こうした使命感を胸に、2025年にノーベル化学賞を受賞した京都大学特別教授の北川進氏は、金属有機構造体（MOF）の研究開発に力を注ぐ。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/mag/ne/18/00007/00332/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-423cef9c45e2'
+  data-themes='開発ツール・DevOps'
+  data-lang='ja'
+  data-score='3'
+  data-source='日経XTECH'
+  data-sentiment='neutral'
+  data-importance='developer_tools'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-18 20:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-423cef9c45e2')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>3位は「不可視文字でマルウエア混入 GitHubなどで汚染拡大、開発基盤の信頼揺らぐ」30代の注目トップ10</h3><div class='summary'>日経クロステックで2026年4月、30代の会員が読んだ記事をランキング形式で紹介します。3位に「不可視文字でマルウエア混入 GitHubなどで汚染拡大、開発基盤の信頼揺らぐ」が入りました。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/02156/051200377/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-70cc3306c635'
@@ -3911,7 +3911,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/mag/ne/18/00001/00658/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-423cef9c45e2'
+  data-cardid='item-49caa0769111'
   data-themes='開発ツール・DevOps'
   data-lang='ja'
   data-score='3'
@@ -3921,11 +3921,11 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   data-isnew='false'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-18 20:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-423cef9c45e2')">既読</button></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-49caa0769111')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>3位は「不可視文字でマルウエア混入 GitHubなどで汚染拡大、開発基盤の信頼揺らぐ」30代の注目トップ10</h3><div class='summary'>日経クロステックで2026年4月、30代の会員が読んだ記事をランキング形式で紹介します。3位に「不可視文字でマルウエア混入 GitHubなどで汚染拡大、開発基盤の信頼揺らぐ」が入りました。</div></div>
+  <div class='lang-pane lang-ja'><h3>竹中工務店がCLT壁で制振性能付与、鉄骨造ビルに初導入</h3><div class='summary'>竹中工務店は中高層ビル向けの新たな木質制振壁技術「KiPLUS WALL DAMPER」を開発した。岡山市で建設している鉄骨造の「ちゅうぎん丸の内ビル」に初導入し、制振性能を付加する。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/02156/051200377/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/00154/02813/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-49bc52a0245c'
@@ -3943,23 +3943,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>「技術者には技術以外の解決手段が見えていない」SDMの白坂教授</h3><div class='summary'>慶応義塾大学大学院の白坂成功教授が教える「システムデザイン・マネジメント」は、宇宙開発から社会システムまで幅広い分野の複雑な課題解決に役立つとされる。具体的にどのような手法なのかを聞いた。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/02827/042700032/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-49caa0769111'
-  data-themes='開発ツール・DevOps'
-  data-lang='ja'
-  data-score='3'
-  data-source='日経XTECH'
-  data-sentiment='neutral'
-  data-importance='developer_tools'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-18 20:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-49caa0769111')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>竹中工務店がCLT壁で制振性能付与、鉄骨造ビルに初導入</h3><div class='summary'>竹中工務店は中高層ビル向けの新たな木質制振壁技術「KiPLUS WALL DAMPER」を開発した。岡山市で建設している鉄骨造の「ちゅうぎん丸の内ビル」に初導入し、制振性能を付加する。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/00154/02813/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-d023da2950a3'
@@ -4001,7 +3984,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Grafana says stolen GitHub token let hackers steal codebase</h3><div class='summary'>Grafana Labs disclosed that hackers have downloaded its source code after breaching its GitHub environment using a stolen access token. [...]</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Grafana氏、盗まれたGitHubトークンによりハッカーがコードベースを盗むことができたと語る</h3><div class='summary'>Grafana Labs は、ハッカーが盗んだアクセス トークンを使用して GitHub 環境に侵入し、ソース コードをダウンロードしたことを明らかにしました。 [...]</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Grafana氏、盗まれたGitHubトークンによりハッカーがコードベースを盗むことができたと主張</h3><div class='summary'>Grafana Labs は、ハッカーが盗んだアクセス トークンを使用して GitHub 環境に侵入し、ソース コードをダウンロードしたことを明らかにしました。 [...]</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.bleepingcomputer.com/news/security/grafana-says-stolen-github-token-let-hackers-steal-codebase/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -4054,12 +4037,12 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   data-themes='開発ツール・DevOps'
   data-lang='ja'
   data-score='3'
-  data-source='ITmedia NEWS 企業・業界動向'
+  data-source='ITmedia NEWS 国内'
   data-sentiment='bullish'
   data-importance='developer_tools'
   data-isnew='false'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS 企業・業界動向</span><span>2026-05-18 10:48</span></div>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS 国内</span><span>2026-05-18 10:48</span></div>
     <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-a4bfbff74e86')">既読</button></div>
   </div>
   <div class='lang-pane lang-ja'><h3>NHK技研、「空飛ぶロボカメ」と「IP回線中継ドローン」を開発 「災害時でも途切れない」</h3><div class='summary'>NHK放送技術研究所は空撮ドローン「空飛ぶロボカメ」「IP回線中継ドローン」を開発したと発表した。いずれも放送事業用の自営無線回線を活用して空撮の安定性を高める。</div></div>
@@ -4099,23 +4082,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>GitHub Actions、Arm64と主要OSイメージの移行を発表</h3><div class='summary'></div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://codezine.jp/article/detail/24243' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-f3ee0d442111'
-  data-themes='開発ツール・DevOps'
-  data-lang='ja'
-  data-score='5'
-  data-source='CodeZine'
-  data-sentiment='bearish'
-  data-importance='developer_tools'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CodeZine</span><span>2026-05-17 23:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-f3ee0d442111')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>そのコードは誰に届くのか？ GovTech東京が挑む、アクセシビリティを「当たり前品質」にする開発プロセス</h3><div class='summary'>「アクセシビリティ対応は、予算や工数に余裕があれば取り組むものになっていないだろうか」。そんな問いが、「Developers Summit 2026」のセッションで静かに、しかし力強く投げかけられた。民間サービスであれば「使いにくいから別のアプリを使おう」という選択肢があるかもしれない。しかし行政サービスは、その地域における唯一の提供者であり、代替となるサービスがない。多様な住民の生活を支える基盤である以上、「使えない」「使いにくい」という状態を解消していく使命がある。本稿では、一般財団法人GovTech東京の松村道生氏と山内晨吾氏が語った、障害当事者とエンジニアが境界なく混ざり合い、サービス</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://codezine.jp/article/detail/23954' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-421eaf95d29f'
@@ -4225,23 +4191,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.infoq.com/news/2026/05/monzo-data-mesh/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-f26d839df020'
-  data-themes='AI・機械学習|開発ツール・DevOps'
-  data-lang='ja'
-  data-score='5'
-  data-source='CodeZine'
-  data-sentiment='bullish'
-  data-importance='developer_tools'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CodeZine</span><span>2026-05-17 09:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-f26d839df020')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>GitHub Copilot、チーム別利用状況を取得するAPIを公開</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://codezine.jp/article/detail/24241' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-36e016276490'
   data-themes='AI・機械学習|クラウド・インフラ|開発ツール・DevOps'
   data-lang='en'
@@ -4281,7 +4230,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Google reimburses Register sources who were victims of API fraud</h3><div class='summary'>But it&#x27;s holding fast on auto-expanding customers&#x27; budgets</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Google、API 詐欺の被害者である Register ソースに賠償金を支払う</h3><div class='summary'>しかし、自動的に拡大する顧客の予算をしっかりと維持している</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Google、API 詐欺の被害を受けた Register ソースに賠償金を支払う</h3><div class='summary'>しかし、自動的に拡大する顧客の予算をしっかりと維持している</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.theregister.com/devops/2026/05/15/google-reimburses-register-sources-who-were-victims-of-api-fraud/5241429' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -4308,38 +4257,16 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bleepingcomputer.com/news/security/funnel-builder-wordpress-plugin-bug-exploited-to-steal-credit-cards/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-03fd46927cd8'
-  data-themes='開発ツール・DevOps'
-  data-lang='en'
-  data-score='4'
-  data-source='InfoQ'
-  data-sentiment='bullish'
-  data-importance='developer_tools'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>InfoQ</span><span>2026-05-15 15:51</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-03fd46927cd8')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Anthropic Introduces Routines for Claude Code Automation</h3><div class='summary'>Anthropic has introduced a new feature called Routines for Claude Code, allowing developers to configure automated coding workflows that run on schedules, through API calls, or in response to external events. By Daniel Dominguez</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Anthropic がクロード コード自動化のルーチンを導入</h3><div class='summary'>Anthropic は、Routines for Claude Code と呼ばれる新機能を導入しました。これにより、開発者は、スケジュールに従って、API 呼び出しを通じて、または外部イベントに応答して実行される自動コーディング ワークフローを構成できるようになります。ダニエル・ドミンゲス著</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://www.infoq.com/news/2026/05/anthropic-routines-claude/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-35355d13679a'
   data-themes='開発ツール・DevOps'
   data-lang='ja'
   data-score='4'
-  data-source='ITmedia NEWS 企業・業界動向'
+  data-source='ITmedia NEWS セキュリティ'
   data-sentiment='bullish'
   data-importance='developer_tools'
   data-isnew='false'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS 企業・業界動向</span><span>2026-05-15 06:00</span></div>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS セキュリティ</span><span>2026-05-15 06:00</span></div>
     <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-35355d13679a')">既読</button></div>
   </div>
   <div class='lang-pane lang-ja'><h3>マネーフォワードが銀行連携の再開を拡大、東京スター銀など メガバンクはすでに復旧</h3><div class='summary'>マネーフォワードは5月15日、GitHubへの不正アクセスを受けて停止していた銀行口座連携機能について、新たに東京スター銀行などとのAPI連携を再開した 。12日の三井住友銀行を皮切りに、三菱UFJ銀行、みずほ銀行、ゆうちょ銀行、全国のJAバンクなど主要な金融機関が順次復旧している。</div></div>
@@ -4347,21 +4274,38 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/15/news092.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-73f667fd172c'
-  data-themes='開発ツール・DevOps|ハードウェア・半導体|企業・業界動向'
+  data-cardid='item-49ea54898177'
+  data-themes='開発ツール・DevOps'
   data-lang='ja'
   data-score='4'
   data-source='日経XTECH'
-  data-sentiment='bullish'
+  data-sentiment='neutral'
   data-importance='developer_tools'
   data-isnew='false'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-14 20:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-73f667fd172c')">既読</button></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-49ea54898177')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>熊本に「半導体パーク」 三井不動産、TSMCの3ナノ支える産業集積</h3><div class='summary'>三井不動産は熊本県合志市に半導体関連企業や研究機関が集まる「サイエンスパーク」を整備する。台湾積体電路製造（TSMC）やソニーグループの工場近くの31ヘクタールの土地を開発し、研究施設を設けたり材料・装置メーカーを誘致したりする。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/00001/11701/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-ja'><h3>中東危機で石油使わぬ建材の開発に期待、海藻由来の接着剤が秘める可能性</h3><div class='summary'>中東情勢の緊迫化によって建材や住宅設備のサプライチェーン（供給網）が混乱している。合成ゴムなどの石油化学製品を主成分とする接着剤も渦中にある。そのような中、建材を扱うあるメーカーの新製品発表会に参加して、原料の石油化学製品への依存度を下げる可能性を感じた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/00138/051102015/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-8898676e731c'
+  data-themes='開発ツール・DevOps|企業・業界動向'
+  data-lang='ja'
+  data-score='4'
+  data-source='日経XTECH'
+  data-sentiment='neutral'
+  data-importance='developer_tools'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-05-14 20:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-8898676e731c')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ソフトウエア開発のCO2排出量算出 IT業界に宿題、不備は事業リスクに</h3><div class='summary'>ソフトウエアやシステム開発といった分野で、二酸化炭素（CO2）を中心とした温暖化ガス（GHG）排出量の算定が求められる機運が高まってきた。しかし、厳密に算出しようとすると相応の手間を要する。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/00989/051200208/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-3c452926889c'
@@ -4413,23 +4357,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>Node.js、Dateに代わる日時処理「Temporal」がデフォルト有効化。TemporalはChrome/Edge/Firefox/Node.jsで利用可能に</h3><div class='summary'>JavaScriptランタイム「Node.js」の最新バージョンとなる「Node.js 26」正式版がリリースされました。 Node.js 26では、これまでJavaScriptにおいて日付処理に使われてきたDateに代わる新たなAPIとし...</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.publickey1.jp/blog/26/nodejsdatetemporaltemporalchromeedgefirefoxnodejs.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-03ee3dd5f390'
-  data-themes='開発ツール・DevOps|企業・業界動向'
-  data-lang='ja'
-  data-score='4'
-  data-source='ITmedia NEWS 企業・業界動向'
-  data-sentiment='neutral'
-  data-importance='developer_tools'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS 企業・業界動向</span><span>2026-05-13 01:29</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-03ee3dd5f390')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>マツダ、電動化投資を3000億円減額 需要縮小で自社開発EV投入を2年程度延期</h3><div class='summary'>マツダが電動化投資計画の修正を発表した。昨年3月時点で1.5兆円としていた2022～30年の累計投資額を1.2兆円に3000億円減額する。トランプ政権による環境規制の緩和などに伴う米国の電気自動車（EV）需要の縮小を踏まえ、自社開発EVの投入時期を当初予定の27年から2年程度延期するなど商品戦略を見直した。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/13/news076.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-d602a5728603'
@@ -4520,7 +4447,7 @@ function switchFxTab(key, btn){
   var panel = document.getElementById('fx-' + key);
   if (panel) panel.classList.add('active');
 }
-</script><footer>IT + — Generated at 2026-05-19 11:51</footer></body></html>
+</script><footer>IT + — Generated at 2026-05-19 18:30</footer></body></html>
 <script>
 var pageLang = 'en';
 function setPageLang(lang) {

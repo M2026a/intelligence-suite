@@ -100,7 +100,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='top'>
     <div class='title'>
       <h1>📰 Smart News Viewer <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ 国内外ニュースを横断収集し、重要トピックを一目で把握</span></h1>
-      <div class='sub'>更新日時：2026-05-27 05:05</div>
+      <div class='sub'>更新日時：2026-05-27 11:59</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -138,7 +138,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='cb-card'>
   <div class='cb-name'>🏛 NHK 政治</div>
   <div style='color:var(--muted);font-size:12px;margin-bottom:8px'>国内の政治・政策</div>
-  <div class='cb-count'>68</div>
+  <div class='cb-count'>65</div>
   <div style='color:var(--muted);font-size:11px'>件の記事</div>
   <div class='cb-recent'>最新: </div>
 </div>
@@ -159,14 +159,14 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='cb-card'>
   <div class='cb-name'>🔬 NASA News</div>
   <div style='color:var(--muted);font-size:12px;margin-bottom:8px'>科学・宇宙</div>
-  <div class='cb-count'>10</div>
+  <div class='cb-count'>0</div>
   <div style='color:var(--muted);font-size:11px'>件の記事</div>
-  <div class='cb-recent'>最新: </div>
+  <div class='cb-recent'>最新: 記事なし</div>
 </div>
 <div class='cb-card'>
   <div class='cb-name'>🏅 BBC Sport</div>
   <div style='color:var(--muted);font-size:12px;margin-bottom:8px'>スポーツ</div>
-  <div class='cb-count'>64</div>
+  <div class='cb-count'>66</div>
   <div style='color:var(--muted);font-size:11px'>件の記事</div>
   <div class='cb-recent'>最新: </div>
 </div></div>
@@ -246,7 +246,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   if(sb) sb.addEventListener('input',function(){search=this.value; apply();});
 })();
 </script>
-  <div style='margin-bottom:12px;font-weight:700;font-size:15px'>注目ソース関連記事（<span id='cbCount'>239</span>件）</div>
+  <div style='margin-bottom:12px;font-weight:700;font-size:15px'>注目ソース関連記事（<span id='cbCount'>228</span>件）</div>
   <div class='grid' id='cbGrid'>
 <article class='card item-card'
   data-cardid='item-af6e7b64aaf5'
@@ -271,6 +271,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/news/articles/c1e22n55zn4o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-1b9d78daaf17'
+  data-themes='総合・国際|テクノロジー'
+  data-lang='en'
+  data-score='5'
+  data-source='BBC World'
+  data-sentiment='bearish'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-1b9d78daaf17')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Can EU find a Russia whisperer to mediate an end to war in Ukraine?</h3><div class='summary'>With the US pulling out of trilateral talks with Russia and Ukraine, the EU is looking for potential candidates to step in.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>EUはウクライナ戦争の終結を仲介するロシアの囁きを見つけることができるだろうか？</h3><div class='summary'>米国がロシア、ウクライナとの３カ国協議から撤退する中、ＥＵは介入する候補者を探している。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/cqxpp73wqero?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-641275e8decc'
   data-themes='総合・国際'
   data-lang='en'
@@ -293,48 +315,26 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/news/articles/c62rrj66p3eo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-b77d8a2257a9'
-  data-themes='総合・国際|文化・エンタメ'
+  data-cardid='item-9d7b510f22a5'
+  data-themes='総合・国際|テクノロジー'
   data-lang='en'
   data-score='5'
-  data-source='BBC World'
+  data-source='TechCrunch'
   data-sentiment='bearish'
-  data-importance='health_alert'
+  data-importance='training_behavior'
   data-isnew='false'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span></span></div>
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-b77d8a2257a9')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-9d7b510f22a5')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>Internet starts coming back in Iran after months-long blackout</h3><div class='summary'>Internet access has been cut off in the country since the start of the war in late February.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>数か月にわたる停電の後、イランでインターネットが復旧し始める</h3><div class='summary'>2月下旬の戦争開始以来、同国ではインターネットへのアクセスが遮断されている。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://www.bbc.com/news/articles/c1w22y1n74do?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-cb47ae16663c'
-  data-themes='総合・国際'
-  data-lang='en'
-  data-score='5'
-  data-source='BBC World'
-  data-sentiment='bearish'
-  data-importance='health_alert'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-cb47ae16663c')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Rights group accuses UAE of being transit point for mercenaries on way to Sudan</h3><div class='summary'>The United Arab Emirates has denied any involvement in the civil war and says it investigates alleged links.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>権利団体、UAEがスーダンへ向かう傭兵の中継地になっていると非難</h3><div class='summary'>アラブ首長国連邦は内戦への関与を否定しており、関連性の疑いを調査していると述べている。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://www.bbc.com/news/articles/c1422nrgm1jo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-en'><h3>Trump administration permits Volvo to keep selling connected cars in the US</h3><div class='summary'>Volvo, which is majority owned by China&#x27;s Geely Holdings, said it can now move forward with its expansion plans for its U.S. factory.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>トランプ政権、ボルボに対し米国内でのコネクテッドカー販売継続を許可</h3><div class='summary'>中国の吉利ホールディングスが過半数を保有するボルボは、米国工場の拡張計画を進めることができると述べた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://techcrunch.com/2026/05/26/trump-administration-permits-volvo-to-keep-selling-connected-cars-in-the-us/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-96f157c6ce9a'
@@ -401,72 +401,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>Amazonフルフィルメントの競合企業Stordが評価額30億ドルで2億5千万ドルを調達</h3><div class='summary'>Stord は、電子商取引向けの物理倉庫のネットワークと在庫管理ソフトウェアを提供しています。同社は自らを一種の反アマゾンとして宣伝し、顧客との関係を維持しながらブランドに「競争するスピード」を与える。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://techcrunch.com/2026/05/26/amazon-fulfillment-competitor-stord-raises-250m-at-3b-valuation/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-faa87423957b'
-  data-themes='科学|文化・エンタメ'
-  data-lang='en'
-  data-score='5'
-  data-source='NASA News'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>NASA News</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-faa87423957b')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>NASA Provides Update on Moon Base Rovers, Landers, Missions</h3><div class='summary'>During a Moon Base event Tuesday at NASA’s Headquarters in Washington, the agency announced new contracts for lunar rovers for crew to drive and uncrewed cargo landers bound for the Moon. NASA leaders also shared target launch timeframes and upcoming milestones for the first Moon Base infrastructure</div></div>
-<div class='lang-pane lang-ja hidden'><h3>NASA、月面基地探査車、着陸船、ミッションに関する最新情報を提供</h3><div class='summary'>火曜日にワシントンのNASA本部で行われた月面基地のイベントで、NASAは乗組員が運転する月面探査車と、月に向かう無人貨物着陸船の新たな契約を発表した。 NASAのリーダーらはまた、最初の月面基地インフラストラクチャーの目標打ち上げ時期と今後のマイルストーンについても共有した</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://www.nasa.gov/news-release/nasa-provides-update-on-moon-base-rovers-landers-missions/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-5ddbd73cf45d'
-  data-themes='総合・国際'
-  data-lang='en'
-  data-score='5'
-  data-source='NASA News'
-  data-sentiment='bearish'
-  data-importance='health_alert'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>NASA News</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-5ddbd73cf45d')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>An Early “Decoration Day” Celebration</h3><div class='summary'>In a precursor to Memorial Day, people in Charleston, South Carolina, honored fallen Civil War troops with flowers, songs, and marches at an event at a racetrack on May 1, 1865.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>早めの「装飾の日」のお祝い</h3><div class='summary'>戦没将兵追悼記念日に先立って、サウスカロライナ州チャールストンの人々は、1865 年 5 月 1 日に競馬場で行われたイベントで、南北戦争で戦死した兵士たちを花や歌、行進で追悼しました。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://science.nasa.gov/earth/earth-observatory/an-early-decoration-day-celebration/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-66970262c13e'
-  data-themes='総合・国際|テクノロジー|科学'
-  data-lang='en'
-  data-score='5'
-  data-source='NASA News'
-  data-sentiment='bullish'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>NASA News</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-66970262c13e')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Keeping NASA Flying: Ground Crews Ensure Aircraft Readiness</h3><div class='summary'>From high‑speed research flights to high‑altitude science campaigns, NASA depends on aircraft that perform at their best and the ground crews who keep them mission ready. At NASA’s Armstrong Flight Research Center in Edwards, California, specially trained maintenance crews are essential to keeping t</div></div>
-<div class='lang-pane lang-ja hidden'><h3>NASA の飛行を維持する: 地上職員が航空機の即応性を確保する</h3><div class='summary'>高速調査飛行から高高度での科学活動に至るまで、NASA は最高のパフォーマンスを発揮する航空機と、それらを任務に備え続ける地上職員に依存しています。カリフォルニア州エドワーズにある NASA のアームストロング飛行研究センターでは、特別な訓練を受けた整備員が飛行状態を維持するために不可欠です。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://www.nasa.gov/centers-and-facilities/armstrong/keeping-nasa-flying-ground-crews-ensure-aircraft-readiness/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-f0c0d74d1b9a'
@@ -639,6 +573,40 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260521/k10015127121000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-387af8bad9b1'
+  data-themes='政治・政策|テクノロジー'
+  data-lang='ja'
+  data-score='5'
+  data-source='ITmedia NEWS'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-387af8bad9b1')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>選挙の公正確保を “虚偽”SNS対策が判明、AI生成動画像に改変表示義務付け 与野党案</h3><div class='summary'>選挙期間中のSNSでの偽・誤情報拡散対策として、与野党による選挙運動に関する協議会で検討が進められていた関連法改正案の骨子の全容が5月26日、分かった。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/27/news072.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-b4148100cf96'
+  data-themes='市場・ビジネス|科学'
+  data-lang='ja'
+  data-score='5'
+  data-source='ITmedia NEWS'
+  data-sentiment='bullish'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-b4148100cf96')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>“週4日勤務”が想像以上の成功──「給与100％／労働時間80％／生産性100％」を豪州15社が実施 学術誌にも掲載</h3><div class='summary'>オーストラリアのディーキン大学やスウィンバーン工科大学に所属する研究者らがSpringer Nature発行の学術誌Humanities and Social Sciences Communicationsで発表した論文「The four-day workweek in Australia: insights from early adopters of the 100:80:100 model」は、週休3日制を実際に導入したオーストラリアの企業15社の生の声から、その効果や課題を分析した研究報告だ。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#e74c3c22;border-color:#e74c3c;color:#e74c3c'>💹 市場・ビジネス</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/27/news023.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-3e05233b5219'
   data-themes='テクノロジー|科学'
   data-lang='ja'
@@ -741,21 +709,26 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/25/news024.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-4c575ff66842'
-  data-themes='テクノロジー'
-  data-lang='ja'
-  data-score='5'
-  data-source='ITmedia NEWS'
+  data-cardid='item-cdbc08b2629d'
+  data-themes='市場・ビジネス|スポーツ|文化・エンタメ'
+  data-lang='en'
+  data-score='4'
+  data-source='TechCrunch'
   data-sentiment='neutral'
-  data-importance='training_behavior'
+  data-importance='food_recall'
   data-isnew='false'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-4c575ff66842')">既読</button></div>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-cdbc08b2629d')">既読</button>
+</div>
   </div>
-  <div class='lang-pane lang-ja'><h3>「pring」終了へ Googleが巨額で買収した日本の送金アプリ、Google Payへの統合は実現せず</h3><div class='summary'>2021年にGoogleが推定100億円以上をかけて買収したが、期待されたGoogle Payへの送金機能統合は実現しないまま幕を閉じる。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/22/news129.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-en'><h3>UK Visa Portal spilled thousands of applicants’ passports and selfies online — and hasn’t fixed the leak</h3><div class='summary'>The third-party website exposed applicants&#x27; sensitive documents as part of the U.K. visa application process. Instead of fixing the issue, the company sent attorneys.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>英国ビザポータルが数千人の申請者のパスポートと自撮り写真をオンラインに流出、漏洩を修正していない</h3><div class='summary'>サードパーティの Web サイトにより、英国ビザ申請プロセスの一環として申請者の機密文書が公開されました。同社は問題を解決する代わりに弁護士を派遣した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#e74c3c22;border-color:#e74c3c;color:#e74c3c'>💹 市場・ビジネス</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-usd-weak'>💹 市場・ビジネス</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://techcrunch.com/2026/05/26/uk-visa-portal-spilled-thousands-of-applicants-passports-and-selfies-online-and-hasnt-fixed-the-leak/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-1e1793faa29b'
@@ -780,48 +753,26 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://techcrunch.com/2026/05/26/dutch-government-blocks-us-company-from-acquisition-citing-risk-to-public-interest/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-cbd0cecd9533'
-  data-themes='テクノロジー|スポーツ|文化・エンタメ'
+  data-cardid='item-a02b4b13543a'
+  data-themes='スポーツ'
   data-lang='en'
   data-score='4'
-  data-source='TechCrunch'
+  data-source='BBC Sport'
   data-sentiment='neutral'
-  data-importance='training_behavior'
+  data-importance='neutral'
   data-isnew='false'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span></span></div>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-cbd0cecd9533')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-a02b4b13543a')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>The pitch trick that helped an eSports startup raise $20M when VCs only wanted AI</h3><div class='summary'>Earlier this year, Lucra Sports founder and CEO Dylan Robbins did something that no one else has ever done. And he shared several secrets on how he did it.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>VC が AI だけを望んでいたときに eSports スタートアップが 2,000 万ドルを調達するのに役立ったピッチ トリック</h3><div class='summary'>今年初め、Lucra Sports の創設者兼 CEO のディラン・ロビンスは、これまで誰もやったことのないことを行いました。そして彼はそれをどのようにして実現したかについていくつかの秘密を共有しました。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://techcrunch.com/2026/05/25/the-pitch-trick-that-helped-an-esports-startup-raise-20m-when-vcs-only-wanted-ai/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-e723064f8654'
-  data-themes='市場・ビジネス|文化・エンタメ'
-  data-lang='en'
-  data-score='4'
-  data-source='TechCrunch'
-  data-sentiment='neutral'
-  data-importance='food_recall'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-e723064f8654')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Xreal, Google’s smartglasses partner, thinks it has finally mastered this notoriously tricky industry</h3><div class='summary'>Chi Xu, the founder and CEO of XREAL, thinks the smart glasses business has finally reached a turning point.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Google のスマートグラス パートナーである Xreal は、この悪名高いトリッキーな業界をついに克服したと考えています</h3><div class='summary'>XREAL の創設者兼 CEO である Chi Xu 氏は、スマート グラス ビジネスがついに転換点に達したと考えています。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#e74c3c22;border-color:#e74c3c;color:#e74c3c'>💹 市場・ビジネス</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-usd-weak'>💹 市場・ビジネス</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://techcrunch.com/2026/05/24/xreal-googles-smartglasses-partner-thinks-it-has-finally-mastered-this-notoriously-tricky-industry/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-en'><h3>Spurs launch review after season of injury woe</h3><div class='summary'>Tottenham will launch a review focusing on the &quot;unusual&quot; spate of anterior cruciate ligament injuries recently suffered by key players.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>怪我に悩まされたシーズンを終えたスパーズの発足レビュー</h3><div class='summary'>トッテナムは最近、主力選手たちが「異例の」相次ぐ前十字靱帯損傷に焦点を当てた見直しを開始する予定だ。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cz0225ly855o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-4bca21a2ef13'
@@ -892,6 +843,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260521/k10015128001000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-76e8a8826be1'
+  data-themes='科学'
+  data-lang='ja'
+  data-score='4'
+  data-source='ITmedia NEWS'
+  data-sentiment='bullish'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-76e8a8826be1')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>子どものジャンクフード、脳に影響残る？ 大人になっても過食グセ Nature系列誌に掲載 マウスは腸内細菌で正常化に成功</h3><div class='summary'>アイルランドのユニバーシティ・カレッジ・コークなどに所属する研究者らがNature Communicationsで発表した論文「Bifidobacterium longum and prebiotic interventions restore early-life high-fat/high-sugar diet-induced alterations in feeding behavior in adult mice」は、幼少期に脂肪や砂糖を多く含むジャンクフードなどの不健康な食事をとることは、大人になってからの食行動にまで長期的な悪影響を及ぼすことを明らかにした研究報告だ。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/26/news073.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-7de43f886f6e'
   data-themes='総合・国際'
   data-lang='en'
@@ -908,14 +876,36 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <button class='read-btn' onclick="markRead(this,'item-7de43f886f6e')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>Eleven killed in Lebanon village as Israel intensifies strikes</h3><div class='summary'>Israel says it struck 100 Hezbollah infrastructure sites and fighters in Lebanon, after PM Benjamin Netanyahu vows to &quot;crush&quot; Hezbollah.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>イスラエルが攻撃強化でレバノンの村で11人死亡</h3><div class='summary'>ベンヤミン・ネタニヤフ首相がヒズボラを「潰す」と誓ったことを受け、イスラエルはレバノンのヒズボラのインフラ施設100ヶ所と戦闘員を攻撃したと発表した。</div></div>
+  <div class='lang-pane lang-en'><h3>Dozens killed in Lebanon as Israel intensifies strikes</h3><div class='summary'>Israel says it struck 100 Hezbollah infrastructure sites and fighters in Lebanon, after PM Benjamin Netanyahu vows to &quot;crush&quot; Hezbollah.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>イスラエルが攻撃強化でレバノンで数十人死亡</h3><div class='summary'>ベンヤミン・ネタニヤフ首相がヒズボラを「潰す」と誓ったことを受け、イスラエルはレバノンのヒズボラのインフラ施設100ヶ所と戦闘員を攻撃したと発表した。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.bbc.com/news/articles/cx211rgngp0o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-9b1c6508cf64'
-  data-themes='テクノロジー|スポーツ'
+  data-cardid='item-8a4e08e8b8f8'
+  data-themes='総合・国際'
+  data-lang='en'
+  data-score='3'
+  data-source='BBC World'
+  data-sentiment='bearish'
+  data-importance='health_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-8a4e08e8b8f8')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Hundreds of children die within months as measles cases soar in Bangladesh</h3><div class='summary'>The country has recorded more than 60,000 suspected cases of measles in just over two months.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>バングラデシュではしかの感染者が急増、数カ月以内に数百人の子どもが死亡</h3><div class='summary'>同国では、わずか2カ月余りで麻疹の疑い例が6万件以上記録されている。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/cwy2d5d7wn5o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-6f7c098d090e'
+  data-themes='科学|文化・エンタメ'
   data-lang='en'
   data-score='3'
   data-source='BBC World'
@@ -927,13 +917,13 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-9b1c6508cf64')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-6f7c098d090e')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>Rescuers race to free seven people trapped in flooded Laos cave</h3><div class='summary'>A team of experts who helped free a teen football team from a Thai cave in 2018 are among the rescuers.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>浸水したラオスの洞窟に閉じ込められた7人を救出するために救助隊が急ぐ</h3><div class='summary'>2018年にタイの洞窟から少年サッカーチームを救出した専門家チームも救助者の中に含まれている。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/news/articles/cglpp1g388zo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-en'><h3>Nasa unveils next steps to build permanent Moon base</h3><div class='summary'>Nasa plans to send hopping drones and roving vehicles to the Moon as part of plans for a permanent Moon base.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>NASA、恒久的な月面基地建設に向けた次のステップを発表</h3><div class='summary'>NASAは、月面常設基地計画の一環として、ホッピングドローンやロービングビークルを月に送る計画を立てている。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/c39228nxyr4o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-f6b2769be2a4'
@@ -978,6 +968,72 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>モロッコは観光客に西サハラを訪れてもらいたいと考えている。管理を強化しているとの声もある</h3><div class='summary'>モロッコ政府は、より多くの西側の行楽客に同国が所有すると主張する領土を訪れてもらいたいと考えている。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.bbc.com/news/articles/cvgldqk4w95o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-8e1644dde4f3'
+  data-themes='テクノロジー|文化・エンタメ'
+  data-lang='en'
+  data-score='3'
+  data-source='TechCrunch'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-8e1644dde4f3')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>What we’re looking for in Startup Battlefield 2026, and how to apply in time for the May 27 deadline</h3><div class='summary'>Startup Battlefield applications are due tomorrow, so now&#x27;s the time to put the finishing touches on your submission!</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Startup Battlefield 2026 で求められるものと、5 月 27 日の締め切りに間に合うように応募する方法</h3><div class='summary'>Startup Battlefield の申請期限は明日なので、今が提出物の最後の仕上げをする時期です。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://techcrunch.com/2026/05/26/what-were-looking-for-in-startup-battlefield-2026-and-how-to-apply-in-time-for-the-may-27-deadline/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-aa4137c034cd'
+  data-themes='政治・政策|テクノロジー|文化・エンタメ'
+  data-lang='en'
+  data-score='3'
+  data-source='TechCrunch'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-aa4137c034cd')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Trump administration wants nuclear startups to use plutonium for their reactors</h3><div class='summary'>The U.S. government is sitting on dozens of tons of weapons-grade plutonium. It&#x27;s hoping startups can find a use for it.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>トランプ政権は原子力新興企業が原子炉にプルトニウムを使用することを望んでいる</h3><div class='summary'>米国政府は数十トンの兵器級プルトニウムを保有している。スタートアップ企業がその用途を見つけられることを期待している。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://techcrunch.com/2026/05/26/trump-administration-wants-nuclear-startups-to-use-plutonium-for-their-reactors/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-ec54900c5c2d'
+  data-themes='市場・ビジネス|科学'
+  data-lang='en'
+  data-score='3'
+  data-source='TechCrunch'
+  data-sentiment='neutral'
+  data-importance='food_recall'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-ec54900c5c2d')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Starship’s path to reusability looks murky after SpaceX’s S-1</h3><div class='summary'>SpaceX&#x27;s recent IPO and Starship rocket test flight delivered two big data points that offer a realistic vision for the coming years — and one that may disappoint both the company&#x27;s boosters and its critics.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>SpaceXのS-1の後、Starshipの再利用への道は不透明に見える</h3><div class='summary'>SpaceX の最近の IPO と Starship ロケット試験飛行は、今後数年間の現実的なビジョンを提供する 2 つの大きなデータ ポイントを提供しました。もう 1 つは、同社の推進者と批評家の両方を失望させる可能性があります。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#e74c3c22;border-color:#e74c3c;color:#e74c3c'>💹 市場・ビジネス</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-usd-weak'>💹 市場・ビジネス</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://techcrunch.com/2026/05/26/starships-path-to-reusability-looks-murky-after-spacexs-s-1/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-0f9c22836c8e'
@@ -1134,28 +1190,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://techcrunch.com/2026/05/25/the-popes-ai-encyclical-isnt-really-about-ai/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-78243e70169e'
-  data-themes='総合・国際|テクノロジー|文化・エンタメ'
-  data-lang='en'
-  data-score='3'
-  data-source='TechCrunch'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-78243e70169e')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Startup Battlefield 200 applications close in days: Apply before May 27</h3><div class='summary'>The deadline to apply or nominate for Startup Battlefield 200 is May 27. This is your shot at VC access, global visibility, TechCrunch coverage, and $100,000. Apply now.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Startup Battlefield 200 の申し込みは数日で締め切られます: 5 月 27 日までにお申し込みください</h3><div class='summary'>Startup Battlefield 200 への応募または推薦の締め切りは 5 月 27 日です。これは、VC へのアクセス、世界的な認知度、TechCrunch の報道、そして 10 万ドルを獲得するチャンスです。今すぐお申し込みください。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://techcrunch.com/2026/05/25/startup-battlefield-200-applications-close-in-days-apply-before-may-27/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-e4be55a487fd'
   data-themes='総合・国際|スポーツ'
   data-lang='en'
@@ -1178,30 +1212,8 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c1l223ymrrvo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-c10eb4587c24'
-  data-themes='政治・政策|文化・エンタメ'
-  data-lang='en'
-  data-score='3'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='breed_adoption'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-c10eb4587c24')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>&#x27;Long time coming&#x27; as Shankland joins Rangers from Hearts</h3><div class='summary'>Scotland striker Lawrence Shankland says he is fulfilling his &quot;dream&quot; of joining &quot;boyhood club&quot; Rangers as he completes his transfer from Scottish Premiership rivals Heart of Midlothian.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>シャンクランドがハーツからレンジャーズに加入「久しぶり」</h3><div class='summary'>スコットランド代表ストライカー、ローレンス・シャンクランドは、スコットランド・プレミアシップのライバルであるハート・オブ・ミッドロジアンからの移籍を完了し、「少年時代のクラブ」レンジャーズに加入するという「夢」をかなえつつあると語った。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/ce8ppl68lrlo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-572571a9863f'
-  data-themes='テクノロジー|スポーツ'
+  data-cardid='item-42aebece522f'
+  data-themes='総合・国際|政治・政策|テクノロジー|文化・エンタメ'
   data-lang='en'
   data-score='3'
   data-source='BBC Sport'
@@ -1213,13 +1225,13 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-572571a9863f')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-42aebece522f')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>RCB beat Buttler&#x27;s Gujarat to reach IPL final</h3><div class='summary'>Captain Rajat Patidar thrashes 93 not out as defending champions Royal Challengers Bengaluru power into the final of the Indian Premier League.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>RCBがバトラーズ・グジャラートを破りIPL決勝進出</h3><div class='summary'>キャプテンのラジャット・パティダールが93ノットアウトを叩き出し、ディフェンディングチャンピオンのロイヤル・チャレンジャーズ・ベンガルールのパワーでインド・プレミアリーグ決勝に進出した。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/cricket/articles/cdepp87pxn3o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-en'><h3>Have Rangers just signed Scotland&#x27;s World Cup number nine?</h3><div class='summary'>Will Lawrence Shankland&#x27;s transfer from Heart of Midlothian to Rangers coincide with him becoming Scotland&#x27;s main striker at the World Cup?</div></div>
+<div class='lang-pane lang-ja hidden'><h3>レンジャーズはスコットランドのワールドカップ背番号9番と契約したばかりですか?</h3><div class='summary'>ローレンス・シャンクランドのハート・オブ・ミッドロジアンからレンジャーズへの移籍は、彼がワールドカップでスコットランドの主力ストライカーになることと一致するのだろうか？</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c809948rmzlo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-621e8e9fbe22'
@@ -1242,6 +1254,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>エラ・トゥーンとの 24 時間は近日公開予定</h3><div class='summary'>マンチェスター・ユナイテッドとイングランドのスター、エラ・トゥーンが父親の死を受け入れながら結婚式の準備をする前例のない舞台裏に迫る、BBC スポーツの新しいドキュメンタリーの予告編をご覧ください。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.bbc.com/sport/football/videos/c4g77x4gg6yo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-572571a9863f'
+  data-themes='テクノロジー|スポーツ'
+  data-lang='en'
+  data-score='3'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-572571a9863f')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>RCB beat Buttler&#x27;s Gujarat to reach IPL final</h3><div class='summary'>Captain Rajat Patidar thrashes 93 not out as defending champions Royal Challengers Bengaluru power into the final of the Indian Premier League.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>RCBがバトラーズ・グジャラートを破りIPL決勝進出</h3><div class='summary'>キャプテンのラジャット・パティダールが93ノットアウトを叩き出し、ディフェンディングチャンピオンのロイヤル・チャレンジャーズ・ベンガルールのパワーでインド・プレミアリーグ決勝に進出した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/cricket/articles/cdepp87pxn3o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-f6f8302d7fea'
@@ -1286,50 +1320,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>ワールドカップのガーナ予備チームでパーティ</h3><div class='summary'>元アーセナルMFトーマス・パーティがガーナのワールドカップ予備チームに選出された。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cp9ppezl4v1o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-853ae22a5af8'
-  data-themes='テクノロジー|スポーツ'
-  data-lang='en'
-  data-score='3'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-853ae22a5af8')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Players won&#x27;t be stopped from taking stand - Collins on Israel fixtures</h3><div class='summary'>Republic of Ireland captain Nathan Collins says no member of the squad will be held back if they wanted to &quot;take a stand&quot; against the team&#x27;s Nations League fixtures with Israel later this year.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>選手たちのスタンドアップは止められない - コリンズ、イスラエル戦に臨む</h3><div class='summary'>アイルランド共和国の主将ネイサン・コリンズは、今年後半のネーションズリーグのイスラエル戦に「立ち向かう」ことを望めば、チームの誰一人として遠慮はしないと語った。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cm2ppgr8vr0o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-51cb73891f27'
-  data-themes='テクノロジー|スポーツ|文化・エンタメ'
-  data-lang='en'
-  data-score='3'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-51cb73891f27')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>&#x27;He showed why good managers need time&#x27; - who are this season&#x27;s over-achievers?</h3><div class='summary'>Tony Pulis explains which Premier League managers have impressed him this season and, down the divisions, who else stands out.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>「優れた監督には時間が必要な理由を彼は示した」―今シーズンの成績優秀者は誰だ？</h3><div class='summary'>トニー・ピュリスが、今シーズン、プレミアリーグのどの監督に感銘を受けたか、そして部門別に見て、他に誰が傑出した人物かを説明します。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c2d27lw7ywjo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-adb473f85dd5'
@@ -1396,6 +1386,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>今シーズン、200人以上の監督とコーチが職を失ったとLMAが発表</h3><div class='summary'>リーグ監督協会（LMA）のリチャード・ビーヴァン会長は、イングランドフットボール界では昨シーズン、「雇って解雇する文化」が「職業を損なう」ため、200人以上の監督やコーチが職を失ったと述べた。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c23229xlprko?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-c10eb4587c24'
+  data-themes='政治・政策|文化・エンタメ'
+  data-lang='en'
+  data-score='3'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-c10eb4587c24')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>&#x27;Long time coming&#x27; as Shankland joins Rangers from Hearts</h3><div class='summary'>Scotland striker Lawrence Shankland says he is fulfilling his &quot;dream&quot; of joining &quot;boyhood club&quot; Rangers as he completes his transfer from Scottish Premiership rivals Heart of Midlothian.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>シャンクランドがハーツからレンジャーズに加入「久しぶり」</h3><div class='summary'>スコットランド代表ストライカー、ローレンス・シャンクランドは、スコットランド・プレミアシップのライバルであるハート・オブ・ミッドロジアンからの移籍を完了し、「少年時代のクラブ」レンジャーズに加入するという「夢」をかなえつつあると語った。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/ce8ppl68lrlo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-d930ba8ced65'
@@ -1486,28 +1498,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/football/videos/cx21dzymzd2o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-a348b81c8605'
-  data-themes='テクノロジー|スポーツ'
-  data-lang='en'
-  data-score='3'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-a348b81c8605')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Premier League predictions - how accurate were BBC Sport pundits?</h3><div class='summary'>Last summer, 33 BBC pundits - plus AI and Opta&#x27;s &#x27;supercomputer&#x27; were asked to pick which teams would finish in the Premier League&#x27;s top four, and in which order. How did they get on?</div></div>
-<div class='lang-pane lang-ja hidden'><h3>プレミアリーグの予想 - BBC スポーツの専門家はどれくらい正確でしたか?</h3><div class='summary'>昨夏、BBCの専門家33名にAIとOptaの「スーパーコンピューター」を加え、どのチームがプレミアリーグのトップ4に入るのか、そしてその順番を選ぶよう求められた。彼らはどうやってやっていったのでしょうか？</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c1j27y7leelo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-b60a067965ec'
   data-themes='総合・国際|テクノロジー'
   data-lang='en'
@@ -1596,158 +1586,38 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/basketball/articles/cqxldyldrreo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-9f02aca61d27'
-  data-themes='総合・国際|テクノロジー|科学|文化・エンタメ'
-  data-lang='en'
+  data-cardid='item-76c158c6e320'
+  data-themes='政治・政策|科学'
+  data-lang='ja'
   data-score='3'
-  data-source='NASA News'
+  data-source='NHK 政治'
   data-sentiment='neutral'
-  data-importance='training_behavior'
+  data-importance='breed_adoption'
   data-isnew='false'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>NASA News</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-9f02aca61d27')">既読</button>
-</div>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK 政治</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-76c158c6e320')">既読</button></div>
   </div>
-  <div class='lang-pane lang-en'><h3>Chennai City Lights</h3><div class='summary'>Chennai, on India’s southern coast along the Bay of Bengal and with a metropolitan population of about 8.7 million, shines with white LED streetlights in this photograph taken at approximately 9:13 p.m. local time on May 2, 2026, from the International Space Station. Earth observations from the spac</div></div>
-<div class='lang-pane lang-ja hidden'><h3>チェンナイ シティ ライツ</h3><div class='summary'>インドのベンガル湾沿いの南海岸に位置し、大都市人口約870万人のチェンナイは、午後9時13分頃に撮影されたこの写真では白色LEDの街灯で輝いている。現地時間2026年5月2日、国際宇宙ステーションから。宇宙からの地球観測</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.nasa.gov/image-article/chennai-city-lights/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-ja'><h3>高市首相動静 2026年5月21日</h3><div class='summary'>（高市首相動静 2026年5月21日）11:14 公邸発11:15 官邸着12:20 中東情勢に関する関係閣僚会議（～12:40）12:41 片山さつき財務大臣と会話（～12:42）13:01 官邸発13:11 皇居着。帰国の記帳13:18 皇居発13:28 官邸着14:04 油井亀美也、大西卓哉両宇宙飛行士の表敬（～14:24）14:30 全国社会福祉法人経営者協議会の磯彰格会長と面会（～14:42）15:00 片山財務大臣、三村淳財務官と面会（～15:15）15:16 片山財務大臣と面会（～15:29）15:30 市川恵一国家安全保障局長、外務省の船越健裕事務次官、金井正彰アジア大洋州局長</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260522/k10015128351000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-7b9a222da591'
-  data-themes='科学|文化・エンタメ'
-  data-lang='en'
+  data-cardid='item-dd27c77c472a'
+  data-themes='総合・国際|政治・政策'
+  data-lang='ja'
   data-score='3'
-  data-source='NASA News'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>NASA News</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-7b9a222da591')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>New Instrument Used Antarctic Ice Sheet to Probe Extreme Universe</h3><div class='summary'>The Payload for Ultrahigh Energy Observations (PUEO) is a NASA Astrophysics Pioneers Program mission designed to detect the most energetic particles in the universe.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>南極の氷床を使用した新しい機器が極限宇宙を探査</h3><div class='summary'>超高エネルギー観測用ペイロード (PUEO) は、宇宙で最も高エネルギーの粒子を検出することを目的とした NASA 天体物理学パイオニア プログラムのミッションです。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://science.nasa.gov/science-research/science-enabling-technology/technology-highlights/new-instrument-used-antarctic-ice-sheet-to-probe-extreme-universe/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-ad775d4c4467'
-  data-themes='科学|文化・エンタメ'
-  data-lang='en'
-  data-score='3'
-  data-source='NASA News'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>NASA News</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-ad775d4c4467')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>A Full Moon Checkup</h3><div class='summary'>Once a month during the full Moon, Landsat 9 turns from Earth to image the lunar surface, helping keep the spacecraft’s data accurate and consistent.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>満月の健康診断</h3><div class='summary'>Landsat 9 は月に 1 回、満月の間に地球から向きを変えて月面を撮影し、探査機のデータの正確さと一貫性を維持します。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://science.nasa.gov/earth/earth-observatory/a-full-moon-checkup/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-a45b8f355161'
-  data-themes='テクノロジー|科学|文化・エンタメ'
-  data-lang='en'
-  data-score='3'
-  data-source='NASA News'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>NASA News</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-a45b8f355161')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Jaclyn Kagey Shapes Humanity’s Return to the Moon</h3><div class='summary'>For Jaclyn Kagey, preparing astronauts to put boots on the Moon is part of her daily work. As the Artemis extravehicular activity lead in NASA’s Flight Operations Directorate, Kagey plays a central role in preparing astronauts to safely explore the lunar surface. During Artemis missions, astronauts </div></div>
-<div class='lang-pane lang-ja hidden'><h3>ジャクリン・ケイギーが人類の月への帰還を形作る</h3><div class='summary'>ジャクリン・ケイギーさんにとって、宇宙飛行士が月面にブーツを履く準備をすることは毎日の仕事の一部です。 NASA の飛行運用総局でアルテミスの船外活動を主導するカゲイ氏は、宇宙飛行士が月面を安全に探索できるよう準備する上で中心的な役割を果たしています。アルテミスのミッション中、宇宙飛行士は</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.nasa.gov/centers-and-facilities/johnson/jaclyn-kagey-shapes-humanitys-return-to-the-moon/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-61d7300f53f8'
-  data-themes='科学|文化・エンタメ'
-  data-lang='en'
-  data-score='3'
-  data-source='NASA News'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>NASA News</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-61d7300f53f8')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Call for Creatives: NASA Seeks Help Illuminating Mission Storytelling</h3><div class='summary'>As NASA pushes the boundaries of exploration and innovation for the benefit of humanity, the agency is looking for partners to share mission stories covering Artemis Moon missions, nuclear propulsion, aeronautics, and more. NASA published an Announcement for Proposals on May 21 asking filmmakers, do</div></div>
-<div class='lang-pane lang-ja hidden'><h3>クリエイティブの募集: NASA はミッションのストーリーテリングを照らす支援を求めています</h3><div class='summary'>NASA は人類の利益のために探査とイノベーションの限界を押し広げており、アルテミス月ミッション、原子力推進、航空学などをカバーするミッション ストーリーを共有するパートナーを探しています。 NASA は 5 月 21 日に提案発表を発表し、映画制作者に次のことを求めました。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.nasa.gov/news-release/call-for-creatives-nasa-seeks-help-illuminating-mission-storytelling/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-cdd410b6a168'
-  data-themes='総合・国際|科学'
-  data-lang='en'
-  data-score='3'
-  data-source='NASA News'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>NASA News</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-cdd410b6a168')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>NASA Sets Coverage for Roscosmos Spacewalk Outside Space Station</h3><div class='summary'>NASA will provide live coverage on Wednesday, May 27, as two Roscosmos cosmonauts conduct a spacewalk outside the International Space Station. The spacewalk is scheduled to begin at approximately 10:15 a.m. EDT and last roughly five hours. Watch NASA’s live coverage beginning at 9:45 a.m. on NASA+, </div></div>
-<div class='lang-pane lang-ja hidden'><h3>NASA、宇宙ステーション外のロスコスモス船外活動の範囲を設定</h3><div class='summary'>NASAは5月27日水曜日、ロスコスモスの宇宙飛行士2名が国際宇宙ステーションの外で船外活動を行う様子を生中継する予定だ。船外活動は東部夏時間午前10時15分頃に始まり、約5時間続く予定だ。 NASA+ で午前 9 時 45 分から始まる NASA のライブ中継をご覧ください。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.nasa.gov/news-release/nasa-sets-coverage-for-roscosmos-spacewalk-outside-space-station-2/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-1aea020035b7'
-  data-themes='科学|文化・エンタメ'
-  data-lang='en'
-  data-score='3'
-  data-source='NASA News'
+  data-source='NHK 政治'
   data-sentiment='bullish'
-  data-importance='training_behavior'
+  data-importance='breed_adoption'
   data-isnew='false'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>NASA News</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-1aea020035b7')">既読</button>
-</div>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK 政治</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-dd27c77c472a')">既読</button></div>
   </div>
-  <div class='lang-pane lang-en'><h3>Webb Studies Star Clusters</h3><div class='summary'>This near-infrared image released on May 6, 2026, shows a section of one of the spiral arms of Messier 51 (M51). M51 is one of four nearby galaxies observed by NASA’s James Webb Space Telescope in a study of nearly 9,000 star clusters. Data from the study shows that more massive star clusters emerge</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ウェッブ研究星団</h3><div class='summary'>2026 年 5 月 6 日に公開されたこの近赤外線画像には、メシエ 51 (M51) の渦巻き腕の 1 つの断面が示されています。 M51 は、NASA のジェームズ ウェッブ宇宙望遠鏡が約 9,000 個の星団の研究で観測した、近くにある 4 つの銀河のうちの 1 つです。研究のデータは、より大規模な星団が出現することを示しています</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.nasa.gov/image-article/webb-studies-star-clusters/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-ja'><h3>給付付き税額控除イメージ案 支援額は個人単位 所得に応じ変動</h3><div class='summary'>所得に応じて減税や給付を行う給付付き税額控除の制度設計をめぐり、超党派の「国民会議」の実務者会議で27日にもイメージ案が示される見通しです。支援額は個人単位で所得に応じて変動させるとともに、子育て世帯には加算を行うなど配慮を検討するとしています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260527/k10015132391000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-fc8f570e8db0'
@@ -1869,23 +1739,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260526/k10015131671000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-76c158c6e320'
-  data-themes='政治・政策|科学'
-  data-lang='ja'
-  data-score='3'
-  data-source='NHK 政治'
-  data-sentiment='neutral'
-  data-importance='breed_adoption'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK 政治</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-76c158c6e320')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>高市首相動静 2026年5月21日</h3><div class='summary'>（高市首相動静 2026年5月21日）11:14 公邸発11:15 官邸着12:20 中東情勢に関する関係閣僚会議（～12:40）12:41 片山さつき財務大臣と会話（～12:42）13:01 官邸発13:11 皇居着。帰国の記帳13:18 皇居発13:28 官邸着14:04 油井亀美也、大西卓哉両宇宙飛行士の表敬（～14:24）14:30 全国社会福祉法人経営者協議会の磯彰格会長と面会（～14:42）15:00 片山財務大臣、三村淳財務官と面会（～15:15）15:16 片山財務大臣と面会（～15:29）15:30 市川恵一国家安全保障局長、外務省の船越健裕事務次官、金井正彰アジア大洋州局長</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260522/k10015128351000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-54fe50854b7a'
   data-themes='総合・国際|政治・政策'
   data-lang='ja'
@@ -1952,23 +1805,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>女性特有の健康課題 対応可能な医療機関公表など方向性確認</h3><div class='summary'>更年期の症状をはじめ、女性特有の健康課題の解決に向けて政府は、対応できる医療機関のリストをまとめて公表するなど今後の取り組みの方向性を確認しました。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-theme' style='background:#00b89422;border-color:#00b894;color:#00b894'>🔬 科学</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260525/k10015130911000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-9f84fb378823'
-  data-themes='総合・国際|政治・政策'
-  data-lang='ja'
-  data-score='3'
-  data-source='NHK 政治'
-  data-sentiment='neutral'
-  data-importance='breed_adoption'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK 政治</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-9f84fb378823')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>みらい 所得応じた給付求める提言 食料品消費税ゼロの対案</h3><div class='summary'>チームみらいは、超党派の「国民会議」で議論されている食料品の消費税ゼロの対案として中低所得層を対象に年収に応じた給付を行うよう求める提言をまとめました。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260525/k10015130861000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-e80d8bed715d'
@@ -2088,23 +1924,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>安定的な皇位継承 来週以降のとりまとめに向け調整急ぐ</h3><div class='summary'>安定的な皇位継承をめぐり、衆参両院の議長・副議長は、来週以降にとりまとめに向けた案を示すことにしています。女性皇族が結婚後も皇室に残る案が盛り込まれる方向ですが、配偶者と子どもを皇族とするかどうか各党で意見が分かれていて、調整が行われる見通しです。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260523/k10015129231000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-3e09f898ae20'
-  data-themes='総合・国際|政治・政策'
-  data-lang='ja'
-  data-score='3'
-  data-source='NHK 政治'
-  data-sentiment='neutral'
-  data-importance='breed_adoption'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK 政治</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-3e09f898ae20')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>給付付き税額控除 対象の所得水準や軽減方法など詰めの調整へ</h3><div class='summary'>給付付き税額控除の制度設計をめぐり超党派の「国民会議」は、夏前の中間取りまとめに向けて、支援の対象となる所得水準をどう位置づけるかなど、残る課題について詰めの調整を急ぐことにしています。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260523/k10015129641000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-29fdca6df8f7'
@@ -2311,23 +2130,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260521/k10015127901000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-f77ff55422d1'
-  data-themes='総合・国際|政治・政策'
-  data-lang='ja'
-  data-score='3'
-  data-source='NHK 政治'
-  data-sentiment='bullish'
-  data-importance='health_alert'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK 政治</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-f77ff55422d1')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>自民 小林政調会長 “ガソリン価格支援策見直し含め検討を”</h3><div class='summary'>ガソリンの価格を1リットル当たり170円程度に抑制する現在の支援策をめぐり、自民党の小林政務調査会長は、中東情勢を受けた激変緩和策として導入されたものであり、見直しも含めて検討すべきだという考えを示しました。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260521/k10015127821000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-84e5fcd5a5d3'
   data-themes='総合・国際|政治・政策'
   data-lang='ja'
@@ -2360,40 +2162,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>衆議院憲法審査会 緊急事態条項イメージ案もとに2回目の討議</h3><div class='summary'>衆議院憲法審査会で緊急事態条項のイメージ案をもとにした2回目の討議が行われ、各党がそれぞれ見解を述べました。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260521/k10015127691000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-981390a6240c'
-  data-themes='総合・国際'
-  data-lang='ja'
-  data-score='3'
-  data-source='NHK'
-  data-sentiment='bearish'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-981390a6240c')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>英海事機関 オマーン沖のタンカーから外部爆発の報告</h3><div class='summary'>イギリスの海事機関は26日、オマーンの首都マスカット沖合のタンカーから爆発があったとの報告を受けたと明らかにしました。爆発はタンカーの外部で起きたとしていて、乗員や船舶は無事だとする一方、燃料の一部が海に流出したということです。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260527/k10015132411000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-2172e3b436b2'
-  data-themes='市場・ビジネス|テクノロジー'
-  data-lang='ja'
-  data-score='3'
-  data-source='NHK'
-  data-sentiment='bullish'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-2172e3b436b2')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>米アンソロピック「ミュトス」1万件のぜい弱性検出と発表</h3><div class='summary'>アメリカの新興AI企業、アンソロピックは22日、新たなAIモデル、「クロード・ミュトス」によってソフトウエアの重大なぜい弱性が1万件以上見つかったと発表しました。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#e74c3c22;border-color:#e74c3c;color:#e74c3c'>💹 市場・ビジネス</span><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260527/k10015132401000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-abf856df68ab'
@@ -2520,6 +2288,72 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/news/articles/c4g44yl7q70o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-808feef87dda'
+  data-themes='総合・国際'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC World'
+  data-sentiment='neutral'
+  data-importance='health_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-808feef87dda')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Russia &#x27;relentlessly targeting&#x27; critical infrastructure and democracy, GCHQ says</h3><div class='summary'>The spy agency&#x27;s head will set out threats facing the UK and the measures she believes need to be taken to confront them on Wednesday.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ロシアは重要インフラと民主主義を「容赦なく標的にしている」とGCHQが発表</h3><div class='summary'>スパイ庁長官は水曜日、英国が直面する脅威と、それに対抗するために取られる必要があると考える措置を発表する予定だ。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/c4g44gprnnvo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-cc2d4353ad97'
+  data-themes='総合・国際'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC World'
+  data-sentiment='neutral'
+  data-importance='health_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-cc2d4353ad97')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Three killed and dozens injured in Israeli strike on Gaza City, medics and witnesses say</h3><div class='summary'>Israel says it was targeting a Hamas commander whose predecessor was killed in a similar strike earlier in May.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>イスラエルによるガザ市攻撃で3人が死亡、数十人が負傷、医師と目撃者が発表</h3><div class='summary'>イスラエルは、5月初めに同様の攻撃で前任者が殺害されたハマスの司令官を標的にしていると述べた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/cjwppj1yn7go?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-2dbf9f940465'
+  data-themes='総合・国際'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC World'
+  data-sentiment='neutral'
+  data-importance='health_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-2dbf9f940465')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Multiple people killed and others missing after chemical explosion at US paper mill</h3><div class='summary'>Ten people were injured and an unknown number are missing after a tank ruptured at a paper mill in Longview, Washington.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>米国の製紙工場で化学爆発が起き、複数人が死亡、行方不明者もいる</h3><div class='summary'>ワシントン州ロングビューの製紙工場でタンクが破裂し、10人が負傷、行方不明者も出ている。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/cj9ppm94xw9o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-d3ba4f213b98'
   data-themes='テクノロジー'
   data-lang='en'
@@ -2542,92 +2376,26 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/news/articles/c70vvd17rg7o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-41ece54e1f03'
-  data-themes='テクノロジー'
+  data-cardid='item-a093b388be4e'
+  data-themes='政治・政策'
   data-lang='en'
   data-score='2'
   data-source='BBC World'
   data-sentiment='neutral'
-  data-importance='training_behavior'
+  data-importance='breed_adoption'
   data-isnew='false'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-41ece54e1f03')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-a093b388be4e')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>Ebola needs swift response to prevent catastrophe, says DR Congo governor</h3><div class='summary'>The governor of Ituri said the more time they lose, the closer the province is to disaster.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>エボラ出血熱、大惨事を防ぐには迅速な対応が必要、コンゴ民主共和国知事が語る</h3><div class='summary'>イトゥリ州知事は、時間が失われるほど、州は災害に近づくと述べた。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/news/articles/c3022rd2er4o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-4d43d635f99d'
-  data-themes='総合・国際'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC World'
-  data-sentiment='neutral'
-  data-importance='health_alert'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-4d43d635f99d')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Australia confirms first diphtheria death amid worst outbreak in decades</h3><div class='summary'>Most cases are in the Northern Territory with some also in Western Australia, South Australia and Queensland.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>オーストラリア、ここ数十年で最悪の流行中、初のジフテリア死亡を確認</h3><div class='summary'>ほとんどの感染者はノーザンテリトリーで発生しており、一部は西オーストラリア州、南オーストラリア州、クイーンズランド州にも発生しています。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/news/articles/c759q6y26w3o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-095317cbc28c'
-  data-themes='テクノロジー'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC World'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-095317cbc28c')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>China executes man for poisoning billionaire gaming tycoon</h3><div class='summary'>The court said the man poisoned the tycoon for sidelining him after he helped secure a deal with Netflix for the 3 Body Problem.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>中国、億万長者のゲーム王を毒殺した男を処刑</h3><div class='summary'>裁判所は、男が「スリー・ボディ・プロブレム」でネットフリックスとの契約獲得に貢献した後、大物富豪を脇に置いたとして毒殺したと述べた。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/news/articles/cg5ppg50gplo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-7fdf40b0c37f'
-  data-themes='テクノロジー'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC World'
-  data-sentiment='bullish'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-7fdf40b0c37f')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>South African president mounts legal challenge against report that could lead to impeachment</h3><div class='summary'>Cyril Ramaphosa argues that the authors of the report &quot;misconceived&quot; their mandate.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>南アフリカ大統領、弾劾につながる可能性のある報告書に対して法的異議申し立てを開始</h3><div class='summary'>シリル・ラマポーザは、報告書の著者らは自らの使命を「誤解」したと主張している。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/news/articles/cy72213v2elo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-en'><h3>White House erects UFC cage ahead of US 250th anniversary celebrations</h3><div class='summary'>Workers were seen assembling domed arches and a staging area on the South Lawn in preparation for next month&#x27;s event.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ホワイトハウス、建国250周年記念式典を前にUFCケージを設置</h3><div class='summary'>来月のイベントに備えて、南芝生でドーム型アーチとステージングエリアを組み立てる作業員の姿が見られた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/articles/cz622647eg3o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-1e0edee662ae'
@@ -2696,6 +2464,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/news/articles/c8e8gx2d7j4o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-f7b3c1183878'
+  data-themes='文化・エンタメ'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC World'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-f7b3c1183878')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Watch: UFC arena construction begins at White House ahead of fight</h3><div class='summary'>The massive structure will host a cage fight as part of celebrations marking the 250th anniversary of the US Declaration of Independence.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>見る: 試合に先立ってホワイトハウスでUFCアリーナの建設が始まる</h3><div class='summary'>この巨大な建造物では、米国独立宣言250周年を記念する祝賀行事の一環として、檻の中での戦いが開催される予定だ。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/news/videos/cz7253q4g4jo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-ed27b86bc3ee'
   data-themes='総合・国際'
   data-lang='en'
@@ -2762,26 +2552,26 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/news/videos/clyppgdl3xwo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-47e482347f2f'
+  data-cardid='item-1e2ebecf46ce'
   data-themes='テクノロジー'
   data-lang='en'
   data-score='2'
-  data-source='BBC World'
+  data-source='TechCrunch'
   data-sentiment='neutral'
   data-importance='training_behavior'
   data-isnew='false'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC World</span><span></span></div>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span></span></div>
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-47e482347f2f')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-1e2ebecf46ce')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>Watch: Trump to have annual medical exam ahead of 80th birthday</h3><div class='summary'>The BBC’s Bernd Debusmann explains the routine medical check of the president of the US.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>動画：トランプ大統領、80歳の誕生日を前に年に一度健康診断を受ける予定</h3><div class='summary'>BBCのベルント・デブスマン氏が、米国大統領の定期健康診断について説明しています。</div></div>
+  <div class='lang-pane lang-en'><h3>DuckDuckGo installs are up 30% as users reject being ‘force-fed’ Google’s AI Search</h3><div class='summary'>Google overhauled Search at I/O 2026, replacing blue links with AI agents. The backlash has been swift. DuckDuckGo app installs spiked 30% as users seek a way out.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ユーザーがGoogleのAI検索の「強制給餌」を拒否したため、DuckDuckGoのインストール数が30％増加</h3><div class='summary'>GoogleはI/O 2026で検索を徹底的に見直し、青いリンクをAIエージェントに置き換えた。反発は急速だった。ユーザーが活路を求めているため、DuckDuckGo アプリのインストール数は 30% 急増しました。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/news/videos/c1j22wp5e6no?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <a class='open-btn' href='https://techcrunch.com/2026/05/26/duckduckgo-installs-are-up-30-as-users-reject-being-force-fed-googles-ai-search/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-1ab37a271eb8'
@@ -2850,72 +2640,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://techcrunch.com/2026/05/26/techcrunch-disrupt-2026-early-bird-ticket-rates-end-may-29/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-218e902321e9'
-  data-themes='テクノロジー'
-  data-lang='en'
-  data-score='2'
-  data-source='TechCrunch'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-218e902321e9')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>5 days left: Save up to $410 on TechCrunch Disrupt 2026 passes before prices increase</h3><div class='summary'>Early Bird savings for TechCrunch Disrupt 2026 in San Francisco end May 29 at 11:59 p.m. PT. Register now to save up to $410 before prices increase.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>残り 5 日: 価格が値上げされる前に、TechCrunch Disrupt 2026 パスで最大 410 ドル割引</h3><div class='summary'>サンフランシスコで開催される TechCrunch Disrupt 2026 の早期割引セールは 5 月 29 日午後 11 時 59 分に終了します。 PT.今すぐ登録すると、価格が上がる前に最大 410 ドル節約できます。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://techcrunch.com/2026/05/25/5-days-left-save-up-to-410-on-techcrunch-disrupt-2026-passes-before-prices-increase/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-a1acbef14ea2'
-  data-themes='テクノロジー'
-  data-lang='en'
-  data-score='2'
-  data-source='TechCrunch'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-a1acbef14ea2')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Everyone is navigating AI security in real time — even Google</h3><div class='summary'>We&#x27;re in the transition period -- all of us.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Google も含め、誰もが AI セキュリティをリアルタイムでナビゲートしています</h3><div class='summary'>私たちは皆、過渡期にいます。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://techcrunch.com/2026/05/24/everyone-is-navigating-ai-security-in-real-time-even-google/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-2a5f5cfbf974'
-  data-themes='テクノロジー'
-  data-lang='en'
-  data-score='2'
-  data-source='TechCrunch'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-2a5f5cfbf974')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>6 kitchen gadgets that make adulting feel easier</h3><div class='summary'>From a robot stirring your soup to a bread machine that kneads your dough, here are 6 gadgets that may make you feel like you’ve won adulthood.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>大人の気分を盛り上げるキッチングッズ6選</h3><div class='summary'>スープをかき混ぜるロボットから生地をこねるパン焼き機まで、大人になった気分にさせてくれる 6 つのガジェットをご紹介します。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://techcrunch.com/2026/05/24/6-kitchen-gadgets-that-make-adulting-feel-easier/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-ded037fbcd60'
   data-themes='スポーツ'
   data-lang='en'
@@ -2936,6 +2660,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>アンダーソン獲得レースではマンチェスター・シティがマンチェスター・ユナイテッドを上回っている</h3><div class='summary'>マンチェスター・シティはエリオット・アンダーソン獲得レースでリードしており、ノッティンガム・フォレストのミッドフィールダーはライバルのマンチェスター・ユナイテッドではなくエティハド・スタジアムへの移籍を望んでいる。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cj0ppgdlll7o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-f8406feb86bf'
+  data-themes='スポーツ'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-f8406feb86bf')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Coventry&#x27;s Lampard named LMA manager of the year</h3><div class='summary'>Frank Lampard is named the League Managers Association manager of the year after guiding Coventry back to the Premier League.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>コベントリーのランパードがLMA年間最優秀監督に選ばれる</h3><div class='summary'>フランク・ランパードはコベントリーをプレミアリーグに復帰させ、リーグ監督協会の年間最優秀監督に選ばれた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cp3pp3xzw8ko?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-cdb6ec74d321'
@@ -2960,7 +2706,29 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cd9ppwqpvqdo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-ea70cce83cca'
+  data-cardid='item-4b152913548d'
+  data-themes='テクノロジー'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-4b152913548d')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Efficient Sinner underlines status as French Open favourite with routine win</h3><div class='summary'>Jannik Sinner underlines why he is the overwhelming favourite to win the French Open with an efficient first-round win against French wildcard Clement Tabur.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Effificient Sinner が常勝で全仏オープン優勝候補の地位を強調</h3><div class='summary'>ヤニク・シナーは、フランスのワイルドカードであるクレマン・タビュルに対する第1ラウンドで効果的な勝利を収め、自分が全仏オープン優勝の圧倒的な優勝候補である理由を強調した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/tennis/articles/ceqpp35xvr1o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-a5532382734f'
   data-themes='スポーツ'
   data-lang='en'
   data-score='2'
@@ -2973,13 +2741,13 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-ea70cce83cca')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-a5532382734f')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>The big VAR debrief - did it deny Bournemouth Champions League spot?</h3><div class='summary'>BBC Sport assesses how VAR interventions may have impacted games at key moments and how some teams might appreciate the system more than others.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>VAR に関する大規模な報告書 - ボーンマスのチャンピオンズ リーグ出場権は否定されましたか?</h3><div class='summary'>BBC スポーツは、VAR 介入が重要な瞬間に試合にどのような影響を与えたか、また一部のチームが他のチームよりもこのシステムをどのように評価しているかを評価しています。</div></div>
+  <div class='lang-pane lang-en'><h3>Vardy leaves Cremonese but wants to continue career</h3><div class='summary'>Former Leicester striker Jamie Vardy has decided to leave Cremonese when his contract expires this summer.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ヴァーディ、クレモネーゼを離れるもキャリア継続を希望</h3><div class='summary'>元レスターのストライカー、ジェイミー・ヴァーディーは今夏の契約満了に伴いクレモネーゼを離れることを決意した。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c4g090pjr7ro?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c3922gej3rzo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-da37755b1287'
@@ -3024,50 +2792,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>ノリーが引退、ファーンリーが敗退のため、英国男子は全仏オープン2回戦に進めず</h3><div class='summary'>キャメロン・ノリーが負傷で引退し、ジェイコブ・ファーンリーがストレートで負けたため、全仏オープンでは英国男子選手は誰も2回戦に出場しない。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.bbc.com/sport/tennis/articles/cr5pp96mvpvo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-cb1dbf2add5f'
-  data-themes='スポーツ'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-cb1dbf2add5f')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>The 2025-26 Premier League season in alternative tables</h3><div class='summary'>BBC Sport presents some alternative Premier League tables, looking at set-pieces, xG, long shots, and more.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>代替テーブルでの 2025-26 プレミアリーグ シーズン</h3><div class='summary'>BBC Sport は、セットプレー、xG、ロングショットなどを考慮したプレミア リーグの代替テーブルをいくつか紹介します。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c1l229n3j9go?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-5953e13a8051'
-  data-themes='スポーツ'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-5953e13a8051')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>How are French Open stars coping with Paris &#x27;heat dome&#x27;?</h3><div class='summary'>With temperatures reaching 34C at the French Open, players are having to tweak their games to deal with firmer courts, higher bounces and the heat.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>全仏オープンのスター選手たちはパリの「ドームの暑さ」にどう対処しているのか？</h3><div class='summary'>全仏オープンでは気温が34度に達しており、選手たちはコートの硬さ、バウンスの高さ、暑さに対処するためにゲームを微調整する必要がある。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/tennis/articles/c70vvyvngy5o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-9424cbd768cd'
@@ -3180,29 +2904,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/football/videos/cqjp24l5w89o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-9bf8fd7dbe43'
-  data-themes='文化・エンタメ'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-9bf8fd7dbe43')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Don&#x27;t cry over spilled juice - Gauff&#x27;s eventful start to title defence</h3><div class='summary'>Coco Gauff overcomes an &quot;eventful&quot; start to her French Open title defence - dealing with a &quot;mini car accident&quot; and a dress malfunction before securing a first-round win.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>こぼれたジュースで泣くな - ガウフの波乱万丈のタイトル防衛戦スタート</h3><div class='summary'>ココ・ガウフは、全仏オープンのタイトル防衛戦で「波乱万丈な」スタートを切り、「軽自動車事故」とドレスの故障に対処しながら、1回戦で勝利を収めた。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/tennis/articles/cwy22j73ql4o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-26b525f874ad'
+  data-cardid='item-5953e13a8051'
   data-themes='スポーツ'
   data-lang='en'
   data-score='2'
@@ -3215,13 +2917,79 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-26b525f874ad')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-5953e13a8051')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>Southampton pay tribute as Udoh dies aged 21</h3><div class='summary'>Southampton FC and Royal Antwerp announce the death of former academy player Victor Udoh at the age of 21.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ウドーが21歳で死去、サウサンプトンが追悼</h3><div class='summary'>サウサンプトンFCとロイヤル・アントワープは、元アカデミー選手のビクター・ウドーが21歳で死去したことを発表した。</div></div>
+  <div class='lang-pane lang-en'><h3>How are French Open stars coping with Paris &#x27;heat dome&#x27;?</h3><div class='summary'>With temperatures reaching 34C at the French Open, players are having to tweak their games to deal with firmer courts, higher bounces and the heat.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>全仏オープンのスター選手たちはパリの「ドームの暑さ」にどう対処しているのか？</h3><div class='summary'>全仏オープンでは気温が34度に達しており、選手たちはコートの硬さ、バウンスの高さ、暑さに対処するためにゲームを微調整する必要がある。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cdjpp0jgjnzo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <a class='open-btn' href='https://www.bbc.com/sport/tennis/articles/c70vvyvngy5o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-ea70cce83cca'
+  data-themes='スポーツ'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-ea70cce83cca')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>The big VAR debrief - did it deny Bournemouth Champions League spot?</h3><div class='summary'>BBC Sport assesses how VAR interventions may have impacted games at key moments and how some teams might appreciate the system more than others.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>VAR に関する大規模な報告書 - ボーンマスのチャンピオンズ リーグ出場権は否定されましたか?</h3><div class='summary'>BBC スポーツは、VAR 介入が重要な瞬間に試合にどのような影響を与えたか、また一部のチームが他のチームよりもこのシステムをどのように評価しているかを評価しています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c4g090pjr7ro?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-9080091aa63f'
+  data-themes='テクノロジー'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-9080091aa63f')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Arsenal target Villa&#x27;s Rogers - Wednesday&#x27;s gossip</h3><div class='summary'>Arsenal ready to target Morgan Rogers, Paris St-Germain to rival Liverpool for Yan Diomande and Jack Grealish to be given chance to revive Man City career.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>アーセナルがヴィラのロジャースを狙う - 水曜日のゴシップ</h3><div class='summary'>アーセナルはモーガン・ロジャースを狙う準備ができており、パリ・サンジェルマンはリバプールのライバルとしてヤン・ディオマンド、そしてジャック・グリーリッシュにはマンシティでのキャリアを復活させるチャンスを与えようとしている。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c62dde3m70no?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-cb1dbf2add5f'
+  data-themes='スポーツ'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-cb1dbf2add5f')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>The 2025-26 Premier League season in alternative tables</h3><div class='summary'>BBC Sport presents some alternative Premier League tables, looking at set-pieces, xG, long shots, and more.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>代替テーブルでの 2025-26 プレミアリーグ シーズン</h3><div class='summary'>BBC Sport は、セットプレー、xG、ロングショットなどを考慮したプレミア リーグの代替テーブルをいくつか紹介します。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c1l229n3j9go?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-c6c28cf3722d'
@@ -3246,28 +3014,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/cycling/articles/cjwppx51dzjo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-3891176e5470'
-  data-themes='スポーツ'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-3891176e5470')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>How Toone is navigating grief through football</h3><div class='summary'>England and Manchester United midfielder Ella Toone opens up about grief, football and preparing for her wedding without her dad in a new BBC documentary.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>トゥーンはサッカーを通して悲しみをどう乗り越えているか</h3><div class='summary'>イングランド代表、マンチェスター・ユナイテッドのミッドフィールダー、エラ・トゥーンがBBCの新しいドキュメンタリーで、悲しみ、フットボール、そして父親のいない結婚式の準備について語る。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c3e2dg875x7o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-12d49d4d45c1'
   data-themes='スポーツ'
   data-lang='en'
@@ -3288,6 +3034,50 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>フェラーリに何が起こっているのか、そしてフェルスタッペンは辞めるのでしょうか？ F1 Q&amp;A</h3><div class='summary'>BBC スポーツの F1 特派員アンドリュー ベンソンがカナダ グランプリ後に最新の質問に答えます。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.bbc.com/sport/formula1/articles/c0720rrkvxvo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-11116b0f9ba1'
+  data-themes='テクノロジー'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-11116b0f9ba1')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Stubbs powers Hants to T20 Blast win against Essex</h3><div class='summary'>Tristan Stubbs and Scott Currie play starring roles as Hampshire inflict a 30-run T20 Blast defeat on Essex.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>スタブスがハンツをパワーアップさせ、T20 ブラストでエセックスに勝利</h3><div class='summary'>トリスタン・スタッブスとスコット・カリーが主演を務め、ハンプシャーがT20ブラストでエセックスに30ランの勝利を収めた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/cricket/articles/c7755ml44eno?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-26b525f874ad'
+  data-themes='スポーツ'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-26b525f874ad')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Southampton pay tribute as Udoh dies aged 21</h3><div class='summary'>Southampton FC and Royal Antwerp announce the death of former academy player Victor Udoh at the age of 21.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ウドーが21歳で死去、サウサンプトンが追悼</h3><div class='summary'>サウサンプトンFCとロイヤル・アントワープは、元アカデミー選手のビクター・ウドーが21歳で死去したことを発表した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cdjpp0jgjnzo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-9885073347af'
@@ -3334,48 +3124,26 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/cricket/articles/cx211d8dkylo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-4474c31a49a6'
-  data-themes='テクノロジー'
+  data-cardid='item-0f39316f0050'
+  data-themes='スポーツ'
   data-lang='en'
   data-score='2'
   data-source='BBC Sport'
   data-sentiment='neutral'
-  data-importance='training_behavior'
+  data-importance='neutral'
   data-isnew='false'>
   <div class='card-top'>
     <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-4474c31a49a6')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-0f39316f0050')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>&#x27;Magician&#x27; Monfils exits final French Open</h3><div class='summary'>Gael Monfils bows out of his final French Open in the first round, losing in five sets to compatriot Hugo Gaston, as tributes are paid to one of the great tennis entertainers.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>「魔術師」モンフィス、全仏オープン決勝で敗退</h3><div class='summary'>ガエル・モンフィスは、偉大なテニスエンターテイナーの一人に敬意を表し、最後の全仏オープンを1回戦で同胞のウーゴ・ガストンに5セットで敗れて敗退した。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/tennis/articles/c8d886738g2o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-5033e29472a7'
-  data-themes='総合・国際'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='bullish'
-  data-importance='health_alert'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-5033e29472a7')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Why reluctant &#x27;guru&#x27; says Dutch will win World Cup</h3><div class='summary'>Economist Joachim Klement developed a forecast model which has kept a 100% record of predicting World Cup winners since 2014 - who does he think will win in 2026?</div></div>
-<div class='lang-pane lang-ja hidden'><h3>なぜ消極的な「教祖」はオランダがワールドカップで優勝すると言うのか</h3><div class='summary'>経済学者のヨアヒム・クレメント氏は、2014 年以来、ワールドカップ優勝者を 100% 予測する記録を保持している予測モデルを開発しました。2026 年に優勝するのは誰だと思いますか?</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c20223n3k4yo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-en'><h3>Sidecar duo taken to hospital after TT incident</h3><div class='summary'>Sidecar driver Maria Costello and her passenger Shaun Parker have been transported to hospital for further assessment of their injuries following an incident during the first Isle of Man TT qualifying session on Tuesday.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>TT事故でサイドカー2人組が病院へ搬送</h3><div class='summary'>サイドカーのドライバー、マリア・コステロと同乗者のショーン・パーカーは、火曜日のマン島TT予選第1セッション中の事故を受け、さらなる負傷の精密検査のため病院に搬送された。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/motorsport/articles/cn0pp66pjpgo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-c70e97237f0c'
@@ -3444,6 +3212,50 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/football/videos/cx21y82dwwgo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
+  data-cardid='item-3891176e5470'
+  data-themes='スポーツ'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-3891176e5470')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>How Toone is navigating grief through football</h3><div class='summary'>England and Manchester United midfielder Ella Toone opens up about grief, football and preparing for her wedding without her dad in a new BBC documentary.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>トゥーンはサッカーを通して悲しみをどう乗り越えているか</h3><div class='summary'>イングランド代表、マンチェスター・ユナイテッドのミッドフィールダー、エラ・トゥーンがBBCの新しいドキュメンタリーで、悲しみ、フットボール、そして父親のいない結婚式の準備について語る。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c3e2dg875x7o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-5033e29472a7'
+  data-themes='総合・国際'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='bullish'
+  data-importance='health_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-5033e29472a7')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Why reluctant &#x27;guru&#x27; says Dutch will win World Cup</h3><div class='summary'>Economist Joachim Klement developed a forecast model which has kept a 100% record of predicting World Cup winners since 2014 - who does he think will win in 2026?</div></div>
+<div class='lang-pane lang-ja hidden'><h3>なぜ消極的な「教祖」はオランダがワールドカップで優勝すると言うのか</h3><div class='summary'>経済学者のヨアヒム・クレメント氏は、2014 年以来、ワールドカップ優勝者を 100% 予測する記録を保持している予測モデルを開発しました。2026 年に優勝するのは誰だと思いますか?</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c20223n3k4yo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-5e04d2b8ab53'
   data-themes='テクノロジー'
   data-lang='en'
@@ -3464,28 +3276,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>ロバーツとデイビスが負傷からウェールズ代表に復帰</h3><div class='summary'>ベン・デイビスは足首の重傷から復帰し、コナー・ロバーツはウェールズ代表としてガーナとルーマニアとの1年ぶりの試合に出場する可能性がある。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c4g00j2d57qo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-2443577756d4'
-  data-themes='スポーツ'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-2443577756d4')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Premier League quiz: Name every title-winning manager</h3><div class='summary'>Pep Guardiola leaves the Premier League as the division&#x27;s second-most successful manager.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>プレミアリーグクイズ: タイトルを獲得したすべての監督の名前を挙げてください</h3><div class='summary'>ジョゼップ・グアルディオラは、同部門で2番目に成功した監督としてプレミアリーグを去る。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/czr22evde50o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-c85d7c2f0ce5'
@@ -3510,7 +3300,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.bbc.com/sport/football/articles/ce9ppnj9zv7o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-3fedb662d3cb'
+  data-cardid='item-b5f5ef8f021c'
   data-themes='スポーツ'
   data-lang='en'
   data-score='2'
@@ -3523,35 +3313,13 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-lang-toggle'>
   <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
   <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-3fedb662d3cb')">既読</button>
+  <button class='read-btn' onclick="markRead(this,'item-b5f5ef8f021c')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>Spurs rekindle Savinho interest - Tuesday&#x27;s gossip</h3><div class='summary'>Tottenham back in for Savinho, Yan Diomande tops Liverpool&#x27;s list of Mohamed Salah replacements, Barcelona keen to make Marcus Rashford move permanent and Arsenal to swoop for Julian Alvarez.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>スパーズがサビーニョへの関心を再燃 - 火曜日のゴシップ</h3><div class='summary'>トッテナムはサヴィーニョに代わって復帰し、ヤン・ディオマンデがリヴァプールのモハメド・サラーの代役リストのトップに君臨し、バルセロナはマーカス・ラッシュフォードの完全移籍を熱望し、アーセナルはジュリアン・アルバレスの獲得に躍り出た。</div></div>
+  <div class='lang-pane lang-en'><h3>Hampshire beat Essex in Women&#x27;s T20 Blast</h3><div class='summary'>Hampshire beat Essex by 23 runs in the Women&#x27;s T20 Blast despite 57 not out by Jodi Grewcock in the visitors&#x27; run-chase.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>女子T20ブラストでハンプシャーがエセックスに勝利</h3><div class='summary'>ハンプシャーは女子T20ブラストで、ビジターチームのランチェイスでジョディ・グルーコックが57ランを出なかったにも関わらず、23ラン差でエセックスを破った。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/c86ddq0y542o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-2e1ba9403911'
-  data-themes='スポーツ'
-  data-lang='en'
-  data-score='2'
-  data-source='BBC Sport'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-2e1ba9403911')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Inter Miami say Messi went off with muscle fatigue</h3><div class='summary'>Argentina star Lionel Messi was substituted during Inter Miami&#x27;s Major League Soccer game on Sunday due to &quot;muscle fatigue&quot; in his left hamstring.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>インテル・マイアミ、メッシは筋肉疲労で離脱したと発表</h3><div class='summary'>アルゼンチン代表スター、リオネル・メッシは、日曜日のインテル・マイアミのメジャーリーグサッカーの試合中に、左ハムストリングの「筋肉疲労」のため途中交代した。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cx211e5890lo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <a class='open-btn' href='https://www.bbc.com/sport/cricket/articles/cwy2235gyneo?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-5cc372619433'
@@ -3706,6 +3474,28 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>ワールドカップ: 発表された各チーム</h3><div class='summary'>米国、カナダ、メキシコで開催される2026年ワールドカップの各メンバーが発表された。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.bbc.com/sport/football/articles/cvgz43lgn15o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-2443577756d4'
+  data-themes='スポーツ'
+  data-lang='en'
+  data-score='2'
+  data-source='BBC Sport'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BBC Sport</span><span></span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-2443577756d4')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Premier League quiz: Name every title-winning manager</h3><div class='summary'>Pep Guardiola leaves the Premier League as the division&#x27;s second-most successful manager.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>プレミアリーグクイズ: タイトルを獲得したすべての監督の名前を挙げてください</h3><div class='summary'>ジョゼップ・グアルディオラは、同部門で2番目に成功した監督としてプレミアリーグを去る。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bbc.com/sport/football/articles/czr22evde50o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-f98a79f3baa8'
@@ -3882,6 +3672,108 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>18か月前に一度も走ったことがなかったが、100日間で100回のマラソンを走る</h3><div class='summary'>ハンナ・コックスさんはこれまで走ったことがなかったが、亡くなった父親への「ラブレター」として、インド横断100日間で100回のマラソンを完走するという目標を立てた。彼女のやり方は次のとおりです。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#74b9ff22;border-color:#74b9ff;color:#74b9ff'>🏅 スポーツ</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.bbc.com/sport/articles/c4gxjg35jj4o?at_medium=RSS&amp;at_campaign=rss' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-0bbff0726afb'
+  data-themes='総合・国際'
+  data-lang='ja'
+  data-score='2'
+  data-source='NHK'
+  data-sentiment='neutral'
+  data-importance='health_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-0bbff0726afb')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>栃木強盗殺人事件 事件主導しすでに出国か 40代容疑者に逮捕状</h3><div class='summary'>栃木県上三川町で起きた強盗殺人事件で、警察が事件を主導したとして強盗殺人の疑いで40代の男の容疑者の逮捕状を取ったことが捜査関係者への取材で分かりました。事件後に中国に出国し、さらに別の国に行った可能性があり、警察は海外の当局と連携して行方を捜査する方針です。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260527/k10015132501000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-359a36c8813a'
+  data-themes='総合・国際'
+  data-lang='ja'
+  data-score='2'
+  data-source='NHK'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-359a36c8813a')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>台風6号が発生 来週 沖縄付近へ進むおそれ 今後の情報に注意を</h3><div class='summary'>27日午前、日本のはるか南の海上で台風6号が発生しました。来週には勢力を強めながら沖縄付近へ進むおそれがあり、気象庁は今後の情報に注意するよう呼びかけています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260527/k10015132541000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-4072d8ea1a39'
+  data-themes='総合・国際'
+  data-lang='ja'
+  data-score='2'
+  data-source='NHK'
+  data-sentiment='neutral'
+  data-importance='neutral'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-4072d8ea1a39')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>鹿児島県 局地的に猛烈な雨 夕方にかけ線状降水帯発生のおそれ</h3><div class='summary'>前線や低気圧の影響で大気の状態が不安定になり、鹿児島県では局地的に猛烈な雨が降っています。鹿児島県では、27日夕方にかけて線状降水帯が発生し、災害の危険度が急激に高まるおそれがあり、気象庁は、土砂災害に厳重に警戒するよう呼びかけています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260527/k10015132291000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-f85cb9eb2379'
+  data-themes='政治・政策'
+  data-lang='ja'
+  data-score='2'
+  data-source='NHK'
+  data-sentiment='bullish'
+  data-importance='breed_adoption'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-f85cb9eb2379')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「国家情報局」設置法案 参院本会議でまもなく採決 成立へ</h3><div class='summary'>政府のインテリジェンス機能の強化に向けて「国家情報局」を設置するための法案は、参議院本会議でまもなく採決が行われ、可決・成立する見通しです。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260527/k10015132531000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-90caea5070f3'
+  data-themes='総合・国際'
+  data-lang='ja'
+  data-score='2'
+  data-source='NHK'
+  data-sentiment='neutral'
+  data-importance='breed_adoption'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-90caea5070f3')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>天皇皇后両陛下 皇居でフィリピン大統領夫妻の歓迎式典に</h3><div class='summary'>国賓として来日したフィリピンのマルコス大統領夫妻を歓迎する式典が、27日午前、皇居で行われました。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260527/k10015132621000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-276a7936e120'
+  data-themes='テクノロジー'
+  data-lang='ja'
+  data-score='2'
+  data-source='NHK'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-276a7936e120')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>北朝鮮 キム総書記 AI誘導の巡航ミサイルなどの発射実験視察</h3><div class='summary'>北朝鮮のメディアは、キム・ジョンウン（金正恩）総書記の立ち会いのもと、26日、AI＝人工知能による誘導システムを導入した戦術巡航ミサイルなどの発射実験が行われたと伝えました。北朝鮮が26日、朝鮮半島西側の黄海に向けて、短距離の弾道ミサイルなど複数の種類の飛しょう体を発射したことを指すとみられます。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260527/k10015132461000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-553717c49242'
@@ -4105,23 +3997,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260522/k10015129061000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-4b4278b40baa'
-  data-themes='政治・政策'
-  data-lang='ja'
-  data-score='2'
-  data-source='NHK 政治'
-  data-sentiment='neutral'
-  data-importance='breed_adoption'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK 政治</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-4b4278b40baa')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>マイナンバーカード義務化 “必要性もう少し議論” デジタル相</h3><div class='summary'>マイナンバーカードの普及に向けて自民党が取得の義務化を検討するよう政府に提言したことについて、松本デジタル大臣は、罰則なしの義務化によって普及が進むか効果は見通せないとして、必要性を慎重に検討する考えを示しました。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f39c1222;border-color:#f39c12;color:#f39c12'>🏛 政治・政策</span><span class='tag tag-jpy-weak'>🏛 政治・政策</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260522/k10015128761000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-e72734b278aa'
   data-themes='政治・政策'
   data-lang='ja'
@@ -4190,72 +4065,123 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260521/k10015127581000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-13a8d28309ab'
-  data-themes='総合・国際'
+  data-cardid='item-85b185e7bc67'
+  data-themes='テクノロジー'
   data-lang='ja'
   data-score='2'
-  data-source='NHK'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-13a8d28309ab')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>奄美除く鹿児島 未明～夕方 線状降水帯のおそれ</h3><div class='summary'>前線や低気圧の影響で、九州南部では大気の状態が不安定になり、これから雨雲が発達する見込みです。特に、奄美地方を除く鹿児島県では、27日未明から夕方にかけて線状降水帯が発生し、災害の危険度が急激に高まるおそれがあり、気象庁が警戒を呼びかけています。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260526/k10015131971000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-47b72028c482'
-  data-themes='総合・国際'
-  data-lang='ja'
-  data-score='2'
-  data-source='NHK'
-  data-sentiment='neutral'
-  data-importance='neutral'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-47b72028c482')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>兵庫 母娘殺害事件 容疑者は運転免許証やスマホ持たず</h3><div class='summary'>兵庫県たつの市の住宅で親子が殺害された事件で、指名手配されている容疑者が、事件が発覚する3日前に、路上で寝ていて警察に話を聞かれた際、運転免許証やスマートフォンなどを持っていなかったことが、捜査関係者への取材で分かりました。所持金も少なく、警察は比較的近場に潜んでいる可能性もあるとみて、現場周辺の地域を中心に行方を捜査しています。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260527/k10015132351000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-352c6b573532'
-  data-themes='総合・国際'
-  data-lang='ja'
-  data-score='2'
-  data-source='NHK'
+  data-source='ITmedia NEWS'
   data-sentiment='bullish'
-  data-importance='health_alert'
+  data-importance='training_behavior'
   data-isnew='false'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-352c6b573532')">既読</button></div>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-85b185e7bc67')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>イランのタスニム通信 革命防衛隊が米の無人機を撃墜と報道</h3><div class='summary'>イランの革命防衛隊とつながりのあるタスニム通信は26日、アメリカ軍の無人機と戦闘機がイランの領空に侵入したため、無人機を撃墜したほか、戦闘機などを撤退させたとする革命防衛隊の声明を伝えました。声明ではアメリカによるいかなる停戦違反に対しても報復する正当な権利があると主張しています。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260527/k10015132421000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-ja'><h3>Google、Workspaceアプリのアイコン刷新 Gmail、カレンダーなど一斉にデザイン変更</h3><div class='summary'>米Googleは5月26日（現地時間）、Google Workspaceアプリのアイコンデザイン刷新を発表した。GmailやGoogleカレンダー、Google Meetなどの主要アプリが対象。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/27/news079.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-fac335009e8d'
-  data-themes='総合・国際'
+  data-cardid='item-a58874be6c85'
+  data-themes='テクノロジー'
   data-lang='ja'
   data-score='2'
-  data-source='NHK'
+  data-source='ITmedia NEWS'
   data-sentiment='bullish'
-  data-importance='neutral'
+  data-importance='training_behavior'
   data-isnew='false'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>NHK</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-fac335009e8d')">既読</button></div>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-a58874be6c85')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>米ロ外相電話会談 ロシアがウクライナ首都キーウ攻撃方針伝達</h3><div class='summary'>ロシア外務省はラブロフ外相がアメリカのルビオ国務長官と電話会談を行ったと発表し、ウクライナが民間施設などへの攻撃を続けているとして、ロシアは、首都キーウにある軍の関係施設などに対して継続的に攻撃を行うと伝えました。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#4ea1ff22;border-color:#4ea1ff;color:#4ea1ff'>🌍 総合・国際</span><span class='tag tag-neutral'>➖ その他</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='http://www3.nhk.or.jp/news/html/20260527/k10015132321000.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+  <div class='lang-pane lang-ja'><h3>「小説家になろう」、AI利用状況を報告必須に 未設定だと9月から投稿不可</h3><div class='summary'>Web小説投稿サイト「小説家になろう」の運営は5月26日、作品創作におけるAI利用状況の設定を必須化すると発表した。6月9日に新設する設定項目で、AIの関与度に応じた4区分から選ばせる。利用度が高い作品はキーワード欄などで開示する。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/27/news071.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-c4613e6e11c0'
+  data-themes='テクノロジー'
+  data-lang='ja'
+  data-score='2'
+  data-source='ITmedia NEWS'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-c4613e6e11c0')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>ロッキング・オン・ジャパン、元従業員が個人情報をUSBメモリで持ち出し 退職時に</h3><div class='summary'>フェス参加者など一般ユーザーの情報は含まれておらず、情報が二次利用された形跡もないと説明している。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/27/news069.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-7f89c9405bdf'
+  data-themes='テクノロジー'
+  data-lang='ja'
+  data-score='2'
+  data-source='ITmedia NEWS'
+  data-sentiment='bullish'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-7f89c9405bdf')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>正社員の5人に1人が「六月病」経験 6月前後にモチベ低下や疲労感</h3><div class='summary'>6月前後にモチベーションの低下や疲労感を自覚する「六月病」を、正社員の19.8％が経験している――マイナビは5月26日、こんな調査結果を発表した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/27/news068.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-8c5f1d13bc6c'
+  data-themes='テクノロジー'
+  data-lang='ja'
+  data-score='2'
+  data-source='ITmedia NEWS'
+  data-sentiment='neutral'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-8c5f1d13bc6c')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>「食品減税」と「所得連動給付」どっちがお得？ 年収などから分かるシミュレータ、チームみらいが公開</h3><div class='summary'>チームみらが「社会保障国民会議 つなぎ施策シミュレーター」を公開した。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/27/news066.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-1dec3d31e268'
+  data-themes='テクノロジー'
+  data-lang='ja'
+  data-score='2'
+  data-source='ITmedia NEWS'
+  data-sentiment='bullish'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-1dec3d31e268')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Dropboxの共同創業者、ヒューストンCEOが退任して会長へ</h3><div class='summary'>Dropboxは、共同創業者で現CEOのドリュー・ヒューストン氏が退任して取締役会長に就任すると発表した。後任には現製品責任者のアシュラフ・アルカルミ氏が指名され、共同CEO期間を経て単独CEOに就任する。アルカルミ氏の後任にはGoogleのChrome担当VPだったマイク・トーレス氏が就く。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/27/news067.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-ca88e5aef7ef'
+  data-themes='テクノロジー'
+  data-lang='ja'
+  data-score='2'
+  data-source='ITmedia NEWS'
+  data-sentiment='bullish'
+  data-importance='training_behavior'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS</span><span></span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-ca88e5aef7ef')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>IPOを控えるSpaceXの「Starlink」、アメリカン航空も採用へ</h3><div class='summary'>アメリカン航空は、SpaceXの衛星通信網「Starlink」を500機以上のナローボディ機に導入すると発表した。2027年第1四半期から搭載を開始し、対象機では会員向けに無料で高速Wi-Fiを提供する。Starlinkは航空会社との契約を拡大しており、来月のIPOへの追い風となる。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/27/news065.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-b02df01df2ca'
@@ -4732,161 +4658,8 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>どうしても「Forza Horizon 6」で遊びたかったマンガ家が古いPCに四苦八苦……そして見つけた“最適解”とは？</h3><div class='summary'>人気レースゲームの新作「Forza Horizon 6」が5月19日に発売されました。日本が舞台ということで国内での注目度も高いのですが、実はまだXbox Series X|S版とPC版（Steam）しかありません。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/24/news017.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-c6c911805c14'
-  data-themes='テクノロジー'
-  data-lang='ja'
-  data-score='2'
-  data-source='ITmedia NEWS'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-c6c911805c14')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>これぞ“普通のコンデジ” パナソニック「DC-TX3」はカジュアルに使える15倍ズーム機</h3><div class='summary'>パナソニックから「あ、これが普通のコンデジだ」ってカメラが出たのである。「LUMIX TX3」だ。何がいいって、めちゃシンプルでミニマムなのである。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/23/news012.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-db5818454a06'
-  data-themes='テクノロジー'
-  data-lang='ja'
-  data-score='2'
-  data-source='ITmedia NEWS'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-db5818454a06')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>Google.comで「ignore」を検索すると……</h3><div class='summary'>英語版Google検索で「ignore」「disregard」などを検索すると、「AIによる概要」が単語の意味ではなく検索クエリをシステムへの命令と誤解し、無視しようとする現象がSNSで話題になった。日本語版でも「無視して」で同様の挙動が確認された。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/23/news033.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-12b6659d8a1b'
-  data-themes='文化・エンタメ'
-  data-lang='ja'
-  data-score='2'
-  data-source='ITmedia NEWS'
-  data-sentiment='bullish'
-  data-importance='health_alert'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-12b6659d8a1b')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>Red Hatが期限のないサポート「Red Hat Enterprise Linux Long-Life アドオン」発表 あるバージョンのRHELを期限なく動かし続けられる</h3><div class='summary'>米IBM傘下の米Red Hatは、5月11日から14日にかけて米アトランタで開催したイベント「Red Hat Summit 2026」で、期限の定めなく特定のバージョンのRed Hat Enterprise Linux（以下RHEL）のサポートを提供する「Red Hat Enterprise Linux Long-Life アドオン」を発表しました。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#a29bfe22;border-color:#a29bfe;color:#a29bfe'>🎭 文化・エンタメ</span><span class='tag tag-usd-strong'>🌍 総合・国際</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/22/news131.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-cc77eb6511f2'
-  data-themes='テクノロジー'
-  data-lang='ja'
-  data-score='2'
-  data-source='ITmedia NEWS'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-cc77eb6511f2')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>全国のApple StoreがPayPay決済に対応 コード決済で初</h3><div class='summary'>Apple Storeがコード決済に対応するのは初。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/22/news127.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-ffcf91e658a0'
-  data-themes='テクノロジー'
-  data-lang='ja'
-  data-score='2'
-  data-source='ITmedia NEWS'
-  data-sentiment='bullish'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-ffcf91e658a0')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>「私も2次元しか愛せない人間」 小野田大臣がAIへの恋愛感情に見解示す 依存には懸念</h3><div class='summary'>小野田大臣は5月22日の記者会見で、対話型生成AIが利用者に恋愛感情を抱かせるなど、精神的な依存を助長するリスクについて言及した。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/22/news125.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-fdd83103fc8a'
-  data-themes='テクノロジー'
-  data-lang='ja'
-  data-score='2'
-  data-source='ITmedia NEWS'
-  data-sentiment='bullish'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-fdd83103fc8a')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>USEN、「AI店長」開発 飲食店特化のAIプロダクト投入へ ドリンク残量の自動検知も</h3><div class='summary'>USENは5月22日、飲食店向けの新AIプロダクト2点を発表した。AIセンサーカメラでドリンク残量をリアルタイム判別する「ドリンク残量検知サービス」と、店舗データに基づいた経営分析AI「USEN AI店長」でより効率的な運営をサポートする。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/22/news123.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-d3394474758b'
-  data-themes='テクノロジー'
-  data-lang='ja'
-  data-score='2'
-  data-source='ITmedia NEWS'
-  data-sentiment='neutral'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-d3394474758b')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>VAIO、個人向けPCを「指定価格」に どの店でも同じ価格</h3><div class='summary'>VAIOが個人向け全販路の在庫責任を負った上で、各製品の販売価格をメーカーとして指定する。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/22/news117.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-a6540afd3c56'
-  data-themes='テクノロジー'
-  data-lang='ja'
-  data-score='2'
-  data-source='ITmedia NEWS'
-  data-sentiment='bullish'
-  data-importance='training_behavior'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-a6540afd3c56')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>「とらのあな」電子書籍サービスに“不正な自動アクセス” 一部サービスを停止中</h3><div class='summary'>虎の穴は22日、「とらのあな」サイト内の電子書籍サービスで外部からの不正な自動アクセスを検知したと発表した。緊急メンテナンスを実施している。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2ecc7122;border-color:#2ecc71;color:#2ecc71'>💻 テクノロジー</span><span class='tag tag-jpy-strong'>💻 テクノロジー</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/22/news116.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-c801b7386d23'
-  data-themes='市場・ビジネス'
-  data-lang='ja'
-  data-score='2'
-  data-source='ITmedia NEWS'
-  data-sentiment='neutral'
-  data-importance='food_recall'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS</span><span></span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-c801b7386d23')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>ファミマが楽天SPUに参加、グループ外で初 月3000円利用でポイント+0.5倍に</h3><div class='summary'>SPUの対象サービスに楽天グループ外の企業が加わるのは初。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#e74c3c22;border-color:#e74c3c;color:#e74c3c'>💹 市場・ビジネス</span><span class='tag tag-usd-weak'>💹 市場・ビジネス</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2605/22/news108.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div>
-</div><footer>Smart News Viewer — Generated at 2026-05-27 05:05</footer></body></html>
+</div><footer>Smart News Viewer — Generated at 2026-05-27 11:59</footer></body></html>
 <script>
 var pageLang = 'en';
 function setPageLang(lang) {

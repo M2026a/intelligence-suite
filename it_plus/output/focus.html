@@ -100,7 +100,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='top'>
     <div class='title'>
       <h1>🖥️ IT + <span style='font-weight:400;color:var(--muted);font-size:16px'>｜ ITニュースを収集・一覧化</span></h1>
-      <div class='sub'>更新日時：2026-07-08 17:13</div>
+      <div class='sub'>更新日時：2026-07-08 23:30</div>
     </div>
     <div class='right-controls'>
       <button class='page-lang-btn active' id='btnPageEN' onclick="setPageLang('en')">🌐 English</button>
@@ -130,27 +130,27 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   
 <div class='fx-summary-grid'>
   <div class='fx-summary-card fx-usd-strong'>
-    <div class='fx-num' style='color:#7c4dff'>136</div>
+    <div class='fx-num' style='color:#7c4dff'>139</div>
     <div class='fx-label'>🤖 AI・データ</div>
     <div class='fx-desc'>AI / Data</div>
   </div>
   <div class='fx-summary-card fx-usd-weak'>
-    <div class='fx-num' style='color:#ff5c5c'>20</div>
+    <div class='fx-num' style='color:#ff5c5c'>21</div>
     <div class='fx-label'>🔐 セキュリティ</div>
     <div class='fx-desc'>Security</div>
   </div>
   <div class='fx-summary-card fx-jpy-strong'>
-    <div class='fx-num' style='color:#00a8ff'>23</div>
+    <div class='fx-num' style='color:#00a8ff'>22</div>
     <div class='fx-label'>☁️ クラウド・基盤</div>
     <div class='fx-desc'>Cloud / Infra</div>
   </div>
   <div class='fx-summary-card fx-jpy-weak'>
-    <div class='fx-num' style='color:#20bf6b'>27</div>
+    <div class='fx-num' style='color:#20bf6b'>29</div>
     <div class='fx-label'>🛠️ 開発ツール</div>
     <div class='fx-desc'>Developer Tools</div>
   </div>
   <div class='fx-summary-card' style='background:var(--panel2);border-color:var(--line)'>
-    <div class='fx-num' style='color:var(--muted)'>103</div>
+    <div class='fx-num' style='color:var(--muted)'>101</div>
     <div class='fx-label'>➖ その他</div>
     <div class='fx-desc'>General</div>
   </div>
@@ -164,8 +164,316 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
       <input id='searchBoxImportance' class='search' placeholder='タイトル・本文を検索...'>
     </div>
   </div>
-  <div class='fx-tabs'><button class='fx-tab active' data-key='ai_data' style='background:#1a1233;border-color:#7c4dff;color:#fff' onclick="switchFxTab('ai_data',this)">🤖 AI・データ (136)</button><button class='fx-tab ' data-key='security_alert' style='' onclick="switchFxTab('security_alert',this)">🔐 セキュリティ (20)</button><button class='fx-tab ' data-key='cloud_platform' style='' onclick="switchFxTab('cloud_platform',this)">☁️ クラウド・基盤 (23)</button><button class='fx-tab ' data-key='developer_tools' style='' onclick="switchFxTab('developer_tools',this)">🛠️ 開発ツール (27)</button></div>
+  <div class='fx-tabs'><button class='fx-tab active' data-key='ai_data' style='background:#1a1233;border-color:#7c4dff;color:#fff' onclick="switchFxTab('ai_data',this)">🤖 AI・データ (139)</button><button class='fx-tab ' data-key='security_alert' style='' onclick="switchFxTab('security_alert',this)">🔐 セキュリティ (21)</button><button class='fx-tab ' data-key='cloud_platform' style='' onclick="switchFxTab('cloud_platform',this)">☁️ クラウド・基盤 (22)</button><button class='fx-tab ' data-key='developer_tools' style='' onclick="switchFxTab('developer_tools',this)">🛠️ 開発ツール (29)</button></div>
   <div class='fx-panel active' id='fx-ai_data'><div class='grid'>
+<article class='card item-card'
+  data-cardid='item-bb9948d6717b'
+  data-themes='AI・機械学習|クラウド・インフラ|開発ツール・DevOps|データ・分析|企業・業界動向'
+  data-lang='en'
+  data-score='5'
+  data-source='InfoQ'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>InfoQ</span><span>2026-07-08 14:25</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-bb9948d6717b')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Airbnb Shares Architecture Behind Sitar-Agent Dynamic Configuration Sidecar for Kubernetes Services</h3><div class='summary'>Airbnb engineers detailed Sitar-agent, a Kubernetes sidecar for dynamic configuration delivery across tens of thousands of pods, processing updates several times per minute. The system was redesigned with Java, Amazon S3 snapshot bootstrapping, and a migration from Sparkey to SQLite to improve relia</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Airbnb、Kubernetes Services の Sitar-Agent 動的構成サイドカーの背後にあるアーキテクチャを共有</h3><div class='summary'>Airbnb のエンジニアは、数万のポッドに動的構成を配信する Kubernetes サイドカーであり、1 分間に数回更新を処理する Sitar-agent について詳しく説明しました。システムは、Java、Amazon S3 スナップショット ブートストラップ、Sparky から SQLite への移行を使用して再設計され、信頼性が向上しました。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.infoq.com/news/2026/07/sitar-agent-sidecar-config/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-36993935886b'
+  data-themes='AI・機械学習'
+  data-lang='en'
+  data-score='1'
+  data-source='TechCrunch'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span>2026-07-08 14:07</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-36993935886b')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Venus Aerospace raises $90M Series B to build a new kind of rocket engine</h3><div class='summary'>Build a new kind of rocket engine, and the world will beat a path to your door.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ヴィーナス・エアロスペースがシリーズBで9,000万ドルを調達、新型ロケットエンジンを開発</h3><div class='summary'>新しい種類のロケット エンジンを構築すれば、世界があなたのドアに近づくでしょう。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://techcrunch.com/2026/07/08/venus-aerospace-raises-90m-series-b-to-build-a-new-kind-of-rocket-engine/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-dd8f47f8a0b3'
+  data-themes='AI・機械学習|ハードウェア・半導体'
+  data-lang='en'
+  data-score='4'
+  data-source='InfoQ'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>InfoQ</span><span>2026-07-08 14:06</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-dd8f47f8a0b3')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Presentation: The Multi-Agent Approach: Building Reliable and Controllable Software Development Automation</h3><div class='summary'>Itamar Friedman discusses how architects and engineering leaders can break through the AI productivity ceiling using adaptive multi-agent systems. He shares insights on moving past simple autocomplete to resilient workflows by integrating autonomous testing, intelligent code review, and robust arbit</div></div>
+<div class='lang-pane lang-ja hidden'><h3>プレゼンテーション: マルチエージェント アプローチ: 信頼性が高く制御可能なソフトウェア開発自動化の構築</h3><div class='summary'>イタマール・フリードマンは、アーキテクトとエンジニアリングのリーダーが適応型マルチエージェント システムを使用して AI の生産性の上限を突破する方法について説明します。彼は、自律テスト、インテリジェントなコード レビュー、および堅牢なアービットを統合することで、単純なオートコンプリートから回復力のあるワークフローへの移行に関する洞察を共有しています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.infoq.com/presentations/multi-agent-ai-architecture/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-d3c265209175'
+  data-themes='AI・機械学習'
+  data-lang='en'
+  data-score='1'
+  data-source='TechCrunch'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span>2026-07-08 14:04</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-d3c265209175')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Blue Origin reportedly raising $10B at $130B valuation</h3><div class='summary'>Blue Origin is raising $10 billion at a $130 billion pre-money valuation from Coatue Asset Management, Bezos himself and other big-name investors, the New York Times reported.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ブルー・オリジンは評価額1,300億ドルで100億ドルを調達したと報じられている</h3><div class='summary'>ブルー・オリジンは、コートゥエ・アセット・マネジメント、ベゾス氏自身、その他の大物投資家からプレマネー評価額1300億ドルで100億ドルを調達しているとニューヨーク・タイムズ紙が報じた。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://techcrunch.com/2026/07/08/blue-origin-reportedly-raising-10b-at-130b-valuation/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-7c30070d1dcc'
+  data-themes='AI・機械学習|セキュリティ'
+  data-lang='en'
+  data-score='2'
+  data-source='BleepingComputer'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BleepingComputer</span><span>2026-07-08 14:01</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-7c30070d1dcc')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>3 Ways AI Powers Service Desk Attacks and How to Prevent Them</h3><div class='summary'>Specops Software explains how AI is making service desk impersonation attacks more convincing, personalized, and scalable, along with practical steps organizations can take to strengthen onboarding and identity verification. [...]</div></div>
+<div class='lang-pane lang-ja hidden'><h3>AI がサービスデスク攻撃を強化する 3 つの方法とそれを防ぐ方法</h3><div class='summary'>Specops Software は、AI がサービス デスクのなりすまし攻撃をより説得力があり、パーソナライズされ、スケーラブルにする方法と、オンボーディングと本人確認を強化するために組織が実行できる実践的な手順を説明します。 [...]</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.bleepingcomputer.com/news/security/3-ways-ai-powers-service-desk-attacks-and-how-to-prevent-them/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-822a695ec416'
+  data-themes='AI・機械学習|セキュリティ'
+  data-lang='en'
+  data-score='5'
+  data-source='The Register'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-07-08 14:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-822a695ec416')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Bug in top AI coding agents shows that Unix-era security headaches never really die</h3><div class='summary'>&#x27;GhostApproval&#x27; problem highlights human-in-the-loop fails</div></div>
+<div class='lang-pane lang-ja hidden'><h3>トップクラスの AI コーディング エージェントのバグは、Unix 時代のセキュリティの問題が決して消えることがないことを示しています</h3><div class='summary'>「GhostApproval」問題は人間参加型の失敗を浮き彫りにする</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.theregister.com/security/2026/07/08/bug-in-top-ai-coding-agents-shows-that-unix-era-security-headaches-never-really-die/5268025' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-0f1bf655ec7a'
+  data-themes='AI・機械学習|セキュリティ|データ・分析|ハードウェア・半導体'
+  data-lang='en'
+  data-score='2'
+  data-source='The Register'
+  data-sentiment='bearish'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-07-08 13:58</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-0f1bf655ec7a')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>China tells devs to ditch Claude Code over &#x27;backdoor code&#x27; fears</h3><div class='summary'>National vulnerability database claims monitoring mechanism can forward Chinese users&#x27; data to remote servers</div></div>
+<div class='lang-pane lang-ja hidden'><h3>中国、「バックドアコード」への懸念から開発者にクロードコードを廃止するよう指示</h3><div class='summary'>全国脆弱性データベースの主張監視メカニズムは中国人ユーザーのデータをリモートサーバーに転送できる</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.theregister.com/security/2026/07/08/china-ditch-older-claude-versions-with-backdoor-code/5268371' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-cfc7765d525c'
+  data-themes='企業・業界動向'
+  data-lang='en'
+  data-score='2'
+  data-source='TechCrunch'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span>2026-07-08 13:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-cfc7765d525c')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Venus Williams-backed WeWard can now lock your apps until you hit your steps</h3><div class='summary'>With funding from tennis star and angel investor Venus Williams, the French app WeWard says that it increases walking time by almost 25%.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ビーナス・ウィリアムズが支援する WeWard は、歩き出すまでアプリをロックできるようになりました</h3><div class='summary'>フランスのアプリ WeWard は、テニスのスター選手でエンジェル投資家でもあるビーナス・ウィリアムズ氏からの資金提供を受けて、歩行時間を約 25% 増加させたと発表しています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://techcrunch.com/2026/07/08/venus-williams-backed-weward-can-now-lock-your-apps-until-you-hit-your-steps/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-045708e1dc8b'
+  data-themes='AI・機械学習|ハードウェア・半導体'
+  data-lang='en'
+  data-score='2'
+  data-source='TechCrunch'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span>2026-07-08 12:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-045708e1dc8b')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Former OpenAI exec Kevin Weil is now on the board of Stoke Space</h3><div class='summary'>Kevin Weil&#x27;s new role at Stoke Space suggests reusable rockets are the next hot thing in Silicon Valley.</div></div>
+<div class='lang-pane lang-ja hidden'><h3>元 OpenAI 幹部の Kevin Weil 氏が現在 Stoke Space の取締役に就任</h3><div class='summary'>ストーク・スペースでのケビン・ワイルの新しい役割は、再利用可能なロケットがシリコンバレーで次に注目されるものであることを示唆しています。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://techcrunch.com/2026/07/08/former-openai-exec-kevin-weil-is-now-on-the-board-of-stoke-space/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-46fb74b7cb22'
+  data-themes='AI・機械学習|クラウド・インフラ'
+  data-lang='en'
+  data-score='5'
+  data-source='The Register'
+  data-sentiment='bearish'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-07-08 11:45</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-46fb74b7cb22')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Telstra outage: Failed emergency services calls, train chaos, payment systems down</h3><div class='summary'>Telco says issues all sorted, but transport networks expected to be disrupted well into Thursday</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Telstra の停止: 緊急通報の失敗、電車の混乱、支払いシステムのダウン</h3><div class='summary'>通信会社は問題はすべて解決したが、輸送ネットワークは木曜まで混乱する見込みだと述べている</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.theregister.com/networks/2026/07/08/telstra-outage-downs-000-calls-trains-payment-systems/5268265' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-2f63977db24c'
+  data-themes='AI・機械学習'
+  data-lang='en'
+  data-score='1'
+  data-source='The Register'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-07-08 11:31</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-2f63977db24c')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Tech divorce from Walmart cost Brit retail giant Asda £1.22B</h3><div class='summary'>Project which included new SAP system saw delays and costs rise from an £800m estimate while causing financial disruptions</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ウォルマートとのハイテク離婚の費用は英国小売大手アズダに12億2000万ポンドかかる</h3><div class='summary'>新しい SAP システムを含むプロジェクトは遅延とコストが 8 億ポンドの見積もりから増加し、財政的混乱を引き起こした</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
+  <a class='open-btn' href='https://www.theregister.com/paas-and-iaas/2026/07/08/tech-divorce-from-walmart-cost-brit-retail-giant-asda-122b/5268298' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-c8c8ea7b441e'
+  data-themes='AI・機械学習|セキュリティ|データ・分析'
+  data-lang='en'
+  data-score='5'
+  data-source='BleepingComputer'
+  data-sentiment='bearish'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BleepingComputer</span><span>2026-07-08 11:24</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-c8c8ea7b441e')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Telco giant KDDI says data breach affects over 12 million people</h3><div class='summary'>Japanese telecommunications giant KDDI says that millions of people had their email addresses and passwords exposed after attackers breached an email platform used by five internet service providers (ISPs) in the country. [...]</div></div>
+<div class='lang-pane lang-ja hidden'><h3>通信大手ＫＤＤＩ、データ侵害で１２００万人以上が影響を受けると発表</h3><div class='summary'>日本の電気通信大手 KDDI は、国内のインターネット サービス プロバイダー (ISP) 5 社が使用する電子メール プラットフォームが攻撃者に侵害され、数百万人の電子メール アドレスとパスワードが流出したと発表しました。 [...]</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.bleepingcomputer.com/news/security/japanese-telecom-giant-kddi-says-data-breach-affects-12-million-people/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-403aa579ca5d'
+  data-themes='AI・機械学習'
+  data-lang='en'
+  data-score='4'
+  data-source='The Register'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-07-08 09:15</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-403aa579ca5d')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Home Office&#x27;s glitchy eVisa rollout lands UK privacy regulator in campaigners&#x27; crosshairs</h3><div class='summary'>Coalition says ICO failed to act despite hundreds of complaints about bug-plagued digital immigration status scheme</div></div>
+<div class='lang-pane lang-ja hidden'><h3>内務省の欠陥のある電子ビザの展開で、英国のプライバシー規制当局が活動家の標的にされる</h3><div class='summary'>連合は、バグに悩まされたデジタル移民ステータス制度に関する数百件の苦情にもかかわらず、ICOは行動を起こさなかったと主張</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
+  <a class='open-btn' href='https://www.theregister.com/software/2026/07/08/home-offices-glitchy-evisa-rollout-lands-uk-privacy-regulator-in-campaigners-crosshairs/5267712' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-c9ca271f9019'
+  data-themes='AI・機械学習|データ・分析'
+  data-lang='en'
+  data-score='2'
+  data-source='The Register'
+  data-sentiment='neutral'
+  data-importance='ai_data'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-07-08 08:30</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-c9ca271f9019')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>NHS told to show its working on Palantir platform benefits</h3><div class='summary'>Campaigners say ministers repeated claims about FDP despite an admission that the data does not prove cause and effect</div></div>
+<div class='lang-pane lang-ja hidden'><h3>NHSは、Palantirプラットフォームの利点に取り組んでいることを示すように言われました</h3><div class='summary'>運動家らは、データが因果関係を証明していないことを認めたにもかかわらず、閣僚がFDPに関する主張を繰り返したと主張している</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
+  <a class='open-btn' href='https://www.theregister.com/public-sector/2026/07/08/nhs-told-to-show-its-working-on-palantir-platform-benefits/5267621' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
 <article class='card item-card'
   data-cardid='item-eed6bdb961ef'
   data-themes='AI・機械学習|データ・分析'
@@ -206,7 +514,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Hot French startup ZML releases free product to speed inference across lots of AI chips</h3><div class='summary'>ZML, a hot French AI startup endorsed by Turing Award winner Yann LeCun, has now released ZML/LLMD, software that could make running AI less costly.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>フランスの人気スタートアップ ZML が、多数の AI チップ間の推論を高速化する無料製品をリリース</h3><div class='summary'>チューリング賞受賞者のヤン・ルカン氏が支持するフランスの注目の AI スタートアップ企業 ZML は、AI の実行コストを削減できるソフトウェア ZML/LLMD をリリースしました。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>フランスの人気スタートアップ ZML が、多数の AI チップにわたる推論を高速化する無料製品をリリース</h3><div class='summary'>チューリング賞受賞者のヤン・ルカン氏が支持するフランスの注目の AI スタートアップ企業 ZML は、AI の実行コストを削減できるソフトウェア ZML/LLMD をリリースしました。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://techcrunch.com/2026/07/08/hot-french-startup-zml-releases-free-product-to-speed-inference-across-lots-of-ai-chips/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -344,12 +652,12 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   data-themes='AI・機械学習'
   data-lang='ja'
   data-score='3'
-  data-source='ITmedia NEWS 国内'
+  data-source='ITmedia NEWS 企業・業界動向'
   data-sentiment='neutral'
   data-importance='ai_data'
   data-isnew='false'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS 国内</span><span>2026-07-08 02:30</span></div>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS 企業・業界動向</span><span>2026-07-08 02:30</span></div>
     <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-3fe875697f33')">既読</button></div>
   </div>
   <div class='lang-pane lang-ja'><h3>note上方修正 「AI活用、想定以上」で人件費率低下 2Q累計営業益は「20倍超」に</h3><div class='summary'>AI活用で生産性が向上。人員数は緩やかに減っており、効率的な事業運営ができているという。</div></div>
@@ -553,8 +861,8 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <button class='read-btn' onclick="markRead(this,'item-52d712648731')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>Avoid AI atrophy - new tool promises to reverse vibe coding skills decay</h3><div class='summary'>Want big muscles? Keep working out. Want big coding skillsets? Flex your dev skills with the Atrophy CLI app before they wither away</div></div>
-<div class='lang-pane lang-ja hidden'><h3>AI の萎縮を回避 - 新しいツールは雰囲気コーディング スキルの低下を逆転させることを約束</h3><div class='summary'>大きな筋肉が欲しいですか？トレーニングを続けてください。優れたコーディング スキルセットが必要ですか?開発スキルが衰える前に、Atrophy CLI アプリを使用して開発スキルを柔軟にしましょう</div></div>
+  <div class='lang-pane lang-en'><h3>Avoid AI atrophy – new tool promises to reverse vibe coding skills decay</h3><div class='summary'>Want big muscles? Keep working out. Want big coding skillsets? Flex your dev skills with the Atrophy CLI app before they wither away</div></div>
+<div class='lang-pane lang-ja hidden'><h3>AI の萎縮を回避 – 新しいツールは雰囲気コーディング スキルの低下を逆転させることを約束</h3><div class='summary'>大きな筋肉が欲しいですか？トレーニングを続けてください。優れたコーディング スキルセットが必要ですか?開発スキルが衰える前に、Atrophy CLI アプリを使用して開発スキルを柔軟にしましょう</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://www.theregister.com/ai-and-ml/2026/07/07/avoid-ai-atrophy-new-tool-promises-to-reverse-vibe-coding-skills-decay/5267913' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -722,7 +1030,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Microsoft joins AI cost-cutting trend by relying more on its own models</h3><div class='summary'>Microsoft is the latest Silicon Valley giant to cut back on its AI spending.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Microsoft、独自モデルへの依存度を高めることで AI コスト削減トレンドに加わる</h3><div class='summary'>マイクロソフトは、AI 支出を削減した最新のシリコンバレーの巨人です。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Microsoft、独自モデルへの依存を強めることで AI コスト削減トレンドに加わる</h3><div class='summary'>マイクロソフトは、AI 支出を削減した最新のシリコンバレーの巨人です。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://techcrunch.com/2026/07/07/microsoft-joins-ai-cost-cutting-trend-by-relying-more-on-its-own-models/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -743,7 +1051,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <button class='read-btn' onclick="markRead(this,'item-338c5696d3e9')">既読</button>
 </div>
   </div>
-  <div class='lang-pane lang-en'><h3>GitHub AI agent leaks private repos when asked nicely</h3><div class='summary'>Per usual, there&#x27;s no fix - or even any documentation - for GitLost</div></div>
+  <div class='lang-pane lang-en'><h3>GitHub AI agent leaks private repos when asked nicely</h3><div class='summary'>Per usual, there&#x27;s no fix – or even any documentation – for GitLost</div></div>
 <div class='lang-pane lang-ja hidden'><h3>GitHub AI エージェントがうまく質問するとプライベート リポジトリを漏洩する</h3><div class='summary'>いつものように、GitLost には修正もドキュメントもありません。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.theregister.com/security/2026/07/07/github-ai-agent-leaks-private-repos-when-asked-nicely/5267924' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
@@ -854,7 +1162,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Netflix dabbles in shorter video content with its new set of publisher deals with Variety, others</h3><div class='summary'>Netflix is bringing 2- to 20-minute videos to its platform through new partnerships with digital publishers, including Rolling Stone and Variety.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>NetflixはVarietyなどとの新たなパブリッシャー契約で、より短いビデオコンテンツに手を出している</h3><div class='summary'>Netflix は、Rolling Stone 社や Variety 社などのデジタル パブリッシャーとの新たな提携を通じて、2 ～ 20 分のビデオをプラットフォームに提供します。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Netflixは、Varietyなどとの新たなパブリッシャー契約で、より短いビデオコンテンツに手を出している</h3><div class='summary'>Netflix は、Rolling Stone 社や Variety 社などのデジタル パブリッシャーとの新たな提携を通じて、2 ～ 20 分のビデオをプラットフォームに提供します。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://techcrunch.com/2026/07/07/netflix-dabbles-in-shorter-video-content-with-its-new-set-of-publisher-deals-with-variety-others/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -898,7 +1206,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Claude Cowork expands to mobile and web</h3><div class='summary'>With this update, users can start a task from their desk, get status updates on their phone, and pick up the finished output later — even if their laptop is closed.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>クロード・コワークがモバイルとウェブに拡大</h3><div class='summary'>このアップデートにより、ユーザーはラップトップが閉じている場合でも、デスクからタスクを開始し、スマートフォンでステータスの最新情報を取得し、後で完成した出力を取得できるようになります。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>クロード・コワークがモバイルとウェブに拡大</h3><div class='summary'>このアップデートにより、ユーザーはラップトップが閉じていても、自分のデスクからタスクを開始し、スマートフォンでステータスの最新情報を取得し、後で完成した出力を取得できるようになります。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://techcrunch.com/2026/07/07/the-coding-agent-wars-are-spilling-into-the-rest-of-the-office-claude-cowork/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -1047,7 +1355,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>AI law startup Norm raises $120M, hits unicorn valuation</h3><div class='summary'>AI law startup Norm has raised a $120 million Series C round led by Khosla Ventures, valuing the startup at $1.2 billion.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>AI法律スタートアップNormが1億2000万ドルを調達、ユニコーンの評価額に到達</h3><div class='summary'>AI法律スタートアップのNormは、Khosla Ventures主導のシリーズCラウンドで1億2000万ドルを調達し、スタートアップの評価額は12億ドルとなった。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>AI法律スタートアップNormが1億2000万ドルを調達、ユニコーンの評価額に到達</h3><div class='summary'>AI 法のスタートアップ Norm は、Khosla Ventures 主導のシリーズ C ラウンドで 1 億 2,000 万ドルを調達し、スタートアップの評価額を 12 億ドルとしました。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://techcrunch.com/2026/07/07/ai-law-startup-norm-raises-120m-hits-unicorn-valuation/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -1069,31 +1377,9 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>This startup pits dealerships against each other to bid on your used car</h3><div class='summary'>Bidbus, which lets dealerships bid on used cars, has raised $15 million in a Series A round that was led by early-stage mobility fund Ibex Investors.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>このスタートアップは、ディーラー同士であなたの中古車の入札を競わせます</h3><div class='summary'>ディーラーに中古車の入札を許可するビッドバスは、初期段階のモビリティファンドであるアイベックス・インベスターズが主導したシリーズAラウンドで1500万ドルを調達した。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>このスタートアップは、ディーラー同士であなたの中古車の入札を競わせます</h3><div class='summary'>ディーラーに中古車の入札を許可するビッドバスは、初期段階のモビリティファンドのアイベックス・インベスターズが主導したシリーズAラウンドで1500万ドルを調達した。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
   <a class='open-btn' href='https://techcrunch.com/2026/07/07/this-startup-is-pitting-dealerships-against-each-other-to-bid-on-your-used-car/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-b8df562a2769'
-  data-themes='ハードウェア・半導体'
-  data-lang='en'
-  data-score='1'
-  data-source='TechCrunch'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span>2026-07-07 13:10</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-b8df562a2769')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Hacktivists call out Trump by hacking and defacing US Army websites</h3><div class='summary'>The U.S. Army has fixed two of its websites that were hacked to display messages calling President Trump a &quot;pedophile&quot; and a &quot;thief.&quot;</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ハクティビストが米軍ウェブサイトをハッキングして改ざんし、トランプ大統領を非難</h3><div class='summary'>米陸軍は、ハッキングされてトランプ大統領を「小児性愛者」「泥棒」と呼ぶメッセージが表示されたウェブサイトのうち２つを修正した。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://techcrunch.com/2026/07/07/hacktivists-call-out-trump-by-hacking-and-defacing-us-army-websites/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-b6c86aea054c'
@@ -1162,28 +1448,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.infoq.com/news/2026/07/aws-devops-ai-agent/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-e2c62726c581'
-  data-themes='AI・機械学習|企業・業界動向'
-  data-lang='en'
-  data-score='3'
-  data-source='TechCrunch'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span>2026-07-07 12:00</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-e2c62726c581')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Savi’s app aims to protect consumers from realistic AI scams like kidnappers demanding ransom</h3><div class='summary'>The company just raised $7 million in seed funding, and is launching its app for iPhone and Android on Tuesday.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Savi のアプリは、身代金を要求する誘拐犯などの現実的な AI 詐欺から消費者を守ることを目的としています</h3><div class='summary'>同社はシード資金として700万ドルを調達したばかりで、火曜日にiPhoneとAndroid向けアプリをリリースする予定だ。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://techcrunch.com/2026/07/07/savis-app-aims-to-protect-consumers-from-realistic-ai-scams-like-kidnappers-demanding-ransom/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-850d9d8eb360'
   data-themes='AI・機械学習'
   data-lang='en'
@@ -1250,38 +1514,16 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.theregister.com/public-sector/2026/07/07/northern-ireland-tries-again-to-expel-capita-from-schools-it-contract/5266887' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-a88205ef5d4e'
-  data-themes='AI・機械学習'
-  data-lang='en'
-  data-score='1'
-  data-source='TechCrunch'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span>2026-07-07 09:00</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-a88205ef5d4e')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>The first American autonomous ground vehicles are fighting in Ukraine</h3><div class='summary'>Forterra has deployed more than 100 of its self-driving ATVs in conflict zones in Ukraine.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>米国初の自動地上車両がウクライナで戦闘中</h3><div class='summary'>フォルテラは、ウクライナの紛争地帯に100台以上の自動運転ATVを配備している。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://techcrunch.com/2026/07/07/the-first-american-autonomous-ground-vehicles-are-fighting-in-ukraine/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-b891b4c245cf'
   data-themes='AI・機械学習|企業・業界動向'
   data-lang='ja'
   data-score='2'
-  data-source='ITmedia NEWS 国内'
+  data-source='ITmedia NEWS 企業・業界動向'
   data-sentiment='neutral'
   data-importance='ai_data'
   data-isnew='false'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS 国内</span><span>2026-07-07 08:58</span></div>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS 企業・業界動向</span><span>2026-07-07 08:58</span></div>
     <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-b891b4c245cf')">既読</button></div>
   </div>
   <div class='lang-pane lang-ja'><h3>三菱UFJ半沢淳一社長「企業の資金ニーズに対応」 個人向け「エムット」でAI活用も</h3><div class='summary'>三菱UFJフィナンシャル・グループ（MUFG）の半沢淳一社長が産経新聞のインタビューに応じ、日銀の利上げで「金利のある世界」が本格化する中、企業の資金需要を取り込むため、事業戦略の提案力を高める考えを示した。</div></div>
@@ -1345,7 +1587,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Presentation: Designing AI Platforms for Reliability: Tools for Certainty, Agents for Discovery</h3><div class='summary'>Aaron Erickson explains how NVIDIA designs and tests purpose-built AI agent hierarchies. For senior developers and architects, he outlines why balancing deterministic tools with agentic discovery is crucial. Discover how to leverage rare context, implement LLM-as-a-judge test pyramids, and avoid the</div></div>
-<div class='lang-pane lang-ja hidden'><h3>プレゼンテーション: 信頼性のための AI プラットフォームの設計: 確実性のためのツール、発見のためのエージェント</h3><div class='summary'>Aaron Erickson が、NVIDIA が専用の AI エージェント階層をどのように設計およびテストするかを説明します。上級開発者やアーキテクト向けに、決定論的なツールとエージェントによる検出のバランスをとることが重要である理由を説明します。まれなコンテキストを活用し、LLM-as-a-judge テスト ピラミッドを実装し、問題を回避する方法を発見します。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>プレゼンテーション: 信頼性のための AI プラットフォームの設計: 確実性のためのツール、発見のためのエージェント</h3><div class='summary'>Aaron Erickson が、NVIDIA が専用の AI エージェント階層をどのように設計およびテストするかについて説明します。上級開発者やアーキテクト向けに、決定論的なツールとエージェントによる検出のバランスを取ることが重要である理由を説明します。まれなコンテキストを活用し、LLM-as-a-judge テスト ピラミッドを実装し、問題を回避する方法を発見します。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.infoq.com/presentations/reliable-ai-platforms/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -1454,12 +1696,12 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   data-themes='AI・機械学習'
   data-lang='ja'
   data-score='3'
-  data-source='ITmedia NEWS 国内'
+  data-source='ITmedia NEWS 企業・業界動向'
   data-sentiment='neutral'
   data-importance='ai_data'
   data-isnew='false'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS 国内</span><span>2026-07-07 03:26</span></div>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS 企業・業界動向</span><span>2026-07-07 03:26</span></div>
     <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-7d5b6996ce57')">既読</button></div>
   </div>
   <div class='lang-pane lang-ja'><h3>「iPhone Air」が2万円引き 「プライムデー先行セール」開始、Apple製品が安い</h3><div class='summary'>日本のプライムデーに初めて登場した「iPhone Air」（256GB／SIMフリー版）は、参考価格の15万9800円から2万円引き（13％オフ）の13万9800円で販売している。</div></div>
@@ -1504,28 +1746,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>SpaceX、xAIの正式名称を「SpaceXAI」に 新ロゴも公開</h3><div class='summary'>SpaceXは、傘下のAI部門であるxAIの正式名称をSpaceXAIに変更し、新しいロゴを発表した。新ロゴはSpaceXの「X」の部分に「AI」が隠れるようなデザイン。今回の名称変更と統合により、衛星通信網Starlinkや大型ロケットStarshipの運用にxAIの技術を直接活用していく方針だ。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2607/07/news084.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-4df617c27620'
-  data-themes='企業・業界動向'
-  data-lang='en'
-  data-score='1'
-  data-source='TechCrunch'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>TechCrunch</span><span>2026-07-07 00:47</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-4df617c27620')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Netflix invented binge-watching. Now it may have outgrown it.</h3><div class='summary'>A new report suggests Netflix viewers aren’t sticking around for Season 2. The bigger issue may be that binge-watching itself is no longer the advantage it once was.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Netflix は一気見を発明しました。今ではそれを超えてしまったかもしれません。</h3><div class='summary'>新しいレポートによると、Netflixの視聴者はシーズン2に留まらないようだ。さらに大きな問題は、一気に視聴すること自体がかつてのような利点ではなくなっていることかもしれない。</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://techcrunch.com/2026/07/06/netflix-invented-binge-watching-now-it-may-have-outgrown-it/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-60e3891d6fd7'
@@ -1805,28 +2025,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://japan.zdnet.com/article/35249873/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-7fd5a1e9eee3'
-  data-themes='AI・機械学習|セキュリティ|企業・業界動向'
-  data-lang='en'
-  data-score='2'
-  data-source='BleepingComputer'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BleepingComputer</span><span>2026-07-06 20:27</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-7fd5a1e9eee3')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Phishing poses as big-brand job interview to steal Google accounts</h3><div class='summary'>A phishing campaign is impersonating more than 30 well-known brands, including Adobe, Netflix, Coca-Cola, and OpenAI, in fake job interviews to steal Google account credentials from marketing professionals. [...]</div></div>
-<div class='lang-pane lang-ja hidden'><h3>大手ブランドの面接を装って Google アカウントを盗むフィッシング</h3><div class='summary'>フィッシング キャンペーンでは、Adobe、Netflix、コカ コーラ、OpenAI を含む 30 以上の有名ブランドになりすまし、偽の就職面接でマーケティング専門家から Google アカウントの認証情報を盗んでいます。 [...]</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.bleepingcomputer.com/news/security/phishing-poses-as-big-brand-job-interview-to-steal-google-accounts/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-4c2222c75da4'
   data-themes='AI・機械学習'
   data-lang='en'
@@ -2056,28 +2254,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.infoq.com/news/2026/07/netflix-cassandra-partition/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-5fb4e12d5259'
-  data-themes='AI・機械学習|セキュリティ'
-  data-lang='en'
-  data-score='4'
-  data-source='BleepingComputer'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BleepingComputer</span><span>2026-07-06 14:00</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-5fb4e12d5259')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Software Is Now Written at the Speed of Thought. Security Isn&#x27;t.</h3><div class='summary'>Every evolution in software development has reduced the friction between an idea and a deployable application. AI may remove the final barrier, but it also removes many of the moments where security decisions have traditionally taken place. [...]</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ソフトウェアは思考の速度で作成されるようになりました。セキュリティはそうではありません。</h3><div class='summary'>ソフトウェア開発が進化するたびに、アイデアと展開可能なアプリケーションの間の摩擦が減少してきました。 AI は最後の障壁を取り除く可能性がありますが、これまでセキュリティに関する意思決定が行われてきた多くの瞬間も取り除きます。 [...]</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://www.bleepingcomputer.com/news/security/software-is-now-written-at-the-speed-of-thought-security-isnt/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-a2516992ceeb'
   data-themes='AI・機械学習'
   data-lang='en'
@@ -2183,31 +2359,9 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Presentation: Practical Robustness: Going Beyond Memory Safety in Rust</h3><div class='summary'>Andy Brinkmeyer shares how engineering leaders and architects can use Rust to build failure-proof systems. Moving beyond memory safety, he explains how ownership, enums, and the typestate pattern embed complex runtime protocols into compile-time checks. Learn to eliminate entire classes of bugs, man</div></div>
-<div class='lang-pane lang-ja hidden'><h3>プレゼンテーション: 実用的な堅牢性: Rust のメモリ安全性を超える</h3><div class='summary'>Andy Brinkmeyer が、エンジニアリング リーダーやアーキテクトが Rust を使用して障害のないシステムを構築する方法を共有します。メモリの安全性を超えて、所有権、列挙型、および型状態パターンが複雑なランタイム プロトコルをコンパイル時のチェックにどのように組み込むかについて説明します。バグのクラス全体を排除する方法を学びましょう</div></div>
+<div class='lang-pane lang-ja hidden'><h3>プレゼンテーション: 実用的な堅牢性: Rust のメモリ安全性を超える</h3><div class='summary'>Andy Brinkmeyer が、エンジニアリング リーダーやアーキテクトが Rust を使用して障害のないシステムを構築する方法を共有します。メモリの安全性を超えて、所有権、列挙型、および型状態パターンが複雑なランタイム プロトコルをコンパイル時のチェックにどのように組み込むのかについて説明します。バグのクラス全体を排除する方法を学びましょう</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.infoq.com/presentations/rust-autonomous-mobile-robots/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-dd536ed762c5'
-  data-themes='AI・機械学習'
-  data-lang='en'
-  data-score='1'
-  data-source='The Register'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-07-06 08:30</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-dd536ed762c5')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Insert token to continue, says AI. Yeah, about that...</h3><div class='summary'>Barney Rubble points to bubble trouble</div></div>
-<div class='lang-pane lang-ja hidden'><h3>トークンを挿入して続行するとAIは言います。はい、それについては...</h3><div class='summary'>バーニー・ラブル氏、バブルの問題を指摘</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://www.theregister.com/columnists/2026/07/06/insert-token-to-continue-says-ai-yeah-about-that/5266319' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-04eca31d23aa'
@@ -2266,28 +2420,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://japan.zdnet.com/article/35250129/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-a533ccb7d051'
-  data-themes='AI・機械学習|クラウド・インフラ'
-  data-lang='en'
-  data-score='4'
-  data-source='The Register'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-07-06 05:29</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-a533ccb7d051')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Zombie ‘who owns Unix?’ lawsuit comes alive again</h3><div class='summary'>SCO&#x27;s legal successor Xinuos asks legal brains to let it bite IBM over ancient license and copyright claims</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ゾンビ「Unix の所有者は誰ですか?」訴訟が再び活気を帯びる</h3><div class='summary'>SCOの法的後継者であるXinuos氏は法務部門に対し、古いライセンスと著作権の主張をめぐってIBMに噛み付くよう要請する</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://www.theregister.com/os-platforms/2026/07/06/zombie-who-owns-unix-lawsuit-comes-alive-again/5266761' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-0a2e4a57a03a'
   data-themes='AI・機械学習'
   data-lang='ja'
@@ -2337,28 +2469,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>三菱UFJ銀行、レッドハット、日本IBMとAI駆動型開発で協業強化--金融システム全体の変革へ</h3><div class='summary'>三菱UFJ銀行、三菱UFJインフォメーションテクノロジー（MUIT）、レッドハット、日本IBMの4社は7月6日、AI駆動型開発を金融システム全体に本格適用するための戦略的パートナーシップを締結したと発表した。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://japan.zdnet.com/article/35250080/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-e82462834405'
-  data-themes='AI・機械学習|セキュリティ'
-  data-lang='en'
-  data-score='2'
-  data-source='The Register'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-07-06 01:29</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-e82462834405')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>EY sacks staff for allegedly accessing Australian Prime Minister’s bank account</h3><div class='summary'>PLUS: India attacks Uber; South Korea warned AI boom is dangerous; Scuba-diving cyborg cockroach; and more!</div></div>
-<div class='lang-pane lang-ja hidden'><h3>EY、オーストラリア首相の銀行口座にアクセスした疑いでスタッフを解雇</h3><div class='summary'>プラス：インドがウーバーを攻撃。韓国はAIブームは危険だと警告した。スキューバダイビングのサイボーグゴキブリ。などなど！</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
-  <a class='open-btn' href='https://www.theregister.com/legal/2026/07/06/ey-sacks-staff-for-allegedly-accessing-australian-prime-ministers-bank-account/5266687' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-bb4a8f837ac0'
@@ -2548,28 +2658,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/03638/060900001/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-3a095b2ff647'
-  data-themes='AI・機械学習'
-  data-lang='en'
-  data-score='1'
-  data-source='The Register'
-  data-sentiment='neutral'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-07-05 12:00</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-3a095b2ff647')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>C programmers commit fresh crimes against readability</h3><div class='summary'>Prepare to be befuddled and bamboozled – and probably bewitched</div></div>
-<div class='lang-pane lang-ja hidden'><h3>C プログラマーが可読性に対して新たな犯罪を犯す</h3><div class='summary'>困惑し、困惑することを覚悟してください – そしておそらく魔法にかけられるかもしれません</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score1'>★1</span></div>
-  <a class='open-btn' href='https://www.theregister.com/offbeat/2026/07/05/c-programmers-commit-fresh-crimes-against-readability/5265981' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-3776e1174072'
   data-themes='AI・機械学習|クラウド・インフラ|データ・分析'
   data-lang='en'
@@ -2590,28 +2678,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 <div class='lang-pane lang-ja hidden'><h3>AWS が Amazon S3 アノテーションを導入</h3><div class='summary'>AWS は最近、Amazon S3 アノテーションを発表しました。これは、チームが概要、分類、コンプライアンス データ、AI が生成した洞察などの豊富で検索可能なコンテキストを S3 オブジェクトに直接添付できる機能です。アノテーションはオブジェクトとは独立して更新でき、データセット全体でクエリできるため、時間を削減できます。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.infoq.com/news/2026/07/aws-s3-annotations/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-914d3d698449'
-  data-themes='AI・機械学習|クラウド・インフラ|データ・分析|企業・業界動向'
-  data-lang='en'
-  data-score='5'
-  data-source='InfoQ'
-  data-sentiment='bullish'
-  data-importance='ai_data'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>InfoQ</span><span>2026-07-05 08:13</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-914d3d698449')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Claude Reaches GA on Microsoft Foundry: European Enterprises Cannot Deploy It</h3><div class='summary'>Claude models reached GA on Microsoft Foundry with Azure-native billing and governance, but no European data zone exists. Anthropic&#x27;s own documentation confirms data residency guarantees apply to Bedrock and Vertex AI but not Foundry. European practitioners from banking and healthcare report the off</div></div>
-<div class='lang-pane lang-ja hidden'><h3>クロードが Microsoft Foundry の GA を達成: ヨーロッパの企業は Microsoft Foundry を導入できない</h3><div class='summary'>Claude モデルは、Azure ネイティブの課金とガバナンスを備えた Microsoft Foundry で GA に達しましたが、ヨーロッパのデータ ゾーンは存在しません。 Anthropic 自身のドキュメントでは、データ常駐性の保証は Bedrock と Vertex AI には適用されるが、Foundry には適用されないことが確認されています。ヨーロッパの銀行業界と医療従事者が業績不振を報告</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-theme' style='background:#2d98da22;border-color:#2d98da;color:#2d98da'>🏢 企業・業界動向</span><span class='tag tag-usd-strong'>🤖 AI・データ</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://www.infoq.com/news/2026/07/claude-foundry-ga-europe/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-b9dadb4aca88'
@@ -2784,6 +2850,72 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.publickey1.jp/blog/26/windowslinuxwsl_containerswindows2.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div></div><div class='fx-panel ' id='fx-security_alert'><div class='grid'>
 <article class='card item-card'
+  data-cardid='item-89901ea9a01e'
+  data-themes='セキュリティ'
+  data-lang='en'
+  data-score='3'
+  data-source='BleepingComputer'
+  data-sentiment='neutral'
+  data-importance='security_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BleepingComputer</span><span>2026-07-08 12:00</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-89901ea9a01e')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>DuckDuckGo browser now blocks YouTube video ads</h3><div class='summary'>DuckDuckGo announced that its browser can now block most video ads on YouTube, including those shown before the video starts playing and during playback. [...]</div></div>
+<div class='lang-pane lang-ja hidden'><h3>DuckDuckGo ブラウザが YouTube 動画広告をブロックするようになりました</h3><div class='summary'>DuckDuckGo は、同社のブラウザが YouTube 上のほとんどのビデオ広告 (ビデオの再生開始前および再生中に表示される広告を含む) をブロックできるようになったと発表しました。 [...]</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-usd-weak'>🔐 セキュリティ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.bleepingcomputer.com/news/software/duckduckgo-browser-now-blocks-youtube-video-ads/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-6ac7d0ab5da4'
+  data-themes='AI・機械学習|クラウド・インフラ|セキュリティ|開発ツール・DevOps'
+  data-lang='en'
+  data-score='5'
+  data-source='BleepingComputer'
+  data-sentiment='bearish'
+  data-importance='security_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BleepingComputer</span><span>2026-07-08 09:58</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-6ac7d0ab5da4')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>CISA orders feds to prioritize patching Langflow auth bypass flaw</h3><div class='summary'>The U.S. Cybersecurity and Infrastructure Security Agency (CISA) gave federal agencies until Friday to patch an actively exploited vulnerability in the Langflow visual framework for building AI agents. [...]</div></div>
+<div class='lang-pane lang-ja hidden'><h3>CISA、連邦政府にLangflow認証バイパスの欠陥へのパッチ適用を優先するよう命令</h3><div class='summary'>米国サイバーセキュリティ・インフラセキュリティ庁（CISA）は、AIエージェントを構築するためのLangflowビジュアルフレームワークで積極的に悪用されている脆弱性を修正するよう連邦政府機関に金曜までに与えた。 [...]</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-usd-weak'>🔐 セキュリティ</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.bleepingcomputer.com/news/security/cisa-orders-feds-to-prioritize-patching-langflow-auth-bypass-flaw/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-3f0009bac41d'
+  data-themes='セキュリティ|開発ツール・DevOps'
+  data-lang='en'
+  data-score='5'
+  data-source='BleepingComputer'
+  data-sentiment='bearish'
+  data-importance='security_alert'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BleepingComputer</span><span>2026-07-08 08:15</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-3f0009bac41d')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Ubiquiti warns of new max severity UniFi OS vulnerability</h3><div class='summary'>Ubiquiti has released security updates to patch seven critical vulnerabilities in UniFi OS, including a maximum-severity flaw that can be exploited in command injection attacks. [...]</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Ubiquiti、最大重大度の新しい UniFi OS の脆弱性を警告</h3><div class='summary'>Ubiquiti は、コマンド インジェクション攻撃で悪用される可能性のある最大重大度の欠陥を含む、UniFi OS の 7 つの重大な脆弱性にパッチを適用するセキュリティ アップデートをリリースしました。 [...]</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-usd-weak'>🔐 セキュリティ</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.bleepingcomputer.com/news/security/ubiquiti-warns-of-new-max-severity-unifi-os-vulnerability/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-10528db75452'
   data-themes='クラウド・インフラ|セキュリティ'
   data-lang='en'
@@ -2818,7 +2950,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
     <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS セキュリティ</span><span>2026-07-08 05:14</span></div>
     <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-22b14af48f77')">既読</button></div>
   </div>
-  <div class='lang-pane lang-ja'><h3>三重県、庁内のUSBメモリ調査でマルウェア47個検知 陸自の報道受け1万個超を一斉調査</h3><div class='summary'>三重県は7月8日、庁内で業務に使うUSBメモリを調査した結果、47個からマルウェアを検知したと発表した。いずれも活動していない古典的なもので、感染や被害はなかったという。</div></div>
+  <div class='lang-pane lang-ja'><h3>三重県、庁内のUSBメモリ47個からマルウェア検知 陸自の報道受け1万個超を一斉調査</h3><div class='summary'>三重県は7月8日、庁内で業務に使うUSBメモリを調査した結果、47個からマルウェアを検知したと発表した。いずれも活動していない古典的なもので、感染や被害はなかったという。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-usd-weak'>🔐 セキュリティ</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2607/08/news104.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -2857,7 +2989,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Chinese hackers develop LONGLEASH malware to expand ORB network</h3><div class='summary'>Chinese hackers tracked as &#x27;UAT-7810&#x27; are actively evolving their malware to expand their Operational Relay Box (ORB) network by compromising internet-facing networking devices, primarily unpatched Ruckus routers. [...]</div></div>
-<div class='lang-pane lang-ja hidden'><h3>中国のハッカーがORBネットワークを拡大するLONGLEASHマルウェアを開発</h3><div class='summary'>「UAT-7810」として追跡されている中国のハッカーは、主にパッチが適用されていない Ruckus ルーターなど、インターネットに接続されたネットワーキング デバイスを侵害することで、Operational Relay Box (ORB) ネットワークを拡張するためにマルウェアを積極的に進化させています。 [...]</div></div>
+<div class='lang-pane lang-ja hidden'><h3>中国のハッカーがORBネットワークを拡大するLONGLEASHマルウェアを開発</h3><div class='summary'>「UAT-7810」として追跡されている中国のハッカーは、主にパッチが適用されていない Ruckus ルーターなど、インターネットに接続されたネットワーキング デバイスを侵害することにより、Operational Relay Box (ORB) ネットワークを拡張するためにマルウェアを積極的に進化させています。 [...]</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-usd-weak'>🔐 セキュリティ</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.bleepingcomputer.com/news/security/chinese-hackers-develop-longleash-malware-to-expand-orb-network/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -2879,7 +3011,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Hacked, leaked, and held for ransom: The worst breaches of 2026 so far</h3><div class='summary'>From a massive DOGE data breach and the hacking of critical energy and water systems to the hack of an FBI surveillance system, here are the most damaging security incidents and data breaches of 2026.</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ハッキング、漏洩、身代金要求: 2026 年これまでで最悪の侵害</h3><div class='summary'>DOGE の大規模なデータ侵害、重要なエネルギーと水道システムのハッキングから FBI 監視システムのハッキングまで、2026 年に最も被害をもたらしたセキュリティ インシデントとデータ侵害を紹介します。</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ハッキング、漏洩、身代金要求: 2026 年これまでで最悪の侵害</h3><div class='summary'>DOGE の大規模なデータ侵害、重要なエネルギーおよび水道システムのハッキングから FBI 監視システムのハッキングまで、2026 年に最も被害をもたらしたセキュリティ インシデントとデータ侵害を紹介します。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-usd-weak'>🔐 セキュリティ</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://techcrunch.com/2026/07/07/the-worst-hacks-and-breaches-of-2026-so-far/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -2987,50 +3119,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>KDDIメール基盤から1223万人分のアドレス漏洩、ソフト会社も脆弱性認識せず</h3><div class='summary'>KDDIは2026年7月6日、インターネットサービスプロバイダー（ISP）向けに提供するメールシステムへの不正アクセスにより、同システムで作成されたメールアドレス1223万3087人分が漏洩したと発表した。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-usd-weak'>🔐 セキュリティ</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/news/24/03297/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-d47fade4fc4a'
-  data-themes='クラウド・インフラ|セキュリティ'
-  data-lang='en'
-  data-score='5'
-  data-source='BleepingComputer'
-  data-sentiment='bearish'
-  data-importance='security_alert'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BleepingComputer</span><span>2026-07-06 20:23</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-d47fade4fc4a')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Fake IT support calls on Microsoft Teams push EtherRAT malware</h3><div class='summary'>Threat actors are abusing Microsoft Teams voice calls by impersonating corporate IT support staff to trick employees into installing the EtherRAT malware, giving attackers initial access to corporate networks. [...]</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Microsoft Teams が EtherRAT マルウェアをプッシュする偽の IT サポート電話</h3><div class='summary'>攻撃者は、企業の IT サポート スタッフになりすまして Microsoft Teams の音声通話を悪用し、従業員をだまして EtherRAT マルウェアをインストールさせ、攻撃者に企業ネットワークへの最初のアクセスを与えています。 [...]</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-usd-weak'>🔐 セキュリティ</span><span class='tag tag-bearish'>⚠ 注意</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://www.bleepingcomputer.com/news/security/fake-it-support-calls-on-microsoft-teams-push-etherrat-malware/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-72fdcdeb0ed8'
-  data-themes='セキュリティ'
-  data-lang='en'
-  data-score='3'
-  data-source='BleepingComputer'
-  data-sentiment='neutral'
-  data-importance='security_alert'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BleepingComputer</span><span>2026-07-06 18:25</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-72fdcdeb0ed8')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Vietnam arrests suspects behind HiAnime anime piracy service</h3><div class='summary'>​Vietnamese authorities have arrested and are prosecuting seven suspects believed to have run HiAnime, the largest anime piracy streaming service before its shutdown in June. [...]</div></div>
-<div class='lang-pane lang-ja hidden'><h3>ベトナム、アニメ海賊版サービス「HiAnime」の容疑者を逮捕</h3><div class='summary'>ベトナム当局は、6月に閉鎖されるまで最大のアニメ海賊版ストリーミングサービスであるHiAnimeを運営していたとみられる7人の容疑者を逮捕し、起訴している。 [...]</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-usd-weak'>🔐 セキュリティ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.bleepingcomputer.com/news/security/vietnam-arrests-suspects-behind-hianime-anime-piracy-service/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-7837f0d2623b'
@@ -3173,6 +3261,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='tags'><span class='tag tag-usd-weak'>🔐 セキュリティ</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score2'>★2</span></div>
   <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2606/25/news076.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div></div><div class='fx-panel ' id='fx-cloud_platform'><div class='grid'>
+<article class='card item-card'
+  data-cardid='item-f4b43b0d97ee'
+  data-themes='データ・分析'
+  data-lang='ja'
+  data-score='3'
+  data-source='CodeZine'
+  data-sentiment='neutral'
+  data-importance='cloud_platform'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CodeZine</span><span>2026-07-08 08:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-f4b43b0d97ee')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Amazon CloudWatch Logs、ログイベントへのメタデータ付与が可能に</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-jpy-strong'>☁️ クラウド・基盤</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://codezine.jp/article/detail/28885' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
 <article class='card item-card'
   data-cardid='item-aac1d089120c'
   data-themes='クラウド・インフラ|ハードウェア・半導体'
@@ -3319,39 +3424,17 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   data-themes='クラウド・インフラ'
   data-lang='ja'
   data-score='4'
-  data-source='ITmedia NEWS 国内'
+  data-source='ITmedia NEWS 企業・業界動向'
   data-sentiment='neutral'
   data-importance='cloud_platform'
   data-isnew='false'>
   <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS 国内</span><span>2026-07-07 09:30</span></div>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>ITmedia NEWS 企業・業界動向</span><span>2026-07-07 09:30</span></div>
     <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-7cf8026031e9')">既読</button></div>
   </div>
   <div class='lang-pane lang-ja'><h3>16:9ではないディスプレイの世界――多種多様「LEDビジョン」に映す映像をどうネットで伝えるか</h3><div class='summary'>ネットワークの祭典「Interop Tokyo 2026」に、放送機材メーカーがずらりと出展した。例年とは異なるこの光景の裏には、会場を埋め尽くすLEDビジョンの存在がある。正方形を積み上げた巨大ディスプレイは、もはや「16:9」に収まらない。放送規格の中で進化してきた映像機器は、この“規格外の画面”とどう向き合うのか。</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-jpy-strong'>☁️ クラウド・基盤</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.itmedia.co.jp/news/articles/2607/07/news154.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-64cf0b821bea'
-  data-themes='クラウド・インフラ|開発ツール・DevOps'
-  data-lang='en'
-  data-score='5'
-  data-source='BleepingComputer'
-  data-sentiment='neutral'
-  data-importance='cloud_platform'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>BleepingComputer</span><span>2026-07-07 07:37</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-64cf0b821bea')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Microsoft testing new Cloud Rebuild Windows 11 recovery feature</h3><div class='summary'>Microsoft has begun testing the Cloud Rebuild recovery feature in the latest Windows 11 Insider Preview builds released for users in the Experimental channel. [...]</div></div>
-<div class='lang-pane lang-ja hidden'><h3>Microsoftが新しいCloud Rebuild Windows 11リカバリ機能をテスト中</h3><div class='summary'>Microsoft は、Experimental チャネルのユーザー向けにリリースされた最新の Windows 11 Insider Preview ビルドで Cloud Rebuild 回復機能のテストを開始しました。 [...]</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-strong'>☁️ クラウド・基盤</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
-  <a class='open-btn' href='https://www.bleepingcomputer.com/news/microsoft/microsoft-testing-new-cloud-rebuild-windows-11-recovery-feature/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-d76230cd24f1'
@@ -3369,23 +3452,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>AWS WAF、Amazon Bedrock AgentCore Gatewayのサポートを開始</h3><div class='summary'></div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-jpy-strong'>☁️ クラウド・基盤</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://codezine.jp/article/detail/28867' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-21d5f1d63046'
-  data-themes='ハードウェア・半導体'
-  data-lang='ja'
-  data-score='3'
-  data-source='CodeZine'
-  data-sentiment='neutral'
-  data-importance='cloud_platform'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CodeZine</span><span>2026-07-07 00:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-21d5f1d63046')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>Amazon S3 サーバーアクセスログがCloudWatch Logsへの配信に対応</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#a55eea22;border-color:#a55eea;color:#a55eea'>💻 ハードウェア・半導体</span><span class='tag tag-jpy-strong'>☁️ クラウド・基盤</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://codezine.jp/article/detail/28864' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-0f30951f0917'
@@ -3585,6 +3651,96 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.publickey1.jp/blog/26/unixwindowsmacoslinuxubuntu20266.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article></div></div><div class='fx-panel ' id='fx-developer_tools'><div class='grid'>
 <article class='card item-card'
+  data-cardid='item-dbda1fe14580'
+  data-themes='開発ツール・DevOps|データ・分析'
+  data-lang='ja'
+  data-score='5'
+  data-source='Publickey'
+  data-sentiment='neutral'
+  data-importance='developer_tools'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Publickey</span><span>2026-07-08 15:33</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-dbda1fe14580')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>PostgreSQLをクラスタ化した分散DBでスケーリングと高可用性を実現する「Multigres v0.1」アルファ版が登場</h3><div class='summary'>PostgreSQLをベースにしたBaaS（Backend as a Service）の「Supabase」を開発し提供しているSupabase社は、複数のPostgreSQLをクラスタ化することでデータベースの水平スケールと高可用性などを...</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.publickey1.jp/blog/26/postgresqldbmultigres_v01.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-59e2a2da554d'
+  data-themes='開発ツール・DevOps|データ・分析'
+  data-lang='ja'
+  data-score='5'
+  data-source='Publickey'
+  data-sentiment='neutral'
+  data-importance='developer_tools'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>Publickey</span><span>2026-07-08 15:31</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-59e2a2da554d')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>PostgreSQL 19ベータ版が登場。I/Oワーカーの自動スケール、Autovacuumの改善など新機能</h3><div class='summary'>オープンソースのリレーショナルデータベース「PostgreSQL 19」のベータ版が先月（2026年6月）にリリースされています。 PostgreSQLは高い拡張性や信頼性を特徴としており、ITエンジニアのコミュニティであるStackove...</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://www.publickey1.jp/blog/26/postgresql_19ioautovacuum.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-009af40a0c0a'
+  data-themes='開発ツール・DevOps'
+  data-lang='en'
+  data-score='3'
+  data-source='The Register'
+  data-sentiment='neutral'
+  data-importance='developer_tools'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-07-08 10:03</span></div>
+    <div class='card-lang-toggle'>
+  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
+  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
+  <button class='read-btn' onclick="markRead(this,'item-009af40a0c0a')">既読</button>
+</div>
+  </div>
+  <div class='lang-pane lang-en'><h3>Another German state heads down the open source sovereignty road</h3><div class='summary'>Mecklenburg-Vorpommern ditches SharePoint while Bavaria also mulls Microsoft alternatives</div></div>
+<div class='lang-pane lang-ja hidden'><h3>ドイツの別の州がオープンソース主権の道を進む</h3><div class='summary'>メクレンブルク・フォアポンメルン州はSharePointを廃止、バイエルン州もMicrosoftの代替案を検討</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://www.theregister.com/software/2026/07/08/another-german-state-heads-down-the-open-source-sovereignty-road/5268192' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-9d6c50dab08c'
+  data-themes='開発ツール・DevOps'
+  data-lang='ja'
+  data-score='5'
+  data-source='CodeZine'
+  data-sentiment='neutral'
+  data-importance='developer_tools'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CodeZine</span><span>2026-07-08 09:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-9d6c50dab08c')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Microsoft、「SkiaSharp 4.0」の安定版をリリース</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://codezine.jp/article/detail/28895' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-22df10b55aa1'
+  data-themes='開発ツール・DevOps'
+  data-lang='ja'
+  data-score='5'
+  data-source='CodeZine'
+  data-sentiment='neutral'
+  data-importance='developer_tools'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CodeZine</span><span>2026-07-08 09:00</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-22df10b55aa1')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>Web向け統合ツールチェーン「Vite+」ベータ版リリース</h3><div class='summary'></div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score5'>★5</span></div>
+  <a class='open-btn' href='https://codezine.jp/article/detail/28896' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
   data-cardid='item-ed8a16fff7b3'
   data-themes='AI・機械学習|開発ツール・DevOps'
   data-lang='ja'
@@ -3600,6 +3756,23 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>GitHub Copilot、オープンウェイトモデル「Kimi K2.7 Code」が利用可能に</h3><div class='summary'></div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://codezine.jp/article/detail/28884' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
+</article>
+<article class='card item-card'
+  data-cardid='item-19ef3cb2c35a'
+  data-themes='開発ツール・DevOps'
+  data-lang='ja'
+  data-score='3'
+  data-source='日経XTECH'
+  data-sentiment='neutral'
+  data-importance='developer_tools'
+  data-isnew='false'>
+  <div class='card-top'>
+    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>日経XTECH</span><span>2026-07-08 06:07</span></div>
+    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-19ef3cb2c35a')">既読</button></div>
+  </div>
+  <div class='lang-pane lang-ja'><h3>米アルテラ、防衛や航空にハイエンドFPGA 「海底や宇宙向けも開発中」</h3><div class='summary'>米Altera（アルテラ）は防衛や航空向けFPGA（Field Programmable Gate Array）の新製品のサンプル提供を始めたと発表した。従来製品と比べ、面積当たりの演算性能を4割高めた。レーダーや電子戦システムなどに向ける。</div></div>
+  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
+  <a class='open-btn' href='https://xtech.nikkei.com/atcl/nxt/column/18/00001/11879/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-596ab2a7b042'
@@ -3687,7 +3860,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>The GitHub Actions Attack Pattern Your CI Security Scanners Miss</h3><div class='summary'>ActiveState explains how GitHub Actions attack chains can evade traditional CI security scanners, why passing a scan doesn&#x27;t guarantee a secure pipeline, and how organizations can better govern their CI/CD workflows. [...]</div></div>
-<div class='lang-pane lang-ja hidden'><h3>CI セキュリティ スキャナーが見逃す GitHub アクションの攻撃パターン</h3><div class='summary'>ActiveState は、GitHub Actions の攻撃チェーンが従来の CI セキュリティ スキャナーをどのように回避できるか、スキャンを通過しても安全なパイプラインが保証されない理由、組織が CI/CD ワークフローをより適切に管理する方法について説明します。 [...]</div></div>
+<div class='lang-pane lang-ja hidden'><h3>CI セキュリティ スキャナーが見逃す GitHub アクションの攻撃パターン</h3><div class='summary'>ActiveState は、GitHub Actions の攻撃チェーンが従来の CI セキュリティ スキャナーを回避する方法、スキャンを通過しても安全なパイプラインが保証されない理由、組織が CI/CD ワークフローをより適切に管理する方法について説明します。 [...]</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#ff5c5c22;border-color:#ff5c5c;color:#ff5c5c'>🔐 セキュリティ</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
   <a class='open-btn' href='https://www.bleepingcomputer.com/news/security/the-github-actions-attack-pattern-your-ci-security-scanners-miss/' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -3709,7 +3882,7 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Government&#x27;s cyber pledge lands 60 signatories, including M&amp;S and, somehow, Capita</h3><div class='summary'>Whitehall&#x27;s latest attempt to boost corporate cyber hygiene has already produced a curious roll call</div></div>
-<div class='lang-pane lang-ja hidden'><h3>政府のサイバー誓約に、M&amp;S となぜか Capita を含む 60 社が署名</h3><div class='summary'>企業のサイバー衛生を強化するホワイトホールの最新の試みは、すでに興味深い点呼を生み出している</div></div>
+<div class='lang-pane lang-ja hidden'><h3>政府のサイバー誓約にM&amp;SとなぜかCapitaを含む60社が署名</h3><div class='summary'>企業のサイバー衛生を強化するホワイトホールの最新の試みは、すでに興味深い点呼を生み出している</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#00a8ff22;border-color:#00a8ff;color:#00a8ff'>☁️ クラウド・インフラ</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.theregister.com/security/2026/07/07/governments-cyber-pledge-lands-60-signatories-including-ms-and-somehow-capita/5267554' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
@@ -3804,26 +3977,9 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 </div>
   </div>
   <div class='lang-pane lang-en'><h3>Java News Roundup: Strict Field Initialization, GlassFish, GraalVM, JReleaser, RefactorFirst</h3><div class='summary'>This week&#x27;s Java roundup for June 29th, 2026, features news highlighting: a new JEP candidate, Strict Field Initialization; point releases of GraalVM, JReleaser, RefactorFirst and Java Operator SDK; maintenance releases of GlassFish and Micronaut; the second milestone release of Grails 8.0; and the </div></div>
-<div class='lang-pane lang-ja hidden'><h3>Java ニュースまとめ: 厳密なフィールド初期化、GlassFish、GraalVM、JReleaser、RefactorFirst</h3><div class='summary'>2026 年 6 月 29 日の今週の Java まとめでは、次のようなニュースを特集しています。新しい JEP 候補である Strict Field Initialization。 GraalVM、JReleaser、RefactorFirst、および Java Operator SDK のポイント リリース。 GlassFish と Micronaut のメンテナンス リリース。 Grails 8.0 の 2 番目のマイルストーン リリース。そして</div></div>
+<div class='lang-pane lang-ja hidden'><h3>Java ニュースまとめ: 厳密なフィールド初期化、GlassFish、GraalVM、JReleaser、RefactorFirst</h3><div class='summary'>2026 年 6 月 29 日の今週の Java まとめでは、次のようなニュースを特集します。新しい JEP 候補である Strict Field Initialization。 GraalVM、JReleaser、RefactorFirst、および Java Operator SDK のポイント リリース。 GlassFish と Micronaut のメンテナンス リリース。 Grails 8.0 の 2 番目のマイルストーン リリース。そして</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score5'>★5</span></div>
   <a class='open-btn' href='https://www.infoq.com/news/2026/07/java-news-roundup-jun29-2026/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-d0dc0a69cf38'
-  data-themes='AI・機械学習|開発ツール・DevOps'
-  data-lang='ja'
-  data-score='4'
-  data-source='CodeZine'
-  data-sentiment='neutral'
-  data-importance='developer_tools'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge ja'>🇯🇵 国内</span><span>CodeZine</span><span>2026-07-06 23:00</span></div>
-    <div class='card-lang-toggle'><button class='read-btn' onclick="markRead(this,'item-d0dc0a69cf38')">既読</button></div>
-  </div>
-  <div class='lang-pane lang-ja'><h3>GitHub Copilot、Gemini 2.5 ProおよびGemini 3 Flashの廃止を発表</h3><div class='summary'></div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#7c4dff22;border-color:#7c4dff;color:#7c4dff'>🤖 AI・機械学習</span><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://codezine.jp/article/detail/28863' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-1911019352dc'
@@ -3899,50 +4055,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <a class='open-btn' href='https://www.publickey1.jp/blog/26/applemacos_27swift.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
-  data-cardid='item-f4b7e34d7a2d'
-  data-themes='開発ツール・DevOps'
-  data-lang='en'
-  data-score='3'
-  data-source='The Register'
-  data-sentiment='neutral'
-  data-importance='developer_tools'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-07-06 07:36</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-f4b7e34d7a2d')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Apprentice developer defied orders – then got a job supporting her weird code</h3><div class='summary'>Who wrote this rubbish? Oh ...</div></div>
-<div class='lang-pane lang-ja hidden'><h3>見習い開発者が命令に反抗し、その後、彼女の奇妙なコードをサポートする仕事に就いた</h3><div class='summary'>こんなくだらないことを書いたのは誰ですか？おお ...</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.theregister.com/software/2026/07/06/apprentice-developer-defied-orders-then-got-a-job-supporting-her-weird-code/5266330' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-d9d3f713a7ea'
-  data-themes='開発ツール・DevOps'
-  data-lang='en'
-  data-score='4'
-  data-source='The Register'
-  data-sentiment='bullish'
-  data-importance='developer_tools'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>The Register</span><span>2026-07-06 06:31</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-d9d3f713a7ea')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Japan’s asteroid sample retriever rapidly buzzes remote space rock</h3><div class='summary'>Zipped just 800m past Asteroid Torifune as part of very extended mission - and sent back a pic, too</div></div>
-<div class='lang-pane lang-ja hidden'><h3>日本の小惑星サンプル回収装置が遠く離れた宇宙の岩石を急速にざわめかせる</h3><div class='summary'>非常に拡張されたミッションの一環として、小惑星トリフネをわずか800メートル通過し、写真も送り返した</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-bullish'>✅ 参考</span><span class='tag tag-score4'>★4</span></div>
-  <a class='open-btn' href='https://www.theregister.com/science/2026/07/06/japans-asteroid-sample-retriever-rapidly-buzzes-remote-space-rock/5266795' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
   data-cardid='item-7f94e7f3bf7b'
   data-themes='開発ツール・DevOps|企業・業界動向'
   data-lang='ja'
@@ -4009,28 +4121,6 @@ footer{max-width:1480px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
   <div class='lang-pane lang-ja'><h3>プログラミングのためのBGMや環境音など。仕事や勉強の邪魔にならない無料で使えそうな音源集。2026年版</h3><div class='summary'>在宅で仕事や勉強をしている時間が増えてくると、ずっと無音だと寂しい気がして、できれば仕事の邪魔にならないBGMや環境音があるといいなあ、と思ったことはありませんか？ 今年も、そうした音源を独自にピックアップした記事の2026年版を紹介しまし...</div></div>
   <div class='tags'><span class='tag tag-theme' style='background:#20bf6b22;border-color:#20bf6b;color:#20bf6b'>🛠️ 開発ツール・DevOps</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
   <a class='open-btn' href='https://www.publickey1.jp/blog/26/bgm2026.html' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
-</article>
-<article class='card item-card'
-  data-cardid='item-4dbd13642991'
-  data-themes='データ・分析'
-  data-lang='en'
-  data-score='3'
-  data-source='InfoQ'
-  data-sentiment='neutral'
-  data-importance='developer_tools'
-  data-isnew='false'>
-  <div class='card-top'>
-    <div class='card-meta'><span class='lang-badge en'>🌐 海外</span><span>InfoQ</span><span>2026-07-04 08:15</span></div>
-    <div class='card-lang-toggle'>
-  <button class='card-lang-btn active' data-l='en' onclick="switchCardLang(this,'en')">🌐 EN</button>
-  <button class='card-lang-btn' data-l='ja' onclick="switchCardLang(this,'ja')">🇯🇵 JA</button>
-  <button class='read-btn' onclick="markRead(this,'item-4dbd13642991')">既読</button>
-</div>
-  </div>
-  <div class='lang-pane lang-en'><h3>Cycle Introduces EU Control Plane as Sovereignty Debate Continues</h3><div class='summary'>Cycle recently introduced a separate EU-based control plane, allowing European customers to keep platform management data and telemetry within Europe. The new offering is designed to improve compliance, operational isolation, and responsiveness for European organizations. By Renato Losio</div></div>
-<div class='lang-pane lang-ja hidden'><h3>主権議論が続く中、CycleがEUコントロールプレーンを導入</h3><div class='summary'>Cycle は最近、別の EU ベースのコントロール プレーンを導入し、欧州の顧客がプラットフォーム管理データとテレメトリを欧州内に保持できるようにしました。新しい製品は、欧州組織のコンプライアンス、運用の分離、対応力を向上させるように設計されています。レナト・ロシオ著</div></div>
-  <div class='tags'><span class='tag tag-theme' style='background:#f7b73122;border-color:#f7b731;color:#f7b731'>📊 データ・分析</span><span class='tag tag-jpy-weak'>🛠️ 開発ツール</span><span class='tag tag-neutral'>➖ Neutral</span><span class='tag tag-score3'>★3</span></div>
-  <a class='open-btn' href='https://www.infoq.com/news/2026/07/cycle-eu-control-plane/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global' target='_blank' rel='noopener noreferrer'>記事を開く →</a>
 </article>
 <article class='card item-card'
   data-cardid='item-30495d57cd4c'
@@ -4121,7 +4211,7 @@ function switchFxTab(key, btn){
   var panel = document.getElementById('fx-' + key);
   if (panel) panel.classList.add('active');
 }
-</script><footer>IT + — Generated at 2026-07-08 17:13</footer></body></html>
+</script><footer>IT + — Generated at 2026-07-08 23:30</footer></body></html>
 <script>
 var pageLang = 'en';
 function setPageLang(lang) {
